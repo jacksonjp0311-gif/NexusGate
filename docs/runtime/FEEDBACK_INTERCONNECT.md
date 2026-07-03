@@ -46,3 +46,29 @@ state/interconnect_graph.v0.2.2.json
 ```
 
 Claim boundary: this is local development evidence, not production validation.
+
+## v0.2.6 AI Agent Interconnection
+
+The interconnect graph now declares AI/operator process surfaces as governed nodes:
+
+```text
+feedback:ai_context
+  -> ai_agent:codex_process
+  -> feedback:operator_packets
+  -> operator:tui
+  -> reports:tui_exports
+  -> ai_agent:codex_process
+```
+
+This captures the local Codex/ChatGPT handoff loop as evidence-routed architecture. It does not grant autonomous write authority, external API authority, memory promotion authority, or correctness claims.
+
+New laws:
+
+```text
+No AI handoff without feedback context.
+No AI handoff without feedback log.
+No autonomous self-authorization.
+No UI bypass of compiler/evolve gates.
+The UI must never own the logic.
+Certificate before compounding.
+```

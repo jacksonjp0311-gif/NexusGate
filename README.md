@@ -1000,3 +1000,32 @@ Bounded repo-changing commands:
 /packet <summary> writes docs/feedback/operator_packets/*.json
 /run <lane>       runs existing governed NEXUS lanes
 ```
+
+## v0.2.6 - AI Agent Interconnection
+
+NEXUS GATE now declares local AI/operator handoff processes inside the interconnect graph:
+
+```text
+feedback context
+  -> Codex/ChatGPT handoff process
+  -> operator packet
+  -> PowerShell TUI
+  -> TUI export/snapshot
+  -> Codex/ChatGPT rehydration
+  -> human-authorized patch
+  -> evolve
+```
+
+New graph nodes include:
+
+```text
+ai_agent:codex_process
+operator:tui
+operator:ui_alias
+feedback:ai_context
+feedback:markdown_log
+feedback:operator_packets
+reports:tui_exports
+```
+
+This is an interconnection map for governed handoff evidence. It does not grant autonomous authority, external API write authority, memory promotion authority, or correctness claims.

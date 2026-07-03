@@ -1,7 +1,8 @@
 """NEXUS GATE interconnect graph.
 
 The graph describes governed transfer relationships between adapters, bridge
-runtime, receptors, feedback, evidence compaction, reports, and ledgers.
+runtime, receptors, feedback, evidence compaction, reports, ledgers, operator
+surfaces, and AI-agent handoff processes.
 """
 
 from __future__ import annotations
@@ -16,7 +17,8 @@ from typing import Any, Dict, List, Optional
 
 CLAIM_BOUNDARY = (
     "Interconnect graph is local architecture evidence only. "
-    "It does not prove production interoperability or safety."
+    "It does not prove production interoperability, safety, consciousness, "
+    "autonomous authority, or correctness."
 )
 
 
@@ -134,6 +136,77 @@ def _extract_receptor_nodes(root: Path) -> List[InterconnectNode]:
     return nodes
 
 
+def _path_status(root: Path, relative: str) -> Dict[str, Any]:
+    path = root / relative
+    return {
+        "path": relative,
+        "exists": path.exists(),
+    }
+
+
+def _ai_process_nodes(root: Path) -> List[InterconnectNode]:
+    """Declare local AI/operator process surfaces without granting authority."""
+
+    return [
+        InterconnectNode(
+            "operator:tui",
+            "operator_surface",
+            "PowerShell Hermes TUI",
+            "declared",
+            _path_status(root, "scripts/nexus_tui.ps1"),
+        ),
+        InterconnectNode(
+            "operator:ui_alias",
+            "operator_surface",
+            "PowerShell UI Compatibility Alias",
+            "declared",
+            _path_status(root, "scripts/nexus_ui.ps1"),
+        ),
+        InterconnectNode(
+            "ai_agent:codex_process",
+            "ai_agent_process",
+            "Codex/ChatGPT Handoff Process",
+            "bounded_handoff",
+            {
+                "authority": "recommendation_only",
+                "writes": "human_authorized_patch_only",
+                "external_api_writes": False,
+            },
+        ),
+        InterconnectNode(
+            "feedback:ai_context",
+            "feedback_surface",
+            "AI Feedback Context",
+            "present",
+            _path_status(root, "state/ai_feedback_context_latest.json"),
+        ),
+        InterconnectNode(
+            "feedback:markdown_log",
+            "feedback_surface",
+            "Feedback Log",
+            "present",
+            _path_status(root, "docs/feedback/FEEDBACK_LOG.md"),
+        ),
+        InterconnectNode(
+            "feedback:operator_packets",
+            "operation_packet_surface",
+            "Operator Packet Directory",
+            "declared",
+            _path_status(root, "docs/feedback/operator_packets"),
+        ),
+        InterconnectNode(
+            "reports:tui_exports",
+            "report_surface",
+            "TUI AI Handoff and Snapshot Exports",
+            "declared",
+            {
+                "handoff": _path_status(root, "reports/tui/nexus_tui_ai_handoff_latest.txt"),
+                "snapshot": _path_status(root, "reports/tui/nexus_tui_snapshot_latest.html"),
+            },
+        ),
+    ]
+
+
 def build_interconnect(root: str | Path = ".") -> InterconnectReport:
     root = Path(root).resolve()
 
@@ -147,8 +220,10 @@ def build_interconnect(root: str | Path = ".") -> InterconnectReport:
     ]
     adapters = _extract_adapter_nodes(root)
     receptors = _extract_receptor_nodes(root)
+    ai_nodes = _ai_process_nodes(root)
     nodes.extend(adapters)
     nodes.extend(receptors)
+    nodes.extend(ai_nodes)
 
     edges: List[InterconnectEdge] = []
     for adapter in adapters:
@@ -161,12 +236,28 @@ def build_interconnect(root: str | Path = ".") -> InterconnectReport:
     edges.append(InterconnectEdge("reports:local", "evidence:compactor", "feeds_compaction", "No growing code surface without pack report."))
     edges.append(InterconnectEdge("feedback:engine", "ledger:local", "appends_feedback_event", "No ledger stub, no compounding."))
     edges.append(InterconnectEdge("evidence:compactor", "ledger:local", "appends_compaction_event", "No compaction without manifest."))
+    edges.append(InterconnectEdge("feedback:engine", "feedback:ai_context", "emits_ai_context", "No AI handoff without feedback context."))
+    edges.append(InterconnectEdge("feedback:engine", "feedback:markdown_log", "appends_feedback_log", "No AI handoff without feedback log."))
+    edges.append(InterconnectEdge("feedback:ai_context", "ai_agent:codex_process", "hydrates_agent_process", "Hydration before mutation."))
+    edges.append(InterconnectEdge("feedback:markdown_log", "ai_agent:codex_process", "hydrates_agent_history", "No patch without update visibility."))
+    edges.append(InterconnectEdge("ai_agent:codex_process", "feedback:operator_packets", "proposes_operation_packet", "No autonomous self-authorization."))
+    edges.append(InterconnectEdge("operator:tui", "feedback:operator_packets", "writes_bounded_packet", "No UI bypass of compiler/evolve gates."))
+    edges.append(InterconnectEdge("operator:tui", "reports:tui_exports", "exports_ai_handoff", "No external API writes."))
+    edges.append(InterconnectEdge("operator:ui_alias", "operator:tui", "routes_to_terminal_tui", "The UI must never own the logic."))
+    edges.append(InterconnectEdge("reports:tui_exports", "ai_agent:codex_process", "rehydrates_this_process", "Certificate before compounding."))
+    edges.append(InterconnectEdge("ai_agent:codex_process", "operator:tui", "returns_recommendation_to_operator", "Human-authorized patch applies mutation."))
 
     checks = [
         {"check": "adapter_nodes", "status": "pass" if adapters else "fail", "count": len(adapters)},
         {"check": "receptor_nodes", "status": "pass" if receptors else "fail", "count": len(receptors)},
         {"check": "bridge_runtime_nodes", "status": "pass", "count": 2},
         {"check": "feedback_compaction_nodes", "status": "pass", "count": 2},
+        {"check": "ai_process_nodes", "status": "pass" if len(ai_nodes) >= 5 else "fail", "count": len(ai_nodes)},
+        {
+            "check": "ai_agent_governed_edges",
+            "status": "pass" if any(e.target == "ai_agent:codex_process" for e in edges) else "fail",
+            "count": len([e for e in edges if e.source == "ai_agent:codex_process" or e.target == "ai_agent:codex_process"]),
+        },
         {"check": "governed_edges", "status": "pass" if len(edges) >= 5 else "fail", "count": len(edges)},
     ]
     status = "pass" if all(c["status"] == "pass" for c in checks) else "fail"
@@ -174,7 +265,7 @@ def build_interconnect(root: str | Path = ".") -> InterconnectReport:
 
     return InterconnectReport(
         system="NEXUS GATE",
-        version="0.2.2-interconnect",
+        version="0.2.6-ai-agent-interconnect",
         root=str(root),
         status=status,
         generated_at_utc=_utc(),

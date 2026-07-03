@@ -3,8 +3,8 @@
   "version": "0.1.5-strict-cold-evidence-compiler",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-03T15:56:01.957139+00:00",
-  "duration_ms": 1161,
+  "generated_at_utc": "2026-07-03T16:16:09.095168+00:00",
+  "duration_ms": 1358,
   "gates": [
     {
       "gate": "required_paths",
@@ -220,7 +220,7 @@
         ],
         "returncode": 0,
         "stdout_tail": "",
-        "stderr_tail": "...............................................................................\n----------------------------------------------------------------------\nRan 79 tests in 0.834s\n\nOK\n"
+        "stderr_tail": "................................................................................\n----------------------------------------------------------------------\nRan 80 tests in 0.982s\n\nOK\n"
       }
     },
     {

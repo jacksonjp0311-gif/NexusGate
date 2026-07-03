@@ -28,6 +28,22 @@ class TestFeedbackInterconnect(unittest.TestCase):
         self.assertTrue(Path(paths["latest"]).exists())
         self.assertTrue(Path(paths["graph"]).exists())
 
+    def test_ai_agent_process_interconnect_is_governed(self):
+        report = build_interconnect(ROOT)
+        node_ids = {node["node_id"] for node in report.nodes}
+        edge_pairs = {(edge["source"], edge["target"]) for edge in report.edges}
+        checks = {check["check"]: check["status"] for check in report.checks}
+
+        self.assertIn("ai_agent:codex_process", node_ids)
+        self.assertIn("operator:tui", node_ids)
+        self.assertIn("feedback:ai_context", node_ids)
+        self.assertIn("reports:tui_exports", node_ids)
+        self.assertIn(("feedback:ai_context", "ai_agent:codex_process"), edge_pairs)
+        self.assertIn(("reports:tui_exports", "ai_agent:codex_process"), edge_pairs)
+        self.assertIn(("ai_agent:codex_process", "feedback:operator_packets"), edge_pairs)
+        self.assertEqual(checks["ai_process_nodes"], "pass")
+        self.assertEqual(checks["ai_agent_governed_edges"], "pass")
+
     def test_feedback_report_compiles(self):
         compaction = compile_evidence_compaction(ROOT)
         write_compaction_report(compaction, ROOT)

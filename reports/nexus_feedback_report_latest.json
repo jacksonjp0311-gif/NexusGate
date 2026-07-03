@@ -3,7 +3,7 @@
   "version": "0.2.2-feedback",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-03T15:56:01.399220+00:00",
+  "generated_at_utc": "2026-07-03T16:16:08.488661+00:00",
   "signals": [
     {
       "name": "nexus_compiler",
@@ -73,8 +73,8 @@
         "exists": true,
         "version": "0.2.2-evidence-compaction",
         "status": "pass",
-        "file_count": 253,
-        "total_bytes": 1893349
+        "file_count": 359,
+        "total_bytes": 2829154
       }
     },
     {
@@ -83,7 +83,7 @@
       "evidence": {
         "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\nexus_interconnect_report_latest.json",
         "exists": true,
-        "version": "0.2.2-interconnect",
+        "version": "0.2.6-ai-agent-interconnect",
         "status": "pass"
       }
     },
@@ -95,9 +95,9 @@
         "exists": true,
         "version": "0.1.6b-pack-compiler",
         "status": "pass",
-        "file_count": 346,
-        "total_bytes": 992337,
-        "total_lines": 31285
+        "file_count": 480,
+        "total_bytes": 1667045,
+        "total_lines": 52059
       }
     }
   ],
@@ -106,24 +106,24 @@
     "Run .\\scripts\\nexus.ps1 compact before adding more runtime lanes."
   ],
   "evidence_pressure": {
-    "file_count": 254,
-    "total_bytes": 1897980,
+    "file_count": 360,
+    "total_bytes": 2838345,
     "pressure_level": "high",
     "newest_files": [
       {
-        "path": "reports\\nexus_interconnect_report_20260703_155601.json",
-        "size_bytes": 4631
+        "path": "reports\\nexus_interconnect_report_20260703_161608.json",
+        "size_bytes": 9191
       },
       {
         "path": "reports\\nexus_interconnect_report_latest.json",
-        "size_bytes": 4631
-      },
-      {
-        "path": "reports\\nexus_evidence_compaction_report_20260703_155601.json",
-        "size_bytes": 627
+        "size_bytes": 9191
       },
       {
         "path": "reports\\nexus_evidence_compaction_report_latest.json",
+        "size_bytes": 627
+      },
+      {
+        "path": "reports\\nexus_evidence_compaction_report_20260703_161608.json",
         "size_bytes": 627
       },
       {
@@ -131,11 +131,11 @@
         "size_bytes": 6295
       },
       {
-        "path": "reports\\nexus_bounded_runtime_report_20260703_155601.json",
+        "path": "reports\\nexus_bounded_runtime_report_20260703_161608.json",
         "size_bytes": 6295
       },
       {
-        "path": "reports\\nexus_feedback_interface_report_20260703_155601.json",
+        "path": "reports\\nexus_feedback_interface_report_20260703_161608.json",
         "size_bytes": 1479
       },
       {
@@ -146,10 +146,10 @@
   },
   "interconnect": {
     "system": "NEXUS GATE",
-    "version": "0.2.2-interconnect",
+    "version": "0.2.6-ai-agent-interconnect",
     "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
     "status": "pass",
-    "generated_at_utc": "2026-07-03T15:56:01.335450+00:00",
+    "generated_at_utc": "2026-07-03T16:16:08.404442+00:00",
     "nodes": [
       {
         "node_id": "runtime:bounded_bridge",
@@ -219,6 +219,83 @@
         "evidence": {
           "manifest": "registry\\receptors.local_demo.v0.1.8.json"
         }
+      },
+      {
+        "node_id": "operator:tui",
+        "kind": "operator_surface",
+        "label": "PowerShell Hermes TUI",
+        "status": "declared",
+        "evidence": {
+          "path": "scripts/nexus_tui.ps1",
+          "exists": true
+        }
+      },
+      {
+        "node_id": "operator:ui_alias",
+        "kind": "operator_surface",
+        "label": "PowerShell UI Compatibility Alias",
+        "status": "declared",
+        "evidence": {
+          "path": "scripts/nexus_ui.ps1",
+          "exists": true
+        }
+      },
+      {
+        "node_id": "ai_agent:codex_process",
+        "kind": "ai_agent_process",
+        "label": "Codex/ChatGPT Handoff Process",
+        "status": "bounded_handoff",
+        "evidence": {
+          "authority": "recommendation_only",
+          "writes": "human_authorized_patch_only",
+          "external_api_writes": false
+        }
+      },
+      {
+        "node_id": "feedback:ai_context",
+        "kind": "feedback_surface",
+        "label": "AI Feedback Context",
+        "status": "present",
+        "evidence": {
+          "path": "state/ai_feedback_context_latest.json",
+          "exists": true
+        }
+      },
+      {
+        "node_id": "feedback:markdown_log",
+        "kind": "feedback_surface",
+        "label": "Feedback Log",
+        "status": "present",
+        "evidence": {
+          "path": "docs/feedback/FEEDBACK_LOG.md",
+          "exists": true
+        }
+      },
+      {
+        "node_id": "feedback:operator_packets",
+        "kind": "operation_packet_surface",
+        "label": "Operator Packet Directory",
+        "status": "declared",
+        "evidence": {
+          "path": "docs/feedback/operator_packets",
+          "exists": false
+        }
+      },
+      {
+        "node_id": "reports:tui_exports",
+        "kind": "report_surface",
+        "label": "TUI AI Handoff and Snapshot Exports",
+        "status": "declared",
+        "evidence": {
+          "handoff": {
+            "path": "reports/tui/nexus_tui_ai_handoff_latest.txt",
+            "exists": false
+          },
+          "snapshot": {
+            "path": "reports/tui/nexus_tui_snapshot_latest.html",
+            "exists": false
+          }
+        }
       }
     ],
     "edges": [
@@ -284,6 +361,76 @@
         "relation": "appends_compaction_event",
         "gate": "No compaction without manifest.",
         "mode": "governed"
+      },
+      {
+        "source": "feedback:engine",
+        "target": "feedback:ai_context",
+        "relation": "emits_ai_context",
+        "gate": "No AI handoff without feedback context.",
+        "mode": "governed"
+      },
+      {
+        "source": "feedback:engine",
+        "target": "feedback:markdown_log",
+        "relation": "appends_feedback_log",
+        "gate": "No AI handoff without feedback log.",
+        "mode": "governed"
+      },
+      {
+        "source": "feedback:ai_context",
+        "target": "ai_agent:codex_process",
+        "relation": "hydrates_agent_process",
+        "gate": "Hydration before mutation.",
+        "mode": "governed"
+      },
+      {
+        "source": "feedback:markdown_log",
+        "target": "ai_agent:codex_process",
+        "relation": "hydrates_agent_history",
+        "gate": "No patch without update visibility.",
+        "mode": "governed"
+      },
+      {
+        "source": "ai_agent:codex_process",
+        "target": "feedback:operator_packets",
+        "relation": "proposes_operation_packet",
+        "gate": "No autonomous self-authorization.",
+        "mode": "governed"
+      },
+      {
+        "source": "operator:tui",
+        "target": "feedback:operator_packets",
+        "relation": "writes_bounded_packet",
+        "gate": "No UI bypass of compiler/evolve gates.",
+        "mode": "governed"
+      },
+      {
+        "source": "operator:tui",
+        "target": "reports:tui_exports",
+        "relation": "exports_ai_handoff",
+        "gate": "No external API writes.",
+        "mode": "governed"
+      },
+      {
+        "source": "operator:ui_alias",
+        "target": "operator:tui",
+        "relation": "routes_to_terminal_tui",
+        "gate": "The UI must never own the logic.",
+        "mode": "governed"
+      },
+      {
+        "source": "reports:tui_exports",
+        "target": "ai_agent:codex_process",
+        "relation": "rehydrates_this_process",
+        "gate": "Certificate before compounding.",
+        "mode": "governed"
+      },
+      {
+        "source": "ai_agent:codex_process",
+        "target": "operator:tui",
+        "relation": "returns_recommendation_to_operator",
+        "gate": "Human-authorized patch applies mutation.",
+        "mode": "governed"
       }
     ],
     "checks": [
@@ -308,14 +455,24 @@
         "count": 2
       },
       {
+        "check": "ai_process_nodes",
+        "status": "pass",
+        "count": 7
+      },
+      {
+        "check": "ai_agent_governed_edges",
+        "status": "pass",
+        "count": 5
+      },
+      {
         "check": "governed_edges",
         "status": "pass",
-        "count": 9
+        "count": 19
       }
     ],
-    "graph_hash": "c5a970c7ecdb0c041e93f4c8256845db6c02d73678fc0c06f26e6b12b52da264",
-    "claim_boundary": "Interconnect graph is local architecture evidence only. It does not prove production interoperability or safety."
+    "graph_hash": "217d0fe90618be5a0ea38fb931cf250be4e19cf646ee28ce972f73ff5c837f15",
+    "claim_boundary": "Interconnect graph is local architecture evidence only. It does not prove production interoperability, safety, consciousness, autonomous authority, or correctness."
   },
   "claim_boundary": "Feedback report is local development evidence only. It is not a production validation, safety proof, security proof, or correctness proof.",
-  "report_hash": "a97bf66b2a9585444cab4ca236238642875f73182573c1b0e1769267df7d51bd"
+  "report_hash": "22cad7972968ca01d54118aae4fbf434016f7dbf00b7cebe9cbaf9c79e508fee"
 }

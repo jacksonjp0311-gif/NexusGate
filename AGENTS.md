@@ -258,3 +258,16 @@ Use this as the primary human/AI debug loop:
 ```
 
 Use `/ai` inside the TUI to print a copyable handoff block for ChatGPT/Codex.
+
+## NEXUS v0.2.6 AI Agent Interconnection
+
+The interconnect graph now includes governed AI/operator process nodes for the Codex/ChatGPT handoff loop, TUI exports, feedback context, feedback log, operator packets, and return-to-operator recommendations.
+
+Hard rules:
+
+```text
+No AI handoff without feedback context.
+No autonomous self-authorization.
+No UI bypass of compiler/evolve gates.
+AI process context is recommendation evidence, not authority.
+```

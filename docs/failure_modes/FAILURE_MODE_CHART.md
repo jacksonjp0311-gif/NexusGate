@@ -63,3 +63,6 @@ Boundary: this chart is a local development control. It does not prove safety, s
 - forms_ui_patch_operator_error: Windows Forms patch mutation failed before install; use terminal TUI shell instead.
 - tui_surface_missing: operator lacks terminal dropdown menu, chat prompt, buffer bar, colored output, AI handoff, and bounded feedback write commands.
 - tui_ungated_mutation: TUI attempts repo mutation outside feedback log, operation packet, or governed NEXUS lanes.
+
+- ai_agent_interconnect_unrouted: AI/Codex handoff process lacks governed feedback-context, operator-packet, TUI export, or return-to-operator edge.
+- ai_agent_self_authorization: AI/Codex process attempts to treat handoff context as authority instead of recommendation evidence.
