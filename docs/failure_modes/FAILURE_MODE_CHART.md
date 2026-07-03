@@ -21,6 +21,8 @@ This chart must be visible during rehydration.
 | `readme_dual_shell_rule_missing` | README/tests | README missing exact dual-shell rule string. | block | Restore exact rule. | Always show. |
 | `bash_env_unavailable` | local environment | Windows exposes WSL bash but no distro is installed. | warning | Skip local Bash validation; keep Bash scripts and CI validation. | Always show. |
 | `powershell_syntax_too_large` | installer/runtime | Long native PowerShell syntax creates parser fragility. | warning | Prefer compressed payload and compact command surface. | Always show. |
+| `packer_output_outside_root` | build/pack | Pack test writes to temp dir outside repo, but packer tries repo-relative path. | block | Use safe display path helper. | Always show. |
+| `update_chart_history_dropped` | docs/updates | New chart overwrites old lineage row still required by tests. | block | Restore historical rows; never delete lineage casually. | Always show. |
 
 ## Laws
 
@@ -30,6 +32,8 @@ No patch without failure mode classification.
 No recovery without ledger update.
 No repeated failure without chart update.
 No chart update without compiler validation.
+No pack report without safe output path handling.
+No update chart without preserved lineage rows.
 ```
 
 Boundary: this chart is a local development control. It does not prove safety, security, correctness, or production readiness.

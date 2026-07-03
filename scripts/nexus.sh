@@ -51,31 +51,24 @@ run_compiler() {
 
 show_rehydration() {
   echo "[NG] Rehydration visibility"
-  echo "[NG] Failure chart"
   sed -n '1,80p' docs/failure_modes/FAILURE_MODE_CHART.md
   echo
-  echo "[NG] Update chart"
   sed -n '1,80p' docs/updates/UPDATE_CHART.md
   echo
-  if [[ -f docs/evidence/COLD_EVIDENCE_ENGINE.md ]]; then
-    echo "[NG] Cold evidence"
-    sed -n '1,80p' docs/evidence/COLD_EVIDENCE_ENGINE.md
-  fi
+  [[ -f docs/goal/GOAL_LOCK.md ]] && sed -n '1,80p' docs/goal/GOAL_LOCK.md
   echo
-  if [[ -f reports/nexus_compile_report_latest.json ]]; then
-    echo "[NG] Latest compiler report"
-    cat reports/nexus_compile_report_latest.json
-  else
-    echo "[WARN] No latest compiler report found yet."
-  fi
+  [[ -f docs/evidence/COLD_EVIDENCE_ENGINE.md ]] && sed -n '1,80p' docs/evidence/COLD_EVIDENCE_ENGINE.md
+  echo
+  [[ -f reports/nexus_compile_report_latest.json ]] && cat reports/nexus_compile_report_latest.json
 }
 
 show_status() {
   echo "[NG] NEXUS GATE STATUS"
-  [[ -f state/update_index.v0.1.4.json ]] && cat state/update_index.v0.1.4.json
-  [[ -f state/failure_mode_index.v0.1.4.json ]] && cat state/failure_mode_index.v0.1.4.json
+  [[ -f state/goal_lock.v0.1.6.json ]] && cat state/goal_lock.v0.1.6.json
+  [[ -f state/pack_index.v0.1.6.json ]] && cat state/pack_index.v0.1.6.json
   [[ -f state/cold_evidence_index.v0.1.5.json ]] && cat state/cold_evidence_index.v0.1.5.json
   [[ -f reports/nexus_compile_report_latest.json ]] && cat reports/nexus_compile_report_latest.json
+  [[ -f dist/nexus_gate_pack_manifest_latest.json ]] && cat dist/nexus_gate_pack_manifest_latest.json
   git status --short || true
 }
 
@@ -95,6 +88,7 @@ run_loop() {
 
 promote() {
   run_compiler
+  py -m nexus_gate.build.packer --root . --out dist --json
   status="$(py - <<'PY'
 import json
 from pathlib import Path
@@ -109,7 +103,7 @@ PY
   if command -v git >/dev/null 2>&1 && [[ "$no_commit" -ne 1 ]]; then
     git add .
     if [[ -n "$(git status --porcelain)" ]]; then
-      git commit -m "chore: promote NEXUS GATE compact gated pass"
+      git commit -m "chore: promote NEXUS GATE packed gated pass"
     fi
   fi
   if command -v git >/dev/null 2>&1 && [[ -n "$tag" ]]; then
@@ -131,6 +125,9 @@ case "$cmd" in
   strict)
     bash scripts/nexus_strict_compile.sh
     ;;
+  pack)
+    bash scripts/nexus_pack.sh
+    ;;
   once)
     run_compiler
     echo "[OK] Once passed."
@@ -149,7 +146,7 @@ case "$cmd" in
     ;;
   *)
     echo "[FAIL] Unknown command: $cmd"
-    echo "Commands: rehydrate, compile, strict, once, loop, watch, status, promote"
+    echo "Commands: rehydrate, compile, strict, pack, once, loop, watch, status, promote"
     exit 2
     ;;
 esac

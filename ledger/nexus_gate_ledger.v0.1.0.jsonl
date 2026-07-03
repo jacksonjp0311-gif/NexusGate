@@ -16,3 +16,9 @@
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_025424.json","duration_ms":234,"failed_gates":[],"timestamp_utc":"2026-07-03T02:54:24.660769+00:00"}
 {"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T02:54:25.329140+00:00"}
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_025425.json","duration_ms":216,"failed_gates":[],"timestamp_utc":"2026-07-03T02:54:25.332582+00:00"}
+{"event":"compression_pack_goal_lock_installed","version":"0.1.6","timestamp_utc":"2026-07-03T02:59:30.6895315Z","hard_law":"No growing code surface without a pack report."}
+{"event":"compression_rescue_lineage_restore","version":"0.1.6b","timestamp_utc":"2026-07-03T03:06:08.4226867Z","fixes":["packer output outside repo","update chart lineage dropped"]}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T03:06:09.502284+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_030609.json","duration_ms":384,"failed_gates":[],"timestamp_utc":"2026-07-03T03:06:09.505516+00:00"}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T03:06:10.533794+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_030610.json","duration_ms":373,"failed_gates":[],"timestamp_utc":"2026-07-03T03:06:10.535918+00:00"}

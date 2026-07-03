@@ -1,0 +1,26 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.6",
+  "goal": "Build a governed transfer boundary between agent frameworks.",
+  "lanes": [
+    "adapter",
+    "schema",
+    "codec",
+    "authority",
+    "hot_route",
+    "cold_evidence",
+    "wound_route",
+    "replay",
+    "disengagement",
+    "ledger",
+    "compiler"
+  ],
+  "current_track": {
+    "v0.1.5": "strict compiler and cold evidence",
+    "v0.1.6": "compression, packing, goal lock",
+    "v0.1.7": "adapter registry and demo adapter",
+    "v0.2.0": "first bounded bridge runtime"
+  },
+  "hard_law": "No new feature unless it advances the governed transfer boundary.",
+  "claim_boundary": "Local goal lock only. Not a proof of correctness or safety."
+}

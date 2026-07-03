@@ -63,3 +63,36 @@ No shadow failure without wound route.
 No re-engagement without replay certificate.
 No specialist promotion without cold evidence.
 ```
+
+
+## Goal Lock / Compression Contract
+
+Before adding code, an agent must check:
+
+```text
+docs/goal/GOAL_LOCK.md
+docs/runtime/PACKING_AND_COMPRESSION.md
+state/goal_lock.v0.1.6.json
+```
+
+Do not expand the repo just to expand it. New code must serve one of these NEXUS GATE lanes:
+
+```text
+adapter
+schema
+codec
+authority
+hot route
+cold evidence
+wound route
+replay
+disengagement
+ledger
+compiler
+```
+
+Run before claiming completion:
+
+```powershell
+.\scripts\nexus.ps1 pack
+```

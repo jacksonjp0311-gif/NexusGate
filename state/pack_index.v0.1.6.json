@@ -1,0 +1,14 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.6",
+  "kind": "pack_index",
+  "commands": {
+    "powershell": ".\\scripts\\nexus.ps1 pack",
+    "bash": "bash scripts/nexus.sh pack"
+  },
+  "outputs": [
+    "dist/nexus_gate_source_bundle_latest.tar.gz",
+    "dist/nexus_gate_pack_manifest_latest.json"
+  ],
+  "claim_boundary": "Pack artifacts are local engineering evidence only."
+}

@@ -665,3 +665,39 @@ Compact strict route:
 .\scripts\nexus.ps1 compile
 .\scripts\nexus.ps1 rehydrate
 ```
+
+
+## v0.1.6 - Compression, Packing, and Goal Lock
+
+NEXUS GATE is now past installer repair. The current goal is to keep the runtime compact, compiled, and aligned with the original architecture:
+
+```text
+Governed transfer boundary.
+Adapter contracts.
+Hot route plane.
+Cold evidence plane.
+Authority gates.
+Wound routing.
+Replay before retrust.
+Clean disengagement.
+```
+
+New command:
+
+```powershell
+.\scripts\nexus.ps1 pack
+```
+
+This runs compile checks and writes a compressed repo bundle under:
+
+```text
+dist/
+```
+
+Compression law:
+
+```text
+No growing code surface without a pack report.
+No release without compile, tests, compiler, and pack manifest.
+No new feature unless it advances the governed transfer boundary.
+```

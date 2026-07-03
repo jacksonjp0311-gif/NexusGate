@@ -1,3 +1,5 @@
 ﻿{"event":"rehydration_failure_update_charting_installed","version":"0.1.4b","timestamp_utc":"2026-07-03T02:44:56.6607155Z","hard_law":"No rehydration without failure/update visibility."}
 {"event":"compact_runtime_surface_installed","version":"0.1.4c","timestamp_utc":"2026-07-03T02:49:47.5511251Z","hard_law":"One command surface. Same gates. Less syntax."}
 {"event":"strict_compiler_cold_evidence_installed","version":"0.1.5","timestamp_utc":"2026-07-03T02:54:23.0026170Z","hard_law":"No shadow failure without wound route."}
+{"event":"compression_pack_goal_lock_installed","version":"0.1.6","timestamp_utc":"2026-07-03T02:59:30.6895315Z","hard_law":"No growing code surface without a pack report."}
+{"event":"compression_rescue_lineage_restore","version":"0.1.6b","timestamp_utc":"2026-07-03T03:06:08.4226867Z","fixes":["packer output outside repo","update chart lineage dropped"]}

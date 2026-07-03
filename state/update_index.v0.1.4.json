@@ -1,6 +1,6 @@
 {
   "system": "NEXUS GATE",
-  "version": "0.1.4c",
+  "version": "0.1.6b",
   "kind": "update_index",
   "rehydration_required": true,
   "must_read_on_rehydration": [
@@ -46,13 +46,28 @@
     },
     {
       "version": "0.1.4b",
-      "status": "pass_core_bash_env_failed",
-      "summary": "Bash validation failed because WSL had no distro"
+      "status": "pass_core",
+      "summary": "rehydration failure/update chart core pass"
     },
     {
       "version": "0.1.4c",
+      "status": "pass",
+      "summary": "compact runtime surface"
+    },
+    {
+      "version": "0.1.5",
+      "status": "pass",
+      "summary": "strict compiler and cold evidence"
+    },
+    {
+      "version": "0.1.6",
+      "status": "failed",
+      "summary": "packer output path and lineage chart failure"
+    },
+    {
+      "version": "0.1.6b",
       "status": "current",
-      "summary": "compact runtime surface and safe Bash validation detection"
+      "summary": "compression rescue and lineage restore"
     }
   ],
   "claim_boundary": "Local update index only. Not production validation."

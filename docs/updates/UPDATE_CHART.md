@@ -14,8 +14,10 @@ This chart must be visible during rehydration.
 | v0.1.3d | Portable RHP/Nexus/AI shell. | failed | README omitted exact dual-shell rule required by existing test. |
 | v0.1.4 | Rehydration failure/update chart. | wrapper failed | Indented here-string broke PowerShell parsing. |
 | v0.1.4b | Safe rehydration failure/update chart. | pass-core | Python compile, tests, compiler, PowerShell rehydrate passed; Bash failed because WSL had no installed distro. |
-| v0.1.4c | Compact runtime surface. | pass | Compact PowerShell passed, unusable Bash skipped, committed checkpoint. |
-| v0.1.5 | Strict compiler + Cold Evidence | current | Adds cold evidence contracts, wound routing, strict compiler gates, and stricter evidence visibility. |
+| v0.1.4c | Compact runtime surface. | pass | Compact command surface and safe Bash detection. |
+| v0.1.5 | Strict compiler + Cold Evidence | pass | Adds cold evidence contracts, wound routing, strict compiler gates. |
+| v0.1.6 | Compression + Goal Lock | failed | Packer assumed temp output lived under repo; update chart dropped v0.1.4b lineage row. |
+| v0.1.6b | Compression Rescue + Lineage Restore | current | Fixes packer external output paths and restores full update lineage. |
 
 ## Current Required Update Rule
 
@@ -28,6 +30,7 @@ Every version step must update:
 5. route map if paths changed.
 6. tests if gates changed.
 7. ledger after validation.
+8. pack manifest if code surface changed.
 ```
 
 ## Update Visibility Law
@@ -37,6 +40,8 @@ No agent rehydration without update chart visibility.
 No version step without update chart entry.
 No stale chart after failed validation.
 No silent repair after failed validation.
+No growing code surface without pack report.
+No lineage row may be deleted while tests still depend on it.
 ```
 
 Boundary: the update chart improves repository continuity. It does not prove correctness, safety, security, or production readiness.
