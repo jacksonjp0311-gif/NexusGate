@@ -73,3 +73,12 @@ Not autonomous authority.
 Not write authority.
 Not memory write authority.
 Not provider authority.
+## Gated Compiler
+
+NEXUS GATE now includes a local gated compiler.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\nexus_compile.ps1
+```
+
+The compiler blocks promotion when required paths, runtime laws, JSON files, Python compile, route contracts, unit tests, or ledger append checks fail.
