@@ -1,26 +1,30 @@
 # NEXUS GATE Gated Compiler
 
-The NEXUS GATE compiler is a development gate.
+The first installer could freeze if its PowerShell helper launched plain `python` without the module arguments.
 
-It does **not** compile Python into machine code.
+This rescue patch installs the direct compiler command:
 
-It compiles the repository state into a promotion decision:
+```powershell
+python -m nexus_gate.compiler --root . --json
+```
+
+The compiler is a development gate:
 
 ```text
 repository state
   -> required paths
-  -> manifest laws
+  -> runtime law check
   -> JSON parse
-  -> bypass scan
+  -> forbidden bypass scan
   -> Python compile
   -> route contracts
   -> unit tests
   -> ledger append
-  -> compile report
+  -> report
   -> pass | fail
 ```
 
-## Runtime Law
+Runtime law:
 
 ```text
 No compile pass, no promotion.
@@ -29,27 +33,3 @@ No authority pass, no mutation.
 No tests pass, no checkpoint.
 No ledger entry, no compounding.
 ```
-
-## Run
-
-```powershell
-cd C:\Users\jacks\OneDrive\Desktop\nexus-gate
-powershell -ExecutionPolicy Bypass -File .\scripts\nexus_compile.ps1
-```
-
-Or:
-
-```powershell
-python -m nexus_gate.compiler --root . --json
-```
-
-## Reports
-
-Compile reports are written to:
-
-```text
-reports/nexus_compile_report_latest.json
-reports/nexus_compile_report_YYYYMMDD_HHMMSS.json
-```
-
-The ledger receives a `nexus_compile` event after each run.

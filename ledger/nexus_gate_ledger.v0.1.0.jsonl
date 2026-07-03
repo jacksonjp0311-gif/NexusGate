@@ -1,2 +1,5 @@
 {"event":"nexus_gate_scaffold_initialized","version":"0.1.0","root":"C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate","timestamp_utc":"2026-07-03T01:55:52.2712570Z","runtime_law":"No adapter, no bridge. No schema, no route. No authority, no mutation."}
 {"event":"gated_compiler_installed","version":"0.1.1","root":"C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate","timestamp_utc":"2026-07-03T02:01:58.8386176Z","runtime_law":"No compile pass, no promotion."}
+{"event":"gated_compiler_freeze_rescue_patch_applied","version":"0.1.1b","root":"C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate","timestamp_utc":"2026-07-03T02:03:33.8066218Z","fix":"Replaced Run-Safe child process path with direct compiler wrapper and patched bypass self-scan."}
+{"event":"compiler_ledger_gate_probe","version":"0.1.1b","status":"probe","timestamp_utc":"2026-07-03T02:03:34.740376+00:00"}
+{"event":"nexus_compile","version":"0.1.1b-gated-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_020334.json","duration_ms":188,"failed_gates":[],"timestamp_utc":"2026-07-03T02:03:34.740376+00:00"}

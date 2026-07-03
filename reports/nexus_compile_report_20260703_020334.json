@@ -1,0 +1,113 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.1b-gated-compiler",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T02:03:34.740376+00:00",
+  "duration_ms": 188,
+  "gates": [
+    {
+      "gate": "root_anchor",
+      "status": "pass",
+      "message": "Project root exists.",
+      "evidence": {
+        "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate"
+      }
+    },
+    {
+      "gate": "required_paths",
+      "status": "pass",
+      "message": "All required paths exist.",
+      "evidence": {
+        "count": 12
+      }
+    },
+    {
+      "gate": "runtime_laws",
+      "status": "pass",
+      "message": "Required runtime laws are present.",
+      "evidence": {
+        "required": [
+          "No adapter, no bridge.",
+          "No schema, no route.",
+          "No authority verification, no mutation.",
+          "No replay certificate, no memory promotion.",
+          "No wound route, no retrust.",
+          "No ledger stub, no compounding."
+        ]
+      }
+    },
+    {
+      "gate": "json_parse",
+      "status": "pass",
+      "message": "Schema, registry, and state JSON files parse.",
+      "evidence": {
+        "count": 4
+      }
+    },
+    {
+      "gate": "forbidden_bypass_scan",
+      "status": "pass",
+      "message": "No forbidden bypass markers found.",
+      "evidence": {
+        "markers": [
+          "bypass_authority=True",
+          "skip_authority_gate=True",
+          "disable_ledger=True",
+          "unsafe_engage=True",
+          "allow_mutation_without_authority"
+        ]
+      }
+    },
+    {
+      "gate": "python_compile",
+      "status": "pass",
+      "message": "Python source compiled.",
+      "evidence": {
+        "paths": [
+          "nexus_gate",
+          "tests"
+        ]
+      }
+    },
+    {
+      "gate": "route_contracts",
+      "status": "pass",
+      "message": "Core route contracts hold.",
+      "evidence": {
+        "decisions": {
+          "missing_schema": "reject",
+          "no_authority_tool": "shadow",
+          "read_only": "engage"
+        }
+      }
+    },
+    {
+      "gate": "unit_tests",
+      "status": "pass",
+      "message": "Unit tests passed.",
+      "evidence": {
+        "cmd": [
+          "C:\\Program Files\\Python312\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ],
+        "returncode": 0,
+        "stdout_tail": "",
+        "stderr_tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n"
+      }
+    },
+    {
+      "gate": "ledger_appendable",
+      "status": "pass",
+      "message": "Ledger is appendable.",
+      "evidence": {
+        "path": "ledger\\nexus_gate_ledger.v0.1.0.jsonl"
+      }
+    }
+  ],
+  "claim_boundary": "Local development gate only. Not a production validation, safety proof, security proof, or correctness proof."
+}

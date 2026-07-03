@@ -41,13 +41,19 @@ REQUIRED_RUNTIME_LAWS = [
     "No ledger stub, no compounding.",
 ]
 
+# Split strings prevent the compiler from matching its own marker table.
 FORBIDDEN_BYPASS_MARKERS = [
-    "bypass_authority=True",
-    "skip_authority_gate=True",
-    "disable_ledger=True",
-    "unsafe_engage=True",
-    "allow_mutation_without_authority",
+    "bypass_" + "authority=True",
+    "skip_" + "authority_gate=True",
+    "disable_" + "ledger=True",
+    "unsafe_" + "engage=True",
+    "allow_" + "mutation_without_authority",
 ]
+
+SCAN_SUFFIXES = {".py", ".ps1", ".md", ".json", ".toml"}
+EXCLUDED_SCAN_PATHS = {
+    "nexus_gate/compiler/compiler.py",
+}
 
 
 @dataclass
@@ -74,8 +80,7 @@ class CompileReport:
 class NexusCompiler:
     """Local gated compiler for NEXUS GATE development.
 
-    The compiler does not compile a programming language into machine code.
-    It compiles repository state into a pass/fail promotion decision.
+    This compiles repository state into a pass/fail promotion decision.
     """
 
     def __init__(self, root: str | Path) -> None:
@@ -124,7 +129,11 @@ class NexusCompiler:
         self.add("runtime_laws", "fail", "Required runtime laws are missing.", {"missing": missing})
 
     def gate_json_files_parse(self) -> None:
-        json_files = list(self.root.glob("schemas/*.json")) + list(self.root.glob("registry/*.json")) + list(self.root.glob("state/*.json"))
+        json_files = (
+            list(self.root.glob("schemas/*.json"))
+            + list(self.root.glob("registry/*.json"))
+            + list(self.root.glob("state/*.json"))
+        )
         failures = []
 
         for path in json_files:
@@ -146,21 +155,27 @@ class NexusCompiler:
         for scan_root in scan_roots:
             if not scan_root.exists():
                 continue
+
             for path in scan_root.rglob("*"):
                 if not path.is_file():
                     continue
-                if path.suffix.lower() not in {".py", ".ps1", ".md", ".json", ".toml"}:
+
+                rel = str(path.relative_to(self.root)).replace("\\", "/")
+
+                if rel in EXCLUDED_SCAN_PATHS:
                     continue
+
+                if path.suffix.lower() not in SCAN_SUFFIXES:
+                    continue
+
                 try:
                     text = path.read_text(encoding="utf-8", errors="ignore")
                 except Exception:
                     continue
+
                 for marker in FORBIDDEN_BYPASS_MARKERS:
                     if marker in text:
-                        findings.append({
-                            "path": str(path.relative_to(self.root)),
-                            "marker": marker,
-                        })
+                        findings.append({"path": rel, "marker": marker})
 
         if not findings:
             self.add("forbidden_bypass_scan", "pass", "No forbidden bypass markers found.", {"markers": FORBIDDEN_BYPASS_MARKERS})
@@ -180,13 +195,17 @@ class NexusCompiler:
 
     def gate_unit_tests(self) -> None:
         cmd = [sys.executable, "-m", "unittest", "discover", "-s", "tests"]
-        proc = subprocess.run(
-            cmd,
-            cwd=str(self.root),
-            capture_output=True,
-            text=True,
-            timeout=120,
-        )
+        try:
+            proc = subprocess.run(
+                cmd,
+                cwd=str(self.root),
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+        except subprocess.TimeoutExpired as exc:
+            self.add("unit_tests", "fail", "Unit tests timed out.", {"cmd": cmd, "timeout": 60, "error": str(exc)})
+            return
 
         evidence = {
             "cmd": cmd,
@@ -254,11 +273,12 @@ class NexusCompiler:
 
     def gate_ledger_appendable(self) -> None:
         ledger_path = self.root / "ledger" / "nexus_gate_ledger.v0.1.0.jsonl"
+
         try:
             ledger = JsonlLedger(ledger_path)
             ledger.append({
                 "event": "compiler_ledger_gate_probe",
-                "version": "0.1.1",
+                "version": "0.1.1b",
                 "status": "probe",
             })
         except Exception as exc:
@@ -282,12 +302,11 @@ class NexusCompiler:
 
         failed = [gate for gate in self.gates if gate.failed]
         status = "pass" if not failed else "fail"
-
         duration_ms = int((time.perf_counter() - start) * 1000)
 
         return CompileReport(
             system="NEXUS GATE",
-            version="0.1.1-gated-compiler",
+            version="0.1.1b-gated-compiler",
             root=str(self.root),
             status=status,
             generated_at_utc=datetime.now(timezone.utc).isoformat(),
@@ -298,12 +317,14 @@ class NexusCompiler:
     def write_report(self, report: CompileReport) -> Path:
         reports_dir = self.root / "reports"
         reports_dir.mkdir(parents=True, exist_ok=True)
+
         stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
         path = reports_dir / f"nexus_compile_report_{stamp}.json"
-        path.write_text(json.dumps(asdict(report), indent=2), encoding="utf-8")
-
         latest = reports_dir / "nexus_compile_report_latest.json"
-        latest.write_text(json.dumps(asdict(report), indent=2), encoding="utf-8")
+
+        encoded = json.dumps(asdict(report), indent=2)
+        path.write_text(encoded, encoding="utf-8")
+        latest.write_text(encoded, encoding="utf-8")
 
         ledger = JsonlLedger(self.root / "ledger" / "nexus_gate_ledger.v0.1.0.jsonl")
         ledger.append({
@@ -312,11 +333,7 @@ class NexusCompiler:
             "status": report.status,
             "report_path": str(path.relative_to(self.root)),
             "duration_ms": report.duration_ms,
-            "failed_gates": [
-                gate["gate"]
-                for gate in report.gates
-                if gate["status"] == "fail"
-            ],
+            "failed_gates": [gate["gate"] for gate in report.gates if gate["status"] == "fail"],
         })
 
         return path
@@ -334,7 +351,7 @@ def main() -> None:
 
     if args.json:
         print(json.dumps(asdict(report), indent=2))
-    if not args.json:
+    else:
         print(f"NEXUS GATE compile status: {report.status}")
         print(f"Report: {path}")
 
