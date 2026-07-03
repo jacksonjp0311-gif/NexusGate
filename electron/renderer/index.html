@@ -7,37 +7,48 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <main class="shell">
-    <section class="topbar">
+  <main class="shell hud-shell">
+    <section class="topbar hud-box">
       <div>
         <h1>NEXUS GATE</h1>
-        <p id="boundary">Presentation-only operator surface</p>
+        <p id="boundary">Hermes-style governed operator surface</p>
       </div>
-      <div class="status" id="status">hydrating</div>
+      <div class="pill">AGENT MODE<br><strong>ACTIVE</strong></div>
+      <div class="pill">GOVERNANCE<br><strong>ENFORCED</strong></div>
+      <div class="pill">LINK STATUS<br><strong id="status">hydrating</strong></div>
     </section>
 
-    <section class="metrics" aria-label="NEXUS metrics">
-      <article>
+    <section class="metrics hud-box" aria-label="NEXUS metrics">
+      <article class="metric-card">
         <span>Health</span>
         <strong id="health">unknown</strong>
       </article>
-      <article>
+      <article class="metric-card">
         <span>Pressure</span>
         <strong id="pressure">unknown</strong>
       </article>
-      <article>
+      <article class="metric-card">
         <span>Graph</span>
         <strong id="graph">unknown</strong>
       </article>
-      <article>
+      <article class="metric-card">
         <span>Next</span>
         <strong id="next">Run evolve</strong>
       </article>
     </section>
 
     <section class="workspace">
-      <nav class="lanes" id="lanes" aria-label="Governed NEXUS lanes"></nav>
-      <pre class="output" id="output">Loading NEXUS surfaces...</pre>
+      <nav class="lanes hud-box" id="lanes" aria-label="Governed NEXUS lanes"></nav>
+      <section class="console hud-box">
+        <div class="console-title">NEXUS CONSOLE</div>
+        <pre class="output" id="output">Loading NEXUS surfaces...</pre>
+      </section>
+      <aside class="handoff hud-box">
+        <div class="console-title">AI HANDOFF PACKAGE</div>
+        <div class="handoff-row"><span>Context</span><strong>READY</strong></div>
+        <div class="handoff-row"><span>Feedback Log</span><strong>READY</strong></div>
+        <div class="handoff-row"><span>Surface JSON</span><strong>READY</strong></div>
+      </aside>
     </section>
   </main>
   <script src="./renderer.js"></script>

@@ -3,7 +3,7 @@
   "version": "0.2.7-domain-interconnect",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-03T19:53:10.592228+00:00",
+  "generated_at_utc": "2026-07-03T21:03:49.987632+00:00",
   "nodes": [
     {
       "node_id": "runtime:bounded_bridge",

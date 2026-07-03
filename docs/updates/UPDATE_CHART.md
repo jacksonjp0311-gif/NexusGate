@@ -81,3 +81,4 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.3.3 | Electron Shell Scaffold | current | Adds a minimal presentation-only Electron scaffold with IPC allowlists, read-surface guards, context isolation, sandboxing, and static tests. |
 
 | v0.3.4 | Electron Preflight Compiler | current | Adds a Python preflight compiler and script lane for the Electron scaffold without installing, packaging, or launching Electron. |
+| v0.3.5 | Electron Environment + HUD Surface | current | Adds non-mutating Electron environment readiness and aligns TUI/Electron presentation with the HUD operator-console direction. |

@@ -1,0 +1,54 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.3.5-electron-environment",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "readiness": "not_ready",
+  "generated_at_utc": "2026-07-03T21:03:49.254130+00:00",
+  "checks": [
+    {
+      "check": "electron_package_present",
+      "status": "pass",
+      "evidence": {
+        "path": "electron/package.json"
+      }
+    },
+    {
+      "check": "electron_dependency_declared",
+      "status": "pass",
+      "evidence": {
+        "devDependencies": {
+          "electron": "^31.0.0"
+        }
+      }
+    },
+    {
+      "check": "node_available",
+      "status": "pass",
+      "evidence": {
+        "path": "C:\\Program Files\\nodejs\\node.EXE",
+        "version": "v24.18.0"
+      }
+    },
+    {
+      "check": "npm_available",
+      "status": "pass",
+      "evidence": {
+        "path": "C:\\Program Files\\nodejs\\npm.CMD",
+        "version": "11.16.0"
+      }
+    },
+    {
+      "check": "electron_node_module_present",
+      "status": "warn",
+      "evidence": {
+        "path": "electron/node_modules/electron",
+        "install_command": "cd electron; npm install",
+        "mutation_performed": false
+      }
+    }
+  ],
+  "command": ".\\scripts\\nexus.ps1 electron-env",
+  "next_action": "Electron runtime is not ready yet. After explicit operator authorization, install dependencies in electron/ and rerun this gate.",
+  "claim_boundary": "Electron environment readiness is local evidence only. It does not install dependencies, launch Electron, package an EXE, grant shell authority, or authorize autonomous action."
+}

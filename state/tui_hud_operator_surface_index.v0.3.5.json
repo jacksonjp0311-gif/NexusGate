@@ -1,0 +1,38 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.3.5-tui-hud-operator-surface",
+  "canonical_command": ".\\scripts\\nexus.ps1 tui",
+  "compatibility_alias": ".\\scripts\\nexus.ps1 ui",
+  "docs": "docs/ui/TUI_HUD_OPERATOR_SURFACE.md",
+  "surfaces": [
+    "scripts/nexus_tui.ps1",
+    "electron/renderer/index.html",
+    "electron/renderer/styles.css",
+    "reports/tui/nexus_tui_snapshot_latest.html",
+    "reports/tui/nexus_tui_surface_latest.json"
+  ],
+  "hud_regions": [
+    "top_status_strip",
+    "process_lanes",
+    "nexus_console",
+    "feedback_summary",
+    "ai_handoff_package",
+    "human_feedback",
+    "ai_feedback",
+    "debugging",
+    "self_healing",
+    "reflection",
+    "interconnect",
+    "governance_footer"
+  ],
+  "blocked_actions": [
+    "self_authorize",
+    "bypass_evolve",
+    "mutate_graph_state",
+    "install_electron",
+    "launch_electron",
+    "package_exe",
+    "run_arbitrary_shell_commands"
+  ],
+  "claim_boundary": "HUD surface is presentation and evidence orientation only. It does not own logic or authority."
+}

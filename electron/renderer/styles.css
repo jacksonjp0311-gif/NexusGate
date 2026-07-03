@@ -1,12 +1,13 @@
 :root {
   color-scheme: dark;
-  --bg: #0f172a;
-  --panel: #111827;
-  --line: #334155;
-  --text: #e5e7eb;
-  --muted: #94a3b8;
+  --bg: #050914;
+  --panel: #07111f;
+  --line: #164e63;
+  --text: #d9f7ff;
+  --muted: #7dd3fc;
   --accent: #22d3ee;
   --ok: #86efac;
+  --warn: #facc15;
 }
 
 * {
@@ -15,7 +16,7 @@
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: radial-gradient(circle at 80% 0%, #0b2540 0, #050914 38%, #020617 100%);
   color: var(--text);
   font-family: "Segoe UI", Arial, sans-serif;
 }
@@ -24,33 +25,50 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto auto 1fr;
+  gap: 12px;
+  padding: 16px;
+}
+
+.hud-box {
+  background: linear-gradient(180deg, rgba(9, 24, 42, .96), rgba(2, 6, 23, .96));
+  border: 1px solid var(--line);
+  box-shadow: 0 0 18px rgba(34, 211, 238, .12), inset 0 0 24px rgba(34, 211, 238, .05);
 }
 
 .topbar {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr repeat(3, minmax(130px, auto));
+  gap: 10px;
   align-items: center;
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--line);
+  padding: 12px 14px;
 }
 
 h1 {
   margin: 0;
-  font-size: 22px;
+  color: var(--accent);
+  font-size: 24px;
   letter-spacing: 0;
+  text-shadow: 0 0 12px rgba(34, 211, 238, .6);
 }
 
 p {
   margin: 6px 0 0;
-  color: var(--muted);
+  color: #cbd5e1;
 }
 
-.status {
-  min-width: 112px;
-  text-align: center;
-  color: var(--ok);
+.pill {
   border: 1px solid var(--line);
-  padding: 8px 12px;
+  padding: 8px 10px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
+  background: #06111f;
+}
+
+.pill strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--ok);
 }
 
 .metrics {
@@ -58,39 +76,54 @@ p {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
   background: var(--line);
-  border-bottom: 1px solid var(--line);
 }
 
-.metrics article {
+.metric-card {
   background: var(--panel);
-  padding: 16px 18px;
+  padding: 14px 16px;
   min-width: 0;
 }
 
-.metrics span {
+.metric-card span {
   display: block;
   color: var(--muted);
   font-size: 12px;
+  text-transform: uppercase;
 }
 
-.metrics strong {
+.metric-card strong {
   display: block;
   margin-top: 8px;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
   overflow-wrap: anywhere;
 }
 
+#health {
+  color: var(--ok);
+  font-size: 30px;
+  text-shadow: 0 0 12px rgba(134, 239, 172, .45);
+}
+
 .workspace {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 210px minmax(360px, 1fr) 310px;
+  gap: 12px;
   min-height: 0;
 }
 
 .lanes {
-  padding: 16px;
-  border-right: 1px solid var(--line);
+  padding: 14px;
   background: #020617;
+}
+
+.lanes::before {
+  content: "PROCESS LANES";
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 button {
@@ -98,35 +131,60 @@ button {
   margin-bottom: 8px;
   padding: 10px 12px;
   color: var(--text);
-  background: var(--panel);
-  border: 1px solid var(--line);
+  background: transparent;
+  border: 1px solid rgba(125, 211, 252, .18);
   text-align: left;
   cursor: pointer;
 }
 
 button:hover {
   border-color: var(--accent);
+  box-shadow: inset 0 0 16px rgba(34, 211, 238, .12);
+}
+
+.console,
+.handoff {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.console-title {
+  padding: 12px 14px;
+  color: var(--accent);
+  border-bottom: 1px solid rgba(125, 211, 252, .18);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .output {
   margin: 0;
-  padding: 18px;
+  padding: 16px;
   overflow: auto;
   background: #020617;
   color: #d1fae5;
   font-family: Consolas, monospace;
   font-size: 13px;
   line-height: 1.45;
+  min-height: 100%;
 }
 
-@media (max-width: 760px) {
+.handoff-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(125, 211, 252, .14);
+  color: #cbd5e1;
+}
+
+.handoff-row strong {
+  color: var(--ok);
+}
+
+@media (max-width: 980px) {
+  .topbar,
   .metrics,
   .workspace {
     grid-template-columns: 1fr;
-  }
-
-  .lanes {
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
   }
 }

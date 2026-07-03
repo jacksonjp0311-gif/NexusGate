@@ -10,7 +10,7 @@
 # nexus_gate.evidence.compact
 # nexus_gate.self_healing.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-preflight", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -96,6 +96,7 @@ switch ($Command) {
     "compact" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 compact }
     "heal" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 heal }
     "interface" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 interface }
+    "electron-env" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 electron-env }
     "electron-preflight" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 electron-preflight }
     "tui" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_tui.ps1 }
     "ui" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_ui.ps1 }

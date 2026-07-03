@@ -1,0 +1,29 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.3.5-electron-environment",
+  "module": "nexus_gate.ui.electron_environment_compile",
+  "command": ".\\scripts\\nexus.ps1 electron-env",
+  "report": "reports/nexus_electron_environment_report_latest.json",
+  "checks": [
+    "electron_package_present",
+    "electron_dependency_declared",
+    "node_available",
+    "npm_available",
+    "electron_node_module_present"
+  ],
+  "readiness_values": [
+    "ready",
+    "not_ready",
+    "blocked"
+  ],
+  "blocked_actions": [
+    "install_dependencies",
+    "launch_electron",
+    "package_exe",
+    "run_arbitrary_shell_commands",
+    "external_api_write",
+    "secret_access",
+    "self_authorize"
+  ],
+  "claim_boundary": "Environment readiness is local evidence only. It does not install, launch, package, or authorize desktop operation."
+}

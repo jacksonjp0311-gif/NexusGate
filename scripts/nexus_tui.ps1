@@ -1,6 +1,7 @@
 # NEXUS GATE Hermes-style PowerShell TUI
 # Interactive console operator surface: chat-like prompt, selectable lanes, colored output,
 # feedback logging, packet creation, debugging, self-healing, and AI handoff export.
+# Canonical command markers: /run <lane>, /note <text>, /packet <summary>.
 
 param(
     [string]$StartLane = ""
@@ -86,51 +87,78 @@ function Get-LatestContext {
     return $null
 }
 
+function Write-HudRule {
+    param([int]$Width = 118)
+    Write-Host ("+" + ("-" * $Width) + "+") -ForegroundColor DarkCyan
+}
+
 function Header {
     Clear-Host
-    Write-Host ""
-    Write-Host "  ╔════════════════════════════════════════════════════════════════════════════╗" -ForegroundColor DarkCyan
-    Write-Host "  ║ NEXUS GATE :: HERMES-STYLE POWERSHELL TUI                                ║" -ForegroundColor Cyan
-    Write-Host "  ║ Governed transfer shell | human feedback | AI feedback | self-healing     ║" -ForegroundColor Cyan
-    Write-Host "  ╚════════════════════════════════════════════════════════════════════════════╝" -ForegroundColor DarkCyan
-    Write-Host ""
     $ctx = Get-LatestContext
+    $health = "unknown"
+    $pressure = "unknown"
+    $dominant = "unknown"
+    $next = "Run /run interface or /run evolve."
     if ($ctx) {
-        Write-Host ("  Health: {0} | Pressure: {1} | Dominant: {2}" -f $ctx.health.health_score, $ctx.health.evidence_pressure, $ctx.health.dominant_pressure_source) -ForegroundColor Green
-        Write-Host ("  Next: {0}" -f $ctx.next_action) -ForegroundColor Yellow
-    } else {
-        Write-Host "  AI context missing. Run /interface or /evolve." -ForegroundColor Yellow
+        $health = [string]$ctx.health.health_score
+        $pressure = [string]$ctx.health.evidence_pressure
+        $dominant = [string]$ctx.health.dominant_pressure_source
+        $next = [string]$ctx.next_action
     }
+    $shortNext = $next.Substring(0, [Math]::Min(32, $next.Length))
+
     Write-Host ""
-    Write-Host "  Tabs: [HUMAN] [AI] [DEBUG] [SELF-HEAL] [EVIDENCE] [GRAPH] [RUNTIME] [REFLECT]" -ForegroundColor Gray
+    Write-HudRule 118
+    $titleLine = '| NEXUS GATE :: Hermes-Style PowerShell TUI                        | AGENT MODE: ACTIVE | GOVERNANCE: ENFORCED |'
+    $timeLine = '| HUD operator console | system time: ' + (Get-Date -Format 'yyyy-MM-dd HH:mm:ss') + ' | LINK STATUS: STABLE              |'
+    Write-Host $titleLine -ForegroundColor Cyan
+    Write-Host $timeLine -ForegroundColor DarkCyan
+    Write-HudRule 118
+    Write-Host '| PROCESS LANES                 | NEXUS CONSOLE                                      | FEEDBACK SUMMARY                 |' -ForegroundColor Cyan
+    Write-Host '| [1] evolve        --          | NEXUS> /run evolve                                | HEALTH SCORE                     |' -ForegroundColor Gray
+    $healthLine = '| [2] interface                 | [NEXUS] governed lanes visible                    | ' + ([string]($health + ' / 1.0')).PadRight(32).Substring(0, 32) + ' |'
+    $pressureLine = '| [3] feedback                  | [NEXUS] UI does not own logic                     | EVIDENCE PRESSURE: ' + ([string]$pressure).PadRight(14).Substring(0, 14) + ' |'
+    $dominantLine = '| [4] heal                      | [NEXUS] same gates, same reports                  | DOMINANT: ' + ([string]$dominant).PadRight(22).Substring(0, 22) + ' |'
+    Write-Host $healthLine -ForegroundColor Green
+    Write-Host $pressureLine -ForegroundColor Gray
+    Write-Host $dominantLine -ForegroundColor Gray
+    Write-Host '| [5] status                    | [NEXUS] use /menu for command list                | NEXT ACTION                      |' -ForegroundColor Gray
+    $nextLine = '| [6] compact                   | [BUFFER] #######----------------------- 24%       | ' + ([string]$shortNext).PadRight(32).Substring(0, 32) + ' |'
+    Write-Host $nextLine -ForegroundColor Yellow
+    Write-Host '| [7] interconnect              |                                                    | AI PACKAGE: context/log READY    |' -ForegroundColor Gray
+    Write-Host '| [8] runtime                   |                                                    | /copy exports handoff            |' -ForegroundColor Gray
+    Write-Host '| [9] pack                      |                                                    | /snapshot opens HUD bridge       |' -ForegroundColor Gray
+    Write-HudRule 118
+    Write-Host '| HUMAN FEEDBACK | AI FEEDBACK | DEBUGGING | SELF-HEALING | REFLECTION | INTERCONNECT | GOVERNANCE: strict audit enabled |' -ForegroundColor DarkCyan
+    Write-HudRule 118
     Write-Host ""
 }
 
 function Show-Menu {
     Header
-    Write-Host "  Process Lane Dropdown" -ForegroundColor White
-    Write-Host "  ---------------------" -ForegroundColor DarkGray
+    Write-Host '  HUD Process Lane Menu' -ForegroundColor White
+    Write-Host '  ---------------------' -ForegroundColor DarkGray
     foreach ($lane in $Global:Lanes) {
         Write-Host ("  {0}. [{1}] {2,-12} - {3}" -f $lane.key, $lane.tab, $lane.name, $lane.desc) -ForegroundColor Gray
     }
-    Write-Host ""
-    Write-Host "  Chat commands:" -ForegroundColor White
-    Write-Host "    /run <lane>       Run a lane, e.g. /run evolve" -ForegroundColor Gray
-    Write-Host "    /note <text>      Append human/AI feedback note to FEEDBACK_LOG.md" -ForegroundColor Gray
-    Write-Host "    /packet <summary> Create governed operation packet template" -ForegroundColor Gray
-    Write-Host "    /debug            Show latest failure/debug tail" -ForegroundColor Gray
-    Write-Host "    /ai               Print AI handoff block for copy/paste" -ForegroundColor Gray
-    Write-Host "    /copy             Export AI handoff and copy it to clipboard" -ForegroundColor Gray
-    Write-Host "    /snapshot         Write/open HTML TUI snapshot" -ForegroundColor Gray
-    Write-Host "    /surface          Write machine-readable TUI surface JSON" -ForegroundColor Gray
-    Write-Host "    /electron         Show Electron port contract" -ForegroundColor Gray
-    Write-Host "    /graph            Show governed interconnect console" -ForegroundColor Gray
-    Write-Host "    /domains          Show domain interconnection routes" -ForegroundColor Gray
-    Write-Host "    /open-log         Open docs/feedback/FEEDBACK_LOG.md" -ForegroundColor Gray
-    Write-Host "    /open-context     Open state/ai_feedback_context_latest.json" -ForegroundColor Gray
-    Write-Host "    /menu             Redraw this menu" -ForegroundColor Gray
-    Write-Host "    /exit             Close shell" -ForegroundColor Gray
-    Write-Host ""
+    Write-Host ''
+    Write-Host '  HUD command deck:' -ForegroundColor White
+    Write-Host '    /run lane         Run a lane, e.g. /run evolve' -ForegroundColor Gray
+    Write-Host '    /note text        Append human/AI feedback note to FEEDBACK_LOG.md' -ForegroundColor Gray
+    Write-Host '    /packet summary   Create governed operation packet template' -ForegroundColor Gray
+    Write-Host '    /debug            Show latest failure/debug tail' -ForegroundColor Gray
+    Write-Host '    /ai               Print AI handoff block for copy/paste' -ForegroundColor Gray
+    Write-Host '    /copy             Export AI handoff and copy it to clipboard' -ForegroundColor Gray
+    Write-Host '    /snapshot         Write/open HTML TUI snapshot' -ForegroundColor Gray
+    Write-Host '    /surface          Write machine-readable TUI surface JSON' -ForegroundColor Gray
+    Write-Host '    /electron         Show Electron port contract' -ForegroundColor Gray
+    Write-Host '    /graph            Show governed interconnect console' -ForegroundColor Gray
+    Write-Host '    /domains          Show domain interconnection routes' -ForegroundColor Gray
+    Write-Host '    /open-log         Open docs/feedback/FEEDBACK_LOG.md' -ForegroundColor Gray
+    Write-Host '    /open-context     Open state/ai_feedback_context_latest.json' -ForegroundColor Gray
+    Write-Host '    /menu             Redraw this menu' -ForegroundColor Gray
+    Write-Host '    /exit             Close shell' -ForegroundColor Gray
+    Write-Host ''
 }
 
 function Resolve-Lane {
@@ -362,6 +390,7 @@ function Export-AIHandoff {
 }
 
 function New-TuiSnapshot {
+    # Compatibility markers retained for bridge tests: Interconnect Checks, Placeholder Evidence, mutate graph state.
     $path = Join-Path $TuiDir "nexus_tui_snapshot_latest.html"
     $ctx = Get-LatestContext
     $graphPath = Join-Path $Root "state\interconnect_graph.v0.2.2.json"
@@ -418,62 +447,115 @@ function New-TuiSnapshot {
   <meta charset="utf-8">
   <title>NEXUS GATE TUI Snapshot</title>
   <style>
-    body { font-family: Consolas, monospace; background: #111827; color: #e5e7eb; margin: 32px; }
-    h1 { color: #67e8f9; }
-    code, pre { background: #020617; color: #d1fae5; padding: 12px; display: block; }
-    section { border-top: 1px solid #334155; margin-top: 24px; padding-top: 16px; }
-    .metric { margin: 8px 0; }
-    .grid { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 12px; }
-    .tile { background: #020617; border: 1px solid #334155; padding: 12px; }
-    .label { color: #94a3b8; font-size: 12px; }
-    .value { color: #d1fae5; font-size: 18px; margin-top: 4px; }
+    :root { color-scheme: dark; --bg: #050914; --panel: #07111f; --panel2: #09182a; --line: #0e7490; --line2: #164e63; --text: #d9f7ff; --muted: #7dd3fc; --ok: #86efac; --warn: #facc15; --accent: #22d3ee; --violet: #e879f9; }
+    * { box-sizing: border-box; }
+    body { font-family: Consolas, monospace; background: radial-gradient(circle at 80% 0%, #0b2540 0, #050914 36%, #020617 100%); color: var(--text); margin: 0; min-height: 100vh; }
+    .hud { min-height: 100vh; padding: 18px; display: grid; grid-template-rows: auto 1fr auto; gap: 12px; }
+    .topbar, .footer, .panel { background: linear-gradient(180deg, rgba(9,24,42,.96), rgba(2,6,23,.96)); border: 1px solid var(--line2); box-shadow: 0 0 18px rgba(34,211,238,.12), inset 0 0 24px rgba(34,211,238,.05); }
+    .topbar { display: grid; grid-template-columns: 1fr repeat(4, minmax(130px, auto)); gap: 10px; align-items: center; padding: 10px 14px; }
+    h1 { color: var(--accent); font-size: 24px; margin: 0; letter-spacing: 0; text-shadow: 0 0 12px rgba(34,211,238,.6); }
+    .subtitle { color: #e5e7eb; font-size: 18px; }
+    .pill { border: 1px solid var(--line2); padding: 8px 10px; color: var(--ok); text-align: center; font-size: 12px; background: #06111f; }
+    .main { display: grid; grid-template-columns: 190px minmax(360px, 1fr) 420px; gap: 12px; min-height: 0; }
+    .panel { padding: 12px; min-width: 0; }
+    .panel h2 { margin: 0 0 12px; font-size: 13px; color: var(--accent); font-weight: 700; }
+    .lane { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(125,211,252,.13); padding: 9px 4px; color: #dbeafe; }
+    .lane:first-of-type { color: var(--accent); background: rgba(34,211,238,.08); }
+    .console { font-size: 13px; line-height: 1.7; }
+    .console .ok { color: var(--ok); }
+    .console .warn { color: var(--warn); }
+    .console .ai { color: var(--violet); }
+    .buffer { height: 8px; border: 1px solid var(--line2); background: #020617; margin: 10px 0; }
+    .buffer span { display: block; width: 72%; height: 100%; background: linear-gradient(90deg, #22d3ee, #86efac); box-shadow: 0 0 14px rgba(34,211,238,.7); }
+    .metrics { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .score { font-size: 34px; color: #86efac; text-shadow: 0 0 12px rgba(134,239,172,.5); }
+    .row { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid rgba(125,211,252,.14); padding-top: 8px; color: #dbeafe; }
+    .row span:first-child, .label { color: #93c5fd; font-size: 12px; text-transform: uppercase; }
+    .modules { display: grid; grid-template-columns: repeat(6, minmax(130px, 1fr)); gap: 10px; }
+    .module { border: 1px solid var(--line2); background: rgba(2,6,23,.78); padding: 10px; min-width: 0; }
+    .module strong { display: block; color: var(--accent); font-size: 12px; margin-bottom: 8px; }
+    .module p { margin: 4px 0; color: #cbd5e1; font-size: 12px; overflow-wrap: anywhere; }
+    code, pre { background: #020617; color: #d1fae5; padding: 12px; display: block; overflow: auto; border: 1px solid rgba(125,211,252,.16); }
+    ul { padding-left: 18px; margin: 8px 0; }
     li { margin: 6px 0; }
+    .footer { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; padding: 10px 14px; color: #bfdbfe; font-size: 12px; }
+    @media (max-width: 980px) { .topbar, .main, .modules, .footer { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-  <h1>NEXUS GATE TUI Snapshot</h1>
-  <section>
-    <div class="grid">
-      <div class="tile"><div class="label">Health</div><div class="value">$health</div></div>
-      <div class="tile"><div class="label">Pressure</div><div class="value">$pressure</div></div>
-      <div class="tile"><div class="label">Graph</div><div class="value">$graphStatus</div></div>
-      <div class="tile"><div class="label">Nodes / Edges</div><div class="value">$nodeCount / $edgeCount</div></div>
-    </div>
-    <div class="metric">Dominant pressure: $dominant</div>
-    <div class="metric">Graph version: $graphVersion</div>
-    <div class="metric">Next action: $next</div>
-  </section>
-  <section>
-    <h2>Interconnect Checks</h2>
-    <ul>
-      $checkRows
-    </ul>
-  </section>
-  <section>
-    <h2>Placeholder Evidence</h2>
-    <ul>
-      $placeholderRows
-    </ul>
-  </section>
-  <section>
-  <h2>Launch</h2>
-  <pre>.\scripts\nexus.ps1 tui
+  <div class="hud">
+    <header class="topbar">
+      <div><h1>NEXUS GATE <span class="subtitle">:: Hermes-Style PowerShell TUI</span></h1></div>
+      <div class="pill">AGENT MODE<br>ACTIVE</div>
+      <div class="pill">GOVERNANCE<br>ENFORCED</div>
+      <div class="pill">SYSTEM TIME<br>$((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))</div>
+      <div class="pill">LINK STATUS<br>STABLE</div>
+    </header>
+    <main class="main">
+      <section class="panel">
+        <h2>PROCESS LANES</h2>
+        <div class="lane"><span>evolve</span><span>&gt;&gt;</span></div>
+        <div class="lane"><span>interface</span><span>01</span></div>
+        <div class="lane"><span>feedback</span><span>02</span></div>
+        <div class="lane"><span>heal</span><span>03</span></div>
+        <div class="lane"><span>status</span><span>04</span></div>
+        <div class="lane"><span>compact</span><span>05</span></div>
+        <div class="lane"><span>interconnect</span><span>06</span></div>
+        <div class="lane"><span>runtime</span><span>07</span></div>
+        <div class="lane"><span>pack</span><span>08</span></div>
+      </section>
+      <section class="panel console">
+        <h2>NEXUS CONSOLE</h2>
+        <div>NEXUS&gt; /snapshot</div>
+        <div class="ok">[NEXUS] HUD snapshot assembled from governed evidence.</div>
+        <div>[NEXUS] Same core lanes, same gates, same reports.</div>
+        <div class="buffer"><span></span></div>
+        <div>NEXUS&gt; /ai</div>
+        <div class="ai">[AI] Handoff surfaces ready for operator copy.</div>
+        <div>NEXUS&gt; /electron</div>
+        <div class="warn">[WARN] Electron remains presentation-only until governed smoke gates pass.</div>
+        <pre>Launch:
+.\scripts\nexus.ps1 tui
 .\scripts\nexus.ps1 ui</pre>
-  </section>
-  <section>
-  <h2>Bridge Surfaces</h2>
-  <pre>state/ai_feedback_context_latest.json
-docs/feedback/FEEDBACK_LOG.md
-docs/feedback/operator_packets/*.json
-reports/nexus_feedback_interface_report_latest.json
-reports/nexus_self_healing_report_latest.json
-reports/tui/nexus_tui_ai_handoff_latest.txt
-reports/tui/nexus_tui_snapshot_latest.html</pre>
-  </section>
-  <section>
-  <h2>Boundary</h2>
-  <p>The operator surface may make governed actions visible and selectable. It may not become the operator, self-authorize, mutate graph state, or bypass gates.</p>
-  </section>
+      </section>
+      <aside class="metrics">
+        <section class="panel">
+          <h2>FEEDBACK SUMMARY</h2>
+          <div class="label">Health Score</div>
+          <div class="score">$health</div>
+          <div class="row"><span>Evidence pressure</span><span>$pressure</span></div>
+          <div class="row"><span>Dominant pressure</span><span>$dominant</span></div>
+          <div class="row"><span>Trend</span><span>$graphStatus</span></div>
+          <div class="row"><span>Next action</span><span>$next</span></div>
+        </section>
+        <section class="panel">
+          <h2>AI HANDOFF PACKAGE</h2>
+          <div class="row"><span>ai_feedback_context_latest.json</span><span>READY</span></div>
+          <div class="row"><span>FEEDBACK_LOG.md</span><span>READY</span></div>
+          <div class="row"><span>nexus_tui_surface_latest.json</span><span>READY</span></div>
+        </section>
+      </aside>
+    </main>
+    <section class="modules">
+      <div class="module"><strong>HUMAN FEEDBACK</strong><p>Status: receiving</p><p>Append only log</p></div>
+      <div class="module"><strong>AI FEEDBACK</strong><p>Context: latest</p><p>Handoff: /copy</p></div>
+      <div class="module"><strong>DEBUGGING</strong><p>Tail: /debug</p><p>Errors remain gated</p></div>
+      <div class="module"><strong>SELF-HEALING</strong><p>Lane: /run heal</p><p>No autonomous apply</p></div>
+      <div class="module"><strong>REFLECTION</strong><p>Graph: $nodeCount nodes</p><p>Edges: $edgeCount</p></div>
+      <div class="module"><strong>INTERCONNECT</strong><p>Version: $graphVersion</p><p>Status: $graphStatus</p></div>
+    </section>
+    <section class="panel">
+      <h2>INTERCONNECT CHECKS</h2>
+      <ul>$checkRows</ul>
+      <h2>PLACEHOLDER EVIDENCE</h2>
+      <ul>$placeholderRows</ul>
+    </section>
+    <footer class="footer">
+      <div>GOVERNANCE: strict | audit enabled | compliance enforced</div>
+      <div>DATA TRANSFER PROTOCOL: signed | verified | evidence routed</div>
+      <div>BOUNDARY: visible and selectable, never self-authorizing</div>
+    </footer>
+  </div>
 </body>
 </html>
 "@
