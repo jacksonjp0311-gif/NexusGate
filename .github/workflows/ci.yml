@@ -1,0 +1,49 @@
+name: NEXUS GATE CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  windows-powershell:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Python compile
+        run: python -m compileall nexus_gate tests
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests
+
+      - name: NEXUS GATE compiler
+        shell: pwsh
+        run: powershell -ExecutionPolicy Bypass -File .\scripts\nexus_compile.ps1
+
+  ubuntu-bash:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Python compile
+        run: python -m compileall nexus_gate tests
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests
+
+      - name: NEXUS GATE compiler
+        run: bash scripts/nexus_compile.sh

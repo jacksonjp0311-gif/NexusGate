@@ -12,5 +12,10 @@
     "gated_compiler":  "installed",
     "gated_compiler_version":  "0.1.1b",
     "freeze_rescue_patch":  "applied",
-    "updated_at_utc":  "2026-07-03T02:03:33.7556669Z"
+    "professional_readme":  "installed",
+    "gated_runtime_loop":  "installed",
+    "runtime_loop_version":  "0.1.2b",
+    "dual_shell_runtime":  "installed",
+    "loop_compile_rule":  "enforced",
+    "updated_at_utc":  "2026-07-03T02:12:56.0255155Z"
 }

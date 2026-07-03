@@ -19,6 +19,8 @@ from nexus_gate.runtime.router import NexusRouter
 
 REQUIRED_PATHS = [
     "README.md",
+    "CONTRIBUTING.md",
+    "ROADMAP.md",
     "pyproject.toml",
     "nexus_gate/__init__.py",
     "nexus_gate/core/packets.py",
@@ -30,6 +32,41 @@ REQUIRED_PATHS = [
     "registry/nexus_gate_manifest.v0.1.0.json",
     "state/nexus_gate_state.v0.1.0.json",
     "ledger/nexus_gate_ledger.v0.1.0.jsonl",
+    "docs/runtime/GATED_RUNTIME_LOOP.md",
+    "docs/runtime/RELEASE_GATES.md",
+    "docs/runtime/CROSS_PLATFORM_COMMANDS.md",
+    "scripts/nexus_compile.ps1",
+    "scripts/nexus_once.ps1",
+    "scripts/nexus_dev_loop.ps1",
+    "scripts/nexus_watch.ps1",
+    "scripts/nexus_status.ps1",
+    "scripts/nexus_promote.ps1",
+    "scripts/nexus_compile.sh",
+    "scripts/nexus_once.sh",
+    "scripts/nexus_dev_loop.sh",
+    "scripts/nexus_watch.sh",
+    "scripts/nexus_status.sh",
+    "scripts/nexus_promote.sh",
+]
+
+DUAL_SHELL_PAIRS = [
+    ("scripts/nexus_compile.ps1", "scripts/nexus_compile.sh"),
+    ("scripts/nexus_once.ps1", "scripts/nexus_once.sh"),
+    ("scripts/nexus_dev_loop.ps1", "scripts/nexus_dev_loop.sh"),
+    ("scripts/nexus_watch.ps1", "scripts/nexus_watch.sh"),
+    ("scripts/nexus_status.ps1", "scripts/nexus_status.sh"),
+    ("scripts/nexus_promote.ps1", "scripts/nexus_promote.sh"),
+]
+
+MUST_CALL_COMPILER = [
+    "scripts/nexus_compile.ps1",
+    "scripts/nexus_once.ps1",
+    "scripts/nexus_dev_loop.ps1",
+    "scripts/nexus_promote.ps1",
+    "scripts/nexus_compile.sh",
+    "scripts/nexus_once.sh",
+    "scripts/nexus_dev_loop.sh",
+    "scripts/nexus_promote.sh",
 ]
 
 REQUIRED_RUNTIME_LAWS = [
@@ -41,6 +78,12 @@ REQUIRED_RUNTIME_LAWS = [
     "No ledger stub, no compounding.",
 ]
 
+REQUIRED_README_RULES = [
+    "Every new runtime loop must exist in both PowerShell and Bash.",
+    "Every loop must run the gated compiler before it cycles, promotes, checkpoints, or claims a pass.",
+    "No compile pass, no promotion.",
+]
+
 # Split strings prevent the compiler from matching its own marker table.
 FORBIDDEN_BYPASS_MARKERS = [
     "bypass_" + "authority=True",
@@ -50,7 +93,7 @@ FORBIDDEN_BYPASS_MARKERS = [
     "allow_" + "mutation_without_authority",
 ]
 
-SCAN_SUFFIXES = {".py", ".ps1", ".md", ".json", ".toml"}
+SCAN_SUFFIXES = {".py", ".ps1", ".sh", ".md", ".json", ".toml", ".yml", ".yaml"}
 EXCLUDED_SCAN_PATHS = {
     "nexus_gate/compiler/compiler.py",
 }
@@ -128,6 +171,21 @@ class NexusCompiler:
 
         self.add("runtime_laws", "fail", "Required runtime laws are missing.", {"missing": missing})
 
+    def gate_readme_rules(self) -> None:
+        readme = self.root / "README.md"
+        if not readme.exists():
+            self.add("readme_rules", "fail", "README.md is missing.", {})
+            return
+
+        text = readme.read_text(encoding="utf-8", errors="ignore")
+        missing = [rule for rule in REQUIRED_README_RULES if rule not in text]
+
+        if not missing:
+            self.add("readme_rules", "pass", "README contains dual-shell and loop-compile rules.", {"rules": REQUIRED_README_RULES})
+            return
+
+        self.add("readme_rules", "fail", "README is missing required development rules.", {"missing": missing})
+
     def gate_json_files_parse(self) -> None:
         json_files = (
             list(self.root.glob("schemas/*.json"))
@@ -150,7 +208,7 @@ class NexusCompiler:
 
     def gate_forbidden_bypass_markers(self) -> None:
         findings = []
-        scan_roots = [self.root / "nexus_gate", self.root / "scripts", self.root / "tests"]
+        scan_roots = [self.root / "nexus_gate", self.root / "scripts", self.root / "tests", self.root / "docs"]
 
         for scan_root in scan_roots:
             if not scan_root.exists():
@@ -182,6 +240,37 @@ class NexusCompiler:
             return
 
         self.add("forbidden_bypass_scan", "fail", "Forbidden bypass markers found.", {"findings": findings})
+
+    def gate_dual_shell_surface(self) -> None:
+        missing_pairs = []
+        for ps1, sh in DUAL_SHELL_PAIRS:
+            if not (self.root / ps1).exists() or not (self.root / sh).exists():
+                missing_pairs.append({"powershell": ps1, "bash": sh})
+
+        if missing_pairs:
+            self.add("dual_shell_surface", "fail", "PowerShell/Bash script pair is missing.", {"missing_pairs": missing_pairs})
+            return
+
+        self.add("dual_shell_surface", "pass", "PowerShell and Bash command surfaces are paired.", {"pairs": DUAL_SHELL_PAIRS})
+
+    def gate_loop_compiler_calls(self) -> None:
+        missing_calls = []
+
+        for rel in MUST_CALL_COMPILER:
+            path = self.root / rel
+            if not path.exists():
+                missing_calls.append({"path": rel, "reason": "missing"})
+                continue
+
+            text = path.read_text(encoding="utf-8", errors="ignore")
+            if "nexus_gate.compiler" not in text:
+                missing_calls.append({"path": rel, "reason": "does_not_call_gated_compiler"})
+
+        if not missing_calls:
+            self.add("loop_compiler_calls", "pass", "Compile/loop/promote scripts call the gated compiler.", {"checked": MUST_CALL_COMPILER})
+            return
+
+        self.add("loop_compiler_calls", "fail", "A required script does not call the gated compiler.", {"missing_calls": missing_calls})
 
     def gate_python_compile(self) -> None:
         ok = compileall.compile_dir(str(self.root / "nexus_gate"), quiet=1)
@@ -278,7 +367,7 @@ class NexusCompiler:
             ledger = JsonlLedger(ledger_path)
             ledger.append({
                 "event": "compiler_ledger_gate_probe",
-                "version": "0.1.1b",
+                "version": "0.1.2b",
                 "status": "probe",
             })
         except Exception as exc:
@@ -293,8 +382,11 @@ class NexusCompiler:
         self.gate_root_exists()
         self.gate_required_paths()
         self.gate_manifest_runtime_laws()
+        self.gate_readme_rules()
         self.gate_json_files_parse()
         self.gate_forbidden_bypass_markers()
+        self.gate_dual_shell_surface()
+        self.gate_loop_compiler_calls()
         self.gate_python_compile()
         self.gate_route_contracts()
         self.gate_unit_tests()
@@ -306,7 +398,7 @@ class NexusCompiler:
 
         return CompileReport(
             system="NEXUS GATE",
-            version="0.1.1b-gated-compiler",
+            version="0.1.2b-dual-shell-compiler",
             root=str(self.root),
             status=status,
             generated_at_utc=datetime.now(timezone.utc).isoformat(),
