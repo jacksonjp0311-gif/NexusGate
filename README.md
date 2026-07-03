@@ -821,3 +821,38 @@ New command:
 ```
 
 This is local development evidence only. It proves bounded runtime mechanics, not production interoperability.
+
+
+## v0.2.1 - Human Surface + Quiet Git Warnings
+
+NEXUS GATE now has a human-readable operator surface for PowerShell runs.
+
+New command:
+
+```powershell
+.\scripts\nexus.ps1 human
+```
+
+Human surface law:
+
+```text
+No operator flood.
+No raw JSON wall unless requested.
+No CRLF warning noise in normal runs.
+No completion claim without compiled report files.
+```
+
+The full evidence is still written under `reports/`. The terminal should show the human status path:
+
+```text
+compile
+tests
+NEXUS compiler
+adapter compiler
+receptor compiler
+bridge compiler
+runtime compiler
+pack compiler
+```
+
+This is local development evidence only.

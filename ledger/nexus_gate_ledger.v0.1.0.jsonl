@@ -43,3 +43,9 @@
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_103440.json","duration_ms":554,"failed_gates":[],"timestamp_utc":"2026-07-03T10:34:40.566043+00:00"}
 {"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T10:34:42.538907+00:00"}
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_103442.json","duration_ms":557,"failed_gates":[],"timestamp_utc":"2026-07-03T10:34:42.540912+00:00"}
+{"event":"human_surface_quiet_git_installed","version":"0.2.1","timestamp_utc":"2026-07-03T10:49:02.0696535Z","hard_law":"No operator flood."}
+{"event":"replacement_human_surface_marker_rescue","version":"0.2.1b","timestamp_utc":"2026-07-03T11:22:35.7440463Z","fix":"restore literal compiler markers required by tests"}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T11:22:37.746447+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_112237.json","duration_ms":566,"failed_gates":[],"timestamp_utc":"2026-07-03T11:22:37.748706+00:00"}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T11:22:39.637224+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_112239.json","duration_ms":543,"failed_gates":[],"timestamp_utc":"2026-07-03T11:22:39.639476+00:00"}

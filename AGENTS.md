@@ -186,3 +186,21 @@ No runtime without summary counts.
 No runtime without claim boundary.
 No promotion without runtime compiler pass.
 ```
+
+
+## Human Surface Contract
+
+When running NEXUS from PowerShell, prefer:
+
+```powershell
+.\scripts\nexus.ps1 human
+```
+
+Hard rules:
+
+```text
+No operator flood.
+No raw JSON wall unless requested.
+No CRLF warning noise in normal runs.
+No completion claim without compiled report files.
+```

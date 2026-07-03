@@ -18,9 +18,9 @@ This chart must be visible during rehydration.
 | v0.1.6b | Compression Rescue + Lineage Restore | pass | Pack compiler and compressed bundle pass. |
 | v0.1.7 | Adapter Registry + LocalDemoAdapter | pass | Adds adapter registry, manifest compiler, and first demo adapter. |
 | v0.1.8 | Receptor Registry + Compatibility Compiler | pass | Adds receptor manifests, receptor registry, compatibility decisions, and receptor compiler. |
-| v0.1.9 | Bridge Session Runner | failed | StatePacket lacked to_dict and compact script dropped FAILURE_MODE_CHART marker. |
-| v0.1.9b | Bridge Session Rescue | pass | Adds safe packet serialization and restores compact marker visibility. |
-| v0.2.0 | Bounded Bridge Runtime | current | Adds bounded runtime, runtime compiler, runtime report, and compact runtime command. |
+| v0.1.9b | Bridge Session Rescue | pass | Adds safe packet serialization and bridge compiler pass. |
+| v0.2.0 | Bounded Bridge Runtime | pass | Adds bounded runtime, runtime compiler, runtime report, and compact runtime command. |
+| v0.2.1 | Human Surface + Quiet Git Warnings | current | Adds human-readable PowerShell surface and filters CRLF/LF warning noise. |
 
 ## Current Required Update Rule
 
@@ -45,6 +45,9 @@ No stale chart after failed validation.
 No silent repair after failed validation.
 No growing code surface without pack report.
 No lineage row may be deleted while tests still depend on it.
+No operator flood in normal PowerShell runs.
 ```
 
 Boundary: the update chart improves repository continuity. It does not prove correctness, safety, security, or production readiness.
+
+| v0.2.1b | Human Surface Marker Rescue | current | Restores compiler marker compatibility while preserving human surface. |

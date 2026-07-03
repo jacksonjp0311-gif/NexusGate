@@ -40,3 +40,5 @@ No bridge report without safe packet serialization.
 ```
 
 Boundary: this chart is a local development control. It does not prove safety, security, correctness, or production readiness.
+
+- compiler_marker_hidden_by_wrapper: human wrapper hid literal compiler marker still required by compatibility tests.

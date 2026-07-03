@@ -8,3 +8,5 @@
 {"event":"bridge_session_runner_installed","version":"0.1.9","timestamp_utc":"2026-07-03T10:29:40.8994518Z","hard_law":"No bridge session without receptor compatibility."}
 {"event":"bridge_session_rescue_installed","version":"0.1.9b","timestamp_utc":"2026-07-03T10:32:21.4256903Z","fixes":["statepacket_to_dict_missing","compact_marker_gate_dropped"]}
 {"event":"bounded_bridge_runtime_installed","version":"0.2.0","timestamp_utc":"2026-07-03T10:34:39.2437482Z","hard_law":"No runtime without event limit."}
+{"event":"human_surface_quiet_git_installed","version":"0.2.1","timestamp_utc":"2026-07-03T10:49:02.0696535Z","hard_law":"No operator flood."}
+{"event":"replacement_human_surface_marker_rescue","version":"0.2.1b","timestamp_utc":"2026-07-03T11:22:35.7440463Z","fix":"restore literal compiler markers required by tests"}

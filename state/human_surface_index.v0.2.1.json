@@ -1,0 +1,23 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.1",
+  "kind": "human_surface_index",
+  "preferred_command": ".\\scripts\\nexus.ps1 human",
+  "surface_law": [
+    "No operator flood.",
+    "No raw JSON wall unless requested.",
+    "No CRLF warning noise in normal runs.",
+    "No completion claim without compiled report files."
+  ],
+  "compiled_steps": [
+    "python_compile",
+    "unit_tests",
+    "nexus_compiler",
+    "adapter_compiler",
+    "receptor_compiler",
+    "bridge_compiler",
+    "runtime_compiler",
+    "pack_compiler"
+  ],
+  "claim_boundary": "Human surface is local operator UX evidence only."
+}

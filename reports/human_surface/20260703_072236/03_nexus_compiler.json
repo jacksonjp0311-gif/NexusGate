@@ -1,10 +1,10 @@
-{
+﻿{
   "system": "NEXUS GATE",
   "version": "0.1.5-strict-cold-evidence-compiler",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-03T11:22:39.638473+00:00",
-  "duration_ms": 543,
+  "generated_at_utc": "2026-07-03T11:22:37.747704+00:00",
+  "duration_ms": 566,
   "gates": [
     {
       "gate": "required_paths",
@@ -220,7 +220,7 @@
         ],
         "returncode": 0,
         "stdout_tail": "",
-        "stderr_tail": ".......................................................\n----------------------------------------------------------------------\nRan 55 tests in 0.276s\n\nOK\n"
+        "stderr_tail": ".......................................................\n----------------------------------------------------------------------\nRan 55 tests in 0.271s\n\nOK\n"
       }
     },
     {

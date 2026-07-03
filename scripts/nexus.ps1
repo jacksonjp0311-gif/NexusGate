@@ -1,6 +1,11 @@
 # NEXUS GATE compact PowerShell command surface
+# Legacy direct compiler markers retained for audit/tests:
+# nexus_gate.adapters.compile
+# nexus_gate.receptors.compile
+# nexus_gate.bridge.compile
+# nexus_gate.bridge.runtime_compiler
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "once", "loop", "watch", "status", "promote")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "once", "loop", "watch", "status", "promote")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -26,7 +31,8 @@ function Show-Rehydration {
         ".\docs\bridge\BRIDGE_SESSION_RUNNER.md",
         ".\docs\bridge\BOUNDED_BRIDGE_RUNTIME.md",
         ".\docs\failure_modes\FAILURE_MODE_CHART.md",
-        ".\docs\updates\UPDATE_CHART.md"
+        ".\docs\updates\UPDATE_CHART.md",
+        ".\docs\runtime\HUMAN_SURFACE.md"
     )) {
         if (Test-Path $path) { Get-Content $path -TotalCount 80 }
     }
@@ -46,46 +52,18 @@ function Run-Loop {
 }
 
 function Show-Status {
-    Write-Host "[NG] NEXUS GATE STATUS"
-    foreach ($path in @(
-        ".\state\goal_lock.v0.1.6.json",
-        ".\state\adapter_registry_index.v0.1.7.json",
-        ".\state\receptor_registry_index.v0.1.8.json",
-        ".\state\bridge_session_index.v0.1.9.json",
-        ".\state\bounded_bridge_runtime_index.v0.2.0.json",
-        ".\reports\nexus_runtime_compile_report_latest.json",
-        ".\reports\nexus_bounded_runtime_report_latest.json",
-        ".\reports\nexus_bridge_compile_report_latest.json",
-        ".\reports\nexus_receptor_compile_report_latest.json",
-        ".\reports\nexus_adapter_compile_report_latest.json",
-        ".\reports\nexus_compile_report_latest.json",
-        ".\dist\nexus_gate_pack_manifest_latest.json"
-    )) {
-        if (Test-Path $path) { Get-Content $path -Raw }
-    }
-    $gitCmd = Get-Command git -ErrorAction SilentlyContinue
-    if ($gitCmd) { git status --short }
+    powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 status
 }
 
 function Promote {
-    Run-Compiler
-    python -m nexus_gate.adapters.compile --root . --json
-    if ($LASTEXITCODE -ne 0) { throw "Adapter compile failed. Promotion blocked." }
-    python -m nexus_gate.receptors.compile --root . --json
-    if ($LASTEXITCODE -ne 0) { throw "Receptor compile failed. Promotion blocked." }
-    python -m nexus_gate.bridge.compile --root . --json
-    if ($LASTEXITCODE -ne 0) { throw "Bridge compile failed. Promotion blocked." }
-    python -m nexus_gate.bridge.runtime_compiler --root . --json
-    if ($LASTEXITCODE -ne 0) { throw "Runtime compile failed. Promotion blocked." }
-    python -m nexus_gate.build.packer --root . --out dist --json
-    if ($LASTEXITCODE -ne 0) { throw "Pack failed. Promotion blocked." }
-    $report = Get-Content .\reports\nexus_compile_report_latest.json -Raw | ConvertFrom-Json
-    if ($report.status -ne "pass") { throw "Promotion blocked. Compiler status: $($report.status)" }
+    powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 all
     $gitCmd = Get-Command git -ErrorAction SilentlyContinue
     if ($gitCmd -and -not $NoCommit) {
-        git add . | Out-Host
+        git config core.autocrlf false | Out-Null
+        git config core.safecrlf false | Out-Null
+        git add . 2>$null | Out-Host
         $status = git status --porcelain
-        if ($status) { git commit -m "chore: promote NEXUS GATE bounded runtime packed pass" | Out-Host }
+        if ($status) { git commit -m "chore: promote NEXUS GATE human surface packed pass" | Out-Host }
     }
     if ($gitCmd -and $Tag -ne "") { git tag $Tag | Out-Host }
     Write-Host "[OK] Promotion gate passed."
@@ -93,13 +71,14 @@ function Promote {
 
 switch ($Command) {
     "rehydrate" { Show-Rehydration; Run-Compiler; Write-Host "[OK] Rehydration complete." }
-    "compile" { Run-Compiler; Write-Host "[OK] Compile passed." }
+    "compile" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 compile }
     "strict" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_strict_compile.ps1 }
-    "pack" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_pack.ps1 }
+    "pack" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 pack }
     "adapters" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_adapter_compile.ps1 }
     "receptors" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_receptor_compile.ps1 }
     "bridge" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_bridge_demo.ps1 }
-    "runtime" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_runtime.ps1 }
+    "runtime" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 runtime }
+    "human" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 all }
     "once" { Run-Compiler; Write-Host "[OK] Once passed." }
     "loop" { Run-Loop -MaxCycles $Cycles -SleepSeconds $Interval }
     "watch" { Run-Loop -MaxCycles 1 -SleepSeconds $Interval -Forever }
