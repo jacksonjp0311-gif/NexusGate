@@ -12,12 +12,11 @@ This chart must be visible during rehydration.
 | v0.1.2b | Dual-shell runtime. | failed | Gate mismatch around direct compiler calls. |
 | v0.1.2c | Dual-shell gate correction. | superseded | Direct compiler-call rule enforced. |
 | v0.1.3d | Portable RHP/Nexus/AI shell. | failed | README omitted exact dual-shell rule required by existing test. |
-| v0.1.4 | Rehydration failure/update chart. | wrapper failed | Indented here-string broke PowerShell parsing. |
-| v0.1.4b | Safe rehydration failure/update chart. | pass-core | Python compile, tests, compiler, PowerShell rehydrate passed; Bash failed because WSL had no installed distro. |
+| v0.1.4b | Safe rehydration failure/update chart. | pass-core | Rehydration chart core pass. |
 | v0.1.4c | Compact runtime surface. | pass | Compact command surface and safe Bash detection. |
 | v0.1.5 | Strict compiler + Cold Evidence | pass | Adds cold evidence contracts, wound routing, strict compiler gates. |
-| v0.1.6 | Compression + Goal Lock | failed | Packer assumed temp output lived under repo; update chart dropped v0.1.4b lineage row. |
-| v0.1.6b | Compression Rescue + Lineage Restore | current | Fixes packer external output paths and restores full update lineage. |
+| v0.1.6b | Compression Rescue + Lineage Restore | pass | Pack compiler and compressed bundle pass. |
+| v0.1.7 | Adapter Registry + LocalDemoAdapter | current | Adds adapter registry, manifest compiler, and first demo adapter. |
 
 ## Current Required Update Rule
 

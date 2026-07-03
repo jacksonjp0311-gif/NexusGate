@@ -1,0 +1,23 @@
+{
+  "adapter_id": "local.demo",
+  "framework_name": "LocalDemo",
+  "adapter_version": "0.1.7",
+  "supported_event_types": [
+    "demo.message",
+    "demo.tool_request"
+  ],
+  "supported_action_classes": [
+    "read_only_signal",
+    "tool_call"
+  ],
+  "supports_shadow": true,
+  "supports_trace_export": true,
+  "supports_replay": false,
+  "capability_bits": [
+    "normalize_event",
+    "export_receptors",
+    "shadow_supported",
+    "trace_export"
+  ],
+  "claim_boundary": "LocalDemoAdapter proves local registry mechanics only. It does not prove framework interoperability."
+}

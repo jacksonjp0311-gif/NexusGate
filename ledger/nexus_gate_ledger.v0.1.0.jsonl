@@ -22,3 +22,8 @@
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_030609.json","duration_ms":384,"failed_gates":[],"timestamp_utc":"2026-07-03T03:06:09.505516+00:00"}
 {"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T03:06:10.533794+00:00"}
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_030610.json","duration_ms":373,"failed_gates":[],"timestamp_utc":"2026-07-03T03:06:10.535918+00:00"}
+{"event":"adapter_registry_local_demo_installed","version":"0.1.7","timestamp_utc":"2026-07-03T10:19:14.2634004Z","hard_law":"No adapter, no bridge."}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T10:19:17.772799+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_101917.json","duration_ms":465,"failed_gates":[],"timestamp_utc":"2026-07-03T10:19:17.775902+00:00"}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T10:19:19.173742+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_101919.json","duration_ms":481,"failed_gates":[],"timestamp_utc":"2026-07-03T10:19:19.175752+00:00"}

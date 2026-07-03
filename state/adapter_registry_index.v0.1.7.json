@@ -1,0 +1,22 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.7",
+  "kind": "adapter_registry_index",
+  "current_adapters": [
+    "local.demo"
+  ],
+  "adapter_law": [
+    "No adapter, no bridge.",
+    "No manifest, no registration.",
+    "No normalized StatePacket, no route.",
+    "No receptor export, no transfer target."
+  ],
+  "next_adapter_targets": [
+    "local_function",
+    "browser_agent",
+    "mcp_like_tool_surface",
+    "openai_agents",
+    "langgraph"
+  ],
+  "claim_boundary": "Adapter registry index is local development evidence only."
+}

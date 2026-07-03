@@ -96,3 +96,26 @@ Run before claiming completion:
 ```powershell
 .\scripts\nexus.ps1 pack
 ```
+
+
+## Adapter Registry Contract
+
+Before adding a framework integration, the agent must add or inspect:
+
+```text
+docs/adapters/ADAPTER_REGISTRY.md
+schemas/adapter_manifest.v0.1.7.schema.json
+registry/adapters.local_demo.v0.1.7.json
+state/adapter_registry_index.v0.1.7.json
+nexus_gate/adapters/registry.py
+nexus_gate/adapters/local_demo.py
+```
+
+Hard rules:
+
+```text
+No adapter, no bridge.
+No manifest, no registration.
+No normalized StatePacket, no route.
+No receptor export, no transfer target.
+```

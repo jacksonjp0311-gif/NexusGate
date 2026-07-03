@@ -1,6 +1,6 @@
 # NEXUS GATE compact PowerShell command surface
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "once", "loop", "watch", "status", "promote")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "once", "loop", "watch", "status", "promote")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -14,28 +14,16 @@ Set-Location $Root
 
 function Run-Compiler {
     python -m nexus_gate.compiler --root . --json
-    if ($LASTEXITCODE -ne 0) {
-        throw "NEXUS GATE compiler failed."
-    }
+    if ($LASTEXITCODE -ne 0) { throw "NEXUS GATE compiler failed." }
 }
 
 function Show-Rehydration {
     Write-Host "[NG] Rehydration visibility"
-    Get-Content .\docs\failure_modes\FAILURE_MODE_CHART.md -TotalCount 80
-    Write-Host ""
-    Get-Content .\docs\updates\UPDATE_CHART.md -TotalCount 80
-    Write-Host ""
-    if (Test-Path .\docs\goal\GOAL_LOCK.md) {
-        Get-Content .\docs\goal\GOAL_LOCK.md -TotalCount 80
-    }
-    Write-Host ""
-    if (Test-Path .\docs\evidence\COLD_EVIDENCE_ENGINE.md) {
-        Get-Content .\docs\evidence\COLD_EVIDENCE_ENGINE.md -TotalCount 80
-    }
-    Write-Host ""
-    if (Test-Path .\reports\nexus_compile_report_latest.json) {
-        Get-Content .\reports\nexus_compile_report_latest.json -Raw
-    }
+    if (Test-Path .\docs\goal\GOAL_LOCK.md) { Get-Content .\docs\goal\GOAL_LOCK.md -TotalCount 80 }
+    if (Test-Path .\docs\adapters\ADAPTER_REGISTRY.md) { Get-Content .\docs\adapters\ADAPTER_REGISTRY.md -TotalCount 80 }
+    if (Test-Path .\docs\failure_modes\FAILURE_MODE_CHART.md) { Get-Content .\docs\failure_modes\FAILURE_MODE_CHART.md -TotalCount 60 }
+    if (Test-Path .\docs\updates\UPDATE_CHART.md) { Get-Content .\docs\updates\UPDATE_CHART.md -TotalCount 80 }
+    if (Test-Path .\reports\nexus_compile_report_latest.json) { Get-Content .\reports\nexus_compile_report_latest.json -Raw }
 }
 
 function Run-Loop {
@@ -52,17 +40,25 @@ function Run-Loop {
 
 function Show-Status {
     Write-Host "[NG] NEXUS GATE STATUS"
-    if (Test-Path .\state\goal_lock.v0.1.6.json) { Get-Content .\state\goal_lock.v0.1.6.json -Raw }
-    if (Test-Path .\state\pack_index.v0.1.6.json) { Get-Content .\state\pack_index.v0.1.6.json -Raw }
-    if (Test-Path .\state\cold_evidence_index.v0.1.5.json) { Get-Content .\state\cold_evidence_index.v0.1.5.json -Raw }
-    if (Test-Path .\reports\nexus_compile_report_latest.json) { Get-Content .\reports\nexus_compile_report_latest.json -Raw }
-    if (Test-Path .\dist\nexus_gate_pack_manifest_latest.json) { Get-Content .\dist\nexus_gate_pack_manifest_latest.json -Raw }
+    foreach ($path in @(
+        ".\state\goal_lock.v0.1.6.json",
+        ".\state\adapter_registry_index.v0.1.7.json",
+        ".\state\pack_index.v0.1.6.json",
+        ".\state\cold_evidence_index.v0.1.5.json",
+        ".\reports\nexus_adapter_compile_report_latest.json",
+        ".\reports\nexus_compile_report_latest.json",
+        ".\dist\nexus_gate_pack_manifest_latest.json"
+    )) {
+        if (Test-Path $path) { Get-Content $path -Raw }
+    }
     $gitCmd = Get-Command git -ErrorAction SilentlyContinue
     if ($gitCmd) { git status --short }
 }
 
 function Promote {
     Run-Compiler
+    python -m nexus_gate.adapters.compile --root . --json
+    if ($LASTEXITCODE -ne 0) { throw "Adapter compile failed. Promotion blocked." }
     python -m nexus_gate.build.packer --root . --out dist --json
     if ($LASTEXITCODE -ne 0) { throw "Pack failed. Promotion blocked." }
     $report = Get-Content .\reports\nexus_compile_report_latest.json -Raw | ConvertFrom-Json
@@ -71,42 +67,21 @@ function Promote {
     if ($gitCmd -and -not $NoCommit) {
         git add . | Out-Host
         $status = git status --porcelain
-        if ($status) { git commit -m "chore: promote NEXUS GATE packed gated pass" | Out-Host }
+        if ($status) { git commit -m "chore: promote NEXUS GATE packed adapter pass" | Out-Host }
     }
     if ($gitCmd -and $Tag -ne "") { git tag $Tag | Out-Host }
     Write-Host "[OK] Promotion gate passed."
 }
 
 switch ($Command) {
-    "rehydrate" {
-        Show-Rehydration
-        Run-Compiler
-        Write-Host "[OK] Rehydration complete."
-    }
-    "compile" {
-        Run-Compiler
-        Write-Host "[OK] Compile passed."
-    }
-    "strict" {
-        powershell -ExecutionPolicy Bypass -File .\scripts\nexus_strict_compile.ps1
-    }
-    "pack" {
-        powershell -ExecutionPolicy Bypass -File .\scripts\nexus_pack.ps1
-    }
-    "once" {
-        Run-Compiler
-        Write-Host "[OK] Once passed."
-    }
-    "loop" {
-        Run-Loop -MaxCycles $Cycles -SleepSeconds $Interval
-    }
-    "watch" {
-        Run-Loop -MaxCycles 1 -SleepSeconds $Interval -Forever
-    }
-    "status" {
-        Show-Status
-    }
-    "promote" {
-        Promote
-    }
+    "rehydrate" { Show-Rehydration; Run-Compiler; Write-Host "[OK] Rehydration complete." }
+    "compile" { Run-Compiler; Write-Host "[OK] Compile passed." }
+    "strict" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_strict_compile.ps1 }
+    "pack" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_pack.ps1 }
+    "adapters" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_adapter_compile.ps1 }
+    "once" { Run-Compiler; Write-Host "[OK] Once passed." }
+    "loop" { Run-Loop -MaxCycles $Cycles -SleepSeconds $Interval }
+    "watch" { Run-Loop -MaxCycles 1 -SleepSeconds $Interval -Forever }
+    "status" { Show-Status }
+    "promote" { Promote }
 }

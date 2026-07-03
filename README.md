@@ -701,3 +701,32 @@ No growing code surface without a pack report.
 No release without compile, tests, compiler, and pack manifest.
 No new feature unless it advances the governed transfer boundary.
 ```
+
+
+## v0.1.7 - Adapter Registry + LocalDemoAdapter
+
+NEXUS GATE now begins the actual bridge surface.
+
+New adapter law:
+
+```text
+No adapter, no bridge.
+No manifest, no registration.
+No normalized StatePacket, no route.
+No receptor export, no transfer target.
+```
+
+New compact commands:
+
+```powershell
+.\scripts\nexus.ps1 adapters
+.\scripts\nexus.ps1 pack
+```
+
+New build lane:
+
+```text
+adapter registry -> adapter manifest -> LocalDemoAdapter -> StatePacket -> route decision
+```
+
+This version is still local development evidence only. It does not prove production interoperability.

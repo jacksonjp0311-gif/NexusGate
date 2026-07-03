@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-gate.local/schemas/adapter_manifest.v0.1.7.json",
+  "title": "NEXUS GATE AdapterManifest v0.1.7",
+  "type": "object",
+  "required": [
+    "adapter_id",
+    "framework_name",
+    "adapter_version",
+    "supported_event_types",
+    "supported_action_classes",
+    "supports_shadow",
+    "supports_trace_export",
+    "supports_replay",
+    "capability_bits"
+  ],
+  "properties": {
+    "adapter_id": {
+      "type": "string"
+    },
+    "framework_name": {
+      "type": "string"
+    },
+    "adapter_version": {
+      "type": "string"
+    },
+    "supported_event_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supported_action_classes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supports_shadow": {
+      "type": "boolean"
+    },
+    "supports_trace_export": {
+      "type": "boolean"
+    },
+    "supports_replay": {
+      "type": "boolean"
+    },
+    "capability_bits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "claim_boundary": {
+      "type": "string"
+    }
+  }
+}
