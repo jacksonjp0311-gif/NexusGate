@@ -247,3 +247,14 @@ Then run or ask the human to run:
 ```
 
 Do not assume autonomous write authority. Use feedback as recommendation/dry-run/apply-gate evidence.
+
+
+## NEXUS v0.2.4b Hermes-Style TUI
+
+Use this as the primary human/AI debug loop:
+
+```powershell
+.\scripts\nexus.ps1 tui
+```
+
+Use `/ai` inside the TUI to print a copyable handoff block for ChatGPT/Codex.

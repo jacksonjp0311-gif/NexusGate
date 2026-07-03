@@ -58,3 +58,8 @@ Boundary: this chart is a local development control. It does not prove safety, s
 - ai_feedback_context_missing: future AI cannot rehydrate feedback state without state/ai_feedback_context_latest.json.
 - feedback_log_missing: feedback loop lacks append-only Markdown handoff surface.
 - ps_feedback_summary_missing: PowerShell output does not expose health, pressure, dominant source, next action, context path, and log path.
+
+
+- forms_ui_patch_operator_error: Windows Forms patch mutation failed before install; use terminal TUI shell instead.
+- tui_surface_missing: operator lacks terminal dropdown menu, chat prompt, buffer bar, colored output, AI handoff, and bounded feedback write commands.
+- tui_ungated_mutation: TUI attempts repo mutation outside feedback log, operation packet, or governed NEXUS lanes.

@@ -64,3 +64,8 @@
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_120057.json","duration_ms":1640,"failed_gates":[],"timestamp_utc":"2026-07-03T12:00:57.172287+00:00"}
 {"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T12:01:03.170576+00:00"}
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_120103.json","duration_ms":1385,"failed_gates":[],"timestamp_utc":"2026-07-03T12:01:03.172575+00:00"}
+{"event":"hermes_style_powershell_tui_installed","version":"0.2.4b","timestamp_utc":"2026-07-03T12:24:56.1157463Z","command":".\\scripts\\nexus.ps1 tui","replaces_failed":"v0.2.4_windows_forms_patch_operator_error"}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T15:55:57.664927+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_155557.json","duration_ms":1253,"failed_gates":[],"timestamp_utc":"2026-07-03T15:55:57.669475+00:00"}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T15:56:01.957139+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_155601.json","duration_ms":1161,"failed_gates":[],"timestamp_utc":"2026-07-03T15:56:01.959140+00:00"}

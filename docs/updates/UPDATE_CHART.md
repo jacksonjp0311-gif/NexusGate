@@ -60,3 +60,6 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 
 
 | v0.2.3 | AI Feedback Interface + Markdown Feedback Log | current | Adds ai_feedback_context_latest.json, FEEDBACK_SYSTEM.md, FEEDBACK_LOG.md, interface command, and PowerShell feedback summary. |
+
+
+| v0.2.4b | Hermes-Style PowerShell TUI | current | Adds interactive terminal shell with lane menu, chat prompt, buffer bar, colored output, feedback notes, operation packets, debug tail, and AI handoff. |

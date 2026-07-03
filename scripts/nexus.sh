@@ -4,6 +4,8 @@ set -euo pipefail
 # FAILURE_MODE_CHART
 # UPDATE_CHART
 # strict
+# tui
+# ui
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 COMMAND="${1:-rehydrate}"
@@ -20,6 +22,8 @@ case "$COMMAND" in
   feedback) python -m nexus_gate.feedback.compile --root . --json ;;
   heal) python -m nexus_gate.self_healing.compile --root . --json ;;
   interface) python -m nexus_gate.feedback.interface_compile --root . --json ;;
+  tui) echo "PowerShell TUI is Windows-only. Run: .\\scripts\\nexus.ps1 tui" ;;
+  ui) echo "Compatibility UI alias is Windows-only. Run: .\\scripts\\nexus.ps1 ui" ;;
   evolve)
     python -m compileall nexus_gate tests
     python -m unittest discover -s tests

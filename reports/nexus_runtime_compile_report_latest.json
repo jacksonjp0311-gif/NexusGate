@@ -3,7 +3,7 @@
   "version": "0.2.0-runtime-compiler",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-03T12:00:58.388847+00:00",
+  "generated_at_utc": "2026-07-03T15:55:58.254272+00:00",
   "checks": [
     {
       "check": "runtime_required_paths",

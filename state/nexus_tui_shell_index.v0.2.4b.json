@@ -1,0 +1,48 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.4b",
+  "kind": "hermes_style_powershell_tui",
+  "commands": [
+    ".\\scripts\\nexus.ps1 tui",
+    ".\\scripts\\nexus.ps1 ui",
+    ".\\scripts\\nexus_tui.ps1"
+  ],
+  "lanes": [
+    "evolve",
+    "interface",
+    "feedback",
+    "heal",
+    "status",
+    "compact",
+    "interconnect",
+    "runtime",
+    "pack"
+  ],
+  "interactive_commands": [
+    "/run <lane>",
+    "/note <text>",
+    "/packet <summary>",
+    "/debug",
+    "/ai",
+    "/copy",
+    "/snapshot",
+    "/electron",
+    "/open-log",
+    "/open-context",
+    "/menu",
+    "/exit"
+  ],
+  "bounded_repo_changes": [
+    "append docs/feedback/FEEDBACK_LOG.md",
+    "write docs/feedback/operator_packets/*.json",
+    "run existing governed NEXUS lanes"
+  ],
+  "blocked_actions": [
+    "self_authorize",
+    "external_api_write",
+    "secret_access",
+    "memory_promotion_without_evidence",
+    "ungated_repo_mutation"
+  ],
+  "claim_boundary": "Local operator/debug TUI only. Does not prove correctness, safety, security, or autonomous authority."
+}

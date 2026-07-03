@@ -1,0 +1,30 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.4",
+  "kind": "powershell_operator_shell",
+  "commands": [
+    ".\\scripts\\nexus.ps1 ui",
+    ".\\scripts\\nexus_ui.ps1"
+  ],
+  "ui_features": [
+    "process_lane_dropdown",
+    "progress_buffer_bar",
+    "colored_output_stream",
+    "feedback_summary_panel",
+    "open_feedback_log",
+    "open_ai_context",
+    "debugging_self_healing_reflection_lanes"
+  ],
+  "lanes": [
+    "evolve",
+    "interface",
+    "feedback",
+    "heal",
+    "status",
+    "compact",
+    "interconnect",
+    "runtime",
+    "pack"
+  ],
+  "claim_boundary": "Local operator UI only. Does not prove correctness, safety, security, or autonomous authority."
+}

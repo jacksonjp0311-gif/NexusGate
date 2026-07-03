@@ -967,3 +967,36 @@ Human-authorized patch applies mutation.
 Patch runs evolve.
 Feedback interface appends FEEDBACK_LOG.md.
 ```
+
+
+## v0.2.4b - Hermes-Style PowerShell TUI
+
+NEXUS GATE now includes a terminal UI inside PowerShell:
+
+```powershell
+.\scripts\nexus.ps1 tui
+```
+
+The TUI provides:
+
+```text
+Hermes-style terminal shell
+Process lane dropdown menu
+Chat-like NEXUS> prompt
+Colored output
+Progress / buffer bar
+AI handoff export
+Feedback note capture
+Operation packet creation
+Debug tail viewer
+Self-healing lane access
+Evolve lane access
+```
+
+Bounded repo-changing commands:
+
+```text
+/note <text>      appends docs/feedback/FEEDBACK_LOG.md
+/packet <summary> writes docs/feedback/operator_packets/*.json
+/run <lane>       runs existing governed NEXUS lanes
+```
