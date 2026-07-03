@@ -1029,3 +1029,34 @@ reports:tui_exports
 ```
 
 This is an interconnection map for governed handoff evidence. It does not grant autonomous authority, external API write authority, memory promotion authority, or correctness claims.
+
+## v0.2.7 - Domain Interconnection Profiles
+
+NEXUS GATE now declares domain interconnection profiles for:
+
+```text
+terminal:cli_format
+domain:bio
+domain:chem
+domain:coding
+domain:neural
+schema:domain_interop_profile
+```
+
+The TUI exposes:
+
+```text
+/domains
+```
+
+The profiles are routing contracts only:
+
+```text
+Bio     -> BioProject / BioSample / SRA-style metadata orientation
+Chem    -> InChI / InChIKey / SMILES-style identifier orientation
+Coding  -> LSP / SARIF / OpenAPI / JSON Schema-style contract orientation
+Neural  -> ONNX graph / operator / model metadata orientation
+CLI     -> colored output / progress / bounded table rows / plain text fallback
+```
+
+Domain routing is not domain validation. These profiles do not prove scientific validity, code correctness, model correctness, safety, production readiness, or autonomous authority.

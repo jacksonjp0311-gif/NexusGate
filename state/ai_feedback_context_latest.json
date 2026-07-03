@@ -1,7 +1,7 @@
 {
   "system": "NEXUS GATE",
   "version": "0.2.3-ai-feedback-interface",
-  "generated_at_utc": "2026-07-03T16:16:08.117017+00:00",
+  "generated_at_utc": "2026-07-03T17:28:01.224980+00:00",
   "status": "pass",
   "repo_role": "governed agentic transfer boundary",
   "human_commands": {
@@ -35,8 +35,8 @@
     "dominant_pressure_source": "none",
     "self_healing_status": "pass",
     "interconnect_status": "pass",
-    "node_count": 16,
-    "edge_count": 19
+    "node_count": 22,
+    "edge_count": 37
   },
   "next_action": "No repair pressure detected. Continue with .\\scripts\\nexus.ps1 evolve.",
   "latest_report_paths": {

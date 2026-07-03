@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class TestNexusTuiShell(unittest.TestCase):
     def test_tui_script_contains_chat_commands_and_lanes(self):
         text = (ROOT / "scripts" / "nexus_tui.ps1").read_text(encoding="utf-8")
-        for marker in ["NEXUS>", "/run <lane>", "/note <text>", "/packet <summary>", "/debug", "/ai"]:
+        for marker in ["NEXUS>", "/run <lane>", "/note <text>", "/packet <summary>", "/debug", "/ai", "/domains"]:
             self.assertIn(marker, text)
         for lane in ["evolve", "interface", "feedback", "heal", "status", "compact", "interconnect", "runtime", "pack"]:
             self.assertIn(lane, text)
@@ -20,6 +20,7 @@ class TestNexusTuiShell(unittest.TestCase):
         self.assertIn("Write-Progress", text)
         self.assertIn("Color-Line", text)
         self.assertIn("ForegroundColor", text)
+        self.assertIn("Show-DomainRoutes", text)
 
     def test_tui_bounded_repo_changes_are_feedback_only(self):
         text = (ROOT / "scripts" / "nexus_tui.ps1").read_text(encoding="utf-8")

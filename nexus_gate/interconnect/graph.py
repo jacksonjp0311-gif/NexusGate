@@ -207,6 +207,73 @@ def _ai_process_nodes(root: Path) -> List[InterconnectNode]:
     ]
 
 
+def _domain_interconnect_nodes(root: Path) -> List[InterconnectNode]:
+    """Declare domain profiles as routing contracts, not scientific validation."""
+
+    return [
+        InterconnectNode(
+            "terminal:cli_format",
+            "operator_format",
+            "CLI Formatting Profile",
+            "declared",
+            {
+                "patterns": ["colored output", "progress indicator", "bounded table rows", "plain text fallback"],
+                "evidence": [
+                    "PowerShell Write-Host ForegroundColor/BackgroundColor",
+                    "PowerShell Write-Progress status bar",
+                ],
+            },
+        ),
+        InterconnectNode(
+            "domain:bio",
+            "domain_profile",
+            "Biological Data Interconnection Profile",
+            "declared",
+            {
+                "identifiers": ["BioProject", "BioSample", "SRA Study", "SRA Experiment", "SRA Run"],
+                "gate": "No biological claim without source metadata and validation evidence.",
+            },
+        ),
+        InterconnectNode(
+            "domain:chem",
+            "domain_profile",
+            "Chemical Data Interconnection Profile",
+            "declared",
+            {
+                "identifiers": ["InChI", "InChIKey", "SMILES"],
+                "gate": "No chemical claim without structure identifier and provenance.",
+            },
+        ),
+        InterconnectNode(
+            "domain:coding",
+            "domain_profile",
+            "Coding Tool Interconnection Profile",
+            "declared",
+            {
+                "formats": ["LSP", "SARIF", "OpenAPI", "JSON Schema"],
+                "gate": "No code-tool route without machine-readable contract or diagnostics evidence.",
+            },
+        ),
+        InterconnectNode(
+            "domain:neural",
+            "domain_profile",
+            "Neural Model Interconnection Profile",
+            "declared",
+            {
+                "formats": ["ONNX graph", "operator set", "model metadata"],
+                "gate": "No neural route without model format, runtime boundary, and evidence report.",
+            },
+        ),
+        InterconnectNode(
+            "schema:domain_interop_profile",
+            "schema",
+            "Domain Interoperability Profile Schema",
+            "declared",
+            _path_status(root, "state/domain_interconnection_index.v0.2.7.json"),
+        ),
+    ]
+
+
 def build_interconnect(root: str | Path = ".") -> InterconnectReport:
     root = Path(root).resolve()
 
@@ -221,9 +288,11 @@ def build_interconnect(root: str | Path = ".") -> InterconnectReport:
     adapters = _extract_adapter_nodes(root)
     receptors = _extract_receptor_nodes(root)
     ai_nodes = _ai_process_nodes(root)
+    domain_nodes = _domain_interconnect_nodes(root)
     nodes.extend(adapters)
     nodes.extend(receptors)
     nodes.extend(ai_nodes)
+    nodes.extend(domain_nodes)
 
     edges: List[InterconnectEdge] = []
     for adapter in adapters:
@@ -246,6 +315,13 @@ def build_interconnect(root: str | Path = ".") -> InterconnectReport:
     edges.append(InterconnectEdge("operator:ui_alias", "operator:tui", "routes_to_terminal_tui", "The UI must never own the logic."))
     edges.append(InterconnectEdge("reports:tui_exports", "ai_agent:codex_process", "rehydrates_this_process", "Certificate before compounding."))
     edges.append(InterconnectEdge("ai_agent:codex_process", "operator:tui", "returns_recommendation_to_operator", "Human-authorized patch applies mutation."))
+    edges.append(InterconnectEdge("operator:tui", "terminal:cli_format", "renders_governed_status", "No operator flood."))
+    edges.append(InterconnectEdge("terminal:cli_format", "reports:local", "summarizes_evidence_surface", "No raw JSON wall unless requested."))
+    for domain in ["domain:bio", "domain:chem", "domain:coding", "domain:neural"]:
+        edges.append(InterconnectEdge("ai_agent:codex_process", domain, "requests_domain_route", "Domain routing is not domain validation."))
+        edges.append(InterconnectEdge(domain, "schema:domain_interop_profile", "binds_domain_contract", "No schema, no route."))
+        edges.append(InterconnectEdge("schema:domain_interop_profile", "bridge:session", "normalizes_domain_packet", "No normalized StatePacket, no route."))
+        edges.append(InterconnectEdge(domain, "reports:local", "emits_domain_evidence", "No evidence, no compounding."))
 
     checks = [
         {"check": "adapter_nodes", "status": "pass" if adapters else "fail", "count": len(adapters)},
@@ -258,6 +334,12 @@ def build_interconnect(root: str | Path = ".") -> InterconnectReport:
             "status": "pass" if any(e.target == "ai_agent:codex_process" for e in edges) else "fail",
             "count": len([e for e in edges if e.source == "ai_agent:codex_process" or e.target == "ai_agent:codex_process"]),
         },
+        {"check": "domain_interconnect_nodes", "status": "pass" if len(domain_nodes) >= 6 else "fail", "count": len(domain_nodes)},
+        {
+            "check": "domain_interconnect_edges",
+            "status": "pass" if all(any(e.source == d or e.target == d for e in edges) for d in ["domain:bio", "domain:chem", "domain:coding", "domain:neural"]) else "fail",
+            "count": len([e for e in edges if e.source.startswith("domain:") or e.target.startswith("domain:")]),
+        },
         {"check": "governed_edges", "status": "pass" if len(edges) >= 5 else "fail", "count": len(edges)},
     ]
     status = "pass" if all(c["status"] == "pass" for c in checks) else "fail"
@@ -265,7 +347,7 @@ def build_interconnect(root: str | Path = ".") -> InterconnectReport:
 
     return InterconnectReport(
         system="NEXUS GATE",
-        version="0.2.6-ai-agent-interconnect",
+        version="0.2.7-domain-interconnect",
         root=str(root),
         status=status,
         generated_at_utc=_utc(),

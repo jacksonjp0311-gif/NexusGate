@@ -3,7 +3,7 @@
   "version": "0.2.2-feedback",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-03T16:16:08.488661+00:00",
+  "generated_at_utc": "2026-07-03T17:28:01.606940+00:00",
   "signals": [
     {
       "name": "nexus_compiler",
@@ -73,8 +73,8 @@
         "exists": true,
         "version": "0.2.2-evidence-compaction",
         "status": "pass",
-        "file_count": 359,
-        "total_bytes": 2829154
+        "file_count": 418,
+        "total_bytes": 3485704
       }
     },
     {
@@ -83,7 +83,7 @@
       "evidence": {
         "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\nexus_interconnect_report_latest.json",
         "exists": true,
-        "version": "0.2.6-ai-agent-interconnect",
+        "version": "0.2.7-domain-interconnect",
         "status": "pass"
       }
     },
@@ -95,9 +95,9 @@
         "exists": true,
         "version": "0.1.6b-pack-compiler",
         "status": "pass",
-        "file_count": 480,
-        "total_bytes": 1667045,
-        "total_lines": 52059
+        "file_count": 528,
+        "total_bytes": 1952422,
+        "total_lines": 60940
       }
     }
   ],
@@ -106,36 +106,36 @@
     "Run .\\scripts\\nexus.ps1 compact before adding more runtime lanes."
   ],
   "evidence_pressure": {
-    "file_count": 360,
-    "total_bytes": 2838345,
+    "file_count": 419,
+    "total_bytes": 3501381,
     "pressure_level": "high",
     "newest_files": [
       {
-        "path": "reports\\nexus_interconnect_report_20260703_161608.json",
-        "size_bytes": 9191
+        "path": "reports\\nexus_interconnect_report_latest.json",
+        "size_bytes": 15677
       },
       {
-        "path": "reports\\nexus_interconnect_report_latest.json",
-        "size_bytes": 9191
+        "path": "reports\\nexus_interconnect_report_20260703_172801.json",
+        "size_bytes": 15677
+      },
+      {
+        "path": "reports\\nexus_evidence_compaction_report_20260703_172801.json",
+        "size_bytes": 627
       },
       {
         "path": "reports\\nexus_evidence_compaction_report_latest.json",
         "size_bytes": 627
       },
       {
-        "path": "reports\\nexus_evidence_compaction_report_20260703_161608.json",
-        "size_bytes": 627
+        "path": "reports\\nexus_bounded_runtime_report_20260703_172801.json",
+        "size_bytes": 6295
       },
       {
         "path": "reports\\nexus_bounded_runtime_report_latest.json",
         "size_bytes": 6295
       },
       {
-        "path": "reports\\nexus_bounded_runtime_report_20260703_161608.json",
-        "size_bytes": 6295
-      },
-      {
-        "path": "reports\\nexus_feedback_interface_report_20260703_161608.json",
+        "path": "reports\\nexus_feedback_interface_report_20260703_172801.json",
         "size_bytes": 1479
       },
       {
@@ -146,10 +146,10 @@
   },
   "interconnect": {
     "system": "NEXUS GATE",
-    "version": "0.2.6-ai-agent-interconnect",
+    "version": "0.2.7-domain-interconnect",
     "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
     "status": "pass",
-    "generated_at_utc": "2026-07-03T16:16:08.404442+00:00",
+    "generated_at_utc": "2026-07-03T17:28:01.516702+00:00",
     "nodes": [
       {
         "node_id": "runtime:bounded_bridge",
@@ -296,6 +296,93 @@
             "exists": false
           }
         }
+      },
+      {
+        "node_id": "terminal:cli_format",
+        "kind": "operator_format",
+        "label": "CLI Formatting Profile",
+        "status": "declared",
+        "evidence": {
+          "patterns": [
+            "colored output",
+            "progress indicator",
+            "bounded table rows",
+            "plain text fallback"
+          ],
+          "evidence": [
+            "PowerShell Write-Host ForegroundColor/BackgroundColor",
+            "PowerShell Write-Progress status bar"
+          ]
+        }
+      },
+      {
+        "node_id": "domain:bio",
+        "kind": "domain_profile",
+        "label": "Biological Data Interconnection Profile",
+        "status": "declared",
+        "evidence": {
+          "identifiers": [
+            "BioProject",
+            "BioSample",
+            "SRA Study",
+            "SRA Experiment",
+            "SRA Run"
+          ],
+          "gate": "No biological claim without source metadata and validation evidence."
+        }
+      },
+      {
+        "node_id": "domain:chem",
+        "kind": "domain_profile",
+        "label": "Chemical Data Interconnection Profile",
+        "status": "declared",
+        "evidence": {
+          "identifiers": [
+            "InChI",
+            "InChIKey",
+            "SMILES"
+          ],
+          "gate": "No chemical claim without structure identifier and provenance."
+        }
+      },
+      {
+        "node_id": "domain:coding",
+        "kind": "domain_profile",
+        "label": "Coding Tool Interconnection Profile",
+        "status": "declared",
+        "evidence": {
+          "formats": [
+            "LSP",
+            "SARIF",
+            "OpenAPI",
+            "JSON Schema"
+          ],
+          "gate": "No code-tool route without machine-readable contract or diagnostics evidence."
+        }
+      },
+      {
+        "node_id": "domain:neural",
+        "kind": "domain_profile",
+        "label": "Neural Model Interconnection Profile",
+        "status": "declared",
+        "evidence": {
+          "formats": [
+            "ONNX graph",
+            "operator set",
+            "model metadata"
+          ],
+          "gate": "No neural route without model format, runtime boundary, and evidence report."
+        }
+      },
+      {
+        "node_id": "schema:domain_interop_profile",
+        "kind": "schema",
+        "label": "Domain Interoperability Profile Schema",
+        "status": "declared",
+        "evidence": {
+          "path": "state/domain_interconnection_index.v0.2.7.json",
+          "exists": true
+        }
       }
     ],
     "edges": [
@@ -431,6 +518,132 @@
         "relation": "returns_recommendation_to_operator",
         "gate": "Human-authorized patch applies mutation.",
         "mode": "governed"
+      },
+      {
+        "source": "operator:tui",
+        "target": "terminal:cli_format",
+        "relation": "renders_governed_status",
+        "gate": "No operator flood.",
+        "mode": "governed"
+      },
+      {
+        "source": "terminal:cli_format",
+        "target": "reports:local",
+        "relation": "summarizes_evidence_surface",
+        "gate": "No raw JSON wall unless requested.",
+        "mode": "governed"
+      },
+      {
+        "source": "ai_agent:codex_process",
+        "target": "domain:bio",
+        "relation": "requests_domain_route",
+        "gate": "Domain routing is not domain validation.",
+        "mode": "governed"
+      },
+      {
+        "source": "domain:bio",
+        "target": "schema:domain_interop_profile",
+        "relation": "binds_domain_contract",
+        "gate": "No schema, no route.",
+        "mode": "governed"
+      },
+      {
+        "source": "schema:domain_interop_profile",
+        "target": "bridge:session",
+        "relation": "normalizes_domain_packet",
+        "gate": "No normalized StatePacket, no route.",
+        "mode": "governed"
+      },
+      {
+        "source": "domain:bio",
+        "target": "reports:local",
+        "relation": "emits_domain_evidence",
+        "gate": "No evidence, no compounding.",
+        "mode": "governed"
+      },
+      {
+        "source": "ai_agent:codex_process",
+        "target": "domain:chem",
+        "relation": "requests_domain_route",
+        "gate": "Domain routing is not domain validation.",
+        "mode": "governed"
+      },
+      {
+        "source": "domain:chem",
+        "target": "schema:domain_interop_profile",
+        "relation": "binds_domain_contract",
+        "gate": "No schema, no route.",
+        "mode": "governed"
+      },
+      {
+        "source": "schema:domain_interop_profile",
+        "target": "bridge:session",
+        "relation": "normalizes_domain_packet",
+        "gate": "No normalized StatePacket, no route.",
+        "mode": "governed"
+      },
+      {
+        "source": "domain:chem",
+        "target": "reports:local",
+        "relation": "emits_domain_evidence",
+        "gate": "No evidence, no compounding.",
+        "mode": "governed"
+      },
+      {
+        "source": "ai_agent:codex_process",
+        "target": "domain:coding",
+        "relation": "requests_domain_route",
+        "gate": "Domain routing is not domain validation.",
+        "mode": "governed"
+      },
+      {
+        "source": "domain:coding",
+        "target": "schema:domain_interop_profile",
+        "relation": "binds_domain_contract",
+        "gate": "No schema, no route.",
+        "mode": "governed"
+      },
+      {
+        "source": "schema:domain_interop_profile",
+        "target": "bridge:session",
+        "relation": "normalizes_domain_packet",
+        "gate": "No normalized StatePacket, no route.",
+        "mode": "governed"
+      },
+      {
+        "source": "domain:coding",
+        "target": "reports:local",
+        "relation": "emits_domain_evidence",
+        "gate": "No evidence, no compounding.",
+        "mode": "governed"
+      },
+      {
+        "source": "ai_agent:codex_process",
+        "target": "domain:neural",
+        "relation": "requests_domain_route",
+        "gate": "Domain routing is not domain validation.",
+        "mode": "governed"
+      },
+      {
+        "source": "domain:neural",
+        "target": "schema:domain_interop_profile",
+        "relation": "binds_domain_contract",
+        "gate": "No schema, no route.",
+        "mode": "governed"
+      },
+      {
+        "source": "schema:domain_interop_profile",
+        "target": "bridge:session",
+        "relation": "normalizes_domain_packet",
+        "gate": "No normalized StatePacket, no route.",
+        "mode": "governed"
+      },
+      {
+        "source": "domain:neural",
+        "target": "reports:local",
+        "relation": "emits_domain_evidence",
+        "gate": "No evidence, no compounding.",
+        "mode": "governed"
       }
     ],
     "checks": [
@@ -462,17 +675,27 @@
       {
         "check": "ai_agent_governed_edges",
         "status": "pass",
-        "count": 5
+        "count": 9
+      },
+      {
+        "check": "domain_interconnect_nodes",
+        "status": "pass",
+        "count": 6
+      },
+      {
+        "check": "domain_interconnect_edges",
+        "status": "pass",
+        "count": 12
       },
       {
         "check": "governed_edges",
         "status": "pass",
-        "count": 19
+        "count": 37
       }
     ],
-    "graph_hash": "217d0fe90618be5a0ea38fb931cf250be4e19cf646ee28ce972f73ff5c837f15",
+    "graph_hash": "13f746fdb479b714b84cb93c57084bc70df2c0b297481e72da450323d2f36e1e",
     "claim_boundary": "Interconnect graph is local architecture evidence only. It does not prove production interoperability, safety, consciousness, autonomous authority, or correctness."
   },
   "claim_boundary": "Feedback report is local development evidence only. It is not a production validation, safety proof, security proof, or correctness proof.",
-  "report_hash": "22cad7972968ca01d54118aae4fbf434016f7dbf00b7cebe9cbaf9c79e508fee"
+  "report_hash": "cc41260c916c43b0ce3ff4930c2c64f12a3c5b1b59538749a158c9faf580f4c6"
 }

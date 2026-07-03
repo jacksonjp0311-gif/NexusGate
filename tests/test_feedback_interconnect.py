@@ -44,6 +44,23 @@ class TestFeedbackInterconnect(unittest.TestCase):
         self.assertEqual(checks["ai_process_nodes"], "pass")
         self.assertEqual(checks["ai_agent_governed_edges"], "pass")
 
+    def test_domain_interconnect_profiles_are_governed(self):
+        report = build_interconnect(ROOT)
+        node_ids = {node["node_id"] for node in report.nodes}
+        edge_pairs = {(edge["source"], edge["target"]) for edge in report.edges}
+        checks = {check["check"]: check["status"] for check in report.checks}
+
+        for domain in ["domain:bio", "domain:chem", "domain:coding", "domain:neural"]:
+            self.assertIn(domain, node_ids)
+            self.assertIn(("ai_agent:codex_process", domain), edge_pairs)
+            self.assertIn((domain, "schema:domain_interop_profile"), edge_pairs)
+            self.assertIn((domain, "reports:local"), edge_pairs)
+
+        self.assertIn("terminal:cli_format", node_ids)
+        self.assertIn(("operator:tui", "terminal:cli_format"), edge_pairs)
+        self.assertEqual(checks["domain_interconnect_nodes"], "pass")
+        self.assertEqual(checks["domain_interconnect_edges"], "pass")
+
     def test_feedback_report_compiles(self):
         compaction = compile_evidence_compaction(ROOT)
         write_compaction_report(compaction, ROOT)

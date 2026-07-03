@@ -1,9 +1,9 @@
 {
   "system": "NEXUS GATE",
-  "version": "0.2.6-ai-agent-interconnect",
+  "version": "0.2.7-domain-interconnect",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-03T16:16:08.493649+00:00",
+  "generated_at_utc": "2026-07-03T17:28:01.613094+00:00",
   "nodes": [
     {
       "node_id": "runtime:bounded_bridge",
@@ -150,6 +150,93 @@
           "exists": false
         }
       }
+    },
+    {
+      "node_id": "terminal:cli_format",
+      "kind": "operator_format",
+      "label": "CLI Formatting Profile",
+      "status": "declared",
+      "evidence": {
+        "patterns": [
+          "colored output",
+          "progress indicator",
+          "bounded table rows",
+          "plain text fallback"
+        ],
+        "evidence": [
+          "PowerShell Write-Host ForegroundColor/BackgroundColor",
+          "PowerShell Write-Progress status bar"
+        ]
+      }
+    },
+    {
+      "node_id": "domain:bio",
+      "kind": "domain_profile",
+      "label": "Biological Data Interconnection Profile",
+      "status": "declared",
+      "evidence": {
+        "identifiers": [
+          "BioProject",
+          "BioSample",
+          "SRA Study",
+          "SRA Experiment",
+          "SRA Run"
+        ],
+        "gate": "No biological claim without source metadata and validation evidence."
+      }
+    },
+    {
+      "node_id": "domain:chem",
+      "kind": "domain_profile",
+      "label": "Chemical Data Interconnection Profile",
+      "status": "declared",
+      "evidence": {
+        "identifiers": [
+          "InChI",
+          "InChIKey",
+          "SMILES"
+        ],
+        "gate": "No chemical claim without structure identifier and provenance."
+      }
+    },
+    {
+      "node_id": "domain:coding",
+      "kind": "domain_profile",
+      "label": "Coding Tool Interconnection Profile",
+      "status": "declared",
+      "evidence": {
+        "formats": [
+          "LSP",
+          "SARIF",
+          "OpenAPI",
+          "JSON Schema"
+        ],
+        "gate": "No code-tool route without machine-readable contract or diagnostics evidence."
+      }
+    },
+    {
+      "node_id": "domain:neural",
+      "kind": "domain_profile",
+      "label": "Neural Model Interconnection Profile",
+      "status": "declared",
+      "evidence": {
+        "formats": [
+          "ONNX graph",
+          "operator set",
+          "model metadata"
+        ],
+        "gate": "No neural route without model format, runtime boundary, and evidence report."
+      }
+    },
+    {
+      "node_id": "schema:domain_interop_profile",
+      "kind": "schema",
+      "label": "Domain Interoperability Profile Schema",
+      "status": "declared",
+      "evidence": {
+        "path": "state/domain_interconnection_index.v0.2.7.json",
+        "exists": true
+      }
     }
   ],
   "edges": [
@@ -285,6 +372,132 @@
       "relation": "returns_recommendation_to_operator",
       "gate": "Human-authorized patch applies mutation.",
       "mode": "governed"
+    },
+    {
+      "source": "operator:tui",
+      "target": "terminal:cli_format",
+      "relation": "renders_governed_status",
+      "gate": "No operator flood.",
+      "mode": "governed"
+    },
+    {
+      "source": "terminal:cli_format",
+      "target": "reports:local",
+      "relation": "summarizes_evidence_surface",
+      "gate": "No raw JSON wall unless requested.",
+      "mode": "governed"
+    },
+    {
+      "source": "ai_agent:codex_process",
+      "target": "domain:bio",
+      "relation": "requests_domain_route",
+      "gate": "Domain routing is not domain validation.",
+      "mode": "governed"
+    },
+    {
+      "source": "domain:bio",
+      "target": "schema:domain_interop_profile",
+      "relation": "binds_domain_contract",
+      "gate": "No schema, no route.",
+      "mode": "governed"
+    },
+    {
+      "source": "schema:domain_interop_profile",
+      "target": "bridge:session",
+      "relation": "normalizes_domain_packet",
+      "gate": "No normalized StatePacket, no route.",
+      "mode": "governed"
+    },
+    {
+      "source": "domain:bio",
+      "target": "reports:local",
+      "relation": "emits_domain_evidence",
+      "gate": "No evidence, no compounding.",
+      "mode": "governed"
+    },
+    {
+      "source": "ai_agent:codex_process",
+      "target": "domain:chem",
+      "relation": "requests_domain_route",
+      "gate": "Domain routing is not domain validation.",
+      "mode": "governed"
+    },
+    {
+      "source": "domain:chem",
+      "target": "schema:domain_interop_profile",
+      "relation": "binds_domain_contract",
+      "gate": "No schema, no route.",
+      "mode": "governed"
+    },
+    {
+      "source": "schema:domain_interop_profile",
+      "target": "bridge:session",
+      "relation": "normalizes_domain_packet",
+      "gate": "No normalized StatePacket, no route.",
+      "mode": "governed"
+    },
+    {
+      "source": "domain:chem",
+      "target": "reports:local",
+      "relation": "emits_domain_evidence",
+      "gate": "No evidence, no compounding.",
+      "mode": "governed"
+    },
+    {
+      "source": "ai_agent:codex_process",
+      "target": "domain:coding",
+      "relation": "requests_domain_route",
+      "gate": "Domain routing is not domain validation.",
+      "mode": "governed"
+    },
+    {
+      "source": "domain:coding",
+      "target": "schema:domain_interop_profile",
+      "relation": "binds_domain_contract",
+      "gate": "No schema, no route.",
+      "mode": "governed"
+    },
+    {
+      "source": "schema:domain_interop_profile",
+      "target": "bridge:session",
+      "relation": "normalizes_domain_packet",
+      "gate": "No normalized StatePacket, no route.",
+      "mode": "governed"
+    },
+    {
+      "source": "domain:coding",
+      "target": "reports:local",
+      "relation": "emits_domain_evidence",
+      "gate": "No evidence, no compounding.",
+      "mode": "governed"
+    },
+    {
+      "source": "ai_agent:codex_process",
+      "target": "domain:neural",
+      "relation": "requests_domain_route",
+      "gate": "Domain routing is not domain validation.",
+      "mode": "governed"
+    },
+    {
+      "source": "domain:neural",
+      "target": "schema:domain_interop_profile",
+      "relation": "binds_domain_contract",
+      "gate": "No schema, no route.",
+      "mode": "governed"
+    },
+    {
+      "source": "schema:domain_interop_profile",
+      "target": "bridge:session",
+      "relation": "normalizes_domain_packet",
+      "gate": "No normalized StatePacket, no route.",
+      "mode": "governed"
+    },
+    {
+      "source": "domain:neural",
+      "target": "reports:local",
+      "relation": "emits_domain_evidence",
+      "gate": "No evidence, no compounding.",
+      "mode": "governed"
     }
   ],
   "checks": [
@@ -316,14 +529,24 @@
     {
       "check": "ai_agent_governed_edges",
       "status": "pass",
-      "count": 5
+      "count": 9
+    },
+    {
+      "check": "domain_interconnect_nodes",
+      "status": "pass",
+      "count": 6
+    },
+    {
+      "check": "domain_interconnect_edges",
+      "status": "pass",
+      "count": 12
     },
     {
       "check": "governed_edges",
       "status": "pass",
-      "count": 19
+      "count": 37
     }
   ],
-  "graph_hash": "217d0fe90618be5a0ea38fb931cf250be4e19cf646ee28ce972f73ff5c837f15",
+  "graph_hash": "13f746fdb479b714b84cb93c57084bc70df2c0b297481e72da450323d2f36e1e",
   "claim_boundary": "Interconnect graph is local architecture evidence only. It does not prove production interoperability, safety, consciousness, autonomous authority, or correctness."
 }

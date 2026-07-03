@@ -1,0 +1,69 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.7",
+  "kind": "domain_interconnection_index",
+  "domains": {
+    "cli_format": {
+      "node_id": "terminal:cli_format",
+      "patterns": [
+        "colored output",
+        "progress indicator",
+        "bounded table rows",
+        "plain text fallback"
+      ],
+      "source_orientation": [
+        "PowerShell Write-Host foreground/background color parameters",
+        "PowerShell Write-Progress progress bar/status rendering"
+      ]
+    },
+    "bio": {
+      "node_id": "domain:bio",
+      "identifiers": [
+        "BioProject",
+        "BioSample",
+        "SRA Study",
+        "SRA Experiment",
+        "SRA Run"
+      ],
+      "gate": "No biological claim without source metadata and validation evidence."
+    },
+    "chem": {
+      "node_id": "domain:chem",
+      "identifiers": [
+        "InChI",
+        "InChIKey",
+        "SMILES"
+      ],
+      "gate": "No chemical claim without structure identifier and provenance."
+    },
+    "coding": {
+      "node_id": "domain:coding",
+      "formats": [
+        "LSP",
+        "SARIF",
+        "OpenAPI",
+        "JSON Schema"
+      ],
+      "gate": "No code-tool route without machine-readable contract or diagnostics evidence."
+    },
+    "neural": {
+      "node_id": "domain:neural",
+      "formats": [
+        "ONNX graph",
+        "operator set",
+        "model metadata"
+      ],
+      "gate": "No neural route without model format, runtime boundary, and evidence report."
+    }
+  },
+  "route_shape": [
+    "ai_agent:codex_process",
+    "domain:<bio|chem|coding|neural>",
+    "schema:domain_interop_profile",
+    "bridge:session",
+    "reports:local",
+    "feedback:engine",
+    "ledger:local"
+  ],
+  "claim_boundary": "Local interconnection contract only. Does not prove scientific validity, code correctness, model correctness, safety, production readiness, or autonomous authority."
+}

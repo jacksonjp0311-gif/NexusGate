@@ -72,3 +72,18 @@ No UI bypass of compiler/evolve gates.
 The UI must never own the logic.
 Certificate before compounding.
 ```
+
+## v0.2.7 Domain Interconnection
+
+The interconnect graph now includes domain profiles for CLI formatting, bio, chem, coding, and neural model routes.
+
+```text
+terminal:cli_format
+domain:bio
+domain:chem
+domain:coding
+domain:neural
+schema:domain_interop_profile
+```
+
+These nodes provide routing contracts and evidence expectations. They do not validate biology, chemistry, source code correctness, model correctness, or safety.

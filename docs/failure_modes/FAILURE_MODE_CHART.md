@@ -66,3 +66,5 @@ Boundary: this chart is a local development control. It does not prove safety, s
 
 - ai_agent_interconnect_unrouted: AI/Codex handoff process lacks governed feedback-context, operator-packet, TUI export, or return-to-operator edge.
 - ai_agent_self_authorization: AI/Codex process attempts to treat handoff context as authority instead of recommendation evidence.
+- domain_route_without_profile: bio, chem, coding, neural, or CLI data is routed without a declared domain interconnection profile.
+- domain_route_claim_inflation: domain routing is treated as scientific validity, code correctness, model correctness, safety, or production readiness.

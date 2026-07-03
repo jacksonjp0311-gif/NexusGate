@@ -271,3 +271,23 @@ No autonomous self-authorization.
 No UI bypass of compiler/evolve gates.
 AI process context is recommendation evidence, not authority.
 ```
+
+## NEXUS v0.2.7 Domain Interconnection Profiles
+
+The interconnect graph now declares CLI formatting, bio, chem, coding, and neural domain profile nodes.
+
+Use the TUI command:
+
+```powershell
+/domains
+```
+
+Hard rules:
+
+```text
+Domain routing is not domain validation.
+No biological claim without source metadata and validation evidence.
+No chemical claim without structure identifier and provenance.
+No code-tool route without machine-readable contract or diagnostics evidence.
+No neural route without model format, runtime boundary, and evidence report.
+```

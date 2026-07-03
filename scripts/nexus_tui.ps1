@@ -123,6 +123,7 @@ function Show-Menu {
     Write-Host "    /copy             Export AI handoff and copy it to clipboard" -ForegroundColor Gray
     Write-Host "    /snapshot         Write/open HTML TUI snapshot" -ForegroundColor Gray
     Write-Host "    /electron         Show Electron port contract" -ForegroundColor Gray
+    Write-Host "    /domains          Show domain interconnection routes" -ForegroundColor Gray
     Write-Host "    /open-log         Open docs/feedback/FEEDBACK_LOG.md" -ForegroundColor Gray
     Write-Host "    /open-context     Open state/ai_feedback_context_latest.json" -ForegroundColor Gray
     Write-Host "    /menu             Redraw this menu" -ForegroundColor Gray
@@ -428,6 +429,32 @@ function Show-ElectronContract {
     Write-Host "===== NEXUS ELECTRON PORT CONTRACT END =====" -ForegroundColor Cyan
 }
 
+function Show-DomainRoutes {
+    $graphPath = Join-Path $Root "state\interconnect_graph.v0.2.2.json"
+    if (-not (Test-Path $graphPath)) {
+        Say "Missing interconnect graph. Run /run interconnect or /run evolve." "WARN"
+        return
+    }
+    try {
+        $graph = Get-Content $graphPath -Raw | ConvertFrom-Json
+    } catch {
+        Say "Unable to read interconnect graph: $($_.Exception.Message)" "FAIL"
+        return
+    }
+    Write-Host ""
+    Write-Host "===== NEXUS DOMAIN INTERCONNECTION =====" -ForegroundColor Cyan
+    Write-Host ("Graph: {0} | Nodes: {1} | Edges: {2}" -f $graph.version, $graph.nodes.Count, $graph.edges.Count) -ForegroundColor Gray
+    foreach ($node in $graph.nodes | Where-Object { $_.node_id -like "domain:*" -or $_.node_id -eq "terminal:cli_format" }) {
+        Write-Host ("  {0,-24} {1}" -f $node.node_id, $node.label) -ForegroundColor Green
+    }
+    Write-Host ""
+    foreach ($edge in $graph.edges | Where-Object { $_.source -like "domain:*" -or $_.target -like "domain:*" -or $_.source -eq "terminal:cli_format" -or $_.target -eq "terminal:cli_format" }) {
+        Write-Host ("  {0} -> {1} [{2}]" -f $edge.source, $edge.target, $edge.relation) -ForegroundColor Gray
+    }
+    Write-Host ""
+    Write-Host "Boundary: domain routing is not domain validation." -ForegroundColor Yellow
+}
+
 function Open-PathIfExists {
     param([string]$Relative)
     $path = Join-Path $Root $Relative
@@ -454,6 +481,7 @@ function Handle-Input {
     if ($line -eq "/copy") { Export-AIHandoff; return $true }
     if ($line -eq "/snapshot") { New-TuiSnapshot; return $true }
     if ($line -eq "/electron") { Show-ElectronContract; return $true }
+    if ($line -eq "/domains") { Show-DomainRoutes; return $true }
     if ($line -eq "/open-log") { Open-PathIfExists "docs\feedback\FEEDBACK_LOG.md"; return $true }
     if ($line -eq "/open-context") { Open-PathIfExists "state\ai_feedback_context_latest.json"; return $true }
 

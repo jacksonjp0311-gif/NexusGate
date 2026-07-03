@@ -3,8 +3,8 @@
   "version": "0.1.5-strict-cold-evidence-compiler",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-03T16:16:09.095168+00:00",
-  "duration_ms": 1358,
+  "generated_at_utc": "2026-07-03T17:28:02.259554+00:00",
+  "duration_ms": 1388,
   "gates": [
     {
       "gate": "required_paths",
@@ -55,7 +55,7 @@
       "status": "pass",
       "message": "Schema, registry, state, context, and route JSON files parse.",
       "evidence": {
-        "count": 39
+        "count": 40
       }
     },
     {
@@ -220,7 +220,7 @@
         ],
         "returncode": 0,
         "stdout_tail": "",
-        "stderr_tail": "................................................................................\n----------------------------------------------------------------------\nRan 80 tests in 0.982s\n\nOK\n"
+        "stderr_tail": ".................................................................................\n----------------------------------------------------------------------\nRan 81 tests in 1.028s\n\nOK\n"
       }
     },
     {

@@ -65,3 +65,5 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.2.4b | Hermes-Style PowerShell TUI | current | Adds interactive terminal shell with lane menu, chat prompt, buffer bar, colored output, feedback notes, operation packets, debug tail, and AI handoff. |
 
 | v0.2.6 | AI Agent Interconnection | current | Extends interconnect graph with governed AI-agent handoff, TUI export, feedback context, operator packet, and this-process rehydration edges. |
+
+| v0.2.7 | Domain Interconnection Profiles | current | Adds CLI formatting, bio, chem, coding, and neural domain routing profiles plus TUI /domains inspection. |
