@@ -48,6 +48,18 @@ Current operator surfaces:
 .\scripts\nexus.ps1 electron-preflight
 ```
 
+Current Bash / Git Bash / WSL / Linux / macOS surfaces:
+
+```bash
+bash scripts/nexus.sh evolve
+bash scripts/nexus.sh electron-env
+bash scripts/nexus.sh electron-preflight
+bash scripts/nexus.sh tui
+bash scripts/nexus.sh ui
+```
+
+`tui` and `ui` are Windows PowerShell operator surfaces. In Bash they are compatibility cases that print the canonical PowerShell launch commands instead of trying to render the Windows terminal HUD.
+
 Current Electron surface:
 
 ```powershell
@@ -137,6 +149,19 @@ cd ~/OneDrive/Desktop/nexus-gate
 bash scripts/nexus_once.sh
 bash scripts/nexus_status.sh
 bash scripts/nexus.sh evolve
+bash scripts/nexus.sh electron-env
+bash scripts/nexus.sh electron-preflight
+bash scripts/nexus.sh tui
+bash scripts/nexus.sh ui
+```
+
+Electron:
+
+```powershell
+cd electron
+npm install
+npm start
+npm run smoke
 ```
 
 ---
@@ -1177,7 +1202,7 @@ tests/test_electron_shell_scaffold.py
 
 The scaffold renders local evidence surfaces and can request only allowlisted NEXUS lanes through `scripts/nexus.ps1`. It uses context isolation, disables Node integration, enables sandboxing, and avoids arbitrary shell execution.
 
-This is not an installed or packaged desktop app. It remains a presentation-only local development surface and does not own NEXUS logic or authority.
+This is a local installed Electron runtime with a committed lockfile, but it is not a packaged desktop app. It remains a presentation-only local development surface and does not own NEXUS logic or authority.
 
 ## v0.3.4 - Electron Preflight Compiler
 
@@ -1190,4 +1215,34 @@ reports/nexus_electron_preflight_report_latest.json
 
 The compiler checks required scaffold paths, read contract allowlists, blocked actions, paired snapshot/surface outputs, main-process security markers, preload API boundaries, renderer bridge usage, package privacy, and claim boundary.
 
-This is still not an Electron install, package, or launch step. It is a gate that keeps the desktop surface aligned before promotion.
+This is not a packaging or production launch step. It is a gate that keeps the desktop surface aligned before promotion.
+
+## v0.3.6 - Electron HUD Runtime
+
+NEXUS GATE now includes the governed Electron HUD runtime:
+
+```powershell
+cd electron
+npm install
+npm start
+npm run smoke
+```
+
+PowerShell operator launch remains:
+
+```powershell
+.\scripts\nexus.ps1 tui
+.\scripts\nexus.ps1 ui
+```
+
+Bash compatibility and Electron gates are:
+
+```bash
+bash scripts/nexus.sh evolve
+bash scripts/nexus.sh electron-env
+bash scripts/nexus.sh electron-preflight
+bash scripts/nexus.sh tui
+bash scripts/nexus.sh ui
+```
+
+The visible HUD title is `NEXUS GATE`. Electron remains presentation-only and may request only allowlisted NEXUS lanes through the governed bridge.
