@@ -1,0 +1,34 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.8",
+  "kind": "tui_interconnect_console_index",
+  "commands": [
+    "/graph",
+    "/interconnect"
+  ],
+  "read_surfaces": [
+    "state/interconnect_graph.v0.2.2.json",
+    "reports/nexus_feedback_report_latest.json",
+    "state/ai_feedback_context_latest.json"
+  ],
+  "display_fields": [
+    "graph status",
+    "graph version",
+    "node count",
+    "edge count",
+    "graph hash prefix",
+    "feedback health",
+    "evidence pressure",
+    "next action",
+    "checks",
+    "core routes",
+    "placeholder evidence paths"
+  ],
+  "blocked_actions": [
+    "self_authorize",
+    "mutate_graph_from_ui",
+    "bypass_evolve",
+    "claim_proof_from_graph_visibility"
+  ],
+  "claim_boundary": "TUI interconnect console is local evidence orientation only. It does not prove correctness, safety, production readiness, scientific validity, model validity, or autonomous authority."
+}

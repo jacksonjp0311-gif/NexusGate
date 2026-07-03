@@ -291,3 +291,19 @@ No chemical claim without structure identifier and provenance.
 No code-tool route without machine-readable contract or diagnostics evidence.
 No neural route without model format, runtime boundary, and evidence report.
 ```
+
+## NEXUS v0.2.8 TUI Interconnect Console
+
+Use this inside the TUI:
+
+```powershell
+/graph
+```
+
+or:
+
+```powershell
+/interconnect
+```
+
+The view is read-only evidence orientation. It must not mutate graph state, bypass evolve, or treat graph visibility as proof.

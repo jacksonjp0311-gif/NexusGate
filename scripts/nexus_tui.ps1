@@ -123,6 +123,7 @@ function Show-Menu {
     Write-Host "    /copy             Export AI handoff and copy it to clipboard" -ForegroundColor Gray
     Write-Host "    /snapshot         Write/open HTML TUI snapshot" -ForegroundColor Gray
     Write-Host "    /electron         Show Electron port contract" -ForegroundColor Gray
+    Write-Host "    /graph            Show governed interconnect console" -ForegroundColor Gray
     Write-Host "    /domains          Show domain interconnection routes" -ForegroundColor Gray
     Write-Host "    /open-log         Open docs/feedback/FEEDBACK_LOG.md" -ForegroundColor Gray
     Write-Host "    /open-context     Open state/ai_feedback_context_latest.json" -ForegroundColor Gray
@@ -429,6 +430,85 @@ function Show-ElectronContract {
     Write-Host "===== NEXUS ELECTRON PORT CONTRACT END =====" -ForegroundColor Cyan
 }
 
+function Show-InterconnectConsole {
+    $graphPath = Join-Path $Root "state\interconnect_graph.v0.2.2.json"
+    $feedbackPath = Join-Path $Root "reports\nexus_feedback_report_latest.json"
+    $contextPath = Join-Path $Root "state\ai_feedback_context_latest.json"
+    if (-not (Test-Path $graphPath)) {
+        Say "Missing interconnect graph. Run /run interconnect or /run evolve." "WARN"
+        return
+    }
+
+    try {
+        $graph = Get-Content $graphPath -Raw | ConvertFrom-Json
+    } catch {
+        Say "Unable to read interconnect graph: $($_.Exception.Message)" "FAIL"
+        return
+    }
+
+    $feedback = $null
+    if (Test-Path $feedbackPath) {
+        try { $feedback = Get-Content $feedbackPath -Raw | ConvertFrom-Json } catch { $feedback = $null }
+    }
+    $ctx = $null
+    if (Test-Path $contextPath) {
+        try { $ctx = Get-Content $contextPath -Raw | ConvertFrom-Json } catch { $ctx = $null }
+    }
+
+    $missingEvidence = @()
+    foreach ($node in $graph.nodes) {
+        if ($node.evidence -and $null -ne $node.evidence.exists -and -not $node.evidence.exists) {
+            $missingEvidence += "$($node.node_id) -> $($node.evidence.path)"
+        }
+        if ($node.evidence -and $node.evidence.handoff -and -not $node.evidence.handoff.exists) {
+            $missingEvidence += "$($node.node_id) -> $($node.evidence.handoff.path)"
+        }
+        if ($node.evidence -and $node.evidence.snapshot -and -not $node.evidence.snapshot.exists) {
+            $missingEvidence += "$($node.node_id) -> $($node.evidence.snapshot.path)"
+        }
+    }
+
+    Write-Host ""
+    Write-Host "===== NEXUS INTERCONNECT CONSOLE =====" -ForegroundColor Cyan
+    Write-Host ("Status: {0} | Version: {1}" -f $graph.status, $graph.version) -ForegroundColor Green
+    Write-Host ("Nodes: {0} | Edges: {1} | Hash: {2}" -f $graph.nodes.Count, $graph.edges.Count, $graph.graph_hash.Substring(0, 12)) -ForegroundColor Gray
+    if ($feedback) {
+        Write-Host ("Health: {0} | Pressure: {1}" -f $feedback.health_score, $feedback.evidence_pressure.pressure_level) -ForegroundColor Green
+    }
+    if ($ctx) {
+        Write-Host ("Next: {0}" -f $ctx.next_action) -ForegroundColor Yellow
+    }
+    Write-Host ""
+    Write-Host "Checks" -ForegroundColor White
+    foreach ($check in $graph.checks) {
+        $color = "Green"
+        if ($check.status -ne "pass") { $color = "Red" }
+        Write-Host ("  {0,-30} {1,-6} {2}" -f $check.check, $check.status, $check.count) -ForegroundColor $color
+    }
+    Write-Host ""
+    Write-Host "Core Routes" -ForegroundColor White
+    foreach ($edge in $graph.edges | Select-Object -First 12) {
+        Write-Host ("  {0} -> {1} [{2}]" -f $edge.source, $edge.target, $edge.relation) -ForegroundColor Gray
+    }
+    if ($graph.edges.Count -gt 12) {
+        Write-Host ("  ... {0} more governed edges" -f ($graph.edges.Count - 12)) -ForegroundColor DarkGray
+    }
+    Write-Host ""
+    if ($missingEvidence.Count -gt 0) {
+        Write-Host "Placeholder/Missing Evidence" -ForegroundColor Yellow
+        foreach ($item in $missingEvidence | Select-Object -First 8) {
+            Write-Host "  $item" -ForegroundColor Yellow
+        }
+        if ($missingEvidence.Count -gt 8) {
+            Write-Host ("  ... {0} more placeholders" -f ($missingEvidence.Count - 8)) -ForegroundColor DarkGray
+        }
+    } else {
+        Write-Host "No missing evidence paths detected." -ForegroundColor Green
+    }
+    Write-Host ""
+    Write-Host "Boundary: graph visibility is evidence orientation, not proof or authority." -ForegroundColor Yellow
+}
+
 function Show-DomainRoutes {
     $graphPath = Join-Path $Root "state\interconnect_graph.v0.2.2.json"
     if (-not (Test-Path $graphPath)) {
@@ -481,6 +561,7 @@ function Handle-Input {
     if ($line -eq "/copy") { Export-AIHandoff; return $true }
     if ($line -eq "/snapshot") { New-TuiSnapshot; return $true }
     if ($line -eq "/electron") { Show-ElectronContract; return $true }
+    if ($line -eq "/graph" -or $line -eq "/interconnect") { Show-InterconnectConsole; return $true }
     if ($line -eq "/domains") { Show-DomainRoutes; return $true }
     if ($line -eq "/open-log") { Open-PathIfExists "docs\feedback\FEEDBACK_LOG.md"; return $true }
     if ($line -eq "/open-context") { Open-PathIfExists "state\ai_feedback_context_latest.json"; return $true }

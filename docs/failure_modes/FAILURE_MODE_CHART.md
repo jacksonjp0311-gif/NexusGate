@@ -68,3 +68,5 @@ Boundary: this chart is a local development control. It does not prove safety, s
 - ai_agent_self_authorization: AI/Codex process attempts to treat handoff context as authority instead of recommendation evidence.
 - domain_route_without_profile: bio, chem, coding, neural, or CLI data is routed without a declared domain interconnection profile.
 - domain_route_claim_inflation: domain routing is treated as scientific validity, code correctness, model correctness, safety, or production readiness.
+- tui_graph_mutation_attempt: TUI graph/interconnect view attempts to mutate graph state instead of reading compiled evidence.
+- graph_visibility_claim_inflation: graph visibility is treated as proof of correctness, safety, production readiness, scientific validity, model validity, or autonomous authority.

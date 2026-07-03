@@ -27,6 +27,7 @@
     "/copy",
     "/snapshot",
     "/electron",
+    "/graph",
     "/open-log",
     "/open-context",
     "/menu",

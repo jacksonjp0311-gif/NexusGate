@@ -1060,3 +1060,16 @@ CLI     -> colored output / progress / bounded table rows / plain text fallback
 ```
 
 Domain routing is not domain validation. These profiles do not prove scientific validity, code correctness, model correctness, safety, production readiness, or autonomous authority.
+
+## v0.2.8 - TUI Interconnect Console
+
+The PowerShell TUI now exposes the governed interconnect graph directly:
+
+```text
+/graph
+/interconnect
+```
+
+The view shows graph status, graph version, node/edge counts, check rows, core governed routes, placeholder evidence paths, health, pressure, and next action.
+
+This is a read-only operator view. It does not mutate the graph, self-authorize, bypass evolve, or turn graph visibility into proof.

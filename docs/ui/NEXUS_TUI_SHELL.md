@@ -58,6 +58,7 @@ Evolve lane access
 /copy
 /snapshot
 /electron
+/graph
 /open-log
 /open-context
 /menu
@@ -101,6 +102,14 @@ Use:
 ```
 
 to write and open `reports/tui/nexus_tui_snapshot_latest.html`.
+
+Use:
+
+```text
+/graph
+```
+
+to show the governed interconnect console: graph status, node and edge counts, checks, placeholder evidence paths, and next action.
 
 Use:
 

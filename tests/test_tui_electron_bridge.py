@@ -13,6 +13,7 @@ class TestTuiElectronBridge(unittest.TestCase):
             "/copy",
             "/snapshot",
             "/electron",
+            "/graph",
             "/domains",
             "nexus_tui_ai_handoff_latest.txt",
             "nexus_tui_snapshot_latest.html",

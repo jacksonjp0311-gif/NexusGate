@@ -67,3 +67,5 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.2.6 | AI Agent Interconnection | current | Extends interconnect graph with governed AI-agent handoff, TUI export, feedback context, operator packet, and this-process rehydration edges. |
 
 | v0.2.7 | Domain Interconnection Profiles | current | Adds CLI formatting, bio, chem, coding, and neural domain routing profiles plus TUI /domains inspection. |
+
+| v0.2.8 | TUI Interconnect Console | current | Adds read-only /graph and /interconnect TUI views for graph status, checks, routes, placeholders, and next action. |
