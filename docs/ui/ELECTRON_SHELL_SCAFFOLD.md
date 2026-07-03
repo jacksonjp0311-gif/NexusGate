@@ -34,4 +34,4 @@ no external API writes
 
 ## Status
 
-This is a scaffold and static contract surface. It is not installed, packaged, or production validated. It does not replace the PowerShell TUI, and it does not own NEXUS logic.
+This surface now has a local installed Electron runtime and committed lockfile. It is still not packaged or production validated. It does not replace the PowerShell TUI, and it does not own NEXUS logic.

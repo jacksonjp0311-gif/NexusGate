@@ -41,6 +41,7 @@ class TestElectronShellScaffold(unittest.TestCase):
         text = (ROOT / "electron" / "preload.js").read_text(encoding="utf-8")
         self.assertIn('contextBridge.exposeInMainWorld("nexus"', text)
         self.assertIn("readSurface", text)
+        self.assertIn("surfaceExists", text)
         self.assertIn("runLane", text)
         self.assertIn("getContract", text)
         self.assertNotIn("require(\"fs\")", text)
@@ -51,6 +52,7 @@ class TestElectronShellScaffold(unittest.TestCase):
         self.assertTrue(data["private"])
         self.assertEqual(data["main"], "main.js")
         self.assertIn("electron", data["devDependencies"])
+        self.assertIn("smoke", data["scripts"])
 
     def test_scaffold_index_matches_read_contract_allowlist(self):
         scaffold = json.loads(
@@ -69,7 +71,8 @@ class TestElectronShellScaffold(unittest.TestCase):
         )
         self.assertIn("spawn_shell_false", scaffold["security_controls"])
         self.assertIn("no_exec", scaffold["security_controls"])
-        self.assertIn("not installed", scaffold["claim_boundary"])
+        self.assertIn("local runtime", scaffold["claim_boundary"])
+        self.assertIn("not packaged", scaffold["claim_boundary"])
 
 
 if __name__ == "__main__":

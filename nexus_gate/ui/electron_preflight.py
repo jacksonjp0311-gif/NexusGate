@@ -43,8 +43,9 @@ class ElectronPreflightReport:
     allowlisted_commands: list[str] = field(default_factory=list)
     blocked_actions: list[str] = field(default_factory=list)
     claim_boundary: str = (
-        "Electron preflight is local scaffold evidence only. It does not install, package, "
-        "launch, validate production readiness, grant shell authority, or authorize autonomous action."
+        "Electron preflight is local HUD runtime evidence only. It validates bounded presentation "
+        "surfaces, package metadata, smoke hooks, and governance markers. It does not package a "
+        "desktop app, validate production readiness, grant shell authority, or authorize autonomous action."
     )
 
 
@@ -62,9 +63,11 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
 
     required_paths = [
         "docs/ui/ELECTRON_READ_CONTRACT.md",
+        "docs/ui/ELECTRON_HUD_RUNTIME.md",
         "docs/ui/ELECTRON_SHELL_SCAFFOLD.md",
         "electron/README.md",
         "electron/package.json",
+        "electron/package-lock.json",
         "electron/main.js",
         "electron/preload.js",
         "electron/renderer/index.html",
@@ -72,6 +75,8 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
         "electron/renderer/styles.css",
         "state/electron_read_contract_index.v0.3.2.json",
         "state/electron_shell_scaffold_index.v0.3.3.json",
+        "state/electron_hud_runtime_index.v0.3.6.json",
+        "tests/test_electron_hud_runtime.py",
         "tests/test_electron_read_contract.py",
         "tests/test_electron_shell_scaffold.py",
     ]
@@ -112,6 +117,7 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
 
     main_js = (root / "electron/main.js").read_text(encoding="utf-8")
     preload_js = (root / "electron/preload.js").read_text(encoding="utf-8")
+    renderer_html = (root / "electron/renderer/index.html").read_text(encoding="utf-8")
     renderer_js = (root / "electron/renderer/renderer.js").read_text(encoding="utf-8")
 
     required_main_markers = [
@@ -122,6 +128,10 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
         "ALLOWLISTED_COMMANDS",
         "READ_SURFACES",
         "scripts\", \"nexus.ps1",
+        "nexus_electron_smoke_report_latest.json",
+        "--smoke",
+        "disableHardwareAcceleration",
+        "nexus:surfaceExists",
     ]
     missing_main_markers = [marker for marker in required_main_markers if marker not in main_js]
     forbidden_main_markers = ["exec(", "execFile(", "shell: true"]
@@ -138,6 +148,7 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
         and "readSurface" in preload_js
         and "runLane" in preload_js
         and "getContract" in preload_js
+        and "surfaceExists" in preload_js
         and "child_process" not in preload_js
         and 'require("fs")' not in preload_js,
         {"preload_api": "nexus"},
@@ -152,9 +163,27 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
     ))
 
     checks.append(_check(
+        "electron_renderer_hud_title",
+        "<title>NEXUS GATE</title>" in renderer_html
+        and "<h1>NEXUS GATE</h1>" in renderer_html
+        and "Hermes" not in renderer_html
+        and "Process Lanes" in renderer_html
+        and "Feedback Summary" in renderer_html
+        and "AI Handoff Package" in renderer_html,
+        {"title": "NEXUS GATE"},
+    ))
+
+    checks.append(_check(
         "electron_package_private",
-        package.get("private") is True and package.get("main") == "main.js",
-        {"private": package.get("private"), "main": package.get("main")},
+        package.get("private") is True
+        and package.get("main") == "main.js"
+        and package.get("scripts", {}).get("smoke") == "electron . --smoke"
+        and package.get("scripts", {}).get("start") == "electron .",
+        {
+            "private": package.get("private"),
+            "main": package.get("main"),
+            "scripts": package.get("scripts", {}),
+        },
     ))
 
     boundary_text = " ".join([
@@ -163,7 +192,7 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
     ])
     checks.append(_check(
         "electron_claim_boundary_present",
-        "local development evidence" in boundary_text
+        ("local development evidence" in boundary_text or "local installed Electron runtime" in boundary_text)
         and "shell authority" in boundary_text
         and "autonomous" in boundary_text,
         {"boundary": boundary_text},
@@ -172,7 +201,7 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
     status = "pass" if all(item["status"] == "pass" for item in checks) else "fail"
     return ElectronPreflightReport(
         system="NEXUS GATE",
-        version="0.3.4-electron-preflight",
+        version="0.3.6-electron-hud-runtime-preflight",
         root=str(root),
         status=status,
         generated_at_utc=datetime.now(timezone.utc).isoformat(),

@@ -34,9 +34,40 @@ Boundary: this repository surface improves developer discipline, local validatio
 
 NEXUS GATE is a governed agentic transfer workbench. It tests whether a local runtime can normalize framework events into StatePackets, route them through schema and authority gates, compile the repository state, preserve evidence, expose failure modes, and keep humans and AI agents oriented through RHP/Nexus documentation.
 
-### What changed in v0.1.3?
+### Current version
 
-This update adds the full RHP/Nexus documentation shell:
+NEXUS GATE is currently at the v0.3.6 local evolution surface.
+
+Current operator surfaces:
+
+```powershell
+.\scripts\nexus.ps1 tui
+.\scripts\nexus.ps1 ui
+.\scripts\nexus.ps1 evolve
+.\scripts\nexus.ps1 electron-env
+.\scripts\nexus.ps1 electron-preflight
+```
+
+Current Electron surface:
+
+```powershell
+cd electron
+npm install
+npm start
+npm run smoke
+```
+
+Visible UI title:
+
+```text
+NEXUS GATE
+```
+
+Boundary: Electron is presentation/operator surface only. It reads allowlisted evidence surfaces and requests allowlisted NEXUS lanes; it does not own logic, bypass gates, run arbitrary shell commands, access secrets, write external APIs, self-authorize, or prove production readiness.
+
+### What changed in the current line?
+
+The current line has evolved from the original RHP/Nexus documentation shell into a governed local operator workbench:
 
 - PART I - Human README
 - PART II - RHP Nexus README
@@ -48,6 +79,8 @@ This update adds the full RHP/Nexus documentation shell:
 - portable compressed PowerShell installer
 - dual PowerShell/Bash runtime scripts
 - compiler gates that require the README/RHP/Nexus/AI surface
+- PowerShell HUD TUI with feedback, interconnect, handoff, snapshot, and surface exports
+- Electron HUD runtime with package lock, smoke report, and governed allowlisted lane requests
 
 ### Current health snapshot
 
@@ -55,8 +88,8 @@ This update adds the full RHP/Nexus documentation shell:
 |---|---:|
 | Package / CLI | `nexus-gate` / `nexus` |
 | Python import | `nexus_gate` |
-| Current software layer | NG-SA v0.1.3 |
-| Current runtime status | local scaffold + gated compiler |
+| Current software layer | NG-SA v0.3.6 |
+| Current runtime status | local governed CLI/TUI + Electron HUD runtime |
 | README structure | Human / RHP Nexus / AI trisection |
 | RHP origin alignment | scaffolded |
 | RCC/Nexus route map | scaffolded |
@@ -66,7 +99,9 @@ This update adds the full RHP/Nexus documentation shell:
 | Compiler gate | required |
 | Claim status | local development gate only |
 | Production status | not production validated |
-| Next build target | v0.1.4 cold evidence engine |
+| Electron runtime | installed locally, lockfile committed |
+| Current launch | `.\scripts\nexus.ps1 tui` / `cd electron; npm start` |
+| Next build target | governed Electron packaging gate |
 
 ### What this is not
 
@@ -91,6 +126,8 @@ PowerShell:
 cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
 powershell -ExecutionPolicy Bypass -File .\scripts\nexus_once.ps1
 powershell -ExecutionPolicy Bypass -File .\scripts\nexus_status.ps1
+.\scripts\nexus.ps1 evolve
+.\scripts\nexus.ps1 tui
 ```
 
 Bash / Git Bash / WSL / Linux / macOS:
@@ -99,6 +136,7 @@ Bash / Git Bash / WSL / Linux / macOS:
 cd ~/OneDrive/Desktop/nexus-gate
 bash scripts/nexus_once.sh
 bash scripts/nexus_status.sh
+bash scripts/nexus.sh evolve
 ```
 
 ---
@@ -969,7 +1007,7 @@ Feedback interface appends FEEDBACK_LOG.md.
 ```
 
 
-## v0.2.4b - Hermes-Style PowerShell TUI
+## v0.2.4b - PowerShell HUD TUI
 
 NEXUS GATE now includes a terminal UI inside PowerShell:
 
@@ -980,7 +1018,7 @@ NEXUS GATE now includes a terminal UI inside PowerShell:
 The TUI provides:
 
 ```text
-Hermes-style terminal shell
+NEXUS GATE terminal HUD shell
 Process lane dropdown menu
 Chat-like NEXUS> prompt
 Colored output
@@ -1085,7 +1123,7 @@ reports/tui/nexus_tui_snapshot_latest.html
 
 The snapshot includes health, pressure, graph status, graph version, node/edge counts, next action, interconnect checks, placeholder evidence paths, bridge surfaces, and claim boundary.
 
-This is the first Electron mock surface. It remains read-only evidence orientation and must not mutate graph state, self-authorize, bypass evolve, or claim proof from graph visibility.
+This is the first Electron bridge surface. It remains read-only evidence orientation and must not mutate graph state, self-authorize, bypass evolve, or claim proof from graph visibility.
 
 ## v0.3.0 - TUI Surface State
 
@@ -1110,11 +1148,11 @@ reports/tui/nexus_tui_snapshot_latest.html
 reports/tui/nexus_tui_surface_latest.json
 ```
 
-This gives the future Electron/dashboard bridge a paired human-readable and machine-readable export from one governed operator action. The pair remains read-only evidence orientation and does not mutate graph state, run arbitrary shell commands, self-authorize, bypass evolve, or prove correctness.
+This gives the Electron/dashboard bridge a paired human-readable and machine-readable export from one governed operator action. The pair remains read-only evidence orientation and does not mutate graph state, run arbitrary shell commands, self-authorize, bypass evolve, or prove correctness.
 
 ## v0.3.2 - Electron Read Contract
 
-NEXUS GATE now has a contract-only gate for the future Electron/dashboard surface:
+NEXUS GATE now has a contract gate for the Electron/dashboard surface:
 
 ```text
 docs/ui/ELECTRON_READ_CONTRACT.md
@@ -1128,7 +1166,7 @@ Electron remains presentation only. It may not run arbitrary shell commands, mut
 
 ## v0.3.3 - Electron Shell Scaffold
 
-NEXUS GATE now includes a minimal future Electron operator shell scaffold:
+NEXUS GATE now includes a governed Electron operator shell:
 
 ```text
 electron/

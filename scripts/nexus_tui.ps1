@@ -1,4 +1,4 @@
-# NEXUS GATE Hermes-style PowerShell TUI
+# NEXUS GATE PowerShell HUD TUI
 # Interactive console operator surface: chat-like prompt, selectable lanes, colored output,
 # feedback logging, packet creation, debugging, self-healing, and AI handoff export.
 # Canonical command markers: /run <lane>, /note <text>, /packet <summary>.
@@ -109,7 +109,7 @@ function Header {
 
     Write-Host ""
     Write-HudRule 118
-    $titleLine = '| NEXUS GATE :: Hermes-Style PowerShell TUI                        | AGENT MODE: ACTIVE | GOVERNANCE: ENFORCED |'
+    $titleLine = '| NEXUS GATE                                                       | AGENT MODE: ACTIVE | GOVERNANCE: ENFORCED |'
     $timeLine = '| HUD operator console | system time: ' + (Get-Date -Format 'yyyy-MM-dd HH:mm:ss') + ' | LINK STATUS: STABLE              |'
     Write-Host $titleLine -ForegroundColor Cyan
     Write-Host $timeLine -ForegroundColor DarkCyan
@@ -485,7 +485,7 @@ function New-TuiSnapshot {
 <body>
   <div class="hud">
     <header class="topbar">
-      <div><h1>NEXUS GATE <span class="subtitle">:: Hermes-Style PowerShell TUI</span></h1></div>
+      <div><h1>NEXUS GATE</h1></div>
       <div class="pill">AGENT MODE<br>ACTIVE</div>
       <div class="pill">GOVERNANCE<br>ENFORCED</div>
       <div class="pill">SYSTEM TIME<br>$((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))</div>

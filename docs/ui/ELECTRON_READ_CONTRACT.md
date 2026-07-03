@@ -1,6 +1,6 @@
 # NEXUS GATE v0.3.2 Electron Read Contract
 
-Electron is a future presentation/operator surface. It must consume existing NEXUS evidence and may only request governed lanes.
+Electron is a local presentation/operator surface. It consumes existing NEXUS evidence and may only request governed lanes.
 
 ## Read Surfaces
 
@@ -52,4 +52,4 @@ bypass_evolve
 
 ## Boundary
 
-This contract is a local development gate for a future Electron surface. It does not build Electron, grant shell authority, prove correctness, prove safety, validate production readiness, or authorize autonomous action.
+This contract is a local development gate for the Electron surface. It does not grant shell authority, prove correctness, prove safety, validate production readiness, or authorize autonomous action.

@@ -26,6 +26,7 @@ class TestElectronPreflightCompiler(unittest.TestCase):
             "electron_main_security_markers",
             "electron_preload_api_limited",
             "electron_renderer_uses_preload_bridge",
+            "electron_renderer_hud_title",
             "electron_package_private",
             "electron_claim_boundary_present",
         ]:

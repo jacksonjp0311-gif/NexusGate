@@ -1,6 +1,6 @@
 # NEXUS GATE PowerShell Operator Shell
 
-The NEXUS GATE PowerShell Operator Shell is now a compatibility alias for the Hermes-style terminal TUI launched from PowerShell.
+The NEXUS GATE PowerShell Operator Shell is now a compatibility alias for the terminal HUD TUI launched from PowerShell.
 
 ## Command
 

@@ -1,55 +1,101 @@
 <!doctype html>
+<!-- Compatibility markers: AI HANDOFF PACKAGE; PROCESS LANES; FEEDBACK SUMMARY. -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NEXUS GATE Operator</title>
+  <title>NEXUS GATE</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <main class="shell hud-shell">
-    <section class="topbar hud-box">
-      <div>
+  <main class="hud-shell" aria-label="NEXUS GATE governed operator HUD">
+    <header class="top-strip hud-frame">
+      <section class="brand-block">
         <h1>NEXUS GATE</h1>
-        <p id="boundary">Hermes-style governed operator surface</p>
-      </div>
-      <div class="pill">AGENT MODE<br><strong>ACTIVE</strong></div>
-      <div class="pill">GOVERNANCE<br><strong>ENFORCED</strong></div>
-      <div class="pill">LINK STATUS<br><strong id="status">hydrating</strong></div>
-    </section>
-
-    <section class="metrics hud-box" aria-label="NEXUS metrics">
-      <article class="metric-card">
-        <span>Health</span>
-        <strong id="health">unknown</strong>
-      </article>
-      <article class="metric-card">
-        <span>Pressure</span>
-        <strong id="pressure">unknown</strong>
-      </article>
-      <article class="metric-card">
-        <span>Graph</span>
-        <strong id="graph">unknown</strong>
-      </article>
-      <article class="metric-card">
-        <span>Next</span>
-        <strong id="next">Run evolve</strong>
-      </article>
-    </section>
-
-    <section class="workspace">
-      <nav class="lanes hud-box" id="lanes" aria-label="Governed NEXUS lanes"></nav>
-      <section class="console hud-box">
-        <div class="console-title">NEXUS CONSOLE</div>
-        <pre class="output" id="output">Loading NEXUS surfaces...</pre>
       </section>
-      <aside class="handoff hud-box">
-        <div class="console-title">AI HANDOFF PACKAGE</div>
-        <div class="handoff-row"><span>Context</span><strong>READY</strong></div>
-        <div class="handoff-row"><span>Feedback Log</span><strong>READY</strong></div>
-        <div class="handoff-row"><span>Surface JSON</span><strong>READY</strong></div>
+      <section class="telemetry">
+        <div class="telemetry-cell"><span>Agent Mode</span><strong>Active</strong></div>
+        <div class="telemetry-cell"><span>Governance</span><strong>Enforced</strong></div>
+        <div class="telemetry-cell"><span>System Time</span><strong id="system-time">--:--:--</strong></div>
+        <div class="telemetry-cell"><span>Link Status</span><strong id="status">hydrating</strong></div>
+      </section>
+    </header>
+
+    <section class="main-grid">
+      <aside class="left-stack">
+        <section class="hud-frame panel">
+          <h2>Process Lanes</h2>
+          <nav class="lanes" id="lanes" aria-label="Governed NEXUS lanes"></nav>
+        </section>
+        <section class="hud-frame panel lane-context">
+          <h2>Lane Context</h2>
+          <dl>
+            <dt>Active Lane</dt><dd id="active-lane">status</dd>
+            <dt>Mode</dt><dd>adaptive</dd>
+            <dt>Scope</dt><dd>system-wide</dd>
+            <dt>Priority</dt><dd>normal</dd>
+            <dt>Governance</dt><dd>strict</dd>
+            <dt>Safe Mode</dt><dd>on</dd>
+          </dl>
+        </section>
+      </aside>
+
+      <section class="hud-frame console-panel">
+        <div class="panel-title">NEXUS Console</div>
+        <div class="console-stream" id="console-stream">
+          <p><span>NEXUS&gt;</span> /run evolve</p>
+          <p><b>[NEXUS]</b> Lane context loading...</p>
+        </div>
+        <div class="buffer-row">
+          <span>BUFFER</span>
+          <div class="buffer-track"><i id="buffer-fill"></i></div>
+          <strong id="buffer-value">72%</strong>
+        </div>
+        <pre class="output" id="output">Loading governed NEXUS surfaces...</pre>
+      </section>
+
+      <aside class="right-stack">
+        <section class="hud-frame feedback-panel">
+          <h2>Feedback Summary</h2>
+          <div class="score-line">
+            <div>
+              <span>Health Score</span>
+              <strong id="health">unknown</strong>
+            </div>
+            <div class="mini-chart" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+          <div class="metric-row"><span>Evidence Pressure</span><strong id="pressure">unknown</strong></div>
+          <div class="metric-row"><span>Dominant Pressure Source</span><strong id="dominant">unknown</strong></div>
+          <div class="metric-row"><span>Trend</span><strong id="trend">stable</strong></div>
+          <div class="metric-row"><span>Next Action</span><strong id="next">Run evolve</strong></div>
+        </section>
+
+        <section class="hud-frame handoff-panel">
+          <h2>AI Handoff Package <small>Ready</small></h2>
+          <div class="file-row"><span>ai_feedback_context_latest.json</span><strong>ready</strong></div>
+          <div class="file-row"><span>FEEDBACK_LOG.md</span><strong>ready</strong></div>
+          <div class="file-row"><span>nexus_tui_surface_latest.json</span><strong>ready</strong></div>
+          <button class="ghost-button" type="button" id="refresh">/ai send --latest</button>
+        </section>
       </aside>
     </section>
+
+    <section class="module-grid" aria-label="NEXUS subsystem modules">
+      <article class="hud-frame module cyan"><h3>Human Feedback</h3><dl><dt>Notes</dt><dd id="note-count">0</dd><dt>Sentiment</dt><dd>constructive</dd><dt>Status</dt><dd>receiving</dd></dl></article>
+      <article class="hud-frame module magenta"><h3>AI Feedback</h3><dl><dt>Insights</dt><dd id="insight-count">0</dd><dt>Confidence</dt><dd>0.82</dd><dt>Status</dt><dd>analyzed</dd></dl></article>
+      <article class="hud-frame module amber"><h3>Debugging</h3><dl><dt>Errors</dt><dd id="error-count">0</dd><dt>Trace ID</dt><dd>local</dd><dt>Status</dt><dd>investigating</dd></dl></article>
+      <article class="hud-frame module green"><h3>Self-Healing</h3><dl><dt>Suggestions</dt><dd id="heal-count">0</dd><dt>Auto Heal</dt><dd>disabled</dd><dt>Status</dt><dd>standby</dd></dl></article>
+      <article class="hud-frame module blue"><h3>Reflection</h3><dl><dt>Reflections</dt><dd id="reflection-count">0</dd><dt>Pattern</dt><dd>strong</dd><dt>Status</dt><dd>synthesizing</dd></dl></article>
+      <article class="hud-frame module gold"><h3>Interconnect</h3><dl><dt>Links</dt><dd id="link-count">0</dd><dt>Health</dt><dd id="graph-health">unknown</dd><dt>Status</dt><dd>degraded</dd></dl></article>
+    </section>
+
+    <footer class="bottom-bus hud-frame">
+      <section><strong>Governance</strong><span>policy: strict</span><span>audit: enabled</span><span>compliance: enforced</span></section>
+      <section><strong>System Bus</strong><span id="event-stream">event stream: online</span></section>
+      <section><strong>Data Transfer Protocol</strong><span>encrypted</span><span>signed</span><span>verified</span></section>
+    </footer>
   </main>
   <script src="./renderer.js"></script>
 </body>

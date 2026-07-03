@@ -1,26 +1,18 @@
 {
   "system": "NEXUS GATE",
-  "version": "0.3.2",
-  "kind": "electron_read_contract_index",
-  "role": "Electron/dashboard read contract",
+  "version": "0.3.6-electron-hud-smoke",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T21:22:24.330Z",
+  "app_title": "NEXUS GATE",
+  "smoke_mode": true,
   "read_surfaces": [
     "state/ai_feedback_context_latest.json",
     "docs/feedback/FEEDBACK_LOG.md",
-    "docs/feedback/operator_packets/*.json",
     "reports/nexus_feedback_interface_report_latest.json",
     "reports/nexus_self_healing_report_latest.json",
     "reports/tui/nexus_tui_ai_handoff_latest.txt",
     "reports/tui/nexus_tui_snapshot_latest.html",
     "reports/tui/nexus_tui_surface_latest.json"
-  ],
-  "required_pairs": [
-    {
-      "command": "/snapshot",
-      "outputs": [
-        "reports/tui/nexus_tui_snapshot_latest.html",
-        "reports/tui/nexus_tui_surface_latest.json"
-      ]
-    }
   ],
   "allowlisted_commands": [
     "evolve",
@@ -43,10 +35,7 @@
     "mutate_graph_state",
     "bypass_evolve"
   ],
-  "required_gates": [
-    "python -m unittest discover -s tests",
-    ".\\scripts\\nexus.ps1 evolve"
-  ],
-  "implementation_status": "contract_with_minimal_scaffold_v0.3.3",
-  "claim_boundary": "Electron read contract and scaffold are local development evidence only. They do not grant shell authority, prove correctness, prove safety, validate production readiness, or authorize autonomous action."
+  "claim_boundary": "Electron HUD smoke is local runtime evidence only. It does not package an EXE, prove production readiness, grant shell authority, or authorize autonomous action.",
+  "renderer_title": "NEXUS GATE",
+  "renderer_ready": true
 }

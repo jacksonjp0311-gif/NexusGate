@@ -1,4 +1,4 @@
-# NEXUS GATE Hermes-Style PowerShell TUI
+# NEXUS GATE PowerShell HUD TUI
 
 This is a terminal UI inside PowerShell, not a Windows Forms app.
 
@@ -16,7 +16,7 @@ or:
 
 ## Design Source
 
-The interface follows the Hermes/HRCN operator-surface law:
+The interface follows the NEXUS GATE operator-surface law:
 
 ```text
 An operator surface may make governed actions visible and selectable; it may not become the operator.
@@ -25,7 +25,7 @@ An operator surface may make governed actions visible and selectable; it may not
 ## What It Gives You
 
 ```text
-Hermes-style terminal shell
+NEXUS GATE terminal HUD shell
 Process lane dropdown menu
 Chat-like NEXUS> prompt
 Colored output
@@ -104,7 +104,7 @@ Use:
 
 to write and open `reports/tui/nexus_tui_snapshot_latest.html`.
 
-The snapshot includes graph status, node and edge counts, interconnect checks, placeholder evidence paths, and next action for the future Electron surface.
+The snapshot includes graph status, node and edge counts, interconnect checks, placeholder evidence paths, and next action for the Electron surface.
 
 Use:
 
@@ -128,7 +128,7 @@ Use:
 /electron
 ```
 
-to print the future Electron port contract. Electron must consume the same evidence surfaces and only run allowlisted NEXUS lanes.
+to print the Electron port contract. Electron must consume the same evidence surfaces and only run allowlisted NEXUS lanes.
 
 ## Claim Boundary
 

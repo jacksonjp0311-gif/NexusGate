@@ -62,7 +62,7 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.2.3 | AI Feedback Interface + Markdown Feedback Log | current | Adds ai_feedback_context_latest.json, FEEDBACK_SYSTEM.md, FEEDBACK_LOG.md, interface command, and PowerShell feedback summary. |
 
 
-| v0.2.4b | Hermes-Style PowerShell TUI | current | Adds interactive terminal shell with lane menu, chat prompt, buffer bar, colored output, feedback notes, operation packets, debug tail, and AI handoff. |
+| v0.2.4b | PowerShell HUD TUI | current | Adds interactive terminal shell with lane menu, chat prompt, buffer bar, colored output, feedback notes, operation packets, debug tail, and AI handoff. |
 
 | v0.2.6 | AI Agent Interconnection | current | Extends interconnect graph with governed AI-agent handoff, TUI export, feedback context, operator packet, and this-process rehydration edges. |
 
@@ -82,3 +82,4 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 
 | v0.3.4 | Electron Preflight Compiler | current | Adds a Python preflight compiler and script lane for the Electron scaffold without installing, packaging, or launching Electron. |
 | v0.3.5 | Electron Environment + HUD Surface | current | Adds non-mutating Electron environment readiness and aligns TUI/Electron presentation with the HUD operator-console direction. |
+| v0.3.6 | Electron HUD Runtime | current | Installs the local Electron runtime, adds a governed HUD desktop shell smoke path, commits the lockfile, and keeps the visible title to NEXUS GATE. |

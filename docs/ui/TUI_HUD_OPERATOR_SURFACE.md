@@ -1,6 +1,10 @@
 # NEXUS GATE v0.3.5 TUI HUD Operator Surface
 
-The PowerShell TUI and Electron scaffold now share the same HUD visual direction:
+The PowerShell TUI and Electron scaffold now share the same HUD visual direction. Visible UI titles use only:
+
+```text
+NEXUS GATE
+```
 
 ```text
 top status strip

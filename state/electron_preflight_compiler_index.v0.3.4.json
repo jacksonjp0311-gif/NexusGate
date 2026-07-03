@@ -12,7 +12,10 @@
     "electron/main.js",
     "electron/preload.js",
     "electron/renderer/renderer.js",
-    "electron/package.json"
+    "electron/package.json",
+    "electron/package-lock.json",
+    "docs/ui/ELECTRON_HUD_RUNTIME.md",
+    "state/electron_hud_runtime_index.v0.3.6.json"
   ],
   "checks": [
     "electron_required_paths",
@@ -22,6 +25,7 @@
     "electron_main_security_markers",
     "electron_preload_api_limited",
     "electron_renderer_uses_preload_bridge",
+    "electron_renderer_hud_title",
     "electron_package_private",
     "electron_claim_boundary_present"
   ],
@@ -36,5 +40,5 @@
     "mutate_graph_state",
     "bypass_evolve"
   ],
-  "claim_boundary": "Electron preflight compiler is local scaffold evidence only. It does not install, package, launch, validate production readiness, grant shell authority, or authorize autonomous action."
+  "claim_boundary": "Electron preflight compiler is local HUD runtime evidence only. It does not package a desktop app, validate production readiness, grant shell authority, or authorize autonomous action."
 }

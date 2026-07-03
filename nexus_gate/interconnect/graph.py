@@ -151,7 +151,7 @@ def _ai_process_nodes(root: Path) -> List[InterconnectNode]:
         InterconnectNode(
             "operator:tui",
             "operator_surface",
-            "PowerShell Hermes TUI",
+            "PowerShell HUD TUI",
             "declared",
             _path_status(root, "scripts/nexus_tui.ps1"),
         ),

@@ -1,6 +1,6 @@
 # NEXUS GATE TUI to Electron Port Plan
 
-The PowerShell TUI is the proof surface for the future Electron operator shell.
+The PowerShell TUI is the proof surface for the Electron operator shell.
 
 ## Current Bridge
 
@@ -10,7 +10,7 @@ PowerShell TUI
   -> report/state/log evidence
   -> AI handoff export
   -> HTML snapshot
-  -> future Electron presentation
+  -> Electron presentation
 ```
 
 ## Required TUI Commands

@@ -6,3 +6,4 @@ __pycache__/
 Thumbs.db
 logs/*.log
 reports/tmp/
+electron/node_modules/

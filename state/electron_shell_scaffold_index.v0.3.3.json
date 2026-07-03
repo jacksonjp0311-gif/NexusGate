@@ -2,7 +2,7 @@
   "system": "NEXUS GATE",
   "version": "0.3.3",
   "kind": "electron_shell_scaffold_index",
-  "status": "scaffold_only_not_packaged",
+  "status": "installed_local_runtime_not_packaged",
   "root": "electron/",
   "entrypoints": {
     "main": "electron/main.js",
@@ -39,5 +39,5 @@
     "mutate_graph_state",
     "bypass_evolve"
   ],
-  "claim_boundary": "Electron shell scaffold is local development evidence only. It is not installed, packaged, production validated, or authoritative."
+  "claim_boundary": "Electron shell scaffold is local development evidence only. It is installed as a local runtime with a committed lockfile, but it is not packaged, production validated, or authoritative."
 }

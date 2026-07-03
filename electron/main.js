@@ -4,6 +4,12 @@ const path = require("path");
 const { spawn } = require("child_process");
 
 const repoRoot = path.resolve(__dirname, "..");
+const isSmoke = process.argv.includes("--smoke");
+const smokeReportPath = path.join(repoRoot, "reports", "nexus_electron_smoke_report_latest.json");
+
+if (isSmoke) {
+  app.disableHardwareAcceleration();
+}
 
 const READ_SURFACES = new Set([
   "state/ai_feedback_context_latest.json",
@@ -40,12 +46,53 @@ function resolveRepoPath(relativePath) {
   return resolved;
 }
 
+function writeSmokeReport(status, extra = {}) {
+  fs.mkdirSync(path.dirname(smokeReportPath), { recursive: true });
+  fs.writeFileSync(smokeReportPath, JSON.stringify({
+    system: "NEXUS GATE",
+    version: "0.3.6-electron-hud-smoke",
+    status,
+    generated_at_utc: new Date().toISOString(),
+    app_title: "NEXUS GATE",
+    smoke_mode: true,
+    read_surfaces: Array.from(READ_SURFACES),
+    allowlisted_commands: Array.from(ALLOWLISTED_COMMANDS),
+    blocked_actions: [
+      "arbitrary_shell_commands",
+      "external_api_write",
+      "secret_access",
+      "self_authorize",
+      "memory_promotion_without_evidence",
+      "ungated_repo_mutation",
+      "mutate_graph_state",
+      "bypass_evolve"
+    ],
+    claim_boundary: "Electron HUD smoke is local runtime evidence only. It does not package an EXE, prove production readiness, grant shell authority, or authorize autonomous action.",
+    ...extra
+  }, null, 2), "utf8");
+}
+
+async function waitForRendererReady(win) {
+  const started = Date.now();
+  while (Date.now() - started < 8000) {
+    const state = await win.webContents.executeJavaScript("document.body.dataset.ready || ''");
+    if (state === "true" || state === "false") {
+      return state === "true";
+    }
+    await new Promise((resolve) => setTimeout(resolve, 150));
+  }
+  return false;
+}
+
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1200,
-    height: 780,
+    width: 1280,
+    height: 720,
     minWidth: 960,
     minHeight: 640,
+    show: !isSmoke,
+    title: "NEXUS GATE",
+    backgroundColor: "#020617",
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
@@ -54,12 +101,35 @@ function createWindow() {
     }
   });
 
+  if (isSmoke) {
+    win.webContents.once("did-finish-load", async () => {
+      try {
+        const title = await win.webContents.executeJavaScript("document.title");
+        const ready = await waitForRendererReady(win);
+        writeSmokeReport(ready ? "pass" : "fail", { renderer_title: title, renderer_ready: ready });
+      } catch (error) {
+        writeSmokeReport("fail", { error: error.message });
+      } finally {
+        app.quit();
+      }
+    });
+    win.webContents.once("did-fail-load", (_event, code, description) => {
+      writeSmokeReport("fail", { error: description, code });
+      app.quit();
+    });
+  }
+
   win.loadFile(path.join(__dirname, "renderer", "index.html"));
 }
 
 ipcMain.handle("nexus:readSurface", async (_event, relativePath) => {
   const target = resolveRepoPath(relativePath);
   return fs.promises.readFile(target, "utf8");
+});
+
+ipcMain.handle("nexus:surfaceExists", async (_event, relativePath) => {
+  const target = resolveRepoPath(relativePath);
+  return fs.existsSync(target);
 });
 
 ipcMain.handle("nexus:runLane", async (_event, lane) => {

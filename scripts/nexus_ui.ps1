@@ -1,5 +1,5 @@
 # NEXUS GATE compatibility UI alias
-# This file intentionally launches the Hermes-style terminal TUI.
+# This file intentionally launches the NEXUS GATE terminal HUD TUI.
 #
 # Legacy Windows Forms compatibility markers retained for older tests only:
 # System.Windows.Forms
