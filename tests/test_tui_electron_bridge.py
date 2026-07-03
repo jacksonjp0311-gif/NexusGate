@@ -17,6 +17,9 @@ class TestTuiElectronBridge(unittest.TestCase):
             "/domains",
             "nexus_tui_ai_handoff_latest.txt",
             "nexus_tui_snapshot_latest.html",
+            "Interconnect Checks",
+            "Placeholder Evidence",
+            "mutate graph state",
             "Set-Clipboard",
             "Allowed commands: evolve, interface, feedback, heal, status, compact, interconnect, runtime, pack",
         ]:

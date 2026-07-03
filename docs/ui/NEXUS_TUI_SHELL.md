@@ -103,6 +103,8 @@ Use:
 
 to write and open `reports/tui/nexus_tui_snapshot_latest.html`.
 
+The snapshot includes graph status, node and edge counts, interconnect checks, placeholder evidence paths, and next action for the future Electron surface.
+
 Use:
 
 ```text

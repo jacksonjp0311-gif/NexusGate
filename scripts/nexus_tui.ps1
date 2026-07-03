@@ -363,15 +363,52 @@ function Export-AIHandoff {
 function New-TuiSnapshot {
     $path = Join-Path $TuiDir "nexus_tui_snapshot_latest.html"
     $ctx = Get-LatestContext
+    $graphPath = Join-Path $Root "state\interconnect_graph.v0.2.2.json"
     $health = "unknown"
     $pressure = "unknown"
     $dominant = "unknown"
     $next = "Run .\scripts\nexus.ps1 interface."
+    $graphVersion = "unknown"
+    $graphStatus = "unknown"
+    $nodeCount = 0
+    $edgeCount = 0
+    $checkRows = "<li>No graph checks available.</li>"
+    $placeholderRows = "<li>No placeholder evidence paths detected.</li>"
     if ($ctx) {
         $health = $ctx.health.health_score
         $pressure = $ctx.health.evidence_pressure
         $dominant = $ctx.health.dominant_pressure_source
         $next = $ctx.next_action
+    }
+    if (Test-Path $graphPath) {
+        try {
+            $graph = Get-Content $graphPath -Raw | ConvertFrom-Json
+            $graphVersion = $graph.version
+            $graphStatus = $graph.status
+            $nodeCount = $graph.nodes.Count
+            $edgeCount = $graph.edges.Count
+            $items = @()
+            foreach ($check in $graph.checks) {
+                $items += "<li><strong>$($check.check)</strong>: $($check.status) ($($check.count))</li>"
+            }
+            if ($items.Count -gt 0) { $checkRows = ($items -join [Environment]::NewLine) }
+
+            $placeholders = @()
+            foreach ($node in $graph.nodes) {
+                if ($node.evidence -and $null -ne $node.evidence.exists -and -not $node.evidence.exists) {
+                    $placeholders += "<li>$($node.node_id): $($node.evidence.path)</li>"
+                }
+                if ($node.evidence -and $node.evidence.handoff -and -not $node.evidence.handoff.exists) {
+                    $placeholders += "<li>$($node.node_id): $($node.evidence.handoff.path)</li>"
+                }
+                if ($node.evidence -and $node.evidence.snapshot -and -not $node.evidence.snapshot.exists) {
+                    $placeholders += "<li>$($node.node_id): $($node.evidence.snapshot.path)</li>"
+                }
+            }
+            if ($placeholders.Count -gt 0) { $placeholderRows = ($placeholders | Select-Object -First 12) -join [Environment]::NewLine }
+        } catch {
+            $checkRows = "<li>Graph unreadable: $($_.Exception.Message)</li>"
+        }
     }
     $html = @"
 <!doctype html>
@@ -383,18 +420,46 @@ function New-TuiSnapshot {
     body { font-family: Consolas, monospace; background: #111827; color: #e5e7eb; margin: 32px; }
     h1 { color: #67e8f9; }
     code, pre { background: #020617; color: #d1fae5; padding: 12px; display: block; }
+    section { border-top: 1px solid #334155; margin-top: 24px; padding-top: 16px; }
     .metric { margin: 8px 0; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 12px; }
+    .tile { background: #020617; border: 1px solid #334155; padding: 12px; }
+    .label { color: #94a3b8; font-size: 12px; }
+    .value { color: #d1fae5; font-size: 18px; margin-top: 4px; }
+    li { margin: 6px 0; }
   </style>
 </head>
 <body>
   <h1>NEXUS GATE TUI Snapshot</h1>
-  <div class="metric">Health score: $health</div>
-  <div class="metric">Evidence pressure: $pressure</div>
-  <div class="metric">Dominant pressure: $dominant</div>
-  <div class="metric">Next action: $next</div>
+  <section>
+    <div class="grid">
+      <div class="tile"><div class="label">Health</div><div class="value">$health</div></div>
+      <div class="tile"><div class="label">Pressure</div><div class="value">$pressure</div></div>
+      <div class="tile"><div class="label">Graph</div><div class="value">$graphStatus</div></div>
+      <div class="tile"><div class="label">Nodes / Edges</div><div class="value">$nodeCount / $edgeCount</div></div>
+    </div>
+    <div class="metric">Dominant pressure: $dominant</div>
+    <div class="metric">Graph version: $graphVersion</div>
+    <div class="metric">Next action: $next</div>
+  </section>
+  <section>
+    <h2>Interconnect Checks</h2>
+    <ul>
+      $checkRows
+    </ul>
+  </section>
+  <section>
+    <h2>Placeholder Evidence</h2>
+    <ul>
+      $placeholderRows
+    </ul>
+  </section>
+  <section>
   <h2>Launch</h2>
   <pre>.\scripts\nexus.ps1 tui
 .\scripts\nexus.ps1 ui</pre>
+  </section>
+  <section>
   <h2>Bridge Surfaces</h2>
   <pre>state/ai_feedback_context_latest.json
 docs/feedback/FEEDBACK_LOG.md
@@ -403,8 +468,11 @@ reports/nexus_feedback_interface_report_latest.json
 reports/nexus_self_healing_report_latest.json
 reports/tui/nexus_tui_ai_handoff_latest.txt
 reports/tui/nexus_tui_snapshot_latest.html</pre>
+  </section>
+  <section>
   <h2>Boundary</h2>
-  <p>The operator surface may make governed actions visible and selectable. It may not become the operator, self-authorize, or bypass gates.</p>
+  <p>The operator surface may make governed actions visible and selectable. It may not become the operator, self-authorize, mutate graph state, or bypass gates.</p>
+  </section>
 </body>
 </html>
 "@

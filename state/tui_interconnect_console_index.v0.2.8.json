@@ -4,7 +4,8 @@
   "kind": "tui_interconnect_console_index",
   "commands": [
     "/graph",
-    "/interconnect"
+    "/interconnect",
+    "/snapshot"
   ],
   "read_surfaces": [
     "state/interconnect_graph.v0.2.2.json",
@@ -24,6 +25,7 @@
     "core routes",
     "placeholder evidence paths"
   ],
+  "snapshot_surface": "reports/tui/nexus_tui_snapshot_latest.html",
   "blocked_actions": [
     "self_authorize",
     "mutate_graph_from_ui",

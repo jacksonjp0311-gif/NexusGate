@@ -1,0 +1,32 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.9",
+  "kind": "tui_snapshot_bridge_index",
+  "command": "/snapshot",
+  "output": "reports/tui/nexus_tui_snapshot_latest.html",
+  "read_surfaces": [
+    "state/ai_feedback_context_latest.json",
+    "state/interconnect_graph.v0.2.2.json",
+    "reports/nexus_feedback_report_latest.json"
+  ],
+  "snapshot_sections": [
+    "health",
+    "evidence pressure",
+    "graph status",
+    "graph version",
+    "node and edge counts",
+    "next action",
+    "interconnect checks",
+    "placeholder evidence paths",
+    "bridge surfaces",
+    "claim boundary"
+  ],
+  "electron_role": "read-only mock surface before desktop shell implementation",
+  "blocked_actions": [
+    "mutate_graph_state",
+    "self_authorize",
+    "bypass_evolve",
+    "claim_proof_from_graph_visibility"
+  ],
+  "claim_boundary": "TUI snapshot bridge is local evidence orientation only. It does not prove correctness, safety, production readiness, scientific validity, model validity, or autonomous authority."
+}

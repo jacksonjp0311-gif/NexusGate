@@ -70,3 +70,4 @@ Boundary: this chart is a local development control. It does not prove safety, s
 - domain_route_claim_inflation: domain routing is treated as scientific validity, code correctness, model correctness, safety, or production readiness.
 - tui_graph_mutation_attempt: TUI graph/interconnect view attempts to mutate graph state instead of reading compiled evidence.
 - graph_visibility_claim_inflation: graph visibility is treated as proof of correctness, safety, production readiness, scientific validity, model validity, or autonomous authority.
+- snapshot_bridge_claim_inflation: TUI snapshot HTML is treated as proof, authority, validation, or runtime ownership instead of read-only evidence orientation.

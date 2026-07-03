@@ -307,3 +307,19 @@ or:
 ```
 
 The view is read-only evidence orientation. It must not mutate graph state, bypass evolve, or treat graph visibility as proof.
+
+## NEXUS v0.2.9 TUI Snapshot Bridge
+
+Use this inside the TUI:
+
+```powershell
+/snapshot
+```
+
+The generated HTML snapshot includes graph status, node and edge counts, checks, placeholder evidence paths, feedback health, next action, and bridge surfaces.
+
+Hard rule:
+
+```text
+Snapshot visibility is not authority, proof, or validation.
+```

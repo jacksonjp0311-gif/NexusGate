@@ -43,7 +43,8 @@
     "external_api_write",
     "secret_access",
     "memory_promotion_without_evidence",
-    "ungated_repo_mutation"
+    "ungated_repo_mutation",
+    "mutate_graph_state_from_snapshot"
   ],
   "claim_boundary": "Local operator/debug TUI only. Does not prove correctness, safety, security, or autonomous authority."
 }

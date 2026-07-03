@@ -1073,3 +1073,16 @@ The PowerShell TUI now exposes the governed interconnect graph directly:
 The view shows graph status, graph version, node/edge counts, check rows, core governed routes, placeholder evidence paths, health, pressure, and next action.
 
 This is a read-only operator view. It does not mutate the graph, self-authorize, bypass evolve, or turn graph visibility into proof.
+
+## v0.2.9 - TUI Snapshot Bridge
+
+The TUI snapshot now carries the interconnect console summary into an HTML surface:
+
+```text
+/snapshot
+reports/tui/nexus_tui_snapshot_latest.html
+```
+
+The snapshot includes health, pressure, graph status, graph version, node/edge counts, next action, interconnect checks, placeholder evidence paths, bridge surfaces, and claim boundary.
+
+This is the first Electron mock surface. It remains read-only evidence orientation and must not mutate graph state, self-authorize, bypass evolve, or claim proof from graph visibility.

@@ -10,6 +10,17 @@
     "reports/tui/nexus_tui_ai_handoff_latest.txt",
     "reports/tui/nexus_tui_snapshot_latest.html"
   ],
+  "snapshot_bridge": {
+    "surface": "reports/tui/nexus_tui_snapshot_latest.html",
+    "contains": [
+      "health",
+      "graph status",
+      "node and edge counts",
+      "interconnect checks",
+      "placeholder evidence paths",
+      "next action"
+    ]
+  },
   "interactive_commands": [
     "/ai",
     "/copy",

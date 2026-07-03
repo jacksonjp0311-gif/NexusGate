@@ -33,3 +33,13 @@ placeholder or missing evidence paths
 ## Boundary
 
 The graph view is evidence orientation. It does not prove correctness, production readiness, safety, scientific validity, model validity, or autonomous authority.
+
+## Snapshot Bridge
+
+The `/snapshot` command also writes the graph status, node and edge counts, check rows, placeholder evidence paths, and next action into:
+
+```text
+reports/tui/nexus_tui_snapshot_latest.html
+```
+
+This HTML file is the first Electron mock surface. It is still read-only evidence orientation.
