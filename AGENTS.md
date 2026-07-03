@@ -142,3 +142,24 @@ No compatibility decision, no engagement.
 No unsupported schema, no receptor route.
 No unsupported action, no receptor route.
 ```
+
+
+## Bridge Session Contract
+
+Before adding a real framework bridge, the agent must inspect:
+
+```text
+docs/bridge/BRIDGE_SESSION_RUNNER.md
+state/bridge_session_index.v0.1.9.json
+nexus_gate/bridge/session.py
+reports/nexus_bridge_compile_report_latest.json
+```
+
+Hard rules:
+
+```text
+No bridge session without adapter normalization.
+No bridge session without route decision.
+No bridge session without receptor compatibility.
+No bridge report without claim boundary.
+```

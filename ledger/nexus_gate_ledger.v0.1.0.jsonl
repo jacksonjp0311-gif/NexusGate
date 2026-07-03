@@ -32,3 +32,9 @@
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_102434.json","duration_ms":532,"failed_gates":[],"timestamp_utc":"2026-07-03T10:24:34.936510+00:00"}
 {"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T10:24:36.427986+00:00"}
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_102436.json","duration_ms":472,"failed_gates":[],"timestamp_utc":"2026-07-03T10:24:36.431460+00:00"}
+{"event":"bridge_session_runner_installed","version":"0.1.9","timestamp_utc":"2026-07-03T10:29:40.8994518Z","hard_law":"No bridge session without receptor compatibility."}
+{"event":"bridge_session_rescue_installed","version":"0.1.9b","timestamp_utc":"2026-07-03T10:32:21.4256903Z","fixes":["statepacket_to_dict_missing","compact_marker_gate_dropped"]}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T10:32:22.774010+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_103222.json","duration_ms":575,"failed_gates":[],"timestamp_utc":"2026-07-03T10:32:22.777023+00:00"}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T10:32:24.549311+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_103224.json","duration_ms":507,"failed_gates":[],"timestamp_utc":"2026-07-03T10:32:24.552326+00:00"}

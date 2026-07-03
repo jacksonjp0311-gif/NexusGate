@@ -756,3 +756,35 @@ New compact command:
 ```
 
 This is still local development evidence only. It does not prove production interoperability.
+
+
+## v0.1.9 - Bridge Session Runner
+
+NEXUS GATE now has the first bounded local bridge session path:
+
+```text
+raw event
+  -> LocalDemoAdapter
+  -> StatePacket
+  -> NexusRouter
+  -> ReceptorManifest
+  -> CompatibilityDecision
+  -> BridgeSessionReport
+```
+
+New bridge law:
+
+```text
+No bridge session without adapter normalization.
+No bridge session without route decision.
+No bridge session without receptor compatibility.
+No bridge report without claim boundary.
+```
+
+New compact command:
+
+```powershell
+.\scripts\nexus.ps1 bridge
+```
+
+This remains local development evidence only. It proves the local bridge session mechanics, not production interoperability.

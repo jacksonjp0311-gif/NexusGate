@@ -23,6 +23,8 @@ This chart must be visible during rehydration.
 | `powershell_syntax_too_large` | installer/runtime | Long native PowerShell syntax creates parser fragility. | warning | Prefer compressed payload and compact command surface. | Always show. |
 | `packer_output_outside_root` | build/pack | Pack test writes to temp dir outside repo, but packer tries repo-relative path. | block | Use safe display path helper. | Always show. |
 | `update_chart_history_dropped` | docs/updates | New chart overwrites old lineage row still required by tests. | block | Restore historical rows; never delete lineage casually. | Always show. |
+| `statepacket_to_dict_missing` | bridge/session | Bridge runner assumed StatePacket had to_dict. | block | Use safe model/dataclass serialization helper. | Always show. |
+| `compact_marker_gate_dropped` | compact scripts | Compact rehydration script dropped literal FAILURE_MODE_CHART marker required by tests. | block | Restore explicit failure chart path. | Always show. |
 
 ## Laws
 
@@ -34,6 +36,7 @@ No repeated failure without chart update.
 No chart update without compiler validation.
 No pack report without safe output path handling.
 No update chart without preserved lineage rows.
+No bridge report without safe packet serialization.
 ```
 
 Boundary: this chart is a local development control. It does not prove safety, security, correctness, or production readiness.

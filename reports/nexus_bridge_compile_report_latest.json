@@ -1,0 +1,192 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.9-bridge-compiler",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T10:32:23.207977+00:00",
+  "checks": [
+    {
+      "check": "bridge_required_paths",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "bridge_readonly_engages",
+      "status": "pass",
+      "evidence": {
+        "system": "NEXUS GATE",
+        "version": "0.1.9b-bridge-session",
+        "session_id": "bridge-compile-readonly",
+        "generated_at_utc": "2026-07-03T10:32:23.207977+00:00",
+        "packet_id": "bridge-readonly",
+        "adapter_id": "local.demo",
+        "receptor_id": "local.demo.readonly",
+        "route_mode": "engage",
+        "route_reason": "minimal_scaffold_gate_passed",
+        "compatibility_mode": "compatible",
+        "compatibility_reason": "schema_action_authority_compatible",
+        "final_mode": "engage",
+        "final_reason": "route_and_receptor_compatible",
+        "packet": {
+          "packet_id": "bridge-readonly",
+          "source_framework": "LocalDemo",
+          "source_surface": "local_demo",
+          "schema_id": "NEXUS_STATE_PACKET",
+          "schema_version": "0.1.7",
+          "requested_action": "read_only_signal",
+          "payload": {
+            "event_type": "demo.message",
+            "message": "bridge compile readonly",
+            "raw": {
+              "session_id": "bridge-compile-readonly",
+              "packet_id": "bridge-readonly",
+              "event_type": "demo.message",
+              "message": "bridge compile readonly",
+              "requested_action": "read_only_signal"
+            }
+          },
+          "provenance_chain": [
+            "local.demo"
+          ],
+          "profile_hash": null,
+          "origin_hash": null,
+          "authority_scope": [],
+          "metadata": {
+            "adapter_id": "local.demo",
+            "adapter_version": "0.1.7"
+          }
+        },
+        "compatibility": {
+          "receptor_id": "local.demo.readonly",
+          "mode": "compatible",
+          "reason": "schema_action_authority_compatible",
+          "schema_supported": true,
+          "action_supported": true,
+          "authority_required": false,
+          "authority_present": false,
+          "claim_boundary": "CompatibilityDecision is local routing evidence only."
+        },
+        "claim_boundary": "BridgeSessionReport is local bridge evidence only. Not production interoperability."
+      }
+    },
+    {
+      "check": "bridge_tool_call_shadows_without_authority",
+      "status": "pass",
+      "evidence": {
+        "system": "NEXUS GATE",
+        "version": "0.1.9b-bridge-session",
+        "session_id": "bridge-compile-tool",
+        "generated_at_utc": "2026-07-03T10:32:23.207977+00:00",
+        "packet_id": "bridge-tool",
+        "adapter_id": "local.demo",
+        "receptor_id": "local.demo.tool_shadow",
+        "route_mode": "shadow",
+        "route_reason": "authority_unverified_shadow_only",
+        "compatibility_mode": "shadow",
+        "compatibility_reason": "authority_required_missing",
+        "final_mode": "shadow",
+        "final_reason": "route_or_compatibility_requires_shadow",
+        "packet": {
+          "packet_id": "bridge-tool",
+          "source_framework": "LocalDemo",
+          "source_surface": "local_demo",
+          "schema_id": "NEXUS_STATE_PACKET",
+          "schema_version": "0.1.7",
+          "requested_action": "tool_call",
+          "payload": {
+            "event_type": "demo.tool_request",
+            "message": "",
+            "raw": {
+              "session_id": "bridge-compile-tool",
+              "packet_id": "bridge-tool",
+              "event_type": "demo.tool_request",
+              "requested_action": "tool_call",
+              "authority_scope": []
+            }
+          },
+          "provenance_chain": [
+            "local.demo"
+          ],
+          "profile_hash": null,
+          "origin_hash": null,
+          "authority_scope": [],
+          "metadata": {
+            "adapter_id": "local.demo",
+            "adapter_version": "0.1.7"
+          }
+        },
+        "compatibility": {
+          "receptor_id": "local.demo.tool_shadow",
+          "mode": "shadow",
+          "reason": "authority_required_missing",
+          "schema_supported": true,
+          "action_supported": true,
+          "authority_required": true,
+          "authority_present": false,
+          "claim_boundary": "CompatibilityDecision is local routing evidence only."
+        },
+        "claim_boundary": "BridgeSessionReport is local bridge evidence only. Not production interoperability."
+      }
+    },
+    {
+      "check": "bridge_unsupported_schema_rejects",
+      "status": "pass",
+      "evidence": {
+        "system": "NEXUS GATE",
+        "version": "0.1.9b-bridge-session",
+        "session_id": "bridge-compile-bad-schema",
+        "generated_at_utc": "2026-07-03T10:32:23.207977+00:00",
+        "packet_id": "bridge-bad-schema",
+        "adapter_id": "local.demo",
+        "receptor_id": null,
+        "route_mode": "engage",
+        "route_reason": "minimal_scaffold_gate_passed",
+        "compatibility_mode": "reject",
+        "compatibility_reason": "no_receptor",
+        "final_mode": "reject",
+        "final_reason": "route_or_compatibility_rejected",
+        "packet": {
+          "packet_id": "bridge-bad-schema",
+          "source_framework": "LocalDemo",
+          "source_surface": "local_demo",
+          "schema_id": "UNKNOWN_SCHEMA",
+          "schema_version": "0.1.7",
+          "requested_action": "read_only_signal",
+          "payload": {
+            "event_type": "demo.message",
+            "message": "",
+            "raw": {
+              "session_id": "bridge-compile-bad-schema",
+              "packet_id": "bridge-bad-schema",
+              "event_type": "demo.message",
+              "schema_id": "UNKNOWN_SCHEMA",
+              "requested_action": "read_only_signal"
+            }
+          },
+          "provenance_chain": [
+            "local.demo"
+          ],
+          "profile_hash": null,
+          "origin_hash": null,
+          "authority_scope": [],
+          "metadata": {
+            "adapter_id": "local.demo",
+            "adapter_version": "0.1.7"
+          }
+        },
+        "compatibility": null,
+        "claim_boundary": "BridgeSessionReport is local bridge evidence only. Not production interoperability."
+      }
+    },
+    {
+      "check": "bridge_docs_markers",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    }
+  ],
+  "claim_boundary": "Bridge compile report is local development evidence only."
+}

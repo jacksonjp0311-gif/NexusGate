@@ -1,0 +1,27 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.9",
+  "kind": "bridge_session_index",
+  "current_runner": "nexus_gate.bridge.session.BridgeSessionRunner",
+  "flow": [
+    "raw_event",
+    "LocalDemoAdapter",
+    "StatePacket",
+    "NexusRouter",
+    "ReceptorManifest",
+    "CompatibilityDecision",
+    "BridgeSessionReport"
+  ],
+  "bridge_law": [
+    "No bridge session without adapter normalization.",
+    "No bridge session without route decision.",
+    "No bridge session without receptor compatibility.",
+    "No bridge report without claim boundary."
+  ],
+  "next_bridge_targets": [
+    "local_function_bridge",
+    "readonly_filesystem_bridge",
+    "browser_snapshot_bridge"
+  ],
+  "claim_boundary": "Bridge session index is local development evidence only."
+}

@@ -1,6 +1,6 @@
 # NEXUS GATE compact PowerShell command surface
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "once", "loop", "watch", "status", "promote")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "once", "loop", "watch", "status", "promote")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -23,6 +23,7 @@ function Show-Rehydration {
         ".\docs\goal\GOAL_LOCK.md",
         ".\docs\adapters\ADAPTER_REGISTRY.md",
         ".\docs\receptors\RECEPTOR_REGISTRY.md",
+        ".\docs\bridge\BRIDGE_SESSION_RUNNER.md",
         ".\docs\failure_modes\FAILURE_MODE_CHART.md",
         ".\docs\updates\UPDATE_CHART.md"
     )) {
@@ -49,12 +50,15 @@ function Show-Status {
         ".\state\goal_lock.v0.1.6.json",
         ".\state\adapter_registry_index.v0.1.7.json",
         ".\state\receptor_registry_index.v0.1.8.json",
-        ".\state\pack_index.v0.1.6.json",
+        ".\state\bridge_session_index.v0.1.9.json",
+        ".\reports\nexus_bridge_compile_report_latest.json",
         ".\reports\nexus_receptor_compile_report_latest.json",
         ".\reports\nexus_adapter_compile_report_latest.json",
         ".\reports\nexus_compile_report_latest.json",
         ".\dist\nexus_gate_pack_manifest_latest.json"
-    )) { if (Test-Path $path) { Get-Content $path -Raw } }
+    )) {
+        if (Test-Path $path) { Get-Content $path -Raw }
+    }
     $gitCmd = Get-Command git -ErrorAction SilentlyContinue
     if ($gitCmd) { git status --short }
 }
@@ -65,6 +69,8 @@ function Promote {
     if ($LASTEXITCODE -ne 0) { throw "Adapter compile failed. Promotion blocked." }
     python -m nexus_gate.receptors.compile --root . --json
     if ($LASTEXITCODE -ne 0) { throw "Receptor compile failed. Promotion blocked." }
+    python -m nexus_gate.bridge.compile --root . --json
+    if ($LASTEXITCODE -ne 0) { throw "Bridge compile failed. Promotion blocked." }
     python -m nexus_gate.build.packer --root . --out dist --json
     if ($LASTEXITCODE -ne 0) { throw "Pack failed. Promotion blocked." }
     $report = Get-Content .\reports\nexus_compile_report_latest.json -Raw | ConvertFrom-Json
@@ -73,7 +79,7 @@ function Promote {
     if ($gitCmd -and -not $NoCommit) {
         git add . | Out-Host
         $status = git status --porcelain
-        if ($status) { git commit -m "chore: promote NEXUS GATE adapter receptor packed pass" | Out-Host }
+        if ($status) { git commit -m "chore: promote NEXUS GATE bridge session packed pass" | Out-Host }
     }
     if ($gitCmd -and $Tag -ne "") { git tag $Tag | Out-Host }
     Write-Host "[OK] Promotion gate passed."
@@ -86,6 +92,7 @@ switch ($Command) {
     "pack" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_pack.ps1 }
     "adapters" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_adapter_compile.ps1 }
     "receptors" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_receptor_compile.ps1 }
+    "bridge" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_bridge_demo.ps1 }
     "once" { Run-Compiler; Write-Host "[OK] Once passed." }
     "loop" { Run-Loop -MaxCycles $Cycles -SleepSeconds $Interval }
     "watch" { Run-Loop -MaxCycles 1 -SleepSeconds $Interval -Forever }

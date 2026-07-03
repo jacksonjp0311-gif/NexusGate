@@ -17,7 +17,9 @@ This chart must be visible during rehydration.
 | v0.1.5 | Strict compiler + Cold Evidence | pass | Adds cold evidence contracts, wound routing, strict compiler gates. |
 | v0.1.6b | Compression Rescue + Lineage Restore | pass | Pack compiler and compressed bundle pass. |
 | v0.1.7 | Adapter Registry + LocalDemoAdapter | pass | Adds adapter registry, manifest compiler, and first demo adapter. |
-| v0.1.8 | Receptor Registry + Compatibility Compiler | current | Adds receptor manifests, receptor registry, compatibility decisions, and receptor compiler. |
+| v0.1.8 | Receptor Registry + Compatibility Compiler | pass | Adds receptor manifests, receptor registry, compatibility decisions, and receptor compiler. |
+| v0.1.9 | Bridge Session Runner | failed | StatePacket lacked to_dict and compact script dropped FAILURE_MODE_CHART marker. |
+| v0.1.9b | Bridge Session Rescue | current | Adds safe packet serialization and restores compact marker visibility. |
 
 ## Current Required Update Rule
 
