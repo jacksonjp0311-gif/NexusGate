@@ -1,0 +1,45 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.8",
+  "receptors": [
+    {
+      "receptor_id": "local.demo.readonly",
+      "owner_adapter_id": "local.demo",
+      "surface_type": "agent",
+      "accepted_schema_families": [
+        "NEXUS_STATE_PACKET"
+      ],
+      "allowed_actions": [
+        "read_only_signal"
+      ],
+      "requires_authority_for_actions": [],
+      "capability_bits": [
+        "accept_statepacket",
+        "compatibility_check",
+        "read_only"
+      ],
+      "claim_boundary": "Local demo readonly receptor is local compatibility evidence only."
+    },
+    {
+      "receptor_id": "local.demo.tool_shadow",
+      "owner_adapter_id": "local.demo",
+      "surface_type": "tool",
+      "accepted_schema_families": [
+        "NEXUS_STATE_PACKET"
+      ],
+      "allowed_actions": [
+        "tool_call"
+      ],
+      "requires_authority_for_actions": [
+        "tool_call"
+      ],
+      "capability_bits": [
+        "accept_statepacket",
+        "compatibility_check",
+        "requires_authority"
+      ],
+      "claim_boundary": "Local demo tool receptor shadows without authority."
+    }
+  ],
+  "claim_boundary": "Local demo receptor registry does not prove production interoperability."
+}

@@ -119,3 +119,26 @@ No manifest, no registration.
 No normalized StatePacket, no route.
 No receptor export, no transfer target.
 ```
+
+
+## Receptor Registry Contract
+
+Before adding a transfer target, the agent must add or inspect:
+
+```text
+docs/receptors/RECEPTOR_REGISTRY.md
+schemas/receptor_manifest.v0.1.8.schema.json
+registry/receptors.local_demo.v0.1.8.json
+state/receptor_registry_index.v0.1.8.json
+nexus_gate/receptors/registry.py
+nexus_gate/receptors/compatibility.py
+```
+
+Hard rules:
+
+```text
+No receptor, no transfer target.
+No compatibility decision, no engagement.
+No unsupported schema, no receptor route.
+No unsupported action, no receptor route.
+```

@@ -4,3 +4,4 @@
 {"event":"compression_pack_goal_lock_installed","version":"0.1.6","timestamp_utc":"2026-07-03T02:59:30.6895315Z","hard_law":"No growing code surface without a pack report."}
 {"event":"compression_rescue_lineage_restore","version":"0.1.6b","timestamp_utc":"2026-07-03T03:06:08.4226867Z","fixes":["packer output outside repo","update chart lineage dropped"]}
 {"event":"adapter_registry_local_demo_installed","version":"0.1.7","timestamp_utc":"2026-07-03T10:19:14.2634004Z","hard_law":"No adapter, no bridge."}
+{"event":"receptor_registry_compatibility_installed","version":"0.1.8","timestamp_utc":"2026-07-03T10:24:33.4903303Z","hard_law":"No receptor, no transfer target."}

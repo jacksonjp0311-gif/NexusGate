@@ -1,0 +1,22 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.8",
+  "kind": "receptor_registry_index",
+  "current_receptors": [
+    "local.demo.readonly",
+    "local.demo.tool_shadow"
+  ],
+  "receptor_law": [
+    "No receptor, no transfer target.",
+    "No compatibility decision, no engagement.",
+    "No unsupported schema, no receptor route.",
+    "No unsupported action, no receptor route."
+  ],
+  "next_receptor_targets": [
+    "local_function.readonly",
+    "browser.snapshot_reader",
+    "filesystem.readonly",
+    "mcp.tool_proxy"
+  ],
+  "claim_boundary": "Receptor registry index is local development evidence only."
+}

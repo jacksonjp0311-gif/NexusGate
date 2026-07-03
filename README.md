@@ -730,3 +730,29 @@ adapter registry -> adapter manifest -> LocalDemoAdapter -> StatePacket -> route
 ```
 
 This version is still local development evidence only. It does not prove production interoperability.
+
+
+## v0.1.8 - Receptor Registry + Compatibility Compiler
+
+NEXUS GATE now has both sides of the first bridge lane:
+
+```text
+Adapter -> StatePacket -> Receptor -> CompatibilityDecision
+```
+
+New receptor law:
+
+```text
+No receptor, no transfer target.
+No compatibility decision, no engagement.
+No unsupported schema, no receptor route.
+No unsupported action, no receptor route.
+```
+
+New compact command:
+
+```powershell
+.\scripts\nexus.ps1 receptors
+```
+
+This is still local development evidence only. It does not prove production interoperability.

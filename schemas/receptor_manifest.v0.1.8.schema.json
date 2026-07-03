@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-gate.local/schemas/receptor_manifest.v0.1.8.json",
+  "title": "NEXUS GATE ReceptorManifest v0.1.8",
+  "type": "object",
+  "required": [
+    "receptor_id",
+    "owner_adapter_id",
+    "surface_type",
+    "accepted_schema_families",
+    "allowed_actions",
+    "requires_authority_for_actions",
+    "capability_bits"
+  ],
+  "properties": {
+    "receptor_id": {
+      "type": "string"
+    },
+    "owner_adapter_id": {
+      "type": "string"
+    },
+    "surface_type": {
+      "type": "string"
+    },
+    "accepted_schema_families": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "allowed_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires_authority_for_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "capability_bits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "claim_boundary": {
+      "type": "string"
+    }
+  }
+}
