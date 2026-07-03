@@ -1,0 +1,2 @@
+﻿{"event":"rehydration_failure_update_charting_installed","version":"0.1.4b","timestamp_utc":"2026-07-03T02:44:56.6607155Z","hard_law":"No rehydration without failure/update visibility."}
+{"event":"compact_runtime_surface_installed","version":"0.1.4c","timestamp_utc":"2026-07-03T02:49:47.5511251Z","hard_law":"One command surface. Same gates. Less syntax."}

@@ -1,0 +1,7 @@
+{
+  "rehydration_boot": "docs/context/REHYDRATION_BOOT.md",
+  "rehydration_manifest": "docs/context/rehydration_manifest.v0.1.4.json",
+  "failure_chart": "docs/failure_modes/FAILURE_MODE_CHART.md",
+  "update_chart": "docs/updates/UPDATE_CHART.md",
+  "latest_compiler_report": "reports/nexus_compile_report_latest.json"
+}

@@ -1,0 +1,19 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.4c",
+  "compact_commands": {
+    "powershell": "scripts/nexus.ps1",
+    "bash": "scripts/nexus.sh"
+  },
+  "commands": [
+    "rehydrate",
+    "compile",
+    "once",
+    "loop",
+    "watch",
+    "status",
+    "promote"
+  ],
+  "hard_law": "One command surface. Same gates. Less syntax.",
+  "claim_boundary": "Compact commands improve usability only. Not a safety proof."
+}

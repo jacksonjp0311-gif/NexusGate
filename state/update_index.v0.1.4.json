@@ -1,0 +1,59 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.4c",
+  "kind": "update_index",
+  "rehydration_required": true,
+  "must_read_on_rehydration": [
+    "docs/updates/UPDATE_CHART.md",
+    "state/update_index.v0.1.4.json",
+    "ledger/nexus_gate_update_ledger.v0.1.4.jsonl"
+  ],
+  "updates": [
+    {
+      "version": "0.1.0",
+      "status": "prior",
+      "summary": "local scaffold"
+    },
+    {
+      "version": "0.1.1",
+      "status": "partial",
+      "summary": "gated compiler with freeze bug"
+    },
+    {
+      "version": "0.1.1b",
+      "status": "pass",
+      "summary": "compiler rescue patch"
+    },
+    {
+      "version": "0.1.2b",
+      "status": "failed",
+      "summary": "dual-shell gate mismatch"
+    },
+    {
+      "version": "0.1.2c",
+      "status": "superseded",
+      "summary": "direct compiler-call correction"
+    },
+    {
+      "version": "0.1.3d",
+      "status": "failed",
+      "summary": "README dual-shell exact rule missing"
+    },
+    {
+      "version": "0.1.4",
+      "status": "wrapper_failed",
+      "summary": "indented here-string parser issue"
+    },
+    {
+      "version": "0.1.4b",
+      "status": "pass_core_bash_env_failed",
+      "summary": "Bash validation failed because WSL had no distro"
+    },
+    {
+      "version": "0.1.4c",
+      "status": "current",
+      "summary": "compact runtime surface and safe Bash validation detection"
+    }
+  ],
+  "claim_boundary": "Local update index only. Not production validation."
+}

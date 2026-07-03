@@ -1,0 +1,25 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.4b",
+  "kind": "rehydration_manifest",
+  "agent_must_read_before_patch": [
+    "README.md",
+    "docs/context/REHYDRATION_BOOT.md",
+    "docs/context/rehydration_manifest.v0.1.4.json",
+    "docs/failure_modes/FAILURE_MODE_CHART.md",
+    "docs/updates/UPDATE_CHART.md",
+    "state/failure_mode_index.v0.1.4.json",
+    "state/update_index.v0.1.4.json",
+    "reports/nexus_compile_report_latest.json",
+    "rcc/nexus/route_map.json",
+    "TARGET_FOLDER/README.md"
+  ],
+  "agent_visible_surfaces": {
+    "failures": "docs/failure_modes/FAILURE_MODE_CHART.md",
+    "updates": "docs/updates/UPDATE_CHART.md",
+    "latest_report": "reports/nexus_compile_report_latest.json",
+    "route_map": "rcc/nexus/route_map.json"
+  },
+  "hard_law": "No rehydration without failure/update visibility.",
+  "claim_boundary": "Rehydration manifest improves agent orientation only. It does not prove correctness."
+}

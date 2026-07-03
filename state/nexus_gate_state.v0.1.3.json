@@ -1,0 +1,7 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.3",
+  "rhp_nexus_ai_shell": "installed",
+  "current_maturity": "scaffold",
+  "claim_boundary": "local development gate only"
+}

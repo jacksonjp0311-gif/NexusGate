@@ -1,1 +1,1 @@
-"""Authority and routing policy modules."""
+"""Policy modules for NEXUS GATE."""

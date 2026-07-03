@@ -1,4 +1,3 @@
-# Run NEXUS GATE gated compiler continuously.
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root

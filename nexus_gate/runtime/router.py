@@ -19,11 +19,7 @@ class RouteDecision:
 
 
 class NexusRouter:
-    """Low-latency hot-path router.
-
-    Heavy scoring, replay, wound routing, demotion, and recalibration belong in
-    the cold evidence plane. The hot path should stay deterministic and bounded.
-    """
+    """Low-latency hot-path router."""
 
     def __init__(self, registry: dict[str, Any] | None = None) -> None:
         self.registry = registry or {}

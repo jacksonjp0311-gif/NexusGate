@@ -27,15 +27,7 @@ class FrameworkAdapter(ABC):
 
     @abstractmethod
     def export_receptors(self) -> list[dict[str, Any]]:
-        """Return ToolReceptor-like manifests exposed by this adapter."""
+        """Return receptor manifests exposed by this adapter."""
 
     def supports_shadow(self) -> bool:
         return False
-
-    def emit_disengagement_receipt(self, packet: StatePacket, decision: dict[str, Any]) -> dict[str, Any]:
-        return {
-            "packet_id": packet.packet_id,
-            "adapter_id": self.adapter_id,
-            "mode": decision.get("mode"),
-            "status": "disengaged",
-        }

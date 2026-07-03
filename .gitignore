@@ -6,9 +6,3 @@ __pycache__/
 Thumbs.db
 logs/*.log
 reports/tmp/
-spool/hot/*
-spool/cold/*
-spool/quarantine/*
-!spool/hot/.gitkeep
-!spool/cold/.gitkeep
-!spool/quarantine/.gitkeep

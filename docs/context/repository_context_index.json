@@ -1,0 +1,24 @@
+{
+  "repository": "nexus-gate",
+  "version": "0.1.3",
+  "purpose": "Governed agentic transfer layer and local development gate.",
+  "read_order": [
+    "README.md",
+    "docs/context/repository_context_index.json",
+    "docs/context/rcc_nexus_index.json",
+    "docs/context/validation_surface.md",
+    "rcc/nexus/route_map.json"
+  ],
+  "primary_surfaces": [
+    "nexus_gate",
+    "docs",
+    "rcc/nexus",
+    "scripts",
+    "tests",
+    "state",
+    "ledger",
+    "reports",
+    "logs"
+  ],
+  "claim_boundary": "Repository context improves orientation; it does not prove correctness or safety."
+}

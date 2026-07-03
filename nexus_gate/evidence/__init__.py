@@ -1,1 +1,1 @@
-"""Evidence, ledger, replay, wounds, and demotion modules."""
+"""Evidence modules for NEXUS GATE."""

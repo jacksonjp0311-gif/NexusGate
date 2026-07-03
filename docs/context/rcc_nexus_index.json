@@ -1,0 +1,35 @@
+{
+  "nci_mode": "self",
+  "nci_target": 1.0,
+  "sphere": {
+    "center": "runtime laws and non-claim locks",
+    "inner": "contracts",
+    "middle": "processes",
+    "outer": "evidence"
+  },
+  "meridians": [
+    "origin",
+    "authority",
+    "schema",
+    "runtime",
+    "compiler",
+    "evidence",
+    "failure",
+    "agent",
+    "release",
+    "documentation"
+  ],
+  "sectors": [
+    "core",
+    "adapters",
+    "runtime",
+    "compiler",
+    "evidence",
+    "policies",
+    "schemas",
+    "scripts",
+    "tests",
+    "docs",
+    "release"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-gate.local/schemas/state_packet.v0.1.3.json",
+  "title": "NEXUS GATE StatePacket v0.1.3",
+  "type": "object",
+  "required": [
+    "packet_id",
+    "source_framework",
+    "source_surface",
+    "schema_id",
+    "schema_version",
+    "requested_action",
+    "payload"
+  ],
+  "properties": {
+    "packet_id": {
+      "type": "string"
+    },
+    "source_framework": {
+      "type": "string"
+    },
+    "source_surface": {
+      "type": "string"
+    },
+    "schema_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "requested_action": {
+      "type": "string"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "authority_scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

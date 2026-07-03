@@ -17,11 +17,7 @@ RouteIntent = Literal[
 
 @dataclass(frozen=True)
 class StatePacket:
-    """Canonical packet passed through NEXUS GATE.
-
-    The router should never process raw framework events directly.
-    Every framework event must be normalized through a FrameworkAdapter first.
-    """
+    """Canonical packet passed through NEXUS GATE."""
 
     packet_id: str
     source_framework: str

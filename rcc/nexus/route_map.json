@@ -1,0 +1,11 @@
+{
+  "root": "README.md",
+  "human": "README.md#part-i---human-readme",
+  "rhp_nexus": "README.md#part-ii---rhp-nexus-readme",
+  "ai": "README.md#part-iii---ai-agent-readme",
+  "context": "docs/context/repository_context_index.json",
+  "nexus_index": "docs/context/rcc_nexus_index.json",
+  "validation": "docs/context/validation_surface.md",
+  "failure_modes": "docs/failure_modes/FAILURE_MODES.md",
+  "compiler": "nexus_gate/compiler/compiler.py"
+}

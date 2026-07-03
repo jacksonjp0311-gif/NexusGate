@@ -1,0 +1,79 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.1.4b",
+  "kind": "failure_mode_index",
+  "rehydration_required": true,
+  "must_read_on_rehydration": [
+    "docs/failure_modes/FAILURE_MODE_CHART.md",
+    "state/failure_mode_index.v0.1.4.json",
+    "reports/nexus_compile_report_latest.json"
+  ],
+  "failure_modes": [
+    {
+      "id": "schema_missing",
+      "severity": "block",
+      "response": "reject route"
+    },
+    {
+      "id": "authority_unverified",
+      "severity": "block",
+      "response": "shadow or reject"
+    },
+    {
+      "id": "origin_dehydrated",
+      "severity": "critical",
+      "response": "rehydrate before mutation"
+    },
+    {
+      "id": "compiler_failed",
+      "severity": "block",
+      "response": "no commit or promotion"
+    },
+    {
+      "id": "unit_test_failed",
+      "severity": "block",
+      "response": "patch smallest surface and rerun"
+    },
+    {
+      "id": "mini_readme_missing",
+      "severity": "warning",
+      "response": "repair mini README"
+    },
+    {
+      "id": "ledger_unavailable",
+      "severity": "critical",
+      "response": "block compounding"
+    },
+    {
+      "id": "direct_compiler_call_missing",
+      "severity": "block",
+      "response": "repair script"
+    },
+    {
+      "id": "claim_boundary_missing",
+      "severity": "warning",
+      "response": "add boundary"
+    },
+    {
+      "id": "shadow_failure_unrouted",
+      "severity": "block",
+      "response": "create wound route"
+    },
+    {
+      "id": "replay_missing",
+      "severity": "block",
+      "response": "block re-engagement"
+    },
+    {
+      "id": "update_chart_stale",
+      "severity": "warning",
+      "response": "update chart and ledger"
+    },
+    {
+      "id": "readme_dual_shell_rule_missing",
+      "severity": "block",
+      "response": "restore exact README rule"
+    }
+  ],
+  "claim_boundary": "Local development failure index only. Not a safety proof."
+}
