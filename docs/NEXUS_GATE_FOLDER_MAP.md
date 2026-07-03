@@ -1,0 +1,43 @@
+# NEXUS GATE Folder Map
+
+```text
+nexus-gate/
+  README.md
+  pyproject.toml
+  registry/
+    nexus_gate_manifest.v0.1.0.json
+  state/
+    nexus_gate_state.v0.1.0.json
+  ledger/
+    nexus_gate_ledger.v0.1.0.jsonl
+  nexus_gate/
+    __init__.py
+    cli.py
+    core/
+      packets.py
+    adapters/
+      base.py
+    runtime/
+      modes.py
+      router.py
+    evidence/
+      ledger.py
+    policies/
+      authority.py
+    schemas/
+      state_packet.v0.1.0.schema.json
+  docs/
+    architecture/
+    adapters/
+    authority/
+    evidence/
+    latency/
+  schemas/
+  examples/
+  tests/
+  scripts/
+  spool/
+    hot/
+    cold/
+    quarantine/
+```

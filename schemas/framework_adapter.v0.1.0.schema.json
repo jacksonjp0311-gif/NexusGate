@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-gate.local/schemas/framework_adapter.v0.1.0.json",
+  "title": "NEXUS GATE FrameworkAdapter Manifest v0.1.0",
+  "type": "object",
+  "required": [
+    "adapter_id",
+    "framework_name",
+    "capabilities",
+    "supported_modes",
+    "authority_contract"
+  ],
+  "properties": {
+    "adapter_id": { "type": "string" },
+    "framework_name": { "type": "string" },
+    "framework_version": { "type": ["string", "null"] },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "supported_modes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["reject", "abstain", "shadow", "engage", "defer", "escalate"]
+      }
+    },
+    "authority_contract": {
+      "type": "object",
+      "properties": {
+        "allowed_actions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "denied_actions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

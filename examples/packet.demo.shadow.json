@@ -1,0 +1,19 @@
+{
+  "packet_id": "packet-demo-001",
+  "source_framework": "local_demo",
+  "source_surface": "agent_cli",
+  "schema_id": "NEXUS_STATE_PACKET",
+  "schema_version": "0.1.0",
+  "requested_action": "tool_call",
+  "payload": {
+    "intent": "demo route decision",
+    "message": "This packet should shadow because tool_call lacks authority_scope."
+  },
+  "provenance_chain": ["origin-demo"],
+  "profile_hash": "profile-demo",
+  "origin_hash": "origin-demo",
+  "authority_scope": [],
+  "metadata": {
+    "demo": true
+  }
+}

@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.DS_Store
+Thumbs.db
+logs/*.log
+reports/tmp/
+spool/hot/*
+spool/cold/*
+spool/quarantine/*
+!spool/hot/.gitkeep
+!spool/cold/.gitkeep
+!spool/quarantine/.gitkeep

@@ -1,0 +1,12 @@
+{
+    "system":  "NEXUS GATE",
+    "version":  "0.1.0",
+    "root":  "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+    "current_maturity":  "registered",
+    "hot_plane":  "scaffolded",
+    "cold_plane":  "scaffolded",
+    "adapter_plane":  "scaffolded",
+    "authority_plane":  "scaffolded",
+    "evidence_ledger":  "initialized",
+    "created_at_utc":  "2026-07-03T01:55:52.1538394Z"
+}

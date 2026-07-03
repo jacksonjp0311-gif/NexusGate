@@ -1,0 +1,15 @@
+[project]
+name = "nexus-gate"
+version = "0.1.0"
+description = "Governed Agentic Transfer Layer for Modular AI Frameworks"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "James Paul Jackson" }
+]
+
+[project.scripts]
+nexus = "nexus_gate.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["nexus_gate*"]
