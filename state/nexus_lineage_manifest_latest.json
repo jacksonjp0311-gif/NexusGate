@@ -1,0 +1,69 @@
+{
+  "system": "NEXUS GATE",
+  "system_version": "0.3.7",
+  "active_phase": "Reflective Intelligence Gateway",
+  "parent_commit": "81e7e227521d2f952c742047699b0b8029563a7d",
+  "current_commit": "752c0d6430d52201986733277780d3c0ea8353c5",
+  "module_versions": {
+    "core": "0.2.x",
+    "feedback": "0.2.3",
+    "self_healing": "0.2.2b",
+    "interconnect": "0.2.8",
+    "reflection": "0.3.7"
+  },
+  "interface_versions": {
+    "powershell_cli": "0.3.7",
+    "powershell_tui": "0.3.7",
+    "electron_hud": "0.3.6",
+    "chatgpt_handoff": "0.3.7",
+    "codex_handoff": "0.3.7",
+    "future_browser_dashboard": "scaffold",
+    "future_local_agent": "blocked"
+  },
+  "hydration_protocol_version": "RHP-NEXUS-local",
+  "feedback_protocol_version": "0.2.3",
+  "electron_runtime_version": "0.3.6",
+  "tui_surface_version": "0.3.7",
+  "reflective_loop_version": "0.3.7",
+  "last_evolve_report": "reports/human_surface/latest",
+  "last_feedback_report": "reports/nexus_feedback_report_latest.json",
+  "last_self_healing_report": "reports/nexus_self_healing_report_latest.json",
+  "last_electron_preflight_report": "reports/nexus_electron_preflight_report_latest.json",
+  "last_electron_smoke_report": "reports/nexus_electron_smoke_report_latest.json",
+  "latest_reflective_loop_report": "reports/nexus_reflective_loop_report_latest.json",
+  "what_changed": [
+    "Reflective intelligence loop doctrine added",
+    "Interface adapter contract added",
+    "Lineage manifest added",
+    "Reflection compiler gate added"
+  ],
+  "what_passed": [
+    "pending next evolve"
+  ],
+  "what_failed": [],
+  "allowed_next_phases": [
+    "governed Electron packaging gate",
+    "browser dashboard read-only prototype",
+    "local agent contract draft"
+  ],
+  "blocked_promotions": [
+    "production_ready",
+    "autonomous_authority",
+    "ungated_local_agent_mutation",
+    "external_api_write",
+    "secret_access"
+  ],
+  "scaffolded_only": [
+    "future_browser_dashboard",
+    "future_local_agent"
+  ],
+  "production_ready": false,
+  "claim_boundaries": [
+    "Local development evidence only",
+    "No correctness proof",
+    "No security proof",
+    "No safety proof",
+    "No production readiness claim",
+    "No autonomous authority"
+  ]
+}

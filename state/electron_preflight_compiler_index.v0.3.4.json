@@ -15,13 +15,19 @@
     "electron/package.json",
     "electron/package-lock.json",
     "docs/ui/ELECTRON_HUD_RUNTIME.md",
-    "state/electron_hud_runtime_index.v0.3.6.json"
+    "state/electron_hud_runtime_index.v0.3.6.json",
+    "docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md",
+    "docs/interfaces/INTERFACE_ADAPTER_CONTRACT.md",
+    "docs/versioning/NEXUS_LINEAGE_PROTOCOL.md",
+    "state/interface_adapter_contract_index.v0.3.7.json",
+    "state/nexus_lineage_manifest_latest.json"
   ],
   "checks": [
     "electron_required_paths",
     "electron_allowlist_matches_contract",
     "electron_blocked_actions_complete",
     "electron_required_surface_pair",
+    "electron_reflective_surfaces_declared",
     "electron_main_security_markers",
     "electron_preload_api_limited",
     "electron_renderer_uses_preload_bridge",

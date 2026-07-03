@@ -6,6 +6,7 @@ set -euo pipefail
 # strict
 # tui
 # ui
+# reflect
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 COMMAND="${1:-rehydrate}"
@@ -24,6 +25,7 @@ case "$COMMAND" in
   interface) python -m nexus_gate.feedback.interface_compile --root . --json ;;
   electron-env) python -m nexus_gate.ui.electron_environment_compile --root . --json ;;
   electron-preflight) python -m nexus_gate.ui.electron_preflight_compile --root . --json ;;
+  reflect) python -m nexus_gate.reflection.compile --root . --json ;;
   tui) echo "PowerShell TUI is Windows-only. Run: .\\scripts\\nexus.ps1 tui" ;;
   ui) echo "Compatibility UI alias is Windows-only. Run: .\\scripts\\nexus.ps1 ui" ;;
   evolve)
@@ -41,6 +43,7 @@ case "$COMMAND" in
     python -m nexus_gate.feedback.interface_compile --root . --json
     python -m nexus_gate.ui.electron_environment_compile --root . --json
     python -m nexus_gate.ui.electron_preflight_compile --root . --json
+    python -m nexus_gate.reflection.compile --root . --json
     python -m nexus_gate.build.packer --root . --out dist --json
     ;;
   pack) python -m nexus_gate.build.packer --root . --out dist --json ;;

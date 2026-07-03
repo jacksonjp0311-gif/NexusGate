@@ -26,7 +26,8 @@ $Global:Lanes = @(
     [ordered]@{ key="6"; name="compact";      tab="EVIDENCE";    desc="Compile evidence pressure/compaction manifest" },
     [ordered]@{ key="7"; name="interconnect"; tab="GRAPH";       desc="Compile governed transfer graph" },
     [ordered]@{ key="8"; name="runtime";      tab="RUNTIME";     desc="Run bounded runtime compiler" },
-    [ordered]@{ key="9"; name="pack";         tab="RELEASE";     desc="Compile pack manifest/bundle" }
+    [ordered]@{ key="9"; name="pack";         tab="RELEASE";     desc="Compile pack manifest/bundle" },
+    [ordered]@{ key="10"; name="reflect";     tab="REFLECT";     desc="Compile reflective intelligence loop and lineage evidence" }
 )
 
 function Add-TranscriptLine {
@@ -128,6 +129,7 @@ function Header {
     Write-Host '| [7] interconnect              |                                                    | AI PACKAGE: context/log READY    |' -ForegroundColor Gray
     Write-Host '| [8] runtime                   |                                                    | /copy exports handoff            |' -ForegroundColor Gray
     Write-Host '| [9] pack                      |                                                    | /snapshot opens HUD bridge       |' -ForegroundColor Gray
+    Write-Host '| [10] reflect                  |                                                    | /lineage shows version manifest  |' -ForegroundColor Gray
     Write-HudRule 118
     Write-Host '| HUMAN FEEDBACK | AI FEEDBACK | DEBUGGING | SELF-HEALING | REFLECTION | INTERCONNECT | GOVERNANCE: strict audit enabled |' -ForegroundColor DarkCyan
     Write-HudRule 118
@@ -154,6 +156,8 @@ function Show-Menu {
     Write-Host '    /electron         Show Electron port contract' -ForegroundColor Gray
     Write-Host '    /graph            Show governed interconnect console' -ForegroundColor Gray
     Write-Host '    /domains          Show domain interconnection routes' -ForegroundColor Gray
+    Write-Host '    /reflect          Compile/show reflective intelligence loop report' -ForegroundColor Gray
+    Write-Host '    /lineage          Show lineage/version manifest' -ForegroundColor Gray
     Write-Host '    /open-log         Open docs/feedback/FEEDBACK_LOG.md' -ForegroundColor Gray
     Write-Host '    /open-context     Open state/ai_feedback_context_latest.json' -ForegroundColor Gray
     Write-Host '    /menu             Redraw this menu' -ForegroundColor Gray
@@ -347,11 +351,15 @@ function Get-AIHandoffText {
     $lines.Add("  .\scripts\nexus.ps1 ui")
     $lines.Add("  .\scripts\nexus.ps1 evolve")
     $lines.Add("  .\scripts\nexus.ps1 heal")
+    $lines.Add("  .\scripts\nexus.ps1 reflect")
     $lines.Add("Read surfaces:")
     $lines.Add("  state/ai_feedback_context_latest.json")
     $lines.Add("  docs/feedback/FEEDBACK_LOG.md")
     $lines.Add("  reports/nexus_feedback_interface_report_latest.json")
     $lines.Add("  reports/nexus_self_healing_report_latest.json")
+    $lines.Add("  reports/nexus_reflective_loop_report_latest.json")
+    $lines.Add("  state/nexus_lineage_manifest_latest.json")
+    $lines.Add("  state/interface_adapter_contract_index.v0.3.7.json")
     $lines.Add("  reports/tui/nexus_tui_ai_handoff_latest.txt")
     $lines.Add("  reports/tui/nexus_tui_snapshot_latest.html")
     $lines.Add("")
@@ -366,6 +374,16 @@ function Get-AIHandoffText {
     if (Test-Path $healPath) {
         $lines.Add("--- nexus_self_healing_report_latest.json ---")
         $lines.Add((Get-Content $healPath -Raw))
+    }
+    $reflectPath = Join-Path $Root "reports\nexus_reflective_loop_report_latest.json"
+    if (Test-Path $reflectPath) {
+        $lines.Add("--- nexus_reflective_loop_report_latest.json ---")
+        $lines.Add((Get-Content $reflectPath -Raw))
+    }
+    $lineagePath = Join-Path $Root "state\nexus_lineage_manifest_latest.json"
+    if (Test-Path $lineagePath) {
+        $lines.Add("--- nexus_lineage_manifest_latest.json ---")
+        $lines.Add((Get-Content $lineagePath -Raw))
     }
     $lines.Add("===== NEXUS AI HANDOFF END =====")
     return ($lines -join [Environment]::NewLine)
@@ -650,11 +668,72 @@ function Show-ElectronContract {
     Write-Host "  docs/feedback/operator_packets/*.json"
     Write-Host "  reports/nexus_feedback_interface_report_latest.json"
     Write-Host "  reports/nexus_self_healing_report_latest.json"
+    Write-Host "  reports/nexus_reflective_loop_report_latest.json"
+    Write-Host "  state/nexus_lineage_manifest_latest.json"
+    Write-Host "  state/interface_adapter_contract_index.v0.3.7.json"
     Write-Host "  reports/tui/nexus_tui_ai_handoff_latest.txt"
     Write-Host "  reports/tui/nexus_tui_snapshot_latest.html"
     Write-Host "  reports/tui/nexus_tui_surface_latest.json"
     Write-Host "Blocked: arbitrary shell commands, external API writes, secret access, self-authorization, memory promotion without evidence."
     Write-Host "===== NEXUS ELECTRON PORT CONTRACT END =====" -ForegroundColor Cyan
+}
+
+function Show-ReflectiveLoop {
+    Run-NexusLane "reflect"
+    $path = Join-Path $Root "reports\nexus_reflective_loop_report_latest.json"
+    if (-not (Test-Path $path)) {
+        Say "Reflective loop report missing after reflect lane." "WARN"
+        return
+    }
+    try {
+        $report = Get-Content $path -Raw | ConvertFrom-Json
+    } catch {
+        Say "Unable to read reflective loop report: $($_.Exception.Message)" "FAIL"
+        return
+    }
+    Write-Host ""
+    Write-Host "===== NEXUS REFLECTIVE INTELLIGENCE LOOP =====" -ForegroundColor Cyan
+    Write-Host ("Status: {0} | Version: {1}" -f $report.status, $report.version) -ForegroundColor Green
+    Write-Host ("Allowed interfaces: {0}" -f ($report.allowed_interfaces -join ", ")) -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "Checks" -ForegroundColor White
+    foreach ($check in $report.checks) {
+        $color = "Green"
+        if ($check.status -eq "warn") { $color = "Yellow" }
+        if ($check.status -eq "fail") { $color = "Red" }
+        Write-Host ("  {0,-38} {1}" -f $check.check, $check.status) -ForegroundColor $color
+    }
+    Write-Host ""
+    Write-Host ("Next: {0}" -f $report.next_action) -ForegroundColor Yellow
+    Write-Host "Boundary: reflective intelligence is permitted; autonomous authority is not." -ForegroundColor Yellow
+}
+
+function Show-LineageManifest {
+    $path = Join-Path $Root "state\nexus_lineage_manifest_latest.json"
+    if (-not (Test-Path $path)) {
+        Say "Lineage manifest missing. Run /reflect or /run reflect." "WARN"
+        return
+    }
+    try {
+        $manifest = Get-Content $path -Raw | ConvertFrom-Json
+    } catch {
+        Say "Unable to read lineage manifest: $($_.Exception.Message)" "FAIL"
+        return
+    }
+    Write-Host ""
+    Write-Host "===== NEXUS LINEAGE MANIFEST =====" -ForegroundColor Cyan
+    Write-Host ("System version: {0}" -f $manifest.system_version) -ForegroundColor Green
+    Write-Host ("Active phase: {0}" -f $manifest.active_phase) -ForegroundColor Gray
+    Write-Host ("Current commit: {0}" -f $manifest.current_commit) -ForegroundColor Gray
+    Write-Host ("Reflective loop: {0}" -f $manifest.reflective_loop_version) -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "Allowed next phases" -ForegroundColor White
+    foreach ($phase in $manifest.allowed_next_phases) { Write-Host "  $phase" -ForegroundColor Gray }
+    Write-Host ""
+    Write-Host "Blocked promotions" -ForegroundColor White
+    foreach ($blocked in $manifest.blocked_promotions) { Write-Host "  $blocked" -ForegroundColor Yellow }
+    Write-Host ""
+    Write-Host "Boundary: lineage is orientation evidence, not production readiness." -ForegroundColor Yellow
 }
 
 function Show-InterconnectConsole {
@@ -791,6 +870,8 @@ function Handle-Input {
     if ($line -eq "/electron") { Show-ElectronContract; return $true }
     if ($line -eq "/graph" -or $line -eq "/interconnect") { Show-InterconnectConsole; return $true }
     if ($line -eq "/domains") { Show-DomainRoutes; return $true }
+    if ($line -eq "/reflect") { Show-ReflectiveLoop; return $true }
+    if ($line -eq "/lineage") { Show-LineageManifest; return $true }
     if ($line -eq "/open-log") { Open-PathIfExists "docs\feedback\FEEDBACK_LOG.md"; return $true }
     if ($line -eq "/open-context") { Open-PathIfExists "state\ai_feedback_context_latest.json"; return $true }
 

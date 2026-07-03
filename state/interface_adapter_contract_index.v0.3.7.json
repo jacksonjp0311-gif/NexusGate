@@ -1,0 +1,264 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.3.7",
+  "kind": "interface_adapter_contract_index",
+  "authority_levels": [
+    "read_only",
+    "feedback_write_only",
+    "operation_packet_write",
+    "allowlisted_lane_request",
+    "human_authorized_patch",
+    "blocked"
+  ],
+  "interfaces": [
+    {
+      "interface_id": "powershell_cli",
+      "surface_type": "execution_surface",
+      "read_surfaces": [
+        "reports/*_latest.json",
+        "state/*_latest.json"
+      ],
+      "write_surfaces": [
+        "reports/*_latest.json",
+        "dist/nexus_gate_pack_manifest_latest.json",
+        "ledger/nexus_gate_ledger.v0.1.0.jsonl"
+      ],
+      "allowed_commands": [
+        "evolve",
+        "feedback",
+        "heal",
+        "interface",
+        "compact",
+        "interconnect",
+        "runtime",
+        "pack",
+        "status",
+        "electron-env",
+        "electron-preflight",
+        "reflect"
+      ],
+      "blocked_actions": [
+        "self_authorize",
+        "arbitrary_shell_commands",
+        "bypass_evolve",
+        "external_api_write",
+        "secret_access",
+        "memory_promotion_without_evidence"
+      ],
+      "authority_level": "allowlisted_lane_request",
+      "handoff_format": "PowerShell command output plus JSON reports",
+      "reflection_format": "human_surface logs and latest reports",
+      "required_gates": [
+        ".\\scripts\\nexus.ps1 evolve"
+      ],
+      "claim_boundary": "PowerShell CLI executes allowlisted NEXUS lanes only. It does not authorize autonomous mutation."
+    },
+    {
+      "interface_id": "powershell_tui",
+      "surface_type": "reflection_surface",
+      "read_surfaces": [
+        "state/ai_feedback_context_latest.json",
+        "docs/feedback/FEEDBACK_LOG.md",
+        "reports/nexus_reflective_loop_report_latest.json",
+        "state/nexus_lineage_manifest_latest.json",
+        "state/interface_adapter_contract_index.v0.3.7.json"
+      ],
+      "write_surfaces": [
+        "docs/feedback/FEEDBACK_LOG.md",
+        "docs/feedback/operator_packets/*.json",
+        "reports/tui/nexus_tui_ai_handoff_latest.txt",
+        "reports/tui/nexus_tui_snapshot_latest.html",
+        "reports/tui/nexus_tui_surface_latest.json"
+      ],
+      "allowed_commands": [
+        "evolve",
+        "interface",
+        "feedback",
+        "heal",
+        "status",
+        "compact",
+        "interconnect",
+        "runtime",
+        "pack",
+        "reflect"
+      ],
+      "blocked_actions": [
+        "self_authorize",
+        "arbitrary_shell_commands",
+        "bypass_evolve",
+        "external_api_write",
+        "secret_access",
+        "mutate_graph_state"
+      ],
+      "authority_level": "allowlisted_lane_request",
+      "handoff_format": "reports/tui/nexus_tui_ai_handoff_latest.txt",
+      "reflection_format": "HUD console, snapshot HTML, surface JSON",
+      "required_gates": [
+        ".\\scripts\\nexus.ps1 reflect",
+        ".\\scripts\\nexus.ps1 evolve"
+      ],
+      "claim_boundary": "PowerShell TUI is a reflection/operator surface. It does not own logic or authority."
+    },
+    {
+      "interface_id": "electron_hud",
+      "surface_type": "reflection_surface",
+      "read_surfaces": [
+        "state/ai_feedback_context_latest.json",
+        "docs/feedback/FEEDBACK_LOG.md",
+        "reports/nexus_feedback_interface_report_latest.json",
+        "reports/nexus_self_healing_report_latest.json",
+        "reports/nexus_electron_preflight_report_latest.json",
+        "reports/nexus_electron_smoke_report_latest.json",
+        "reports/tui/nexus_tui_ai_handoff_latest.txt",
+        "reports/tui/nexus_tui_snapshot_latest.html",
+        "reports/tui/nexus_tui_surface_latest.json",
+        "reports/nexus_reflective_loop_report_latest.json",
+        "state/nexus_lineage_manifest_latest.json",
+        "state/interface_adapter_contract_index.v0.3.7.json"
+      ],
+      "write_surfaces": [],
+      "allowed_commands": [
+        "evolve",
+        "interface",
+        "feedback",
+        "heal",
+        "status",
+        "compact",
+        "interconnect",
+        "runtime",
+        "pack"
+      ],
+      "blocked_actions": [
+        "self_authorize",
+        "arbitrary_shell_commands",
+        "bypass_evolve",
+        "external_api_write",
+        "secret_access",
+        "ungated_repo_mutation"
+      ],
+      "authority_level": "allowlisted_lane_request",
+      "handoff_format": "read-only renderer surfaces",
+      "reflection_format": "Electron HUD",
+      "required_gates": [
+        ".\\scripts\\nexus.ps1 electron-preflight",
+        "npm run smoke"
+      ],
+      "claim_boundary": "Electron HUD is presentation-only and cannot run arbitrary shell commands."
+    },
+    {
+      "interface_id": "chatgpt_handoff",
+      "surface_type": "reasoning_surface",
+      "read_surfaces": [
+        "reports/tui/nexus_tui_ai_handoff_latest.txt",
+        "state/ai_feedback_context_latest.json",
+        "docs/feedback/FEEDBACK_LOG.md",
+        "reports/nexus_reflective_loop_report_latest.json",
+        "state/nexus_lineage_manifest_latest.json"
+      ],
+      "write_surfaces": [],
+      "allowed_commands": [],
+      "blocked_actions": [
+        "self_authorize",
+        "arbitrary_shell_commands",
+        "bypass_evolve",
+        "direct_repo_mutation",
+        "secret_access",
+        "external_api_write"
+      ],
+      "authority_level": "read_only",
+      "handoff_format": "operator-pasted Markdown/text block",
+      "reflection_format": "recommendation text returned to human operator",
+      "required_gates": [
+        "human runs .\\scripts\\nexus.ps1 evolve after applying any patch"
+      ],
+      "claim_boundary": "ChatGPT handoff is reasoning evidence only. It has no direct repo authority."
+    },
+    {
+      "interface_id": "codex_handoff",
+      "surface_type": "reasoning_and_patch_surface",
+      "read_surfaces": [
+        "README.md",
+        "AGENTS.md",
+        "state/ai_feedback_context_latest.json",
+        "reports/nexus_reflective_loop_report_latest.json",
+        "state/nexus_lineage_manifest_latest.json"
+      ],
+      "write_surfaces": [
+        "bounded_repo_patch_after_hydration"
+      ],
+      "allowed_commands": [
+        "python -m unittest discover -s tests",
+        ".\\scripts\\nexus.ps1 reflect",
+        ".\\scripts\\nexus.ps1 evolve"
+      ],
+      "blocked_actions": [
+        "self_authorize",
+        "arbitrary_shell_commands",
+        "bypass_evolve",
+        "secret_access",
+        "external_api_write",
+        "memory_promotion_without_evidence"
+      ],
+      "authority_level": "human_authorized_patch",
+      "handoff_format": "repo hydration plus task prompt",
+      "reflection_format": "commit, reports, and final summary",
+      "required_gates": [
+        "python -m unittest discover -s tests",
+        ".\\scripts\\nexus.ps1 evolve"
+      ],
+      "claim_boundary": "Codex may patch only within the user's task and local gates. It cannot self-authorize."
+    },
+    {
+      "interface_id": "future_browser_dashboard",
+      "surface_type": "reflection_surface",
+      "read_surfaces": [
+        "reports/nexus_reflective_loop_report_latest.json",
+        "state/nexus_lineage_manifest_latest.json",
+        "state/interface_adapter_contract_index.v0.3.7.json"
+      ],
+      "write_surfaces": [],
+      "allowed_commands": [],
+      "blocked_actions": [
+        "self_authorize",
+        "arbitrary_shell_commands",
+        "bypass_evolve",
+        "secret_access",
+        "external_api_write"
+      ],
+      "authority_level": "read_only",
+      "handoff_format": "dashboard state JSON",
+      "reflection_format": "browser read-only panels",
+      "required_gates": [
+        "future dashboard gate"
+      ],
+      "claim_boundary": "Future browser dashboard is scaffolded only and grants no authority."
+    },
+    {
+      "interface_id": "future_local_agent",
+      "surface_type": "agent_surface",
+      "read_surfaces": [
+        "reports/nexus_reflective_loop_report_latest.json",
+        "state/nexus_lineage_manifest_latest.json",
+        "state/interface_adapter_contract_index.v0.3.7.json"
+      ],
+      "write_surfaces": [],
+      "allowed_commands": [],
+      "blocked_actions": [
+        "self_authorize",
+        "arbitrary_shell_commands",
+        "bypass_evolve",
+        "secret_access",
+        "external_api_write",
+        "ungated_repo_mutation"
+      ],
+      "authority_level": "blocked",
+      "handoff_format": "future contract",
+      "reflection_format": "future evidence report",
+      "required_gates": [
+        "future local agent gate"
+      ],
+      "claim_boundary": "Future local agent authority is blocked until explicitly governed and tested."
+    }
+  ],
+  "claim_boundary": "Interface adapter contract is local development evidence only. It does not grant autonomous authority, prove correctness, or validate production readiness."
+}

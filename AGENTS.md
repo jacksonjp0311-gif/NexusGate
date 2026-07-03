@@ -249,7 +249,7 @@ Then run or ask the human to run:
 Do not assume autonomous write authority. Use feedback as recommendation/dry-run/apply-gate evidence.
 
 
-## NEXUS v0.2.4b Hermes-Style TUI
+## NEXUS v0.2.4b PowerShell HUD TUI
 
 Use this as the primary human/AI debug loop:
 
@@ -380,7 +380,7 @@ state/electron_shell_scaffold_index.v0.3.3.json
 tests/test_electron_shell_scaffold.py
 ```
 
-It is not installed, packaged, or production validated. It must remain presentation-only, use context isolation, keep Node integration disabled, run IPC through allowlists, and use the existing NEXUS lanes instead of owning logic.
+It is installed locally with a committed lockfile, but it is not packaged or production validated. It must remain presentation-only, use context isolation, keep Node integration disabled, run IPC through allowlists, and use the existing NEXUS lanes instead of owning logic.
 
 ## NEXUS v0.3.4 Electron Preflight Compiler
 
@@ -397,3 +397,34 @@ reports/nexus_electron_preflight_report_latest.json
 ```
 
 The preflight compiler verifies the Electron scaffold contract and guardrails. It does not install dependencies, package the desktop app, launch Electron, grant shell authority, or authorize autonomous action.
+
+## NEXUS v0.3.7 Reflective Intelligence Gateway
+
+Before evolving reflective or interface surfaces, inspect:
+
+```text
+docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md
+docs/interfaces/INTERFACE_ADAPTER_CONTRACT.md
+docs/versioning/NEXUS_LINEAGE_PROTOCOL.md
+state/interface_adapter_contract_index.v0.3.7.json
+state/nexus_lineage_manifest_latest.json
+reports/nexus_reflective_loop_report_latest.json
+```
+
+Use:
+
+```powershell
+.\scripts\nexus.ps1 reflect
+.\scripts\nexus.ps1 evolve
+```
+
+Hard rules:
+
+```text
+Reflective intelligence is permitted.
+Autonomous authority is not.
+Organic evolution is allowed.
+Ungated compounding is not.
+No reflective loop without evidence surfaces.
+No interface adapter may declare autonomous mutation authority.
+```

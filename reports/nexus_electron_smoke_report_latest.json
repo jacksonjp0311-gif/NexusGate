@@ -2,7 +2,7 @@
   "system": "NEXUS GATE",
   "version": "0.3.6-electron-hud-smoke",
   "status": "pass",
-  "generated_at_utc": "2026-07-03T21:22:24.330Z",
+  "generated_at_utc": "2026-07-03T21:52:50.777Z",
   "app_title": "NEXUS GATE",
   "smoke_mode": true,
   "read_surfaces": [
@@ -10,6 +10,9 @@
     "docs/feedback/FEEDBACK_LOG.md",
     "reports/nexus_feedback_interface_report_latest.json",
     "reports/nexus_self_healing_report_latest.json",
+    "reports/nexus_reflective_loop_report_latest.json",
+    "state/nexus_lineage_manifest_latest.json",
+    "state/interface_adapter_contract_index.v0.3.7.json",
     "reports/tui/nexus_tui_ai_handoff_latest.txt",
     "reports/tui/nexus_tui_snapshot_latest.html",
     "reports/tui/nexus_tui_surface_latest.json"

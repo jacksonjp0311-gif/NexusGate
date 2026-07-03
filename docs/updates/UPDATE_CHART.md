@@ -64,22 +64,23 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 
 | v0.2.4b | PowerShell HUD TUI | current | Adds interactive terminal shell with lane menu, chat prompt, buffer bar, colored output, feedback notes, operation packets, debug tail, and AI handoff. |
 
-| v0.2.6 | AI Agent Interconnection | current | Extends interconnect graph with governed AI-agent handoff, TUI export, feedback context, operator packet, and this-process rehydration edges. |
+| v0.2.6 | AI Agent Interconnection | stable | Extends interconnect graph with governed AI-agent handoff, TUI export, feedback context, operator packet, and this-process rehydration edges. |
 
-| v0.2.7 | Domain Interconnection Profiles | current | Adds CLI formatting, bio, chem, coding, and neural domain routing profiles plus TUI /domains inspection. |
+| v0.2.7 | Domain Interconnection Profiles | stable | Adds CLI formatting, bio, chem, coding, and neural domain routing profiles plus TUI /domains inspection. |
 
-| v0.2.8 | TUI Interconnect Console | current | Adds read-only /graph and /interconnect TUI views for graph status, checks, routes, placeholders, and next action. |
+| v0.2.8 | TUI Interconnect Console | stable | Adds read-only /graph and /interconnect TUI views for graph status, checks, routes, placeholders, and next action. |
 
-| v0.2.9 | TUI Snapshot Bridge | current | Adds graph health, checks, placeholder evidence, and next action to /snapshot HTML as the first Electron mock surface. |
+| v0.2.9 | TUI Snapshot Bridge | stable | Adds graph health, checks, placeholder evidence, and next action to /snapshot HTML as the first Electron mock surface. |
 
-| v0.3.0 | TUI Surface State | current | Adds /surface JSON export for Electron/dashboard read-only health, graph, commands, surfaces, and claim-boundary state. |
+| v0.3.0 | TUI Surface State | stable | Adds /surface JSON export for Electron/dashboard read-only health, graph, commands, surfaces, and claim-boundary state. |
 
-| v0.3.1 | TUI Snapshot Surface Pair | current | Makes /snapshot refresh both HTML snapshot and JSON surface state for Electron/dashboard bridge consumers. |
+| v0.3.1 | TUI Snapshot Surface Pair | stable | Makes /snapshot refresh both HTML snapshot and JSON surface state for Electron/dashboard bridge consumers. |
 
-| v0.3.2 | Electron Read Contract | current | Adds a contract-only Electron/dashboard read surface gate with allowlisted commands, paired TUI exports, blocked actions, and claim boundary tests. |
+| v0.3.2 | Electron Read Contract | stable | Adds a contract-only Electron/dashboard read surface gate with allowlisted commands, paired TUI exports, blocked actions, and claim boundary tests. |
 
-| v0.3.3 | Electron Shell Scaffold | current | Adds a minimal presentation-only Electron scaffold with IPC allowlists, read-surface guards, context isolation, sandboxing, and static tests. |
+| v0.3.3 | Electron Shell Scaffold | stable | Adds a minimal presentation-only Electron scaffold with IPC allowlists, read-surface guards, context isolation, sandboxing, and static tests. |
 
-| v0.3.4 | Electron Preflight Compiler | current | Adds a Python preflight compiler and script lane for the Electron scaffold without installing, packaging, or launching Electron. |
-| v0.3.5 | Electron Environment + HUD Surface | current | Adds non-mutating Electron environment readiness and aligns TUI/Electron presentation with the HUD operator-console direction. |
-| v0.3.6 | Electron HUD Runtime | current | Installs the local Electron runtime, adds a governed HUD desktop shell smoke path, commits the lockfile, and keeps the visible title to NEXUS GATE. |
+| v0.3.4 | Electron Preflight Compiler | stable | Adds a Python preflight compiler and script lane for the Electron scaffold without installing, packaging, or launching Electron. |
+| v0.3.5 | Electron Environment + HUD Surface | stable | Adds non-mutating Electron environment readiness and aligns TUI/Electron presentation with the HUD operator-console direction. |
+| v0.3.6 | Electron HUD Runtime | stable | Installs the local Electron runtime, adds a governed HUD desktop shell smoke path, commits the lockfile, and keeps the visible title to NEXUS GATE. |
+| v0.3.7 | Reflective Intelligence Gateway | current | Formalizes the reflective intelligence loop, interface adapter contract, lineage manifest, reflect lane, TUI /reflect and /lineage views, and compiler-gated reflective report. |

@@ -36,7 +36,8 @@ NEXUS GATE is a governed agentic transfer workbench. It tests whether a local ru
 
 ### Current version
 
-NEXUS GATE is currently at the v0.3.6 local evolution surface.
+NEXUS GATE is currently at the v0.3.7 reflective intelligence gateway surface.
+Current strategic direction: Reflective Intelligence Gateway.
 
 Current operator surfaces:
 
@@ -46,6 +47,7 @@ Current operator surfaces:
 .\scripts\nexus.ps1 evolve
 .\scripts\nexus.ps1 electron-env
 .\scripts\nexus.ps1 electron-preflight
+.\scripts\nexus.ps1 reflect
 ```
 
 Current Bash / Git Bash / WSL / Linux / macOS surfaces:
@@ -54,6 +56,7 @@ Current Bash / Git Bash / WSL / Linux / macOS surfaces:
 bash scripts/nexus.sh evolve
 bash scripts/nexus.sh electron-env
 bash scripts/nexus.sh electron-preflight
+bash scripts/nexus.sh reflect
 bash scripts/nexus.sh tui
 bash scripts/nexus.sh ui
 ```
@@ -100,8 +103,8 @@ The current line has evolved from the original RHP/Nexus documentation shell int
 |---|---:|
 | Package / CLI | `nexus-gate` / `nexus` |
 | Python import | `nexus_gate` |
-| Current software layer | NG-SA v0.3.6 |
-| Current runtime status | local governed CLI/TUI + Electron HUD runtime |
+| Current software layer | NG-SA v0.3.7 |
+| Current runtime status | local governed CLI/TUI + Electron HUD runtime + reflective intelligence loop |
 | README structure | Human / RHP Nexus / AI trisection |
 | RHP origin alignment | scaffolded |
 | RCC/Nexus route map | scaffolded |
@@ -113,7 +116,38 @@ The current line has evolved from the original RHP/Nexus documentation shell int
 | Production status | not production validated |
 | Electron runtime | installed locally, lockfile committed |
 | Current launch | `.\scripts\nexus.ps1 tui` / `cd electron; npm start` |
+| Reflective loop | compiler-gated local evidence protocol |
 | Next build target | governed Electron packaging gate |
+
+### Reflective Intelligence Gateway
+
+NEXUS GATE now treats intelligence as a governed loop across reasoning, evidence, execution, reflection, and human authority surfaces:
+
+```text
+reasoning surface + evidence surface + execution surface + reflection surface + human authority
+=
+reflective intelligence loop
+```
+
+Read these during rehydration before feature promotion:
+
+```text
+docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md
+docs/interfaces/INTERFACE_ADAPTER_CONTRACT.md
+docs/versioning/NEXUS_LINEAGE_PROTOCOL.md
+state/interface_adapter_contract_index.v0.3.7.json
+state/nexus_lineage_manifest_latest.json
+reports/nexus_reflective_loop_report_latest.json
+```
+
+Core law:
+
+```text
+Reflective intelligence is permitted.
+Autonomous authority is not.
+Organic evolution is allowed.
+Ungated compounding is not.
+```
 
 ### What this is not
 
@@ -140,6 +174,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\nexus_once.ps1
 powershell -ExecutionPolicy Bypass -File .\scripts\nexus_status.ps1
 .\scripts\nexus.ps1 evolve
 .\scripts\nexus.ps1 tui
+.\scripts\nexus.ps1 reflect
 ```
 
 Bash / Git Bash / WSL / Linux / macOS:
@@ -151,6 +186,7 @@ bash scripts/nexus_status.sh
 bash scripts/nexus.sh evolve
 bash scripts/nexus.sh electron-env
 bash scripts/nexus.sh electron-preflight
+bash scripts/nexus.sh reflect
 bash scripts/nexus.sh tui
 bash scripts/nexus.sh ui
 ```
@@ -1246,3 +1282,43 @@ bash scripts/nexus.sh ui
 ```
 
 The visible HUD title is `NEXUS GATE`. Electron remains presentation-only and may request only allowlisted NEXUS lanes through the governed bridge.
+
+## v0.3.7 - Reflective Intelligence Gateway
+
+NEXUS GATE now formalizes the reflection loop as a compiler-gated protocol:
+
+```text
+hydrate -> orient -> reason -> propose -> patch -> execute -> validate -> reflect -> compress -> resume
+```
+
+New doctrine and contract surfaces:
+
+```text
+docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md
+docs/interfaces/INTERFACE_ADAPTER_CONTRACT.md
+docs/versioning/NEXUS_LINEAGE_PROTOCOL.md
+state/interface_adapter_contract_index.v0.3.7.json
+state/nexus_lineage_manifest_latest.json
+reports/nexus_reflective_loop_report_latest.json
+```
+
+New lane:
+
+```powershell
+.\scripts\nexus.ps1 reflect
+```
+
+Bash equivalent:
+
+```bash
+bash scripts/nexus.sh reflect
+```
+
+TUI commands:
+
+```text
+/reflect
+/lineage
+```
+
+Electron may read the reflective report, lineage manifest, and interface adapter contract. It does not gain new authority.

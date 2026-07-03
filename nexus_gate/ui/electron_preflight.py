@@ -65,6 +65,9 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
         "docs/ui/ELECTRON_READ_CONTRACT.md",
         "docs/ui/ELECTRON_HUD_RUNTIME.md",
         "docs/ui/ELECTRON_SHELL_SCAFFOLD.md",
+        "docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md",
+        "docs/interfaces/INTERFACE_ADAPTER_CONTRACT.md",
+        "docs/versioning/NEXUS_LINEAGE_PROTOCOL.md",
         "electron/README.md",
         "electron/package.json",
         "electron/package-lock.json",
@@ -76,7 +79,10 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
         "state/electron_read_contract_index.v0.3.2.json",
         "state/electron_shell_scaffold_index.v0.3.3.json",
         "state/electron_hud_runtime_index.v0.3.6.json",
+        "state/interface_adapter_contract_index.v0.3.7.json",
+        "state/nexus_lineage_manifest_latest.json",
         "tests/test_electron_hud_runtime.py",
+        "tests/test_reflective_intelligence_loop.py",
         "tests/test_electron_read_contract.py",
         "tests/test_electron_shell_scaffold.py",
     ]
@@ -115,6 +121,17 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
         {"read_surfaces": read_surfaces},
     ))
 
+    required_reflective_surfaces = {
+        "reports/nexus_reflective_loop_report_latest.json",
+        "state/nexus_lineage_manifest_latest.json",
+        "state/interface_adapter_contract_index.v0.3.7.json",
+    }
+    checks.append(_check(
+        "electron_reflective_surfaces_declared",
+        required_reflective_surfaces.issubset(set(read_surfaces)),
+        {"missing": sorted(required_reflective_surfaces - set(read_surfaces))},
+    ))
+
     main_js = (root / "electron/main.js").read_text(encoding="utf-8")
     preload_js = (root / "electron/preload.js").read_text(encoding="utf-8")
     renderer_html = (root / "electron/renderer/index.html").read_text(encoding="utf-8")
@@ -129,6 +146,8 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
         "READ_SURFACES",
         "scripts\", \"nexus.ps1",
         "nexus_electron_smoke_report_latest.json",
+        "nexus_reflective_loop_report_latest.json",
+        "nexus_lineage_manifest_latest.json",
         "--smoke",
         "disableHardwareAcceleration",
         "nexus:surfaceExists",

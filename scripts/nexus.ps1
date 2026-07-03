@@ -9,8 +9,9 @@
 # nexus_gate.interconnect.compile
 # nexus_gate.evidence.compact
 # nexus_gate.self_healing.compile
+# nexus_gate.reflection.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -41,6 +42,9 @@ function Show-Rehydration {
         ".\docs\feedback\FEEDBACK_SYSTEM.md",
         ".\docs\feedback\FEEDBACK_LOG.md",
         ".\docs\ui\NEXUS_TUI_SHELL.md",
+        ".\docs\intelligence\REFLECTIVE_INTELLIGENCE_LOOP.md",
+        ".\docs\interfaces\INTERFACE_ADAPTER_CONTRACT.md",
+        ".\docs\versioning\NEXUS_LINEAGE_PROTOCOL.md",
         ".\docs\failure_modes\FAILURE_MODE_CHART.md",
         ".\docs\updates\UPDATE_CHART.md"
     )) {
@@ -98,6 +102,7 @@ switch ($Command) {
     "interface" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 interface }
     "electron-env" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 electron-env }
     "electron-preflight" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 electron-preflight }
+    "reflect" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 reflect }
     "tui" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_tui.ps1 }
     "ui" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_ui.ps1 }
     "evolve" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 evolve }

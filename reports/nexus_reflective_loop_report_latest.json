@@ -1,0 +1,126 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.3.7-reflective-intelligence-loop",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T21:52:53.526668+00:00",
+  "checks": [
+    {
+      "check": "reflective_required_paths",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "interface_modes_declared",
+      "status": "pass",
+      "evidence": {
+        "missing": [],
+        "declared": [
+          "chatgpt_handoff",
+          "codex_handoff",
+          "electron_hud",
+          "future_browser_dashboard",
+          "future_local_agent",
+          "powershell_cli",
+          "powershell_tui"
+        ]
+      }
+    },
+    {
+      "check": "compressed_handoff_surfaces_declared",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "blocked_actions_declared",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "no_autonomous_authority",
+      "status": "pass",
+      "evidence": {
+        "violations": []
+      }
+    },
+    {
+      "check": "lineage_tracks_versions",
+      "status": "pass",
+      "evidence": {
+        "system_version": "0.3.7",
+        "reflective_loop_version": "0.3.7"
+      }
+    },
+    {
+      "check": "reflective_doctrine_present",
+      "status": "pass",
+      "evidence": {
+        "doc": "docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md"
+      }
+    },
+    {
+      "check": "claim_boundary_present",
+      "status": "pass",
+      "evidence": {
+        "claim_boundary": "Reflective loop compilation is local development evidence only. It does not prove correctness, security, safety, production readiness, model understanding, or autonomous authority."
+      }
+    }
+  ],
+  "read_surfaces": [
+    "AGENTS.md",
+    "README.md",
+    "docs/feedback/FEEDBACK_LOG.md",
+    "reports/*_latest.json",
+    "reports/nexus_electron_preflight_report_latest.json",
+    "reports/nexus_electron_smoke_report_latest.json",
+    "reports/nexus_feedback_interface_report_latest.json",
+    "reports/nexus_reflective_loop_report_latest.json",
+    "reports/nexus_self_healing_report_latest.json",
+    "reports/tui/nexus_tui_ai_handoff_latest.txt",
+    "reports/tui/nexus_tui_snapshot_latest.html",
+    "reports/tui/nexus_tui_surface_latest.json",
+    "state/*_latest.json",
+    "state/ai_feedback_context_latest.json",
+    "state/interface_adapter_contract_index.v0.3.7.json",
+    "state/nexus_lineage_manifest_latest.json"
+  ],
+  "write_surfaces": [
+    "bounded_repo_patch_after_hydration",
+    "dist/nexus_gate_pack_manifest_latest.json",
+    "docs/feedback/FEEDBACK_LOG.md",
+    "docs/feedback/operator_packets/*.json",
+    "ledger/nexus_gate_ledger.v0.1.0.jsonl",
+    "reports/*_latest.json",
+    "reports/tui/nexus_tui_ai_handoff_latest.txt",
+    "reports/tui/nexus_tui_snapshot_latest.html",
+    "reports/tui/nexus_tui_surface_latest.json"
+  ],
+  "allowed_interfaces": [
+    "chatgpt_handoff",
+    "codex_handoff",
+    "electron_hud",
+    "future_browser_dashboard",
+    "future_local_agent",
+    "powershell_cli",
+    "powershell_tui"
+  ],
+  "blocked_actions": [
+    "arbitrary_shell_commands",
+    "bypass_evolve",
+    "direct_repo_mutation",
+    "external_api_write",
+    "memory_promotion_without_evidence",
+    "mutate_graph_state",
+    "secret_access",
+    "self_authorize",
+    "ungated_repo_mutation"
+  ],
+  "next_action": "Continue with .\\scripts\\nexus.ps1 evolve.",
+  "claim_boundary": "Reflective loop compilation is local development evidence only. It does not prove correctness, security, safety, production readiness, model understanding, or autonomous authority."
+}

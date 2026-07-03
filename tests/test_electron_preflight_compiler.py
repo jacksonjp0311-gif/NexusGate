@@ -23,6 +23,7 @@ class TestElectronPreflightCompiler(unittest.TestCase):
             "electron_allowlist_matches_contract",
             "electron_blocked_actions_complete",
             "electron_required_surface_pair",
+            "electron_reflective_surfaces_declared",
             "electron_main_security_markers",
             "electron_preload_api_limited",
             "electron_renderer_uses_preload_bridge",
