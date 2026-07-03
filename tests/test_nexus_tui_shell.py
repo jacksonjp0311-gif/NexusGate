@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class TestNexusTuiShell(unittest.TestCase):
     def test_tui_script_contains_chat_commands_and_lanes(self):
         text = (ROOT / "scripts" / "nexus_tui.ps1").read_text(encoding="utf-8")
-        for marker in ["NEXUS>", "/run <lane>", "/note <text>", "/packet <summary>", "/debug", "/ai", "/graph", "/domains"]:
+        for marker in ["NEXUS>", "/run <lane>", "/note <text>", "/packet <summary>", "/debug", "/ai", "/surface", "/graph", "/domains"]:
             self.assertIn(marker, text)
         for lane in ["evolve", "interface", "feedback", "heal", "status", "compact", "interconnect", "runtime", "pack"]:
             self.assertIn(lane, text)

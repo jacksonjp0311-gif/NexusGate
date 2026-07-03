@@ -57,6 +57,7 @@ Evolve lane access
 /ai
 /copy
 /snapshot
+/surface
 /electron
 /graph
 /open-log
@@ -112,6 +113,14 @@ Use:
 ```
 
 to show the governed interconnect console: graph status, node and edge counts, checks, placeholder evidence paths, and next action.
+
+Use:
+
+```text
+/surface
+```
+
+to write `reports/tui/nexus_tui_surface_latest.json` for Electron/dashboard consumers.
 
 Use:
 

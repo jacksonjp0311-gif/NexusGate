@@ -1,0 +1,29 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.3.0",
+  "kind": "tui_surface_state_index",
+  "command": "/surface",
+  "output": "reports/tui/nexus_tui_surface_latest.json",
+  "read_surfaces": [
+    "state/ai_feedback_context_latest.json",
+    "state/interconnect_graph.v0.2.2.json",
+    "reports/nexus_feedback_report_latest.json"
+  ],
+  "fields": [
+    "health",
+    "graph",
+    "commands",
+    "surfaces",
+    "blocked_actions",
+    "claim_boundary"
+  ],
+  "electron_role": "machine-readable read-only state summary",
+  "blocked_actions": [
+    "self_authorize",
+    "mutate_graph_state",
+    "bypass_evolve",
+    "arbitrary_shell_command",
+    "claim_proof_from_surface_visibility"
+  ],
+  "claim_boundary": "TUI surface state is local evidence orientation only. It does not prove correctness, safety, production readiness, scientific validity, model validity, or autonomous authority."
+}

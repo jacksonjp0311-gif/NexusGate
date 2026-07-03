@@ -323,3 +323,19 @@ Hard rule:
 ```text
 Snapshot visibility is not authority, proof, or validation.
 ```
+
+## NEXUS v0.3.0 TUI Surface State
+
+Use this inside the TUI:
+
+```powershell
+/surface
+```
+
+It writes:
+
+```text
+reports/tui/nexus_tui_surface_latest.json
+```
+
+The file is a read-only state summary for Electron/dashboard consumers. It is not authority, proof, or a shell execution surface.

@@ -1086,3 +1086,16 @@ reports/tui/nexus_tui_snapshot_latest.html
 The snapshot includes health, pressure, graph status, graph version, node/edge counts, next action, interconnect checks, placeholder evidence paths, bridge surfaces, and claim boundary.
 
 This is the first Electron mock surface. It remains read-only evidence orientation and must not mutate graph state, self-authorize, bypass evolve, or claim proof from graph visibility.
+
+## v0.3.0 - TUI Surface State
+
+The TUI can now export a compact JSON state summary for Electron and future dashboards:
+
+```text
+/surface
+reports/tui/nexus_tui_surface_latest.json
+```
+
+The file includes health, graph status, graph checks, missing evidence paths, command paths, read surfaces, blocked actions, and claim boundary.
+
+This is a machine-readable read-only surface. It does not mutate graph state, run arbitrary shell commands, self-authorize, bypass evolve, or prove correctness.

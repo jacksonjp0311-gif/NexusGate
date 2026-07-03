@@ -71,3 +71,5 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.2.8 | TUI Interconnect Console | current | Adds read-only /graph and /interconnect TUI views for graph status, checks, routes, placeholders, and next action. |
 
 | v0.2.9 | TUI Snapshot Bridge | current | Adds graph health, checks, placeholder evidence, and next action to /snapshot HTML as the first Electron mock surface. |
+
+| v0.3.0 | TUI Surface State | current | Adds /surface JSON export for Electron/dashboard read-only health, graph, commands, surfaces, and claim-boundary state. |

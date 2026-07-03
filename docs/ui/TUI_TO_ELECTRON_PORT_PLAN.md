@@ -32,6 +32,7 @@ reports/nexus_feedback_interface_report_latest.json
 reports/nexus_self_healing_report_latest.json
 reports/tui/nexus_tui_ai_handoff_latest.txt
 reports/tui/nexus_tui_snapshot_latest.html
+reports/tui/nexus_tui_surface_latest.json
 ```
 
 ## Electron Allowlist

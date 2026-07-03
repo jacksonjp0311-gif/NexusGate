@@ -8,7 +8,8 @@
   ],
   "tui_exports": [
     "reports/tui/nexus_tui_ai_handoff_latest.txt",
-    "reports/tui/nexus_tui_snapshot_latest.html"
+    "reports/tui/nexus_tui_snapshot_latest.html",
+    "reports/tui/nexus_tui_surface_latest.json"
   ],
   "snapshot_bridge": {
     "surface": "reports/tui/nexus_tui_snapshot_latest.html",
@@ -19,6 +20,17 @@
       "interconnect checks",
       "placeholder evidence paths",
       "next action"
+    ]
+  },
+  "surface_state": {
+    "surface": "reports/tui/nexus_tui_surface_latest.json",
+    "contains": [
+      "health",
+      "graph",
+      "commands",
+      "surfaces",
+      "blocked actions",
+      "claim boundary"
     ]
   },
   "interactive_commands": [

@@ -122,6 +122,7 @@ function Show-Menu {
     Write-Host "    /ai               Print AI handoff block for copy/paste" -ForegroundColor Gray
     Write-Host "    /copy             Export AI handoff and copy it to clipboard" -ForegroundColor Gray
     Write-Host "    /snapshot         Write/open HTML TUI snapshot" -ForegroundColor Gray
+    Write-Host "    /surface          Write machine-readable TUI surface JSON" -ForegroundColor Gray
     Write-Host "    /electron         Show Electron port contract" -ForegroundColor Gray
     Write-Host "    /graph            Show governed interconnect console" -ForegroundColor Gray
     Write-Host "    /domains          Show domain interconnection routes" -ForegroundColor Gray
@@ -481,6 +482,79 @@ reports/tui/nexus_tui_snapshot_latest.html</pre>
     Say "Snapshot written/opened: reports\tui\nexus_tui_snapshot_latest.html" "OK"
 }
 
+function Export-TuiSurfaceState {
+    $path = Join-Path $TuiDir "nexus_tui_surface_latest.json"
+    $ctx = Get-LatestContext
+    $graphPath = Join-Path $Root "state\interconnect_graph.v0.2.2.json"
+    $feedbackPath = Join-Path $Root "reports\nexus_feedback_report_latest.json"
+
+    $graph = $null
+    if (Test-Path $graphPath) {
+        try { $graph = Get-Content $graphPath -Raw | ConvertFrom-Json } catch { $graph = $null }
+    }
+    $feedback = $null
+    if (Test-Path $feedbackPath) {
+        try { $feedback = Get-Content $feedbackPath -Raw | ConvertFrom-Json } catch { $feedback = $null }
+    }
+
+    $missingEvidence = @()
+    if ($graph) {
+        foreach ($node in $graph.nodes) {
+            if ($node.evidence -and $null -ne $node.evidence.exists -and -not $node.evidence.exists) {
+                $missingEvidence += [ordered]@{ node_id = $node.node_id; path = $node.evidence.path }
+            }
+            if ($node.evidence -and $node.evidence.handoff -and -not $node.evidence.handoff.exists) {
+                $missingEvidence += [ordered]@{ node_id = $node.node_id; path = $node.evidence.handoff.path }
+            }
+            if ($node.evidence -and $node.evidence.snapshot -and -not $node.evidence.snapshot.exists) {
+                $missingEvidence += [ordered]@{ node_id = $node.node_id; path = $node.evidence.snapshot.path }
+            }
+        }
+    }
+
+    $state = [ordered]@{
+        system = "NEXUS GATE"
+        version = "0.3.0-tui-surface-state"
+        generated_utc = (Get-Date).ToUniversalTime().ToString("o")
+        source = "PowerShell TUI"
+        status = "pass"
+        health = [ordered]@{
+            health_score = if ($ctx) { $ctx.health.health_score } else { $null }
+            evidence_pressure = if ($ctx) { $ctx.health.evidence_pressure } elseif ($feedback) { $feedback.evidence_pressure.pressure_level } else { $null }
+            dominant_pressure = if ($ctx) { $ctx.health.dominant_pressure_source } else { $null }
+            next_action = if ($ctx) { $ctx.next_action } else { "Run .\scripts\nexus.ps1 evolve" }
+        }
+        graph = [ordered]@{
+            status = if ($graph) { $graph.status } else { "missing" }
+            version = if ($graph) { $graph.version } else { $null }
+            node_count = if ($graph) { $graph.nodes.Count } else { 0 }
+            edge_count = if ($graph) { $graph.edges.Count } else { 0 }
+            checks = if ($graph) { $graph.checks } else { @() }
+            missing_evidence = $missingEvidence
+        }
+        commands = [ordered]@{
+            launch = ".\scripts\nexus.ps1 tui"
+            ui_alias = ".\scripts\nexus.ps1 ui"
+            evolve = ".\scripts\nexus.ps1 evolve"
+            snapshot = "/snapshot"
+            graph = "/graph"
+            surface = "/surface"
+        }
+        surfaces = [ordered]@{
+            ai_context = "state/ai_feedback_context_latest.json"
+            feedback_log = "docs/feedback/FEEDBACK_LOG.md"
+            interconnect_graph = "state/interconnect_graph.v0.2.2.json"
+            snapshot_html = "reports/tui/nexus_tui_snapshot_latest.html"
+            surface_json = "reports/tui/nexus_tui_surface_latest.json"
+        }
+        blocked_actions = @("self_authorize", "mutate_graph_state", "bypass_evolve", "arbitrary_shell_command", "claim_proof_from_surface_visibility")
+        claim_boundary = "TUI surface state is read-only local evidence orientation. It does not prove correctness, safety, production readiness, scientific validity, model validity, or autonomous authority."
+    }
+
+    $state | ConvertTo-Json -Depth 12 | Out-File -FilePath $path -Encoding utf8
+    Say "TUI surface state written: reports\tui\nexus_tui_surface_latest.json" "OK"
+}
+
 function Show-ElectronContract {
     Write-Host ""
     Write-Host "===== NEXUS ELECTRON PORT CONTRACT =====" -ForegroundColor Cyan
@@ -494,6 +568,7 @@ function Show-ElectronContract {
     Write-Host "  reports/nexus_self_healing_report_latest.json"
     Write-Host "  reports/tui/nexus_tui_ai_handoff_latest.txt"
     Write-Host "  reports/tui/nexus_tui_snapshot_latest.html"
+    Write-Host "  reports/tui/nexus_tui_surface_latest.json"
     Write-Host "Blocked: arbitrary shell commands, external API writes, secret access, self-authorization, memory promotion without evidence."
     Write-Host "===== NEXUS ELECTRON PORT CONTRACT END =====" -ForegroundColor Cyan
 }
@@ -628,6 +703,7 @@ function Handle-Input {
     if ($line -eq "/ai") { Show-AIHandoff; return $true }
     if ($line -eq "/copy") { Export-AIHandoff; return $true }
     if ($line -eq "/snapshot") { New-TuiSnapshot; return $true }
+    if ($line -eq "/surface") { Export-TuiSurfaceState; return $true }
     if ($line -eq "/electron") { Show-ElectronContract; return $true }
     if ($line -eq "/graph" -or $line -eq "/interconnect") { Show-InterconnectConsole; return $true }
     if ($line -eq "/domains") { Show-DomainRoutes; return $true }
