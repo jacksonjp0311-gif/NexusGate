@@ -1111,3 +1111,17 @@ reports/tui/nexus_tui_surface_latest.json
 ```
 
 This gives the future Electron/dashboard bridge a paired human-readable and machine-readable export from one governed operator action. The pair remains read-only evidence orientation and does not mutate graph state, run arbitrary shell commands, self-authorize, bypass evolve, or prove correctness.
+
+## v0.3.2 - Electron Read Contract
+
+NEXUS GATE now has a contract-only gate for the future Electron/dashboard surface:
+
+```text
+docs/ui/ELECTRON_READ_CONTRACT.md
+state/electron_read_contract_index.v0.3.2.json
+tests/test_electron_read_contract.py
+```
+
+The contract fixes the read surfaces, `/snapshot` paired outputs, governed command allowlist, blocked actions, and claim boundary before any Electron app is built.
+
+Electron remains presentation only. It may not run arbitrary shell commands, mutate graph state, bypass evolve, self-authorize, access secrets, write external APIs, or claim validation proof.

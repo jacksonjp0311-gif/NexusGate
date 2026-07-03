@@ -356,3 +356,15 @@ reports/tui/nexus_tui_surface_latest.json
 ```
 
 The paired export gives future Electron/dashboard consumers a human-readable view and a machine-readable state view from one governed operator action. It remains read-only evidence orientation, not authority or validation proof.
+
+## NEXUS v0.3.2 Electron Read Contract
+
+Before building an Electron surface, inspect:
+
+```text
+docs/ui/ELECTRON_READ_CONTRACT.md
+state/electron_read_contract_index.v0.3.2.json
+tests/test_electron_read_contract.py
+```
+
+Electron/dashboard surfaces may read declared evidence files and request only allowlisted NEXUS lanes. They must not run arbitrary shell commands, mutate graph state, bypass evolve, access secrets, write external APIs, self-authorize, or claim validation proof.

@@ -75,3 +75,5 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.3.0 | TUI Surface State | current | Adds /surface JSON export for Electron/dashboard read-only health, graph, commands, surfaces, and claim-boundary state. |
 
 | v0.3.1 | TUI Snapshot Surface Pair | current | Makes /snapshot refresh both HTML snapshot and JSON surface state for Electron/dashboard bridge consumers. |
+
+| v0.3.2 | Electron Read Contract | current | Adds a contract-only Electron/dashboard read surface gate with allowlisted commands, paired TUI exports, blocked actions, and claim boundary tests. |
