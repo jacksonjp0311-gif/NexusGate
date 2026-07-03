@@ -53,3 +53,8 @@ Boundary: this chart is a local development control. It does not prove safety, s
 - bash_strict_mode_missing: Bash compact surface dropped strict command marker.
 - crlf_filter_literal_missing: human surface dropped CRLF/LF filter literal markers.
 - self_healing_without_apply_gate: repair recommendation lacks dry-run/apply-gate boundary.
+
+
+- ai_feedback_context_missing: future AI cannot rehydrate feedback state without state/ai_feedback_context_latest.json.
+- feedback_log_missing: feedback loop lacks append-only Markdown handoff surface.
+- ps_feedback_summary_missing: PowerShell output does not expose health, pressure, dominant source, next action, context path, and log path.

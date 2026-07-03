@@ -1,0 +1,15 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.2-evidence-compaction",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T12:00:54.456912+00:00",
+  "file_count": 136,
+  "total_bytes": 1269884,
+  "retained_latest": [],
+  "candidate_count": 136,
+  "pressure_level": "high",
+  "recommended_action": "Archive older timestamped reports before adding new adapter families.",
+  "archive_path": null,
+  "claim_boundary": "Evidence compaction report is local operator evidence only. It does not prove correctness, safety, security, or production readiness."
+}

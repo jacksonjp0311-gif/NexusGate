@@ -57,3 +57,6 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 
 
 | v0.2.2b | Self-Healing Feedback Rescue | current | Restores v0.2.2 marker compatibility and adds recommendation/dry-run/apply-gate self-healing reports. |
+
+
+| v0.2.3 | AI Feedback Interface + Markdown Feedback Log | current | Adds ai_feedback_context_latest.json, FEEDBACK_SYSTEM.md, FEEDBACK_LOG.md, interface command, and PowerShell feedback summary. |

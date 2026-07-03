@@ -19,6 +19,7 @@ case "$COMMAND" in
   interconnect) python -m nexus_gate.interconnect.compile --root . --json ;;
   feedback) python -m nexus_gate.feedback.compile --root . --json ;;
   heal) python -m nexus_gate.self_healing.compile --root . --json ;;
+  interface) python -m nexus_gate.feedback.interface_compile --root . --json ;;
   evolve)
     python -m compileall nexus_gate tests
     python -m unittest discover -s tests
@@ -31,11 +32,12 @@ case "$COMMAND" in
     python -m nexus_gate.interconnect.compile --root . --json
     python -m nexus_gate.feedback.compile --root . --json
     python -m nexus_gate.self_healing.compile --root . --json
+    python -m nexus_gate.feedback.interface_compile --root . --json
     python -m nexus_gate.build.packer --root . --out dist --json
     ;;
   pack) python -m nexus_gate.build.packer --root . --out dist --json ;;
   status)
-    test -f reports/nexus_feedback_report_latest.json && cat reports/nexus_feedback_report_latest.json
+    test -f reports/nexus_feedback_interface_report_latest.json && cat reports/nexus_feedback_interface_report_latest.json
     ;;
   rehydrate|*)
     python -m nexus_gate.compiler --root . --json

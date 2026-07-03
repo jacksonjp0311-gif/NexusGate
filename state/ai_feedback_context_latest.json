@@ -1,0 +1,51 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.3-ai-feedback-interface",
+  "generated_at_utc": "2026-07-03T12:01:02.202298+00:00",
+  "status": "pass",
+  "repo_role": "governed agentic transfer boundary",
+  "human_commands": {
+    "evolve": ".\\scripts\\nexus.ps1 evolve",
+    "heal": ".\\scripts\\nexus.ps1 heal",
+    "feedback": ".\\scripts\\nexus.ps1 feedback",
+    "interface": ".\\scripts\\nexus.ps1 interface",
+    "status": ".\\scripts\\nexus.ps1 status"
+  },
+  "ai_read_surfaces": {
+    "feedback_log": "docs/feedback/FEEDBACK_LOG.md",
+    "feedback_system": "docs/feedback/FEEDBACK_SYSTEM.md",
+    "ai_context": "state/ai_feedback_context_latest.json",
+    "latest_feedback_report": "reports/nexus_feedback_report_latest.json",
+    "latest_self_healing_report": "reports/nexus_self_healing_report_latest.json",
+    "latest_interconnect_report": "reports/nexus_interconnect_report_latest.json",
+    "latest_evidence_compaction_report": "reports/nexus_evidence_compaction_report_latest.json"
+  },
+  "two_way_protocol": [
+    "AI reads state/ai_feedback_context_latest.json first.",
+    "AI reads docs/feedback/FEEDBACK_LOG.md for recent evolution history.",
+    "AI proposes typed recommendation, not direct mutation.",
+    "Human-authorized patch performs mutation.",
+    "Patch runs .\\scripts\\nexus.ps1 evolve.",
+    "Feedback interface appends the new result to FEEDBACK_LOG.md."
+  ],
+  "health": {
+    "health_score": 1.0,
+    "feedback_status": "pass",
+    "evidence_pressure": "high",
+    "dominant_pressure_source": "none",
+    "self_healing_status": "pass",
+    "interconnect_status": "pass",
+    "node_count": 9,
+    "edge_count": 9
+  },
+  "next_action": "No repair pressure detected. Continue with .\\scripts\\nexus.ps1 evolve.",
+  "latest_report_paths": {
+    "feedback": "reports\\nexus_feedback_report_latest.json",
+    "self_healing": "reports\\nexus_self_healing_report_latest.json",
+    "interconnect": "reports\\nexus_interconnect_report_latest.json",
+    "evidence_compaction": "reports\\nexus_evidence_compaction_report_latest.json",
+    "runtime": "reports\\nexus_runtime_compile_report_latest.json",
+    "pack": "dist\\nexus_gate_pack_manifest_latest.json"
+  },
+  "claim_boundary": "AI feedback interface is a local repository orientation surface. It does not prove correctness, security, safety, production readiness, or autonomous repair authority."
+}

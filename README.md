@@ -924,3 +924,46 @@ No autonomous commit from self-healing recommendation.
 ```
 
 This restores v0.2.2 compatibility markers and adds bounded self-healing reports without autonomous mutation.
+
+
+## v0.2.3 - AI Feedback Interface + Markdown Feedback Log
+
+NEXUS GATE now exposes its feedback loop as a first-class interface for future AI systems.
+
+```powershell
+.\scripts\nexus.ps1 interface
+.\scripts\nexus.ps1 feedback
+.\scripts\nexus.ps1 heal
+.\scripts\nexus.ps1 evolve
+```
+
+Canonical AI read surfaces:
+
+```text
+state/ai_feedback_context_latest.json
+docs/feedback/FEEDBACK_SYSTEM.md
+docs/feedback/FEEDBACK_LOG.md
+reports/nexus_feedback_interface_report_latest.json
+```
+
+The PowerShell human surface now prints a feedback summary after feedback/evolve runs:
+
+```text
+Health score
+Evidence pressure
+Dominant pressure
+Next action
+AI context path
+Feedback log path
+```
+
+Two-way protocol:
+
+```text
+AI reads feedback context.
+AI proposes typed recommendation.
+AI does not assume autonomous write authority.
+Human-authorized patch applies mutation.
+Patch runs evolve.
+Feedback interface appends FEEDBACK_LOG.md.
+```

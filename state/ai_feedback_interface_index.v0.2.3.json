@@ -1,0 +1,23 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.3",
+  "kind": "ai_feedback_interface_index",
+  "canonical_ai_context": "state/ai_feedback_context_latest.json",
+  "canonical_markdown_log": "docs/feedback/FEEDBACK_LOG.md",
+  "canonical_feedback_doc": "docs/feedback/FEEDBACK_SYSTEM.md",
+  "commands": [
+    ".\\scripts\\nexus.ps1 interface",
+    ".\\scripts\\nexus.ps1 feedback",
+    ".\\scripts\\nexus.ps1 heal",
+    ".\\scripts\\nexus.ps1 evolve"
+  ],
+  "two_way_protocol": [
+    "AI reads the feedback context.",
+    "AI proposes a typed recommendation.",
+    "AI does not assume autonomous write authority.",
+    "Human-authorized patch applies the change.",
+    "Patch runs evolve.",
+    "Feedback interface appends the Markdown log."
+  ],
+  "claim_boundary": "Local development evidence only."
+}

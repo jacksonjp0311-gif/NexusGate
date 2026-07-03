@@ -5,11 +5,12 @@
 # nexus_gate.bridge.compile
 # nexus_gate.bridge.runtime_compiler
 # nexus_gate.feedback.compile
+# nexus_gate.feedback.interface_compile
 # nexus_gate.interconnect.compile
 # nexus_gate.evidence.compact
 # nexus_gate.self_healing.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "evolve", "once", "loop", "watch", "status", "promote")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "evolve", "once", "loop", "watch", "status", "promote")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -37,11 +38,14 @@ function Show-Rehydration {
         ".\docs\runtime\HUMAN_SURFACE.md",
         ".\docs\runtime\FEEDBACK_INTERCONNECT.md",
         ".\docs\runtime\SELF_HEALING_FEEDBACK.md",
+        ".\docs\feedback\FEEDBACK_SYSTEM.md",
+        ".\docs\feedback\FEEDBACK_LOG.md",
         ".\docs\failure_modes\FAILURE_MODE_CHART.md",
         ".\docs\updates\UPDATE_CHART.md"
     )) {
         if (Test-Path $path) { Get-Content $path -TotalCount 80 }
     }
+    if (Test-Path .\state\ai_feedback_context_latest.json) { Get-Content .\state\ai_feedback_context_latest.json -Raw }
     if (Test-Path .\reports\nexus_compile_report_latest.json) { Get-Content .\reports\nexus_compile_report_latest.json -Raw }
 }
 
@@ -70,7 +74,7 @@ function Promote {
         git config core.safecrlf false | Out-Null
         git add . 2>$null | Out-Host
         $status = git status --porcelain
-        if ($status) { git commit -m "chore: promote NEXUS GATE evolved self-healing pass" | Out-Host }
+        if ($status) { git commit -m "chore: promote NEXUS GATE AI feedback interface pass" | Out-Host }
     }
     if ($gitCmd -and $Tag -ne "") { git tag $Tag | Out-Host }
     Write-Host "[OK] Promotion gate passed."
@@ -90,6 +94,7 @@ switch ($Command) {
     "interconnect" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 interconnect }
     "compact" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 compact }
     "heal" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 heal }
+    "interface" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 interface }
     "evolve" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 evolve }
     "once" { Run-Compiler; Write-Host "[OK] Once passed." }
     "loop" { Run-Loop -MaxCycles $Cycles -SleepSeconds $Interval }

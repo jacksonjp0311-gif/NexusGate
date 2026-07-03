@@ -1,0 +1,320 @@
+﻿{
+  "system": "NEXUS GATE",
+  "version": "0.2.2-feedback",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T12:00:59.302635+00:00",
+  "signals": [
+    {
+      "name": "nexus_compiler",
+      "status": "pass",
+      "evidence": {
+        "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\nexus_compile_report_latest.json",
+        "exists": true,
+        "version": "0.1.5-strict-cold-evidence-compiler",
+        "status": "pass"
+      }
+    },
+    {
+      "name": "adapter_compiler",
+      "status": "pass",
+      "evidence": {
+        "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\nexus_adapter_compile_report_latest.json",
+        "exists": true,
+        "version": "0.1.7-adapter-compiler",
+        "status": "pass"
+      }
+    },
+    {
+      "name": "receptor_compiler",
+      "status": "pass",
+      "evidence": {
+        "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\nexus_receptor_compile_report_latest.json",
+        "exists": true,
+        "version": "0.1.8-receptor-compiler",
+        "status": "pass"
+      }
+    },
+    {
+      "name": "bridge_compiler",
+      "status": "pass",
+      "evidence": {
+        "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\nexus_bridge_compile_report_latest.json",
+        "exists": true,
+        "version": "0.1.9-bridge-compiler",
+        "status": "pass"
+      }
+    },
+    {
+      "name": "runtime_compiler",
+      "status": "pass",
+      "evidence": {
+        "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\nexus_runtime_compile_report_latest.json",
+        "exists": true,
+        "version": "0.2.0-runtime-compiler",
+        "status": "pass"
+      }
+    },
+    {
+      "name": "bounded_runtime",
+      "status": "pass",
+      "evidence": {
+        "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\nexus_bounded_runtime_report_latest.json",
+        "exists": true,
+        "version": "0.2.0-bounded-bridge-runtime",
+        "status": "pass"
+      }
+    },
+    {
+      "name": "evidence_compaction",
+      "status": "pass",
+      "evidence": {
+        "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\nexus_evidence_compaction_report_latest.json",
+        "exists": true,
+        "version": "0.2.2-evidence-compaction",
+        "status": "pass",
+        "file_count": 153,
+        "total_bytes": 1344605
+      }
+    },
+    {
+      "name": "interconnect",
+      "status": "pass",
+      "evidence": {
+        "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\nexus_interconnect_report_latest.json",
+        "exists": true,
+        "version": "0.2.2-interconnect",
+        "status": "pass"
+      }
+    },
+    {
+      "name": "pack_manifest",
+      "status": "pass",
+      "evidence": {
+        "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\dist\\nexus_gate_pack_manifest_latest.json",
+        "exists": true,
+        "version": "0.1.6b-pack-compiler",
+        "status": "pass",
+        "file_count": 294,
+        "total_bytes": 775895,
+        "total_lines": 24820
+      }
+    }
+  ],
+  "health_score": 1.0,
+  "next_actions": [
+    "Run .\\scripts\\nexus.ps1 compact before adding more runtime lanes."
+  ],
+  "evidence_pressure": {
+    "file_count": 157,
+    "total_bytes": 1355131,
+    "pressure_level": "high",
+    "newest_files": [
+      {
+        "path": "reports\\human_surface\\20260703_080052\\09_interconnect_compiler.json",
+        "size_bytes": 4636
+      },
+      {
+        "path": "reports\\nexus_interconnect_report_20260703_120058.json",
+        "size_bytes": 4631
+      },
+      {
+        "path": "reports\\nexus_interconnect_report_latest.json",
+        "size_bytes": 4631
+      },
+      {
+        "path": "reports\\human_surface\\20260703_080052\\08_evidence_compaction.json",
+        "size_bytes": 632
+      },
+      {
+        "path": "reports\\nexus_evidence_compaction_report_20260703_120058.json",
+        "size_bytes": 627
+      },
+      {
+        "path": "reports\\nexus_evidence_compaction_report_latest.json",
+        "size_bytes": 627
+      },
+      {
+        "path": "reports\\human_surface\\20260703_080052\\07_runtime_compiler.json",
+        "size_bytes": 1294
+      },
+      {
+        "path": "reports\\nexus_runtime_compile_report_latest.json",
+        "size_bytes": 1289
+      }
+    ]
+  },
+  "interconnect": {
+    "system": "NEXUS GATE",
+    "version": "0.2.2-interconnect",
+    "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+    "status": "pass",
+    "generated_at_utc": "2026-07-03T12:00:58.945568+00:00",
+    "nodes": [
+      {
+        "node_id": "runtime:bounded_bridge",
+        "kind": "runtime",
+        "label": "Bounded Bridge Runtime",
+        "status": "compiled",
+        "evidence": {}
+      },
+      {
+        "node_id": "bridge:session",
+        "kind": "bridge",
+        "label": "Bridge Session Runner",
+        "status": "compiled",
+        "evidence": {}
+      },
+      {
+        "node_id": "feedback:engine",
+        "kind": "feedback",
+        "label": "Feedback Engine",
+        "status": "compiled",
+        "evidence": {}
+      },
+      {
+        "node_id": "evidence:compactor",
+        "kind": "evidence",
+        "label": "Evidence Compactor",
+        "status": "compiled",
+        "evidence": {}
+      },
+      {
+        "node_id": "ledger:local",
+        "kind": "ledger",
+        "label": "Local Evidence Ledger",
+        "status": "appendable",
+        "evidence": {}
+      },
+      {
+        "node_id": "reports:local",
+        "kind": "reports",
+        "label": "Local Report Surface",
+        "status": "present",
+        "evidence": {}
+      },
+      {
+        "node_id": "adapter:local.demo",
+        "kind": "adapter",
+        "label": "local.demo",
+        "status": "registered",
+        "evidence": {
+          "manifest": "registry\\adapters.local_demo.v0.1.7.json"
+        }
+      },
+      {
+        "node_id": "receptor:local.demo.readonly",
+        "kind": "receptor",
+        "label": "local.demo.readonly",
+        "status": "registered",
+        "evidence": {
+          "manifest": "registry\\receptors.local_demo.v0.1.8.json"
+        }
+      },
+      {
+        "node_id": "receptor:local.demo.tool_shadow",
+        "kind": "receptor",
+        "label": "local.demo.tool_shadow",
+        "status": "registered",
+        "evidence": {
+          "manifest": "registry\\receptors.local_demo.v0.1.8.json"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "adapter:local.demo",
+        "target": "bridge:session",
+        "relation": "normalizes_to_packet",
+        "gate": "No adapter, no bridge.",
+        "mode": "governed"
+      },
+      {
+        "source": "bridge:session",
+        "target": "runtime:bounded_bridge",
+        "relation": "feeds_runtime",
+        "gate": "No schema, no route.",
+        "mode": "governed"
+      },
+      {
+        "source": "runtime:bounded_bridge",
+        "target": "receptor:local.demo.readonly",
+        "relation": "routes_to_receptor",
+        "gate": "No receptor, no transfer target.",
+        "mode": "governed"
+      },
+      {
+        "source": "runtime:bounded_bridge",
+        "target": "receptor:local.demo.tool_shadow",
+        "relation": "routes_to_receptor",
+        "gate": "No receptor, no transfer target.",
+        "mode": "governed"
+      },
+      {
+        "source": "runtime:bounded_bridge",
+        "target": "reports:local",
+        "relation": "emits_runtime_report",
+        "gate": "No runtime report, no evidence.",
+        "mode": "governed"
+      },
+      {
+        "source": "reports:local",
+        "target": "feedback:engine",
+        "relation": "feeds_feedback",
+        "gate": "No feedback without compiled reports.",
+        "mode": "governed"
+      },
+      {
+        "source": "reports:local",
+        "target": "evidence:compactor",
+        "relation": "feeds_compaction",
+        "gate": "No growing code surface without pack report.",
+        "mode": "governed"
+      },
+      {
+        "source": "feedback:engine",
+        "target": "ledger:local",
+        "relation": "appends_feedback_event",
+        "gate": "No ledger stub, no compounding.",
+        "mode": "governed"
+      },
+      {
+        "source": "evidence:compactor",
+        "target": "ledger:local",
+        "relation": "appends_compaction_event",
+        "gate": "No compaction without manifest.",
+        "mode": "governed"
+      }
+    ],
+    "checks": [
+      {
+        "check": "adapter_nodes",
+        "status": "pass",
+        "count": 1
+      },
+      {
+        "check": "receptor_nodes",
+        "status": "pass",
+        "count": 2
+      },
+      {
+        "check": "bridge_runtime_nodes",
+        "status": "pass",
+        "count": 2
+      },
+      {
+        "check": "feedback_compaction_nodes",
+        "status": "pass",
+        "count": 2
+      },
+      {
+        "check": "governed_edges",
+        "status": "pass",
+        "count": 9
+      }
+    ],
+    "graph_hash": "c5a970c7ecdb0c041e93f4c8256845db6c02d73678fc0c06f26e6b12b52da264",
+    "claim_boundary": "Interconnect graph is local architecture evidence only. It does not prove production interoperability or safety."
+  },
+  "claim_boundary": "Feedback report is local development evidence only. It is not a production validation, safety proof, security proof, or correctness proof."
+}

@@ -1,0 +1,30 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.3-ai-feedback-interface",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T12:00:56.194342+00:00",
+  "ai_context_path": "state\\ai_feedback_context_latest.json",
+  "markdown_log_path": "docs\\feedback\\FEEDBACK_LOG.md",
+  "health_score": 1.0,
+  "evidence_pressure": "high",
+  "dominant_pressure_source": "none",
+  "next_action": "No repair pressure detected. Continue with .\\scripts\\nexus.ps1 evolve.",
+  "two_way_commands": [
+    ".\\scripts\\nexus.ps1 evolve",
+    ".\\scripts\\nexus.ps1 heal",
+    ".\\scripts\\nexus.ps1 feedback",
+    ".\\scripts\\nexus.ps1 interface",
+    ".\\scripts\\nexus.ps1 status"
+  ],
+  "latest_report_paths": {
+    "feedback": "reports\\nexus_feedback_report_latest.json",
+    "self_healing": "reports\\nexus_self_healing_report_latest.json",
+    "interconnect": "reports\\nexus_interconnect_report_latest.json",
+    "evidence_compaction": "reports\\nexus_evidence_compaction_report_latest.json",
+    "runtime": "reports\\nexus_runtime_compile_report_latest.json",
+    "pack": "dist\\nexus_gate_pack_manifest_latest.json"
+  },
+  "log_entry_hash": "0c6cf5b41237409cf2dcf0dd284aaf38244474ab346583f53d985dbc03d76dc7",
+  "claim_boundary": "AI feedback interface is a local repository orientation surface. It does not prove correctness, security, safety, production readiness, or autonomous repair authority."
+}

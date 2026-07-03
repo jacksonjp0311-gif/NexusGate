@@ -1,0 +1,172 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.2-interconnect",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T12:00:58.945568+00:00",
+  "nodes": [
+    {
+      "node_id": "runtime:bounded_bridge",
+      "kind": "runtime",
+      "label": "Bounded Bridge Runtime",
+      "status": "compiled",
+      "evidence": {}
+    },
+    {
+      "node_id": "bridge:session",
+      "kind": "bridge",
+      "label": "Bridge Session Runner",
+      "status": "compiled",
+      "evidence": {}
+    },
+    {
+      "node_id": "feedback:engine",
+      "kind": "feedback",
+      "label": "Feedback Engine",
+      "status": "compiled",
+      "evidence": {}
+    },
+    {
+      "node_id": "evidence:compactor",
+      "kind": "evidence",
+      "label": "Evidence Compactor",
+      "status": "compiled",
+      "evidence": {}
+    },
+    {
+      "node_id": "ledger:local",
+      "kind": "ledger",
+      "label": "Local Evidence Ledger",
+      "status": "appendable",
+      "evidence": {}
+    },
+    {
+      "node_id": "reports:local",
+      "kind": "reports",
+      "label": "Local Report Surface",
+      "status": "present",
+      "evidence": {}
+    },
+    {
+      "node_id": "adapter:local.demo",
+      "kind": "adapter",
+      "label": "local.demo",
+      "status": "registered",
+      "evidence": {
+        "manifest": "registry\\adapters.local_demo.v0.1.7.json"
+      }
+    },
+    {
+      "node_id": "receptor:local.demo.readonly",
+      "kind": "receptor",
+      "label": "local.demo.readonly",
+      "status": "registered",
+      "evidence": {
+        "manifest": "registry\\receptors.local_demo.v0.1.8.json"
+      }
+    },
+    {
+      "node_id": "receptor:local.demo.tool_shadow",
+      "kind": "receptor",
+      "label": "local.demo.tool_shadow",
+      "status": "registered",
+      "evidence": {
+        "manifest": "registry\\receptors.local_demo.v0.1.8.json"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "adapter:local.demo",
+      "target": "bridge:session",
+      "relation": "normalizes_to_packet",
+      "gate": "No adapter, no bridge.",
+      "mode": "governed"
+    },
+    {
+      "source": "bridge:session",
+      "target": "runtime:bounded_bridge",
+      "relation": "feeds_runtime",
+      "gate": "No schema, no route.",
+      "mode": "governed"
+    },
+    {
+      "source": "runtime:bounded_bridge",
+      "target": "receptor:local.demo.readonly",
+      "relation": "routes_to_receptor",
+      "gate": "No receptor, no transfer target.",
+      "mode": "governed"
+    },
+    {
+      "source": "runtime:bounded_bridge",
+      "target": "receptor:local.demo.tool_shadow",
+      "relation": "routes_to_receptor",
+      "gate": "No receptor, no transfer target.",
+      "mode": "governed"
+    },
+    {
+      "source": "runtime:bounded_bridge",
+      "target": "reports:local",
+      "relation": "emits_runtime_report",
+      "gate": "No runtime report, no evidence.",
+      "mode": "governed"
+    },
+    {
+      "source": "reports:local",
+      "target": "feedback:engine",
+      "relation": "feeds_feedback",
+      "gate": "No feedback without compiled reports.",
+      "mode": "governed"
+    },
+    {
+      "source": "reports:local",
+      "target": "evidence:compactor",
+      "relation": "feeds_compaction",
+      "gate": "No growing code surface without pack report.",
+      "mode": "governed"
+    },
+    {
+      "source": "feedback:engine",
+      "target": "ledger:local",
+      "relation": "appends_feedback_event",
+      "gate": "No ledger stub, no compounding.",
+      "mode": "governed"
+    },
+    {
+      "source": "evidence:compactor",
+      "target": "ledger:local",
+      "relation": "appends_compaction_event",
+      "gate": "No compaction without manifest.",
+      "mode": "governed"
+    }
+  ],
+  "checks": [
+    {
+      "check": "adapter_nodes",
+      "status": "pass",
+      "count": 1
+    },
+    {
+      "check": "receptor_nodes",
+      "status": "pass",
+      "count": 2
+    },
+    {
+      "check": "bridge_runtime_nodes",
+      "status": "pass",
+      "count": 2
+    },
+    {
+      "check": "feedback_compaction_nodes",
+      "status": "pass",
+      "count": 2
+    },
+    {
+      "check": "governed_edges",
+      "status": "pass",
+      "count": 9
+    }
+  ],
+  "graph_hash": "c5a970c7ecdb0c041e93f4c8256845db6c02d73678fc0c06f26e6b12b52da264",
+  "claim_boundary": "Interconnect graph is local architecture evidence only. It does not prove production interoperability or safety."
+}

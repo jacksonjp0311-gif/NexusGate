@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [switch]$NoGit
 )
@@ -74,6 +74,27 @@ function Set-GitQuietLineEndings {
     }
 }
 
+function Show-FeedbackSummary {
+    $path = ".\reports\nexus_feedback_interface_report_latest.json"
+    if (Test-Path $path) {
+        try {
+            $data = Get-Content $path -Raw | ConvertFrom-Json
+            Say "Feedback summary" "NG"
+            Say "Health score: $($data.health_score)" "OK"
+            Say "Evidence pressure: $($data.evidence_pressure)" "OK"
+            Say "Dominant pressure: $($data.dominant_pressure_source)" "OK"
+            Say "Next action: $($data.next_action)" "OK"
+            Say "AI context: $($data.ai_context_path)" "OK"
+            Say "Feedback log: $($data.markdown_log_path)" "OK"
+        }
+        catch {
+            Say "Feedback summary unavailable; report unreadable." "WARN"
+        }
+    } else {
+        Say "Feedback interface report missing." "WARN"
+    }
+}
+
 function Run-Compile {
     Say "NEXUS GATE human compile surface"
     Say "Detailed logs: $HumanDir"
@@ -92,11 +113,13 @@ function Run-Feedback {
     Invoke-Step "Interconnect compiler" "09_interconnect_compiler.json" { python -m nexus_gate.interconnect.compile --root . --json }
     Invoke-Step "Feedback compiler" "10_feedback_compiler.json" { python -m nexus_gate.feedback.compile --root . --json }
     Invoke-Step "Self-healing compiler" "11_self_healing_compiler.json" { python -m nexus_gate.self_healing.compile --root . --json } -AllowWarn
-    Say "Feedback/self-healing lanes passed." "OK"
+    Invoke-Step "AI feedback interface" "12_ai_feedback_interface.json" { python -m nexus_gate.feedback.interface_compile --root . --json }
+    Say "Feedback/self-healing/interface lanes passed." "OK"
+    Show-FeedbackSummary
 }
 
 function Run-Pack {
-    Invoke-Step "Pack compiler" "12_pack_compiler.json" { python -m nexus_gate.build.packer --root . --out dist --json }
+    Invoke-Step "Pack compiler" "13_pack_compiler.json" { python -m nexus_gate.build.packer --root . --out dist --json }
     Say "Pack lane passed." "OK"
 }
 
@@ -121,6 +144,9 @@ function Show-Status {
         ".\reports\nexus_interconnect_report_latest.json",
         ".\reports\nexus_feedback_report_latest.json",
         ".\reports\nexus_self_healing_report_latest.json",
+        ".\reports\nexus_feedback_interface_report_latest.json",
+        ".\state\ai_feedback_context_latest.json",
+        ".\docs\feedback\FEEDBACK_LOG.md",
         ".\dist\nexus_gate_pack_manifest_latest.json"
     )) {
         if (Test-Path $path) {
@@ -138,6 +164,7 @@ function Show-Status {
             Say "$path => missing" "WARN"
         }
     }
+    Show-FeedbackSummary
 }
 
 if ($Command -eq "gitfix") {
@@ -181,7 +208,15 @@ if ($Command -eq "feedback") {
 
 if ($Command -eq "heal") {
     Invoke-Step "Self-healing compiler" "11_self_healing_compiler.json" { python -m nexus_gate.self_healing.compile --root . --json } -AllowWarn
+    Invoke-Step "AI feedback interface" "12_ai_feedback_interface.json" { python -m nexus_gate.feedback.interface_compile --root . --json }
     Say "Self-healing feedback report written." "OK"
+    Show-FeedbackSummary
+    exit 0
+}
+
+if ($Command -eq "interface") {
+    Invoke-Step "AI feedback interface" "12_ai_feedback_interface.json" { python -m nexus_gate.feedback.interface_compile --root . --json }
+    Show-FeedbackSummary
     exit 0
 }
 

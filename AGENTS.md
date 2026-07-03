@@ -227,3 +227,23 @@ Use:
 ```
 
 Self-healing in this repo means recommendation, dry-run, apply gate, and validation evidence. It does not mean autonomous file writes or autonomous commits.
+
+
+## NEXUS v0.2.3 AI Feedback Interface
+
+Future AI systems should begin with:
+
+```text
+state/ai_feedback_context_latest.json
+docs/feedback/FEEDBACK_LOG.md
+docs/feedback/FEEDBACK_SYSTEM.md
+```
+
+Then run or ask the human to run:
+
+```powershell
+.\scripts\nexus.ps1 interface
+.\scripts\nexus.ps1 evolve
+```
+
+Do not assume autonomous write authority. Use feedback as recommendation/dry-run/apply-gate evidence.

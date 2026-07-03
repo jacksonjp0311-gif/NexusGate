@@ -12,3 +12,4 @@
 {"event":"replacement_human_surface_marker_rescue","version":"0.2.1b","timestamp_utc":"2026-07-03T11:22:35.7440463Z","fix":"restore literal compiler markers required by tests"}
 {"event":"feedback_interconnect_evolution_installed","version":"0.2.2","timestamp_utc":"2026-07-03T11:38:20.5792915Z","commands":["compact","interconnect","feedback","evolve"]}
 {"event":"self_healing_feedback_rescue_installed","version":"0.2.2b","timestamp_utc":"2026-07-03T11:45:37.8971973Z","commands":["heal","evolve"],"cms_pattern":"recommendation_to_dry_run_to_apply_gate"}
+{"event":"ai_feedback_interface_installed","version":"0.2.3","timestamp_utc":"2026-07-03T12:00:52.3133387Z","surfaces":["state/ai_feedback_context_latest.json","docs/feedback/FEEDBACK_LOG.md","docs/feedback/FEEDBACK_SYSTEM.md"]}

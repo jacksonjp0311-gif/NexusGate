@@ -1,0 +1,158 @@
+﻿{
+  "system": "NEXUS GATE",
+  "version": "0.1.6b-pack-compiler",
+  "generated_at_utc": "2026-07-03T12:01:03.682176+00:00",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "file_count": 346,
+  "total_bytes": 992337,
+  "total_lines": 31285,
+  "bundle_path": "dist/nexus_gate_source_bundle_20260703_120103.tar.gz",
+  "manifest_path": "dist/nexus_gate_pack_manifest_20260703_120103.json",
+  "largest_files": [
+    {
+      "path": "README.md",
+      "size_bytes": 26959,
+      "line_count": 970,
+      "sha256": "ee6b5dfcada3b8dbb0e6dc8cee35c6bf30d34c9ec70c176ab8fca450ac2f7e82"
+    },
+    {
+      "path": "nexus_gate/compiler/compiler.py",
+      "size_bytes": 22324,
+      "line_count": 500,
+      "sha256": "a8926ee4df1e095d7efc0544b4470cc5aa55e52af2e38ed6cba7ed8f1d9e85ab"
+    },
+    {
+      "path": "reports/human_surface/20260703_074538/12_pack_compiler.json",
+      "size_bytes": 9963,
+      "line_count": 159,
+      "sha256": "acd99e4fc0fba961cbed50bf58c4af770e68c960c2dab752388fabc9ff65a45d"
+    },
+    {
+      "path": "reports/human_surface/20260703_072404/08_pack_compiler.json",
+      "size_bytes": 9872,
+      "line_count": 159,
+      "sha256": "eb64df605dd420f45f8021cadbda1781e0c0da75f24fbe85dc3f5cfa7ee1a4be"
+    },
+    {
+      "path": "reports/human_surface/20260703_072236/08_pack_compiler.json",
+      "size_bytes": 9839,
+      "line_count": 159,
+      "sha256": "2e4a244455e81f8edc4a89a2623987bcbac0907e5b732805ce89400063c3bf5c"
+    },
+    {
+      "path": "reports/nexus_feedback_report_20260703_114542.json",
+      "size_bytes": 9784,
+      "line_count": 321,
+      "sha256": "919907fa54d76567d329187f74e6fec060326b33439a7213d56b4fedeacdc0d9"
+    },
+    {
+      "path": "reports/nexus_feedback_report_20260703_120059.json",
+      "size_bytes": 9784,
+      "line_count": 321,
+      "sha256": "26daf1d2dd3b42d04693b23daee05aed65e1ca3550371c4b3e0fb9f4a09d5b27"
+    },
+    {
+      "path": "reports/nexus_feedback_report_20260703_114544.json",
+      "size_bytes": 9765,
+      "line_count": 321,
+      "sha256": "77c2b2b7c72295e359bf1c496df0fca9b518b6cb979d6a6be00168b2f01c0b97"
+    },
+    {
+      "path": "reports/nexus_feedback_report_20260703_120054.json",
+      "size_bytes": 9753,
+      "line_count": 321,
+      "sha256": "28c4e40739dc594a5de398532620bddb30552b4c921a95bcc8ed025688ba5013"
+    },
+    {
+      "path": "reports/nexus_feedback_report_20260703_120056.json",
+      "size_bytes": 9753,
+      "line_count": 321,
+      "sha256": "9b350f043336b9dca6fbfc4e54dcf0f73389f069e02e21d79520bd5a59577270"
+    },
+    {
+      "path": "reports/nexus_feedback_report_20260703_120100.json",
+      "size_bytes": 9753,
+      "line_count": 321,
+      "sha256": "b4f47f4e61c9d824b51069f3210dea582ed1253fd80528b62ef34af85f5ddb5a"
+    },
+    {
+      "path": "reports/nexus_feedback_report_20260703_120102.json",
+      "size_bytes": 9753,
+      "line_count": 321,
+      "sha256": "19052a8d917ad3f0cbbdeb579bb4a438834ef0580cd55f4a9d69afe0ac698b50"
+    },
+    {
+      "path": "reports/nexus_feedback_report_latest.json",
+      "size_bytes": 9753,
+      "line_count": 321,
+      "sha256": "19052a8d917ad3f0cbbdeb579bb4a438834ef0580cd55f4a9d69afe0ac698b50"
+    },
+    {
+      "path": "reports/nexus_feedback_report_20260703_114540.json",
+      "size_bytes": 9751,
+      "line_count": 321,
+      "sha256": "296fe5db8a4cb03de4ff7ec264609407cd482751396208434414f32f5314fcb7"
+    },
+    {
+      "path": "reports/nexus_feedback_report_20260703_114546.json",
+      "size_bytes": 9741,
+      "line_count": 321,
+      "sha256": "1d4e7b78a3643038805c1d31db324025c4baf3d7e78da83f8eba7e77a1cc9e6d"
+    }
+  ],
+  "commands": [
+    {
+      "cmd": [
+        "C:\\Program Files\\Python312\\python.exe",
+        "-m",
+        "compileall",
+        "nexus_gate",
+        "tests"
+      ],
+      "returncode": 0,
+      "stdout_tail": "Listing 'nexus_gate'...\nListing 'nexus_gate\\\\adapters'...\nListing 'nexus_gate\\\\bridge'...\nListing 'nexus_gate\\\\build'...\nListing 'nexus_gate\\\\compiler'...\nListing 'nexus_gate\\\\core'...\nListing 'nexus_gate\\\\evidence'...\nListing 'nexus_gate\\\\feedback'...\nListing 'nexus_gate\\\\interconnect'...\nListing 'nexus_gate\\\\policies'...\nListing 'nexus_gate\\\\receptors'...\nListing 'nexus_gate\\\\runtime'...\nListing 'nexus_gate\\\\schemas'...\nListing 'nexus_gate\\\\self_healing'...\nListing 'tests'...\n",
+      "stderr_tail": ""
+    },
+    {
+      "cmd": [
+        "C:\\Program Files\\Python312\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "...................................................................\n----------------------------------------------------------------------\nRan 67 tests in 1.033s\n\nOK\n"
+    },
+    {
+      "cmd": [
+        "C:\\Program Files\\Python312\\python.exe",
+        "-m",
+        "nexus_gate.compiler",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "returncode": 0,
+      "stdout_tail": " \"evidence\": {\n        \"required\": [\n          \"docs/failure_modes/FAILURE_MODE_CHART.md\",\n          \"docs/updates/UPDATE_CHART.md\",\n          \"reports/nexus_compile_report_latest.json\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"update_chart_current\",\n      \"status\": \"pass\",\n      \"message\": \"Update chart includes current v0.1.5 state.\",\n      \"evidence\": {\n        \"required\": [\n          \"v0.1.5\",\n          \"Strict compiler\",\n          \"Cold Evidence\",\n          \"No version step without update chart entry\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"cold_evidence_contracts\",\n      \"status\": \"pass\",\n      \"message\": \"Cold evidence and wound route contracts are visible.\",\n      \"evidence\": {\n        \"contracts\": [\n          \"ShadowReport\",\n          \"ShadowFailure\",\n          \"ShadowWound\",\n          \"WoundRoute\",\n          \"ReplayCertificate\",\n          \"DemotionDecision\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"cold_evidence_engine\",\n      \"status\": \"pass\",\n      \"message\": \"Cold evidence engine classifies failure, wounds, routes, and certifies replay.\",\n      \"evidence\": {\n        \"failure\": \"shadow_failure_unrouted\",\n        \"wound_status\": \"open\",\n        \"route_action\": \"replay\",\n        \"replay_passed\": true\n      }\n    },\n    {\n      \"gate\": \"forbidden_bypass_scan\",\n      \"status\": \"pass\",\n      \"message\": \"No forbidden bypass markers found.\",\n      \"evidence\": {\n        \"markers\": [\n          \"bypass_authority=True\",\n          \"skip_authority_gate=True\",\n          \"disable_ledger=True\",\n          \"unsafe_engage=True\",\n          \"allow_mutation_without_authority\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"direct_compiler_calls\",\n      \"status\": \"pass\",\n      \"message\": \"Compile/loop/promote/strict scripts call the gated compiler directly.\",\n      \"evidence\": {\n        \"checked\": [\n          \"scripts/nexus.ps1\",\n          \"scripts/nexus_compile.ps1\",\n          \"scripts/nexus_once.ps1\",\n          \"scripts/nexus_dev_loop.ps1\",\n          \"scripts/nexus_promote.ps1\",\n          \"scripts/nexus_strict_compile.ps1\",\n          \"scripts/nexus.sh\",\n          \"scripts/nexus_compile.sh\",\n          \"scripts/nexus_once.sh\",\n          \"scripts/nexus_dev_loop.sh\",\n          \"scripts/nexus_promote.sh\",\n          \"scripts/nexus_strict_compile.sh\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"compact_commands\",\n      \"status\": \"pass\",\n      \"message\": \"Compact command surface is present.\",\n      \"evidence\": {\n        \"required\": [\n          \"scripts/nexus.ps1\",\n          \"scripts/nexus.sh\",\n          \"docs/runtime/COMPACT_COMMANDS.md\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"python_compile\",\n      \"status\": \"pass\",\n      \"message\": \"Python source compiled.\",\n      \"evidence\": {\n        \"paths\": [\n          \"nexus_gate\",\n          \"tests\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"route_contracts\",\n      \"status\": \"pass\",\n      \"message\": \"Core route contracts hold.\",\n      \"evidence\": {\n        \"decisions\": {\n          \"missing_schema\": \"reject\",\n          \"no_authority_tool\": \"shadow\",\n          \"read_only\": \"engage\"\n        }\n      }\n    },\n    {\n      \"gate\": \"unit_tests\",\n      \"status\": \"pass\",\n      \"message\": \"Unit tests passed.\",\n      \"evidence\": {\n        \"cmd\": [\n          \"C:\\\\Program Files\\\\Python312\\\\python.exe\",\n          \"-m\",\n          \"unittest\",\n          \"discover\",\n          \"-s\",\n          \"tests\"\n        ],\n        \"returncode\": 0,\n        \"stdout_tail\": \"\",\n        \"stderr_tail\": \"...................................................................\\n----------------------------------------------------------------------\\nRan 67 tests in 0.938s\\n\\nOK\\n\"\n      }\n    },\n    {\n      \"gate\": \"ledger_appendable\",\n      \"status\": \"pass\",\n      \"message\": \"Ledger is appendable.\",\n      \"evidence\": {\n        \"path\": \"ledger\\\\nexus_gate_ledger.v0.1.0.jsonl\"\n      }\n    }\n  ],\n  \"claim_boundary\": \"Local development gate only. Not a production validation, safety proof, security proof, or correctness proof.\"\n}\n",
+      "stderr_tail": ""
+    }
+  ],
+  "goal_lanes": [
+    "adapter",
+    "schema",
+    "codec",
+    "authority",
+    "hot_route",
+    "cold_evidence",
+    "wound_route",
+    "replay",
+    "disengagement",
+    "ledger",
+    "compiler"
+  ],
+  "claim_boundary": "Pack report is local engineering evidence only. Not production validation."
+}
