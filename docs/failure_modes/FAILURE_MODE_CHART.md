@@ -72,3 +72,4 @@ Boundary: this chart is a local development control. It does not prove safety, s
 - graph_visibility_claim_inflation: graph visibility is treated as proof of correctness, safety, production readiness, scientific validity, model validity, or autonomous authority.
 - snapshot_bridge_claim_inflation: TUI snapshot HTML is treated as proof, authority, validation, or runtime ownership instead of read-only evidence orientation.
 - tui_surface_state_claim_inflation: TUI surface JSON is treated as proof, authority, validation, shell execution permission, or runtime ownership.
+- snapshot_surface_pair_drift: TUI snapshot HTML and surface JSON diverge because they are not refreshed by the same operator action.

@@ -6,6 +6,7 @@ The TUI can now export a compact machine-readable surface state for Electron and
 
 ```text
 /surface
+/snapshot
 ```
 
 ## Output
@@ -13,6 +14,8 @@ The TUI can now export a compact machine-readable surface state for Electron and
 ```text
 reports/tui/nexus_tui_surface_latest.json
 ```
+
+`/surface` writes only the JSON state. `/snapshot` writes the HTML snapshot and refreshes this same JSON state as a paired Electron bridge export.
 
 ## Contents
 

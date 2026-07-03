@@ -478,6 +478,7 @@ reports/tui/nexus_tui_snapshot_latest.html</pre>
 </html>
 "@
     $html | Out-File -FilePath $path -Encoding utf8
+    Export-TuiSurfaceState
     Invoke-Item $path
     Say "Snapshot written/opened: reports\tui\nexus_tui_snapshot_latest.html" "OK"
 }
@@ -518,6 +519,7 @@ function Export-TuiSurfaceState {
         generated_utc = (Get-Date).ToUniversalTime().ToString("o")
         source = "PowerShell TUI"
         status = "pass"
+        refreshed_by = @("/surface", "/snapshot")
         health = [ordered]@{
             health_score = if ($ctx) { $ctx.health.health_score } else { $null }
             evidence_pressure = if ($ctx) { $ctx.health.evidence_pressure } elseif ($feedback) { $feedback.evidence_pressure.pressure_level } else { $null }

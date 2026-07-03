@@ -1099,3 +1099,15 @@ reports/tui/nexus_tui_surface_latest.json
 The file includes health, graph status, graph checks, missing evidence paths, command paths, read surfaces, blocked actions, and claim boundary.
 
 This is a machine-readable read-only surface. It does not mutate graph state, run arbitrary shell commands, self-authorize, bypass evolve, or prove correctness.
+
+## v0.3.1 - TUI Snapshot Surface Pair
+
+The TUI snapshot now refreshes both the HTML snapshot and the JSON surface state:
+
+```text
+/snapshot
+reports/tui/nexus_tui_snapshot_latest.html
+reports/tui/nexus_tui_surface_latest.json
+```
+
+This gives the future Electron/dashboard bridge a paired human-readable and machine-readable export from one governed operator action. The pair remains read-only evidence orientation and does not mutate graph state, run arbitrary shell commands, self-authorize, bypass evolve, or prove correctness.

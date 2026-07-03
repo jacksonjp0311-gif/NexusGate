@@ -3,6 +3,10 @@
   "version": "0.3.0",
   "kind": "tui_surface_state_index",
   "command": "/surface",
+  "refreshed_by": [
+    "/surface",
+    "/snapshot"
+  ],
   "output": "reports/tui/nexus_tui_surface_latest.json",
   "read_surfaces": [
     "state/ai_feedback_context_latest.json",

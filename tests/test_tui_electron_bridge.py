@@ -49,6 +49,20 @@ class TestTuiElectronBridge(unittest.TestCase):
         self.assertIn("reports/tui/nexus_tui_snapshot_latest.html", data["electron_read_surfaces"])
         self.assertIn("arbitrary_shell_commands", data["blocked_actions"])
 
+    def test_snapshot_surface_pair_is_documented(self):
+        state = ROOT / "state" / "tui_snapshot_surface_pair_index.v0.3.1.json"
+        self.assertTrue(state.exists())
+        data = json.loads(state.read_text(encoding="utf-8"))
+        self.assertEqual(data["command"], "/snapshot")
+        self.assertIn("reports/tui/nexus_tui_snapshot_latest.html", data["paired_outputs"])
+        self.assertIn("reports/tui/nexus_tui_surface_latest.json", data["paired_outputs"])
+        self.assertIn("/surface", data["companion_command"])
+
+        text = (ROOT / "scripts" / "nexus_tui.ps1").read_text(encoding="utf-8")
+        snapshot_start = text.index("function New-TuiSnapshot")
+        snapshot_end = text.index("function Export-TuiSurfaceState")
+        self.assertIn("Export-TuiSurfaceState", text[snapshot_start:snapshot_end])
+
 
 if __name__ == "__main__":
     unittest.main()

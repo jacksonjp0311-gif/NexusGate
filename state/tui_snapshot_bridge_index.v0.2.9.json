@@ -4,6 +4,7 @@
   "kind": "tui_snapshot_bridge_index",
   "command": "/snapshot",
   "output": "reports/tui/nexus_tui_snapshot_latest.html",
+  "companion_output": "reports/tui/nexus_tui_surface_latest.json",
   "read_surfaces": [
     "state/ai_feedback_context_latest.json",
     "state/interconnect_graph.v0.2.2.json",
@@ -21,7 +22,7 @@
     "bridge surfaces",
     "claim boundary"
   ],
-  "electron_role": "read-only mock surface before desktop shell implementation",
+  "electron_role": "read-only mock surface before desktop shell implementation; paired with companion JSON surface state as of v0.3.1",
   "blocked_actions": [
     "mutate_graph_state",
     "self_authorize",

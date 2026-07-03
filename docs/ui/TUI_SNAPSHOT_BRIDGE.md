@@ -12,6 +12,7 @@ The TUI snapshot now carries the same core evidence orientation as the interconn
 
 ```text
 reports/tui/nexus_tui_snapshot_latest.html
+reports/tui/nexus_tui_surface_latest.json
 ```
 
 ## Snapshot Sections
@@ -32,6 +33,8 @@ claim boundary
 ## Purpose
 
 This HTML file is the first Electron mock surface. It gives Electron a read-only target to mirror before any desktop shell is built.
+
+As of v0.3.1, `/snapshot` also refreshes the companion JSON surface state so Electron/dashboard consumers can pair the human HTML view with the machine-readable state export from the same operator action.
 
 ## Boundary
 

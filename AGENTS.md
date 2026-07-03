@@ -339,3 +339,20 @@ reports/tui/nexus_tui_surface_latest.json
 ```
 
 The file is a read-only state summary for Electron/dashboard consumers. It is not authority, proof, or a shell execution surface.
+
+## NEXUS v0.3.1 TUI Snapshot Surface Pair
+
+Use this inside the TUI:
+
+```powershell
+/snapshot
+```
+
+It writes both:
+
+```text
+reports/tui/nexus_tui_snapshot_latest.html
+reports/tui/nexus_tui_surface_latest.json
+```
+
+The paired export gives future Electron/dashboard consumers a human-readable view and a machine-readable state view from one governed operator action. It remains read-only evidence orientation, not authority or validation proof.
