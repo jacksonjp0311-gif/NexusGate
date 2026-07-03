@@ -1,0 +1,147 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.3.4-electron-preflight",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T19:53:31.035723+00:00",
+  "checks": [
+    {
+      "check": "electron_required_paths",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "electron_allowlist_matches_contract",
+      "status": "pass",
+      "evidence": {
+        "contract_allowlist": [
+          "compact",
+          "evolve",
+          "feedback",
+          "heal",
+          "interconnect",
+          "interface",
+          "pack",
+          "runtime",
+          "status"
+        ],
+        "scaffold_allowlist": [
+          "compact",
+          "evolve",
+          "feedback",
+          "heal",
+          "interconnect",
+          "interface",
+          "pack",
+          "runtime",
+          "status"
+        ],
+        "expected": [
+          "compact",
+          "evolve",
+          "feedback",
+          "heal",
+          "interconnect",
+          "interface",
+          "pack",
+          "runtime",
+          "status"
+        ]
+      }
+    },
+    {
+      "check": "electron_blocked_actions_complete",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "electron_required_surface_pair",
+      "status": "pass",
+      "evidence": {
+        "read_surfaces": [
+          "state/ai_feedback_context_latest.json",
+          "docs/feedback/FEEDBACK_LOG.md",
+          "docs/feedback/operator_packets/*.json",
+          "reports/nexus_feedback_interface_report_latest.json",
+          "reports/nexus_self_healing_report_latest.json",
+          "reports/tui/nexus_tui_ai_handoff_latest.txt",
+          "reports/tui/nexus_tui_snapshot_latest.html",
+          "reports/tui/nexus_tui_surface_latest.json"
+        ]
+      }
+    },
+    {
+      "check": "electron_main_security_markers",
+      "status": "pass",
+      "evidence": {
+        "missing": [],
+        "forbidden_present": []
+      }
+    },
+    {
+      "check": "electron_preload_api_limited",
+      "status": "pass",
+      "evidence": {
+        "preload_api": "nexus"
+      }
+    },
+    {
+      "check": "electron_renderer_uses_preload_bridge",
+      "status": "pass",
+      "evidence": {
+        "renderer_bridge": "window.nexus"
+      }
+    },
+    {
+      "check": "electron_package_private",
+      "status": "pass",
+      "evidence": {
+        "private": true,
+        "main": "main.js"
+      }
+    },
+    {
+      "check": "electron_claim_boundary_present",
+      "status": "pass",
+      "evidence": {
+        "boundary": "Electron read contract and scaffold are local development evidence only. They do not grant shell authority, prove correctness, prove safety, validate production readiness, or authorize autonomous action. Electron shell scaffold is local development evidence only. It is not installed, packaged, production validated, or authoritative."
+      }
+    }
+  ],
+  "read_surfaces": [
+    "state/ai_feedback_context_latest.json",
+    "docs/feedback/FEEDBACK_LOG.md",
+    "docs/feedback/operator_packets/*.json",
+    "reports/nexus_feedback_interface_report_latest.json",
+    "reports/nexus_self_healing_report_latest.json",
+    "reports/tui/nexus_tui_ai_handoff_latest.txt",
+    "reports/tui/nexus_tui_snapshot_latest.html",
+    "reports/tui/nexus_tui_surface_latest.json"
+  ],
+  "allowlisted_commands": [
+    "compact",
+    "evolve",
+    "feedback",
+    "heal",
+    "interconnect",
+    "interface",
+    "pack",
+    "runtime",
+    "status"
+  ],
+  "blocked_actions": [
+    "arbitrary_shell_commands",
+    "bypass_evolve",
+    "external_api_write",
+    "memory_promotion_without_evidence",
+    "mutate_graph_state",
+    "secret_access",
+    "self_authorize",
+    "ungated_repo_mutation"
+  ],
+  "claim_boundary": "Electron preflight is local scaffold evidence only. It does not install, package, launch, validate production readiness, grant shell authority, or authorize autonomous action."
+}

@@ -1,0 +1,40 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.3.4",
+  "kind": "electron_preflight_compiler_index",
+  "command": ".\\scripts\\nexus.ps1 electron-preflight",
+  "bash_command": "bash scripts/nexus.sh electron-preflight",
+  "module": "nexus_gate.ui.electron_preflight_compile",
+  "report": "reports/nexus_electron_preflight_report_latest.json",
+  "compiled_surfaces": [
+    "state/electron_read_contract_index.v0.3.2.json",
+    "state/electron_shell_scaffold_index.v0.3.3.json",
+    "electron/main.js",
+    "electron/preload.js",
+    "electron/renderer/renderer.js",
+    "electron/package.json"
+  ],
+  "checks": [
+    "electron_required_paths",
+    "electron_allowlist_matches_contract",
+    "electron_blocked_actions_complete",
+    "electron_required_surface_pair",
+    "electron_main_security_markers",
+    "electron_preload_api_limited",
+    "electron_renderer_uses_preload_bridge",
+    "electron_package_private",
+    "electron_claim_boundary_present"
+  ],
+  "blocked_actions": [
+    "install_dependencies",
+    "package_desktop_app",
+    "launch_electron",
+    "arbitrary_shell_commands",
+    "external_api_write",
+    "secret_access",
+    "self_authorize",
+    "mutate_graph_state",
+    "bypass_evolve"
+  ],
+  "claim_boundary": "Electron preflight compiler is local scaffold evidence only. It does not install, package, launch, validate production readiness, grant shell authority, or authorize autonomous action."
+}

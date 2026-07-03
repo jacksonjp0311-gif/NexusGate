@@ -105,3 +105,7 @@
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_191901.json","duration_ms":1959,"failed_gates":[],"timestamp_utc":"2026-07-03T19:19:01.912756+00:00"}
 {"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T19:19:08.313736+00:00"}
 {"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_191908.json","duration_ms":1969,"failed_gates":[],"timestamp_utc":"2026-07-03T19:19:08.316737+00:00"}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T19:53:04.475829+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_195304.json","duration_ms":2037,"failed_gates":[],"timestamp_utc":"2026-07-03T19:53:04.478878+00:00"}
+{"event":"compiler_ledger_gate_probe","version":"0.1.5","status":"probe","timestamp_utc":"2026-07-03T19:53:12.410180+00:00"}
+{"event":"nexus_compile","version":"0.1.5-strict-cold-evidence-compiler","status":"pass","report_path":"reports\\nexus_compile_report_20260703_195312.json","duration_ms":3002,"failed_gates":[],"timestamp_utc":"2026-07-03T19:53:12.418182+00:00"}

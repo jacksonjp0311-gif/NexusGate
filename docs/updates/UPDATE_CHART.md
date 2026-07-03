@@ -79,3 +79,5 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.3.2 | Electron Read Contract | current | Adds a contract-only Electron/dashboard read surface gate with allowlisted commands, paired TUI exports, blocked actions, and claim boundary tests. |
 
 | v0.3.3 | Electron Shell Scaffold | current | Adds a minimal presentation-only Electron scaffold with IPC allowlists, read-surface guards, context isolation, sandboxing, and static tests. |
+
+| v0.3.4 | Electron Preflight Compiler | current | Adds a Python preflight compiler and script lane for the Electron scaffold without installing, packaging, or launching Electron. |

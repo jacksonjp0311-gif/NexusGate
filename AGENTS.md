@@ -381,3 +381,19 @@ tests/test_electron_shell_scaffold.py
 ```
 
 It is not installed, packaged, or production validated. It must remain presentation-only, use context isolation, keep Node integration disabled, run IPC through allowlists, and use the existing NEXUS lanes instead of owning logic.
+
+## NEXUS v0.3.4 Electron Preflight Compiler
+
+Use:
+
+```powershell
+.\scripts\nexus.ps1 electron-preflight
+```
+
+It writes:
+
+```text
+reports/nexus_electron_preflight_report_latest.json
+```
+
+The preflight compiler verifies the Electron scaffold contract and guardrails. It does not install dependencies, package the desktop app, launch Electron, grant shell authority, or authorize autonomous action.

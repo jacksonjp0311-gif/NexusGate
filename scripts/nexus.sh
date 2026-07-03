@@ -22,6 +22,7 @@ case "$COMMAND" in
   feedback) python -m nexus_gate.feedback.compile --root . --json ;;
   heal) python -m nexus_gate.self_healing.compile --root . --json ;;
   interface) python -m nexus_gate.feedback.interface_compile --root . --json ;;
+  electron-preflight) python -m nexus_gate.ui.electron_preflight_compile --root . --json ;;
   tui) echo "PowerShell TUI is Windows-only. Run: .\\scripts\\nexus.ps1 tui" ;;
   ui) echo "Compatibility UI alias is Windows-only. Run: .\\scripts\\nexus.ps1 ui" ;;
   evolve)
@@ -37,6 +38,7 @@ case "$COMMAND" in
     python -m nexus_gate.feedback.compile --root . --json
     python -m nexus_gate.self_healing.compile --root . --json
     python -m nexus_gate.feedback.interface_compile --root . --json
+    python -m nexus_gate.ui.electron_preflight_compile --root . --json
     python -m nexus_gate.build.packer --root . --out dist --json
     ;;
   pack) python -m nexus_gate.build.packer --root . --out dist --json ;;

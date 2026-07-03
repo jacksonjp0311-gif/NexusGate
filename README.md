@@ -1140,3 +1140,16 @@ tests/test_electron_shell_scaffold.py
 The scaffold renders local evidence surfaces and can request only allowlisted NEXUS lanes through `scripts/nexus.ps1`. It uses context isolation, disables Node integration, enables sandboxing, and avoids arbitrary shell execution.
 
 This is not an installed or packaged desktop app. It remains a presentation-only local development surface and does not own NEXUS logic or authority.
+
+## v0.3.4 - Electron Preflight Compiler
+
+The Electron scaffold now has a local compiler lane:
+
+```powershell
+.\scripts\nexus.ps1 electron-preflight
+reports/nexus_electron_preflight_report_latest.json
+```
+
+The compiler checks required scaffold paths, read contract allowlists, blocked actions, paired snapshot/surface outputs, main-process security markers, preload API boundaries, renderer bridge usage, package privacy, and claim boundary.
+
+This is still not an Electron install, package, or launch step. It is a gate that keeps the desktop surface aligned before promotion.

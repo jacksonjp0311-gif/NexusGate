@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-preflight", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [switch]$NoGit
 )
@@ -114,12 +114,13 @@ function Run-Feedback {
     Invoke-Step "Feedback compiler" "10_feedback_compiler.json" { python -m nexus_gate.feedback.compile --root . --json }
     Invoke-Step "Self-healing compiler" "11_self_healing_compiler.json" { python -m nexus_gate.self_healing.compile --root . --json } -AllowWarn
     Invoke-Step "AI feedback interface" "12_ai_feedback_interface.json" { python -m nexus_gate.feedback.interface_compile --root . --json }
+    Invoke-Step "Electron preflight compiler" "13_electron_preflight.json" { python -m nexus_gate.ui.electron_preflight_compile --root . --json }
     Say "Feedback/self-healing/interface lanes passed." "OK"
     Show-FeedbackSummary
 }
 
 function Run-Pack {
-    Invoke-Step "Pack compiler" "13_pack_compiler.json" { python -m nexus_gate.build.packer --root . --out dist --json }
+    Invoke-Step "Pack compiler" "14_pack_compiler.json" { python -m nexus_gate.build.packer --root . --out dist --json }
     Say "Pack lane passed." "OK"
 }
 
@@ -145,6 +146,7 @@ function Show-Status {
         ".\reports\nexus_feedback_report_latest.json",
         ".\reports\nexus_self_healing_report_latest.json",
         ".\reports\nexus_feedback_interface_report_latest.json",
+        ".\reports\nexus_electron_preflight_report_latest.json",
         ".\state\ai_feedback_context_latest.json",
         ".\docs\feedback\FEEDBACK_LOG.md",
         ".\dist\nexus_gate_pack_manifest_latest.json"
@@ -217,6 +219,12 @@ if ($Command -eq "heal") {
 if ($Command -eq "interface") {
     Invoke-Step "AI feedback interface" "12_ai_feedback_interface.json" { python -m nexus_gate.feedback.interface_compile --root . --json }
     Show-FeedbackSummary
+    exit 0
+}
+
+if ($Command -eq "electron-preflight") {
+    Invoke-Step "Electron preflight compiler" "13_electron_preflight.json" { python -m nexus_gate.ui.electron_preflight_compile --root . --json }
+    Say "Electron preflight report written." "OK"
     exit 0
 }
 

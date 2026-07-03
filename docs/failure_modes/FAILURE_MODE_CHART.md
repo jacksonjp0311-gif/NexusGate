@@ -75,3 +75,4 @@ Boundary: this chart is a local development control. It does not prove safety, s
 - snapshot_surface_pair_drift: TUI snapshot HTML and surface JSON diverge because they are not refreshed by the same operator action.
 - electron_contract_drift: Electron/dashboard plan gains read surfaces or commands outside the tested contract.
 - electron_shell_authority_leak: Electron scaffold exposes Node integration, arbitrary shell execution, graph mutation, secret access, or bypasses NEXUS lanes.
+- electron_preflight_missing: Electron scaffold exists without a compiled preflight report in the normal evolve evidence chain.
