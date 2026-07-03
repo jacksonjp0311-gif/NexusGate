@@ -1125,3 +1125,18 @@ tests/test_electron_read_contract.py
 The contract fixes the read surfaces, `/snapshot` paired outputs, governed command allowlist, blocked actions, and claim boundary before any Electron app is built.
 
 Electron remains presentation only. It may not run arbitrary shell commands, mutate graph state, bypass evolve, self-authorize, access secrets, write external APIs, or claim validation proof.
+
+## v0.3.3 - Electron Shell Scaffold
+
+NEXUS GATE now includes a minimal future Electron operator shell scaffold:
+
+```text
+electron/
+docs/ui/ELECTRON_SHELL_SCAFFOLD.md
+state/electron_shell_scaffold_index.v0.3.3.json
+tests/test_electron_shell_scaffold.py
+```
+
+The scaffold renders local evidence surfaces and can request only allowlisted NEXUS lanes through `scripts/nexus.ps1`. It uses context isolation, disables Node integration, enables sandboxing, and avoids arbitrary shell execution.
+
+This is not an installed or packaged desktop app. It remains a presentation-only local development surface and does not own NEXUS logic or authority.

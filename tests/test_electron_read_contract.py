@@ -16,7 +16,10 @@ class TestElectronReadContract(unittest.TestCase):
 
     def test_contract_docs_and_state_exist(self):
         self.assertTrue((ROOT / "docs" / "ui" / "ELECTRON_READ_CONTRACT.md").exists())
-        self.assertEqual(self.contract["implementation_status"], "contract_only_no_electron_app")
+        self.assertEqual(
+            self.contract["implementation_status"],
+            "contract_with_minimal_scaffold_v0.3.3",
+        )
 
     def test_read_surfaces_include_tui_pair(self):
         surfaces = self.contract["read_surfaces"]
@@ -60,7 +63,7 @@ class TestElectronReadContract(unittest.TestCase):
             "bypass_evolve",
         ]:
             self.assertIn(action, blocked)
-        self.assertIn("does not build Electron", self.contract["claim_boundary"])
+        self.assertIn("do not grant shell authority", self.contract["claim_boundary"])
         self.assertIn("authorize autonomous action", self.contract["claim_boundary"])
 
     def test_existing_bridge_index_matches_contract_surfaces(self):

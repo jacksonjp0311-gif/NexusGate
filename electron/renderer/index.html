@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEXUS GATE Operator</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="topbar">
+      <div>
+        <h1>NEXUS GATE</h1>
+        <p id="boundary">Presentation-only operator surface</p>
+      </div>
+      <div class="status" id="status">hydrating</div>
+    </section>
+
+    <section class="metrics" aria-label="NEXUS metrics">
+      <article>
+        <span>Health</span>
+        <strong id="health">unknown</strong>
+      </article>
+      <article>
+        <span>Pressure</span>
+        <strong id="pressure">unknown</strong>
+      </article>
+      <article>
+        <span>Graph</span>
+        <strong id="graph">unknown</strong>
+      </article>
+      <article>
+        <span>Next</span>
+        <strong id="next">Run evolve</strong>
+      </article>
+    </section>
+
+    <section class="workspace">
+      <nav class="lanes" id="lanes" aria-label="Governed NEXUS lanes"></nav>
+      <pre class="output" id="output">Loading NEXUS surfaces...</pre>
+    </section>
+  </main>
+  <script src="./renderer.js"></script>
+</body>
+</html>

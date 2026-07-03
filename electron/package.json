@@ -1,0 +1,13 @@
+{
+  "name": "nexus-gate-electron-shell",
+  "version": "0.3.3",
+  "private": true,
+  "description": "Presentation-only Electron shell scaffold for NEXUS GATE evidence surfaces.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}

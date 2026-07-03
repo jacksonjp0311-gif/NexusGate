@@ -1,0 +1,43 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.3.3",
+  "kind": "electron_shell_scaffold_index",
+  "status": "scaffold_only_not_packaged",
+  "root": "electron/",
+  "entrypoints": {
+    "main": "electron/main.js",
+    "preload": "electron/preload.js",
+    "renderer": "electron/renderer/index.html"
+  },
+  "read_contract": "state/electron_read_contract_index.v0.3.2.json",
+  "allowlisted_commands": [
+    "evolve",
+    "interface",
+    "feedback",
+    "heal",
+    "status",
+    "compact",
+    "interconnect",
+    "runtime",
+    "pack"
+  ],
+  "security_controls": [
+    "contextIsolation_true",
+    "nodeIntegration_false",
+    "sandbox_true",
+    "spawn_shell_false",
+    "no_exec",
+    "allowlisted_ipc_only"
+  ],
+  "blocked_actions": [
+    "arbitrary_shell_commands",
+    "external_api_write",
+    "secret_access",
+    "self_authorize",
+    "memory_promotion_without_evidence",
+    "ungated_repo_mutation",
+    "mutate_graph_state",
+    "bypass_evolve"
+  ],
+  "claim_boundary": "Electron shell scaffold is local development evidence only. It is not installed, packaged, production validated, or authoritative."
+}

@@ -368,3 +368,16 @@ tests/test_electron_read_contract.py
 ```
 
 Electron/dashboard surfaces may read declared evidence files and request only allowlisted NEXUS lanes. They must not run arbitrary shell commands, mutate graph state, bypass evolve, access secrets, write external APIs, self-authorize, or claim validation proof.
+
+## NEXUS v0.3.3 Electron Shell Scaffold
+
+The Electron scaffold lives under:
+
+```text
+electron/
+docs/ui/ELECTRON_SHELL_SCAFFOLD.md
+state/electron_shell_scaffold_index.v0.3.3.json
+tests/test_electron_shell_scaffold.py
+```
+
+It is not installed, packaged, or production validated. It must remain presentation-only, use context isolation, keep Node integration disabled, run IPC through allowlists, and use the existing NEXUS lanes instead of owning logic.

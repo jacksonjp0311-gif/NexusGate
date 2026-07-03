@@ -47,6 +47,6 @@
     "python -m unittest discover -s tests",
     ".\\scripts\\nexus.ps1 evolve"
   ],
-  "implementation_status": "contract_only_no_electron_app",
-  "claim_boundary": "Electron read contract is local development evidence only. It does not build Electron, grant shell authority, prove correctness, prove safety, validate production readiness, or authorize autonomous action."
+  "implementation_status": "contract_with_minimal_scaffold_v0.3.3",
+  "claim_boundary": "Electron read contract and scaffold are local development evidence only. They do not grant shell authority, prove correctness, prove safety, validate production readiness, or authorize autonomous action."
 }
