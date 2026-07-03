@@ -788,3 +788,36 @@ New compact command:
 ```
 
 This remains local development evidence only. It proves the local bridge session mechanics, not production interoperability.
+
+
+## v0.2.0 - Bounded Bridge Runtime
+
+NEXUS GATE now has the first bounded local bridge runtime.
+
+Runtime flow:
+
+```text
+raw event batch
+  -> BoundedBridgeRuntime
+  -> BridgeSessionRunner per event
+  -> BridgeSessionReport per event
+  -> BoundedRuntimeReport
+```
+
+Runtime law:
+
+```text
+No runtime without event limit.
+No runtime without bridge session reports.
+No runtime without summary counts.
+No runtime without claim boundary.
+No promotion without runtime compiler pass.
+```
+
+New command:
+
+```powershell
+.\scripts\nexus.ps1 runtime
+```
+
+This is local development evidence only. It proves bounded runtime mechanics, not production interoperability.

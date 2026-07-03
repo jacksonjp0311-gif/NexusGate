@@ -19,7 +19,8 @@ This chart must be visible during rehydration.
 | v0.1.7 | Adapter Registry + LocalDemoAdapter | pass | Adds adapter registry, manifest compiler, and first demo adapter. |
 | v0.1.8 | Receptor Registry + Compatibility Compiler | pass | Adds receptor manifests, receptor registry, compatibility decisions, and receptor compiler. |
 | v0.1.9 | Bridge Session Runner | failed | StatePacket lacked to_dict and compact script dropped FAILURE_MODE_CHART marker. |
-| v0.1.9b | Bridge Session Rescue | current | Adds safe packet serialization and restores compact marker visibility. |
+| v0.1.9b | Bridge Session Rescue | pass | Adds safe packet serialization and restores compact marker visibility. |
+| v0.2.0 | Bounded Bridge Runtime | current | Adds bounded runtime, runtime compiler, runtime report, and compact runtime command. |
 
 ## Current Required Update Rule
 

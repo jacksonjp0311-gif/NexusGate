@@ -7,3 +7,4 @@
 {"event":"receptor_registry_compatibility_installed","version":"0.1.8","timestamp_utc":"2026-07-03T10:24:33.4903303Z","hard_law":"No receptor, no transfer target."}
 {"event":"bridge_session_runner_installed","version":"0.1.9","timestamp_utc":"2026-07-03T10:29:40.8994518Z","hard_law":"No bridge session without receptor compatibility."}
 {"event":"bridge_session_rescue_installed","version":"0.1.9b","timestamp_utc":"2026-07-03T10:32:21.4256903Z","fixes":["statepacket_to_dict_missing","compact_marker_gate_dropped"]}
+{"event":"bounded_bridge_runtime_installed","version":"0.2.0","timestamp_utc":"2026-07-03T10:34:39.2437482Z","hard_law":"No runtime without event limit."}

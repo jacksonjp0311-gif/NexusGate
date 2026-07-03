@@ -38,6 +38,7 @@ show_rehydration() {
   [[ -f docs/adapters/ADAPTER_REGISTRY.md ]] && sed -n '1,80p' docs/adapters/ADAPTER_REGISTRY.md
   [[ -f docs/receptors/RECEPTOR_REGISTRY.md ]] && sed -n '1,80p' docs/receptors/RECEPTOR_REGISTRY.md
   [[ -f docs/bridge/BRIDGE_SESSION_RUNNER.md ]] && sed -n '1,80p' docs/bridge/BRIDGE_SESSION_RUNNER.md
+  [[ -f docs/bridge/BOUNDED_BRIDGE_RUNTIME.md ]] && sed -n '1,80p' docs/bridge/BOUNDED_BRIDGE_RUNTIME.md
   [[ -f docs/failure_modes/FAILURE_MODE_CHART.md ]] && sed -n '1,80p' docs/failure_modes/FAILURE_MODE_CHART.md
   [[ -f docs/updates/UPDATE_CHART.md ]] && sed -n '1,80p' docs/updates/UPDATE_CHART.md
   [[ -f reports/nexus_compile_report_latest.json ]] && cat reports/nexus_compile_report_latest.json
@@ -49,9 +50,10 @@ show_status() {
   [[ -f state/adapter_registry_index.v0.1.7.json ]] && cat state/adapter_registry_index.v0.1.7.json
   [[ -f state/receptor_registry_index.v0.1.8.json ]] && cat state/receptor_registry_index.v0.1.8.json
   [[ -f state/bridge_session_index.v0.1.9.json ]] && cat state/bridge_session_index.v0.1.9.json
+  [[ -f state/bounded_bridge_runtime_index.v0.2.0.json ]] && cat state/bounded_bridge_runtime_index.v0.2.0.json
+  [[ -f reports/nexus_runtime_compile_report_latest.json ]] && cat reports/nexus_runtime_compile_report_latest.json
+  [[ -f reports/nexus_bounded_runtime_report_latest.json ]] && cat reports/nexus_bounded_runtime_report_latest.json
   [[ -f reports/nexus_bridge_compile_report_latest.json ]] && cat reports/nexus_bridge_compile_report_latest.json
-  [[ -f reports/nexus_receptor_compile_report_latest.json ]] && cat reports/nexus_receptor_compile_report_latest.json
-  [[ -f reports/nexus_adapter_compile_report_latest.json ]] && cat reports/nexus_adapter_compile_report_latest.json
   [[ -f reports/nexus_compile_report_latest.json ]] && cat reports/nexus_compile_report_latest.json
   [[ -f dist/nexus_gate_pack_manifest_latest.json ]] && cat dist/nexus_gate_pack_manifest_latest.json
   git status --short || true
@@ -74,11 +76,12 @@ promote() {
   py -m nexus_gate.adapters.compile --root .
   py -m nexus_gate.receptors.compile --root .
   py -m nexus_gate.bridge.compile --root .
+  py -m nexus_gate.bridge.runtime_compiler --root .
   py -m nexus_gate.build.packer --root . --out dist
   if command -v git >/dev/null 2>&1 && [[ "$no_commit" -ne 1 ]]; then
     git add .
     if [[ -n "$(git status --porcelain)" ]]; then
-      git commit -m "chore: promote NEXUS GATE bridge session packed pass"
+      git commit -m "chore: promote NEXUS GATE bounded runtime packed pass"
     fi
   fi
   if command -v git >/dev/null 2>&1 && [[ -n "$tag" ]]; then git tag "$tag"; fi
@@ -93,10 +96,11 @@ case "$cmd" in
   adapters) bash scripts/nexus_adapter_compile.sh ;;
   receptors) bash scripts/nexus_receptor_compile.sh ;;
   bridge) bash scripts/nexus_bridge_demo.sh ;;
+  runtime) bash scripts/nexus_runtime.sh ;;
   once) run_compiler; echo "[OK] Once passed." ;;
   loop) run_loop 0 ;;
   watch) run_loop 1 ;;
   status) show_status ;;
   promote) promote ;;
-  *) echo "[FAIL] Unknown command: $cmd"; echo "Commands: rehydrate, compile, strict, pack, adapters, receptors, bridge, once, loop, watch, status, promote"; exit 2 ;;
+  *) echo "[FAIL] Unknown command: $cmd"; echo "Commands: rehydrate, compile, strict, pack, adapters, receptors, bridge, runtime, once, loop, watch, status, promote"; exit 2 ;;
 esac

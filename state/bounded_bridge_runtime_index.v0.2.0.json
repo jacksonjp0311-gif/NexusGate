@@ -1,0 +1,26 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.0",
+  "kind": "bounded_bridge_runtime_index",
+  "current_runtime": "nexus_gate.bridge.runtime.BoundedBridgeRuntime",
+  "flow": [
+    "raw_event_batch",
+    "BoundedBridgeRuntime",
+    "BridgeSessionRunner",
+    "BridgeSessionReport",
+    "BoundedRuntimeReport"
+  ],
+  "runtime_law": [
+    "No runtime without event limit.",
+    "No runtime without bridge session reports.",
+    "No runtime without summary counts.",
+    "No runtime without claim boundary.",
+    "No promotion without runtime compiler pass."
+  ],
+  "next_runtime_targets": [
+    "local_function_bridge",
+    "readonly_filesystem_bridge",
+    "browser_snapshot_bridge"
+  ],
+  "claim_boundary": "Bounded runtime index is local development evidence only."
+}

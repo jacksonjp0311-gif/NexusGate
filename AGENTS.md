@@ -163,3 +163,26 @@ No bridge session without route decision.
 No bridge session without receptor compatibility.
 No bridge report without claim boundary.
 ```
+
+
+## Bounded Bridge Runtime Contract
+
+Before adding a real external bridge, the agent must inspect:
+
+```text
+docs/bridge/BOUNDED_BRIDGE_RUNTIME.md
+state/bounded_bridge_runtime_index.v0.2.0.json
+nexus_gate/bridge/runtime.py
+nexus_gate/bridge/runtime_compiler.py
+reports/nexus_bounded_runtime_report_latest.json
+```
+
+Hard rules:
+
+```text
+No runtime without event limit.
+No runtime without bridge session reports.
+No runtime without summary counts.
+No runtime without claim boundary.
+No promotion without runtime compiler pass.
+```
