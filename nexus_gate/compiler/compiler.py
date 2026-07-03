@@ -13,6 +13,7 @@ from typing import Any
 
 from nexus_gate.compiler.gates import GateResult
 from nexus_gate.core.packets import StatePacket
+from nexus_gate.evidence.cold import ColdEvidenceEngine, ShadowReport
 from nexus_gate.evidence.ledger import JsonlLedger
 from nexus_gate.runtime.router import NexusRouter
 
@@ -30,23 +31,39 @@ REQUIRED_PATHS = [
     "nexus_gate/runtime/router.py",
     "nexus_gate/policies/authority.py",
     "nexus_gate/evidence/failure_modes.py",
+    "nexus_gate/evidence/cold.py",
     "schemas/state_packet.v0.1.3.schema.json",
     "schemas/failure_mode.v0.1.3.schema.json",
-    "registry/nexus_gate_manifest.v0.1.3.json",
+    "schemas/shadow_report.v0.1.5.schema.json",
+    "schemas/wound_route.v0.1.5.schema.json",
+    "registry/nexus_gate_manifest.v0.1.5.json",
     "state/nexus_gate_state.v0.1.3.json",
+    "state/failure_mode_index.v0.1.4.json",
+    "state/update_index.v0.1.4.json",
+    "state/cold_evidence_index.v0.1.5.json",
     "ledger/nexus_gate_ledger.v0.1.0.jsonl",
     "docs/context/repository_context_index.json",
     "docs/context/rcc_nexus_index.json",
     "docs/context/validation_surface.md",
+    "docs/context/REHYDRATION_BOOT.md",
+    "docs/context/rehydration_manifest.v0.1.4.json",
     "docs/failure_modes/FAILURE_MODES.md",
+    "docs/failure_modes/FAILURE_MODE_CHART.md",
+    "docs/failure_modes/WOUND_ROUTING.md",
+    "docs/updates/UPDATE_CHART.md",
+    "docs/evidence/COLD_EVIDENCE_ENGINE.md",
     "docs/runtime/GATED_RUNTIME_LOOP.md",
     "docs/runtime/RELEASE_GATES.md",
     "docs/runtime/CROSS_PLATFORM_COMMANDS.md",
+    "docs/runtime/COMPACT_COMMANDS.md",
+    "docs/runtime/STRICT_COMPILER.md",
     "rcc/nexus/README.md",
     "rcc/nexus/route_map.json",
     "rcc/nexus/task_routing_matrix.md",
     "rcc/nexus/echo_location_template.md",
     "rcc/nexus/agent_handoff_contract.md",
+    "scripts/nexus.ps1",
+    "scripts/nexus.sh",
     "scripts/nexus_compile.ps1",
     "scripts/nexus_once.ps1",
     "scripts/nexus_dev_loop.ps1",
@@ -55,6 +72,8 @@ REQUIRED_PATHS = [
     "scripts/nexus_once.sh",
     "scripts/nexus_dev_loop.sh",
     "scripts/nexus_promote.sh",
+    "scripts/nexus_strict_compile.ps1",
+    "scripts/nexus_strict_compile.sh",
 ]
 
 MINI_README_DIRS = [
@@ -85,6 +104,8 @@ REQUIRED_README_MARKERS = [
     "Failure Modes",
     "No RHP alignment, no durable mutation.",
     "No mini README, no blind patching.",
+    "Every new runtime loop must exist in both PowerShell and Bash.",
+    "No rehydration without failure chart visibility.",
 ]
 
 REQUIRED_RUNTIME_LAWS = [
@@ -94,17 +115,22 @@ REQUIRED_RUNTIME_LAWS = [
     "No replay certificate, no memory promotion.",
     "No wound route, no retrust.",
     "No ledger stub, no compounding.",
+    "No shadow failure without wound route.",
 ]
 
 MUST_CALL_COMPILER_DIRECTLY = [
+    "scripts/nexus.ps1",
     "scripts/nexus_compile.ps1",
     "scripts/nexus_once.ps1",
     "scripts/nexus_dev_loop.ps1",
     "scripts/nexus_promote.ps1",
+    "scripts/nexus_strict_compile.ps1",
+    "scripts/nexus.sh",
     "scripts/nexus_compile.sh",
     "scripts/nexus_once.sh",
     "scripts/nexus_dev_loop.sh",
     "scripts/nexus_promote.sh",
+    "scripts/nexus_strict_compile.sh",
 ]
 
 FORBIDDEN_BYPASS_MARKERS = [
@@ -148,18 +174,15 @@ class NexusCompiler:
 
     def gate_readme_trisection(self) -> None:
         path = self.root / "README.md"
-        if not path.exists():
-            self.add("readme_trisection", "fail", "README.md is missing.", {})
-            return
-        text = path.read_text(encoding="utf-8", errors="ignore")
+        text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
         missing = [m for m in REQUIRED_README_MARKERS if m not in text]
         if missing:
-            self.add("readme_trisection", "fail", "README missing required Human/RHP Nexus/AI markers.", {"missing": missing})
+            self.add("readme_trisection", "fail", "README missing required markers.", {"missing": missing})
             return
-        self.add("readme_trisection", "pass", "README contains Human/RHP Nexus/AI trisection.", {"markers": REQUIRED_README_MARKERS})
+        self.add("readme_trisection", "pass", "README contains Human/RHP Nexus/AI and rehydration markers.", {"markers": REQUIRED_README_MARKERS})
 
     def gate_manifest_runtime_laws(self) -> None:
-        manifest_path = self.root / "registry" / "nexus_gate_manifest.v0.1.3.json"
+        manifest_path = self.root / "registry" / "nexus_gate_manifest.v0.1.5.json"
         if not manifest_path.exists():
             self.add("runtime_laws", "fail", "Manifest missing.", {"path": str(manifest_path)})
             return
@@ -176,7 +199,12 @@ class NexusCompiler:
         self.add("runtime_laws", "pass", "Required runtime laws are present.", {"required": REQUIRED_RUNTIME_LAWS})
 
     def gate_json_files_parse(self) -> None:
-        json_files = list(self.root.glob("schemas/*.json")) + list(self.root.glob("registry/*.json")) + list(self.root.glob("state/*.json")) + list((self.root / "docs/context").glob("*.json")) + list((self.root / "rcc/nexus").glob("*.json"))
+        roots = ["schemas", "registry", "state", "docs/context", "rcc/nexus"]
+        json_files: list[Path] = []
+        for rel in roots:
+            root = self.root / rel
+            if root.exists():
+                json_files.extend(root.glob("*.json"))
         failures = []
         for path in json_files:
             try:
@@ -205,14 +233,107 @@ class NexusCompiler:
         self.add("mini_readmes", "pass", "Mini README Echo Location coverage passed.", {"count": len(MINI_README_DIRS)})
 
     def gate_failure_modes(self) -> None:
-        path = self.root / "docs/failure_modes/FAILURE_MODES.md"
+        path = self.root / "docs/failure_modes/FAILURE_MODE_CHART.md"
         text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
-        required = ["schema_missing", "authority_unverified", "origin_dehydrated", "compiler_failed", "mini_readme_missing", "ledger_unavailable"]
+        required = [
+            "schema_missing",
+            "authority_unverified",
+            "origin_dehydrated",
+            "compiler_failed",
+            "mini_readme_missing",
+            "ledger_unavailable",
+            "shadow_failure_unrouted",
+            "replay_missing",
+            "bash_env_unavailable",
+        ]
         missing = [item for item in required if item not in text]
         if missing:
-            self.add("failure_modes", "fail", "Failure-mode registry is incomplete.", {"missing": missing})
+            self.add("failure_modes", "fail", "Failure-mode chart is incomplete.", {"missing": missing})
             return
-        self.add("failure_modes", "pass", "Failure-mode registry contains required modes.", {"required": required})
+        self.add("failure_modes", "pass", "Failure-mode chart contains required modes.", {"required": required})
+
+    def gate_rehydration_visibility(self) -> None:
+        manifest_path = self.root / "docs/context/rehydration_manifest.v0.1.4.json"
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            self.add("rehydration_visibility", "fail", "Rehydration manifest failed to parse.", {"error": str(exc)})
+            return
+        required = [
+            "docs/failure_modes/FAILURE_MODE_CHART.md",
+            "docs/updates/UPDATE_CHART.md",
+            "reports/nexus_compile_report_latest.json",
+        ]
+        declared = manifest.get("agent_must_read_before_patch", [])
+        missing = [item for item in required if item not in declared]
+        if missing:
+            self.add("rehydration_visibility", "fail", "Rehydration manifest missing visibility surfaces.", {"missing": missing})
+            return
+        self.add("rehydration_visibility", "pass", "Rehydration requires failure/update/report visibility.", {"required": required})
+
+    def gate_update_chart_current(self) -> None:
+        path = self.root / "docs/updates/UPDATE_CHART.md"
+        text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
+        required = ["v0.1.5", "Strict compiler", "Cold Evidence", "No version step without update chart entry"]
+        missing = [item for item in required if item not in text]
+        if missing:
+            self.add("update_chart_current", "fail", "Update chart missing current v0.1.5 state.", {"missing": missing})
+            return
+        self.add("update_chart_current", "pass", "Update chart includes current v0.1.5 state.", {"required": required})
+
+    def gate_cold_evidence_contracts(self) -> None:
+        doc = self.root / "docs/evidence/COLD_EVIDENCE_ENGINE.md"
+        wound = self.root / "docs/failure_modes/WOUND_ROUTING.md"
+        index = self.root / "state/cold_evidence_index.v0.1.5.json"
+        for path in [doc, wound, index]:
+            if not path.exists():
+                self.add("cold_evidence_contracts", "fail", "Cold evidence surface missing.", {"missing": str(path.relative_to(self.root))})
+                return
+        text = doc.read_text(encoding="utf-8", errors="ignore") + "\n" + wound.read_text(encoding="utf-8", errors="ignore")
+        required = ["ShadowReport", "ShadowFailure", "ShadowWound", "WoundRoute", "ReplayCertificate", "DemotionDecision"]
+        missing = [item for item in required if item not in text]
+        if missing:
+            self.add("cold_evidence_contracts", "fail", "Cold evidence docs missing required contracts.", {"missing": missing})
+            return
+
+        try:
+            data = json.loads(index.read_text(encoding="utf-8"))
+        except Exception as exc:
+            self.add("cold_evidence_contracts", "fail", "Cold evidence index failed to parse.", {"error": str(exc)})
+            return
+
+        if not data.get("rehydration_required", False):
+            self.add("cold_evidence_contracts", "fail", "Cold evidence index must be visible on rehydration.", {})
+            return
+
+        self.add("cold_evidence_contracts", "pass", "Cold evidence and wound route contracts are visible.", {"contracts": required})
+
+    def gate_cold_evidence_engine(self) -> None:
+        engine = ColdEvidenceEngine()
+        report = ShadowReport(
+            report_id="compiler-shadow-report",
+            packet_id="compiler-packet",
+            route_mode="shadow",
+            observed_result="tool_call_without_authority",
+            expected_boundary="must_not_engage",
+            passed=False,
+        )
+        failure = engine.classify_shadow_report(report)
+        if failure is None:
+            self.add("cold_evidence_engine", "fail", "Failed shadow report did not classify.", {})
+            return
+        wound = engine.create_wound(failure, affected_surface="compiler")
+        route = engine.route_wound(wound)
+        cert = engine.certify_replay(wound, replay_passed=True, replay_report_path="reports/compiler_replay.json")
+        if route.replay_required and cert.memory_promotion_allowed:
+            self.add("cold_evidence_engine", "pass", "Cold evidence engine classifies failure, wounds, routes, and certifies replay.", {
+                "failure": failure.failure_mode,
+                "wound_status": wound.status,
+                "route_action": route.action,
+                "replay_passed": cert.replay_passed,
+            })
+            return
+        self.add("cold_evidence_engine", "fail", "Cold evidence engine contract failed.", {})
 
     def gate_forbidden_bypass_markers(self) -> None:
         findings = []
@@ -247,7 +368,19 @@ class NexusCompiler:
         if missing_calls:
             self.add("direct_compiler_calls", "fail", "A required script does not call the gated compiler directly.", {"missing_calls": missing_calls})
             return
-        self.add("direct_compiler_calls", "pass", "Compile/once/loop/promote scripts call the gated compiler directly.", {"checked": MUST_CALL_COMPILER_DIRECTLY})
+        self.add("direct_compiler_calls", "pass", "Compile/loop/promote/strict scripts call the gated compiler directly.", {"checked": MUST_CALL_COMPILER_DIRECTLY})
+
+    def gate_compact_commands(self) -> None:
+        required = ["scripts/nexus.ps1", "scripts/nexus.sh", "docs/runtime/COMPACT_COMMANDS.md"]
+        missing = [rel for rel in required if not (self.root / rel).exists()]
+        if missing:
+            self.add("compact_commands", "fail", "Compact command surface missing.", {"missing": missing})
+            return
+        text = (self.root / "docs/runtime/COMPACT_COMMANDS.md").read_text(encoding="utf-8", errors="ignore")
+        if "One command surface." not in text or "Less syntax." not in text:
+            self.add("compact_commands", "fail", "Compact command docs missing command law.", {})
+            return
+        self.add("compact_commands", "pass", "Compact command surface is present.", {"required": required})
 
     def gate_python_compile(self) -> None:
         ok = compileall.compile_dir(str(self.root / "nexus_gate"), quiet=1)
@@ -260,9 +393,9 @@ class NexusCompiler:
     def gate_route_contracts(self) -> None:
         router = NexusRouter()
         cases = {
-            "missing_schema": StatePacket("p1", "test", "unit", "", "0.1.3", "read_only_signal", {}),
-            "no_authority_tool": StatePacket("p2", "test", "unit", "NEXUS_STATE_PACKET", "0.1.3", "tool_call", {}, authority_scope=[]),
-            "read_only": StatePacket("p3", "test", "unit", "NEXUS_STATE_PACKET", "0.1.3", "read_only_signal", {}, authority_scope=[]),
+            "missing_schema": StatePacket("p1", "test", "unit", "", "0.1.5", "read_only_signal", {}),
+            "no_authority_tool": StatePacket("p2", "test", "unit", "NEXUS_STATE_PACKET", "0.1.5", "tool_call", {}, authority_scope=[]),
+            "read_only": StatePacket("p3", "test", "unit", "NEXUS_STATE_PACKET", "0.1.5", "read_only_signal", {}, authority_scope=[]),
         }
         decisions = {name: router.route(packet).mode for name, packet in cases.items()}
         expected = {"missing_schema": "reject", "no_authority_tool": "shadow", "read_only": "engage"}
@@ -288,7 +421,7 @@ class NexusCompiler:
         ledger_path = self.root / "ledger" / "nexus_gate_ledger.v0.1.0.jsonl"
         try:
             ledger = JsonlLedger(ledger_path)
-            ledger.append({"event": "compiler_ledger_gate_probe", "version": "0.1.3", "status": "probe"})
+            ledger.append({"event": "compiler_ledger_gate_probe", "version": "0.1.5", "status": "probe"})
         except Exception as exc:
             self.add("ledger_appendable", "fail", "Ledger append failed.", {"error": str(exc)})
             return
@@ -302,8 +435,13 @@ class NexusCompiler:
         self.gate_json_files_parse()
         self.gate_mini_readmes()
         self.gate_failure_modes()
+        self.gate_rehydration_visibility()
+        self.gate_update_chart_current()
+        self.gate_cold_evidence_contracts()
+        self.gate_cold_evidence_engine()
         self.gate_forbidden_bypass_markers()
         self.gate_direct_compiler_calls()
+        self.gate_compact_commands()
         self.gate_python_compile()
         self.gate_route_contracts()
         self.gate_unit_tests()
@@ -312,7 +450,7 @@ class NexusCompiler:
         status = "pass" if not failed else "fail"
         return CompileReport(
             system="NEXUS GATE",
-            version="0.1.3-rhp-nexus-ai-compiler",
+            version="0.1.5-strict-cold-evidence-compiler",
             root=str(self.root),
             status=status,
             generated_at_utc=datetime.now(timezone.utc).isoformat(),

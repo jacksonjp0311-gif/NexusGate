@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-gate.local/schemas/wound_route.v0.1.5.json",
+  "title": "NEXUS GATE WoundRoute v0.1.5",
+  "type": "object",
+  "required": [
+    "route_id",
+    "wound_id",
+    "action",
+    "reason",
+    "replay_required"
+  ],
+  "properties": {
+    "route_id": {
+      "type": "string"
+    },
+    "wound_id": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "replay_required": {
+      "type": "boolean"
+    },
+    "timestamp_utc": {
+      "type": "string"
+    },
+    "claim_boundary": {
+      "type": "string"
+    }
+  }
+}

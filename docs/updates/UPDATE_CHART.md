@@ -14,7 +14,8 @@ This chart must be visible during rehydration.
 | v0.1.3d | Portable RHP/Nexus/AI shell. | failed | README omitted exact dual-shell rule required by existing test. |
 | v0.1.4 | Rehydration failure/update chart. | wrapper failed | Indented here-string broke PowerShell parsing. |
 | v0.1.4b | Safe rehydration failure/update chart. | pass-core | Python compile, tests, compiler, PowerShell rehydrate passed; Bash failed because WSL had no installed distro. |
-| v0.1.4c | Compact runtime surface. | current | Adds `scripts/nexus.ps1`, `scripts/nexus.sh`, and safe Bash validation detection. |
+| v0.1.4c | Compact runtime surface. | pass | Compact PowerShell passed, unusable Bash skipped, committed checkpoint. |
+| v0.1.5 | Strict compiler + Cold Evidence | current | Adds cold evidence contracts, wound routing, strict compiler gates, and stricter evidence visibility. |
 
 ## Current Required Update Rule
 

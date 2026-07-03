@@ -43,3 +43,23 @@ Hard rule:
 ```text
 No rehydration without failure/update visibility.
 ```
+
+
+## Cold Evidence / Wound Routing Contract
+
+Before trusting a previously failed route, the agent must check:
+
+```text
+docs/evidence/COLD_EVIDENCE_ENGINE.md
+docs/failure_modes/WOUND_ROUTING.md
+state/cold_evidence_index.v0.1.5.json
+reports/nexus_compile_report_latest.json
+```
+
+Hard rules:
+
+```text
+No shadow failure without wound route.
+No re-engagement without replay certificate.
+No specialist promotion without cold evidence.
+```

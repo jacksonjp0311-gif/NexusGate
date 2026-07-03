@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-gate.local/schemas/shadow_report.v0.1.5.json",
+  "title": "NEXUS GATE ShadowReport v0.1.5",
+  "type": "object",
+  "required": [
+    "report_id",
+    "packet_id",
+    "route_mode",
+    "observed_result",
+    "expected_boundary",
+    "passed"
+  ],
+  "properties": {
+    "report_id": {
+      "type": "string"
+    },
+    "packet_id": {
+      "type": "string"
+    },
+    "route_mode": {
+      "type": "string"
+    },
+    "observed_result": {
+      "type": "string"
+    },
+    "expected_boundary": {
+      "type": "string"
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "timestamp_utc": {
+      "type": "string"
+    },
+    "claim_boundary": {
+      "type": "string"
+    }
+  }
+}

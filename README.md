@@ -626,3 +626,42 @@ Windows rule:
 If Bash exists but WSL has no installed distribution, Bash validation is skipped locally.
 Bash scripts still remain in the repo and CI can validate them on Ubuntu.
 ```
+
+
+## v0.1.5 — Strict Compiler + Cold Evidence/Wound Routing
+
+NEXUS GATE now begins the cold evidence layer.
+
+New surfaces:
+
+```text
+ShadowReport
+ShadowFailure
+ShadowWound
+WoundRoute
+ReplayCertificate
+DemotionDecision
+ColdEvidenceEngine
+```
+
+New compile law:
+
+```text
+No shadow failure without wound route.
+No re-engagement without replay certificate.
+No specialist promotion without cold evidence.
+No compiler pass without cold evidence contract visibility.
+```
+
+Strict compile:
+
+```powershell
+.\scripts\nexus_strict_compile.ps1
+```
+
+Compact strict route:
+
+```powershell
+.\scripts\nexus.ps1 compile
+.\scripts\nexus.ps1 rehydrate
+```

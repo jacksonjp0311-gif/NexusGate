@@ -57,6 +57,11 @@ show_rehydration() {
   echo "[NG] Update chart"
   sed -n '1,80p' docs/updates/UPDATE_CHART.md
   echo
+  if [[ -f docs/evidence/COLD_EVIDENCE_ENGINE.md ]]; then
+    echo "[NG] Cold evidence"
+    sed -n '1,80p' docs/evidence/COLD_EVIDENCE_ENGINE.md
+  fi
+  echo
   if [[ -f reports/nexus_compile_report_latest.json ]]; then
     echo "[NG] Latest compiler report"
     cat reports/nexus_compile_report_latest.json
@@ -69,6 +74,7 @@ show_status() {
   echo "[NG] NEXUS GATE STATUS"
   [[ -f state/update_index.v0.1.4.json ]] && cat state/update_index.v0.1.4.json
   [[ -f state/failure_mode_index.v0.1.4.json ]] && cat state/failure_mode_index.v0.1.4.json
+  [[ -f state/cold_evidence_index.v0.1.5.json ]] && cat state/cold_evidence_index.v0.1.5.json
   [[ -f reports/nexus_compile_report_latest.json ]] && cat reports/nexus_compile_report_latest.json
   git status --short || true
 }
@@ -122,6 +128,9 @@ case "$cmd" in
     run_compiler
     echo "[OK] Compile passed."
     ;;
+  strict)
+    bash scripts/nexus_strict_compile.sh
+    ;;
   once)
     run_compiler
     echo "[OK] Once passed."
@@ -140,7 +149,7 @@ case "$cmd" in
     ;;
   *)
     echo "[FAIL] Unknown command: $cmd"
-    echo "Commands: rehydrate, compile, once, loop, watch, status, promote"
+    echo "Commands: rehydrate, compile, strict, once, loop, watch, status, promote"
     exit 2
     ;;
 esac

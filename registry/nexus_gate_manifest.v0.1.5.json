@@ -1,0 +1,24 @@
+{
+  "name": "NEXUS GATE",
+  "version": "0.1.5",
+  "architecture": "NG-SA v0.1.5 strict compiler and cold evidence foundation",
+  "status": "local development gate only",
+  "runtime_laws": [
+    "No adapter, no bridge.",
+    "No schema, no route.",
+    "No codec, no transfer.",
+    "No profile, no coverage.",
+    "No calibration, no warning authority.",
+    "No shadow, no live promotion.",
+    "No authority verification, no mutation.",
+    "No replay certificate, no memory promotion.",
+    "No wound route, no retrust.",
+    "No clean disengagement, no connection.",
+    "No ledger stub, no compounding.",
+    "No compile pass, no promotion.",
+    "No RHP alignment, no durable mutation.",
+    "No mini README, no blind patching.",
+    "No shadow failure without wound route.",
+    "No specialist promotion without cold evidence."
+  ]
+}
