@@ -42,3 +42,14 @@ No bridge report without safe packet serialization.
 Boundary: this chart is a local development control. It does not prove safety, security, correctness, or production readiness.
 
 - compiler_marker_hidden_by_wrapper: human wrapper hid literal compiler marker still required by compatibility tests.
+
+
+- feedback_missing_compiled_reports: feedback cannot infer health without current compiler/runtime reports.
+- interconnect_graph_missing_edges: interconnect graph failed to prove governed transfer edges.
+- compaction_manifest_missing: evidence pressure cannot be governed without a compaction manifest.
+
+
+- bash_failure_chart_marker_missing: Bash compact surface dropped FAILURE_MODE_CHART marker.
+- bash_strict_mode_missing: Bash compact surface dropped strict command marker.
+- crlf_filter_literal_missing: human surface dropped CRLF/LF filter literal markers.
+- self_healing_without_apply_gate: repair recommendation lacks dry-run/apply-gate boundary.

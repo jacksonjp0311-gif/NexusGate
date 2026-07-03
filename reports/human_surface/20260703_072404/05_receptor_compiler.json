@@ -1,0 +1,62 @@
+﻿{
+  "system": "NEXUS GATE",
+  "version": "0.1.8-receptor-compiler",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T11:24:06.131941+00:00",
+  "checks": [
+    {
+      "check": "receptor_required_paths",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "receptor_manifests_register",
+      "status": "pass",
+      "evidence": {
+        "receptors": [
+          "local.demo.readonly",
+          "local.demo.tool_shadow"
+        ]
+      }
+    },
+    {
+      "check": "readonly_receptor_compatible",
+      "status": "pass",
+      "evidence": {
+        "receptor_id": "local.demo.readonly",
+        "mode": "compatible",
+        "reason": "schema_action_authority_compatible",
+        "schema_supported": true,
+        "action_supported": true,
+        "authority_required": false,
+        "authority_present": false,
+        "claim_boundary": "CompatibilityDecision is local routing evidence only."
+      }
+    },
+    {
+      "check": "tool_receptor_shadows_without_authority",
+      "status": "pass",
+      "evidence": {
+        "receptor_id": "local.demo.tool_shadow",
+        "mode": "shadow",
+        "reason": "authority_required_missing",
+        "schema_supported": true,
+        "action_supported": true,
+        "authority_required": true,
+        "authority_present": false,
+        "claim_boundary": "CompatibilityDecision is local routing evidence only."
+      }
+    },
+    {
+      "check": "receptor_docs_markers",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    }
+  ],
+  "claim_boundary": "Receptor compile report is local development evidence only."
+}

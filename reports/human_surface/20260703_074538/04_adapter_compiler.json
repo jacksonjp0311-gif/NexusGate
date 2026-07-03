@@ -1,0 +1,59 @@
+﻿{
+  "system": "NEXUS GATE",
+  "version": "0.1.7-adapter-compiler",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T11:45:40.945434+00:00",
+  "checks": [
+    {
+      "check": "adapter_required_paths",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "adapter_manifest_registers",
+      "status": "pass",
+      "evidence": {
+        "adapter_id": "local.demo"
+      }
+    },
+    {
+      "check": "adapter_statepacket_routes",
+      "status": "pass",
+      "evidence": {
+        "packet_id": "adapter-compile-packet",
+        "decision": "engage",
+        "reason": "minimal_scaffold_gate_passed"
+      }
+    },
+    {
+      "check": "adapter_exports_receptors",
+      "status": "pass",
+      "evidence": {
+        "receptors": [
+          {
+            "receptor_id": "local.demo.readonly",
+            "surface_type": "agent",
+            "accepted_schema_families": [
+              "NEXUS_STATE_PACKET"
+            ],
+            "allowed_actions": [
+              "read_only_signal"
+            ],
+            "claim_boundary": "Local demo receptor is not production interoperability."
+          }
+        ]
+      }
+    },
+    {
+      "check": "adapter_docs_markers",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    }
+  ],
+  "claim_boundary": "Adapter compile report is local development evidence only."
+}

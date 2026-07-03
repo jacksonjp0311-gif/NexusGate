@@ -1,0 +1,236 @@
+﻿{
+  "system": "NEXUS GATE",
+  "version": "0.1.5-strict-cold-evidence-compiler",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "pass",
+  "generated_at_utc": "2026-07-03T11:24:05.877588+00:00",
+  "duration_ms": 559,
+  "gates": [
+    {
+      "gate": "required_paths",
+      "status": "pass",
+      "message": "All required paths exist.",
+      "evidence": {
+        "count": 55
+      }
+    },
+    {
+      "gate": "readme_trisection",
+      "status": "pass",
+      "message": "README contains Human/RHP Nexus/AI and rehydration markers.",
+      "evidence": {
+        "markers": [
+          "PART I - Human README",
+          "PART II - RHP Nexus README",
+          "PART III - AI Agent README",
+          "Human Director Box",
+          "RHP Origin Alignment",
+          "AI Operating Contract",
+          "Failure Modes",
+          "No RHP alignment, no durable mutation.",
+          "No mini README, no blind patching.",
+          "Every new runtime loop must exist in both PowerShell and Bash.",
+          "No rehydration without failure chart visibility."
+        ]
+      }
+    },
+    {
+      "gate": "runtime_laws",
+      "status": "pass",
+      "message": "Required runtime laws are present.",
+      "evidence": {
+        "required": [
+          "No adapter, no bridge.",
+          "No schema, no route.",
+          "No authority verification, no mutation.",
+          "No replay certificate, no memory promotion.",
+          "No wound route, no retrust.",
+          "No ledger stub, no compounding.",
+          "No shadow failure without wound route."
+        ]
+      }
+    },
+    {
+      "gate": "json_parse",
+      "status": "pass",
+      "message": "Schema, registry, state, context, and route JSON files parse.",
+      "evidence": {
+        "count": 31
+      }
+    },
+    {
+      "gate": "mini_readmes",
+      "status": "pass",
+      "message": "Mini README Echo Location coverage passed.",
+      "evidence": {
+        "count": 15
+      }
+    },
+    {
+      "gate": "failure_modes",
+      "status": "pass",
+      "message": "Failure-mode chart contains required modes.",
+      "evidence": {
+        "required": [
+          "schema_missing",
+          "authority_unverified",
+          "origin_dehydrated",
+          "compiler_failed",
+          "mini_readme_missing",
+          "ledger_unavailable",
+          "shadow_failure_unrouted",
+          "replay_missing",
+          "bash_env_unavailable"
+        ]
+      }
+    },
+    {
+      "gate": "rehydration_visibility",
+      "status": "pass",
+      "message": "Rehydration requires failure/update/report visibility.",
+      "evidence": {
+        "required": [
+          "docs/failure_modes/FAILURE_MODE_CHART.md",
+          "docs/updates/UPDATE_CHART.md",
+          "reports/nexus_compile_report_latest.json"
+        ]
+      }
+    },
+    {
+      "gate": "update_chart_current",
+      "status": "pass",
+      "message": "Update chart includes current v0.1.5 state.",
+      "evidence": {
+        "required": [
+          "v0.1.5",
+          "Strict compiler",
+          "Cold Evidence",
+          "No version step without update chart entry"
+        ]
+      }
+    },
+    {
+      "gate": "cold_evidence_contracts",
+      "status": "pass",
+      "message": "Cold evidence and wound route contracts are visible.",
+      "evidence": {
+        "contracts": [
+          "ShadowReport",
+          "ShadowFailure",
+          "ShadowWound",
+          "WoundRoute",
+          "ReplayCertificate",
+          "DemotionDecision"
+        ]
+      }
+    },
+    {
+      "gate": "cold_evidence_engine",
+      "status": "pass",
+      "message": "Cold evidence engine classifies failure, wounds, routes, and certifies replay.",
+      "evidence": {
+        "failure": "shadow_failure_unrouted",
+        "wound_status": "open",
+        "route_action": "replay",
+        "replay_passed": true
+      }
+    },
+    {
+      "gate": "forbidden_bypass_scan",
+      "status": "pass",
+      "message": "No forbidden bypass markers found.",
+      "evidence": {
+        "markers": [
+          "bypass_authority=True",
+          "skip_authority_gate=True",
+          "disable_ledger=True",
+          "unsafe_engage=True",
+          "allow_mutation_without_authority"
+        ]
+      }
+    },
+    {
+      "gate": "direct_compiler_calls",
+      "status": "pass",
+      "message": "Compile/loop/promote/strict scripts call the gated compiler directly.",
+      "evidence": {
+        "checked": [
+          "scripts/nexus.ps1",
+          "scripts/nexus_compile.ps1",
+          "scripts/nexus_once.ps1",
+          "scripts/nexus_dev_loop.ps1",
+          "scripts/nexus_promote.ps1",
+          "scripts/nexus_strict_compile.ps1",
+          "scripts/nexus.sh",
+          "scripts/nexus_compile.sh",
+          "scripts/nexus_once.sh",
+          "scripts/nexus_dev_loop.sh",
+          "scripts/nexus_promote.sh",
+          "scripts/nexus_strict_compile.sh"
+        ]
+      }
+    },
+    {
+      "gate": "compact_commands",
+      "status": "pass",
+      "message": "Compact command surface is present.",
+      "evidence": {
+        "required": [
+          "scripts/nexus.ps1",
+          "scripts/nexus.sh",
+          "docs/runtime/COMPACT_COMMANDS.md"
+        ]
+      }
+    },
+    {
+      "gate": "python_compile",
+      "status": "pass",
+      "message": "Python source compiled.",
+      "evidence": {
+        "paths": [
+          "nexus_gate",
+          "tests"
+        ]
+      }
+    },
+    {
+      "gate": "route_contracts",
+      "status": "pass",
+      "message": "Core route contracts hold.",
+      "evidence": {
+        "decisions": {
+          "missing_schema": "reject",
+          "no_authority_tool": "shadow",
+          "read_only": "engage"
+        }
+      }
+    },
+    {
+      "gate": "unit_tests",
+      "status": "pass",
+      "message": "Unit tests passed.",
+      "evidence": {
+        "cmd": [
+          "C:\\Program Files\\Python312\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ],
+        "returncode": 0,
+        "stdout_tail": "",
+        "stderr_tail": ".......................................................\n----------------------------------------------------------------------\nRan 55 tests in 0.288s\n\nOK\n"
+      }
+    },
+    {
+      "gate": "ledger_appendable",
+      "status": "pass",
+      "message": "Ledger is appendable.",
+      "evidence": {
+        "path": "ledger\\nexus_gate_ledger.v0.1.0.jsonl"
+      }
+    }
+  ],
+  "claim_boundary": "Local development gate only. Not a production validation, safety proof, security proof, or correctness proof."
+}

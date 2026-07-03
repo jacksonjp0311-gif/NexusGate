@@ -204,3 +204,26 @@ No raw JSON wall unless requested.
 No CRLF warning noise in normal runs.
 No completion claim without compiled report files.
 ```
+
+
+## NEXUS v0.2.2 Operator Preference
+
+Use this lane for normal evolution:
+
+```powershell
+.\scripts\nexus.ps1 evolve
+```
+
+It compiles the code, tests, bridge, runtime, evidence compaction, interconnect graph, feedback report, and pack manifest using the human-readable surface.
+
+
+## NEXUS v0.2.2b Self-Healing Lane
+
+Use:
+
+```powershell
+.\scripts\nexus.ps1 heal
+.\scripts\nexus.ps1 evolve
+```
+
+Self-healing in this repo means recommendation, dry-run, apply gate, and validation evidence. It does not mean autonomous file writes or autonomous commits.

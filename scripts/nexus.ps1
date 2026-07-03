@@ -4,8 +4,12 @@
 # nexus_gate.receptors.compile
 # nexus_gate.bridge.compile
 # nexus_gate.bridge.runtime_compiler
+# nexus_gate.feedback.compile
+# nexus_gate.interconnect.compile
+# nexus_gate.evidence.compact
+# nexus_gate.self_healing.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "once", "loop", "watch", "status", "promote")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "evolve", "once", "loop", "watch", "status", "promote")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -30,9 +34,11 @@ function Show-Rehydration {
         ".\docs\receptors\RECEPTOR_REGISTRY.md",
         ".\docs\bridge\BRIDGE_SESSION_RUNNER.md",
         ".\docs\bridge\BOUNDED_BRIDGE_RUNTIME.md",
+        ".\docs\runtime\HUMAN_SURFACE.md",
+        ".\docs\runtime\FEEDBACK_INTERCONNECT.md",
+        ".\docs\runtime\SELF_HEALING_FEEDBACK.md",
         ".\docs\failure_modes\FAILURE_MODE_CHART.md",
-        ".\docs\updates\UPDATE_CHART.md",
-        ".\docs\runtime\HUMAN_SURFACE.md"
+        ".\docs\updates\UPDATE_CHART.md"
     )) {
         if (Test-Path $path) { Get-Content $path -TotalCount 80 }
     }
@@ -45,7 +51,8 @@ function Run-Loop {
     while ($true) {
         $i += 1
         Write-Host "[NG] Cycle $i"
-        Run-Compiler
+        powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 evolve
+        if ($LASTEXITCODE -ne 0) { throw "NEXUS human/evolve failed." }
         if (-not $Forever -and $i -ge $MaxCycles) { break }
         Start-Sleep -Seconds $SleepSeconds
     }
@@ -56,14 +63,14 @@ function Show-Status {
 }
 
 function Promote {
-    powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 all
+    powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 evolve
     $gitCmd = Get-Command git -ErrorAction SilentlyContinue
     if ($gitCmd -and -not $NoCommit) {
         git config core.autocrlf false | Out-Null
         git config core.safecrlf false | Out-Null
         git add . 2>$null | Out-Host
         $status = git status --porcelain
-        if ($status) { git commit -m "chore: promote NEXUS GATE human surface packed pass" | Out-Host }
+        if ($status) { git commit -m "chore: promote NEXUS GATE evolved self-healing pass" | Out-Host }
     }
     if ($gitCmd -and $Tag -ne "") { git tag $Tag | Out-Host }
     Write-Host "[OK] Promotion gate passed."
@@ -79,6 +86,11 @@ switch ($Command) {
     "bridge" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_bridge_demo.ps1 }
     "runtime" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 runtime }
     "human" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 all }
+    "feedback" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 feedback }
+    "interconnect" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 interconnect }
+    "compact" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 compact }
+    "heal" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 heal }
+    "evolve" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 evolve }
     "once" { Run-Compiler; Write-Host "[OK] Once passed." }
     "loop" { Run-Loop -MaxCycles $Cycles -SleepSeconds $Interval }
     "watch" { Run-Loop -MaxCycles 1 -SleepSeconds $Interval -Forever }

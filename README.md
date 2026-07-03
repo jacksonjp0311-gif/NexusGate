@@ -856,3 +856,71 @@ pack compiler
 ```
 
 This is local development evidence only.
+
+
+## v0.2.2 - Feedback + Interconnect + Evidence Compaction
+
+NEXUS GATE now has an adaptive local feedback layer.
+
+```powershell
+.\scripts\nexus.ps1 compact
+.\scripts\nexus.ps1 interconnect
+.\scripts\nexus.ps1 feedback
+.\scripts\nexus.ps1 evolve
+```
+
+The system now compiles:
+
+```text
+compiler reports
+  -> evidence pressure
+  -> interconnect graph
+  -> feedback report
+  -> next bounded action
+```
+
+New laws:
+
+```text
+No feedback without compiled reports.
+No interconnect without governed edges.
+No compaction without manifest.
+No CLI evolution without human-readable surface.
+No new runtime lane without feedback visibility.
+```
+
+Claim boundary: local development evidence only.
+
+
+## v0.2.2b - Self-Healing Feedback Rescue
+
+NEXUS GATE now has a CMS-inspired self-healing feedback lane:
+
+```powershell
+.\scripts\nexus.ps1 heal
+.\scripts\nexus.ps1 evolve
+```
+
+The loop is:
+
+```text
+feedback finding
+  -> typed repair recommendation
+  -> dry-run repair plan
+  -> human-authorized apply gate
+  -> validation stack
+  -> evidence report
+```
+
+Hard lock:
+
+```text
+No self-healing without typed recommendation.
+No recommendation may write directly.
+No dry-run may write target surfaces.
+No apply gate may execute without explicit human authorization.
+No repair closure without validation evidence.
+No autonomous commit from self-healing recommendation.
+```
+
+This restores v0.2.2 compatibility markers and adds bounded self-healing reports without autonomous mutation.

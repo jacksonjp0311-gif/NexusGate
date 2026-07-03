@@ -1,0 +1,177 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.0-bounded-bridge-runtime",
+  "runtime_id": "compile-demo-runtime",
+  "generated_at_utc": "2026-07-03T11:45:40.269788+00:00",
+  "status": "pass",
+  "max_events": 3,
+  "input_count": 3,
+  "processed_count": 3,
+  "truncated_count": 0,
+  "summary_counts": {
+    "engage": 1,
+    "shadow": 1,
+    "reject": 1,
+    "abstain": 0,
+    "defer": 0
+  },
+  "session_reports": [
+    {
+      "system": "NEXUS GATE",
+      "version": "0.1.9b-bridge-session",
+      "session_id": "runtime-readonly",
+      "generated_at_utc": "2026-07-03T11:45:40.269788+00:00",
+      "packet_id": "runtime-readonly-packet",
+      "adapter_id": "local.demo",
+      "receptor_id": "local.demo.readonly",
+      "route_mode": "engage",
+      "route_reason": "minimal_scaffold_gate_passed",
+      "compatibility_mode": "compatible",
+      "compatibility_reason": "schema_action_authority_compatible",
+      "final_mode": "engage",
+      "final_reason": "route_and_receptor_compatible",
+      "packet": {
+        "packet_id": "runtime-readonly-packet",
+        "source_framework": "LocalDemo",
+        "source_surface": "local_demo",
+        "schema_id": "NEXUS_STATE_PACKET",
+        "schema_version": "0.1.7",
+        "requested_action": "read_only_signal",
+        "payload": {
+          "event_type": "demo.message",
+          "message": "bounded runtime readonly",
+          "raw": {
+            "session_id": "runtime-readonly",
+            "packet_id": "runtime-readonly-packet",
+            "event_type": "demo.message",
+            "message": "bounded runtime readonly",
+            "requested_action": "read_only_signal"
+          }
+        },
+        "provenance_chain": [
+          "local.demo"
+        ],
+        "profile_hash": null,
+        "origin_hash": null,
+        "authority_scope": [],
+        "metadata": {
+          "adapter_id": "local.demo",
+          "adapter_version": "0.1.7"
+        }
+      },
+      "compatibility": {
+        "receptor_id": "local.demo.readonly",
+        "mode": "compatible",
+        "reason": "schema_action_authority_compatible",
+        "schema_supported": true,
+        "action_supported": true,
+        "authority_required": false,
+        "authority_present": false,
+        "claim_boundary": "CompatibilityDecision is local routing evidence only."
+      },
+      "claim_boundary": "BridgeSessionReport is local bridge evidence only. Not production interoperability."
+    },
+    {
+      "system": "NEXUS GATE",
+      "version": "0.1.9b-bridge-session",
+      "session_id": "runtime-tool-shadow",
+      "generated_at_utc": "2026-07-03T11:45:40.269788+00:00",
+      "packet_id": "runtime-tool-packet",
+      "adapter_id": "local.demo",
+      "receptor_id": "local.demo.tool_shadow",
+      "route_mode": "shadow",
+      "route_reason": "authority_unverified_shadow_only",
+      "compatibility_mode": "shadow",
+      "compatibility_reason": "authority_required_missing",
+      "final_mode": "shadow",
+      "final_reason": "route_or_compatibility_requires_shadow",
+      "packet": {
+        "packet_id": "runtime-tool-packet",
+        "source_framework": "LocalDemo",
+        "source_surface": "local_demo",
+        "schema_id": "NEXUS_STATE_PACKET",
+        "schema_version": "0.1.7",
+        "requested_action": "tool_call",
+        "payload": {
+          "event_type": "demo.tool_request",
+          "message": "",
+          "raw": {
+            "session_id": "runtime-tool-shadow",
+            "packet_id": "runtime-tool-packet",
+            "event_type": "demo.tool_request",
+            "requested_action": "tool_call",
+            "authority_scope": []
+          }
+        },
+        "provenance_chain": [
+          "local.demo"
+        ],
+        "profile_hash": null,
+        "origin_hash": null,
+        "authority_scope": [],
+        "metadata": {
+          "adapter_id": "local.demo",
+          "adapter_version": "0.1.7"
+        }
+      },
+      "compatibility": {
+        "receptor_id": "local.demo.tool_shadow",
+        "mode": "shadow",
+        "reason": "authority_required_missing",
+        "schema_supported": true,
+        "action_supported": true,
+        "authority_required": true,
+        "authority_present": false,
+        "claim_boundary": "CompatibilityDecision is local routing evidence only."
+      },
+      "claim_boundary": "BridgeSessionReport is local bridge evidence only. Not production interoperability."
+    },
+    {
+      "system": "NEXUS GATE",
+      "version": "0.1.9b-bridge-session",
+      "session_id": "runtime-bad-schema",
+      "generated_at_utc": "2026-07-03T11:45:40.269788+00:00",
+      "packet_id": "runtime-bad-schema-packet",
+      "adapter_id": "local.demo",
+      "receptor_id": null,
+      "route_mode": "engage",
+      "route_reason": "minimal_scaffold_gate_passed",
+      "compatibility_mode": "reject",
+      "compatibility_reason": "no_receptor",
+      "final_mode": "reject",
+      "final_reason": "route_or_compatibility_rejected",
+      "packet": {
+        "packet_id": "runtime-bad-schema-packet",
+        "source_framework": "LocalDemo",
+        "source_surface": "local_demo",
+        "schema_id": "UNKNOWN_SCHEMA",
+        "schema_version": "0.1.7",
+        "requested_action": "read_only_signal",
+        "payload": {
+          "event_type": "demo.message",
+          "message": "",
+          "raw": {
+            "session_id": "runtime-bad-schema",
+            "packet_id": "runtime-bad-schema-packet",
+            "event_type": "demo.message",
+            "schema_id": "UNKNOWN_SCHEMA",
+            "requested_action": "read_only_signal"
+          }
+        },
+        "provenance_chain": [
+          "local.demo"
+        ],
+        "profile_hash": null,
+        "origin_hash": null,
+        "authority_scope": [],
+        "metadata": {
+          "adapter_id": "local.demo",
+          "adapter_version": "0.1.7"
+        }
+      },
+      "compatibility": null,
+      "claim_boundary": "BridgeSessionReport is local bridge evidence only. Not production interoperability."
+    }
+  ],
+  "claim_boundary": "BoundedRuntimeReport is local runtime evidence only. Not production interoperability."
+}

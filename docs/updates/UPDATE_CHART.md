@@ -51,3 +51,9 @@ No operator flood in normal PowerShell runs.
 Boundary: the update chart improves repository continuity. It does not prove correctness, safety, security, or production readiness.
 
 | v0.2.1b | Human Surface Marker Rescue | current | Restores compiler marker compatibility while preserving human surface. |
+
+
+| v0.2.2 | Feedback + Interconnect + Evidence Compaction | current | Adds compact, interconnect, feedback, and evolve CLI lanes. |
+
+
+| v0.2.2b | Self-Healing Feedback Rescue | current | Restores v0.2.2 marker compatibility and adds recommendation/dry-run/apply-gate self-healing reports. |

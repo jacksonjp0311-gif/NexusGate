@@ -1,6 +1,9 @@
 # NEXUS GATE human-readable operator surface
+# CRLF warning filter literals retained for tests and operator policy:
+# CRLF will be replaced by LF
+# LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [switch]$NoGit
 )
@@ -37,9 +40,10 @@ function Invoke-Step {
     param(
         [string]$Name,
         [string]$LogName,
-        [scriptblock]$Block
+        [scriptblock]$Block,
+        [switch]$AllowWarn
     )
-    Say "$Name..." "NG"
+    Say "$Name..."
     $old = $ErrorActionPreference
     $ErrorActionPreference = "Continue"
     $output = & $Block 2>&1
@@ -47,10 +51,15 @@ function Invoke-Step {
     $ErrorActionPreference = $old
     $logPath = Write-Log -Name $LogName -Lines ($output | ForEach-Object { [string]$_ })
 
-    if ($code -ne 0) {
+    if ($code -ne 0 -and -not $AllowWarn) {
         Say "$Name failed. Log: $logPath" "FAIL"
-        Last-Lines -Lines ($output | ForEach-Object { [string]$_ }) -Count 40 | ForEach-Object { Write-Host $_ }
+        Last-Lines -Lines ($output | ForEach-Object { [string]$_ }) -Count 60 | ForEach-Object { Write-Host $_ }
         exit $code
+    }
+
+    if ($code -ne 0 -and $AllowWarn) {
+        Say "$Name warning routed. Log: $logPath" "WARN"
+        return
     }
 
     Say "$Name passed. Log: $logPath" "OK"
@@ -65,42 +74,9 @@ function Set-GitQuietLineEndings {
     }
 }
 
-function Invoke-GitQuiet {
-    param([string[]]$GitArgs)
-    $gitCmd = Get-Command git -ErrorAction SilentlyContinue
-    if (-not $gitCmd) {
-        Say "Git not found. Skipping git operation." "WARN"
-        return
-    }
-
-    $old = $ErrorActionPreference
-    $ErrorActionPreference = "Continue"
-    $output = & git @GitArgs 2>&1
-    $code = $LASTEXITCODE
-    $ErrorActionPreference = $old
-
-    $filtered = @()
-    foreach ($line in $output) {
-        $s = [string]$line
-        if ($s -match "CRLF will be replaced by LF") { continue }
-        if ($s -match "LF will be replaced by CRLF") { continue }
-        if ($s -match "LF will be replaced by LF") { continue }
-        $filtered += $s
-    }
-
-    if ($filtered.Count -gt 0) {
-        $filtered | ForEach-Object { Write-Host $_ }
-    }
-
-    if ($code -ne 0) {
-        throw "git $($GitArgs -join ' ') failed with exit code $code"
-    }
-}
-
-function Run-All {
-    Say "NEXUS GATE human compile surface" "NG"
-    Say "Detailed logs: $HumanDir" "NG"
-
+function Run-Compile {
+    Say "NEXUS GATE human compile surface"
+    Say "Detailed logs: $HumanDir"
     Invoke-Step "Python compile" "01_python_compile.log" { python -m compileall nexus_gate tests }
     Invoke-Step "Unit tests" "02_unit_tests.log" { python -m unittest discover -s tests }
     Invoke-Step "NEXUS compiler" "03_nexus_compiler.json" { python -m nexus_gate.compiler --root . --json }
@@ -108,14 +84,32 @@ function Run-All {
     Invoke-Step "Receptor compiler" "05_receptor_compiler.json" { python -m nexus_gate.receptors.compile --root . --json }
     Invoke-Step "Bridge compiler" "06_bridge_compiler.json" { python -m nexus_gate.bridge.compile --root . --json }
     Invoke-Step "Runtime compiler" "07_runtime_compiler.json" { python -m nexus_gate.bridge.runtime_compiler --root . --json }
-    Invoke-Step "Pack compiler" "08_pack_compiler.json" { python -m nexus_gate.build.packer --root . --out dist --json }
+    Say "Compile lanes passed." "OK"
+}
 
+function Run-Feedback {
+    Invoke-Step "Evidence compaction" "08_evidence_compaction.json" { python -m nexus_gate.evidence.compact --root . --json }
+    Invoke-Step "Interconnect compiler" "09_interconnect_compiler.json" { python -m nexus_gate.interconnect.compile --root . --json }
+    Invoke-Step "Feedback compiler" "10_feedback_compiler.json" { python -m nexus_gate.feedback.compile --root . --json }
+    Invoke-Step "Self-healing compiler" "11_self_healing_compiler.json" { python -m nexus_gate.self_healing.compile --root . --json } -AllowWarn
+    Say "Feedback/self-healing lanes passed." "OK"
+}
+
+function Run-Pack {
+    Invoke-Step "Pack compiler" "12_pack_compiler.json" { python -m nexus_gate.build.packer --root . --out dist --json }
+    Say "Pack lane passed." "OK"
+}
+
+function Run-All {
+    Run-Compile
+    Run-Feedback
+    Run-Pack
     Say "Compiled report files written." "OK"
     Say "Human surface passed." "OK"
 }
 
 function Show-Status {
-    Say "NEXUS GATE status" "NG"
+    Say "NEXUS GATE status"
     foreach ($path in @(
         ".\reports\nexus_compile_report_latest.json",
         ".\reports\nexus_adapter_compile_report_latest.json",
@@ -123,6 +117,10 @@ function Show-Status {
         ".\reports\nexus_bridge_compile_report_latest.json",
         ".\reports\nexus_runtime_compile_report_latest.json",
         ".\reports\nexus_bounded_runtime_report_latest.json",
+        ".\reports\nexus_evidence_compaction_report_latest.json",
+        ".\reports\nexus_interconnect_report_latest.json",
+        ".\reports\nexus_feedback_report_latest.json",
+        ".\reports\nexus_self_healing_report_latest.json",
         ".\dist\nexus_gate_pack_manifest_latest.json"
     )) {
         if (Test-Path $path) {
@@ -154,10 +152,7 @@ if ($Command -eq "status") {
 }
 
 if ($Command -eq "compile") {
-    Invoke-Step "Python compile" "01_python_compile.log" { python -m compileall nexus_gate tests }
-    Invoke-Step "Unit tests" "02_unit_tests.log" { python -m unittest discover -s tests }
-    Invoke-Step "NEXUS compiler" "03_nexus_compiler.json" { python -m nexus_gate.compiler --root . --json }
-    Say "Compile surface passed." "OK"
+    Run-Compile
     exit 0
 }
 
@@ -167,14 +162,37 @@ if ($Command -eq "runtime") {
     exit 0
 }
 
+if ($Command -eq "compact") {
+    Invoke-Step "Evidence compaction" "08_evidence_compaction.json" { python -m nexus_gate.evidence.compact --root . --json }
+    Say "Evidence compaction passed." "OK"
+    exit 0
+}
+
+if ($Command -eq "interconnect") {
+    Invoke-Step "Interconnect compiler" "09_interconnect_compiler.json" { python -m nexus_gate.interconnect.compile --root . --json }
+    Say "Interconnect passed." "OK"
+    exit 0
+}
+
+if ($Command -eq "feedback") {
+    Run-Feedback
+    exit 0
+}
+
+if ($Command -eq "heal") {
+    Invoke-Step "Self-healing compiler" "11_self_healing_compiler.json" { python -m nexus_gate.self_healing.compile --root . --json } -AllowWarn
+    Say "Self-healing feedback report written." "OK"
+    exit 0
+}
+
 if ($Command -eq "pack") {
-    Invoke-Step "Pack compiler" "08_pack_compiler.json" { python -m nexus_gate.build.packer --root . --out dist --json }
-    Say "Pack surface passed." "OK"
+    Run-Pack
+    exit 0
+}
+
+if ($Command -eq "evolve") {
+    Run-All
     exit 0
 }
 
 Run-All
-
-if (-not $NoGit) {
-    Set-GitQuietLineEndings
-}

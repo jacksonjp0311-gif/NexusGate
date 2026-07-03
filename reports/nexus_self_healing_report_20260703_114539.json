@@ -1,0 +1,67 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.2b-self-healing",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "status": "warn",
+  "generated_at_utc": "2026-07-03T11:45:39.782925+00:00",
+  "recommendations": [
+    {
+      "recommendation_id": "rec-001-latest_unit_test_failure",
+      "pressure_source": "latest_unit_test_failure",
+      "repair_class": "TEST_FAILURE_ROUTE",
+      "allowed_action": "route latest unit-test failure into exact script/doc marker repair",
+      "blocked_action": "autonomous_target_write_without_human_authorization",
+      "required_validation": [
+        "python -m unittest discover -s tests"
+      ],
+      "evidence": {
+        "failures": [
+          "test_compact_scripts_preserve_gates (test_compact_runtime_surface.TestCompactRuntimeSurface.test_compact_scripts_preserve_gates)",
+          "test_human_script_filters_crlf_warnings (test_human_surface.TestHumanSurface.test_human_script_filters_crlf_warnings)",
+          "test_compact_command_has_strict_mode (test_strict_compiler_surface.TestStrictCompilerSurface.test_compact_command_has_strict_mode)"
+        ]
+      },
+      "claim_boundary": "Self-healing report is local development evidence only. It does not prove correctness, security, safety, production readiness, or autonomous repair authority."
+    }
+  ],
+  "dry_run_plans": [
+    {
+      "plan_id": "plan-001-test_failure_route",
+      "recommendation_id": "rec-001-latest_unit_test_failure",
+      "execution_mode": "dry_run_only",
+      "target_writes": [],
+      "target_writes_performed": 0,
+      "api_writes_performed": 0,
+      "git_commits_performed": 0,
+      "rollback_required": false,
+      "blocked_action_preservation": [
+        "no_autonomous_write",
+        "no_api_write",
+        "no_git_commit",
+        "no_memory_promotion",
+        "no_tool_mutation"
+      ],
+      "required_validation": [
+        "python -m unittest discover -s tests"
+      ],
+      "claim_boundary": "Self-healing report is local development evidence only. It does not prove correctness, security, safety, production readiness, or autonomous repair authority."
+    }
+  ],
+  "apply_gates": [
+    {
+      "gate_id": "gate-001-human-authorized-apply",
+      "plan_id": "plan-001-test_failure_route",
+      "status": "blocked_until_human_authorized",
+      "human_authorization_required": true,
+      "exact_target_writes": [],
+      "rollback_entries_required": [],
+      "target_writes_performed": 0,
+      "api_writes_performed": 0,
+      "git_commits_performed": 0,
+      "claim_boundary": "Self-healing report is local development evidence only. It does not prove correctness, security, safety, production readiness, or autonomous repair authority."
+    }
+  ],
+  "dominant_pressure_source": "latest_unit_test_failure",
+  "next_action": "Apply the provided human-authorized patch, then run .\\scripts\\nexus.ps1 evolve.",
+  "claim_boundary": "Self-healing report is local development evidence only. It does not prove correctness, security, safety, production readiness, or autonomous repair authority."
+}

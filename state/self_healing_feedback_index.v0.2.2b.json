@@ -1,0 +1,23 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.2b",
+  "kind": "self_healing_feedback_index",
+  "command": ".\\scripts\\nexus.ps1 heal",
+  "loop": [
+    "feedback finding",
+    "typed repair recommendation",
+    "dry-run repair plan",
+    "human-authorized apply gate",
+    "validation stack",
+    "evidence report"
+  ],
+  "locks": [
+    "No self-healing without typed recommendation.",
+    "No recommendation may write directly.",
+    "No dry-run may write target surfaces.",
+    "No apply gate may execute without explicit human authorization.",
+    "No repair closure without validation evidence.",
+    "No autonomous commit from self-healing recommendation."
+  ],
+  "claim_boundary": "Local development evidence only."
+}

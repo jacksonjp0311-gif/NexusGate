@@ -1,0 +1,19 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.2.2",
+  "kind": "feedback_interconnect_index",
+  "commands": [
+    ".\\scripts\\nexus.ps1 feedback",
+    ".\\scripts\\nexus.ps1 interconnect",
+    ".\\scripts\\nexus.ps1 compact",
+    ".\\scripts\\nexus.ps1 evolve"
+  ],
+  "laws": [
+    "No feedback without compiled reports.",
+    "No interconnect without governed edges.",
+    "No compaction without manifest.",
+    "No CLI evolution without human-readable surface.",
+    "No new runtime lane without feedback visibility."
+  ],
+  "claim_boundary": "Local development evidence only."
+}
