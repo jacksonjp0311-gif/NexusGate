@@ -1,0 +1,112 @@
+{
+  "system": "NEXUS Reflective Neural Assembly",
+  "version": "0.5.0",
+  "status": "pass",
+  "intent": "What should we do next?",
+  "reasoning_mode": "analyze",
+  "recommendation": "Continue observing; no high-pressure workflow pattern detected.",
+  "confidence": 0.65,
+  "why": [
+    "events=1",
+    "failure_rate=0.0",
+    "duration_pattern=unknown"
+  ],
+  "uncertainty": [
+    "standard-library fallback is heuristic",
+    "no external telemetry adapters enabled"
+  ],
+  "blocked_actions": [
+    "auto_apply_fix",
+    "arbitrary_shell",
+    "external_api_write",
+    "parent_repo_mutation",
+    "self_authorize"
+  ],
+  "telemetry_adapters": {
+    "local_file": {
+      "enabled": true,
+      "mode": "read_write_lab_only"
+    },
+    "http_readonly": {
+      "enabled": false
+    },
+    "github_readonly": {
+      "enabled": false
+    },
+    "api_checkpoint": {
+      "enabled": false
+    },
+    "blocked": [
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE",
+      "secret_exfiltration",
+      "credential_storage",
+      "unbounded_crawling"
+    ],
+    "claim_boundary": "Telemetry adapters are disabled by default except local lab files. No external writes."
+  },
+  "optional_neural": {
+    "available": true,
+    "version": "2.5.1+cu121",
+    "mode": "optional_local"
+  },
+  "parent_emitter_packet": {
+    "source_platform": "nexus_reflective_neural_assembly",
+    "source_model": "local_fallback",
+    "session_id": "rna-fb0f75d3-8226-4052-a3f3-2c5d96ab7c55",
+    "timestamp_utc": "2026-07-04T10:41:55.612502+00:00",
+    "user_intent": "What should we do next?",
+    "reasoning_summary": "Continue observing; no high-pressure workflow pattern detected.",
+    "proposed_actions": [],
+    "evidence_references": [],
+    "uncertainties": [
+      "lab output is recommendation-only"
+    ],
+    "boundaries": [
+      "no self-authorization",
+      "no arbitrary shell",
+      "no external API writes",
+      "no parent repo mutation"
+    ],
+    "raw_text": "Continue observing; no high-pressure workflow pattern detected.",
+    "validation": {
+      "valid": true,
+      "missing": [],
+      "blocked_action_requested": false,
+      "claim_boundary": "Parent emitter packets are reasoning evidence only, not authority."
+    }
+  },
+  "raw_evidence_report": {
+    "health_score": 1.0,
+    "alerts": [],
+    "workflow_predictions": {
+      "next_failure_probability": 0.0
+    },
+    "recommendations": [
+      "Continue observing; no high-pressure workflow pattern detected."
+    ],
+    "knowledge_entries": [
+      "observed_events:1",
+      "failure_rate:0.0"
+    ],
+    "analysis": {
+      "execution_count": 1,
+      "failure_count": 0,
+      "failure_rate": 0.0,
+      "avg_duration_ms": 0.0,
+      "duration_pattern": {
+        "pattern": "unknown",
+        "confidence": 0.2,
+        "scores": {}
+      },
+      "next_execution_risk": 0.0,
+      "recommendations": [
+        "Continue observing; no high-pressure workflow pattern detected."
+      ]
+    },
+    "claim_boundary": "Realtime evolution memory is lab evidence only and cannot apply fixes."
+  },
+  "claim_boundary": "Reflective Neural Assembly is recommendation-only lab evidence. It does not execute shell, mutate the parent repo, write external APIs, access secrets, or self-authorize."
+}
