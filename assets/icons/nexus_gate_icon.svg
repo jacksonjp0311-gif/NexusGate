@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="NEXUS GATE icon">
+  <defs>
+    <radialGradient id="bgGlow" cx="70%" cy="18%" r="80%">
+      <stop offset="0%" stop-color="#0e7490" stop-opacity="0.38"/>
+      <stop offset="45%" stop-color="#020617" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#020713" stop-opacity="1"/>
+    </radialGradient>
+    <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="ngrad" x1="20%" x2="80%" y1="20%" y2="80%">
+      <stop offset="0%" stop-color="#d9f7ff"/>
+      <stop offset="48%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#86efac"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="992" height="992" rx="170" fill="url(#bgGlow)" stroke="#22d3ee" stroke-opacity="0.55" stroke-width="10"/>
+  <circle cx="512" cy="512" r="472" fill="none" stroke="#22d3ee" stroke-opacity="0.10" stroke-width="6"/>
+  <circle cx="512" cy="512" r="354" fill="none" stroke="#22d3ee" stroke-opacity="0.14" stroke-width="7"/>
+  <polygon points="512,110 860,311 860,713 512,914 164,713 164,311" fill="none" stroke="#22d3ee" stroke-width="18" filter="url(#cyanGlow)"/>
+  <polygon points="512,219 766,366 766,658 512,805 258,658 258,366" fill="none" stroke="#86efac" stroke-opacity="0.78" stroke-width="9"/>
+  <g stroke="#7dd3fc" stroke-opacity="0.45" stroke-width="5">
+    <line x1="512" y1="110" x2="512" y2="219"/>
+    <line x1="860" y1="311" x2="766" y2="366"/>
+    <line x1="860" y1="713" x2="766" y2="658"/>
+    <line x1="512" y1="914" x2="512" y2="805"/>
+    <line x1="164" y1="713" x2="258" y2="658"/>
+    <line x1="164" y1="311" x2="258" y2="366"/>
+  </g>
+  <circle cx="512" cy="512" r="235" fill="#020617" fill-opacity="0.86" stroke="#22d3ee" stroke-opacity="0.68" stroke-width="8"/>
+  <g fill="#22d3ee">
+    <circle cx="512" cy="110" r="24"/><circle cx="860" cy="311" r="24"/><circle cx="860" cy="713" r="24"/>
+    <circle cx="512" cy="914" r="24"/><circle cx="164" cy="713" r="24"/><circle cx="164" cy="311" r="24"/>
+  </g>
+  <g stroke-linecap="round" stroke-linejoin="round" filter="url(#cyanGlow)">
+    <path d="M374 670 L374 354 L650 670 L650 354" fill="none" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="96"/>
+    <path d="M374 670 L374 354 L650 670 L650 354" fill="none" stroke="url(#ngrad)" stroke-width="68"/>
+  </g>
+  <path d="M318 808 H706" stroke="#22d3ee" stroke-opacity="0.78" stroke-width="8" stroke-linecap="round"/>
+  <path d="M414 844 H610" stroke="#86efac" stroke-opacity="0.65" stroke-width="6" stroke-linecap="round"/>
+</svg>

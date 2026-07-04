@@ -1,0 +1,17 @@
+{
+    "system":  "NEXUS GATE",
+    "version":  "0.4.0c-electron-hud-polish-rescue",
+    "status":  "patched",
+    "generated_at_utc":  "2026-07-04T01:59:52.8839768Z",
+    "fixed":  [
+                  "completed partial polish patch safely",
+                  "3-line human input textarea",
+                  "ASCII-safe process lane badges",
+                  "safe DOM lane rendering",
+                  "renderer.js fully rewritten to known-good state",
+                  "bad PowerShell replace expression avoided",
+                  "reflect/domain allowlist alignment attempted"
+              ],
+    "authority_boundary":  "Electron remains allowlist-bound. UI input does not add arbitrary shell execution, repo mutation, external API writes, secret access, or self-authorization.",
+    "backup_dir":  "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\_backup_electron_hud_polish_rescue_20260703_215952"
+}
