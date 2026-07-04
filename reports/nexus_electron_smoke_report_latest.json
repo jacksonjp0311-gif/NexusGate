@@ -2,7 +2,7 @@
   "system": "NEXUS GATE",
   "version": "0.3.6-electron-hud-smoke",
   "status": "pass",
-  "generated_at_utc": "2026-07-04T01:09:27.396Z",
+  "generated_at_utc": "2026-07-04T01:37:31.405Z",
   "app_title": "NEXUS GATE",
   "smoke_mode": true,
   "read_surfaces": [

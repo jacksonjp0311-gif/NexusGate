@@ -23,7 +23,7 @@
 
     <section class="main-grid">
       <aside class="left-stack">
-        <section class="hud-frame panel">
+        <section class="hud-frame panel process-panel">
           <h2>Process Lanes</h2>
           <nav class="lanes" id="lanes" aria-label="Governed NEXUS lanes"></nav>
         </section>
@@ -49,9 +49,14 @@
         <div class="buffer-row">
           <span>BUFFER</span>
           <div class="buffer-track"><i id="buffer-fill"></i></div>
-          <strong id="buffer-value">72%</strong>
+          <strong id="buffer-value">0%</strong>
         </div>
         <pre class="output" id="output">Loading governed NEXUS surfaces...</pre>
+        <form class="operator-input" id="operator-form">
+          <label for="operator-command">Human Input</label>
+          <input id="operator-command" type="text" autocomplete="off" placeholder="/domain, /reflect, /status, /study <summary>, or note for handoff">
+          <button type="submit">Send</button>
+        </form>
       </section>
 
       <aside class="right-stack">
@@ -69,7 +74,7 @@
           <div class="metric-row"><span>Evidence Pressure</span><strong id="pressure">unknown</strong></div>
           <div class="metric-row"><span>Dominant Pressure Source</span><strong id="dominant">unknown</strong></div>
           <div class="metric-row"><span>Trend</span><strong id="trend">stable</strong></div>
-          <div class="metric-row"><span>Next Action</span><strong id="next">Run evolve</strong></div>
+          <div class="metric-row metric-next"><span>Next Action</span><strong id="next">Run evolve</strong></div>
         </section>
 
         <section class="hud-frame handoff-panel">

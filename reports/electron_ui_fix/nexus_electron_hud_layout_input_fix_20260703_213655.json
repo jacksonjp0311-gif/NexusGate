@@ -1,0 +1,22 @@
+{
+    "system":  "NEXUS GATE",
+    "version":  "0.4.0-electron-hud-layout-input-fix",
+    "status":  "patched",
+    "generated_at_utc":  "2026-07-04T01:36:55.5189205Z",
+    "patched_files":  [
+                          "electron/renderer/index.html",
+                          "electron/renderer/styles.css",
+                          "electron/renderer/renderer.js"
+                      ],
+    "fixed":  [
+                  "top telemetry clipping",
+                  "panel overlap and crowding",
+                  "bounded scrollable console and output",
+                  "operator input under output",
+                  "larger operator fonts",
+                  "dynamic buffer instead of static 72 percent",
+                  "long Next Action wrapping"
+              ],
+    "authority_boundary":  "Electron input remains governed UI intent only. It does not add arbitrary shell execution, repo mutation, external API writes, secret access, or self-authorization.",
+    "backup_dir":  "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\_backup_electron_hud_layout_fix_20260703_213655"
+}
