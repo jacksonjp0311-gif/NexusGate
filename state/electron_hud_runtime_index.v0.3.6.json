@@ -1,39 +1,39 @@
 {
-  "system": "NEXUS GATE",
-  "version": "0.3.6-electron-hud-runtime",
-  "title": "NEXUS GATE",
-  "package": "electron/package.json",
-  "lockfile": "electron/package-lock.json",
-  "commands": {
-    "install": "cd electron; npm install",
-    "start": "cd electron; npm start",
-    "smoke": "cd electron; npm run smoke"
-  },
-  "report": "reports/nexus_electron_smoke_report_latest.json",
-  "renderer_surfaces": [
-    "electron/renderer/index.html",
-    "electron/renderer/styles.css",
-    "electron/renderer/renderer.js"
-  ],
-  "hud_regions": [
-    "top_telemetry",
-    "process_lanes",
-    "lane_context",
-    "nexus_console",
-    "feedback_summary",
-    "ai_handoff_package",
-    "subsystem_modules",
-    "bottom_governance_bus"
-  ],
-  "blocked_actions": [
-    "arbitrary_shell_commands",
-    "external_api_write",
-    "secret_access",
-    "self_authorize",
-    "memory_promotion_without_evidence",
-    "ungated_repo_mutation",
-    "mutate_graph_state",
-    "bypass_evolve"
-  ],
-  "claim_boundary": "Electron HUD runtime is local operator presentation only. It does not own NEXUS logic or authority."
+    "system":  "NEXUS GATE",
+    "version":  "0.3.6-electron-hud-runtime",
+    "title":  "NEXUS GATE",
+    "package":  "electron/package.json",
+    "lockfile":  "electron/package-lock.json",
+    "commands":  {
+                     "install":  "cd electron; npm install",
+                     "start":  "cd electron; npm start",
+                     "smoke":  "cd electron; npm run smoke"
+                 },
+    "report":  "reports/nexus_electron_smoke_report_latest.json",
+    "renderer_surfaces":  [
+                              "electron/renderer/index.html",
+                              "electron/renderer/styles.css",
+                              "electron/renderer/renderer.js"
+                          ],
+    "hud_regions":  [
+                        "top_telemetry",
+                        "process_lanes",
+                        "lane_context",
+                        "nexus_console",
+                        "feedback_summary",
+                        "ai_handoff_package",
+                        "subsystem_modules",
+                        "bottom_governance_bus"
+                    ],
+    "blocked_actions":  [
+                            "arbitrary_shell_commands",
+                            "external_api_write",
+                            "secret_access",
+                            "self_authorize",
+                            "memory_promotion_without_evidence",
+                            "ungated_repo_mutation",
+                            "mutate_graph_state",
+                            "bypass_evolve"
+                        ],
+    "claim_boundary":  "Electron HUD runtime is local operator presentation only. It does not own NEXUS logic or authority."
 }

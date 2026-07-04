@@ -1,0 +1,26 @@
+{
+    "system":  "NEXUS GATE",
+    "version":  "0.4.0d-electron-allowlist-regression-rescue",
+    "status":  "patched",
+    "generated_at_utc":  "2026-07-04T02:01:53.8960526Z",
+    "cause":  "Previous polish rescue added reflect/domain to Electron command allowlist, but tests intentionally require Electron command authority to remain narrow.",
+    "fixed":  [
+                  "removed reflect/domain from Electron command allowlists",
+                  "kept reflect/domain as PowerShell/TUI lanes and read/report surfaces",
+                  "restored preflight expected allowlist",
+                  "kept HUD textarea and ASCII lane repair intact"
+              ],
+    "strict_electron_allowlist":  [
+                                      "evolve",
+                                      "interface",
+                                      "feedback",
+                                      "heal",
+                                      "status",
+                                      "compact",
+                                      "interconnect",
+                                      "runtime",
+                                      "pack"
+                                  ],
+    "authority_boundary":  "Electron remains presentation/operator surface with narrow allowlisted lane requests. Reflect/domain remain available through PowerShell/TUI and report read surfaces, not expanded Electron command authority.",
+    "backup_dir":  "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\_backup_electron_allowlist_rescue_20260703_220153"
+}

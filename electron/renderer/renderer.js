@@ -9,17 +9,17 @@ const operatorCommand = document.getElementById("operator-command");
 let allowlistedCommands = [];
 
 const laneIcons = {
-  evolve: "â—Ž",
-  interface: "â–£",
-  feedback: "â—‰",
-  heal: "â—‡",
-  status: "âŒ",
-  compact: "â¬¡",
-  interconnect: "âŒ˜",
-  runtime: "â—·",
-  pack: "â¬¢",
-  reflect: "â†»",
-  domain: "â—†"
+  evolve: "EV",
+  interface: "IF",
+  feedback: "FB",
+  heal: "HL",
+  status: "ST",
+  compact: "CP",
+  interconnect: "IC",
+  runtime: "RT",
+  pack: "PK",
+  reflect: "RF",
+  domain: "DM"
 };
 
 function setText(id, value) {
@@ -105,12 +105,28 @@ function renderLanes(commands) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `lane-button${index === 0 ? " active" : ""}`;
-    button.innerHTML = `<span class="lane-icon">${laneIcons[lane] || "â–¡"}</span><span>${lane}</span><span class="lane-arrow">Â»</span>`;
+
+    const icon = document.createElement("span");
+    icon.className = "lane-icon";
+    icon.textContent = laneIcons[lane] || "--";
+
+    const label = document.createElement("span");
+    label.textContent = lane;
+
+    const arrow = document.createElement("span");
+    arrow.className = "lane-arrow";
+    arrow.textContent = ">";
+
+    button.appendChild(icon);
+    button.appendChild(label);
+    button.appendChild(arrow);
+
     button.addEventListener("click", async () => {
       document.querySelectorAll(".lane-button").forEach((item) => item.classList.remove("active"));
       button.classList.add("active");
       await runGovernedLane(lane);
     });
+
     laneRoot.appendChild(button);
   });
 }
@@ -124,13 +140,14 @@ function buildFallbackState(context) {
       next_action: context.next_action
     },
     graph: {
-      status: context.interconnect_graph?.status || "fallback",
+      status: context.interconnect_graph?.status || "context-fallback",
       node_count: context.interconnect_graph?.node_count || 0,
       edge_count: context.interconnect_graph?.edge_count || 0,
       checks: [],
       missing_evidence: []
     },
-    fallback_surface: "state/ai_feedback_context_latest.json"
+    fallback_surface: "state/ai_feedback_context_latest.json",
+    note: "TUI surface is missing; run .\\scripts\\nexus.ps1 tui and use /surface or /snapshot for full dashboard state."
   };
 }
 
@@ -186,6 +203,13 @@ async function loadSurfaceState() {
 document.getElementById("refresh")?.addEventListener("click", () => {
   pushConsole("AI", "Latest handoff surfaces are already loaded.");
   setBuffer(100);
+});
+
+operatorCommand?.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && event.ctrlKey) {
+    event.preventDefault();
+    operatorForm?.requestSubmit();
+  }
 });
 
 operatorForm?.addEventListener("submit", async (event) => {

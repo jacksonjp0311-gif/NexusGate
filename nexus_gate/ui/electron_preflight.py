@@ -7,17 +7,7 @@ from pathlib import Path
 from typing import Any
 
 
-EXPECTED_ALLOWLIST = {
-    "evolve",
-    "interface",
-    "feedback",
-    "heal",
-    "status",
-    "compact",
-    "interconnect",
-    "runtime",
-    "pack",
-}
+EXPECTED_ALLOWLIST = {"evolve", "interface", "feedback", "heal", "status", "compact", "interconnect", "runtime", "pack"}
 
 EXPECTED_BLOCKED = {
     "arbitrary_shell_commands",
