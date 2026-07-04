@@ -1,0 +1,18 @@
+{
+    "system":  "NEXUS GATE",
+    "version":  "0.4.0-icon-pack",
+    "status":  "present",
+    "generated_at_utc":  "2026-07-04T01:39:45.1254144Z",
+    "assets":  [
+                   "assets/icons/nexus_gate_icon.svg",
+                   "assets/icons/nexus_gate_icon_256.png",
+                   "assets/icons/nexus_gate_icon_512.png",
+                   "assets/icons/nexus_gate.ico",
+                   "electron/assets/icons/nexus_gate_icon.svg",
+                   "electron/assets/icons/nexus_gate_icon_256.png",
+                   "electron/assets/icons/nexus_gate_icon_512.png",
+                   "electron/assets/icons/nexus_gate.ico"
+               ],
+    "design":  "futuristic cyan/green hexagonal NEXUS gate mark with central N glyph",
+    "claim_boundary":  "Icon pack is UI branding only. It does not prove production readiness or alter NEXUS authority."
+}

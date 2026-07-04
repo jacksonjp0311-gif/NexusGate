@@ -4,6 +4,7 @@ const path = require("path");
 const { spawn } = require("child_process");
 
 const repoRoot = path.resolve(__dirname, "..");
+const appIconPath = path.join(repoRoot, 'electron', 'assets', 'icons', 'nexus_gate.ico');
 const isSmoke = process.argv.includes("--smoke");
 const smokeReportPath = path.join(repoRoot, "reports", "nexus_electron_smoke_report_latest.json");
 
@@ -93,6 +94,7 @@ async function waitForRendererReady(win) {
 
 function createWindow() {
   const win = new BrowserWindow({
+    icon: appIconPath,
     width: 1280,
     height: 720,
     minWidth: 960,
