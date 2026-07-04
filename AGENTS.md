@@ -471,3 +471,35 @@ No code demo becomes production validation.
 No biological pattern becomes medical advice.
 No mathematical conjecture becomes theorem without proof.
 ```
+
+## NEXUS v0.5.1 Reflective Neural Assembly Chat Distribution
+
+Before evolving Codex, ChatGPT, local-agent, or neural assembly handoff behavior, inspect:
+
+```text
+labs/reflective_neural_assembly/MINI_README.md
+labs/reflective_neural_assembly/CHAT_INTELLIGENCE_DISTRIBUTION.md
+labs/reflective_neural_assembly/state/chat_intelligence_distribution_index.v0.5.1.json
+labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json
+labs/reflective_neural_assembly/reports/neural_intelligence_distribution_latest.json
+labs/reflective_neural_assembly/handoffs/
+```
+
+Use:
+
+```powershell
+python .\labs\reflective_neural_assembly\run_neural_assembly.py --intent "What should we do next?"
+python -m unittest discover -s labs/reflective_neural_assembly/tests
+```
+
+Hard rules:
+
+```text
+Distribute intelligence.
+Do not distribute authority.
+No chat handoff may self-authorize.
+No neural lab may execute arbitrary shell.
+No neural lab may mutate the parent repo.
+No neural lab may write external APIs.
+No compressed handoff is proof of correctness, safety, security, production readiness, or truth.
+```

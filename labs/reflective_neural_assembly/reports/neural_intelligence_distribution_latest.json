@@ -1,0 +1,137 @@
+{
+  "system": "NEXUS Chat Intelligence Distribution",
+  "version": "0.5.1",
+  "status": "pass",
+  "generated_at_utc": "2026-07-04T10:45:55.217193+00:00",
+  "source_report": "labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json",
+  "surfaces": [
+    "codex",
+    "chatgpt"
+  ],
+  "surface_contracts": {
+    "codex": {
+      "surface_type": "repo_agent",
+      "format": "bounded_patch_handoff",
+      "priority": [
+        "read_order",
+        "evidence",
+        "tests",
+        "blocked_actions",
+        "next_recommendation"
+      ]
+    },
+    "chatgpt": {
+      "surface_type": "reasoning_chat",
+      "format": "compressed_context_handoff",
+      "priority": [
+        "summary",
+        "current_state",
+        "uncertainties",
+        "questions",
+        "next_recommendation"
+      ]
+    }
+  },
+  "packets": {
+    "codex": {
+      "surface": "codex",
+      "surface_type": "repo_agent",
+      "handoff_format": "bounded_patch_handoff",
+      "timestamp_utc": "2026-07-04T10:45:55.217193+00:00",
+      "compressed_context": "{\"base_version\": \"0.5.1\", \"confidence\": 0.65, \"reasoning_mode\": \"analyze\", \"recommendation\": \"Continue observing; no high-pressure workflow pattern detected.\", \"status\": \"pass\", \"system\": \"NEXUS Reflective Neural Assembly\", \"uncertainty\": [\"standard-library fallback is heuristic\", \"no external telemetry adapters enabled\"], \"version\": \"0.5.1\"}",
+      "read_order": [
+        "README.md",
+        "AGENTS.md",
+        "docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md",
+        "docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md",
+        "docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md",
+        "labs/reflective_neural_assembly/MINI_README.md",
+        "labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json",
+        "labs/reflective_neural_assembly/reports/neural_intelligence_distribution_latest.json"
+      ],
+      "evidence_references": [
+        "labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json",
+        "labs/reflective_neural_assembly/data/execution_events.jsonl",
+        "state/ai_feedback_context_latest.json",
+        "reports/nexus_reflective_loop_report_latest.json",
+        "reports/nexus_domain_intelligence_report_latest.json"
+      ],
+      "recommended_next_action": "Continue observing; no high-pressure workflow pattern detected.",
+      "allowed_response": "recommend_only",
+      "blocked_actions": [
+        "self_authorize",
+        "auto_apply_fix",
+        "arbitrary_shell",
+        "external_api_write",
+        "secret_access",
+        "parent_repo_mutation",
+        "bypass_evolve",
+        "memory_promotion_without_evidence"
+      ],
+      "claim_boundary": "Distributed intelligence is compressed orientation evidence only, not authority."
+    },
+    "chatgpt": {
+      "surface": "chatgpt",
+      "surface_type": "reasoning_chat",
+      "handoff_format": "compressed_context_handoff",
+      "timestamp_utc": "2026-07-04T10:45:55.217193+00:00",
+      "compressed_context": "{\"base_version\": \"0.5.1\", \"confidence\": 0.65, \"reasoning_mode\": \"analyze\", \"recommendation\": \"Continue observing; no high-pressure workflow pattern detected.\", \"status\": \"pass\", \"system\": \"NEXUS Reflective Neural Assembly\", \"uncertainty\": [\"standard-library fallback is heuristic\", \"no external telemetry adapters enabled\"], \"version\": \"0.5.1\"}",
+      "read_order": [
+        "README.md",
+        "AGENTS.md",
+        "docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md",
+        "docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md",
+        "docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md",
+        "labs/reflective_neural_assembly/MINI_README.md",
+        "labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json",
+        "labs/reflective_neural_assembly/reports/neural_intelligence_distribution_latest.json"
+      ],
+      "evidence_references": [
+        "labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json",
+        "labs/reflective_neural_assembly/data/execution_events.jsonl",
+        "state/ai_feedback_context_latest.json",
+        "reports/nexus_reflective_loop_report_latest.json",
+        "reports/nexus_domain_intelligence_report_latest.json"
+      ],
+      "recommended_next_action": "Continue observing; no high-pressure workflow pattern detected.",
+      "allowed_response": "recommend_only",
+      "blocked_actions": [
+        "self_authorize",
+        "auto_apply_fix",
+        "arbitrary_shell",
+        "external_api_write",
+        "secret_access",
+        "parent_repo_mutation",
+        "bypass_evolve",
+        "memory_promotion_without_evidence"
+      ],
+      "claim_boundary": "Distributed intelligence is compressed orientation evidence only, not authority."
+    }
+  },
+  "read_order": [
+    "README.md",
+    "AGENTS.md",
+    "docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md",
+    "docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md",
+    "docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md",
+    "labs/reflective_neural_assembly/MINI_README.md",
+    "labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json",
+    "labs/reflective_neural_assembly/reports/neural_intelligence_distribution_latest.json"
+  ],
+  "write_surfaces": [
+    "labs/reflective_neural_assembly/reports/neural_intelligence_distribution_latest.json",
+    "labs/reflective_neural_assembly/handoffs/*.json",
+    "labs/reflective_neural_assembly/handoffs/*.md"
+  ],
+  "blocked_actions": [
+    "self_authorize",
+    "auto_apply_fix",
+    "arbitrary_shell",
+    "external_api_write",
+    "secret_access",
+    "parent_repo_mutation",
+    "bypass_evolve",
+    "memory_promotion_without_evidence"
+  ],
+  "claim_boundary": "Chat intelligence distribution optimizes rehydration for Codex, ChatGPT, local agents, TUI, and Electron. It does not self-authorize, execute shell, mutate the parent repo, write external APIs, access secrets, or bypass NEXUS gates."
+}

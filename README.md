@@ -36,8 +36,8 @@ NEXUS GATE is a governed agentic transfer workbench. It tests whether a local ru
 
 ### Current version
 
-NEXUS GATE is currently at the v0.4.0 domain intelligence orchestrator surface.
-Current strategic direction: Reflective Intelligence Gateway + Domain Intelligence Orchestrator.
+NEXUS GATE is currently at the v0.5.1 reflective neural assembly and chat intelligence distribution lab surface.
+Current strategic direction: Reflective Intelligence Gateway + Domain Intelligence Orchestrator + governed intelligence distribution.
 
 Current operator surfaces:
 
@@ -49,6 +49,13 @@ Current operator surfaces:
 .\scripts\nexus.ps1 electron-preflight
 .\scripts\nexus.ps1 reflect
 .\scripts\nexus.ps1 domain
+```
+
+Current neural assembly lab surface:
+
+```powershell
+python .\labs\reflective_neural_assembly\run_neural_assembly.py --intent "What should we do next?"
+python -m unittest discover -s labs/reflective_neural_assembly/tests
 ```
 
 Current Bash / Git Bash / WSL / Linux / macOS surfaces:
@@ -120,7 +127,9 @@ The current line has evolved from the original RHP/Nexus documentation shell int
 | Current launch | `.\scripts\nexus.ps1 tui` / `cd electron; npm start` |
 | Reflective loop | compiler-gated local evidence protocol |
 | Domain intelligence | compiler-gated repo-native learning protocol |
-| Next build target | governed Electron packaging gate |
+| Reflective neural assembly | isolated NeuralForge-inspired recommendation lab |
+| Chat intelligence distribution | Codex / ChatGPT / local agent handoff packets |
+| Next build target | governed neural assembly compiler gate |
 
 ### Reflective Intelligence Gateway
 
@@ -1410,3 +1419,40 @@ Autonomous authority is not.
 Cross-domain synthesis is allowed.
 Unsupported claims are not.
 ```
+
+## v0.5.1 - Reflective Neural Assembly Chat Distribution
+
+NEXUS GATE now includes an isolated lab for NeuralForge-inspired adaptive telemetry and chat/Codex intelligence distribution:
+
+```text
+labs/reflective_neural_assembly/
+```
+
+The lab emits recommendation-only reports and compressed handoffs for Codex, ChatGPT, local agents, TUI, and Electron:
+
+```text
+labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json
+labs/reflective_neural_assembly/reports/neural_intelligence_distribution_latest.json
+labs/reflective_neural_assembly/handoffs/*_handoff_latest.json
+labs/reflective_neural_assembly/handoffs/*_handoff_latest.md
+labs/reflective_neural_assembly/state/chat_intelligence_distribution_index.v0.5.1.json
+```
+
+Run:
+
+```powershell
+python .\labs\reflective_neural_assembly\run_neural_assembly.py --intent "What should we do next?"
+```
+
+Lab law:
+
+```text
+Distribute intelligence.
+Do not distribute authority.
+Optimize rehydration.
+Do not bypass evidence.
+Compress context.
+Do not promote unsupported claims.
+```
+
+The lab does not execute shell, mutate the parent repo, write external APIs, access secrets, self-authorize, bypass evolve, or prove correctness, safety, security, production readiness, model understanding, or real-world truth.

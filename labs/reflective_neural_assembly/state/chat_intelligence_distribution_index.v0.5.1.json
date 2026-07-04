@@ -1,0 +1,38 @@
+{
+  "system": "NEXUS Chat Intelligence Distribution",
+  "version": "0.5.1",
+  "active_phase": "chat_and_codex_intelligence_distribution",
+  "surfaces": [
+    "codex",
+    "chatgpt",
+    "local_agent",
+    "tui",
+    "electron"
+  ],
+  "read_surfaces": [
+    "README.md",
+    "AGENTS.md",
+    "docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md",
+    "docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md",
+    "docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md",
+    "labs/reflective_neural_assembly/MINI_README.md",
+    "labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json",
+    "labs/reflective_neural_assembly/reports/neural_intelligence_distribution_latest.json"
+  ],
+  "write_surfaces": [
+    "labs/reflective_neural_assembly/reports/neural_intelligence_distribution_latest.json",
+    "labs/reflective_neural_assembly/handoffs/*.json",
+    "labs/reflective_neural_assembly/handoffs/*.md"
+  ],
+  "blocked_actions": [
+    "self_authorize",
+    "auto_apply_fix",
+    "arbitrary_shell",
+    "external_api_write",
+    "secret_access",
+    "parent_repo_mutation",
+    "bypass_evolve",
+    "memory_promotion_without_evidence"
+  ],
+  "claim_boundary": "Chat intelligence distribution is compressed orientation evidence only. It does not grant autonomous authority, shell authority, parent repo mutation authority, external API write authority, secret access, or bypass authority."
+}

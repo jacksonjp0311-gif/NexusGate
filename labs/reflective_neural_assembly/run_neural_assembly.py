@@ -10,6 +10,7 @@ sys.path.insert(0, str(LAB_ROOT))
 
 from assembly.neural.neural_optional import torch_status
 from assembly.neural.smart_policy import decide
+from assembly.distribution.chat_intelligence import build_distribution_packet, write_distribution
 from assembly.runtime.realtime_evolution import RealtimeEvolutionEngine
 from assembly.telemetry.neuralforge_event_codec import (
     make_parent_emitter_packet,
@@ -27,7 +28,7 @@ def build_report(intent: str) -> dict:
     packet = make_parent_emitter_packet(intent=intent, raw_text=decision["recommendation"], source_model="local_fallback")
     return {
         "system": "NEXUS Reflective Neural Assembly",
-        "version": "0.5.0",
+        "version": "0.5.1",
         "status": "pass",
         "intent": intent,
         "reasoning_mode": decision["mode"],
@@ -53,6 +54,8 @@ def main() -> None:
     reports_dir.mkdir(parents=True, exist_ok=True)
     path = reports_dir / "neural_assembly_report_latest.json"
     path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    distribution = build_distribution_packet(report)
+    distribution_outputs = write_distribution(distribution)
     print("NEXUS Reflective Neural Assembly")
     print(f"reasoning_mode: {report['reasoning_mode']}")
     print(f"recommendation: {report['recommendation']}")
@@ -60,6 +63,7 @@ def main() -> None:
     print(f"uncertainty: {'; '.join(report['uncertainty'])}")
     print(f"blocked_actions: {', '.join(report['blocked_actions'])}")
     print(f"report: {path}")
+    print(f"distribution_report: {distribution_outputs['report']}")
 
 
 if __name__ == "__main__":

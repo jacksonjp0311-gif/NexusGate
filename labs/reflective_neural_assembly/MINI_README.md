@@ -1,6 +1,6 @@
-# NEXUS Reflective Neural Assembly Lab v0.5.0
+# NEXUS Reflective Neural Assembly Lab v0.5.1
 
-This is an isolated NEXUS lab for NeuralForge-inspired adaptive telemetry and recommendation experiments.
+This is an isolated NEXUS lab for NeuralForge-inspired adaptive telemetry, recommendation, and chat intelligence distribution experiments.
 
 It is:
 
@@ -8,6 +8,7 @@ It is:
 - recommendation-only
 - parent intelligence emitter compatible
 - telemetry codec compatible
+- Codex / ChatGPT / local agent handoff compatible
 - standard-library-first
 - optional-neural only when local dependencies already exist
 
@@ -48,4 +49,14 @@ Report:
 
 ```text
 labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json
+labs/reflective_neural_assembly/reports/neural_intelligence_distribution_latest.json
+labs/reflective_neural_assembly/handoffs/*_handoff_latest.json
+labs/reflective_neural_assembly/handoffs/*_handoff_latest.md
+```
+
+Read:
+
+```text
+labs/reflective_neural_assembly/CHAT_INTELLIGENCE_DISTRIBUTION.md
+labs/reflective_neural_assembly/state/chat_intelligence_distribution_index.v0.5.1.json
 ```

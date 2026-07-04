@@ -13,6 +13,11 @@ sys.path.insert(0, str(LAB_ROOT))
 from assembly.neural.neural_optional import torch_status
 from assembly.neural.pattern_engine import detect_pattern
 from assembly.neural.smart_policy import decide
+from assembly.distribution.chat_intelligence import (
+    BLOCKED_ACTIONS as DISTRIBUTION_BLOCKED_ACTIONS,
+    build_distribution_packet,
+    write_distribution,
+)
 from assembly.runtime.realtime_evolution import RealtimeEvolutionEngine
 from assembly.telemetry.neuralforge_event_codec import (
     BLOCKED_ADAPTER_ACTIONS,
@@ -78,8 +83,30 @@ class TestReflectiveNeuralAssembly(unittest.TestCase):
         path = reports_dir / "neural_assembly_report_latest.json"
         path.write_text(json.dumps(report, indent=2), encoding="utf-8")
         data = json.loads(path.read_text(encoding="utf-8"))
-        self.assertEqual(data["version"], "0.5.0")
+        self.assertEqual(data["version"], "0.5.1")
         self.assertIn("recommendation-only", data["claim_boundary"])
+
+    def test_chat_intelligence_distribution_declares_codex_and_chats(self):
+        report = build_report("Distribute intelligence to Codex and chats")
+        packet = build_distribution_packet(report)
+        self.assertEqual(packet["version"], "0.5.1")
+        for surface in ["codex", "chatgpt", "local_agent", "tui", "electron"]:
+            self.assertIn(surface, packet["packets"])
+        self.assertIn("self_authorize", packet["blocked_actions"])
+        self.assertIn("parent_repo_mutation", packet["blocked_actions"])
+        self.assertIn("Distributed intelligence", packet["packets"]["codex"]["claim_boundary"])
+
+    def test_chat_intelligence_distribution_writes_lab_only_surfaces(self):
+        report = build_report("Write handoff packets")
+        packet = build_distribution_packet(report, surfaces=["codex", "chatgpt"])
+        outputs = write_distribution(packet)
+        self.assertTrue(Path(outputs["report"]).exists())
+        self.assertTrue(Path(outputs["codex_json"]).exists())
+        self.assertTrue(Path(outputs["chatgpt_markdown"]).exists())
+        for output in outputs.values():
+            self.assertIn("reflective_neural_assembly", output)
+        for blocked in ["arbitrary_shell", "external_api_write", "memory_promotion_without_evidence"]:
+            self.assertIn(blocked, DISTRIBUTION_BLOCKED_ACTIONS)
 
     def test_no_arbitrary_shell_or_external_api_writes(self):
         source = "\n".join(
@@ -97,6 +124,7 @@ class TestReflectiveNeuralAssembly(unittest.TestCase):
         self.assertIn("no self-authorization", mini)
         self.assertIn("no arbitrary shell", mini)
         self.assertIn("no parent repo mutation", mini)
+        self.assertIn("Chat intelligence distribution", (LAB_ROOT / "CHAT_INTELLIGENCE_DISTRIBUTION.md").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

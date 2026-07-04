@@ -1,0 +1,37 @@
+{
+  "surface": "local_agent",
+  "surface_type": "local_agent",
+  "handoff_format": "machine_json_handoff",
+  "timestamp_utc": "2026-07-04T10:45:55.214126+00:00",
+  "compressed_context": "{\"base_version\": \"0.5.1\", \"confidence\": 0.65, \"reasoning_mode\": \"analyze\", \"recommendation\": \"Continue observing; no high-pressure workflow pattern detected.\", \"status\": \"pass\", \"system\": \"NEXUS Reflective Neural Assembly\", \"uncertainty\": [\"standard-library fallback is heuristic\", \"no external telemetry adapters enabled\"], \"version\": \"0.5.1\"}",
+  "read_order": [
+    "README.md",
+    "AGENTS.md",
+    "docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md",
+    "docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md",
+    "docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md",
+    "labs/reflective_neural_assembly/MINI_README.md",
+    "labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json",
+    "labs/reflective_neural_assembly/reports/neural_intelligence_distribution_latest.json"
+  ],
+  "evidence_references": [
+    "labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json",
+    "labs/reflective_neural_assembly/data/execution_events.jsonl",
+    "state/ai_feedback_context_latest.json",
+    "reports/nexus_reflective_loop_report_latest.json",
+    "reports/nexus_domain_intelligence_report_latest.json"
+  ],
+  "recommended_next_action": "Continue observing; no high-pressure workflow pattern detected.",
+  "allowed_response": "recommend_only",
+  "blocked_actions": [
+    "self_authorize",
+    "auto_apply_fix",
+    "arbitrary_shell",
+    "external_api_write",
+    "secret_access",
+    "parent_repo_mutation",
+    "bypass_evolve",
+    "memory_promotion_without_evidence"
+  ],
+  "claim_boundary": "Distributed intelligence is compressed orientation evidence only, not authority."
+}
