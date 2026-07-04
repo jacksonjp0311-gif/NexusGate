@@ -36,8 +36,8 @@ NEXUS GATE is a governed agentic transfer workbench. It tests whether a local ru
 
 ### Current version
 
-NEXUS GATE is currently at the v0.3.7 reflective intelligence gateway surface.
-Current strategic direction: Reflective Intelligence Gateway.
+NEXUS GATE is currently at the v0.4.0 domain intelligence orchestrator surface.
+Current strategic direction: Reflective Intelligence Gateway + Domain Intelligence Orchestrator.
 
 Current operator surfaces:
 
@@ -48,6 +48,7 @@ Current operator surfaces:
 .\scripts\nexus.ps1 electron-env
 .\scripts\nexus.ps1 electron-preflight
 .\scripts\nexus.ps1 reflect
+.\scripts\nexus.ps1 domain
 ```
 
 Current Bash / Git Bash / WSL / Linux / macOS surfaces:
@@ -57,6 +58,7 @@ bash scripts/nexus.sh evolve
 bash scripts/nexus.sh electron-env
 bash scripts/nexus.sh electron-preflight
 bash scripts/nexus.sh reflect
+bash scripts/nexus.sh domain
 bash scripts/nexus.sh tui
 bash scripts/nexus.sh ui
 ```
@@ -103,8 +105,8 @@ The current line has evolved from the original RHP/Nexus documentation shell int
 |---|---:|
 | Package / CLI | `nexus-gate` / `nexus` |
 | Python import | `nexus_gate` |
-| Current software layer | NG-SA v0.3.7 |
-| Current runtime status | local governed CLI/TUI + Electron HUD runtime + reflective intelligence loop |
+| Current software layer | NG-SA v0.4.0 |
+| Current runtime status | local governed CLI/TUI + Electron HUD runtime + reflective/domain intelligence gates |
 | README structure | Human / RHP Nexus / AI trisection |
 | RHP origin alignment | scaffolded |
 | RCC/Nexus route map | scaffolded |
@@ -117,6 +119,7 @@ The current line has evolved from the original RHP/Nexus documentation shell int
 | Electron runtime | installed locally, lockfile committed |
 | Current launch | `.\scripts\nexus.ps1 tui` / `cd electron; npm start` |
 | Reflective loop | compiler-gated local evidence protocol |
+| Domain intelligence | compiler-gated repo-native learning protocol |
 | Next build target | governed Electron packaging gate |
 
 ### Reflective Intelligence Gateway
@@ -149,6 +152,37 @@ Organic evolution is allowed.
 Ungated compounding is not.
 ```
 
+### Evolving Domain Intelligence
+
+NEXUS GATE now teaches Codex how to study domains through repo-native artifacts:
+
+```text
+study -> extract -> map -> model -> simulate -> test -> gate -> reflect -> compress -> rehydrate -> orchestrate
+```
+
+Read these during rehydration before creating or promoting domain claims:
+
+```text
+docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md
+docs/intelligence/REPO_NATIVE_LEARNING.md
+docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md
+docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md
+state/domain_intelligence_index.v0.4.0.json
+state/repo_native_learning_index.v0.4.0.json
+state/codex_orchestration_index.v0.4.0.json
+reports/nexus_domain_intelligence_report_latest.json
+domains/
+```
+
+Core law:
+
+```text
+Repo-native learning is allowed.
+Autonomous authority is not.
+Cross-domain synthesis is allowed.
+Unsupported claims are not.
+```
+
 ### What this is not
 
 - Not production validated.
@@ -175,6 +209,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\nexus_status.ps1
 .\scripts\nexus.ps1 evolve
 .\scripts\nexus.ps1 tui
 .\scripts\nexus.ps1 reflect
+.\scripts\nexus.ps1 domain
 ```
 
 Bash / Git Bash / WSL / Linux / macOS:
@@ -187,6 +222,7 @@ bash scripts/nexus.sh evolve
 bash scripts/nexus.sh electron-env
 bash scripts/nexus.sh electron-preflight
 bash scripts/nexus.sh reflect
+bash scripts/nexus.sh domain
 bash scripts/nexus.sh tui
 bash scripts/nexus.sh ui
 ```
@@ -1322,3 +1358,55 @@ TUI commands:
 ```
 
 Electron may read the reflective report, lineage manifest, and interface adapter contract. It does not gain new authority.
+
+## v0.4.0 - Domain Intelligence Orchestrator
+
+NEXUS GATE now formalizes repo-native domain learning:
+
+```text
+study -> extract -> map -> model -> simulate -> test -> gate -> reflect -> compress -> rehydrate -> orchestrate
+```
+
+New doctrine and state surfaces:
+
+```text
+docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md
+docs/intelligence/REPO_NATIVE_LEARNING.md
+docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md
+docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md
+domains/
+state/domain_intelligence_index.v0.4.0.json
+state/repo_native_learning_index.v0.4.0.json
+state/codex_orchestration_index.v0.4.0.json
+reports/nexus_domain_intelligence_report_latest.json
+```
+
+New lane:
+
+```powershell
+.\scripts\nexus.ps1 domain
+```
+
+Bash equivalent:
+
+```bash
+bash scripts/nexus.sh domain
+```
+
+TUI commands:
+
+```text
+/domain
+/study <summary>
+```
+
+Electron may read the domain report and domain state indexes. It does not gain new authority.
+
+Domain law:
+
+```text
+Repo-native learning is allowed.
+Autonomous authority is not.
+Cross-domain synthesis is allowed.
+Unsupported claims are not.
+```

@@ -1,0 +1,139 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.4.0-domain-intelligence-orchestrator",
+  "status": "pass",
+  "generated_at_utc": "2026-07-04T01:09:09.299669+00:00",
+  "domains": [
+    "biology",
+    "technology",
+    "code",
+    "math",
+    "physics",
+    "systems",
+    "human_ai",
+    "governance"
+  ],
+  "checks": [
+    {
+      "check": "domain_doctrine_exists",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "domain_readmes_exist",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "domain_schemas_exist",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "domain_state_indexes_exist",
+      "status": "pass",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "check": "blocked_claims_declared",
+      "status": "pass",
+      "evidence": {
+        "blocked_claims": [
+          "medical_authority",
+          "unsafe_wet_lab_instruction",
+          "simulation_as_empirical_proof",
+          "conjecture_as_theorem",
+          "demo_as_production_validation",
+          "unsupported_cross_domain_fact"
+        ]
+      }
+    },
+    {
+      "check": "biology_safety_boundary_present",
+      "status": "pass",
+      "evidence": {
+        "domain": "biology"
+      }
+    },
+    {
+      "check": "math_proof_conjecture_boundary_present",
+      "status": "pass",
+      "evidence": {
+        "domain": "math"
+      }
+    },
+    {
+      "check": "physics_dimensional_simulation_boundary_present",
+      "status": "pass",
+      "evidence": {
+        "domain": "physics"
+      }
+    },
+    {
+      "check": "code_test_boundary_present",
+      "status": "pass",
+      "evidence": {
+        "domain": "code"
+      }
+    },
+    {
+      "check": "cross_domain_analogy_boundary_present",
+      "status": "pass",
+      "evidence": {
+        "doc": "CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md"
+      }
+    },
+    {
+      "check": "codex_no_self_authorization_boundary_present",
+      "status": "pass",
+      "evidence": {
+        "doc": "CODEX_ORCHESTRATION_PROTOCOL.md"
+      }
+    }
+  ],
+  "read_surfaces": [
+    "docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md",
+    "docs/intelligence/REPO_NATIVE_LEARNING.md",
+    "docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md",
+    "docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md",
+    "state/domain_intelligence_index.v0.4.0.json",
+    "state/repo_native_learning_index.v0.4.0.json",
+    "state/codex_orchestration_index.v0.4.0.json",
+    "domains/README.md"
+  ],
+  "write_surfaces": [
+    "reports/nexus_domain_intelligence_report_latest.json",
+    "docs/feedback/operator_packets/*.json"
+  ],
+  "allowed_study_modes": [
+    "study",
+    "extract",
+    "map",
+    "model",
+    "simulate",
+    "test",
+    "gate",
+    "reflect",
+    "compress",
+    "rehydrate",
+    "orchestrate"
+  ],
+  "blocked_claims": [
+    "medical_authority",
+    "unsafe_wet_lab_instruction",
+    "simulation_as_empirical_proof",
+    "conjecture_as_theorem",
+    "demo_as_production_validation",
+    "unsupported_cross_domain_fact"
+  ],
+  "next_action": "Continue with .\\scripts\\nexus.ps1 reflect and .\\scripts\\nexus.ps1 evolve.",
+  "claim_boundary": "Domain intelligence compilation is local development evidence only. It does not prove scientific truth, medical validity, physical law, mathematical proof, code correctness, safety, security, production readiness, model understanding, or autonomous authority."
+}

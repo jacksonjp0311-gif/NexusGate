@@ -20,7 +20,7 @@ This chart must be visible during rehydration.
 | v0.1.8 | Receptor Registry + Compatibility Compiler | pass | Adds receptor manifests, receptor registry, compatibility decisions, and receptor compiler. |
 | v0.1.9b | Bridge Session Rescue | pass | Adds safe packet serialization and bridge compiler pass. |
 | v0.2.0 | Bounded Bridge Runtime | pass | Adds bounded runtime, runtime compiler, runtime report, and compact runtime command. |
-| v0.2.1 | Human Surface + Quiet Git Warnings | current | Adds human-readable PowerShell surface and filters CRLF/LF warning noise. |
+| v0.2.1 | Human Surface + Quiet Git Warnings | stable | Adds human-readable PowerShell surface and filters CRLF/LF warning noise. |
 
 ## Current Required Update Rule
 
@@ -50,19 +50,19 @@ No operator flood in normal PowerShell runs.
 
 Boundary: the update chart improves repository continuity. It does not prove correctness, safety, security, or production readiness.
 
-| v0.2.1b | Human Surface Marker Rescue | current | Restores compiler marker compatibility while preserving human surface. |
+| v0.2.1b | Human Surface Marker Rescue | stable | Restores compiler marker compatibility while preserving human surface. |
 
 
-| v0.2.2 | Feedback + Interconnect + Evidence Compaction | current | Adds compact, interconnect, feedback, and evolve CLI lanes. |
+| v0.2.2 | Feedback + Interconnect + Evidence Compaction | stable | Adds compact, interconnect, feedback, and evolve CLI lanes. |
 
 
-| v0.2.2b | Self-Healing Feedback Rescue | current | Restores v0.2.2 marker compatibility and adds recommendation/dry-run/apply-gate self-healing reports. |
+| v0.2.2b | Self-Healing Feedback Rescue | stable | Restores v0.2.2 marker compatibility and adds recommendation/dry-run/apply-gate self-healing reports. |
 
 
-| v0.2.3 | AI Feedback Interface + Markdown Feedback Log | current | Adds ai_feedback_context_latest.json, FEEDBACK_SYSTEM.md, FEEDBACK_LOG.md, interface command, and PowerShell feedback summary. |
+| v0.2.3 | AI Feedback Interface + Markdown Feedback Log | stable | Adds ai_feedback_context_latest.json, FEEDBACK_SYSTEM.md, FEEDBACK_LOG.md, interface command, and PowerShell feedback summary. |
 
 
-| v0.2.4b | PowerShell HUD TUI | current | Adds interactive terminal shell with lane menu, chat prompt, buffer bar, colored output, feedback notes, operation packets, debug tail, and AI handoff. |
+| v0.2.4b | PowerShell HUD TUI | stable | Adds interactive terminal shell with lane menu, chat prompt, buffer bar, colored output, feedback notes, operation packets, debug tail, and AI handoff. |
 
 | v0.2.6 | AI Agent Interconnection | stable | Extends interconnect graph with governed AI-agent handoff, TUI export, feedback context, operator packet, and this-process rehydration edges. |
 
@@ -83,4 +83,5 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.3.4 | Electron Preflight Compiler | stable | Adds a Python preflight compiler and script lane for the Electron scaffold without installing, packaging, or launching Electron. |
 | v0.3.5 | Electron Environment + HUD Surface | stable | Adds non-mutating Electron environment readiness and aligns TUI/Electron presentation with the HUD operator-console direction. |
 | v0.3.6 | Electron HUD Runtime | stable | Installs the local Electron runtime, adds a governed HUD desktop shell smoke path, commits the lockfile, and keeps the visible title to NEXUS GATE. |
-| v0.3.7 | Reflective Intelligence Gateway | current | Formalizes the reflective intelligence loop, interface adapter contract, lineage manifest, reflect lane, TUI /reflect and /lineage views, and compiler-gated reflective report. |
+| v0.3.7 | Reflective Intelligence Gateway | stable | Formalizes the reflective intelligence loop, interface adapter contract, lineage manifest, reflect lane, TUI /reflect and /lineage views, and compiler-gated reflective report. |
+| v0.4.0 | Domain Intelligence Orchestrator | current | Adds repo-native domain learning doctrine, domain card schemas, Codex orchestration protocol, domain compiler lane, TUI /domain and /study views, and claim-discipline gates. |

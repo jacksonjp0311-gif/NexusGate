@@ -66,8 +66,12 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
         "docs/ui/ELECTRON_HUD_RUNTIME.md",
         "docs/ui/ELECTRON_SHELL_SCAFFOLD.md",
         "docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md",
+        "docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md",
+        "docs/intelligence/REPO_NATIVE_LEARNING.md",
+        "docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md",
         "docs/interfaces/INTERFACE_ADAPTER_CONTRACT.md",
         "docs/versioning/NEXUS_LINEAGE_PROTOCOL.md",
+        "docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md",
         "electron/README.md",
         "electron/package.json",
         "electron/package-lock.json",
@@ -81,8 +85,12 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
         "state/electron_hud_runtime_index.v0.3.6.json",
         "state/interface_adapter_contract_index.v0.3.7.json",
         "state/nexus_lineage_manifest_latest.json",
+        "state/domain_intelligence_index.v0.4.0.json",
+        "state/repo_native_learning_index.v0.4.0.json",
+        "state/codex_orchestration_index.v0.4.0.json",
         "tests/test_electron_hud_runtime.py",
         "tests/test_reflective_intelligence_loop.py",
+        "tests/test_domain_intelligence_orchestrator.py",
         "tests/test_electron_read_contract.py",
         "tests/test_electron_shell_scaffold.py",
     ]
@@ -123,8 +131,12 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
 
     required_reflective_surfaces = {
         "reports/nexus_reflective_loop_report_latest.json",
+        "reports/nexus_domain_intelligence_report_latest.json",
         "state/nexus_lineage_manifest_latest.json",
         "state/interface_adapter_contract_index.v0.3.7.json",
+        "state/domain_intelligence_index.v0.4.0.json",
+        "state/repo_native_learning_index.v0.4.0.json",
+        "state/codex_orchestration_index.v0.4.0.json",
     }
     checks.append(_check(
         "electron_reflective_surfaces_declared",
@@ -147,6 +159,7 @@ def compile_electron_preflight(root: str | Path) -> ElectronPreflightReport:
         "scripts\", \"nexus.ps1",
         "nexus_electron_smoke_report_latest.json",
         "nexus_reflective_loop_report_latest.json",
+        "nexus_domain_intelligence_report_latest.json",
         "nexus_lineage_manifest_latest.json",
         "--smoke",
         "disableHardwareAcceleration",

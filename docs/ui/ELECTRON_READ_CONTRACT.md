@@ -11,8 +11,12 @@ docs/feedback/operator_packets/*.json
 reports/nexus_feedback_interface_report_latest.json
 reports/nexus_self_healing_report_latest.json
 reports/nexus_reflective_loop_report_latest.json
+reports/nexus_domain_intelligence_report_latest.json
 state/nexus_lineage_manifest_latest.json
 state/interface_adapter_contract_index.v0.3.7.json
+state/domain_intelligence_index.v0.4.0.json
+state/repo_native_learning_index.v0.4.0.json
+state/codex_orchestration_index.v0.4.0.json
 reports/tui/nexus_tui_ai_handoff_latest.txt
 reports/tui/nexus_tui_snapshot_latest.html
 reports/tui/nexus_tui_surface_latest.json

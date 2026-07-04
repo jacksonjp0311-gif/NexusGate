@@ -1,20 +1,20 @@
 {
   "system": "NEXUS GATE",
   "version": "0.1.6b-pack-compiler",
-  "generated_at_utc": "2026-07-03T21:52:41.500031+00:00",
+  "generated_at_utc": "2026-07-04T01:09:16.856139+00:00",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "file_count": 1510,
-  "total_bytes": 8545844,
-  "total_lines": 267091,
-  "bundle_path": "dist/nexus_gate_source_bundle_20260703_215240.tar.gz",
-  "manifest_path": "dist/nexus_gate_pack_manifest_20260703_215240.json",
+  "file_count": 1723,
+  "total_bytes": 9933138,
+  "total_lines": 311126,
+  "bundle_path": "dist/nexus_gate_source_bundle_20260704_010915.tar.gz",
+  "manifest_path": "dist/nexus_gate_pack_manifest_20260704_010915.json",
   "largest_files": [
     {
       "path": "docs/feedback/FEEDBACK_LOG.md",
-      "size_bytes": 90477,
-      "line_count": 2606,
-      "sha256": "7c831a1cb01250c36a21175554fb73fcba4a69d1414bb9e089072d55987e2264"
+      "size_bytes": 104841,
+      "line_count": 3020,
+      "sha256": "0a284a0bb83ce6ddb54f916b5d7bf9a107ae678c3fcd114978015975c6f84fbd"
     },
     {
       "path": "electron/node_modules/got/readme.md",
@@ -30,15 +30,15 @@
     },
     {
       "path": "scripts/nexus_tui.ps1",
-      "size_bytes": 42968,
-      "line_count": 922,
-      "sha256": "f555887db49d1a7cd72fb9dda9bac39119a8c038907d9b67eebdfab8e95dbff1"
+      "size_bytes": 47227,
+      "line_count": 997,
+      "sha256": "c5f699dbe1b737c082361c1d7767df3087734ede7c97b4d4397ce809b650dbc7"
     },
     {
       "path": "README.md",
-      "size_bytes": 37398,
-      "line_count": 1325,
-      "sha256": "9656a012d9a48e05fe2c9f92cb7f7b70178e25ae0dfb3fa81d60d89006700c97"
+      "size_bytes": 39567,
+      "line_count": 1413,
+      "sha256": "c84779f96f58883b18190bd52374694dfe4569167df2dde6051b0c44ce28519e"
     },
     {
       "path": "electron/node_modules/yauzl/README.md",
@@ -111,7 +111,7 @@
         "tests"
       ],
       "returncode": 0,
-      "stdout_tail": "Listing 'nexus_gate'...\nListing 'nexus_gate\\\\adapters'...\nListing 'nexus_gate\\\\bridge'...\nListing 'nexus_gate\\\\build'...\nListing 'nexus_gate\\\\compiler'...\nListing 'nexus_gate\\\\core'...\nListing 'nexus_gate\\\\evidence'...\nListing 'nexus_gate\\\\feedback'...\nListing 'nexus_gate\\\\interconnect'...\nListing 'nexus_gate\\\\policies'...\nListing 'nexus_gate\\\\receptors'...\nListing 'nexus_gate\\\\reflection'...\nListing 'nexus_gate\\\\runtime'...\nListing 'nexus_gate\\\\schemas'...\nListing 'nexus_gate\\\\self_healing'...\nListing 'nexus_gate\\\\ui'...\nListing 'tests'...\n",
+      "stdout_tail": "Listing 'nexus_gate'...\nListing 'nexus_gate\\\\adapters'...\nListing 'nexus_gate\\\\bridge'...\nListing 'nexus_gate\\\\build'...\nListing 'nexus_gate\\\\compiler'...\nListing 'nexus_gate\\\\core'...\nListing 'nexus_gate\\\\domain'...\nListing 'nexus_gate\\\\evidence'...\nListing 'nexus_gate\\\\feedback'...\nListing 'nexus_gate\\\\interconnect'...\nListing 'nexus_gate\\\\policies'...\nListing 'nexus_gate\\\\receptors'...\nListing 'nexus_gate\\\\reflection'...\nListing 'nexus_gate\\\\runtime'...\nListing 'nexus_gate\\\\schemas'...\nListing 'nexus_gate\\\\self_healing'...\nListing 'nexus_gate\\\\ui'...\nListing 'tests'...\n",
       "stderr_tail": ""
     },
     {
@@ -125,7 +125,7 @@
       ],
       "returncode": 0,
       "stdout_tail": "",
-      "stderr_tail": "........................................................................................................................\n----------------------------------------------------------------------\nRan 120 tests in 3.265s\n\nOK\n"
+      "stderr_tail": "................................................................................................................................\n----------------------------------------------------------------------\nRan 128 tests in 5.412s\n\nOK\n"
     },
     {
       "cmd": [
@@ -137,7 +137,7 @@
         "--json"
       ],
       "returncode": 0,
-      "stdout_tail": "ailure_modes/FAILURE_MODE_CHART.md\",\n          \"docs/updates/UPDATE_CHART.md\",\n          \"reports/nexus_compile_report_latest.json\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"update_chart_current\",\n      \"status\": \"pass\",\n      \"message\": \"Update chart includes current v0.1.5 state.\",\n      \"evidence\": {\n        \"required\": [\n          \"v0.1.5\",\n          \"Strict compiler\",\n          \"Cold Evidence\",\n          \"No version step without update chart entry\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"cold_evidence_contracts\",\n      \"status\": \"pass\",\n      \"message\": \"Cold evidence and wound route contracts are visible.\",\n      \"evidence\": {\n        \"contracts\": [\n          \"ShadowReport\",\n          \"ShadowFailure\",\n          \"ShadowWound\",\n          \"WoundRoute\",\n          \"ReplayCertificate\",\n          \"DemotionDecision\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"cold_evidence_engine\",\n      \"status\": \"pass\",\n      \"message\": \"Cold evidence engine classifies failure, wounds, routes, and certifies replay.\",\n      \"evidence\": {\n        \"failure\": \"shadow_failure_unrouted\",\n        \"wound_status\": \"open\",\n        \"route_action\": \"replay\",\n        \"replay_passed\": true\n      }\n    },\n    {\n      \"gate\": \"forbidden_bypass_scan\",\n      \"status\": \"pass\",\n      \"message\": \"No forbidden bypass markers found.\",\n      \"evidence\": {\n        \"markers\": [\n          \"bypass_authority=True\",\n          \"skip_authority_gate=True\",\n          \"disable_ledger=True\",\n          \"unsafe_engage=True\",\n          \"allow_mutation_without_authority\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"direct_compiler_calls\",\n      \"status\": \"pass\",\n      \"message\": \"Compile/loop/promote/strict scripts call the gated compiler directly.\",\n      \"evidence\": {\n        \"checked\": [\n          \"scripts/nexus.ps1\",\n          \"scripts/nexus_compile.ps1\",\n          \"scripts/nexus_once.ps1\",\n          \"scripts/nexus_dev_loop.ps1\",\n          \"scripts/nexus_promote.ps1\",\n          \"scripts/nexus_strict_compile.ps1\",\n          \"scripts/nexus.sh\",\n          \"scripts/nexus_compile.sh\",\n          \"scripts/nexus_once.sh\",\n          \"scripts/nexus_dev_loop.sh\",\n          \"scripts/nexus_promote.sh\",\n          \"scripts/nexus_strict_compile.sh\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"compact_commands\",\n      \"status\": \"pass\",\n      \"message\": \"Compact command surface is present.\",\n      \"evidence\": {\n        \"required\": [\n          \"scripts/nexus.ps1\",\n          \"scripts/nexus.sh\",\n          \"docs/runtime/COMPACT_COMMANDS.md\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"python_compile\",\n      \"status\": \"pass\",\n      \"message\": \"Python source compiled.\",\n      \"evidence\": {\n        \"paths\": [\n          \"nexus_gate\",\n          \"tests\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"route_contracts\",\n      \"status\": \"pass\",\n      \"message\": \"Core route contracts hold.\",\n      \"evidence\": {\n        \"decisions\": {\n          \"missing_schema\": \"reject\",\n          \"no_authority_tool\": \"shadow\",\n          \"read_only\": \"engage\"\n        }\n      }\n    },\n    {\n      \"gate\": \"unit_tests\",\n      \"status\": \"pass\",\n      \"message\": \"Unit tests passed.\",\n      \"evidence\": {\n        \"cmd\": [\n          \"C:\\\\Program Files\\\\Python312\\\\python.exe\",\n          \"-m\",\n          \"unittest\",\n          \"discover\",\n          \"-s\",\n          \"tests\"\n        ],\n        \"returncode\": 0,\n        \"stdout_tail\": \"\",\n        \"stderr_tail\": \"........................................................................................................................\\n----------------------------------------------------------------------\\nRan 120 tests in 3.307s\\n\\nOK\\n\"\n      }\n    },\n    {\n      \"gate\": \"ledger_appendable\",\n      \"status\": \"pass\",\n      \"message\": \"Ledger is appendable.\",\n      \"evidence\": {\n        \"path\": \"ledger\\\\nexus_gate_ledger.v0.1.0.jsonl\"\n      }\n    }\n  ],\n  \"claim_boundary\": \"Local development gate only. Not a production validation, safety proof, security proof, or correctness proof.\"\n}\n",
+      "stdout_tail": "odes/FAILURE_MODE_CHART.md\",\n          \"docs/updates/UPDATE_CHART.md\",\n          \"reports/nexus_compile_report_latest.json\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"update_chart_current\",\n      \"status\": \"pass\",\n      \"message\": \"Update chart includes current v0.1.5 state.\",\n      \"evidence\": {\n        \"required\": [\n          \"v0.1.5\",\n          \"Strict compiler\",\n          \"Cold Evidence\",\n          \"No version step without update chart entry\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"cold_evidence_contracts\",\n      \"status\": \"pass\",\n      \"message\": \"Cold evidence and wound route contracts are visible.\",\n      \"evidence\": {\n        \"contracts\": [\n          \"ShadowReport\",\n          \"ShadowFailure\",\n          \"ShadowWound\",\n          \"WoundRoute\",\n          \"ReplayCertificate\",\n          \"DemotionDecision\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"cold_evidence_engine\",\n      \"status\": \"pass\",\n      \"message\": \"Cold evidence engine classifies failure, wounds, routes, and certifies replay.\",\n      \"evidence\": {\n        \"failure\": \"shadow_failure_unrouted\",\n        \"wound_status\": \"open\",\n        \"route_action\": \"replay\",\n        \"replay_passed\": true\n      }\n    },\n    {\n      \"gate\": \"forbidden_bypass_scan\",\n      \"status\": \"pass\",\n      \"message\": \"No forbidden bypass markers found.\",\n      \"evidence\": {\n        \"markers\": [\n          \"bypass_authority=True\",\n          \"skip_authority_gate=True\",\n          \"disable_ledger=True\",\n          \"unsafe_engage=True\",\n          \"allow_mutation_without_authority\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"direct_compiler_calls\",\n      \"status\": \"pass\",\n      \"message\": \"Compile/loop/promote/strict scripts call the gated compiler directly.\",\n      \"evidence\": {\n        \"checked\": [\n          \"scripts/nexus.ps1\",\n          \"scripts/nexus_compile.ps1\",\n          \"scripts/nexus_once.ps1\",\n          \"scripts/nexus_dev_loop.ps1\",\n          \"scripts/nexus_promote.ps1\",\n          \"scripts/nexus_strict_compile.ps1\",\n          \"scripts/nexus.sh\",\n          \"scripts/nexus_compile.sh\",\n          \"scripts/nexus_once.sh\",\n          \"scripts/nexus_dev_loop.sh\",\n          \"scripts/nexus_promote.sh\",\n          \"scripts/nexus_strict_compile.sh\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"compact_commands\",\n      \"status\": \"pass\",\n      \"message\": \"Compact command surface is present.\",\n      \"evidence\": {\n        \"required\": [\n          \"scripts/nexus.ps1\",\n          \"scripts/nexus.sh\",\n          \"docs/runtime/COMPACT_COMMANDS.md\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"python_compile\",\n      \"status\": \"pass\",\n      \"message\": \"Python source compiled.\",\n      \"evidence\": {\n        \"paths\": [\n          \"nexus_gate\",\n          \"tests\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"route_contracts\",\n      \"status\": \"pass\",\n      \"message\": \"Core route contracts hold.\",\n      \"evidence\": {\n        \"decisions\": {\n          \"missing_schema\": \"reject\",\n          \"no_authority_tool\": \"shadow\",\n          \"read_only\": \"engage\"\n        }\n      }\n    },\n    {\n      \"gate\": \"unit_tests\",\n      \"status\": \"pass\",\n      \"message\": \"Unit tests passed.\",\n      \"evidence\": {\n        \"cmd\": [\n          \"C:\\\\Program Files\\\\Python312\\\\python.exe\",\n          \"-m\",\n          \"unittest\",\n          \"discover\",\n          \"-s\",\n          \"tests\"\n        ],\n        \"returncode\": 0,\n        \"stdout_tail\": \"\",\n        \"stderr_tail\": \"................................................................................................................................\\n----------------------------------------------------------------------\\nRan 128 tests in 4.979s\\n\\nOK\\n\"\n      }\n    },\n    {\n      \"gate\": \"ledger_appendable\",\n      \"status\": \"pass\",\n      \"message\": \"Ledger is appendable.\",\n      \"evidence\": {\n        \"path\": \"ledger\\\\nexus_gate_ledger.v0.1.0.jsonl\"\n      }\n    }\n  ],\n  \"claim_boundary\": \"Local development gate only. Not a production validation, safety proof, security proof, or correctness proof.\"\n}\n",
       "stderr_tail": ""
     }
   ],

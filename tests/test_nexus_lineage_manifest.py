@@ -18,9 +18,10 @@ class TestNexusLineageManifest(unittest.TestCase):
         self.assertIn("Ungated compounding is not.", text)
 
     def test_manifest_tracks_required_versions_and_reports(self):
-        self.assertEqual(self.manifest["system_version"], "0.3.7")
-        self.assertEqual(self.manifest["active_phase"], "Reflective Intelligence Gateway")
+        self.assertEqual(self.manifest["system_version"], "0.4.0")
+        self.assertEqual(self.manifest["active_phase"], "Domain Intelligence Orchestrator")
         self.assertEqual(self.manifest["reflective_loop_version"], "0.3.7")
+        self.assertEqual(self.manifest["domain_intelligence_version"], "0.4.0")
         self.assertIn("last_evolve_report", self.manifest)
         self.assertIn("last_electron_preflight_report", self.manifest)
         self.assertIn("last_electron_smoke_report", self.manifest)

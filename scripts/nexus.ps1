@@ -10,8 +10,9 @@
 # nexus_gate.evidence.compact
 # nexus_gate.self_healing.compile
 # nexus_gate.reflection.compile
+# nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -43,6 +44,10 @@ function Show-Rehydration {
         ".\docs\feedback\FEEDBACK_LOG.md",
         ".\docs\ui\NEXUS_TUI_SHELL.md",
         ".\docs\intelligence\REFLECTIVE_INTELLIGENCE_LOOP.md",
+        ".\docs\intelligence\DOMAIN_INTELLIGENCE_ORCHESTRATOR.md",
+        ".\docs\intelligence\REPO_NATIVE_LEARNING.md",
+        ".\docs\intelligence\CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md",
+        ".\docs\codex\CODEX_ORCHESTRATION_PROTOCOL.md",
         ".\docs\interfaces\INTERFACE_ADAPTER_CONTRACT.md",
         ".\docs\versioning\NEXUS_LINEAGE_PROTOCOL.md",
         ".\docs\failure_modes\FAILURE_MODE_CHART.md",
@@ -103,6 +108,7 @@ switch ($Command) {
     "electron-env" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 electron-env }
     "electron-preflight" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 electron-preflight }
     "reflect" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 reflect }
+    "domain" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 domain }
     "tui" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_tui.ps1 }
     "ui" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_ui.ps1 }
     "evolve" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 evolve }

@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"SourceCard","type":"object","required":["card_type","source_id","title","provenance","claim_boundary"],"properties":{"card_type":{"const":"SourceCard"},"source_id":{"type":"string"},"title":{"type":"string"},"provenance":{"type":"string"},"retrieved_at":{"type":"string"},"claim_boundary":{"type":"string"}}}

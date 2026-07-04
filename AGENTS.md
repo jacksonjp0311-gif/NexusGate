@@ -404,17 +404,23 @@ Before evolving reflective or interface surfaces, inspect:
 
 ```text
 docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md
+docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md
+docs/intelligence/REPO_NATIVE_LEARNING.md
+docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md
+docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md
 docs/interfaces/INTERFACE_ADAPTER_CONTRACT.md
 docs/versioning/NEXUS_LINEAGE_PROTOCOL.md
 state/interface_adapter_contract_index.v0.3.7.json
 state/nexus_lineage_manifest_latest.json
 reports/nexus_reflective_loop_report_latest.json
+reports/nexus_domain_intelligence_report_latest.json
 ```
 
 Use:
 
 ```powershell
 .\scripts\nexus.ps1 reflect
+.\scripts\nexus.ps1 domain
 .\scripts\nexus.ps1 evolve
 ```
 
@@ -427,4 +433,41 @@ Organic evolution is allowed.
 Ungated compounding is not.
 No reflective loop without evidence surfaces.
 No interface adapter may declare autonomous mutation authority.
+```
+
+## NEXUS v0.4.0 Domain Intelligence Orchestrator
+
+Before creating or promoting domain claims, inspect:
+
+```text
+docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md
+docs/intelligence/REPO_NATIVE_LEARNING.md
+docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md
+docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md
+state/domain_intelligence_index.v0.4.0.json
+state/repo_native_learning_index.v0.4.0.json
+state/codex_orchestration_index.v0.4.0.json
+reports/nexus_domain_intelligence_report_latest.json
+domains/
+```
+
+Use:
+
+```powershell
+.\scripts\nexus.ps1 domain
+.\scripts\nexus.ps1 reflect
+.\scripts\nexus.ps1 evolve
+```
+
+Hard rules:
+
+```text
+Repo-native learning is allowed.
+Autonomous authority is not.
+Cross-domain synthesis is allowed.
+Unsupported claims are not.
+No simulation becomes real-world proof.
+No code demo becomes production validation.
+No biological pattern becomes medical advice.
+No mathematical conjecture becomes theorem without proof.
 ```

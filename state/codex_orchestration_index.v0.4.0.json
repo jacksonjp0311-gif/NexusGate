@@ -1,0 +1,22 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.4.0",
+  "kind": "codex_orchestration_index",
+  "required_read_order": [
+    "README.md",
+    "AGENTS.md",
+    "docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md",
+    "docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md",
+    "docs/intelligence/REPO_NATIVE_LEARNING.md",
+    "docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md",
+    "docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md",
+    "state/nexus_lineage_manifest_latest.json",
+    "state/interface_adapter_contract_index.v0.3.7.json",
+    "state/domain_intelligence_index.v0.4.0.json",
+    "reports/nexus_reflective_loop_report_latest.json",
+    "reports/nexus_domain_intelligence_report_latest.json"
+  ],
+  "required_commands": ["python -m unittest discover -s tests", ".\\scripts\\nexus.ps1 domain", ".\\scripts\\nexus.ps1 reflect", ".\\scripts\\nexus.ps1 evolve"],
+  "blocked_actions": ["self_authorize", "bypass_evolve", "secret_access", "external_api_write", "unsupported_claim_promotion"],
+  "claim_boundary": "Codex orchestration is bounded repo work with human authority and gates. It does not create autonomous authority."
+}

@@ -1,0 +1,10 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.4.0",
+  "kind": "repo_native_learning_index",
+  "definition": "Persistent improvement of repository structures through evidence, not mutation of model weights.",
+  "learning_units": ["SourceCard", "ConceptCard", "ClaimCard", "EquationCard", "SimulationCard", "CodePatternCard", "ExperimentCard", "FailureCard", "ReflectionCard", "OrchestrationCard"],
+  "learning_chain": ["source", "concept", "claim", "model", "test", "report", "lineage", "handoff", "next_session"],
+  "required_gates": ["python -m unittest discover -s tests", ".\\scripts\\nexus.ps1 domain", ".\\scripts\\nexus.ps1 reflect", ".\\scripts\\nexus.ps1 evolve"],
+  "claim_boundary": "Repo-native learning is evidence discipline, not model-weight learning, proof, production validation, or autonomous authority."
+}

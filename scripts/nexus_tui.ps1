@@ -27,7 +27,8 @@ $Global:Lanes = @(
     [ordered]@{ key="7"; name="interconnect"; tab="GRAPH";       desc="Compile governed transfer graph" },
     [ordered]@{ key="8"; name="runtime";      tab="RUNTIME";     desc="Run bounded runtime compiler" },
     [ordered]@{ key="9"; name="pack";         tab="RELEASE";     desc="Compile pack manifest/bundle" },
-    [ordered]@{ key="10"; name="reflect";     tab="REFLECT";     desc="Compile reflective intelligence loop and lineage evidence" }
+    [ordered]@{ key="10"; name="reflect";     tab="REFLECT";     desc="Compile reflective intelligence loop and lineage evidence" },
+    [ordered]@{ key="11"; name="domain";      tab="DOMAIN";      desc="Compile domain intelligence and repo-native learning evidence" }
 )
 
 function Add-TranscriptLine {
@@ -130,6 +131,7 @@ function Header {
     Write-Host '| [8] runtime                   |                                                    | /copy exports handoff            |' -ForegroundColor Gray
     Write-Host '| [9] pack                      |                                                    | /snapshot opens HUD bridge       |' -ForegroundColor Gray
     Write-Host '| [10] reflect                  |                                                    | /lineage shows version manifest  |' -ForegroundColor Gray
+    Write-Host '| [11] domain                   |                                                    | /study creates study packet      |' -ForegroundColor Gray
     Write-HudRule 118
     Write-Host '| HUMAN FEEDBACK | AI FEEDBACK | DEBUGGING | SELF-HEALING | REFLECTION | INTERCONNECT | GOVERNANCE: strict audit enabled |' -ForegroundColor DarkCyan
     Write-HudRule 118
@@ -158,6 +160,8 @@ function Show-Menu {
     Write-Host '    /domains          Show domain interconnection routes' -ForegroundColor Gray
     Write-Host '    /reflect          Compile/show reflective intelligence loop report' -ForegroundColor Gray
     Write-Host '    /lineage          Show lineage/version manifest' -ForegroundColor Gray
+    Write-Host '    /domain           Compile/show domain intelligence report' -ForegroundColor Gray
+    Write-Host '    /study text       Create a governed domain study packet' -ForegroundColor Gray
     Write-Host '    /open-log         Open docs/feedback/FEEDBACK_LOG.md' -ForegroundColor Gray
     Write-Host '    /open-context     Open state/ai_feedback_context_latest.json' -ForegroundColor Gray
     Write-Host '    /menu             Redraw this menu' -ForegroundColor Gray
@@ -352,12 +356,17 @@ function Get-AIHandoffText {
     $lines.Add("  .\scripts\nexus.ps1 evolve")
     $lines.Add("  .\scripts\nexus.ps1 heal")
     $lines.Add("  .\scripts\nexus.ps1 reflect")
+    $lines.Add("  .\scripts\nexus.ps1 domain")
     $lines.Add("Read surfaces:")
     $lines.Add("  state/ai_feedback_context_latest.json")
     $lines.Add("  docs/feedback/FEEDBACK_LOG.md")
     $lines.Add("  reports/nexus_feedback_interface_report_latest.json")
     $lines.Add("  reports/nexus_self_healing_report_latest.json")
     $lines.Add("  reports/nexus_reflective_loop_report_latest.json")
+    $lines.Add("  reports/nexus_domain_intelligence_report_latest.json")
+    $lines.Add("  state/domain_intelligence_index.v0.4.0.json")
+    $lines.Add("  state/repo_native_learning_index.v0.4.0.json")
+    $lines.Add("  state/codex_orchestration_index.v0.4.0.json")
     $lines.Add("  state/nexus_lineage_manifest_latest.json")
     $lines.Add("  state/interface_adapter_contract_index.v0.3.7.json")
     $lines.Add("  reports/tui/nexus_tui_ai_handoff_latest.txt")
@@ -384,6 +393,11 @@ function Get-AIHandoffText {
     if (Test-Path $lineagePath) {
         $lines.Add("--- nexus_lineage_manifest_latest.json ---")
         $lines.Add((Get-Content $lineagePath -Raw))
+    }
+    $domainPath = Join-Path $Root "reports\nexus_domain_intelligence_report_latest.json"
+    if (Test-Path $domainPath) {
+        $lines.Add("--- nexus_domain_intelligence_report_latest.json ---")
+        $lines.Add((Get-Content $domainPath -Raw))
     }
     $lines.Add("===== NEXUS AI HANDOFF END =====")
     return ($lines -join [Environment]::NewLine)
@@ -669,8 +683,12 @@ function Show-ElectronContract {
     Write-Host "  reports/nexus_feedback_interface_report_latest.json"
     Write-Host "  reports/nexus_self_healing_report_latest.json"
     Write-Host "  reports/nexus_reflective_loop_report_latest.json"
+    Write-Host "  reports/nexus_domain_intelligence_report_latest.json"
     Write-Host "  state/nexus_lineage_manifest_latest.json"
     Write-Host "  state/interface_adapter_contract_index.v0.3.7.json"
+    Write-Host "  state/domain_intelligence_index.v0.4.0.json"
+    Write-Host "  state/repo_native_learning_index.v0.4.0.json"
+    Write-Host "  state/codex_orchestration_index.v0.4.0.json"
     Write-Host "  reports/tui/nexus_tui_ai_handoff_latest.txt"
     Write-Host "  reports/tui/nexus_tui_snapshot_latest.html"
     Write-Host "  reports/tui/nexus_tui_surface_latest.json"
@@ -734,6 +752,61 @@ function Show-LineageManifest {
     foreach ($blocked in $manifest.blocked_promotions) { Write-Host "  $blocked" -ForegroundColor Yellow }
     Write-Host ""
     Write-Host "Boundary: lineage is orientation evidence, not production readiness." -ForegroundColor Yellow
+}
+
+function Show-DomainIntelligence {
+    Run-NexusLane "domain"
+    $path = Join-Path $Root "reports\nexus_domain_intelligence_report_latest.json"
+    if (-not (Test-Path $path)) {
+        Say "Domain intelligence report missing after domain lane." "WARN"
+        return
+    }
+    try {
+        $report = Get-Content $path -Raw | ConvertFrom-Json
+    } catch {
+        Say "Unable to read domain intelligence report: $($_.Exception.Message)" "FAIL"
+        return
+    }
+    Write-Host ""
+    Write-Host "===== NEXUS DOMAIN INTELLIGENCE =====" -ForegroundColor Cyan
+    Write-Host ("Status: {0} | Version: {1}" -f $report.status, $report.version) -ForegroundColor Green
+    Write-Host ("Domains: {0}" -f ($report.domains -join ", ")) -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "Checks" -ForegroundColor White
+    foreach ($check in $report.checks) {
+        $color = "Green"
+        if ($check.status -ne "pass") { $color = "Red" }
+        Write-Host ("  {0,-45} {1}" -f $check.check, $check.status) -ForegroundColor $color
+    }
+    Write-Host ""
+    Write-Host ("Next: {0}" -f $report.next_action) -ForegroundColor Yellow
+    Write-Host "Boundary: domain study is evidence-gated; unsupported claims are not promoted." -ForegroundColor Yellow
+}
+
+function New-StudyPacket {
+    param([string]$Summary)
+    if (-not $Summary.Trim()) {
+        Say "Study summary required." "WARN"
+        return
+    }
+    $dir = Join-Path $Root "docs\feedback\operator_packets"
+    if (-not (Test-Path $dir)) { [void](New-Item -ItemType Directory -Path $dir -Force) }
+    $stamp = (Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssZ")
+    $packet = [ordered]@{
+        schema = "NEXUS-GATE-DOMAIN-STUDY-PACKET"
+        packet_id = "nexus-domain-study-$stamp"
+        created_utc = (Get-Date).ToUniversalTime().ToString("o")
+        created_by = "NEXUS PowerShell TUI"
+        summary = $Summary
+        study_loop = @("study", "extract", "map", "model", "simulate", "test", "gate", "reflect", "compress", "rehydrate", "orchestrate")
+        required_boundaries = @("source", "claim", "evidence", "boundary", "test", "report", "lineage")
+        blocked_claims = @("medical_authority", "simulation_as_empirical_proof", "conjecture_as_theorem", "demo_as_production_validation", "unsupported_cross_domain_fact")
+        required_gates = @(".\scripts\nexus.ps1 domain", ".\scripts\nexus.ps1 reflect", ".\scripts\nexus.ps1 evolve")
+        claim_boundary = "Study packet only. It does not certify truth, apply changes, or grant autonomous authority."
+    }
+    $path = Join-Path $dir "domain-study-packet-$stamp.json"
+    $packet | ConvertTo-Json -Depth 10 | Out-File -FilePath $path -Encoding utf8
+    Say "Domain study packet created: $($path.Replace($Root + '\',''))" "OK"
 }
 
 function Show-InterconnectConsole {
@@ -872,6 +945,8 @@ function Handle-Input {
     if ($line -eq "/domains") { Show-DomainRoutes; return $true }
     if ($line -eq "/reflect") { Show-ReflectiveLoop; return $true }
     if ($line -eq "/lineage") { Show-LineageManifest; return $true }
+    if ($line -eq "/domain") { Show-DomainIntelligence; return $true }
+    if ($line.StartsWith("/study ")) { New-StudyPacket ($line.Substring(7)); return $true }
     if ($line -eq "/open-log") { Open-PathIfExists "docs\feedback\FEEDBACK_LOG.md"; return $true }
     if ($line -eq "/open-context") { Open-PathIfExists "state\ai_feedback_context_latest.json"; return $true }
 

@@ -3,7 +3,7 @@
   "version": "0.3.7-reflective-intelligence-loop",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-03T21:52:53.526668+00:00",
+  "generated_at_utc": "2026-07-04T01:09:14.148470+00:00",
   "checks": [
     {
       "check": "reflective_required_paths",
@@ -53,7 +53,7 @@
       "check": "lineage_tracks_versions",
       "status": "pass",
       "evidence": {
-        "system_version": "0.3.7",
+        "system_version": "0.4.0",
         "reflective_loop_version": "0.3.7"
       }
     },
@@ -77,6 +77,7 @@
     "README.md",
     "docs/feedback/FEEDBACK_LOG.md",
     "reports/*_latest.json",
+    "reports/nexus_domain_intelligence_report_latest.json",
     "reports/nexus_electron_preflight_report_latest.json",
     "reports/nexus_electron_smoke_report_latest.json",
     "reports/nexus_feedback_interface_report_latest.json",
@@ -87,8 +88,11 @@
     "reports/tui/nexus_tui_surface_latest.json",
     "state/*_latest.json",
     "state/ai_feedback_context_latest.json",
+    "state/codex_orchestration_index.v0.4.0.json",
+    "state/domain_intelligence_index.v0.4.0.json",
     "state/interface_adapter_contract_index.v0.3.7.json",
-    "state/nexus_lineage_manifest_latest.json"
+    "state/nexus_lineage_manifest_latest.json",
+    "state/repo_native_learning_index.v0.4.0.json"
   ],
   "write_surfaces": [
     "bounded_repo_patch_after_hydration",

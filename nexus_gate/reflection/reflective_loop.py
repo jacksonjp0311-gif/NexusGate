@@ -130,7 +130,7 @@ def compile_reflective_loop(root: str | Path = ".") -> ReflectiveLoopReport:
 
     checks.append(_check(
         "lineage_tracks_versions",
-        lineage.get("system_version") == "0.3.7"
+        lineage.get("system_version") in {"0.3.7", "0.4.0"}
         and lineage.get("reflective_loop_version") == "0.3.7"
         and "blocked_promotions" in lineage,
         {

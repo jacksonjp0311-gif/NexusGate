@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [switch]$NoGit
 )
@@ -117,12 +117,13 @@ function Run-Feedback {
     Invoke-Step "Electron environment gate" "13_electron_environment.json" { python -m nexus_gate.ui.electron_environment_compile --root . --json }
     Invoke-Step "Electron preflight compiler" "14_electron_preflight.json" { python -m nexus_gate.ui.electron_preflight_compile --root . --json }
     Invoke-Step "Reflective loop compiler" "15_reflective_loop.json" { python -m nexus_gate.reflection.compile --root . --json }
+    Invoke-Step "Domain intelligence compiler" "16_domain_intelligence.json" { python -m nexus_gate.domain.compile --root . --json }
     Say "Feedback/self-healing/interface lanes passed." "OK"
     Show-FeedbackSummary
 }
 
 function Run-Pack {
-    Invoke-Step "Pack compiler" "16_pack_compiler.json" { python -m nexus_gate.build.packer --root . --out dist --json }
+    Invoke-Step "Pack compiler" "17_pack_compiler.json" { python -m nexus_gate.build.packer --root . --out dist --json }
     Say "Pack lane passed." "OK"
 }
 
@@ -151,8 +152,10 @@ function Show-Status {
         ".\reports\nexus_electron_environment_report_latest.json",
         ".\reports\nexus_electron_preflight_report_latest.json",
         ".\reports\nexus_reflective_loop_report_latest.json",
+        ".\reports\nexus_domain_intelligence_report_latest.json",
         ".\state\nexus_lineage_manifest_latest.json",
         ".\state\interface_adapter_contract_index.v0.3.7.json",
+        ".\state\domain_intelligence_index.v0.4.0.json",
         ".\state\ai_feedback_context_latest.json",
         ".\docs\feedback\FEEDBACK_LOG.md",
         ".\dist\nexus_gate_pack_manifest_latest.json"
@@ -243,6 +246,12 @@ if ($Command -eq "electron-preflight") {
 if ($Command -eq "reflect") {
     Invoke-Step "Reflective loop compiler" "15_reflective_loop.json" { python -m nexus_gate.reflection.compile --root . --json }
     Say "Reflective loop report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "domain") {
+    Invoke-Step "Domain intelligence compiler" "16_domain_intelligence.json" { python -m nexus_gate.domain.compile --root . --json }
+    Say "Domain intelligence report written." "OK"
     exit 0
 }
 
