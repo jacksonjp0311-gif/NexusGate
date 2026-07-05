@@ -261,12 +261,30 @@ function Invoke-NexusRuntimeResidueClean {
 
     git restore --worktree -- reports state ledger docs/feedback/FEEDBACK_LOG.md 2>$null
 
-    $reportRoot = Join-Path $RepoRoot "reports"
-    if (Test-Path -LiteralPath $reportRoot) {
-        Get-ChildItem -Path $reportRoot -File -ErrorAction SilentlyContinue |
-            Where-Object { $_.Name -match '^nexus_.*_report_20\d{6}_\d{6}\.json$' } |
-            Remove-Item -Force -ErrorAction SilentlyContinue
+    Write-NG "Dev clean: removing untracked timestamped report JSON files only."
+
+    $untrackedReports = @(
+        git ls-files --others --exclude-standard -- reports |
+            Where-Object { $_ -match '^reports/nexus_.*_report_20\d{6}_\d{6}\.json$' }
+    )
+
+    foreach ($relative in $untrackedReports) {
+        $normalized = $relative.Replace('/', '\')
+        $fullPath = Join-Path $RepoRoot $normalized
+        if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
+            Remove-Item -LiteralPath $fullPath -Force -ErrorAction SilentlyContinue
+        }
     }
+
+    if ($untrackedReports.Count -gt 0) {
+        Write-OK ("Removed untracked timestamped report files: {0}" -f $untrackedReports.Count)
+    }
+    else {
+        Write-NG "No untracked timestamped report files found."
+    }
+
+    Write-NG "Dev clean: second safety restore for tracked generated surfaces."
+    git restore --worktree -- reports state ledger docs/feedback/FEEDBACK_LOG.md 2>$null
 
     $status = @(git status --short)
     if ($status.Count -eq 0) {

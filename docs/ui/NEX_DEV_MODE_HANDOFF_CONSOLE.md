@@ -32,3 +32,17 @@ The desktop entry portal exposes:
 Dev Mode streams local evidence and runs existing repo commands.
 
 It does not grant model-output authority, bypass tests, bypass the compiler, or mutate durable source without human authorization.
+
+## v0.7.6.1 Dev Clean Safety
+
+Dev Clean must never delete tracked historical report files.
+
+The safe sequence is:
+
+1. Restore tracked generated surfaces.
+2. Discover untracked timestamped report JSON files with `git ls-files --others --exclude-standard -- reports`.
+3. Remove only those untracked files.
+4. Run a second safety restore over reports, state, ledger, and feedback log.
+5. Show final git status.
+
+Wound lesson: cleanup must classify tracked versus untracked before deletion.
