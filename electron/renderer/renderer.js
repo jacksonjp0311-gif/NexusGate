@@ -207,6 +207,51 @@ function appendChat(kind, text, meta = "") {
   consoleStream.scrollTop = consoleStream.scrollHeight;
 }
 
+function resetChatToNexGreeting(greeting) {
+  if (consoleStream && nexAiCard) {
+    consoleStream.innerHTML = "";
+    consoleStream.appendChild(nexAiCard);
+  }
+
+  writeOutput(greeting, { preTranslated: true });
+
+  const meta = nexAiCard?.querySelector("header small");
+  if (meta) meta.textContent = "ready / recommendation-only";
+
+  const label = nexAiCard?.querySelector("header strong");
+  if (label) label.textContent = "NEX";
+}
+
+const NEX_LOCAL_MODEL_REFUSAL_CODE = "WinError 10061";
+
+function reflectNexFailure(text, role) {
+  const raw = String(text || "");
+  const lower = raw.toLowerCase();
+
+  if (lower.includes("winerror 10061") || raw.includes(NEX_LOCAL_MODEL_REFUSAL_CODE) || lower.includes("actively refused") || lower.includes("connection refused")) {
+    return [
+      "NEX REFLECTIVE FEEDBACK",
+      "=======================",
+      `Status: local model bridge blocked for ${role}. Trigger: ${NEX_LOCAL_MODEL_REFUSAL_CODE} / connection refused.`,
+      "",
+      "What this means:",
+      "- The NEX chat bridge reached the local reasoning route.",
+      "- The selected local model server refused the connection.",
+      "- This usually means Ollama is not running on the local API port.",
+      "",
+      "Next bounded test:",
+      "1. Start Ollama or open the Ollama desktop service.",
+      "2. Run: ollama list",
+      "3. Run: ollama run mistral \"reply with NEX ready\"",
+      "4. Return to Electron and send the message again.",
+      "",
+      "Boundary:",
+      "NEX did not execute model output, mutate files, or grant authority."
+    ].join("\\n");
+  }
+
+  return raw;
+}
 function pushConsole(level, text) {
   appendChat("ai", `[${level}] ${text}`, "system event");
 }
@@ -350,6 +395,8 @@ async function sendNexMessage(prompt) {
       visible = `NEX bridge returned non-zero status.\n\n${result.stderr || result.stdout || visible}`;
     }
 
+    visible = reflectNexFailure(visible, role);
+
     appendChat("ai", visible, `NEX / ${role} / recommendation-only`);
     writeOutput(visible, { preTranslated: true });
     statusEl.textContent = result.code === 0 ? "stable" : "blocked";
@@ -436,7 +483,7 @@ async function loadSurfaceState() {
     state = JSON.parse(raw);
     setBuffer(70, "hydrate");
   } catch (error) {
-    pushConsole("WARN", "TUI surface missing. Hydrating from AI feedback context.");
+    // Startup fallback is reflected in telemetry panels, not as an opening chat message.
     const raw = await window.nexus.readSurface("state/ai_feedback_context_latest.json");
     const context = JSON.parse(raw);
     state = buildFallbackState(context);
@@ -458,9 +505,8 @@ async function loadSurfaceState() {
   setText("note-count", 3);
   setText("error-count", 0);
 
-  const greeting = "NEX online. Chat is now routed through the bounded NEX bridge. Select FAST, BALANCED, DEEP, or HANDOFF, then press Enter to send.";
-  writeOutput(greeting, { preTranslated: true });
-  appendChat("ai", greeting, "ready / recommendation-only");
+  const greeting = "Hello. I am NEX - your bounded reflective intelligence surface. Select a local voice, ask one thing, and I will return recommendation-only feedback with any blocker made clear.";
+  resetChatToNexGreeting(greeting);
   statusEl.textContent = "stable";
   document.body.dataset.ready = "true";
   setBuffer(100, "complete");
@@ -521,4 +567,6 @@ loadSurfaceState().catch((error) => {
   setBuffer(0, "error");
   writeOutput(error.stack || error.message, { preTranslated: true });
 });
+
+
 
