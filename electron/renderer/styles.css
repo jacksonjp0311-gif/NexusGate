@@ -1575,3 +1575,211 @@ body.system-error-active .chat-viewport {
   scrollbar-color: rgba(34, 211, 238, .55) rgba(2, 6, 23, .9);
 }
 
+/* NEXUS v0.7.2: chat stack discipline + Iceborg/Hacker colors.
+   This override intentionally comes last because older polish blocks define
+   chat layout multiple times. The chat stream must be one vertical stack:
+   no grid row overlap, no ghosted message bleed, no pinned-output mirroring. */
+.nex-chat-panel {
+  display: grid !important;
+  grid-template-rows: 34px auto minmax(0, 1fr) 86px !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.chat-viewport,
+.console-stream {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  align-content: unset !important;
+  gap: 12px !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 12px !important;
+  isolation: isolate !important;
+  scroll-behavior: smooth !important;
+}
+
+.chat-message {
+  position: relative !important;
+  z-index: 1 !important;
+  flex: 0 0 auto !important;
+  display: grid !important;
+  grid-template-columns: 50px minmax(0, 1fr) !important;
+  gap: 10px !important;
+  align-items: start !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.chat-message + .chat-message {
+  margin-top: 0 !important;
+}
+
+.message-body {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  border-radius: 0 !important;
+}
+
+.message-body header {
+  min-height: 28px !important;
+  padding: 7px 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  white-space: nowrap !important;
+}
+
+.message-body header small {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.message-body pre,
+.chat-message .message-body pre {
+  display: block !important;
+  position: relative !important;
+  z-index: 2 !important;
+  margin: 0 !important;
+  padding: 11px 12px !important;
+  max-height: 172px !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  white-space: pre-wrap !important;
+  word-break: normal !important;
+  overflow-wrap: anywhere !important;
+  font: 13px/1.48 Consolas, monospace !important;
+  background: transparent !important;
+}
+
+/* HUMAN = Iceborg blue. */
+.human-message .message-body {
+  border: 1px solid rgba(96, 165, 250, .56) !important;
+  background:
+    linear-gradient(180deg, rgba(7, 24, 45, .92), rgba(2, 12, 30, .86)) !important;
+  box-shadow: 0 0 18px rgba(59, 130, 246, .18), inset 0 0 18px rgba(147, 197, 253, .06) !important;
+}
+
+.human-message .message-body header {
+  color: #bfdbfe !important;
+  border-bottom: 1px solid rgba(96, 165, 250, .28) !important;
+  background: linear-gradient(90deg, rgba(29, 78, 216, .20), transparent) !important;
+}
+
+.human-message .message-body pre {
+  color: #dbeafe !important;
+  text-shadow: 0 0 8px rgba(147, 197, 253, .16) !important;
+}
+
+.human-message .human-avatar {
+  border-color: rgba(96, 165, 250, .72) !important;
+  box-shadow: 0 0 18px rgba(59, 130, 246, .32), inset 0 0 10px rgba(147, 197, 253, .06) !important;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(147, 197, 253, .20), transparent 40%),
+    rgba(2, 10, 24, .92) !important;
+}
+
+.human-message .human-avatar span {
+  color: #bfdbfe !important;
+  text-shadow: 0 0 9px rgba(96, 165, 250, .95) !important;
+}
+
+/* NEX = vibe-coder cyberpunk green. */
+.ai-message .message-body {
+  border: 1px solid rgba(34, 197, 94, .56) !important;
+  background:
+    linear-gradient(180deg, rgba(3, 35, 24, .92), rgba(2, 14, 18, .88)) !important;
+  box-shadow: 0 0 18px rgba(34, 197, 94, .18), inset 0 0 18px rgba(74, 222, 128, .06) !important;
+}
+
+.ai-message .message-body header {
+  color: #86efac !important;
+  border-bottom: 1px solid rgba(34, 197, 94, .28) !important;
+  background: linear-gradient(90deg, rgba(21, 128, 61, .22), transparent) !important;
+}
+
+.ai-message .message-body header small {
+  color: #bbf7d0 !important;
+}
+
+.ai-message .message-body pre {
+  color: #dcfce7 !important;
+  text-shadow: 0 0 8px rgba(34, 197, 94, .14) !important;
+}
+
+.ai-message .nex-avatar {
+  border-color: rgba(34, 197, 94, .78) !important;
+  box-shadow: 0 0 18px rgba(34, 197, 94, .36), inset 0 0 10px rgba(74, 222, 128, .07) !important;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(34, 197, 94, .20), transparent 40%),
+    rgba(2, 18, 14, .94) !important;
+}
+
+.ai-message .nex-avatar span {
+  color: #86efac !important;
+  text-shadow: 0 0 9px rgba(34, 197, 94, .95) !important;
+}
+
+/* System errors keep red priority over NEX green. */
+.chat-message.system-error-message .message-body {
+  border-color: rgba(248, 113, 113, .82) !important;
+  background:
+    linear-gradient(180deg, rgba(69, 10, 10, .88), rgba(2, 6, 23, .82)) !important;
+  box-shadow: 0 0 22px rgba(248, 113, 113, .28), inset 0 0 18px rgba(248, 113, 113, .10) !important;
+}
+
+.chat-message.system-error-message .message-body header {
+  color: #fecaca !important;
+  border-bottom-color: rgba(248, 113, 113, .32) !important;
+  background: linear-gradient(90deg, rgba(127, 29, 29, .36), transparent) !important;
+}
+
+.chat-message.system-error-message .message-body pre {
+  color: #fee2e2 !important;
+}
+
+/* Input row is fixed-height and never overlaps the chat stream. */
+.nex-input.operator-input {
+  position: relative !important;
+  z-index: 3 !important;
+  display: grid !important;
+  grid-template-columns: 50px auto minmax(0, 1fr) 104px !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+  min-height: 78px !important;
+  max-height: 86px !important;
+  overflow: visible !important;
+  background: rgba(2, 6, 23, .20) !important;
+}
+
+.nex-input.operator-input textarea {
+  height: 58px !important;
+  min-height: 58px !important;
+  max-height: 58px !important;
+  resize: none !important;
+  overflow-y: auto !important;
+  color: #dbeafe !important;
+  border-color: rgba(96, 165, 250, .35) !important;
+  box-shadow: inset 0 0 12px rgba(59, 130, 246, .06) !important;
+}
+
+.transmission-actions {
+  position: relative !important;
+  z-index: 8 !important;
+  display: grid !important;
+  grid-template-rows: 30px 34px !important;
+  gap: 6px !important;
+  align-self: center !important;
+}
+
