@@ -44,6 +44,96 @@ if (-not (Test-Path -LiteralPath $NexusScript -PathType Leaf)) {
     exit 1
 }
 
+function Test-OllamaEndpoint {
+    try {
+        $response = Invoke-WebRequest -UseBasicParsing -Uri "http://127.0.0.1:11434/api/tags" -TimeoutSec 2
+        return ($response.StatusCode -ge 200 -and $response.StatusCode -lt 500)
+    }
+    catch {
+        return $false
+    }
+}
+
+function Resolve-OllamaExe {
+    $candidates = @(
+        $env:OLLAMA_EXE,
+        (Join-Path $env:LOCALAPPDATA "Programs\Ollama\ollama.exe"),
+        (Join-Path $env:LOCALAPPDATA "Programs\Ollama\Ollama.exe")
+    ) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+
+    foreach ($candidate in $candidates) {
+        if (Test-Path -LiteralPath $candidate -PathType Leaf) {
+            return $candidate
+        }
+    }
+
+    $cmd = Get-Command ollama.exe -ErrorAction SilentlyContinue
+    if ($cmd) { return $cmd.Source }
+
+    $cmd = Get-Command ollama -ErrorAction SilentlyContinue
+    if ($cmd) { return $cmd.Source }
+
+    return ""
+}
+
+function Start-OllamaInnerBackend {
+    Write-NG "Preparing local Ollama backend inside NEXUS entry portal."
+
+    $env:CUDA_VISIBLE_DEVICES = "-1"
+    $env:NEXUS_OLLAMA_NUM_GPU = "0"
+
+    if ([string]::IsNullOrWhiteSpace($env:OLLAMA_MODELS)) {
+        $env:OLLAMA_MODELS = Join-Path $env:USERPROFILE ".ollama\models"
+    }
+
+    if (Test-OllamaEndpoint) {
+        Write-OK "Ollama backend already online at 127.0.0.1:11434."
+        return $true
+    }
+
+    $ollamaExe = Resolve-OllamaExe
+    if ([string]::IsNullOrWhiteSpace($ollamaExe)) {
+        Write-FAIL "ollama.exe not found. Install Ollama or add it to PATH."
+        return $false
+    }
+
+    Write-NG ("Starting hidden Ollama backend: {0}" -f $ollamaExe)
+    Write-NG ("OLLAMA_MODELS: {0}" -f $env:OLLAMA_MODELS)
+    Write-NG "CPU fallback: CUDA_VISIBLE_DEVICES=-1; NEXUS_OLLAMA_NUM_GPU=0"
+
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = $ollamaExe
+    $psi.Arguments = "serve"
+    $psi.WorkingDirectory = $RepoRoot
+    $psi.UseShellExecute = $false
+    $psi.CreateNoWindow = $true
+    $psi.WindowStyle = [System.Diagnostics.ProcessWindowStyle]::Hidden
+    $psi.RedirectStandardOutput = $true
+    $psi.RedirectStandardError = $true
+    $psi.EnvironmentVariables["CUDA_VISIBLE_DEVICES"] = "-1"
+    $psi.EnvironmentVariables["NEXUS_OLLAMA_NUM_GPU"] = "0"
+    $psi.EnvironmentVariables["OLLAMA_MODELS"] = $env:OLLAMA_MODELS
+
+    try {
+        $proc = [System.Diagnostics.Process]::Start($psi)
+        Write-NG ("Ollama inner backend PID: {0}" -f $proc.Id)
+    }
+    catch {
+        Write-FAIL ("Ollama backend start failed: {0}" -f $_.Exception.Message)
+        return $false
+    }
+
+    for ($i = 0; $i -lt 20; $i++) {
+        Start-Sleep -Milliseconds 500
+        if (Test-OllamaEndpoint) {
+            Write-OK "Ollama backend is online."
+            return $true
+        }
+    }
+
+    Write-FAIL "Ollama backend did not become ready in time."
+    return $false
+}
 function Invoke-NexusLane {
     param(
         [string]$Lane,
@@ -216,3 +306,4 @@ while ($true) {
         Write-NG "Unknown choice."
     }
 }
+

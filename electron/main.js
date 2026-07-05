@@ -8,6 +8,19 @@ const { spawn } = require("child_process");
 const repoRoot = path.resolve(__dirname, "..");
 const appIconPath = path.join(repoRoot, 'electron', 'assets', 'icons', 'nexus_gate.ico');
 const isSmoke = process.argv.includes("--smoke");
+const gotSingleInstanceLock = app.requestSingleInstanceLock();
+if (!gotSingleInstanceLock) {
+  app.quit();
+}
+let mainWindow = null;
+
+app.on("second-instance", () => {
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
+  }
+});
+
 const smokeReportPath = path.join(repoRoot, "reports", "nexus_electron_smoke_report_latest.json");
 
 if (isSmoke) {
@@ -258,17 +271,26 @@ function runNexPython(args) {
     const child = spawn("python", args, {
       cwd: repoRoot,
       shell: false,
-      windowsHide: true
+      windowsHide: true,
+      env: {
+        ...process.env,
+        CUDA_VISIBLE_DEVICES: process.env.CUDA_VISIBLE_DEVICES || "-1",
+        NEXUS_OLLAMA_NUM_GPU: process.env.NEXUS_OLLAMA_NUM_GPU || "0",
+        OLLAMA_MODELS: process.env.OLLAMA_MODELS || resolveOllamaModels()
+      }
     });
 
+    activeNexChild = child;
     let stdout = "";
     let stderr = "";
     child.stdout.on("data", (chunk) => { stdout += chunk.toString(); });
     child.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
     child.on("error", (error) => {
+      if (activeNexChild === child) activeNexChild = null;
       resolve({ code: -1, stdout, stderr: stderr + error.message });
     });
     child.on("close", (code) => {
+      if (activeNexChild === child) activeNexChild = null;
       resolve({ code, stdout, stderr });
     });
   });
@@ -337,6 +359,10 @@ async function waitForRendererReady(win) {
 }
 
 function createWindow() {
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    mainWindow.focus();
+    return mainWindow;
+  }
   const win = new BrowserWindow({
     icon: appIconPath,
     width: 1280,
@@ -372,7 +398,10 @@ function createWindow() {
     });
   }
 
+  mainWindow = win;
+  win.on("closed", () => { mainWindow = null; });
   win.loadFile(path.join(__dirname, "renderer", "index.html"));
+  return win;
 }
 
 ipcMain.handle("nexus:readSurface", async (_event, relativePath) => {
@@ -508,6 +537,7 @@ ipcMain.handle("nexus:getContract", async () => ({
 }));
 
 app.whenReady().then(async () => {
+  if (!gotSingleInstanceLock) return;
   await ensureOllamaBackend();
   createWindow();
 });
@@ -523,6 +553,7 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
 
 
 

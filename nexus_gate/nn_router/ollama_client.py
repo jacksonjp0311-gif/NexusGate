@@ -10,6 +10,8 @@ This module is intentionally narrow:
 
 from __future__ import annotations
 
+import os
+
 import json
 import urllib.error
 import urllib.request
@@ -17,6 +19,14 @@ from typing import Dict, Optional
 
 
 LOCAL_OLLAMA_GENERATE_URL = "http://127.0.0.1:11434/api/generate"
+
+
+def _env_int(name: str, default: int) -> int:
+    raw = os.environ.get(name, str(default))
+    try:
+        return int(str(raw).strip())
+    except (TypeError, ValueError):
+        return default
 
 
 def build_nexus_prompt(intent: str, role: str) -> str:
@@ -45,7 +55,7 @@ def call_local_ollama(
         "options": {
             "temperature": 0.2,
             "num_ctx": 4096,
-            "num_gpu": int(os.environ.get("NEXUS_OLLAMA_NUM_GPU", "0")),
+            "num_gpu": _env_int("NEXUS_OLLAMA_NUM_GPU", 0),
         },
     }
 
@@ -85,4 +95,6 @@ def call_local_ollama(
             "endpoint": LOCAL_OLLAMA_GENERATE_URL,
             "error": str(exc),
         }
+
+
 
