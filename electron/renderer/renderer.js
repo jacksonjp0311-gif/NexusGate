@@ -26,6 +26,8 @@ const NEX_MODEL_RESPONSE_STAGE_MARKER = 'stage: "nex_model_response"';
 const NEX_MODEL_BRIDGE_STAGE_MARKER = 'stage: "nex_model_bridge"';
 const NEX_TIMEOUT_ERROR_HUD_BOUNDARY = "Model response ok=false is system evidence and opens the red HUD, not normal AI output.";
 const NEX_CHAT_APPEND_ONLY_BOUNDARY = "append-only chat: NEX responses appear once in the conversation stream and are not mirrored into the pinned output card.";
+const NEX_SHELL_RELAY_MODE_BOUNDARY = "Shell relay mode runs only allowlisted NEXUS lanes through the hidden PowerShell bridge; no arbitrary shell.";
+const NEX_ARBITRARY_POWERSHELL_BLOCK_MARKER = "arbitrary PowerShell is blocked";
 
 const laneIcons = {
   evolve: "EV",
@@ -519,41 +521,156 @@ function initRoleSelector() {
   setSelectorRole(roleSelect.value || "DEEP", "init");
 }
 
+function parseGovernedChatCommand(raw) {
+  const text = String(raw || "").trim();
+  const lower = text.toLowerCase();
+
+  if (lower.startsWith("/run ")) {
+    const lane = text.slice(5).trim().split(/\s+/)[0] || "";
+    return { kind: "lane", lane, raw: text, relay: true };
+  }
+
+  if (lower === "/run") {
+    return { kind: "help", raw: text, relay: true };
+  }
+
+  if (text.startsWith("/")) {
+    const lane = text.slice(1).trim().split(/\s+/)[0] || "";
+    return { kind: "lane", lane, raw: text, relay: false };
+  }
+
+  return null;
+}
+
+function formatRelayOutput(lane, result) {
+  const code = Number(result?.code ?? -1);
+  const ok = code === 0;
+  const rawEvidence = String(result?.stdout || result?.stderr || "No lane output returned.").trim();
+  let evidence = rawEvidence;
+  let parsedStatus = "";
+  let parsedSystem = "";
+
+  try {
+    const parsed = JSON.parse(rawEvidence);
+    parsedStatus = parsed.status || parsed.result || parsed.kind || "";
+    parsedSystem = parsed.system || parsed.version || "";
+    evidence = JSON.stringify(parsed, null, 2);
+  } catch (_error) {
+    evidence = rawEvidence;
+  }
+
+  const clipped = evidence.length > 7000
+    ? `${evidence.slice(0, 7000)}\n\n[relay evidence clipped at 7000 chars]`
+    : evidence;
+
+  const resultWord = ok ? "PASS" : "BLOCKED";
+  const statusText = parsedStatus ? `${resultWord} / ${parsedStatus}` : resultWord;
+  const systemText = parsedSystem ? `\nSystem: ${parsedSystem}` : "";
+
+  return [
+    "NEX SHELL RELAY REPORT",
+    "======================",
+    `What ran: scripts/nexus.ps1 ${lane}`,
+    `Result: ${statusText}`,
+    `Exit code: ${Number.isNaN(code) ? "unknown" : code}${systemText}`,
+    "",
+    "Human-readable meaning:",
+    ok
+      ? "The governed NEXUS lane completed through the local hidden bridge."
+      : "The governed NEXUS lane returned a blocker or non-zero bridge result.",
+    "",
+    "Evidence:",
+    clipped || "No evidence returned.",
+    "",
+    "Next allowed action:",
+    ok
+      ? "Review this report, then choose the next governed lane or ask NEX for a recommendation."
+      : "Inspect the blocker above. Do not promote memory, mutate files, or compound until the lane is clean.",
+    "",
+    "Boundary:",
+    NEX_SHELL_RELAY_MODE_BOUNDARY
+  ].join("\n");
+}
+
+function relayHelpText() {
+  const lanes = allowlistedCommands.length ? allowlistedCommands.join(", ") : "status, feedback, interconnect, compact, pack";
+  return [
+    "NEX SHELL RELAY MODE",
+    "====================",
+    "Use /run <lane> to run a governed local lane without leaving chat.",
+    "",
+    `Allowed lanes: ${lanes}`,
+    "",
+    "Examples:",
+    "/run status",
+    "/run interconnect",
+    "/run feedback",
+    "/run compact",
+    "/run pack",
+    "",
+    "Boundary:",
+    NEX_SHELL_RELAY_MODE_BOUNDARY
+  ].join("\n");
+}
+
 async function runGovernedLane(lane) {
   if (!allowlistedCommands.includes(lane)) {
+    const blocked = [
+      "NEX SHELL RELAY BLOCKED",
+      "=======================",
+      `Requested lane: ${lane || "empty"}`,
+      `Allowed lanes: ${allowlistedCommands.join(", ")}`,
+      "",
+      "Reason:",
+      "The chat relay only runs allowlisted NEXUS lanes. arbitrary PowerShell is blocked.",
+      "",
+      "Boundary:",
+      NEX_SHELL_RELAY_MODE_BOUNDARY
+    ].join("\n");
+
     pushConsole("WARN", `Lane '${lane}' is not allowlisted in Electron.`);
-    writeOutput(JSON.stringify({
-      type: "blocked_lane_request",
-      lane,
-      allowlistedCommands,
-      boundary: "Electron may request only lanes declared by the Electron contract. This is not arbitrary shell access."
-    }, null, 2));
+    writeOutput(blocked, { preTranslated: true });
+    appendChat("ai", blocked, "NEX / shell-relay / blocked");
     return;
   }
 
   activeLane.textContent = lane;
   statusEl.textContent = "running";
   setProcessing(true);
-  setBuffer(24, "lane");
-  pushConsole("NEXUS", `Lane '${lane}' engaged. Initializing governed run...`);
+  setBuffer(24, "relay");
+  pushConsole("NEXUS", `Shell relay engaged for governed lane '${lane}'.`);
 
   try {
-    setBuffer(52, "lane");
+    setBuffer(52, "relay");
     const result = await window.nexus.runLane(lane);
-    setBuffer(result.code === 0 ? 100 : 0, "lane");
-    writeOutput(result.stdout || result.stderr || "No lane output.");
+    const relayReport = formatRelayOutput(lane, result);
+
+    setBuffer(result.code === 0 ? 100 : 0, result.code === 0 ? "complete" : "blocked");
+    writeOutput(relayReport, { preTranslated: true });
     statusEl.textContent = result.code === 0 ? "stable" : "blocked";
-    appendChat("ai", translateEvidence(result.stdout || result.stderr || "No lane output."), `lane=${lane}`);
+    appendChat("ai", relayReport, `NEX / shell-relay / lane=${lane}`);
   } catch (error) {
-    setBuffer(0, "lane");
+    const relayReport = [
+      "NEX SHELL RELAY EXCEPTION",
+      "=========================",
+      `What ran: scripts/nexus.ps1 ${lane}`,
+      "Result: BLOCKED",
+      "",
+      "Evidence:",
+      error.stack || error.message,
+      "",
+      "Boundary:",
+      NEX_SHELL_RELAY_MODE_BOUNDARY
+    ].join("\n");
+
+    setBuffer(0, "error");
     statusEl.textContent = "blocked";
-    writeOutput(error.stack || error.message, { preTranslated: true });
-    pushConsole("WARN", "Lane execution failed inside governed bridge.");
+    writeOutput(relayReport, { preTranslated: true });
+    appendChat("ai", relayReport, `NEX / shell-relay / exception lane=${lane}`);
   } finally {
     setProcessing(false);
   }
 }
-
 async function sendNexMessage(prompt) {
   if (nexBusy) return;
   clearSystemErrorHud();
@@ -791,10 +908,18 @@ operatorForm?.addEventListener("submit", async (event) => {
     return;
   }
 
-  const lane = raw.startsWith("/") ? raw.slice(1).trim() : "";
-  if (lane) {
-    appendChat("human", raw, "slash command");
-    await runGovernedLane(lane);
+  const command = parseGovernedChatCommand(raw);
+  if (command?.kind === "help") {
+    appendChat("human", raw, "shell relay help");
+    const help = relayHelpText();
+    appendChat("ai", help, "NEX / shell-relay / help");
+    writeOutput(help, { preTranslated: true });
+    return;
+  }
+
+  if (command?.kind === "lane") {
+    appendChat("human", raw, command.relay ? "shell relay request" : "slash command");
+    await runGovernedLane(command.lane);
     return;
   }
 
@@ -808,6 +933,9 @@ loadSurfaceState().catch((error) => {
   setBuffer(0, "error");
   writeOutput(error.stack || error.message, { preTranslated: true });
 });
+
+
+
 
 
 

@@ -49,7 +49,7 @@
               <span class="knot-core"></span>
             </div>
           </div>
-          <label class="selector-label" for="role-select">Local Voice</label>
+          <label class="selector-label" for="role-select">Local Voice / Relay</label>
           <select id="role-select" aria-label="Select local reasoning voice">
             <option value="FAST">FAST / Phi-3</option>
             <option value="BALANCED">BALANCED / Phi-3</option>
@@ -92,7 +92,7 @@
         <form class="operator-input nex-input" id="operator-form">
           <div class="human-avatar" aria-hidden="true"><span>YOU</span></div>
           <label for="operator-command">Human Chat</label>
-          <textarea id="operator-command" rows="3" autocomplete="off" placeholder="Ask NEX. Enter sends. Shift+Enter makes a new line. /status runs a governed lane."></textarea>
+          <textarea id="operator-command" rows="3" autocomplete="off" placeholder="Ask NEX, or run governed lanes: /run status, /run interconnect, /run feedback. Enter sends."></textarea>
           <div class="transmission-actions" aria-label="NEX transmission controls">
             <button type="submit" id="nex-send-button">Send</button>
             <button type="button" id="nex-stop-button" class="stop-transmission" disabled>Stop<br>Transmission</button>
@@ -188,6 +188,8 @@
   <script src="./renderer.js"></script>
 </body>
 </html>
+
+
 
 
 

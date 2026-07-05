@@ -1783,3 +1783,41 @@ body.system-error-active .chat-viewport {
   align-self: center !important;
 }
 
+/* NEXUS v0.7.3: yellow/black local voice relay selector. */
+#role-select,
+#role-select option {
+  background: #facc15 !important;
+  color: #020617 !important;
+  border-color: rgba(250, 204, 21, .95) !important;
+  text-shadow: none !important;
+  font-weight: 800 !important;
+}
+
+#role-select {
+  box-shadow: 0 0 14px rgba(250, 204, 21, .36), inset 0 0 10px rgba(2, 6, 23, .18) !important;
+  outline: none !important;
+}
+
+#role-select:focus {
+  border-color: #fde047 !important;
+  box-shadow: 0 0 20px rgba(250, 204, 21, .62), inset 0 0 10px rgba(2, 6, 23, .22) !important;
+}
+
+.selector-label {
+  color: #facc15 !important;
+  text-shadow: 0 0 10px rgba(250, 204, 21, .44) !important;
+}
+
+.selector-copy {
+  border-color: rgba(250, 204, 21, .44) !important;
+  background: rgba(250, 204, 21, .08) !important;
+}
+
+.selector-copy strong {
+  color: #facc15 !important;
+}
+
+.selector-copy span {
+  color: #fde68a !important;
+}
+
