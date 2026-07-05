@@ -4,327 +4,96 @@
 
 NEXUS GATE is a local-first reflective intelligence layer for AI systems. It gives AI systems a governed mirror: origin alignment, state routing, local model reflection, HANDOFF action boundaries, Failure Doctor diagnosis, compiler evidence, wound lessons, UI feedback, and GitHub durability through explicit gates.
 
-It is not another agent framework and it is not just the entry portal. The Desktop Entry Portal is the human doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems oriented, bounded, diagnosable, and evidence-governed without granting autonomous authority.
+It is not another agent framework and it is not just the entry portal. The Desktop Entry Portal is the human doorway. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
 
 ```text
-Human intent
-  -> RHP origin alignment
-  -> FrameworkAdapter
-  -> StatePacket
-  -> NEXUS GATE hot route plane
-  -> reject | abstain | shadow | engage | defer | escalate
-  -> cold evidence plane
-  -> failure mode | wound | demotion | replay | recalibration
-  -> ledger | report | registry update
+human intent -> origin alignment -> route/authority gate -> evidence -> human-authorized durable mutation
 ```
 
+## Start Here
 
-## Reflective Intelligence for AI Systems
+### Windows PowerShell / Desktop Portal
 
-NEXUS GATE is the reflective intelligence layer behind the entry point. The portal is only the doorway.
+```powershell
+cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\desktop\open_nexus_gate_console.ps1
 
-It connects AI reasoning, local execution, UI reflection, memory surfaces, failure-mode diagnosis, replay evidence, and human authorization into one governed operating loop.
+.\scripts\nexus.ps1 ui
+.\scripts\nexus.ps1 tui
+.\scripts\nexus.ps1 status
+.\scripts\nexus.ps1 evolve
+.\scripts\nexus.ps1 reflect
+.\scripts\nexus.ps1 domain
+```
 
-The system's purpose is not to make tools autonomous. Its purpose is to make AI systems observable, diagnosable, bounded, and able to compound only through evidence and human-authorized gates.
+### Bash / Git Bash / WSL / Linux / macOS
+
+```bash
+cd ~/OneDrive/Desktop/nexus-gate
+bash scripts/nexus.sh status
+bash scripts/nexus.sh evolve
+bash scripts/nexus.sh reflect
+bash scripts/nexus.sh domain
+bash scripts/nexus.sh electron-env
+bash scripts/nexus.sh electron-preflight
+```
+
+### GitHub / README / Docs Submenu
+
+The Desktop Entry Portal includes a GitHub / README / Docs submenu for fast navigation:
+
+```text
+Open GitHub repository
+Open GitHub README
+Open docs/ENTRYPOINTS.md
+Open docs/versioning/NEXUS_CHANGELOG.md
+Open local README.md
+Open local docs folder
+```
+
+## Electron HUD
+
+```powershell
+cd electron
+npm install
+npm start
+npm run smoke
+```
+
+## Current Operator Surfaces
+
+| Surface | Purpose |
+|---|---|
+| Desktop Entry Portal | Human doorway into all local operator lanes. |
+| Electron HUD | Visual operator HUD with NEX chat, telemetry, Mode Selection, and HANDOFF package. |
+| PowerShell TUI | Terminal HUD for governed local lanes. |
+| Dev Mode / HANDOFF | Human-authorized patch, compiler, and wound-evidence room. |
+| Failure Doctor | Scan, classify, safe clean, compact retry. |
+| Mode Selection HUD | Local voice/relay selector. Selection is not authority. |
+| GitHub / README / Docs | Portal submenu for repo link, README, entrypoints, changelog, and local docs. |
 
 ## NEXUS Connective Point
 
 ```text
-NEXUS GATE is the gateway.
-Human intent enters.
-AI recommends.
-Doctor classifies.
-Dev Mode validates.
-HANDOFF acts only when human-authorized.
+Portal = gateway.
+NEXUS GATE = reflective intelligence layer for AI systems.
+Electron = presentation/operator HUD.
+Doctor = diagnosis / safe-clean / retry cockpit.
+HANDOFF = human-authorized action bridge.
 Evidence decides what may compound.
 ```
 
-Desktop Portal quote:
-
-```text
-The gate does not give intelligence authority.
-The gate gives authority a visible path through intelligence.
-```
-
-Current gateway surfaces:
-
-| Selection | Surface | Purpose |
-|---:|---|---|
-| 1 | Open NexusGate | Full Electron operator HUD |
-| 2 | Dev Mode / Handoff Console | Patch, compiler, wound evidence |
-| 3 | Status / health surface | Current health route |
-| 4 | Terminal TUI surface | Terminal dashboard |
-| 5 | NN router health | Local model readiness |
-| 6 | Ask NEXUS router | Recommendation-only local route |
-| 7 | Open repo folder | Human inspection |
-| 8 | Failure Modes / Doctor | Scan, classify, safe clean, retry checks |
-
-Versioning and long rehydration notes live in `docs/versioning/NEXUS_VERSIONING_REHYDRATION.md`.
-
-## Failure Modes / Doctor Gateway
-
-The Desktop Entry Portal includes a Failure Modes / Doctor selection:
-
-```text
-8. Failure Modes / Doctor
-```
-
-The Doctor uses a compact syntax stored at `state/failure_modes/nexus_failure_modes.v0.7.9.json`:
-
-```text
-FM := id,key,n,who,why,what,when,signs,doctor,retry,authority
-```
-
-This makes failures human-readable, AI-parsable, and troubleshootable. Doctor can read, classify, recommend, safely clean generated residue, and retry validation checks. It cannot self-authorize durable source repair.
-
-## Repository Description
-
-NEXUS GATE combines three layers:
-
-1. **Human control layer**: a readable director box, quick-start commands, safety boundaries, current health, and operator rules.
-2. **RHP Nexus layer**: repository origin alignment, route maps, Echo Location records, mini READMEs, validation surfaces, and context indexes.
-3. **AI agent layer**: operating contract, patch route, file routing guide, failure modes, non-claim locks, and done criteria.
-
-Boundary: this repository surface improves developer discipline, local validation, agent orientation, and release hygiene. It does not prove code correctness, security, safety, production readiness, AI understanding, agent alignment, model correctness, empirical truth, or autonomous authority.
-
 ## Human Director Box
 
-### What is this?
+NEXUS GATE is currently at the v0.8.1 UI cleanup line with v0.8.2D documentation rehydration: compact root README, dedicated changelog, entrypoint map, algorithm docs, mini README refresh, Mode Selection pop-out HUD, Failure Doctor, HANDOFF bridge, Dev Mode, and dual PowerShell/Bash runtime surfaces.
 
-NEXUS GATE is a governed agentic transfer workbench. It tests whether a local runtime can normalize framework events into StatePackets, route them through schema and authority gates, compile the repository state, preserve evidence, expose failure modes, and keep humans and AI agents oriented through RHP/Nexus documentation.
+Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, replayable lessons, and durable GitHub compounding under human authority.
 
-### Current version
+## PART I - Human README
 
-NEXUS GATE is currently at the v0.8.1 UI cleanup line: reflective intelligence for AI systems, cyber ice-blue Desktop Entry Portal, empty left rail, closing telemetry HUD, Failure Doctor, HANDOFF bridge, Dev Mode, and Electron selector HUD.
-Current strategic direction: reflective intelligence for AI systems: local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, replayable lessons, and durable GitHub compounding under human authority.
+NEXUS GATE is a governed local operator workbench for testing whether AI/runtime events can be normalized, routed, blocked, reflected, diagnosed, and preserved as evidence without giving autonomous authority to tools or model output.
 
-Current operator surfaces:
-
-```powershell
-.\scripts\nexus.ps1 tui
-.\scripts\nexus.ps1 ui
-.\scripts\nexus.ps1 evolve
-.\scripts\nexus.ps1 electron-env
-.\scripts\nexus.ps1 electron-preflight
-.\scripts\nexus.ps1 reflect
-.\scripts\nexus.ps1 domain
-```
-
-Current neural assembly lab surface:
-
-```powershell
-python .\labs\reflective_neural_assembly\run_neural_assembly.py --intent "What should we do next?"
-python -m unittest discover -s labs/reflective_neural_assembly/tests
-```
-
-Current Bash / Git Bash / WSL / Linux / macOS surfaces:
-
-```bash
-bash scripts/nexus.sh evolve
-bash scripts/nexus.sh electron-env
-bash scripts/nexus.sh electron-preflight
-bash scripts/nexus.sh reflect
-bash scripts/nexus.sh domain
-bash scripts/nexus.sh tui
-bash scripts/nexus.sh ui
-```
-
-`tui` and `ui` are Windows PowerShell operator surfaces. In Bash they are compatibility cases that print the canonical PowerShell launch commands instead of trying to render the Windows terminal HUD.
-
-Current Electron surface:
-
-```powershell
-cd electron
-npm install
-npm start
-npm run smoke
-```
-
-Visible UI title:
-
-```text
-NEXUS GATE
-```
-
-Boundary: Electron is presentation/operator surface only. It reads allowlisted evidence surfaces and requests allowlisted NEXUS lanes; it does not own logic, bypass gates, run arbitrary shell commands, access secrets, write external APIs, self-authorize, or prove production readiness.
-
-### What changed in the current line?
-
-The current line has evolved from the original RHP/Nexus documentation shell into a governed local operator workbench:
-
-- PART I - Human README
-- PART II - RHP Nexus README
-- PART III - AI Agent README
-- folder-level mini READMEs with Echo Location records
-- `docs/context/` repository indexes
-- `rcc/nexus/` route maps and agent handoff contracts
-- explicit failure-mode registry and failure-mode docs
-- portable compressed PowerShell installer
-- dual PowerShell/Bash runtime scripts
-- compiler gates that require the README/RHP/Nexus/AI surface
-- PowerShell HUD TUI with feedback, interconnect, handoff, snapshot, and surface exports
-- Electron HUD runtime with package lock, smoke report, and governed allowlisted lane requests
-
-### Current health snapshot
-
-| Surface | Current result |
-|---|---:|
-| Package / CLI | `nexus-gate` / `nexus` |
-| Python import | `nexus_gate` |
-| Current software layer | NG-SA v0.4.0 |
-| Current runtime status | local governed CLI/TUI + Electron HUD runtime + reflective/domain intelligence gates |
-| README structure | Human / RHP Nexus / AI trisection |
-| RHP origin alignment | scaffolded |
-| RCC/Nexus route map | scaffolded |
-| Mini README coverage | required for key folders |
-| Evidence emission | state, reports, logs, ledger |
-| Dual shell surface | PowerShell + Bash |
-| Compiler gate | required |
-| Claim status | local development gate only |
-| Production status | not production validated |
-| Electron runtime | installed locally, lockfile committed |
-| Current launch | `.\scripts\nexus.ps1 tui` / `cd electron; npm start` |
-| Reflective loop | compiler-gated local evidence protocol |
-| Domain intelligence | compiler-gated repo-native learning protocol |
-| Reflective neural assembly | isolated NeuralForge-inspired recommendation lab |
-| Chat intelligence distribution | Codex / ChatGPT / local agent handoff packets |
-| Next build target | governed neural assembly compiler gate |
-
-### Reflective Intelligence Gateway
-
-NEXUS GATE now treats intelligence as a governed loop across reasoning, evidence, execution, reflection, and human authority surfaces:
-
-```text
-reasoning surface + evidence surface + execution surface + reflection surface + human authority
-=
-reflective intelligence loop
-```
-
-Read these during rehydration before feature promotion:
-
-```text
-docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md
-docs/interfaces/INTERFACE_ADAPTER_CONTRACT.md
-docs/versioning/NEXUS_LINEAGE_PROTOCOL.md
-state/interface_adapter_contract_index.v0.3.7.json
-state/nexus_lineage_manifest_latest.json
-reports/nexus_reflective_loop_report_latest.json
-```
-
-Core law:
-
-```text
-Reflective intelligence is permitted.
-Autonomous authority is not.
-Organic evolution is allowed.
-Ungated compounding is not.
-```
-
-### Evolving Domain Intelligence
-
-NEXUS GATE now teaches Codex how to study domains through repo-native artifacts:
-
-```text
-study -> extract -> map -> model -> simulate -> test -> gate -> reflect -> compress -> rehydrate -> orchestrate
-```
-
-Read these during rehydration before creating or promoting domain claims:
-
-```text
-docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md
-docs/intelligence/REPO_NATIVE_LEARNING.md
-docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md
-docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md
-state/domain_intelligence_index.v0.4.0.json
-state/repo_native_learning_index.v0.4.0.json
-state/codex_orchestration_index.v0.4.0.json
-reports/nexus_domain_intelligence_report_latest.json
-domains/
-```
-
-Core law:
-
-```text
-Repo-native learning is allowed.
-Autonomous authority is not.
-Cross-domain synthesis is allowed.
-Unsupported claims are not.
-```
-
-### What this is not
-
-- Not production validated.
-- Not a safety proof.
-- Not a security proof.
-- Not a correctness proof.
-- Not autonomous authority.
-- Not write authority.
-- Not memory write authority.
-- Not provider authority.
-- Not a replacement for human authorization.
-- Not a claim that routing proves alignment.
-- Not a claim that RHP proves truth.
-- Not a claim that Nexus geometry proves code correctness.
-
-### Where do I start?
-
-PowerShell:
-
-```powershell
-cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
-powershell -ExecutionPolicy Bypass -File .\scripts\nexus_once.ps1
-powershell -ExecutionPolicy Bypass -File .\scripts\nexus_status.ps1
-.\scripts\nexus.ps1 evolve
-.\scripts\nexus.ps1 tui
-.\scripts\nexus.ps1 reflect
-.\scripts\nexus.ps1 domain
-```
-
-Bash / Git Bash / WSL / Linux / macOS:
-
-```bash
-cd ~/OneDrive/Desktop/nexus-gate
-bash scripts/nexus_once.sh
-bash scripts/nexus_status.sh
-bash scripts/nexus.sh evolve
-bash scripts/nexus.sh electron-env
-bash scripts/nexus.sh electron-preflight
-bash scripts/nexus.sh reflect
-bash scripts/nexus.sh domain
-bash scripts/nexus.sh tui
-bash scripts/nexus.sh ui
-```
-
-Electron:
-
-```powershell
-cd electron
-npm install
-npm start
-npm run smoke
-```
-
----
-
-# PART I - Human README
-
-## Current Identity
-
-NEXUS GATE is a local Python reference runtime and repository governance shell for testing whether agent-framework events can be:
-
-- normalized into `StatePacket` contracts,
-- routed through schema and authority gates,
-- blocked when authority is missing,
-- shadowed before live engagement,
-- recorded in evidence ledgers,
-- compiled through a local development gate,
-- described through a Human/RHP Nexus/AI README trisection,
-- navigated through folder-level mini READMEs,
-- preserved through RHP origin-alignment discipline.
-
-The current repo is a governed scaffold, not a production bridge.
-
-## Runtime Laws
+### Runtime Laws
 
 ```text
 No adapter, no bridge.
@@ -341,411 +110,52 @@ No ledger stub, no compounding.
 No compile pass, no promotion.
 No RHP alignment, no durable mutation.
 No mini README, no blind patching.
+No shadow failure without wound route.
 ```
 
-## Quick Start
+### Failure Modes
 
-Run once:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\nexus_once.ps1
-```
-
-Run dev loop:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\nexus_dev_loop.ps1 -MaxCycles 5 -IntervalSeconds 5
-```
-
-Run status:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\nexus_status.ps1
-```
-
-Run promotion gate:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\nexus_promote.ps1
-```
-
-## Project Structure Director
-
-| Surface | What it does | Why it matters |
-|---|---|---|
-| `AGENTS.md` | Agent entry beacon and operating contract. | Prevents blind patching. |
-| `README.md` | Human / RHP Nexus / AI trisection. | Makes the repo readable by humans and agents. |
-| `README_90_SECONDS.md` | Short adoption compression. | Reduces onboarding friction. |
-| `nexus_gate/core/` | StatePacket and core contracts. | Defines transfer packets. |
-| `nexus_gate/runtime/` | Hot route plane. | Holds route decision behavior. |
-| `nexus_gate/compiler/` | Gated development compiler. | Blocks promotion when repo state fails. |
-| `nexus_gate/evidence/` | Ledger and future evidence modules. | Preserves run continuity. |
-| `docs/context/` | Repository context, validation surface, Nexus index. | Main self-description surface. |
-| `docs/failure_modes/` | Failure-mode taxonomy and handling rules. | Makes expected failures explicit. |
-| `docs/runtime/` | Compiler, loop, release-gate docs. | Explains operational commands. |
-| `docs/software_architecture/` | NG-SA architecture docs. | Keeps theory-to-software direction explicit. |
-| `rcc/nexus/` | Route maps, Echo template, handoff contract. | Makes the repo agent-navigable. |
-| `scripts/` | PowerShell and Bash command surfaces. | Makes local operation repeatable. |
-| `tests/` | Implementation-health tests. | Catches local scaffold regressions. |
-| `state/` | Current system state. | Machine-readable project status. |
-| `ledger/` | Append-only JSONL continuity records. | Preserves event history. |
-| `reports/` | Compiler and validation reports. | Evidence surface for gate results. |
-| `logs/` | Runtime and dev-loop logs. | Operational trace. |
-
-## Failure Modes
-
-| Failure mode | Meaning | Required response |
-|---|---|---|
-| `schema_missing` | Packet lacks schema identity. | Reject. |
-| `authority_unverified` | Requested action lacks authority. | Shadow or reject. |
-| `origin_dehydrated` | Session state drifted from repo origin. | Rehydrate before mutation. |
-| `compiler_failed` | Repo state failed gated compiler. | No commit or promotion. |
-| `mini_readme_missing` | Target folder lacks local orientation. | Repair mini README before patching. |
-| `ledger_unavailable` | Evidence cannot be appended. | Block compounding. |
-| `direct_compiler_call_missing` | Runtime script does not call compiler directly. | Repair script. |
-| `claim_boundary_missing` | Report lacks non-claim boundary. | Block public-facing claim. |
-| `shadow_failure_unrouted` | Shadow failure has no wound/failure route. | Convert to failure-mode record. |
-| `replay_missing` | Re-engagement lacks replay certificate. | Block re-engagement. |
-
-## Evidence Artifacts
-
-Runtime state artifacts are written under:
+Failure Modes are compact, human-readable, AI-parsable wound records.
 
 ```text
-state/
+FM := id,key,n,who,why,what,when,signs,doctor,retry,authority
 ```
 
-Compiler reports are written under:
+Read `docs/failure_modes/NEXUS_FAILURE_MODE_DOCTOR.md`, `state/failure_modes/nexus_failure_modes.v0.7.9.json`, and `docs/failure_modes/FAILURE_MODE_CHART.md`.
 
+## Failure Modes / Doctor Gateway
+Failure Modes / Doctor Gateway keeps local wounds human-readable, AI-parsable, and troubleshootable.
 ```text
-reports/
+8. Failure Modes / Doctor -> scan -> classify -> explain -> safe clean -> retry
+Doctor recommends; human authorizes repair.
 ```
 
-Runtime logs are written under:
+## PART II - RHP Nexus README
 
-```text
-logs/
-```
-
-Ledgers are written under:
-
-```text
-ledger/
-```
-
-RHP/Nexus context files live under:
-
-```text
-docs/context/
-rcc/nexus/
-```
-
-## Non-Claim Locks
-
-NEXUS GATE is:
-
-- not proof of correctness,
-- not proof of safety,
-- not proof of security,
-- not proof of production readiness,
-- not proof that an agent may self-authorize,
-- not proof that RHP alignment equals truth,
-- not proof that Nexus geometry equals code quality,
-- not proof that passing tests proves real-world safety,
-- not proof that framework interoperability is validated beyond the declared local gates.
-
----
-
-# PART II - RHP Nexus README
-
-## RHP Nexus Identity
-
-RHP tells the agent what origin it must rehydrate from.
-
-Nexus tells the agent where it is.
-
-Validation tells the agent whether the local repo state passed the gate.
-
-NEXUS GATE uses RHP/Nexus to prevent blind continuation, context drift, and ungrounded mutation.
-
-## Repository Sphere
-
-| Shell | Name | Meaning |
-|---|---|---|
-| `center` | Invariant Core | Purpose, runtime laws, non-claim locks, authority boundaries. |
-| `inner` | Contracts | StatePacket, FrameworkAdapter, schemas, authority contracts. |
-| `middle` | Processes | Compiler, scripts, tests, validation, dev loop. |
-| `outer` | Evidence / Reflection | Ledgers, reports, logs, context indexes, release notes. |
-
-## Nexus Meridians
-
-- origin
-- authority
-- schema
-- runtime
-- compiler
-- evidence
-- failure
-- agent
-- release
-- documentation
-
-## Nexus Sectors
-
-- core
-- adapters
-- runtime
-- compiler
-- evidence
-- policies
-- schemas
-- scripts
-- tests
-- docs
-- release
-
-## Primary Nexus Files
-
-- `docs/context/repository_context_index.json`
-- `docs/context/rcc_nexus_index.json`
-- `docs/context/validation_surface.md`
-- `rcc/nexus/README.md`
-- `rcc/nexus/route_map.json`
-- `rcc/nexus/task_routing_matrix.md`
-- `rcc/nexus/echo_location_template.md`
-- `rcc/nexus/agent_handoff_contract.md`
-- `docs/failure_modes/FAILURE_MODES.md`
-- `reports/nexus_compile_report_latest.json`
-
-## RHP Origin Alignment
+### RHP Origin Alignment
 
 A session is not allowed to treat memory, chat context, or prior guesses as authoritative when the repository exists locally.
 
-Required sequence:
-
 ```text
 Anchor repo
-  -> read README
-  -> read docs/context/repository_context_index.json
-  -> read docs/context/rcc_nexus_index.json
-  -> read rcc/nexus/route_map.json
-  -> read target folder README
-  -> inspect relevant source/tests/docs
-  -> patch minimal surface
-  -> run compiler
-  -> update ledger/report/context if geometry changed
+-> read README.md
+-> read docs/README.md
+-> read docs/ENTRYPOINTS.md
+-> read docs/algorithms/NEXUS_CORE_ALGORITHMS.md
+-> read target folder README.md
+-> inspect relevant source/tests/docs
+-> patch minimal surface
+-> run tests and compiler
+-> update docs/evidence when geometry changes
 ```
 
-## RCC Nexus Echo Location
+## PART III - AI Agent README
 
-Sphere Position:
+### AI Operating Contract
 
-- Shell: center
-- Meridian(s): origin, authority, runtime, compiler, evidence
-- Sector: rcc
-- Version / TTL: NG-RHP-NEXUS-v0.1.3 / 180 days
-- Last Verified: generated by installer
+Any AI agent modifying this repository must rehydrate from the repository, read the target folder README, patch the smallest necessary surface, preserve the authority boundary, run tests and compiler, update docs when geometry changes, and never convert recommendation into autonomous mutation.
 
-Local Role:
-
-- Root orientation surface for humans, RHP Nexus routing, and AI agents.
-
-Inbound Hooks:
-
-- local PowerShell installer
-- local Bash scripts
-- Git repository
-- NEXUS GATE compiler
-
-Outbound Hooks:
-
-- `docs/context/repository_context_index.json`
-- `docs/context/rcc_nexus_index.json`
-- `docs/context/validation_surface.md`
-- `rcc/nexus/route_map.json`
-- `nexus_gate/runtime/router.py`
-- `nexus_gate/compiler/compiler.py`
-- `tests/`
-- `reports/`
-
-Evidence Surface:
-
-- `reports/`
-- `state/`
-- `logs/`
-- `ledger/`
-
-Validation Surface:
-
-- `python -m compileall nexus_gate tests`
-- `python -m unittest discover -s tests`
-- `python -m nexus_gate.compiler --root . --json`
-- `powershell -ExecutionPolicy Bypass -File .\scripts\nexus_once.ps1`
-- `bash scripts/nexus_once.sh`
-
-Claim Boundary:
-
-- README quality, RHP origin alignment, RCC/Nexus geometry, reports, and ledgers do not prove code correctness, security, patch safety, AI understanding, production readiness, or runtime truth.
-
-Non-Claim Locks:
-
-- rhp_alignment_is_not_truth
-- nexus_geometry_is_not_correctness
-- navigation_is_not_validation
-- context_reconstruction_is_not_code_quality
-- validation_remains_required
-- compiler_pass_is_local_gate_only
-
-Agent Route:
-
-- Read `README.md`, `docs/context/repository_context_index.json`, `docs/context/rcc_nexus_index.json`, `rcc/nexus/route_map.json`, then the target folder README before editing.
-
-Update Obligation:
-
-- Update README, RHP context, Nexus index, route maps, validation surface, failure modes, reports, and Echo Location records when project identity, validation commands, evidence paths, claim boundaries, or repository geometry changes.
-
-## RHP Nexus Non-Claim Lock
-
-RHP/Nexus improves navigation, traceability, maintenance discipline, and agent self-location. It does not prove code correctness, security, AI understanding, patch safety, production readiness, causal mechanism, or runtime truth.
-
-Geometry is not correctness.
-
-Navigation is not validation.
-
-Context is not truth.
-
----
-
-# PART III - AI Agent README
-
-## AI Version Tracking Contract
-
-Current repository context:
-
-- Repository: nexus-gate
-- Purpose: governed agentic transfer layer and local development gate.
-- Current runtime layer: NEXUS GATE scaffold.
-- Current software architecture layer: NG-SA v0.1.3 RHP/Nexus/AI repo shell.
-- Primary package: `nexus_gate`.
-- CLI: `nexus`.
-- Current classification: local development gate only.
-- Current non-claim boundary: local scaffold evidence only, not production validation.
-- RHP mode: origin alignment before durable mutation.
-- Nexus mode: local geometric repository navigation shell plus mini READMEs.
-- No runtime behavior is changed by documentation alone.
-
-## AI Operating Contract
-
-Any AI agent reading or modifying this repository must follow this order:
-
-1. Read the Human Director Box.
-2. Read PART I - Human README.
-3. Read PART II - RHP Nexus README.
-4. Read PART III - AI Agent README.
-5. Read `docs/context/repository_context_index.json`.
-6. Read `docs/context/rcc_nexus_index.json`.
-7. Read `docs/context/validation_surface.md`.
-8. Read `rcc/nexus/route_map.json`.
-9. Read the mini README in the target folder.
-10. Inspect only relevant source, tests, docs, configs, scripts, reports, outputs, or visuals.
-11. Patch the smallest necessary surface.
-12. Run the gated compiler before claiming behavior changed.
-13. Update README, RHP, Nexus, reports, and Echo Location records if geometry or evidence changed.
-
-## AI README Update Policy
-
-When the repository versions, the AI agent must update the root README in all required zones.
-
-Required root README update zones:
-
-| Zone | Section | Required update |
-|---|---|---|
-| 1 | Human Director Box / Current health snapshot | Current software layer, latest patch, tests, release reference, gate status. |
-| 2 | PART I - Human README | Project structure, quick start, failure modes, evidence paths. |
-| 3 | PART II - RHP Nexus README | Repository sphere, route maps, context indexes, Echo Location. |
-| 4 | PART III - AI Agent README | Version tracking, operating contract, done criteria. |
-| 5 | Failure Modes | New failure modes and responses. |
-| 6 | Directory / Mini README Coverage | New folders and local orientation blocks. |
-| 7 | Validation commands | Update commands if validation surface changed. |
-| 8 | Boundary / non-claim locks | Preserve or strengthen boundaries; never weaken them. |
-
-AI update rule:
-
-```text
-Top dashboard without AI route is incomplete.
-AI route without RHP/Nexus context is blind.
-Current version without failure-mode update is drift.
-README completion requires all three: human state, RHP/Nexus state, AI operating state.
-```
-
-## AI File Routing Guide
-
-- `nexus_gate/core`: StatePacket and core transfer contracts.
-- `nexus_gate/adapters`: framework adapter interfaces.
-- `nexus_gate/runtime`: hot route plane and mode decisions.
-- `nexus_gate/compiler`: gated development compiler.
-- `nexus_gate/evidence`: ledger and future evidence modules.
-- `nexus_gate/policies`: authority policy contracts.
-- `nexus_gate/schemas`: packaged schemas.
-- `docs/context`: repository context index, validation surface, Nexus index.
-- `docs/failure_modes`: failure taxonomy and handling rules.
-- `docs/software_architecture`: software architecture shell.
-- `docs/runtime`: compiler, loop, release docs.
-- `rcc/nexus`: route map, task matrix, Echo template, handoff contract.
-- `scripts`: PowerShell and Bash runtime surfaces.
-- `tests`: implementation-health validation.
-- `state`: machine-readable system state.
-- `ledger`: JSONL continuity records.
-- `reports`: compiler and validation reports.
-- `logs`: runtime logs.
-
-## AI Non-Claim Lock
-
-Never claim or imply:
-
-- NEXUS GATE proves correctness.
-- NEXUS GATE proves safety.
-- NEXUS GATE proves production readiness.
-- NEXUS GATE grants autonomous write authority.
-- NEXUS GATE grants tool authority by itself.
-- RHP alignment proves truth.
-- Nexus navigation proves code quality.
-- Passing local compiler gates proves real-world safety.
-- Agent fluency should be confused with source-grounded implementation accuracy.
-
-## Required Local Verification
-
-After README, RHP, Nexus, or mini README changes, run:
-
-```powershell
-python -m nexus_gate.compiler --root . --json
-python -m unittest discover -s tests
-```
-
-After source/runtime changes, also run:
-
-```powershell
-python -m compileall nexus_gate tests
-powershell -ExecutionPolicy Bypass -File .\scripts\nexus_once.ps1
-```
-
-## Done Criteria
-
-A change is not complete until:
-
-- runtime laws are preserved,
-- RHP origin alignment is preserved,
-- non-claim locks are preserved,
-- target folder README remains accurate,
-- context index remains accurate,
-- route map remains accurate,
-- compiler passed,
-- tests passed,
-- evidence paths are updated if outputs changed,
-- claims remain inside evidence boundaries.
-
-
-## Dual-Shell Development Rule
+### Dual-Shell Development Rule
 
 ```text
 Every new runtime loop must exist in both PowerShell and Bash.
@@ -755,9 +165,7 @@ Every shell surface must preserve the same gate semantics.
 PowerShell and Bash are peer surfaces, not separate products.
 ```
 
-## Rehydration Failure and Update Visibility Rule
-
-Every agent rehydration must expose the current failure-mode chart and update chart before patching.
+### Rehydration Failure and Update Visibility Rule
 
 ```text
 No rehydration without failure chart visibility.
@@ -767,864 +175,38 @@ No recovery without failure mode classification.
 No version step without update ledger entry.
 ```
 
-Required rehydration read order:
-
-```text
-1. README.md
-2. docs/context/REHYDRATION_BOOT.md
-3. docs/context/rehydration_manifest.v0.1.4.json
-4. docs/failure_modes/FAILURE_MODE_CHART.md
-5. docs/updates/UPDATE_CHART.md
-6. state/failure_mode_index.v0.1.4.json
-7. state/update_index.v0.1.4.json
-8. reports/nexus_compile_report_latest.json, if present
-9. rcc/nexus/route_map.json
-10. target folder README.md
-```
-
-Agent rule:
-
-```text
-The agent must see failures, updates, reports, and route context during rehydration before it edits code.
-```
-
-
-## Compact Runtime Command Surface
-
-NEXUS GATE now has a compact command surface.
-
-PowerShell:
+### Required Local Verification
 
 ```powershell
-.\scripts\nexus.ps1 rehydrate
-.\scripts\nexus.ps1 compile
-.\scripts\nexus.ps1 status
-.\scripts\nexus.ps1 loop -Cycles 5
-.\scripts\nexus.ps1 promote
+python -m unittest discover -s tests
+python -m nexus_gate.compiler --root . --json
 ```
 
-Bash / Git Bash / WSL / Linux / macOS:
+## Documentation Map
 
-```bash
-bash scripts/nexus.sh rehydrate
-bash scripts/nexus.sh compile
-bash scripts/nexus.sh status
-bash scripts/nexus.sh loop --cycles 5
-bash scripts/nexus.sh promote
-```
+| Need | File |
+|---|---|
+| 90-second intro | `README_90_SECONDS.md` |
+| Entrypoints | `docs/ENTRYPOINTS.md` |
+| Docs index | `docs/README.md` |
+| Core algorithms | `docs/algorithms/NEXUS_CORE_ALGORITHMS.md` |
+| Changelog | `docs/versioning/NEXUS_CHANGELOG.md` |
+| Versioning / rehydration | `docs/versioning/NEXUS_VERSIONING_REHYDRATION.md` |
+| Extended README archive | `docs/readme/NEXUS_README_EXTENDED_REFERENCE.md` |
+| UI docs | `docs/ui/` |
+| Failure Doctor | `docs/failure_modes/` |
+| Runtime commands | `docs/runtime/` |
+| GitHub repo | `https://github.com/jacksonjp0311-gif/NexusGate` |
 
-Compact law:
+## What this is not
 
-```text
-One command surface.
-Same gates.
-Less syntax.
-No compile pass, no promotion.
-No rehydration without failure/update visibility.
-```
+Not production validated. Not a safety proof. Not a security proof. Not a correctness proof. Not autonomous authority. Not write authority. Not memory write authority. Not provider authority. Not a replacement for human authorization. Not a claim that routing proves alignment. Not a claim that RHP proves truth. Not a claim that Nexus geometry proves code correctness.
 
-Windows rule:
+## Compact Law
 
 ```text
-If Bash exists but WSL has no installed distribution, Bash validation is skipped locally.
-Bash scripts still remain in the repo and CI can validate them on Ubuntu.
-```
-
-
-## v0.1.5 â€” Strict Compiler + Cold Evidence/Wound Routing
-
-NEXUS GATE now begins the cold evidence layer.
-
-New surfaces:
-
-```text
-ShadowReport
-ShadowFailure
-ShadowWound
-WoundRoute
-ReplayCertificate
-DemotionDecision
-ColdEvidenceEngine
-```
-
-New compile law:
-
-```text
-No shadow failure without wound route.
-No re-engagement without replay certificate.
-No specialist promotion without cold evidence.
-No compiler pass without cold evidence contract visibility.
-```
-
-Strict compile:
-
-```powershell
-.\scripts\nexus_strict_compile.ps1
-```
-
-Compact strict route:
-
-```powershell
-.\scripts\nexus.ps1 compile
-.\scripts\nexus.ps1 rehydrate
-```
-
-
-## v0.1.6 - Compression, Packing, and Goal Lock
-
-NEXUS GATE is now past installer repair. The current goal is to keep the runtime compact, compiled, and aligned with the original architecture:
-
-```text
-Governed transfer boundary.
-Adapter contracts.
-Hot route plane.
-Cold evidence plane.
-Authority gates.
-Wound routing.
-Replay before retrust.
-Clean disengagement.
-```
-
-New command:
-
-```powershell
-.\scripts\nexus.ps1 pack
-```
-
-This runs compile checks and writes a compressed repo bundle under:
-
-```text
-dist/
-```
-
-Compression law:
-
-```text
-No growing code surface without a pack report.
-No release without compile, tests, compiler, and pack manifest.
-No new feature unless it advances the governed transfer boundary.
-```
-
-
-## v0.1.7 - Adapter Registry + LocalDemoAdapter
-
-NEXUS GATE now begins the actual bridge surface.
-
-New adapter law:
-
-```text
-No adapter, no bridge.
-No manifest, no registration.
-No normalized StatePacket, no route.
-No receptor export, no transfer target.
-```
-
-New compact commands:
-
-```powershell
-.\scripts\nexus.ps1 adapters
-.\scripts\nexus.ps1 pack
-```
-
-New build lane:
-
-```text
-adapter registry -> adapter manifest -> LocalDemoAdapter -> StatePacket -> route decision
-```
-
-This version is still local development evidence only. It does not prove production interoperability.
-
-
-## v0.1.8 - Receptor Registry + Compatibility Compiler
-
-NEXUS GATE now has both sides of the first bridge lane:
-
-```text
-Adapter -> StatePacket -> Receptor -> CompatibilityDecision
-```
-
-New receptor law:
-
-```text
-No receptor, no transfer target.
-No compatibility decision, no engagement.
-No unsupported schema, no receptor route.
-No unsupported action, no receptor route.
-```
-
-New compact command:
-
-```powershell
-.\scripts\nexus.ps1 receptors
-```
-
-This is still local development evidence only. It does not prove production interoperability.
-
-
-## v0.1.9 - Bridge Session Runner
-
-NEXUS GATE now has the first bounded local bridge session path:
-
-```text
-raw event
-  -> LocalDemoAdapter
-  -> StatePacket
-  -> NexusRouter
-  -> ReceptorManifest
-  -> CompatibilityDecision
-  -> BridgeSessionReport
-```
-
-New bridge law:
-
-```text
-No bridge session without adapter normalization.
-No bridge session without route decision.
-No bridge session without receptor compatibility.
-No bridge report without claim boundary.
-```
-
-New compact command:
-
-```powershell
-.\scripts\nexus.ps1 bridge
-```
-
-This remains local development evidence only. It proves the local bridge session mechanics, not production interoperability.
-
-
-## v0.2.0 - Bounded Bridge Runtime
-
-NEXUS GATE now has the first bounded local bridge runtime.
-
-Runtime flow:
-
-```text
-raw event batch
-  -> BoundedBridgeRuntime
-  -> BridgeSessionRunner per event
-  -> BridgeSessionReport per event
-  -> BoundedRuntimeReport
-```
-
-Runtime law:
-
-```text
-No runtime without event limit.
-No runtime without bridge session reports.
-No runtime without summary counts.
-No runtime without claim boundary.
-No promotion without runtime compiler pass.
-```
-
-New command:
-
-```powershell
-.\scripts\nexus.ps1 runtime
-```
-
-This is local development evidence only. It proves bounded runtime mechanics, not production interoperability.
-
-
-## v0.2.1 - Human Surface + Quiet Git Warnings
-
-NEXUS GATE now has a human-readable operator surface for PowerShell runs.
-
-New command:
-
-```powershell
-.\scripts\nexus.ps1 human
-```
-
-Human surface law:
-
-```text
-No operator flood.
-No raw JSON wall unless requested.
-No CRLF warning noise in normal runs.
-No completion claim without compiled report files.
-```
-
-The full evidence is still written under `reports/`. The terminal should show the human status path:
-
-```text
-compile
-tests
-NEXUS compiler
-adapter compiler
-receptor compiler
-bridge compiler
-runtime compiler
-pack compiler
-```
-
-This is local development evidence only.
-
-
-## v0.2.2 - Feedback + Interconnect + Evidence Compaction
-
-NEXUS GATE now has an adaptive local feedback layer.
-
-```powershell
-.\scripts\nexus.ps1 compact
-.\scripts\nexus.ps1 interconnect
-.\scripts\nexus.ps1 feedback
-.\scripts\nexus.ps1 evolve
-```
-
-The system now compiles:
-
-```text
-compiler reports
-  -> evidence pressure
-  -> interconnect graph
-  -> feedback report
-  -> next bounded action
-```
-
-New laws:
-
-```text
-No feedback without compiled reports.
-No interconnect without governed edges.
-No compaction without manifest.
-No CLI evolution without human-readable surface.
-No new runtime lane without feedback visibility.
-```
-
-Claim boundary: local development evidence only.
-
-
-## v0.2.2b - Self-Healing Feedback Rescue
-
-NEXUS GATE now has a CMS-inspired self-healing feedback lane:
-
-```powershell
-.\scripts\nexus.ps1 heal
-.\scripts\nexus.ps1 evolve
-```
-
-The loop is:
-
-```text
-feedback finding
-  -> typed repair recommendation
-  -> dry-run repair plan
-  -> human-authorized apply gate
-  -> validation stack
-  -> evidence report
-```
-
-Hard lock:
-
-```text
-No self-healing without typed recommendation.
-No recommendation may write directly.
-No dry-run may write target surfaces.
-No apply gate may execute without explicit human authorization.
-No repair closure without validation evidence.
-No autonomous commit from self-healing recommendation.
-```
-
-This restores v0.2.2 compatibility markers and adds bounded self-healing reports without autonomous mutation.
-
-
-## v0.2.3 - AI Feedback Interface + Markdown Feedback Log
-
-NEXUS GATE now exposes its feedback loop as a first-class interface for future AI systems.
-
-```powershell
-.\scripts\nexus.ps1 interface
-.\scripts\nexus.ps1 feedback
-.\scripts\nexus.ps1 heal
-.\scripts\nexus.ps1 evolve
-```
-
-Canonical AI read surfaces:
-
-```text
-state/ai_feedback_context_latest.json
-docs/feedback/FEEDBACK_SYSTEM.md
-docs/feedback/FEEDBACK_LOG.md
-reports/nexus_feedback_interface_report_latest.json
-```
-
-The PowerShell human surface now prints a feedback summary after feedback/evolve runs:
-
-```text
-Health score
-Evidence pressure
-Dominant pressure
-Next action
-AI context path
-Feedback log path
-```
-
-Two-way protocol:
-
-```text
-AI reads feedback context.
-AI proposes typed recommendation.
-AI does not assume autonomous write authority.
-Human-authorized patch applies mutation.
-Patch runs evolve.
-Feedback interface appends FEEDBACK_LOG.md.
-```
-
-
-## v0.2.4b - PowerShell HUD TUI
-
-NEXUS GATE now includes a terminal UI inside PowerShell:
-
-```powershell
-.\scripts\nexus.ps1 tui
-```
-
-The TUI provides:
-
-```text
-NEXUS GATE terminal HUD shell
-Process lane dropdown menu
-Chat-like NEXUS> prompt
-Colored output
-Progress / buffer bar
-AI handoff export
-Feedback note capture
-Operation packet creation
-Debug tail viewer
-Self-healing lane access
-Evolve lane access
-```
-
-Bounded repo-changing commands:
-
-```text
-/note <text>      appends docs/feedback/FEEDBACK_LOG.md
-/packet <summary> writes docs/feedback/operator_packets/*.json
-/run <lane>       runs existing governed NEXUS lanes
-```
-
-## v0.2.6 - AI Agent Interconnection
-
-NEXUS GATE now declares local AI/operator handoff processes inside the interconnect graph:
-
-```text
-feedback context
-  -> Codex/ChatGPT handoff process
-  -> operator packet
-  -> PowerShell TUI
-  -> TUI export/snapshot
-  -> Codex/ChatGPT rehydration
-  -> human-authorized patch
-  -> evolve
-```
-
-New graph nodes include:
-
-```text
-ai_agent:codex_process
-operator:tui
-operator:ui_alias
-feedback:ai_context
-feedback:markdown_log
-feedback:operator_packets
-reports:tui_exports
-```
-
-This is an interconnection map for governed handoff evidence. It does not grant autonomous authority, external API write authority, memory promotion authority, or correctness claims.
-
-## v0.2.7 - Domain Interconnection Profiles
-
-NEXUS GATE now declares domain interconnection profiles for:
-
-```text
-terminal:cli_format
-domain:bio
-domain:chem
-domain:coding
-domain:neural
-schema:domain_interop_profile
-```
-
-The TUI exposes:
-
-```text
-/domains
-```
-
-The profiles are routing contracts only:
-
-```text
-Bio     -> BioProject / BioSample / SRA-style metadata orientation
-Chem    -> InChI / InChIKey / SMILES-style identifier orientation
-Coding  -> LSP / SARIF / OpenAPI / JSON Schema-style contract orientation
-Neural  -> ONNX graph / operator / model metadata orientation
-CLI     -> colored output / progress / bounded table rows / plain text fallback
-```
-
-Domain routing is not domain validation. These profiles do not prove scientific validity, code correctness, model correctness, safety, production readiness, or autonomous authority.
-
-## v0.2.8 - TUI Interconnect Console
-
-The PowerShell TUI now exposes the governed interconnect graph directly:
-
-```text
-/graph
-/interconnect
-```
-
-The view shows graph status, graph version, node/edge counts, check rows, core governed routes, placeholder evidence paths, health, pressure, and next action.
-
-This is a read-only operator view. It does not mutate the graph, self-authorize, bypass evolve, or turn graph visibility into proof.
-
-## v0.2.9 - TUI Snapshot Bridge
-
-The TUI snapshot now carries the interconnect console summary into an HTML surface:
-
-```text
-/snapshot
-reports/tui/nexus_tui_snapshot_latest.html
-```
-
-The snapshot includes health, pressure, graph status, graph version, node/edge counts, next action, interconnect checks, placeholder evidence paths, bridge surfaces, and claim boundary.
-
-This is the first Electron bridge surface. It remains read-only evidence orientation and must not mutate graph state, self-authorize, bypass evolve, or claim proof from graph visibility.
-
-## v0.3.0 - TUI Surface State
-
-The TUI can now export a compact JSON state summary for Electron and future dashboards:
-
-```text
-/surface
-reports/tui/nexus_tui_surface_latest.json
-```
-
-The file includes health, graph status, graph checks, missing evidence paths, command paths, read surfaces, blocked actions, and claim boundary.
-
-This is a machine-readable read-only surface. It does not mutate graph state, run arbitrary shell commands, self-authorize, bypass evolve, or prove correctness.
-
-## v0.3.1 - TUI Snapshot Surface Pair
-
-The TUI snapshot now refreshes both the HTML snapshot and the JSON surface state:
-
-```text
-/snapshot
-reports/tui/nexus_tui_snapshot_latest.html
-reports/tui/nexus_tui_surface_latest.json
-```
-
-This gives the Electron/dashboard bridge a paired human-readable and machine-readable export from one governed operator action. The pair remains read-only evidence orientation and does not mutate graph state, run arbitrary shell commands, self-authorize, bypass evolve, or prove correctness.
-
-## v0.3.2 - Electron Read Contract
-
-NEXUS GATE now has a contract gate for the Electron/dashboard surface:
-
-```text
-docs/ui/ELECTRON_READ_CONTRACT.md
-state/electron_read_contract_index.v0.3.2.json
-tests/test_electron_read_contract.py
-```
-
-The contract fixes the read surfaces, `/snapshot` paired outputs, governed command allowlist, blocked actions, and claim boundary before any Electron app is built.
-
-Electron remains presentation only. It may not run arbitrary shell commands, mutate graph state, bypass evolve, self-authorize, access secrets, write external APIs, or claim validation proof.
-
-## v0.3.3 - Electron Shell Scaffold
-
-NEXUS GATE now includes a governed Electron operator shell:
-
-```text
-electron/
-docs/ui/ELECTRON_SHELL_SCAFFOLD.md
-state/electron_shell_scaffold_index.v0.3.3.json
-tests/test_electron_shell_scaffold.py
-```
-
-The scaffold renders local evidence surfaces and can request only allowlisted NEXUS lanes through `scripts/nexus.ps1`. It uses context isolation, disables Node integration, enables sandboxing, and avoids arbitrary shell execution.
-
-This is a local installed Electron runtime with a committed lockfile, but it is not a packaged desktop app. It remains a presentation-only local development surface and does not own NEXUS logic or authority.
-
-## v0.3.4 - Electron Preflight Compiler
-
-The Electron scaffold now has a local compiler lane:
-
-```powershell
-.\scripts\nexus.ps1 electron-preflight
-reports/nexus_electron_preflight_report_latest.json
-```
-
-The compiler checks required scaffold paths, read contract allowlists, blocked actions, paired snapshot/surface outputs, main-process security markers, preload API boundaries, renderer bridge usage, package privacy, and claim boundary.
-
-This is not a packaging or production launch step. It is a gate that keeps the desktop surface aligned before promotion.
-
-## v0.3.6 - Electron HUD Runtime
-
-NEXUS GATE now includes the governed Electron HUD runtime:
-
-```powershell
-cd electron
-npm install
-npm start
-npm run smoke
-```
-
-PowerShell operator launch remains:
-
-```powershell
-.\scripts\nexus.ps1 tui
-.\scripts\nexus.ps1 ui
-```
-
-Bash compatibility and Electron gates are:
-
-```bash
-bash scripts/nexus.sh evolve
-bash scripts/nexus.sh electron-env
-bash scripts/nexus.sh electron-preflight
-bash scripts/nexus.sh tui
-bash scripts/nexus.sh ui
-```
-
-The visible HUD title is `NEXUS GATE`. Electron remains presentation-only and may request only allowlisted NEXUS lanes through the governed bridge.
-
-## v0.3.7 - Reflective Intelligence Gateway
-
-NEXUS GATE now formalizes the reflection loop as a compiler-gated protocol:
-
-```text
-hydrate -> orient -> reason -> propose -> patch -> execute -> validate -> reflect -> compress -> resume
-```
-
-New doctrine and contract surfaces:
-
-```text
-docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md
-docs/interfaces/INTERFACE_ADAPTER_CONTRACT.md
-docs/versioning/NEXUS_LINEAGE_PROTOCOL.md
-state/interface_adapter_contract_index.v0.3.7.json
-state/nexus_lineage_manifest_latest.json
-reports/nexus_reflective_loop_report_latest.json
-```
-
-New lane:
-
-```powershell
-.\scripts\nexus.ps1 reflect
-```
-
-Bash equivalent:
-
-```bash
-bash scripts/nexus.sh reflect
-```
-
-TUI commands:
-
-```text
-/reflect
-/lineage
-```
-
-Electron may read the reflective report, lineage manifest, and interface adapter contract. It does not gain new authority.
-
-## v0.4.0 - Domain Intelligence Orchestrator
-
-NEXUS GATE now formalizes repo-native domain learning:
-
-```text
-study -> extract -> map -> model -> simulate -> test -> gate -> reflect -> compress -> rehydrate -> orchestrate
-```
-
-New doctrine and state surfaces:
-
-```text
-docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md
-docs/intelligence/REPO_NATIVE_LEARNING.md
-docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md
-docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md
-domains/
-state/domain_intelligence_index.v0.4.0.json
-state/repo_native_learning_index.v0.4.0.json
-state/codex_orchestration_index.v0.4.0.json
-reports/nexus_domain_intelligence_report_latest.json
-```
-
-New lane:
-
-```powershell
-.\scripts\nexus.ps1 domain
-```
-
-Bash equivalent:
-
-```bash
-bash scripts/nexus.sh domain
-```
-
-TUI commands:
-
-```text
-/domain
-/study <summary>
-```
-
-Electron may read the domain report and domain state indexes. It does not gain new authority.
-
-Domain law:
-
-```text
-Repo-native learning is allowed.
+Reflective intelligence is permitted.
 Autonomous authority is not.
-Cross-domain synthesis is allowed.
-Unsupported claims are not.
+Organic evolution is allowed.
+Ungated compounding is not.
 ```
-
-## v0.5.1 - Reflective Neural Assembly Chat Distribution
-
-NEXUS GATE now includes an isolated lab for NeuralForge-inspired adaptive telemetry and chat/Codex intelligence distribution:
-
-```text
-labs/reflective_neural_assembly/
-```
-
-The lab emits recommendation-only reports and compressed handoffs for Codex, ChatGPT, local agents, TUI, and Electron:
-
-```text
-labs/reflective_neural_assembly/reports/neural_assembly_report_latest.json
-labs/reflective_neural_assembly/reports/neural_intelligence_distribution_latest.json
-labs/reflective_neural_assembly/handoffs/*_handoff_latest.json
-labs/reflective_neural_assembly/handoffs/*_handoff_latest.md
-labs/reflective_neural_assembly/state/chat_intelligence_distribution_index.v0.5.1.json
-```
-
-Run:
-
-```powershell
-python .\labs\reflective_neural_assembly\run_neural_assembly.py --intent "What should we do next?"
-```
-
-Lab law:
-
-```text
-Distribute intelligence.
-Do not distribute authority.
-Optimize rehydration.
-Do not bypass evidence.
-Compress context.
-Do not promote unsupported claims.
-```
-
-The lab does not execute shell, mutate the parent repo, write external APIs, access secrets, self-authorize, bypass evolve, or prove correctness, safety, security, production readiness, model understanding, or real-world truth.
-
-<!-- NEXUS-DESKTOP-PORTAL:START -->
-## NEXUS GATE Desktop Entry Portal
-
-NEXUS GATE can be opened from a local Desktop icon named NEXUS Gate.
-
-The icon is an entry portal into the governed local operator surface. Its first menu option is:
-
-`	ext
-1. Open NexusGate
-`
-
-That option opens the presentation-only Electron UI from:
-
-`	ext
-electron/package.json
-npm start
-`
-
-The launcher also keeps secondary governed lanes available:
-
-`	ext
-Status / health surface
-Terminal TUI surface
-NN router health
-Ask NEXUS router
-Open repo folder
-`
-
-Boundary:
-
-- The Desktop icon does not grant model authority.
-- The Electron UI is a presentation/operator surface only.
-- The launcher does not execute model output as shell.
-- The launcher does not mutate files from model output.
-- The launcher does not bypass NEXUS gates.
-- Human authorization remains required for durable mutation.
-
-Related launcher assets:
-
-`	ext
-assets/icons/nexus_gate.ico
-scripts/desktop/open_nexus_gate_console.ps1
-docs/ui/NEXUS_DESKTOP_LAUNCHER.md
-`
-<!-- NEXUS-DESKTOP-PORTAL:END -->
-
-
-<!-- NEXUS-ELECTRON-SELECTOR:START -->
-## NEXUS Electron Selector Switch
-
-The Electron HUD includes a visual local reasoning selector for NEXUS role context:
-
-```text
-FAST     -> Phi-3
-BALANCED -> Phi-3
-DEEP     -> Mistral
-HANDOFF  -> ChatGPT/Codex
-```
-
-The selector is subtle until clicked. On selection change, it animates from a triangle into a Celtic-knot-like pulse and settles into a crystalline state.
-
-Boundary:
-
-- selection is not execution
-- recommendation is not authority
-- no model call is made by changing the selector
-- no repo mutation occurs from the selector
-- human authorization remains required for durable mutation
-
-See:
-
-```text
-docs/ui/NEXUS_ELECTRON_SELECTOR_SWITCH.md
-```
-<!-- NEXUS-ELECTRON-SELECTOR:END -->
-
-<!-- NEX-CHAT-BRIDGE:START -->
-## NEX Chat Bridge
-
-The Electron HUD now names the local AI interface avatar **NEX**.
-
-The center panel is chat-first:
-
-```text
-NEX AI Output
-Human Chat
-```
-
-Enter sends a human message. Shift+Enter inserts a newline.
-
-The selected local reasoning role controls the bounded chat route:
-
-```text
-FAST     -> Phi-3
-BALANCED -> Phi-3
-DEEP     -> Mistral
-HANDOFF  -> ChatGPT/Codex packet mode
-```
-
-Boundary:
-
-- NEX replies are recommendation-only.
-- Chat does not execute model output as shell.
-- Chat does not mutate files from model output.
-- Human authorization remains required for durable mutation.
-
-See:
-
-```text
-docs/ui/NEX_CHAT_BRIDGE.md
-```
-<!-- NEX-CHAT-BRIDGE:END -->

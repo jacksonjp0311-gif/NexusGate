@@ -1,15 +1,27 @@
-# NEXUS GATE Electron Shell Scaffold
+# NEXUS GATE Electron HUD
 
-This folder is the local Electron operator HUD surface.
+## RCC Nexus Echo Location
 
-It is presentation only:
+Sphere Position:
 
-```text
-read declared evidence surfaces
-request allowlisted NEXUS lanes
-render operator state
+- Shell: middle
+- Meridian(s): ui, runtime, evidence, operator
+- Sector: electron
+- Version / TTL: NG-RHP-NEXUS-v0.8.2D / 180 days
+
+Local Role:
+
+- Local Electron operator HUD for NEXUS evidence, chat, Mode Selection, telemetry, HANDOFF packets, and governed lane requests.
+
+## Run
+
+```powershell
+cd electron
+npm install
+npm start
+npm run smoke
 ```
 
-It does not own NEXUS logic, execute arbitrary shell commands, mutate graph state, self-authorize, access secrets, write external APIs, bypass evolve, or prove validation.
+## Boundary
 
-The current runtime is installed locally with `electron/package-lock.json` committed for reproducible installs. It is not packaged as an EXE and does not own NEXUS logic or authority.
+Electron is presentation/operator surface only. It may read declared evidence surfaces, request allowlisted NEXUS lanes, and render operator state. It may not execute arbitrary shell commands, mutate graph state, self-authorize, access secrets, write external APIs, bypass evolve, or prove validation.

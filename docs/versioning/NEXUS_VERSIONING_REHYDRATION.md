@@ -55,3 +55,109 @@ Mode Selection button remains in the right feedback column.
 Mode Selection HUD opens as a fixed overlay, matching the Telemetry HUD format.
 The HUD no longer expands inside the right column scroll area.
 ```
+
+
+## v0.8.2A README/doc rehydration
+
+```text
+Root README compressed into operator-grade orientation.
+Long historical versioning moved to docs/versioning/NEXUS_CHANGELOG.md.
+Extended old README preserved in docs/readme/NEXUS_README_EXTENDED_REFERENCE.md.
+Entrypoints moved to docs/ENTRYPOINTS.md.
+Core algorithms moved to docs/algorithms/NEXUS_CORE_ALGORITHMS.md.
+Mini READMEs refreshed for docs, scripts, electron, and readme archives.
+```
+
+
+## v0.8.2B README/doc rehydration
+
+```text
+Root README compressed below 220 lines.
+Long history moved to docs/versioning/NEXUS_CHANGELOG.md.
+Extended README reference preserved in docs/readme/.
+Entrypoints moved to docs/ENTRYPOINTS.md.
+Core algorithms moved to docs/algorithms/NEXUS_CORE_ALGORITHMS.md.
+Mini READMEs refreshed.
+```
+
+
+## v0.8.2C README/doc rehydration
+
+```text
+Root README compressed below 220 lines.
+Long history moved to docs/versioning/NEXUS_CHANGELOG.md.
+Extended README reference preserved in docs/readme/.
+Entrypoints moved to docs/ENTRYPOINTS.md.
+Core algorithms moved to docs/algorithms/NEXUS_CORE_ALGORITHMS.md.
+Mini READMEs refreshed.
+```
+
+
+## v0.8.2D README/doc rehydration
+
+```text
+Root README compressed below 220 lines.
+Long history moved to docs/versioning/NEXUS_CHANGELOG.md.
+Extended README reference preserved in docs/readme/.
+Entrypoints moved to docs/ENTRYPOINTS.md.
+Core algorithms moved to docs/algorithms/NEXUS_CORE_ALGORITHMS.md.
+Mini READMEs refreshed.
+```
+
+
+## v0.8.2E GitHub/docs portal submenu
+
+```text
+Fixes exact reflective README phrase.
+Adds Desktop Portal option 9: GitHub / README / Docs.
+Adds docs/ENTRYPOINTS.md GitHub / README / Docs Submenu.
+Keeps README compact while exposing repo links, entrypoints, changelog, and local docs.
+```
+
+
+## v0.8.2F Doctor Gateway README marker
+
+```text
+Restores root README marker: Failure Modes / Doctor Gateway.
+Preserves portal option 9: GitHub / README / Docs.
+Keeps docs/ENTRYPOINTS.md GitHub / README / Docs Submenu.
+```
+
+
+## v0.8.2G reflective repair lane
+
+```text
+Compacts README below line gate after Doctor Gateway marker restoration.
+Adds scripts/nexus_reflective_repair.ps1.
+Documents NEXUS DEEP/Mistral -> recommendation -> Y/N -> bounded repair loop.
+```
+
+
+## v0.8.2H README compaction and reflective repair lane
+
+```text
+Compacts root README below gate.
+Preserves Failure Modes / Doctor Gateway marker.
+Preserves GitHub / README / Docs submenu.
+Preserves reflective NEXUS DEEP/Mistral -> Y/N -> bounded repair lane.
+```
+
+
+## v0.8.2I README compaction and reflective repair lane
+
+```text
+Compacts root README below gate.
+Preserves Failure Modes / Doctor Gateway marker.
+Preserves GitHub / README / Docs submenu.
+Preserves reflective NEXUS DEEP/Mistral -> Y/N -> bounded repair lane.
+```
+
+
+## v0.8.2J README compaction and reflective repair lane
+
+```text
+Compacts root README below gate.
+Preserves Failure Modes / Doctor Gateway marker.
+Preserves GitHub / README / Docs submenu.
+Preserves reflective NEXUS DEEP/Mistral -> Y/N -> bounded repair lane.
+```

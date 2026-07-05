@@ -1,35 +1,34 @@
 # NEXUS GATE in 90 Seconds
 
-NEXUS GATE is a governed transfer boundary for agent frameworks.
-
-It routes framework events through:
+NEXUS GATE is a local-first reflective intelligence layer for AI systems.
 
 ```text
-RHP origin alignment
--> adapter normalization
--> StatePacket
--> schema gate
--> authority gate
--> route decision
--> evidence ledger
+human intent -> origin alignment -> authority gate -> evidence -> human-authorized durable mutation
 ```
 
-Run once:
+## Fastest Windows path
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\nexus_once.ps1
+cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\desktop\open_nexus_gate_console.ps1
 ```
 
-Status:
+## Direct lanes
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\nexus_status.ps1
+.\scripts\nexus.ps1 ui
+.\scripts\nexus.ps1 tui
+.\scripts\nexus.ps1 status
+.\scripts\nexus.ps1 evolve
+.\scripts\nexus.ps1 reflect
+.\scripts\nexus.ps1 domain
 ```
 
-Main law:
-
-```text
-No compile pass, no promotion.
-No RHP alignment, no durable mutation.
-No mini README, no blind patching.
+```bash
+bash scripts/nexus.sh status
+bash scripts/nexus.sh evolve
+bash scripts/nexus.sh reflect
+bash scripts/nexus.sh domain
 ```
+
+Main law: recommendation is not authority. No compile pass, no promotion. No RHP alignment, no durable mutation.

@@ -37,6 +37,7 @@ catch {
 $NexusScript = Join-Path $RepoRoot "scripts\nexus.ps1"
 $ElectronDir = Join-Path $RepoRoot "electron"
 $ElectronPackage = Join-Path $ElectronDir "package.json"
+$GitHubRepoUrl = "https://github.com/jacksonjp0311-gif/NexusGate"
 
 if (-not (Test-Path -LiteralPath $NexusScript -PathType Leaf)) {
     Write-FAIL "scripts/nexus.ps1 not found"
@@ -686,6 +687,64 @@ function Invoke-NexusFailureModeDoctorConsole {
 }
 
 
+
+function Invoke-NexusOpenUrl {
+    param([string]$Url)
+    Write-NG ("Opening: {0}" -f $Url)
+    try {
+        & rundll32.exe url.dll,FileProtocolHandler $Url
+    }
+    catch {
+        Write-FAIL ("Could not open URL: {0}" -f $_.Exception.Message)
+    }
+}
+
+function Invoke-NexusResourceMenu {
+    while ($true) {
+        Write-Host ""
+        Write-Host "========================================"
+        Write-Host " NEXUS GITHUB / README / DOCS"
+        Write-Host "========================================"
+        Write-Host "1. Open GitHub repository"
+        Write-Host "2. Open GitHub README"
+        Write-Host "3. Open docs/ENTRYPOINTS.md"
+        Write-Host "4. Open docs/versioning/NEXUS_CHANGELOG.md"
+        Write-Host "5. Open local README.md"
+        Write-Host "6. Open local docs folder"
+        Write-Host "B. Back to main menu"
+        Write-Host ""
+        Write-Host "Rule: docs orient; human authorizes durable mutation."
+        Write-Host ""
+
+        $resourceChoice = Read-Host "Docs"
+
+        if ($resourceChoice -eq "1") {
+            Invoke-NexusOpenUrl $GitHubRepoUrl
+        }
+        elseif ($resourceChoice -eq "2") {
+            Invoke-NexusOpenUrl ($GitHubRepoUrl + "/blob/main/README.md")
+        }
+        elseif ($resourceChoice -eq "3") {
+            Invoke-NexusOpenUrl ($GitHubRepoUrl + "/blob/main/docs/ENTRYPOINTS.md")
+        }
+        elseif ($resourceChoice -eq "4") {
+            Invoke-NexusOpenUrl ($GitHubRepoUrl + "/blob/main/docs/versioning/NEXUS_CHANGELOG.md")
+        }
+        elseif ($resourceChoice -eq "5") {
+            explorer.exe (Join-Path $RepoRoot "README.md") | Out-Null
+        }
+        elseif ($resourceChoice -eq "6") {
+            explorer.exe (Join-Path $RepoRoot "docs") | Out-Null
+        }
+        elseif ($resourceChoice -eq "B" -or $resourceChoice -eq "b") {
+            return
+        }
+        else {
+            Write-NG "Unknown Docs choice."
+        }
+    }
+}
+
 function Write-Portal {
     param(
         [string]$Text,
@@ -713,6 +772,7 @@ function Show-Menu {
     Write-Portal "  [6] Ask NEXUS router               -> recommendation-only route" "Cyan"
     Write-Portal "  [7] Open repo folder               -> human inspection" "DarkCyan"
     Write-Portal "  [8] Failure Modes / Doctor         -> scan / classify / safe clean / retry" "Yellow"
+    Write-Portal "  [9] GitHub / README / Docs         -> repo links / entrypoints / changelog" "Cyan"
     Write-Portal "  [Q] Quit" "DarkGray"
     Write-Host ""
     Write-Portal "Rule: models recommend; human authorizes durable mutation." "Green"
@@ -755,6 +815,9 @@ while ($true) {
     }
     elseif ($choice -eq "8") {
         Invoke-NexusFailureModeDoctorConsole
+    }
+    elseif ($choice -eq "9") {
+        Invoke-NexusResourceMenu
     }
     elseif ($choice -eq "Q" -or $choice -eq "q") {
         Write-OK "closing NEXUS Gate launcher"
