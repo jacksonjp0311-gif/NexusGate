@@ -1384,3 +1384,194 @@ body.nex-processing .nex-interface-symbol {
   border-color: rgba(134, 239, 172, .22);
 }
 
+/* NEXUS v0.7.0: real-time monitor, stop-button clearance, system error HUD. */
+.telemetry-hud[hidden],
+.system-error-hud[hidden] {
+  display: none !important;
+}
+
+.system-monitor-station {
+  margin-top: 12px;
+  padding: 10px 0 0;
+}
+
+.telemetry-popout-button {
+  min-height: 42px !important;
+  padding: 0 12px;
+  font: 900 14px Consolas, monospace !important;
+  letter-spacing: .02em;
+}
+
+.telemetry-popout-button strong {
+  font-size: 12px;
+}
+
+.telemetry-mini-grid {
+  gap: 7px !important;
+}
+
+.telemetry-mini-grid span {
+  min-height: 38px;
+  padding: 8px !important;
+  font: 800 12px Consolas, monospace !important;
+}
+
+.telemetry-mini-grid strong {
+  font-size: 15px !important;
+}
+
+.nex-input {
+  grid-template-columns: 50px auto minmax(0, 1fr) 104px !important;
+  gap: 10px !important;
+  overflow: visible;
+}
+
+.transmission-actions {
+  position: relative;
+  z-index: 8;
+  display: grid;
+  grid-template-rows: 30px 34px !important;
+  gap: 6px !important;
+  align-self: center;
+}
+
+.transmission-actions button {
+  min-height: 0 !important;
+  height: 100% !important;
+  line-height: 1.05;
+}
+
+#nex-stop-button {
+  position: relative;
+  z-index: 12;
+  pointer-events: auto;
+  overflow: hidden;
+}
+
+#nex-send-button {
+  position: relative;
+  z-index: 12;
+}
+
+body.system-error-active .nex-chat-panel {
+  border-color: rgba(248, 113, 113, .82);
+  box-shadow: 0 0 28px rgba(248, 113, 113, .28), inset 0 0 18px rgba(248, 113, 113, .08);
+}
+
+body.system-error-active .chat-viewport {
+  border-color: rgba(248, 113, 113, .44);
+  background:
+    linear-gradient(180deg, rgba(127, 29, 29, .12), rgba(2, 6, 23, .58));
+}
+
+.chat-message.system-error-message .message-body {
+  border-color: rgba(248, 113, 113, .72);
+  box-shadow: 0 0 18px rgba(248, 113, 113, .20), inset 0 0 16px rgba(248, 113, 113, .08);
+}
+
+.chat-message.system-error-message .message-body header {
+  color: #fecaca;
+  border-bottom-color: rgba(248, 113, 113, .24);
+}
+
+.chat-message.system-error-message pre {
+  color: #fee2e2;
+}
+
+.system-error-hud {
+  position: fixed;
+  right: 28px;
+  top: 128px;
+  z-index: 70;
+  width: min(680px, calc(100vw - 56px));
+  max-height: calc(100vh - 170px);
+  padding: 14px;
+  color: #fee2e2;
+  background:
+    linear-gradient(135deg, rgba(69, 10, 10, .88), rgba(2, 6, 23, .74)),
+    radial-gradient(circle at 80% 18%, rgba(248, 113, 113, .24), transparent 34%);
+  border: 1px solid rgba(248, 113, 113, .74);
+  box-shadow: 0 0 46px rgba(248, 113, 113, .34), inset 0 0 26px rgba(248, 113, 113, .09);
+  backdrop-filter: blur(10px);
+}
+
+.system-error-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(248, 113, 113, .32);
+}
+
+.system-error-head span {
+  display: block;
+  color: #fca5a5;
+  font: 900 12px Consolas, monospace;
+  text-transform: uppercase;
+}
+
+.system-error-head strong {
+  display: block;
+  margin-top: 4px;
+  color: #fff1f2;
+  font: 900 20px Consolas, monospace;
+  text-transform: uppercase;
+}
+
+#system-error-close {
+  color: #fee2e2;
+  background: rgba(127, 29, 29, .72);
+  border: 1px solid rgba(248, 113, 113, .68);
+  cursor: pointer;
+  text-transform: uppercase;
+  min-height: 28px;
+}
+
+.system-error-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.system-error-grid article {
+  padding: 10px;
+  background: rgba(2, 6, 23, .62);
+  border: 1px solid rgba(248, 113, 113, .24);
+}
+
+.system-error-grid span {
+  display: block;
+  color: #fca5a5;
+  font: 800 11px Consolas, monospace;
+  text-transform: uppercase;
+}
+
+.system-error-grid strong {
+  display: block;
+  margin-top: 6px;
+  color: #fff1f2;
+  font: 800 14px Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+#system-error-report {
+  margin: 10px 0 0;
+  max-height: 250px;
+  overflow: auto;
+  white-space: pre-wrap;
+  color: #fee2e2;
+  background: rgba(2, 6, 23, .78);
+  border: 1px solid rgba(248, 113, 113, .22);
+  padding: 10px;
+  font: 12px/1.38 Consolas, monospace;
+}
+
+.chat-message .message-body pre {
+  max-height: 210px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 211, 238, .55) rgba(2, 6, 23, .9);
+}
+

@@ -14,11 +14,15 @@ const nexAiCard = document.getElementById("nex-ai-card");
 const sendButton = document.getElementById("nex-send-button");
 const stopButton = document.getElementById("nex-stop-button");
 const telemetryHud = document.getElementById("telemetry-hud");
+const systemErrorHud = document.getElementById("system-error-hud");
+const systemErrorClose = document.getElementById("system-error-close");
 
 let allowlistedCommands = [];
 let nexBusy = false;
 let nexStopRequested = false;
+let telemetryLoopHandle = null;
 const SELECTOR_UI_ONLY_BOUNDARY = "Selector changes UI planning context only. It does not call models, execute shell, mutate repo files, or grant authority.";
+const NEX_CHAT_APPEND_ONLY_BOUNDARY = "append-only chat: NEX responses appear once in the conversation stream and are not mirrored into the pinned output card.";
 
 const laneIcons = {
   evolve: "EV",
@@ -183,6 +187,7 @@ function writeOutput(raw, options = {}) {
 function appendChat(kind, text, meta = "") {
   const row = document.createElement("article");
   row.className = `chat-message ${kind === "human" ? "human-message" : "ai-message"}`;
+  row.classList.toggle("system-error-message", String(meta || "").toLowerCase().includes("system-error"));
 
   const avatar = document.createElement("div");
   avatar.className = kind === "human" ? "human-avatar" : "nex-avatar";
@@ -272,6 +277,126 @@ async function ensureLocalOllamaBackend() {
     return { ok: false, error: error.message };
   }
 }
+function classifySystemError(rawText) {
+  const raw = String(rawText || "");
+  const lower = raw.toLowerCase();
+
+  if (lower.includes("timed out") || lower.includes("timeout")) {
+    return {
+      cause: "local model response timeout",
+      recommendations: [
+        "Use FAST / Phi-3 for the next bounded test.",
+        "Keep DEEP / Mistral for shorter prompts until runtime pressure is visible.",
+        "Open System Monitor and inspect CPU/RAM/Ollama pressure.",
+        "Use Stop Transmission if the local model stalls again."
+      ]
+    };
+  }
+
+  if (lower.includes("winerror 10061") || lower.includes("connection refused") || lower.includes("actively refused")) {
+    return {
+      cause: "local Ollama endpoint unavailable",
+      recommendations: [
+        "Let the entry portal start the hidden Ollama backend.",
+        "Confirm System Monitor shows Ollama online.",
+        "Retry FAST / Phi-3 before DEEP / Mistral.",
+        "If blocked, restart the desktop portal rather than opening a second Ollama shell."
+      ]
+    };
+  }
+
+  if (lower.includes("cuda") || lower.includes("0xc0000409") || lower.includes("llama-server process no longer running")) {
+    return {
+      cause: "GPU/CUDA runner failure",
+      recommendations: [
+        "Keep NEX CPU fallback enabled.",
+        "Use FAST / Phi-3 first.",
+        "Do not switch back to GPU until driver/runtime compatibility is fixed.",
+        "Preserve num_gpu=0 for NEX local calls."
+      ]
+    };
+  }
+
+  if (lower.includes("_env_int") || lower.includes("nameerror") || lower.includes("traceback")) {
+    return {
+      cause: "local router/runtime code error",
+      recommendations: [
+        "Run the focused unit test for the failing module.",
+        "Run the full test suite before committing.",
+        "Do not treat this as model output; this is system evidence.",
+        "Patch the local bridge and verify by readback."
+      ]
+    };
+  }
+
+  return {
+    cause: "local bridge returned a non-zero status",
+    recommendations: [
+      "Inspect the system-compiled report below.",
+      "Run the focused test tied to the failing surface.",
+      "Retry FAST / Phi-3 after the blocker is removed.",
+      "Keep model output recommendation-only."
+    ]
+  };
+}
+
+function buildSystemErrorReport({ stage, role, code, stderr, stdout, report }) {
+  const raw = [stderr, stdout].filter(Boolean).join("\n").trim();
+  const classified = classifySystemError(raw);
+  const reportStatus = report?.status || report?.kind || "runtime";
+  const lines = [
+    "NEX SYSTEM ERROR REPORT",
+    "=======================",
+    "Compiled by: NEXUS renderer/system bridge",
+    `Stage: ${stage || "unknown"}`,
+    `Role: ${role || "unknown"}`,
+    `Exit code: ${code ?? "unknown"}`,
+    `Report status: ${reportStatus}`,
+    "",
+    "How it happened:",
+    classified.cause,
+    "",
+    "System recommendations:",
+    ...classified.recommendations.map((item, index) => `${index + 1}. ${item}`),
+    "",
+    "Raw system evidence:",
+    raw ? raw.slice(0, 5000) : "No stderr/stdout was returned."
+  ];
+
+  return {
+    title: "NEX bridge blocked",
+    stage: stage || "unknown",
+    code: String(code ?? "unknown"),
+    cause: classified.cause,
+    chatText: lines.join("\n")
+  };
+}
+
+function showSystemErrorHud(payload) {
+  if (!systemErrorHud) return;
+  document.body.classList.add("system-error-active");
+  systemErrorHud.hidden = false;
+  systemErrorHud.classList.add("is-visible");
+  setTelemetryText("system-error-title", payload.title || "NEX bridge blocked");
+  setTelemetryText("system-error-stage", payload.stage || "unknown");
+  setTelemetryText("system-error-cause", payload.cause || "unknown");
+  setTelemetryText("system-error-code", payload.code || "unknown");
+  setTelemetryText("system-error-report", payload.chatText || "No system report.");
+}
+
+function clearSystemErrorHud() {
+  document.body.classList.remove("system-error-active");
+  if (systemErrorHud) {
+    systemErrorHud.hidden = true;
+    systemErrorHud.classList.remove("is-visible");
+  }
+}
+
+function startTelemetryLoop() {
+  if (telemetryLoopHandle) return;
+  refreshTelemetry();
+  telemetryLoopHandle = setInterval(refreshTelemetry, 1000);
+}
 function formatBytes(value) {
   const numeric = Number(value || 0);
   if (!numeric) return "--";
@@ -313,7 +438,7 @@ async function refreshTelemetry() {
     setTelemetryText("hud-gpu-name", gpuName);
     setTelemetryText("hud-disk", diskFree);
     setTelemetryText("hud-ollama", ollamaCount > 0 ? `online / ${ollamaCount}` : "not detected");
-    setTelemetryText("telemetry-status", "reading");
+    setTelemetryText("telemetry-status", "live");
     setTelemetryText("hud-telemetry-raw", JSON.stringify(telemetry, null, 2));
   } catch (error) {
     setTelemetryText("telemetry-status", "blocked");
@@ -353,7 +478,6 @@ function setProcessing(active) {
   if (sendButton) sendButton.disabled = active;
   if (stopButton) stopButton.disabled = !active;
 }
-
 function currentRole() {
   return roleSettings[roleSelect?.value] ? roleSelect.value : "DEEP";
 }
@@ -429,6 +553,9 @@ async function runGovernedLane(lane) {
 
 async function sendNexMessage(prompt) {
   if (nexBusy) return;
+  clearSystemErrorHud();
+  nexStopRequested = false;
+
   const role = currentRole();
   appendChat("human", prompt, `role=${role}`);
   activeLane.textContent = `nex:${role.toLowerCase()}`;
@@ -465,26 +592,40 @@ async function sendNexMessage(prompt) {
     }
 
     if (result.code !== 0) {
-      visible = `NEX bridge returned non-zero status.\n\n${result.stderr || result.stdout || visible}`;
+      const systemReport = buildSystemErrorReport({
+        stage: "nex_model_bridge",
+        role,
+        code: result.code,
+        stderr: result.stderr,
+        stdout: result.stdout,
+        report
+      });
+      showSystemErrorHud(systemReport);
+      visible = systemReport.chatText;
     }
 
     visible = reflectNexFailure(visible, role);
 
-    appendChat("ai", visible, `NEX / ${role} / recommendation-only`);
-    // v0.6.9: NEX chat replies are append-only. Do not mirror the same answer into the pinned NEX output card.
+    appendChat("ai", visible, result.code === 0 ? `NEX / ${role} / recommendation-only` : `NEX / ${role} / system-error`);
     statusEl.textContent = result.code === 0 ? "stable" : "blocked";
-    setBuffer(result.code === 0 ? 100 : 0, "complete");
+    setBuffer(result.code === 0 ? 100 : 0, result.code === 0 ? "complete" : "error");
   } catch (error) {
-    const message = `NEX chat bridge failed: ${error.message}\n\nCheck that Python is available, Ollama is running for local model calls, and the selected role is allowlisted.`;
-    appendChat("ai", message, `NEX / ${role} / blocked`);
-    // v0.6.9: errors also remain in the append-only chat stream.
+    const systemReport = buildSystemErrorReport({
+      stage: "nex_chat_exception",
+      role,
+      code: -1,
+      stderr: error.stack || error.message,
+      stdout: "",
+      report: {}
+    });
+    showSystemErrorHud(systemReport);
+    appendChat("ai", systemReport.chatText, `NEX / ${role} / system-error`);
     statusEl.textContent = "blocked";
     setBuffer(0, "error");
   } finally {
     setProcessing(false);
   }
 }
-
 function renderLanes(commands) {
   laneRoot.innerHTML = "";
   commands.forEach((lane, index) => {
@@ -540,7 +681,11 @@ function buildFallbackState(context) {
 async function loadSurfaceState() {
   setClock();
   setInterval(setClock, 1000);
+  ensureLocalOllamaBackend();
+  startTelemetryLoop();
   setBuffer(10, "hydrate");
+  toggleTelemetryHud(false);
+  clearSystemErrorHud();
 
   const contract = await window.nexus.getContract();
   allowlistedCommands = contract.allowlistedCommands || [];
@@ -592,6 +737,7 @@ document.getElementById("refresh")?.addEventListener("click", () => {
 
 document.getElementById("telemetry-popout")?.addEventListener("click", () => toggleTelemetryHud());
 document.getElementById("telemetry-close")?.addEventListener("click", () => toggleTelemetryHud(false));
+systemErrorClose?.addEventListener("click", () => clearSystemErrorHud());
 
 stopButton?.addEventListener("click", async () => {
   nexStopRequested = true;
@@ -657,6 +803,8 @@ loadSurfaceState().catch((error) => {
   setBuffer(0, "error");
   writeOutput(error.stack || error.message, { preTranslated: true });
 });
+
+
 
 
 

@@ -126,7 +126,7 @@
               <span>GPU <strong id="tm-gpu">--</strong></span>
             </div>
           </section>
-          <section class="telemetry-hud" id="telemetry-hud" aria-label="Expanded local telemetry HUD">
+          <section class="telemetry-hud" id="telemetry-hud" hidden aria-label="Expanded local telemetry HUD">
             <div class="telemetry-hud-head">
               <div>
                 <span>Cyberpunk Yellow HUD</span>
@@ -144,7 +144,21 @@
             </div>
             <pre id="hud-telemetry-raw">Waiting for local telemetry...</pre>
           </section>
-        </section>
+          <section class="system-error-hud" id="system-error-hud" hidden aria-label="System error report HUD">
+            <div class="system-error-head">
+              <div>
+                <span>System Compiled Error</span>
+                <strong id="system-error-title">No active error</strong>
+              </div>
+              <button type="button" id="system-error-close">close</button>
+            </div>
+            <div class="system-error-grid">
+              <article><span>Stage</span><strong id="system-error-stage">idle</strong></article>
+              <article><span>Cause</span><strong id="system-error-cause">none</strong></article>
+              <article><span>Code</span><strong id="system-error-code">0</strong></article>
+            </div>
+            <pre id="system-error-report">No active system error.</pre>
+          </section>        </section>
 
         <section class="hud-frame handoff-panel">
           <h2>AI Handoff Package <small>Ready</small></h2>
@@ -174,6 +188,9 @@
   <script src="./renderer.js"></script>
 </body>
 </html>
+
+
+
 
 
 
