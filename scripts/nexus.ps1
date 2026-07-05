@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -100,6 +100,11 @@ function Invoke-NexusGeo {
     if ($LASTEXITCODE -ne 0) { throw "NEXUS geometric memory packet compile failed." }
 }
 
+function Invoke-NexusGeoClean {
+    python -m nexus_gate.geometric_memory.cleanup --root . --json
+    if ($LASTEXITCODE -ne 0) { throw "NEXUS geometric cleanup failed." }
+}
+
 function Invoke-NexusNN {
     param(
         [string]$Intent = "What should we do next?",
@@ -120,6 +125,7 @@ function Invoke-NexusNN {
     if ($LASTEXITCODE -ne 0) { throw "NEXUS NN router compile failed." }
 }
 switch ($Command) {
+    "geo-clean" { Invoke-NexusGeoClean }
     "geo" { Invoke-NexusGeo -Intent $Tag }
     "fast" { Invoke-NexusNN -Intent $Tag -Role "FAST" -UseModel:$CallModel }
     "balanced" { Invoke-NexusNN -Intent $Tag -Role "BALANCED" -UseModel:$CallModel }
@@ -155,3 +161,4 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
+

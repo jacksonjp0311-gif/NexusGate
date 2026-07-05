@@ -1,4 +1,4 @@
-# NEXUS GATE Entrypoints
+﻿# NEXUS GATE Entrypoints
 
 ## Desktop Entry Portal
 
@@ -74,12 +74,6 @@ Human authorizes.
 ```
 
 
-## GitHub Repository
-
-```text
-https://github.com/jacksonjp0311-gif/NexusGate
-```
-
 ## Reflective Repair Loop
 
 ```powershell
@@ -111,3 +105,18 @@ python -m nexus_gate.geometric_memory.router --root . --intent "What should we d
 ```bash
 bash scripts/nexus.sh geo "What should we do next?"
 ```
+
+
+## Geometric Cleanup
+
+```powershell
+python -m nexus_gate.geometric_memory.cleanup --root . --json
+.\scripts\nexus.ps1 geo-clean
+```
+
+```bash
+bash scripts/nexus.sh geo-clean
+```
+
+Use cleanup after smoke tests, full-suite runs, or failed scripts that leave generated report residue.
+

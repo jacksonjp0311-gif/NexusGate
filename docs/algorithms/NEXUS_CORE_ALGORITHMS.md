@@ -1,4 +1,4 @@
-# NEXUS Core Algorithms
+﻿# NEXUS Core Algorithms
 
 ## Rehydration Algorithm
 
@@ -64,3 +64,13 @@ intent -> evidence refs -> authority mode -> context refs -> read-only geometry 
 ```
 
 This is the latency reducer: the model receives a compact packet instead of an unbounded repo scan.
+
+
+## Geometric Preflight Cleanup Algorithm
+
+```text
+runtime smoke/test -> generated report residue -> geo-clean -> skip tracked files -> clean status surface
+```
+
+Cleanup is a preflight surface, not a repair surface. It removes generated residue only.
+

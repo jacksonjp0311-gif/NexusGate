@@ -1,4 +1,4 @@
-# NEXUS Geometric Memory Router v0.8.3A
+﻿# NEXUS Geometric Memory Router v0.8.3A
 
 ## Purpose
 
@@ -78,3 +78,25 @@ state/nexus_geometric_memory_runtime_latest.json
 ```
 
 Latency goal: compile a bounded geometry packet before model calls so Mistral/Codex receive intent, evidence refs, authority boundary, and sliced context instead of broad repo context.
+
+
+## Preflight Cleanup v0.8.3E
+
+The geometric runtime now includes a first-class cleanup surface:
+
+```powershell
+python -m nexus_gate.geometric_memory.cleanup --root . --json
+```
+
+This removes generated/untracked runtime packets and timestamped reports while skipping tracked files. The package init is passive/lazy to avoid runpy warnings during `python -m` execution.
+
+## Preflight Cleanup v0.8.3F
+
+The geometric runtime includes a first-class cleanup surface:
+
+```powershell
+python -m nexus_gate.geometric_memory.cleanup --root . --json
+```
+
+This removes generated/untracked runtime packets and timestamped reports while skipping tracked files. The package init uses importlib-backed lazy access to avoid runpy warnings during `python -m` execution.
+

@@ -10,7 +10,6 @@ human intent -> origin alignment -> route/authority gate -> evidence -> human-au
 ```powershell
 cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\desktop\open_nexus_gate_console.ps1
-
 .\scripts\nexus.ps1 ui
 .\scripts\nexus.ps1 tui
 .\scripts\nexus.ps1 status
@@ -18,7 +17,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\desktop\open_nexus
 .\scripts\nexus.ps1 reflect
 .\scripts\nexus.ps1 domain
 ```
-
 ### Bash / Git Bash / WSL / Linux / macOS
 
 ```bash
@@ -78,7 +76,7 @@ Evidence decides what may compound.
 
 ## Human Director Box
 
-NEXUS GATE is currently at the v0.8.1 UI cleanup line and the v0.8.3C geometric router runtime stub line: compact root README, Desktop Portal, GitHub/docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, and the first LFTE/EIMT/RCMA/TRAT geometry contract for bounded local intelligence.
+NEXUS GATE is currently at the v0.8.1 UI cleanup line and the v0.8.3F geo preflight cleanup and warning seal line: compact root README, Desktop Portal, GitHub/docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, and the first LFTE/EIMT/RCMA/TRAT geometry contract for bounded local intelligence.
 
 Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, replayable lessons, and durable GitHub compounding under human authority.
 
@@ -90,7 +88,7 @@ Intent -> Evidence -> Authority -> Context
 LFTE depth typing + EIMT drift gate + RCMA latent remap + TRAT attractor score
 ```
 
-Read `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md`, `docs/algorithms/NEXUS_TESSERACT_ALIGNMENT_KERNEL.md`, `docs/memory/EIMT_RUNTIME_MEMORY_CONTRACT.md`, and `state/nexus_geometric_memory_manifest.v0.8.3.json` before changing memory, routing, or model-weight behavior. Runtime packet: `python -m nexus_gate.geometric_memory.router --root . --intent "..." --json`.
+Read `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md`, `docs/algorithms/NEXUS_TESSERACT_ALIGNMENT_KERNEL.md`, `docs/memory/EIMT_RUNTIME_MEMORY_CONTRACT.md`, and `state/nexus_geometric_memory_manifest.v0.8.3.json` before changing memory, routing, or model-weight behavior. Runtime packet: `python -m nexus_gate.geometric_memory.router --root . --intent "..." --json`. Cleanup: `python -m nexus_gate.geometric_memory.cleanup --root . --json` or `./scripts/nexus.ps1 geo-clean`.
 
 ## PART I - Human README
 

@@ -1,4 +1,4 @@
-# NEXUS Versioning Rehydration
+﻿# NEXUS Versioning Rehydration
 
 Version: v0.8.0B
 
@@ -194,3 +194,25 @@ Adds PowerShell/Bash geo command surfaces.
 Emits reports/nexus_geometric_memory_packet_latest.json and state/nexus_geometric_memory_runtime_latest.json.
 No repair authority, no Mistral training, no raw-weight mutation.
 ```
+
+
+## v0.8.3E Geo Preflight Cleanup and Warning Seal
+
+```text
+Makes geometric_memory package init passive/lazy to remove python -m runpy warning.
+Adds nexus_gate.geometric_memory.cleanup generated-report cleanup module.
+Adds geo-clean command to PowerShell and Bash surfaces.
+Deduplicates docs/ENTRYPOINTS.md GitHub Repository section.
+Keeps runtime packet read-only and human-authority bounded.
+```
+
+## v0.8.3F Geo Preflight Cleanup and Warning Seal Close
+
+```text
+Uses importlib-backed lazy package access to remove python -m runpy warning.
+Keeps geo-clean generated-report cleanup module.
+Keeps PowerShell/Bash geo-clean command surfaces.
+Deduplicates docs/ENTRYPOINTS.md GitHub Repository section.
+Keeps runtime packet read-only and human-authority bounded.
+```
+

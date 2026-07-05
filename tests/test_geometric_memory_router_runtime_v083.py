@@ -1,4 +1,4 @@
-import json
+﻿import json
 import subprocess
 import sys
 import unittest
@@ -71,11 +71,14 @@ class TestGeometricMemoryRouterRuntimeV083(unittest.TestCase):
         router = (ROOT / "docs" / "intelligence" / "NEXUS_GEOMETRIC_MEMORY_ROUTER.md").read_text(encoding="utf-8")
         self.assertLess(len(readme.splitlines()), 220)
         self.assertIn("v0.8.1 UI cleanup line", readme)
-        self.assertIn("v0.8.3C geometric router runtime stub line", readme)
+        self.assertIn("v0.8.3F geo preflight cleanup and warning seal line", readme)
         self.assertIn("python -m nexus_gate.geometric_memory.router", readme)
+        self.assertIn("geo-clean", readme)
+        self.assertIn("geo-clean", readme)
         self.assertIn("Geometric Runtime Packet", entry)
         self.assertIn("Runtime Stub v0.8.3C", router)
 
 
 if __name__ == "__main__":
     unittest.main()
+

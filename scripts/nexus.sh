@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 set -euo pipefail
 # Rehydration/compatibility markers retained for audit/tests:
 # FAILURE_MODE_CHART
@@ -9,11 +9,15 @@ set -euo pipefail
 # reflect
 # domain
 # geo
+# geo-clean
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 COMMAND="${1:-rehydrate}"
 
 case "$COMMAND" in
+  geo-clean)
+    python -m nexus_gate.geometric_memory.cleanup --root . --json
+    ;;
   geo)
     shift || true
     INTENT="${1:-What should we do next?}"
@@ -63,3 +67,4 @@ case "$COMMAND" in
     python -m nexus_gate.compiler --root . --json
     ;;
 esac
+

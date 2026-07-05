@@ -1,4 +1,4 @@
-# NEXUS GATE Changelog
+﻿# NEXUS GATE Changelog
 
 ## Purpose
 
@@ -64,3 +64,20 @@ Keeps v0.8.3A geometric memory router docs, manifest, and tests.
 Adds first executable geometry packet for latency reduction.
 Keeps packet runtime read-only and human-authority bounded.
 ```
+
+
+## v0.8.3E - Geo Preflight Cleanup and Warning Seal
+
+```text
+Removes geometric runtime runpy warning.
+Adds first-class cleanup for generated report residue.
+Deduplicates entrypoint docs.
+```
+
+## v0.8.3F - Geo Preflight Cleanup and Warning Seal Close
+
+```text
+Closes lazy import readback wound with importlib-backed package init.
+Preserves geo-clean cleanup and warning seal.
+```
+
