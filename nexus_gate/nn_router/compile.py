@@ -51,6 +51,37 @@ def _replace_case_variants(value: str, old: str, new: str) -> str:
     return result
 
 
+def _path_candidates(path: Path) -> List[str]:
+    """Return path spellings that may appear on Windows/local/CI.
+
+    GitHub Actions Windows can expose temp paths with short 8.3 segments
+    such as RUNNER~1 while Path.resolve() may produce a different spelling.
+    Public reports must sanitize all visible spellings.
+    """
+    candidates: List[str] = []
+
+    for item in (path, path.absolute()):
+        text = str(item)
+        if text and text not in candidates:
+            candidates.append(text)
+
+    for strict in (False, True):
+        try:
+            text = str(path.resolve(strict=strict))
+            if text and text not in candidates:
+                candidates.append(text)
+        except OSError:
+            pass
+
+    normalized: List[str] = []
+    for item in candidates:
+        for variant in (item, item.replace("\\", "/")):
+            if variant and variant not in normalized:
+                normalized.append(variant)
+
+    return sorted(normalized, key=len, reverse=True)
+
+
 def _sanitize_public(value: Any, root: Path, models_root: Path) -> Any:
     """Remove machine-specific paths from reports.
 
@@ -60,26 +91,21 @@ def _sanitize_public(value: Any, root: Path, models_root: Path) -> Any:
     the model marker or a %USERPROFILE%-relative path.
     """
     public_models = _public_models_root(models_root)
-    try:
-        root_abs = str(root.resolve())
-    except OSError:
-        root_abs = str(root.absolute())
-    try:
-        models_abs = str(models_root.resolve())
-    except OSError:
-        models_abs = str(models_root.absolute())
+    root_candidates = _path_candidates(root)
+    models_candidates = _path_candidates(models_root)
 
     if isinstance(value, dict):
         return {key: _sanitize_public(item, root, models_root) for key, item in value.items()}
     if isinstance(value, list):
         return [_sanitize_public(item, root, models_root) for item in value]
     if isinstance(value, str):
-        text = _replace_case_variants(value, root_abs, "<repo-root>")
-        text = _replace_case_variants(text, models_abs, public_models)
+        text = value
+        for candidate in root_candidates:
+            text = _replace_case_variants(text, candidate, "<repo-root>")
+        for candidate in models_candidates:
+            text = _replace_case_variants(text, candidate, public_models)
         return text
     return value
-
-
 def _packet_lines(title: str, report: Dict[str, object]) -> List[str]:
     intent = str(report.get("intent", ""))
     target_role = str(report.get("target_role", "ALL"))
@@ -270,4 +296,5 @@ def main(argv: Optional[List[str]] = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
 
