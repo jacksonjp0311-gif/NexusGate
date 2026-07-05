@@ -255,17 +255,203 @@ function Invoke-OpenNexusGate {
     Read-Host "Press Enter to return to NEXUS menu"
 }
 
+function Invoke-NexusRuntimeResidueClean {
+    Write-Host ""
+    Write-NG "Dev clean: restoring tracked generated runtime surfaces."
+
+    git restore --worktree -- reports state ledger docs/feedback/FEEDBACK_LOG.md 2>$null
+
+    $reportRoot = Join-Path $RepoRoot "reports"
+    if (Test-Path -LiteralPath $reportRoot) {
+        Get-ChildItem -Path $reportRoot -File -ErrorAction SilentlyContinue |
+            Where-Object { $_.Name -match '^nexus_.*_report_20\d{6}_\d{6}\.json$' } |
+            Remove-Item -Force -ErrorAction SilentlyContinue
+    }
+
+    $status = @(git status --short)
+    if ($status.Count -eq 0) {
+        Write-OK "Dev clean complete. Working tree is clean."
+    }
+    else {
+        Write-NG "Dev clean complete with residue:"
+        $status | ForEach-Object { Write-Host $_ }
+    }
+
+    Write-Host ""
+    Read-Host "Press Enter to return to Dev Mode"
+}
+
+function Invoke-NexusCompilerSummary {
+    Write-Host ""
+    Write-NG "Dev compiler summary starting."
+    Write-NG "This streams a compact compiler view into the dev console."
+
+    $raw = python -m nexus_gate.compiler --root . --json | Out-String
+    $code = $LASTEXITCODE
+
+    if ($code -ne 0) {
+        Write-FAIL ("compiler exited with code {0}" -f $code)
+        Write-Host $raw
+        Read-Host "Press Enter to return to Dev Mode"
+        return
+    }
+
+    try {
+        $compiled = $raw | ConvertFrom-Json
+        $failed = @($compiled.gates | Where-Object { $_.status -ne "pass" })
+        $unit = @($compiled.gates | Where-Object { $_.gate -eq "unit_tests" } | Select-Object -First 1)
+
+        Write-OK ("Compiler status: {0}" -f $compiled.status)
+        Write-NG ("Gate count: {0}" -f $compiled.gates.Count)
+        Write-NG ("Failed gates: {0}" -f $failed.Count)
+
+        if ($unit) {
+            Write-NG ("Unit test gate: {0}" -f $unit.status)
+            if ($unit.evidence.stderr_tail) {
+                Write-Host ""
+                Write-NG "Unit test tail:"
+                Write-Host $unit.evidence.stderr_tail
+            }
+        }
+
+        if ($failed.Count -gt 0) {
+            Write-Host ""
+            Write-FAIL "Failed gates:"
+            $failed | ForEach-Object { Write-Host ("- {0}: {1}" -f $_.gate, $_.message) }
+        }
+    }
+    catch {
+        Write-FAIL ("compiler JSON parse failed: {0}" -f $_.Exception.Message)
+        Write-Host $raw
+    }
+
+    Write-Host ""
+    Read-Host "Press Enter to return to Dev Mode"
+}
+
+function Invoke-NexusFullTests {
+    Write-Host ""
+    Write-NG "Dev test run starting."
+
+    python -m compileall nexus_gate tests
+    if ($LASTEXITCODE -ne 0) {
+        Write-FAIL "compileall failed"
+        Read-Host "Press Enter to return to Dev Mode"
+        return
+    }
+
+    python -m unittest discover -s tests
+    if ($LASTEXITCODE -ne 0) {
+        Write-FAIL "unit tests failed"
+        Read-Host "Press Enter to return to Dev Mode"
+        return
+    }
+
+    Write-OK "Dev tests passed."
+    Write-Host ""
+    Read-Host "Press Enter to return to Dev Mode"
+}
+
+function Show-NexusGitStatus {
+    Write-Host ""
+    Write-NG "Dev git status:"
+    $status = @(git status --short)
+    if ($status.Count -eq 0) {
+        Write-OK "working tree clean"
+    }
+    else {
+        $status | ForEach-Object { Write-Host $_ }
+    }
+
+    Write-Host ""
+    Read-Host "Press Enter to return to Dev Mode"
+}
+
+function Show-LatestHandoffReport {
+    Write-Host ""
+    Write-NG "Latest HANDOFF report:"
+
+    $queue = Join-Path $RepoRoot "reports\handoff_queue"
+    if (-not (Test-Path -LiteralPath $queue)) {
+        Write-NG "No handoff_queue folder found yet."
+        Read-Host "Press Enter to return to Dev Mode"
+        return
+    }
+
+    $latest = Get-ChildItem -Path $queue -Recurse -Filter "handoff_action_report.json" -File -ErrorAction SilentlyContinue |
+        Sort-Object LastWriteTime -Descending |
+        Select-Object -First 1
+
+    if (-not $latest) {
+        Write-NG "No HANDOFF action report found yet."
+        Read-Host "Press Enter to return to Dev Mode"
+        return
+    }
+
+    Write-OK ("Report: {0}" -f $latest.FullName)
+    Get-Content -LiteralPath $latest.FullName -Raw | Write-Host
+
+    Write-Host ""
+    Read-Host "Press Enter to return to Dev Mode"
+}
+
+function Invoke-NexusDevMode {
+    while ($true) {
+        Write-Host ""
+        Write-Host "========================================"
+        Write-Host " NEXUS DEV MODE - Handoff Console"
+        Write-Host "========================================"
+        Write-Host "1. Git status"
+        Write-Host "2. Clean runtime residue"
+        Write-Host "3. Compiler summary"
+        Write-Host "4. Full tests"
+        Write-Host "5. Latest HANDOFF report"
+        Write-Host "6. Open full Electron UI"
+        Write-Host "B. Back to main menu"
+        Write-Host ""
+        Write-Host "Rule: dev mode streams local evidence; human authorizes durable mutation."
+        Write-Host ""
+
+        $devChoice = Read-Host "Dev"
+
+        if ($devChoice -eq "1") {
+            Show-NexusGitStatus
+        }
+        elseif ($devChoice -eq "2") {
+            Invoke-NexusRuntimeResidueClean
+        }
+        elseif ($devChoice -eq "3") {
+            Invoke-NexusCompilerSummary
+        }
+        elseif ($devChoice -eq "4") {
+            Invoke-NexusFullTests
+        }
+        elseif ($devChoice -eq "5") {
+            Show-LatestHandoffReport
+        }
+        elseif ($devChoice -eq "6") {
+            Invoke-OpenNexusGate
+        }
+        elseif ($devChoice -eq "B" -or $devChoice -eq "b") {
+            return
+        }
+        else {
+            Write-NG "Unknown Dev Mode choice."
+        }
+    }
+}
 function Show-Menu {
     Write-Host ""
     Write-Host "========================================"
     Write-Host " NEXUS GATE - Desktop Entry Portal"
     Write-Host "========================================"
     Write-Host "1. Open NexusGate"
-    Write-Host "2. Status / health surface"
-    Write-Host "3. Terminal TUI surface"
-    Write-Host "4. NN router health"
-    Write-Host "5. Ask NEXUS router"
-    Write-Host "6. Open repo folder"
+    Write-Host "2. Dev Mode / Handoff Console"
+    Write-Host "3. Status / health surface"
+    Write-Host "4. Terminal TUI surface"
+    Write-Host "5. NN router health"
+    Write-Host "6. Ask NEXUS router"
+    Write-Host "7. Open repo folder"
     Write-Host "Q. Quit"
     Write-Host ""
     Write-Host "Rule: models recommend; human authorizes durable mutation."
@@ -274,6 +460,7 @@ function Show-Menu {
 
 Write-NG "NEXUS Gate launcher opened."
 Write-NG "Primary entry: Open NexusGate -> Electron UI."
+Write-NG "Dev entry: Dev Mode / Handoff Console -> patch, compiler, wound evidence."
 
 while ($true) {
     Show-Menu
@@ -283,19 +470,22 @@ while ($true) {
         Invoke-OpenNexusGate
     }
     elseif ($choice -eq "2") {
-        Invoke-NexusLane -Lane "status"
+        Invoke-NexusDevMode
     }
     elseif ($choice -eq "3") {
-        Invoke-NexusLane -Lane "tui"
+        Invoke-NexusLane -Lane "status"
     }
     elseif ($choice -eq "4") {
-        Invoke-NexusLane -Lane "nn-health"
+        Invoke-NexusLane -Lane "tui"
     }
     elseif ($choice -eq "5") {
+        Invoke-NexusLane -Lane "nn-health"
+    }
+    elseif ($choice -eq "6") {
         $tag = Read-Host "Ask"
         Invoke-NexusLane -Lane "ask" -Tag $tag
     }
-    elseif ($choice -eq "6") {
+    elseif ($choice -eq "7") {
         explorer.exe $RepoRoot | Out-Null
     }
     elseif ($choice -eq "Q" -or $choice -eq "q") {
@@ -306,4 +496,3 @@ while ($true) {
         Write-NG "Unknown choice."
     }
 }
-
