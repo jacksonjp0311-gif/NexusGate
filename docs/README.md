@@ -44,3 +44,15 @@ Validation Surface:
 Claim Boundary:
 
 - Documentation improves orientation. It does not prove code correctness, safety, security, production readiness, or autonomous authority.
+
+
+## Geometric Memory Router
+
+```text
+docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md
+docs/algorithms/NEXUS_TESSERACT_ALIGNMENT_KERNEL.md
+docs/memory/EIMT_RUNTIME_MEMORY_CONTRACT.md
+state/nexus_geometric_memory_manifest.v0.8.3.json
+```
+
+This layer maps human intent, repo evidence, model recommendation, and memory context through a bounded four-axis geometry before durable mutation.

@@ -87,3 +87,15 @@ https://github.com/jacksonjp0311-gif/NexusGate
 ```
 
 The loop calls NEXUS DEEP/Mistral through the local NN router, prints recommendation context, asks Y/N, and only applies a bounded repair when the human approves.
+
+
+## Geometric Memory Router
+
+```powershell
+Get-Content .\docs\intelligence\NEXUS_GEOMETRIC_MEMORY_ROUTER.md -TotalCount 120
+Get-Content .\docs\algorithms\NEXUS_TESSERACT_ALIGNMENT_KERNEL.md -TotalCount 120
+Get-Content .\docs\memory\EIMT_RUNTIME_MEMORY_CONTRACT.md -TotalCount 120
+Get-Content .\state\nexus_geometric_memory_manifest.v0.8.3.json -Raw
+```
+
+Use this entry before changing memory, routing, context slicing, model-role weights, or reflective repair behavior.

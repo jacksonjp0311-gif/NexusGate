@@ -1,0 +1,52 @@
+{
+  "axes": [
+    {
+      "name": "Intent",
+      "question": "what is being asked",
+      "required": true
+    },
+    {
+      "name": "Evidence",
+      "question": "what proves or falsifies it",
+      "required": true
+    },
+    {
+      "name": "Authority",
+      "question": "who may mutate what",
+      "required": true
+    },
+    {
+      "name": "Context",
+      "question": "which memory/docs/files are relevant",
+      "required": true
+    }
+  ],
+  "files": {
+    "core_algorithms": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+    "kernel_doc": "docs/algorithms/NEXUS_TESSERACT_ALIGNMENT_KERNEL.md",
+    "memory_contract": "docs/memory/EIMT_RUNTIME_MEMORY_CONTRACT.md",
+    "router_doc": "docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md"
+  },
+  "gates": {
+    "geometry_pass": "requires_all_axes_and_tests",
+    "memory_promotion": "source_bounded_drift_gated_evidence_required",
+    "model_output": "recommendation_only",
+    "model_weight_change": "blocked_until_separate_tuning_protocol",
+    "repo_mutation": "human_authorized_only"
+  },
+  "name": "NEXUS Geometric Memory Router",
+  "runtime_boundary": [
+    "no raw model weight mutation",
+    "no autonomous repair",
+    "no memory promotion without source and drift",
+    "no geometry claim without tests and compiler"
+  ],
+  "source_theory_stack": {
+    "EIMT": "drift_gated_episodic_memory",
+    "LFTE": "typed_depth_projection",
+    "RCMA": "cross_modal_latent_remapping",
+    "TRAT": "simplex_attractor_persistence"
+  },
+  "status": "contract_first_not_runtime_autonomy",
+  "version": "0.8.3A"
+}

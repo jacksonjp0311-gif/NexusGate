@@ -161,3 +161,25 @@ Preserves Failure Modes / Doctor Gateway marker.
 Preserves GitHub / README / Docs submenu.
 Preserves reflective NEXUS DEEP/Mistral -> Y/N -> bounded repair lane.
 ```
+
+
+## v0.8.3A Geometric Memory Router
+
+```text
+Adds LFTE/EIMT/RCMA/TRAT source-theory extraction as NexusGate operating geometry.
+Adds four-axis Intent/Evidence/Authority/Context tesseract alignment contract.
+Adds EIMT runtime memory contract.
+Adds state/nexus_geometric_memory_manifest.v0.8.3.json.
+Updates README rehydration map so future agents see this as the next local intelligence layer.
+No model training or raw-weight mutation is authorized in this patch.
+```
+
+
+## v0.8.3B Geometric Memory Router compatibility anchor
+
+```text
+Preserves README test anchor: v0.8.1 UI cleanup line.
+Keeps v0.8.3A LFTE/EIMT/RCMA/TRAT geometry contract.
+Keeps four-axis Intent/Evidence/Authority/Context tesseract alignment contract.
+No model training or raw-weight mutation is authorized.
+```

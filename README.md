@@ -1,19 +1,12 @@
 ﻿# NEXUS GATE
-
 **Reflective Intelligence Layer for AI Systems**
-
 NEXUS GATE is a local-first reflective intelligence layer for AI systems. It gives AI systems a governed mirror: origin alignment, state routing, local model reflection, HANDOFF action boundaries, Failure Doctor diagnosis, compiler evidence, wound lessons, UI feedback, and GitHub durability through explicit gates.
-
 It is not another agent framework and it is not just the entry portal. The Desktop Entry Portal is the human doorway. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
-
 ```text
 human intent -> origin alignment -> route/authority gate -> evidence -> human-authorized durable mutation
 ```
-
 ## Start Here
-
 ### Windows PowerShell / Desktop Portal
-
 ```powershell
 cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\desktop\open_nexus_gate_console.ps1
@@ -85,9 +78,19 @@ Evidence decides what may compound.
 
 ## Human Director Box
 
-NEXUS GATE is currently at the v0.8.1 UI cleanup line with v0.8.2D documentation rehydration: compact root README, dedicated changelog, entrypoint map, algorithm docs, mini README refresh, Mode Selection pop-out HUD, Failure Doctor, HANDOFF bridge, Dev Mode, and dual PowerShell/Bash runtime surfaces.
+NEXUS GATE is currently at the v0.8.1 UI cleanup line and the v0.8.3A geometric memory router line: compact root README, Desktop Portal, GitHub/docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, and the first LFTE/EIMT/RCMA/TRAT geometry contract for bounded local intelligence.
 
 Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, replayable lessons, and durable GitHub compounding under human authority.
+
+## Geometric Memory Router
+NEXUS Geometric Memory Router is the next rehydration layer. It does not train or mutate model weights. It maps every request through four typed axes before repair or compounding:
+
+```text
+Intent -> Evidence -> Authority -> Context
+LFTE depth typing + EIMT drift gate + RCMA latent remap + TRAT attractor score
+```
+
+Read `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md`, `docs/algorithms/NEXUS_TESSERACT_ALIGNMENT_KERNEL.md`, `docs/memory/EIMT_RUNTIME_MEMORY_CONTRACT.md`, and `state/nexus_geometric_memory_manifest.v0.8.3.json` before changing memory, routing, or model-weight behavior.
 
 ## PART I - Human README
 
@@ -197,6 +200,10 @@ python -m nexus_gate.compiler --root . --json
 | Failure Doctor | `docs/failure_modes/` |
 | Runtime commands | `docs/runtime/` |
 | GitHub repo | `https://github.com/jacksonjp0311-gif/NexusGate` |
+| Geometric memory router | `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md` |
+| Tesseract alignment kernel | `docs/algorithms/NEXUS_TESSERACT_ALIGNMENT_KERNEL.md` |
+| EIMT runtime memory contract | `docs/memory/EIMT_RUNTIME_MEMORY_CONTRACT.md` |
+| Geometry manifest | `state/nexus_geometric_memory_manifest.v0.8.3.json` |
 
 ## What this is not
 

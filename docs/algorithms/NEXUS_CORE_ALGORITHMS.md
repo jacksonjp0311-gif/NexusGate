@@ -46,3 +46,12 @@ failure/log/issue -> NEXUS DEEP/Mistral recommendation -> compact summary -> Y/N
 ```
 
 The model does not mutate files. It produces recommendation context only. The PowerShell script continues only after human approval.
+
+
+## Geometric Memory Router Algorithm
+
+```text
+human intent -> Intent/Evidence/Authority/Context axes -> LFTE typed-depth projection -> EIMT drift gate -> RCMA latent remap -> TRAT attractor score -> NEXUS gate -> recommend | ask | block | bounded repair
+```
+
+Models recommend. Memory orients. Geometry constrains. Evidence gates. Humans authorize compounding.

@@ -39,3 +39,20 @@ The extended old README/reference context is preserved in:
 ```text
 docs/readme/NEXUS_README_EXTENDED_REFERENCE.md
 ```
+
+
+## v0.8.3A - Geometric Memory Router
+
+```text
+Contract-first geometry layer for local reflective intelligence.
+Adds typed-depth, episodic drift, cross-modal remap, and attractor-persistence routing vocabulary.
+Keeps Mistral recommendation-only and human-authorized.
+```
+
+
+## v0.8.3B - Geometric Memory Router compatibility anchor
+
+```text
+Restores the v0.8.1 UI cleanup line README anchor required by rehydration tests.
+Keeps v0.8.3A geometric memory router docs, manifest, and tests.
+```
