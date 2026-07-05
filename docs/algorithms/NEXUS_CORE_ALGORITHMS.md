@@ -55,3 +55,12 @@ human intent -> Intent/Evidence/Authority/Context axes -> LFTE typed-depth proje
 ```
 
 Models recommend. Memory orients. Geometry constrains. Evidence gates. Humans authorize compounding.
+
+
+## Geometric Runtime Packet Algorithm
+
+```text
+intent -> evidence refs -> authority mode -> context refs -> read-only geometry packet -> optional model call
+```
+
+This is the latency reducer: the model receives a compact packet instead of an unbounded repo scan.

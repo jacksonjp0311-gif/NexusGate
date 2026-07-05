@@ -99,3 +99,15 @@ Get-Content .\state\nexus_geometric_memory_manifest.v0.8.3.json -Raw
 ```
 
 Use this entry before changing memory, routing, context slicing, model-role weights, or reflective repair behavior.
+
+
+## Geometric Runtime Packet
+
+```powershell
+python -m nexus_gate.geometric_memory.router --root . --intent "What should we do next?" --json
+.\scripts\nexus.ps1 geo -Tag "What should we do next?"
+```
+
+```bash
+bash scripts/nexus.sh geo "What should we do next?"
+```

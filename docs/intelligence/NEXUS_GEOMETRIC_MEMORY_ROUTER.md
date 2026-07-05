@@ -60,3 +60,21 @@ LoRA/fine-tuning only after evidence
 ## Claim Boundary
 
 This is a software governance contract, not proof of consciousness, physics, biological mechanism, alignment, production readiness, or model correctness.
+
+
+## Runtime Stub v0.8.3C
+
+The first executable speed layer is read-only:
+
+```powershell
+python -m nexus_gate.geometric_memory.router --root . --intent "summarize the wound" --json
+```
+
+It emits:
+
+```text
+reports/nexus_geometric_memory_packet_latest.json
+state/nexus_geometric_memory_runtime_latest.json
+```
+
+Latency goal: compile a bounded geometry packet before model calls so Mistral/Codex receive intent, evidence refs, authority boundary, and sliced context instead of broad repo context.

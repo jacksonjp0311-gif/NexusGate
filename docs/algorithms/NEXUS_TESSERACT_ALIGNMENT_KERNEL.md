@@ -41,3 +41,12 @@ geometry_pass = axis_complete == 1 and drift_ok and authority_ok and evidence_ok
 ## Runtime Rule
 
 No memory promotion, model-role tuning, context-slice promotion, or repair continuation may claim a geometry pass without an emitted manifest or test evidence.
+
+
+## Runtime Packet Algorithm v0.8.3C
+
+```text
+issue -> compact intent -> evidence refs -> authority mode -> context refs -> axis score -> read-only geometry packet
+```
+
+The runtime stub always refuses repair authority. It prepares speed packets; it does not mutate.

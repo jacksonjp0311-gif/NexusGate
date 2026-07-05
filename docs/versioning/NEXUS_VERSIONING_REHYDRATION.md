@@ -183,3 +183,14 @@ Keeps v0.8.3A LFTE/EIMT/RCMA/TRAT geometry contract.
 Keeps four-axis Intent/Evidence/Authority/Context tesseract alignment contract.
 No model training or raw-weight mutation is authorized.
 ```
+
+
+## v0.8.3C Geometric Router Runtime Stub
+
+```text
+Adds nexus_gate/geometric_memory read-only runtime package.
+Adds geometry packet compiler for Intent/Evidence/Authority/Context.
+Adds PowerShell/Bash geo command surfaces.
+Emits reports/nexus_geometric_memory_packet_latest.json and state/nexus_geometric_memory_runtime_latest.json.
+No repair authority, no Mistral training, no raw-weight mutation.
+```

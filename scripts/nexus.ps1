@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -91,6 +91,15 @@ function Promote {
     Write-Host "[OK] Promotion gate passed."
 }
 
+function Invoke-NexusGeo {
+    param([string]$Intent = "What should we do next?")
+    if ([string]::IsNullOrWhiteSpace($Intent)) {
+        $Intent = "What should we do next?"
+    }
+    python -m nexus_gate.geometric_memory.router --root . --intent $Intent --json
+    if ($LASTEXITCODE -ne 0) { throw "NEXUS geometric memory packet compile failed." }
+}
+
 function Invoke-NexusNN {
     param(
         [string]$Intent = "What should we do next?",
@@ -111,6 +120,7 @@ function Invoke-NexusNN {
     if ($LASTEXITCODE -ne 0) { throw "NEXUS NN router compile failed." }
 }
 switch ($Command) {
+    "geo" { Invoke-NexusGeo -Intent $Tag }
     "fast" { Invoke-NexusNN -Intent $Tag -Role "FAST" -UseModel:$CallModel }
     "balanced" { Invoke-NexusNN -Intent $Tag -Role "BALANCED" -UseModel:$CallModel }
     "deep" { Invoke-NexusNN -Intent $Tag -Role "DEEP" -UseModel:$CallModel }
@@ -145,5 +155,3 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
-
-

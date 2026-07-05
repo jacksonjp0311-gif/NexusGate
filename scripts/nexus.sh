@@ -8,11 +8,17 @@ set -euo pipefail
 # ui
 # reflect
 # domain
+# geo
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 COMMAND="${1:-rehydrate}"
 
 case "$COMMAND" in
+  geo)
+    shift || true
+    INTENT="${1:-What should we do next?}"
+    python -m nexus_gate.geometric_memory.router --root . --intent "$INTENT" --json
+    ;;
   compile) python -m nexus_gate.compiler --root . --json ;;
   strict) python -m nexus_gate.compiler --root . --json ;;
   adapters) python -m nexus_gate.adapters.compile --root . --json ;;

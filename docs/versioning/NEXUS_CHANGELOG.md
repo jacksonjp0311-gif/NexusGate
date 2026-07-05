@@ -56,3 +56,11 @@ Keeps Mistral recommendation-only and human-authorized.
 Restores the v0.8.1 UI cleanup line README anchor required by rehydration tests.
 Keeps v0.8.3A geometric memory router docs, manifest, and tests.
 ```
+
+
+## v0.8.3C - Geometric Router Runtime Stub
+
+```text
+Adds first executable geometry packet for latency reduction.
+Keeps packet runtime read-only and human-authority bounded.
+```
