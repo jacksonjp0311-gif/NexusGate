@@ -1344,3 +1344,43 @@ body.nex-processing .nex-interface-symbol {
   font: 11px/1.35 Consolas, monospace;
 }
 
+/* NEXUS v0.6.9: append-only chat response stream. */
+.nex-chat-panel {
+  grid-template-rows: 34px auto minmax(0, 1fr) 82px;
+}
+
+.chat-viewport {
+  min-height: 0;
+  overflow-y: auto;
+  align-content: start;
+  scroll-behavior: smooth;
+}
+
+.chat-message {
+  min-height: 0;
+}
+
+.chat-message .message-body {
+  min-height: 0;
+}
+
+.chat-message .message-body pre {
+  max-height: 210px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 211, 238, .55) rgba(2, 6, 23, .9);
+}
+
+#nex-ai-card .message-body pre {
+  max-height: 96px;
+  overflow-y: auto;
+}
+
+.ai-message:not(#nex-ai-card) .message-body {
+  border-color: rgba(34, 211, 238, .22);
+}
+
+.human-message .message-body {
+  border-color: rgba(134, 239, 172, .22);
+}
+

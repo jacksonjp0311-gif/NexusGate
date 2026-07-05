@@ -351,6 +351,7 @@ function setProcessing(active) {
   document.body.classList.toggle("nex-processing", active);
   nexAiCard?.classList.toggle("is-processing", active);
   if (sendButton) sendButton.disabled = active;
+  if (stopButton) stopButton.disabled = !active;
 }
 
 function currentRole() {
@@ -470,13 +471,13 @@ async function sendNexMessage(prompt) {
     visible = reflectNexFailure(visible, role);
 
     appendChat("ai", visible, `NEX / ${role} / recommendation-only`);
-    writeOutput(visible, { preTranslated: true });
+    // v0.6.9: NEX chat replies are append-only. Do not mirror the same answer into the pinned NEX output card.
     statusEl.textContent = result.code === 0 ? "stable" : "blocked";
     setBuffer(result.code === 0 ? 100 : 0, "complete");
   } catch (error) {
     const message = `NEX chat bridge failed: ${error.message}\n\nCheck that Python is available, Ollama is running for local model calls, and the selected role is allowlisted.`;
     appendChat("ai", message, `NEX / ${role} / blocked`);
-    writeOutput(message, { preTranslated: true });
+    // v0.6.9: errors also remain in the append-only chat stream.
     statusEl.textContent = "blocked";
     setBuffer(0, "error");
   } finally {
@@ -656,6 +657,7 @@ loadSurfaceState().catch((error) => {
   setBuffer(0, "error");
   writeOutput(error.stack || error.message, { preTranslated: true });
 });
+
 
 
 
