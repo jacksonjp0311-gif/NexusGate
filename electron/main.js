@@ -211,6 +211,27 @@ function runFixedPowerShell(scriptText, timeoutMs = 1800) {
 function timestampForPath() {
   return new Date().toISOString().replace(/[-:TZ.]/g, "").slice(0, 14);
 }
+function persistHandoffReport(reportPath, report) {
+  const fallbackRoot = path.join(repoRoot, "reports", "handoff_queue", "recovered");
+  const targetPath = reportPath || path.join(fallbackRoot, `handoff_action_report_${timestampForPath()}.json`);
+
+  function writeReport(target) {
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    report.report_path = target;
+    fs.writeFileSync(target, JSON.stringify(report, null, 2), "utf8");
+    return target;
+  }
+
+  try {
+    return writeReport(targetPath);
+  } catch (error) {
+    fs.mkdirSync(fallbackRoot, { recursive: true });
+    const fallbackPath = path.join(fallbackRoot, `handoff_action_report_${timestampForPath()}.json`);
+    report.original_report_path = targetPath;
+    report.report_write_error = error.message;
+    return writeReport(fallbackPath);
+  }
+}
 
 function sanitizeHandoffScriptText(value) {
   const text = String(value || "").replace(/\0/g, "").trim();
@@ -325,7 +346,7 @@ function runHandoffPowerShell(scriptText, packet = {}) {
         report_path: reportPath,
         boundary: "HANDOFF script failed before process start."
       };
-      fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), "utf8");
+      persistHandoffReport(reportPath, report);
       resolve(report);
     });
     child.on("close", (code) => {
@@ -343,7 +364,7 @@ function runHandoffPowerShell(scriptText, packet = {}) {
         report_path: reportPath,
         boundary: "HANDOFF chat executed a human-authorized script through hidden PowerShell. This does not grant autonomous authority."
       };
-      fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), "utf8");
+      persistHandoffReport(reportPath, report);
       resolve(report);
     });
   });
@@ -706,6 +727,7 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
 
 
 

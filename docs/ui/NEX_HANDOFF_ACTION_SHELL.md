@@ -43,3 +43,13 @@ This does not give NEX autonomous shell authority.
 Execution requires a human-initiated `/handoff run` message while the local voice is set to HANDOFF.
 
 Model output cannot self-execute, promote memory, mutate files without human authorization, or bypass the repo gates.
+
+## v0.7.5 Wound-Safe Report Persistence
+
+HANDOFF actions may not assume the active `reports/handoff_queue/<timestamp>` folder survives until process close.
+
+The Electron main process must recreate the report directory before writing `handoff_action_report.json`.
+
+If the active report path is missing, Electron must write a fallback report under `reports/handoff_queue/recovered/` and include the original path plus the report write error.
+
+Wound lesson: cleanup scripts must not delete their own active execution/report directory.
