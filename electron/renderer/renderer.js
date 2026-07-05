@@ -12,9 +12,12 @@ const roleCommand = document.getElementById("role-command");
 const copyRoleCommand = document.getElementById("copy-role-command");
 const nexAiCard = document.getElementById("nex-ai-card");
 const sendButton = document.getElementById("nex-send-button");
+const stopButton = document.getElementById("nex-stop-button");
+const telemetryHud = document.getElementById("telemetry-hud");
 
 let allowlistedCommands = [];
 let nexBusy = false;
+let nexStopRequested = false;
 const SELECTOR_UI_ONLY_BOUNDARY = "Selector changes UI planning context only. It does not call models, execute shell, mutate repo files, or grant authority.";
 
 const laneIcons = {
@@ -247,7 +250,7 @@ function reflectNexFailure(text, role) {
       "",
       "Boundary:",
       "NEX did not execute model output, mutate files, or grant authority."
-    ].join("\\n");
+    ].join("\n");
   }
 
   return raw;
@@ -256,6 +259,75 @@ function pushConsole(level, text) {
   appendChat("ai", `[${level}] ${text}`, "system event");
 }
 
+async function ensureLocalOllamaBackend() {
+  if (!window.nexus.ensureOllama) return;
+  try {
+    const result = await window.nexus.ensureOllama();
+    const label = result.ok ? `ollama ${result.status}` : `ollama ${result.status || "blocked"}`;
+    setTelemetryText("hud-ollama", label);
+    setTelemetryText("telemetry-status", result.ok ? "backend online" : "backend blocked");
+    return result;
+  } catch (error) {
+    setTelemetryText("telemetry-status", "backend blocked");
+    return { ok: false, error: error.message };
+  }
+}
+function formatBytes(value) {
+  const numeric = Number(value || 0);
+  if (!numeric) return "--";
+  const units = ["B", "KB", "MB", "GB", "TB"];
+  let size = numeric;
+  let index = 0;
+  while (size >= 1024 && index < units.length - 1) {
+    size = size / 1024;
+    index += 1;
+  }
+  return `${size.toFixed(index === 0 ? 0 : 1)} ${units[index]}`;
+}
+
+function setTelemetryText(id, value) {
+  const node = document.getElementById(id);
+  if (node) node.textContent = value;
+}
+
+async function refreshTelemetry() {
+  if (!window.nexus.getTelemetry) return;
+  try {
+    const telemetry = await window.nexus.getTelemetry();
+    const cpu = telemetry.cpu?.load_percent ?? 0;
+    const ram = telemetry.memory?.used_percent ?? 0;
+    const gpuRaw = telemetry.windows?.gpu_load_percent;
+    const gpu = gpuRaw === null || gpuRaw === undefined ? "--" : `${Math.min(100, Number(gpuRaw)).toFixed(1)}%`;
+    const gpuName = telemetry.windows?.gpu_name || "unknown";
+    const diskFree = formatBytes(telemetry.windows?.disk_c_free);
+    const ollamaCount = Array.isArray(telemetry.windows?.ollama_processes)
+      ? telemetry.windows.ollama_processes.length
+      : telemetry.windows?.ollama_processes ? 1 : 0;
+
+    setTelemetryText("tm-cpu", `${Number(cpu).toFixed(1)}%`);
+    setTelemetryText("tm-ram", `${Number(ram).toFixed(1)}%`);
+    setTelemetryText("tm-gpu", gpu);
+    setTelemetryText("hud-cpu", `${Number(cpu).toFixed(1)}%`);
+    setTelemetryText("hud-ram", `${Number(ram).toFixed(1)}%`);
+    setTelemetryText("hud-gpu", gpu);
+    setTelemetryText("hud-gpu-name", gpuName);
+    setTelemetryText("hud-disk", diskFree);
+    setTelemetryText("hud-ollama", ollamaCount > 0 ? `online / ${ollamaCount}` : "not detected");
+    setTelemetryText("telemetry-status", "reading");
+    setTelemetryText("hud-telemetry-raw", JSON.stringify(telemetry, null, 2));
+  } catch (error) {
+    setTelemetryText("telemetry-status", "blocked");
+    setTelemetryText("hud-telemetry-raw", `Telemetry unavailable: ${error.message}`);
+  }
+}
+
+function toggleTelemetryHud(force) {
+  if (!telemetryHud) return;
+  const next = typeof force === "boolean" ? force : !telemetryHud.classList.contains("is-expanded");
+  telemetryHud.classList.toggle("is-expanded", next);
+  telemetryHud.toggleAttribute("hidden", !next);
+  if (next) refreshTelemetry();
+}
 function setClock() {
   document.getElementById("system-time").textContent = new Date().toISOString().slice(0, 19).replace("T", " ");
 }
@@ -517,6 +589,23 @@ document.getElementById("refresh")?.addEventListener("click", () => {
   setBuffer(100, "complete");
 });
 
+document.getElementById("telemetry-popout")?.addEventListener("click", () => toggleTelemetryHud());
+document.getElementById("telemetry-close")?.addEventListener("click", () => toggleTelemetryHud(false));
+
+stopButton?.addEventListener("click", async () => {
+  nexStopRequested = true;
+  setBuffer(0, "stopped");
+  statusEl.textContent = "stopping";
+  try {
+    const result = await window.nexus.stopNex();
+    appendChat("ai", `Transmission stop requested.\n\n${JSON.stringify(result, null, 2)}`, "NEX / stopped / recommendation-only");
+  } catch (error) {
+    appendChat("ai", `Stop transmission failed: ${error.message}`, "NEX / stop blocked");
+  } finally {
+    setProcessing(false);
+    statusEl.textContent = "stable";
+  }
+});
 operatorCommand?.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && !event.shiftKey) {
     event.preventDefault();
@@ -567,6 +656,8 @@ loadSurfaceState().catch((error) => {
   setBuffer(0, "error");
   writeOutput(error.stack || error.message, { preTranslated: true });
 });
+
+
 
 
 

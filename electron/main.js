@@ -1,6 +1,8 @@
 ﻿const { app, BrowserWindow, ipcMain } = require("electron");
 const fs = require("fs");
 const path = require("path");
+const os = require("os");
+const http = require("http");
 const { spawn } = require("child_process");
 
 const repoRoot = path.resolve(__dirname, "..");
@@ -31,7 +33,198 @@ const READ_SURFACES = new Set([
 
 const NEX_CHAT_ROLES = new Set(["FAST", "BALANCED", "DEEP", "HANDOFF"]);
 const NEX_MAX_PROMPT_CHARS = 4000;
+let activeNexChild = null;
+let managedOllamaProcess = null;
+let lastCpuSample = null;
 
+function ollamaTagsReady(timeoutMs = 900) {
+  return new Promise((resolve) => {
+    const request = http.get("http://127.0.0.1:11434/api/tags", { timeout: timeoutMs }, (response) => {
+      response.resume();
+      resolve(response.statusCode >= 200 && response.statusCode < 500);
+    });
+    request.on("timeout", () => {
+      request.destroy();
+      resolve(false);
+    });
+    request.on("error", () => resolve(false));
+  });
+}
+
+function resolveOllamaBinary() {
+  const candidates = [
+    process.env.OLLAMA_EXE,
+    path.join(os.homedir(), "AppData", "Local", "Programs", "Ollama", "ollama.exe"),
+    path.join(process.env.LOCALAPPDATA || "", "Programs", "Ollama", "ollama.exe"),
+    "ollama"
+  ].filter(Boolean);
+
+  for (const candidate of candidates) {
+    if (candidate === "ollama" || fs.existsSync(candidate)) return candidate;
+  }
+  return "ollama";
+}
+
+function resolveOllamaModels() {
+  const explicit = process.env.OLLAMA_MODELS;
+  if (explicit && fs.existsSync(explicit)) return explicit;
+  return path.join(os.homedir(), ".ollama", "models");
+}
+
+async function ensureOllamaBackend() {
+  if (await ollamaTagsReady()) {
+    return {
+      ok: true,
+      status: "already_running",
+      endpoint: "http://127.0.0.1:11434",
+      hidden_backend: true,
+      boundary: "Ollama service is used only as a local model endpoint."
+    };
+  }
+
+  const binary = resolveOllamaBinary();
+  const modelsPath = resolveOllamaModels();
+  const env = {
+    ...process.env,
+    CUDA_VISIBLE_DEVICES: process.env.CUDA_VISIBLE_DEVICES || "-1",
+    NEXUS_OLLAMA_NUM_GPU: process.env.NEXUS_OLLAMA_NUM_GPU || "0",
+    OLLAMA_MODELS: modelsPath
+  };
+
+  try {
+    managedOllamaProcess = spawn(binary, ["serve"], {
+      cwd: repoRoot,
+      shell: false,
+      detached: true,
+      windowsHide: true,
+      stdio: "ignore",
+      env
+    });
+    managedOllamaProcess.unref();
+  } catch (error) {
+    return {
+      ok: false,
+      status: "start_failed",
+      error: error.message,
+      binary,
+      modelsPath,
+      boundary: "No shell authority granted; hidden backend launch failed."
+    };
+  }
+
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    if (await ollamaTagsReady(700)) {
+      return {
+        ok: true,
+        status: "started_hidden",
+        endpoint: "http://127.0.0.1:11434",
+        pid: managedOllamaProcess?.pid,
+        modelsPath,
+        cpu_fallback: true,
+        boundary: "Started hidden Ollama backend only; no repo mutation, tool authority, or model-output execution."
+      };
+    }
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+
+  return {
+    ok: false,
+    status: "not_ready_after_start",
+    endpoint: "http://127.0.0.1:11434",
+    pid: managedOllamaProcess?.pid,
+    modelsPath,
+    boundary: "NEX can report the blocker; it may not self-repair without human authorization."
+  };
+}
+function sampleCpuTimes() {
+  const cpus = os.cpus();
+  let idle = 0;
+  let total = 0;
+  for (const cpu of cpus) {
+    idle += cpu.times.idle;
+    total += Object.values(cpu.times).reduce((sum, value) => sum + value, 0);
+  }
+  return { idle, total };
+}
+
+function readCpuPercent() {
+  const current = sampleCpuTimes();
+  if (!lastCpuSample) {
+    lastCpuSample = current;
+    return 0;
+  }
+  const idleDelta = current.idle - lastCpuSample.idle;
+  const totalDelta = current.total - lastCpuSample.total;
+  lastCpuSample = current;
+  if (totalDelta <= 0) return 0;
+  return Math.max(0, Math.min(100, (1 - idleDelta / totalDelta) * 100));
+}
+
+function runFixedPowerShell(scriptText, timeoutMs = 1800) {
+  return new Promise((resolve) => {
+    const child = spawn("powershell.exe", [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-Command",
+      scriptText
+    ], {
+      cwd: repoRoot,
+      shell: false,
+      windowsHide: true
+    });
+
+    let stdout = "";
+    let stderr = "";
+    const timer = setTimeout(() => {
+      try { child.kill(); } catch (_error) {}
+      resolve({ ok: false, stdout, stderr: stderr + "telemetry timeout" });
+    }, timeoutMs);
+
+    child.stdout.on("data", (chunk) => { stdout += chunk.toString(); });
+    child.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
+    child.on("error", (error) => {
+      clearTimeout(timer);
+      resolve({ ok: false, stdout, stderr: stderr + error.message });
+    });
+    child.on("close", (code) => {
+      clearTimeout(timer);
+      resolve({ ok: code === 0, stdout, stderr, code });
+    });
+  });
+}
+
+async function readWindowsTelemetry() {
+  const script = `
+$ErrorActionPreference = "SilentlyContinue"
+$gpu = Get-CimInstance Win32_VideoController | Select-Object -First 1 Name,AdapterRAM,DriverVersion
+$disk = Get-PSDrive -Name C | Select-Object -First 1 Used,Free
+$ollama = @(Get-Process ollama,llama-server -ErrorAction SilentlyContinue | Select-Object ProcessName,Id,CPU,WorkingSet64)
+$gpuLoad = $null
+try {
+  $samples = Get-Counter '\\GPU Engine(*)\\Utilization Percentage' -ErrorAction Stop
+  $gpuLoad = [Math]::Round((($samples.CounterSamples | Measure-Object CookedValue -Sum).Sum), 1)
+} catch { $gpuLoad = $null }
+[pscustomobject]@{
+  gpu_name = $gpu.Name
+  gpu_adapter_ram = $gpu.AdapterRAM
+  gpu_driver = $gpu.DriverVersion
+  gpu_load_percent = $gpuLoad
+  disk_c_free = $disk.Free
+  disk_c_used = $disk.Used
+  ollama_processes = $ollama
+} | ConvertTo-Json -Depth 5
+`;
+  const result = await runFixedPowerShell(script, 2200);
+  if (!result.ok) {
+    return { ok: false, error: result.stderr || "windows telemetry unavailable" };
+  }
+  try {
+    return { ok: true, ...JSON.parse(result.stdout || "{}") };
+  } catch (error) {
+    return { ok: false, error: error.message, raw: result.stdout };
+  }
+}
 function sanitizeNexPrompt(value) {
   const text = String(value || "").replace(/\0/g, "").trim();
   if (!text) {
@@ -211,9 +404,11 @@ ipcMain.handle("nexus:runLane", async (_event, lane) => {
     const child = spawn("powershell.exe", args, {
       cwd: repoRoot,
       shell: false,
-      windowsHide: true
+      windowsHide: true,
+      env: { ...process.env, CUDA_VISIBLE_DEVICES: process.env.CUDA_VISIBLE_DEVICES || "-1", NEXUS_OLLAMA_NUM_GPU: process.env.NEXUS_OLLAMA_NUM_GPU || "0" }
     });
 
+    activeNexChild = child;
     let stdout = "";
     let stderr = "";
     child.stdout.on("data", (chunk) => {
@@ -263,13 +458,59 @@ ipcMain.handle("nexus:askNex", async (_event, packet = {}) => {
     boundary: "NEX chat is recommendation-only. It does not execute model output, mutate repo files from model output, or grant authority."
   };
 });
+ipcMain.handle("nexus:stopNex", async () => {
+  if (!activeNexChild) {
+    return { stopped: false, status: "idle" };
+  }
+  const pid = activeNexChild.pid;
+  try {
+    activeNexChild.kill();
+    activeNexChild = null;
+    return { stopped: true, pid, boundary: "Stopped active NEX model transmission only. No repo mutation or shell authority granted." };
+  } catch (error) {
+    return { stopped: false, pid, error: error.message };
+  }
+});
+
+ipcMain.handle("nexus:getTelemetry", async () => {
+  const totalMem = os.totalmem();
+  const freeMem = os.freemem();
+  const cpuPercent = readCpuPercent();
+  const windowsTelemetry = await readWindowsTelemetry();
+  return {
+    system: "NEXUS GATE",
+    version: "0.6.6-local-telemetry-hud",
+    generated_at_utc: new Date().toISOString(),
+    cpu: {
+      cores: os.cpus().length,
+      model: os.cpus()[0]?.model || "unknown",
+      load_percent: Number(cpuPercent.toFixed(1))
+    },
+    memory: {
+      total_bytes: totalMem,
+      free_bytes: freeMem,
+      used_percent: Number((((totalMem - freeMem) / totalMem) * 100).toFixed(1))
+    },
+    platform: {
+      type: os.type(),
+      release: os.release(),
+      uptime_seconds: Math.round(os.uptime())
+    },
+    windows: windowsTelemetry,
+    boundary: "Read-only local telemetry. NEX may observe CPU/RAM/GPU/process pressure but may not self-authorize repair or mutation."
+  };
+});
+ipcMain.handle("nexus:ensureOllama", async () => ensureOllamaBackend());
 ipcMain.handle("nexus:getContract", async () => ({
   readSurfaces: Array.from(READ_SURFACES),
   allowlistedCommands: Array.from(ALLOWLISTED_COMMANDS),
   boundary: "Electron shell is presentation only and does not own NEXUS authority."
 }));
 
-app.whenReady().then(createWindow);
+app.whenReady().then(async () => {
+  await ensureOllamaBackend();
+  createWindow();
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
@@ -282,4 +523,6 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+
 

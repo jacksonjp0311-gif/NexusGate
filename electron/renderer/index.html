@@ -93,7 +93,10 @@
           <div class="human-avatar" aria-hidden="true"><span>YOU</span></div>
           <label for="operator-command">Human Chat</label>
           <textarea id="operator-command" rows="3" autocomplete="off" placeholder="Ask NEX. Enter sends. Shift+Enter makes a new line. /status runs a governed lane."></textarea>
-          <button type="submit" id="nex-send-button">Send</button>
+          <div class="transmission-actions" aria-label="NEX transmission controls">
+            <button type="submit" id="nex-send-button">Send</button>
+            <button type="button" id="nex-stop-button" class="stop-transmission" disabled>Stop<br>Transmission</button>
+          </div>
         </form>
       </section>
       <aside class="right-stack">
@@ -112,6 +115,35 @@
           <div class="metric-row"><span>Dominant Pressure Source</span><strong id="dominant">unknown</strong></div>
           <div class="metric-row"><span>Trend</span><strong id="trend">stable</strong></div>
           <div class="metric-row metric-next"><span>Next Action</span><strong id="next">Run evolve</strong></div>
+          <section class="system-monitor-station" aria-label="Local system monitor">
+            <button class="telemetry-popout-button" type="button" id="telemetry-popout">
+              <span>System Monitor</span>
+              <strong id="telemetry-status">local</strong>
+            </button>
+            <div class="telemetry-mini-grid">
+              <span>CPU <strong id="tm-cpu">--%</strong></span>
+              <span>RAM <strong id="tm-ram">--%</strong></span>
+              <span>GPU <strong id="tm-gpu">--</strong></span>
+            </div>
+          </section>
+          <section class="telemetry-hud" id="telemetry-hud" aria-label="Expanded local telemetry HUD">
+            <div class="telemetry-hud-head">
+              <div>
+                <span>Cyberpunk Yellow HUD</span>
+                <strong>Local Telemetry Station</strong>
+              </div>
+              <button type="button" id="telemetry-close">close</button>
+            </div>
+            <div class="telemetry-hud-grid">
+              <article><span>CPU Load</span><strong id="hud-cpu">--%</strong></article>
+              <article><span>RAM Load</span><strong id="hud-ram">--%</strong></article>
+              <article><span>GPU Load</span><strong id="hud-gpu">--</strong></article>
+              <article><span>GPU Name</span><strong id="hud-gpu-name">unknown</strong></article>
+              <article><span>Disk C Free</span><strong id="hud-disk">--</strong></article>
+              <article><span>Ollama</span><strong id="hud-ollama">unknown</strong></article>
+            </div>
+            <pre id="hud-telemetry-raw">Waiting for local telemetry...</pre>
+          </section>
         </section>
 
         <section class="hud-frame handoff-panel">
@@ -142,6 +174,7 @@
   <script src="./renderer.js"></script>
 </body>
 </html>
+
 
 
 

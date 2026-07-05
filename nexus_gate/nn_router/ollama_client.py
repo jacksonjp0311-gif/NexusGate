@@ -1,4 +1,4 @@
-"""Local-only Ollama client for NEXUS NN router v0.6.2.
+﻿"""Local-only Ollama client for NEXUS NN router v0.6.2.
 
 This module is intentionally narrow:
 - It only talks to loopback localhost Ollama.
@@ -45,6 +45,7 @@ def call_local_ollama(
         "options": {
             "temperature": 0.2,
             "num_ctx": 4096,
+            "num_gpu": int(os.environ.get("NEXUS_OLLAMA_NUM_GPU", "0")),
         },
     }
 
@@ -84,3 +85,4 @@ def call_local_ollama(
             "endpoint": LOCAL_OLLAMA_GENERATE_URL,
             "error": str(exc),
         }
+
