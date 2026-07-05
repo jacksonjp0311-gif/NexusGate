@@ -1,4 +1,4 @@
-# NEXUS GATE
+﻿# NEXUS GATE
 
 **Governed Agentic Transfer Layer for Modular AI Frameworks**
 
@@ -772,7 +772,7 @@ Bash scripts still remain in the repo and CI can validate them on Ubuntu.
 ```
 
 
-## v0.1.5 — Strict Compiler + Cold Evidence/Wound Routing
+## v0.1.5 â€” Strict Compiler + Cold Evidence/Wound Routing
 
 NEXUS GATE now begins the cold evidence layer.
 
@@ -1456,3 +1456,79 @@ Do not promote unsupported claims.
 ```
 
 The lab does not execute shell, mutate the parent repo, write external APIs, access secrets, self-authorize, bypass evolve, or prove correctness, safety, security, production readiness, model understanding, or real-world truth.
+
+<!-- NEXUS-DESKTOP-PORTAL:START -->
+## NEXUS GATE Desktop Entry Portal
+
+NEXUS GATE can be opened from a local Desktop icon named NEXUS Gate.
+
+The icon is an entry portal into the governed local operator surface. Its first menu option is:
+
+`	ext
+1. Open NexusGate
+`
+
+That option opens the presentation-only Electron UI from:
+
+`	ext
+electron/package.json
+npm start
+`
+
+The launcher also keeps secondary governed lanes available:
+
+`	ext
+Status / health surface
+Terminal TUI surface
+NN router health
+Ask NEXUS router
+Open repo folder
+`
+
+Boundary:
+
+- The Desktop icon does not grant model authority.
+- The Electron UI is a presentation/operator surface only.
+- The launcher does not execute model output as shell.
+- The launcher does not mutate files from model output.
+- The launcher does not bypass NEXUS gates.
+- Human authorization remains required for durable mutation.
+
+Related launcher assets:
+
+`	ext
+assets/icons/nexus_gate.ico
+scripts/desktop/open_nexus_gate_console.ps1
+docs/ui/NEXUS_DESKTOP_LAUNCHER.md
+`
+<!-- NEXUS-DESKTOP-PORTAL:END -->
+
+
+<!-- NEXUS-ELECTRON-SELECTOR:START -->
+## NEXUS Electron Selector Switch
+
+The Electron HUD includes a visual local reasoning selector for NEXUS role context:
+
+```text
+FAST     -> Phi-3
+BALANCED -> Phi-3
+DEEP     -> Mistral
+HANDOFF  -> ChatGPT/Codex
+```
+
+The selector is subtle until clicked. On selection change, it animates from a triangle into a Celtic-knot-like pulse and settles into a crystalline state.
+
+Boundary:
+
+- selection is not execution
+- recommendation is not authority
+- no model call is made by changing the selector
+- no repo mutation occurs from the selector
+- human authorization remains required for durable mutation
+
+See:
+
+```text
+docs/ui/NEXUS_ELECTRON_SELECTOR_SWITCH.md
+```
+<!-- NEXUS-ELECTRON-SELECTOR:END -->

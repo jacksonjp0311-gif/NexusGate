@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   /* Compatibility markers: PROCESS LANES; AI HANDOFF PACKAGE; FEEDBACK SUMMARY. */
   color-scheme: dark;
   --bg: #020713;
@@ -148,7 +148,7 @@ h3 {
   overflow: hidden;
 }
 
-.left-stack { grid-template-rows: minmax(0, 1fr) minmax(126px, auto); }
+.left-stack { grid-template-rows: minmax(0, 1fr) minmax(126px, auto) minmax(178px, auto); }
 .right-stack { grid-template-rows: minmax(0, 1fr) minmax(150px, auto); }
 
 .panel,
@@ -698,4 +698,166 @@ dd {
 
 .console-panel {
   grid-template-rows: auto minmax(92px, 140px) 28px minmax(0, 1fr) 104px;
+}
+/* NEXUS role selector switch: subtle triangle -> Celtic knot -> crystal pulse. */
+.role-selector-panel {
+  min-height: 178px;
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto auto;
+  gap: 7px 10px;
+  align-items: center;
+}
+
+.role-selector-panel h2 {
+  grid-column: 1 / -1;
+}
+
+.selector-switch {
+  grid-row: 2 / 5;
+  width: 66px;
+  height: 66px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border: 1px solid rgba(34, 211, 238, .18);
+  background: radial-gradient(circle, rgba(34, 211, 238, .08), rgba(2, 6, 23, .78));
+  transition: border-color .22s ease, box-shadow .22s ease, background .22s ease;
+}
+
+.selector-switch:hover {
+  border-color: rgba(34, 211, 238, .55);
+  box-shadow: 0 0 16px rgba(34, 211, 238, .16);
+}
+
+.selector-knot {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  opacity: .62;
+  transition: opacity .22s ease, transform .32s ease, filter .32s ease;
+}
+
+.knot-triangle {
+  position: absolute;
+  left: 10px;
+  top: 6px;
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 30px solid rgba(34, 211, 238, .36);
+  filter: drop-shadow(0 0 8px rgba(34, 211, 238, .3));
+}
+
+.knot-loop {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(125, 211, 252, .42);
+  border-radius: 45% 55% 45% 55%;
+  opacity: 0;
+  transform-origin: center;
+}
+
+.loop-a { left: 12px; top: 4px; transform: rotate(0deg) scale(.72); }
+.loop-b { left: 4px; top: 20px; transform: rotate(120deg) scale(.72); }
+.loop-c { right: 4px; top: 20px; transform: rotate(240deg) scale(.72); }
+
+.knot-core {
+  position: absolute;
+  left: 22px;
+  top: 22px;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(255, 255, 255, .55);
+  background: rgba(255, 255, 255, .25);
+  box-shadow: 0 0 10px rgba(255, 255, 255, .35);
+  transform: rotate(45deg);
+}
+
+.selector-switch.is-awake .selector-knot {
+  opacity: 1;
+  animation: knotPulse .8s ease-out;
+}
+
+.selector-switch.is-awake .knot-triangle {
+  animation: triangleToCrystal .8s ease-out;
+}
+
+.selector-switch.is-awake .knot-loop {
+  opacity: 1;
+  animation: knotCrystallize .8s ease-out;
+}
+
+.selector-switch[data-role="FAST"] { --selector-accent: var(--cyan); }
+.selector-switch[data-role="BALANCED"] { --selector-accent: var(--green); }
+.selector-switch[data-role="DEEP"] { --selector-accent: var(--magenta); }
+.selector-switch[data-role="HANDOFF"] { --selector-accent: var(--yellow); }
+
+.selector-switch.is-awake {
+  border-color: rgba(34, 211, 238, .65);
+  box-shadow: 0 0 18px rgba(34, 211, 238, .32);
+}
+
+.selector-label {
+  color: var(--muted);
+  text-transform: uppercase;
+  font: 11px Consolas, monospace;
+}
+
+#role-select {
+  min-width: 0;
+  width: 100%;
+  height: 28px;
+  color: var(--text);
+  background: rgba(2, 6, 23, .92);
+  border: 1px solid var(--line-dim);
+  outline: none;
+  font: 12px Consolas, monospace;
+}
+
+#role-select:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px rgba(34, 211, 238, .22);
+}
+
+.selector-copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  font: 11px Consolas, monospace;
+}
+
+.selector-copy strong {
+  color: var(--green);
+  overflow-wrap: anywhere;
+}
+
+.selector-copy span {
+  color: #93c5fd;
+  overflow-wrap: anywhere;
+}
+
+.selector-copy-button {
+  min-height: 26px;
+  padding: 0 8px;
+}
+
+@keyframes knotPulse {
+  0% { transform: scale(.94); filter: brightness(1); }
+  45% { transform: scale(1.08) rotate(8deg); filter: brightness(1.4); }
+  100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+}
+
+@keyframes triangleToCrystal {
+  0% { opacity: .45; filter: drop-shadow(0 0 4px rgba(34, 211, 238, .18)); }
+  55% { opacity: .85; filter: drop-shadow(0 0 16px rgba(34, 211, 238, .9)); }
+  100% { opacity: .52; filter: drop-shadow(0 0 8px rgba(34, 211, 238, .34)); }
+}
+
+@keyframes knotCrystallize {
+  0% { opacity: 0; transform: rotate(0deg) scale(.55); }
+  48% { opacity: .94; border-color: var(--selector-accent, var(--cyan)); }
+  100% { opacity: 1; }
 }

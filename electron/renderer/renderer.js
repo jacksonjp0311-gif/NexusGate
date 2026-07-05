@@ -1,4 +1,4 @@
-const laneRoot = document.getElementById("lanes");
+﻿const laneRoot = document.getElementById("lanes");
 const output = document.getElementById("output");
 const statusEl = document.getElementById("status");
 const consoleStream = document.getElementById("console-stream");
@@ -6,7 +6,11 @@ const activeLane = document.getElementById("active-lane");
 const operatorForm = document.getElementById("operator-form");
 const operatorCommand = document.getElementById("operator-command");
 
-let allowlistedCommands = [];
+const roleSelect = document.getElementById("role-select");
+const selectorSwitch = document.getElementById("selector-switch");
+const roleModel = document.getElementById("role-model");
+const roleCommand = document.getElementById("role-command");
+const copyRoleCommand = document.getElementById("copy-role-command");let allowlistedCommands = [];
 
 const laneIcons = {
   evolve: "EV",
@@ -17,9 +21,83 @@ const laneIcons = {
   compact: "CP",
   interconnect: "IC",
   runtime: "RT",
-  pack: "PK"
+  pack: "PK",
+  "nn-health": "NN",
+  fast: "FS",
+  balanced: "BL",
+  deep: "DP",
+  "align-score": "AS"
 };
 
+const roleSettings = {
+  FAST: {
+    label: "FAST -> Phi-3",
+    command: ".\\scripts\\nexus.ps1 fast -Tag \"Quick bounded recommendation.\"",
+    note: "FAST selected. Phi-3 quick recommendation voice is active for local planning."
+  },
+  BALANCED: {
+    label: "BALANCED -> Phi-3",
+    command: ".\\scripts\\nexus.ps1 balanced -Tag \"Balanced bounded recommendation.\"",
+    note: "BALANCED selected. Phi-3 balanced recommendation voice is active for local planning."
+  },
+  DEEP: {
+    label: "DEEP -> Mistral",
+    command: ".\\scripts\\nexus.ps1 deep -Tag \"Use Mistral for DEEP recommendation.\" -CallModel",
+    note: "DEEP selected. Mistral is the deeper recommendation voice; output remains non-authoritative."
+  },
+  HANDOFF: {
+    label: "HANDOFF -> ChatGPT/Codex",
+    command: ".\\scripts\\nexus.ps1 nn-health",
+    note: "HANDOFF selected. ChatGPT/Codex packet mode requires no local model authority."
+  }
+};
+
+function setSelectorRole(role, source = "change") {
+  const normalized = roleSettings[role] ? role : "DEEP";
+  const setting = roleSettings[normalized];
+
+  if (selectorSwitch) {
+    selectorSwitch.dataset.role = normalized;
+    selectorSwitch.classList.remove("is-awake");
+    void selectorSwitch.offsetWidth;
+    selectorSwitch.classList.add("is-awake");
+    window.setTimeout(() => selectorSwitch.classList.remove("is-awake"), 850);
+  }
+
+  if (roleModel) roleModel.textContent = setting.label;
+  if (roleCommand) roleCommand.textContent = setting.command;
+
+  pushConsole("NEXUS", `${setting.note} Selector source=${source}.`);
+  writeOutput(JSON.stringify({
+    type: "ui_role_selector",
+    status: "selected_in_ui_only",
+    selected_role: normalized,
+    model_surface: setting.label,
+    suggested_command: setting.command,
+    next_action: "Copy or run the command from PowerShell if this selection should produce durable repo evidence.",
+    boundary: "Selector changes UI planning context only. It does not call models, execute shell, mutate repo files, or grant authority."
+  }, null, 2), { showRaw: true });
+}
+
+function initRoleSelector() {
+  if (!roleSelect || !selectorSwitch) return;
+
+  roleSelect.addEventListener("change", () => setSelectorRole(roleSelect.value, "select"));
+  selectorSwitch.addEventListener("click", () => setSelectorRole(roleSelect.value, "glyph"));
+
+  copyRoleCommand?.addEventListener("click", async () => {
+    const command = roleCommand?.textContent || "";
+    if (!command) return;
+    try {
+      await navigator.clipboard.writeText(command);
+      pushConsole("NEXUS", "Selector command copied to clipboard.");
+    } catch (error) {
+      pushConsole("WARN", "Clipboard unavailable; command remains visible in selector.");
+    }
+  });
+
+  setSelectorRole(roleSelect.value || "DEEP", "init");
+}
 function setText(id, value) {
   const node = document.getElementById(id);
   if (node) {
@@ -340,6 +418,7 @@ async function loadSurfaceState() {
   const contract = await window.nexus.getContract();
   allowlistedCommands = contract.allowlistedCommands || [];
   renderLanes(allowlistedCommands);
+  initRoleSelector();
   setBuffer(25);
 
   let state;

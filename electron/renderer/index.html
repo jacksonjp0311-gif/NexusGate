@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <!-- Compatibility markers: AI HANDOFF PACKAGE; PROCESS LANES; FEEDBACK SUMMARY. -->
 <html lang="en">
 <head>
@@ -37,6 +37,30 @@
             <dt>Governance</dt><dd>strict</dd>
             <dt>Safe Mode</dt><dd>on</dd>
           </dl>
+        </section>
+        <section class="hud-frame panel role-selector-panel" aria-label="Local reasoning selector">
+          <h2>Reasoning Selector</h2>
+          <div class="selector-switch" id="selector-switch" data-role="DEEP" title="Click or change selection to pulse the role selector">
+            <div class="selector-knot" id="selector-knot" aria-hidden="true">
+              <span class="knot-triangle"></span>
+              <span class="knot-loop loop-a"></span>
+              <span class="knot-loop loop-b"></span>
+              <span class="knot-loop loop-c"></span>
+              <span class="knot-core"></span>
+            </div>
+          </div>
+          <label class="selector-label" for="role-select">Local Voice</label>
+          <select id="role-select" aria-label="Select local reasoning voice">
+            <option value="FAST">FAST / Phi-3</option>
+            <option value="BALANCED">BALANCED / Phi-3</option>
+            <option value="DEEP" selected>DEEP / Mistral</option>
+            <option value="HANDOFF">HANDOFF / ChatGPT-Codex</option>
+          </select>
+          <div class="selector-copy">
+            <strong id="role-model">DEEP -> Mistral</strong>
+            <span id="role-command">.\scripts\nexus.ps1 deep -CallModel</span>
+          </div>
+          <button class="ghost-button selector-copy-button" type="button" id="copy-role-command">Copy command</button>
         </section>
       </aside>
 
