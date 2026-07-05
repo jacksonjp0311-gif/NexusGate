@@ -458,6 +458,234 @@ function Invoke-NexusDevMode {
         }
     }
 }
+
+function Get-NexusFailureModeIndex {
+    $path = Join-Path $RepoRoot "state\failure_modes\nexus_failure_modes.v0.7.9.json"
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+        Write-FAIL ("Failure mode index missing: {0}" -f $path)
+        return $null
+    }
+
+    try {
+        return (Get-Content -LiteralPath $path -Raw | ConvertFrom-Json)
+    }
+    catch {
+        Write-FAIL ("Failure mode index parse failed: {0}" -f $_.Exception.Message)
+        return $null
+    }
+}
+
+function Get-NexusLatestHandoffReportText {
+    $queue = Join-Path $RepoRoot "reports\handoff_queue"
+    if (-not (Test-Path -LiteralPath $queue)) { return "" }
+
+    $latest = Get-ChildItem -Path $queue -Recurse -Filter "handoff_action_report.json" -File -ErrorAction SilentlyContinue |
+        Sort-Object LastWriteTime -Descending |
+        Select-Object -First 1
+
+    if (-not $latest) { return "" }
+
+    try { return (Get-Content -LiteralPath $latest.FullName -Raw) }
+    catch { return "" }
+}
+
+function Get-NexusFailureDoctorClassification {
+    $index = Get-NexusFailureModeIndex
+    if (-not $index) { return @() }
+
+    $statusText = (@(git status --short) -join "`n")
+    $handoffText = Get-NexusLatestHandoffReportText
+    $scanText = ($statusText + "`n" + $handoffText)
+
+    $matches = New-Object System.Collections.Generic.List[object]
+
+    foreach ($entry in @($index.modes | Sort-Object n)) {
+        foreach ($sign in @($entry.signs)) {
+            if ($scanText -like ("*" + $sign + "*")) {
+                $matches.Add($entry) | Out-Null
+                break
+            }
+        }
+    }
+
+    return @($matches)
+}
+
+function Show-NexusFailureModes {
+    $index = Get-NexusFailureModeIndex
+    if (-not $index) {
+        Read-Host "Press Enter to return to Failure Modes"
+        return
+    }
+
+    Write-Host ""
+    Write-NG ("Failure Mode Index: {0}" -f $index.version)
+    Write-NG "Syntax: FM := id,key,n,who,why,what,when,signs,doctor,retry,authority"
+    Write-Host ""
+
+    foreach ($entry in @($index.modes | Sort-Object n)) {
+        Write-Host ("{0}  {1}" -f $entry.id, $entry.key) -ForegroundColor Yellow
+        Write-Host ("  who : {0}" -f $entry.who)
+        Write-Host ("  why : {0}" -f $entry.why)
+        Write-Host ("  what: {0}" -f $entry.what)
+        Write-Host ("  when: {0}" -f $entry.when)
+        Write-Host ("  fix : {0}" -f $entry.doctor) -ForegroundColor Cyan
+        Write-Host ("  retry: {0}" -f $entry.retry) -ForegroundColor Green
+        Write-Host ("  auth: {0}" -f $entry.authority)
+        Write-Host ""
+    }
+
+    Read-Host "Press Enter to return to Failure Modes"
+}
+
+function Invoke-NexusFailureDoctorScan {
+    Write-Host ""
+    Write-NG "Failure Doctor scan starting."
+    Write-NG "Mode: read/classify/recommend. Durable source mutation is locked."
+
+    $matches = @(Get-NexusFailureDoctorClassification)
+    $status = @(git status --short)
+
+    Write-Host ""
+    Write-Host "NEXUS FAILURE DOCTOR REPORT" -ForegroundColor Yellow
+    Write-Host "==========================="
+    Write-Host ("worktree-clean: {0}" -f ($status.Count -eq 0))
+    Write-Host ("matched-modes: {0}" -f $matches.Count)
+    Write-Host ""
+
+    if ($matches.Count -eq 0) {
+        Write-OK "No known failure mode matched current git status or latest HANDOFF report."
+        Write-NG "Next: run compiler summary or full tests if validating a patch."
+    }
+    else {
+        foreach ($entry in $matches) {
+            Write-Host ("MODE: {0} / {1}" -f $entry.id, $entry.key) -ForegroundColor Yellow
+            Write-Host ("  who : {0}" -f $entry.who)
+            Write-Host ("  why : {0}" -f $entry.why)
+            Write-Host ("  what: {0}" -f $entry.what)
+            Write-Host ("  when: {0}" -f $entry.when)
+            Write-Host ("  doctor: {0}" -f $entry.doctor) -ForegroundColor Cyan
+            Write-Host ("  retry : {0}" -f $entry.retry) -ForegroundColor Green
+            Write-Host ("  auth  : {0}" -f $entry.authority)
+            Write-Host ""
+        }
+    }
+
+    Write-Host "Boundary: Doctor classifies and recommends. It does not self-authorize repairs."
+    Write-Host ""
+    Read-Host "Press Enter to return to Failure Modes"
+}
+
+function Invoke-NexusFailureDoctorSafeClean {
+    Write-Host ""
+    Write-NG "Failure Doctor safe clean selected by human."
+    Write-NG "Restoring tracked generated surfaces."
+
+    git restore --worktree -- reports state ledger docs/feedback/FEEDBACK_LOG.md 2>$null
+
+    Write-NG "Removing untracked timestamped report JSON files only."
+    $untrackedReports = @(
+        git ls-files --others --exclude-standard -- reports |
+            Where-Object { $_ -match '^reports/nexus_.*_report_20\d{6}_\d{6}\.json$' }
+    )
+
+    foreach ($relative in $untrackedReports) {
+        $normalized = $relative.Replace("/", "\")
+        $fullPath = Join-Path $RepoRoot $normalized
+        if (Test-Path -LiteralPath $fullPath -PathType Leaf) {
+            Remove-Item -LiteralPath $fullPath -Force -ErrorAction SilentlyContinue
+        }
+    }
+
+    git restore --worktree -- reports state ledger docs/feedback/FEEDBACK_LOG.md 2>$null
+
+    $status = @(git status --short)
+    if ($status.Count -eq 0) {
+        Write-OK "Failure Doctor safe clean complete. Working tree is clean."
+    }
+    else {
+        Write-NG "Failure Doctor safe clean complete with residue:"
+        $status | ForEach-Object { Write-Host $_ }
+    }
+
+    Write-Host ""
+    Read-Host "Press Enter to return to Failure Modes"
+}
+
+function Invoke-NexusFailureDoctorRetry {
+    Write-Host ""
+    Write-NG "Failure Doctor retry checks starting."
+    Write-NG "Retry is validation-only. It does not patch source."
+
+    powershell -NoProfile -ExecutionPolicy Bypass -Command {
+        $null = [scriptblock]::Create((Get-Content -Raw "scripts\desktop\open_nexus_gate_console.ps1"))
+        Write-Host "[OK] launcher parses"
+    }
+
+    if ($LASTEXITCODE -ne 0) {
+        Write-FAIL "launcher parse retry failed"
+        Read-Host "Press Enter to return to Failure Modes"
+        return
+    }
+
+    python -m unittest discover -s tests -p test_failure_mode_doctor_gateway.py -v
+    if ($LASTEXITCODE -ne 0) {
+        Write-FAIL "Failure Mode Doctor tests failed"
+        Read-Host "Press Enter to return to Failure Modes"
+        return
+    }
+
+    python -m nexus_gate.compiler --root . --json
+    if ($LASTEXITCODE -ne 0) {
+        Write-FAIL "NEXUS compiler retry failed"
+        Read-Host "Press Enter to return to Failure Modes"
+        return
+    }
+
+    Write-OK "Failure Doctor retry checks passed."
+    Write-Host ""
+    Read-Host "Press Enter to return to Failure Modes"
+}
+
+function Invoke-NexusFailureModeDoctorConsole {
+    while ($true) {
+        Write-Host ""
+        Write-Host "========================================"
+        Write-Host " NEXUS FAILURE MODES / DOCTOR"
+        Write-Host "========================================"
+        Write-Host "1. List ordered failure modes"
+        Write-Host "2. Doctor scan current state"
+        Write-Host "3. Safe clean generated residue"
+        Write-Host "4. Retry validation checks"
+        Write-Host "B. Back to main menu"
+        Write-Host ""
+        Write-Host "Rule: Doctor classifies and recommends; human authorizes repair."
+        Write-Host ""
+
+        $doctorChoice = Read-Host "Doctor"
+
+        if ($doctorChoice -eq "1") {
+            Show-NexusFailureModes
+        }
+        elseif ($doctorChoice -eq "2") {
+            Invoke-NexusFailureDoctorScan
+        }
+        elseif ($doctorChoice -eq "3") {
+            Invoke-NexusFailureDoctorSafeClean
+        }
+        elseif ($doctorChoice -eq "4") {
+            Invoke-NexusFailureDoctorRetry
+        }
+        elseif ($doctorChoice -eq "B" -or $doctorChoice -eq "b") {
+            return
+        }
+        else {
+            Write-NG "Unknown Failure Doctor choice."
+        }
+    }
+}
+
+
 function Show-Menu {
     Write-Host ""
     Write-Host "========================================"
@@ -470,6 +698,7 @@ function Show-Menu {
     Write-Host "5. NN router health"
     Write-Host "6. Ask NEXUS router"
     Write-Host "7. Open repo folder"
+    Write-Host "8. Failure Modes / Doctor"
     Write-Host "Q. Quit"
     Write-Host ""
     Write-Host "Rule: models recommend; human authorizes durable mutation."
@@ -505,6 +734,9 @@ while ($true) {
     }
     elseif ($choice -eq "7") {
         explorer.exe $RepoRoot | Out-Null
+    }
+    elseif ($choice -eq "8") {
+        Invoke-NexusFailureModeDoctorConsole
     }
     elseif ($choice -eq "Q" -or $choice -eq "q") {
         Write-OK "closing NEXUS Gate launcher"

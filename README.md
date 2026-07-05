@@ -18,6 +18,23 @@ Human intent
   -> ledger | report | registry update
 ```
 
+
+## Failure Modes / Doctor Gateway
+
+The Desktop Entry Portal includes a Failure Modes / Doctor selection:
+
+```text
+8. Failure Modes / Doctor
+```
+
+The Doctor uses a compact syntax stored at `state/failure_modes/nexus_failure_modes.v0.7.9.json`:
+
+```text
+FM := id,key,n,who,why,what,when,signs,doctor,retry,authority
+```
+
+This makes failures human-readable, AI-parsable, and troubleshootable. Doctor can read, classify, recommend, safely clean generated residue, and retry validation checks. It cannot self-authorize durable source repair.
+
 ## Repository Description
 
 NEXUS GATE combines three layers:

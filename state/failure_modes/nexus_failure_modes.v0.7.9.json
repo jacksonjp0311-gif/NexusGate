@@ -1,0 +1,148 @@
+{
+  "system": "NEXUS GATE",
+  "version": "0.7.9B-compact-failure-doctor",
+  "schema": "nexus.failure_modes.compact.v1",
+  "syntax": "FM := id,key,n,who,why,what,when,signs,doctor,retry,authority",
+  "goal": "Human-readable and AI-parsable failure memory for troubleshooting, safe cleanup, and bounded retry.",
+  "boundary": "Doctor reads, classifies, recommends, safe-cleans generated residue, and retries validation. Durable source repair stays human-authorized.",
+  "modes": [
+    {
+      "id": "FM-010",
+      "key": "launcher_parse_failure",
+      "n": 10,
+      "who": "Desktop Entry Portal",
+      "why": "Generated launcher syntax is invalid.",
+      "what": "Menu cannot open.",
+      "when": "PowerShell parses the launcher.",
+      "signs": [
+        "ParserError",
+        "terminator",
+        "Missing closing",
+        "Unexpected parser symbol"
+      ],
+      "doctor": "Parse launcher with scriptblock create and report line/column.",
+      "retry": "Restore or minimally fix launcher, then rerun parse and focused launcher tests.",
+      "authority": "human_patch_required"
+    },
+    {
+      "id": "FM-020",
+      "key": "stale_test_contract",
+      "n": 20,
+      "who": "Test suite",
+      "why": "A test asserts old UI text after the surface evolved.",
+      "what": "Tests fail while behavior is otherwise bounded.",
+      "when": "Focused or full unittest run.",
+      "signs": [
+        "AssertionError",
+        "not found in",
+        "expected marker",
+        "stale test"
+      ],
+      "doctor": "Compare failed assertion to current UI/contract.",
+      "retry": "Update test to verify behavior contract, not brittle renderer wording.",
+      "authority": "human_patch_required"
+    },
+    {
+      "id": "FM-030",
+      "key": "generated_residue",
+      "n": 30,
+      "who": "Runtime evidence",
+      "why": "Compiler or lanes emitted timestamped generated reports.",
+      "what": "Git status shows generated residue.",
+      "when": "After validation, compiler, Dev Mode, or HANDOFF.",
+      "signs": [
+        "?? reports/nexus_",
+        " M reports/",
+        " M state/"
+      ],
+      "doctor": "Classify tracked vs untracked residue.",
+      "retry": "Restore tracked generated surfaces and remove only untracked timestamped reports.",
+      "authority": "safe_human_selected_cleanup"
+    },
+    {
+      "id": "FM-040",
+      "key": "tracked_report_delete",
+      "n": 40,
+      "who": "Cleanup logic",
+      "why": "Cleanup deleted tracked historical evidence.",
+      "what": "Git status shows deleted reports.",
+      "when": "After broad report cleanup.",
+      "signs": [
+        " D reports/nexus_",
+        " D reports/human_surface"
+      ],
+      "doctor": "Restore tracked reports/state/ledger and replace broad delete with untracked-only cleanup.",
+      "retry": "Run safe clean, then git status.",
+      "authority": "safe_human_selected_restore"
+    },
+    {
+      "id": "FM-050",
+      "key": "local_model_refused",
+      "n": 50,
+      "who": "NEX local model bridge",
+      "why": "Ollama endpoint is not accepting local connections.",
+      "what": "Model route reached bridge but connection was refused.",
+      "when": "FAST/BALANCED/DEEP local model call.",
+      "signs": [
+        "WinError 10061",
+        "actively refused",
+        "connection refused",
+        "ECONNREFUSED"
+      ],
+      "doctor": "Check Ollama presence and recommend bounded ollama list/run test.",
+      "retry": "Start/reuse hidden Ollama backend; retry FAST before DEEP.",
+      "authority": "no_repo_mutation"
+    },
+    {
+      "id": "FM-060",
+      "key": "handoff_report_path_missing",
+      "n": 60,
+      "who": "HANDOFF bridge",
+      "why": "Active HANDOFF report folder was removed before close.",
+      "what": "Electron cannot persist final HANDOFF report.",
+      "when": "HANDOFF child process closes.",
+      "signs": [
+        "ENOENT",
+        "handoff_action_report.json",
+        "no such file"
+      ],
+      "doctor": "Verify report persistence fallback exists.",
+      "retry": "Restart Electron and rerun harmless HANDOFF test.",
+      "authority": "human_patch_required_if_fallback_missing"
+    },
+    {
+      "id": "FM-070",
+      "key": "compiler_failed",
+      "n": 70,
+      "who": "NEXUS compiler",
+      "why": "A required gate failed.",
+      "what": "No promotion or durable compounding allowed.",
+      "when": "Compiler JSON returns fail status.",
+      "signs": [
+        "compiler failed",
+        "\"status\": \"fail\"",
+        "failed gate"
+      ],
+      "doctor": "Read compiler JSON and list failed gates.",
+      "retry": "Run focused tests after human-authorized patch.",
+      "authority": "human_patch_required"
+    },
+    {
+      "id": "FM-080",
+      "key": "authority_unverified",
+      "n": 80,
+      "who": "Human/AI/tool boundary",
+      "why": "Requested action lacks explicit human authority.",
+      "what": "Mutation must be blocked or routed to proposal/shadow.",
+      "when": "Before write, shell, commit, push, memory, or external action.",
+      "signs": [
+        "authority_unverified",
+        "authorization required",
+        "No authority"
+      ],
+      "doctor": "Explain missing authority and next lawful human selection.",
+      "retry": "Re-run as human-selected HANDOFF or entrypoint action.",
+      "authority": "human_authorization_required"
+    }
+  ]
+}
