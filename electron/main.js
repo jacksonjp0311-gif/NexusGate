@@ -46,6 +46,7 @@ const READ_SURFACES = new Set([
 
 const NEX_CHAT_ROLES = new Set(["FAST", "BALANCED", "DEEP", "HANDOFF"]);
 const NEX_MAX_PROMPT_CHARS = 4000;
+const HANDOFF_SCRIPT_MAX_CHARS = 180000;
 let activeNexChild = null;
 let managedOllamaProcess = null;
 let lastCpuSample = null;
@@ -207,6 +208,146 @@ function runFixedPowerShell(scriptText, timeoutMs = 1800) {
   });
 }
 
+function timestampForPath() {
+  return new Date().toISOString().replace(/[-:TZ.]/g, "").slice(0, 14);
+}
+
+function sanitizeHandoffScriptText(value) {
+  const text = String(value || "").replace(/\0/g, "").trim();
+  if (!text) {
+    throw new Error("HANDOFF action script is empty.");
+  }
+  if (text.length > HANDOFF_SCRIPT_MAX_CHARS) {
+    throw new Error(`HANDOFF action script exceeds ${HANDOFF_SCRIPT_MAX_CHARS} characters.`);
+  }
+  return text;
+}
+
+function scanHandoffScriptText(text) {
+  const blocked = [];
+  const checks = [
+    { name: "format_volume", pattern: /\bFormat-Volume\b/i },
+    { name: "set_execution_policy", pattern: /\bSet-ExecutionPolicy\b/i },
+    { name: "invoke_expression", pattern: /\bInvoke-Expression\b|\biex\b/i },
+    { name: "global_c_drive_delete", pattern: /Remove-Item[\s\S]{0,80}(C:\\|C:\/)[\s\S]{0,80}-Recurse[\s\S]{0,80}-Force/i },
+    { name: "download_pipe_to_shell", pattern: /(Invoke-WebRequest|iwr|curl|wget)[\s\S]{0,120}\|[\s\S]{0,80}(powershell|pwsh|cmd)/i }
+  ];
+
+  for (const check of checks) {
+    if (check.pattern.test(text)) blocked.push(check.name);
+  }
+
+  return blocked;
+}
+
+function runHandoffPowerShell(scriptText, packet = {}) {
+  return new Promise((resolve) => {
+    const text = sanitizeHandoffScriptText(scriptText);
+    const blocked = scanHandoffScriptText(text);
+    if (blocked.length) {
+      resolve({
+        code: 91,
+        stdout: "",
+        stderr: `HANDOFF action blocked by safety scan: ${blocked.join(", ")}`,
+        blocked,
+        boundary: "HANDOFF shell bridge rejected a high-risk script pattern before execution."
+      });
+      return;
+    }
+
+    const handoffRoot = path.join(repoRoot, "reports", "handoff_queue", timestampForPath());
+    fs.mkdirSync(handoffRoot, { recursive: true });
+
+    const scriptPath = path.join(handoffRoot, "handoff_action.ps1");
+    const reportPath = path.join(handoffRoot, "handoff_action_report.json");
+    const metadataPath = path.join(handoffRoot, "handoff_action_metadata.json");
+
+    const header = [
+      "# NEXUS HANDOFF ACTION SHELL v0.7.4",
+      "# Human-authorized local script executed through Electron hidden PowerShell bridge.",
+      "# Boundary: ChatGPT/NEX text is not authority; the human initiated /handoff run.",
+      ""
+    ].join("\r\n");
+
+    fs.writeFileSync(scriptPath, header + text + "\r\n", "utf8");
+    fs.writeFileSync(metadataPath, JSON.stringify({
+      system: "NEXUS GATE",
+      version: "0.7.4-handoff-action-shell",
+      generated_at_utc: new Date().toISOString(),
+      source: String(packet.source || "handoff_chat"),
+      role: String(packet.role || "HANDOFF"),
+      authorized: Boolean(packet.authorized),
+      cwd: repoRoot,
+      script_path: scriptPath,
+      boundary: "PowerShell is hidden execution substrate. The human uses HANDOFF chat as the front door."
+    }, null, 2), "utf8");
+
+    const child = spawn("powershell.exe", [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      scriptPath
+    ], {
+      cwd: repoRoot,
+      shell: false,
+      windowsHide: true,
+      env: {
+        ...process.env,
+        CUDA_VISIBLE_DEVICES: process.env.CUDA_VISIBLE_DEVICES || "-1",
+        NEXUS_OLLAMA_NUM_GPU: process.env.NEXUS_OLLAMA_NUM_GPU || "0",
+        NEXUS_HANDOFF_ACTION_SHELL: "1"
+      }
+    });
+
+    activeNexChild = child;
+    let stdout = "";
+    let stderr = "";
+    const timeoutMs = Math.max(30000, Math.min(Number(packet.timeoutMs || 900000), 1800000));
+    const timer = setTimeout(() => {
+      try { child.kill(); } catch (_error) {}
+      stderr += "\nHANDOFF action timeout.";
+    }, timeoutMs);
+
+    child.stdout.on("data", (chunk) => { stdout += chunk.toString(); });
+    child.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
+    child.on("error", (error) => {
+      clearTimeout(timer);
+      if (activeNexChild === child) activeNexChild = null;
+      const report = {
+        system: "NEXUS GATE",
+        version: "0.7.4-handoff-action-shell",
+        status: "blocked",
+        code: -1,
+        stdout,
+        stderr: stderr + error.message,
+        script_path: scriptPath,
+        report_path: reportPath,
+        boundary: "HANDOFF script failed before process start."
+      };
+      fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), "utf8");
+      resolve(report);
+    });
+    child.on("close", (code) => {
+      clearTimeout(timer);
+      if (activeNexChild === child) activeNexChild = null;
+      const report = {
+        system: "NEXUS GATE",
+        version: "0.7.4-handoff-action-shell",
+        status: code === 0 ? "pass" : "blocked",
+        code,
+        stdout,
+        stderr,
+        script_path: scriptPath,
+        metadata_path: metadataPath,
+        report_path: reportPath,
+        boundary: "HANDOFF chat executed a human-authorized script through hidden PowerShell. This does not grant autonomous authority."
+      };
+      fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), "utf8");
+      resolve(report);
+    });
+  });
+}
 async function readWindowsTelemetry() {
   const script = `
 $ErrorActionPreference = "SilentlyContinue"
@@ -452,6 +593,18 @@ ipcMain.handle("nexus:runLane", async (_event, lane) => {
   });
 });
 
+ipcMain.handle("nexus:runHandoffScript", async (_event, packet = {}) => {
+  if (!packet || packet.authorized !== true) {
+    return {
+      code: 90,
+      status: "blocked",
+      stdout: "",
+      stderr: "HANDOFF action requires explicit human /handoff run authorization.",
+      boundary: "No model output may execute as shell authority."
+    };
+  }
+  return runHandoffPowerShell(packet.scriptText, packet);
+});
 ipcMain.handle("nexus:askNex", async (_event, packet = {}) => {
   const prompt = sanitizeNexPrompt(packet.prompt);
   const role = normalizeNexRole(packet.role);
@@ -553,6 +706,7 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
 
 
 

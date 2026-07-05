@@ -28,6 +28,7 @@ const NEX_TIMEOUT_ERROR_HUD_BOUNDARY = "Model response ok=false is system eviden
 const NEX_CHAT_APPEND_ONLY_BOUNDARY = "append-only chat: NEX responses appear once in the conversation stream and are not mirrored into the pinned output card.";
 const NEX_SHELL_RELAY_MODE_BOUNDARY = "Shell relay mode runs only allowlisted NEXUS lanes through the hidden PowerShell bridge; no arbitrary shell.";
 const NEX_ARBITRARY_POWERSHELL_BLOCK_MARKER = "arbitrary PowerShell is blocked";
+const NEX_HANDOFF_ACTION_SHELL_BOUNDARY = "HANDOFF selection can run human-authorized ChatGPT/Codex action scripts through the hidden PowerShell bridge; never from autonomous model output.";
 
 const laneIcons = {
   evolve: "EV",
@@ -671,6 +672,163 @@ async function runGovernedLane(lane) {
     setProcessing(false);
   }
 }
+function extractPowerShellFence(text) {
+  const raw = String(text || "").trim();
+  const fenced = raw.match(/```(?:powershell|ps1|pwsh)?\s*([\s\S]*?)```/i);
+  return (fenced ? fenced[1] : raw).trim();
+}
+
+function parseHandoffShellAction(raw) {
+  const text = String(raw || "").trim();
+  const lower = text.toLowerCase();
+
+  if (lower === "/handoff" || lower === "/handoff help") {
+    return { kind: "help" };
+  }
+
+  if (lower.startsWith("/handoff run")) {
+    if (currentRole() !== "HANDOFF") {
+      return { kind: "blocked_role", scriptText: "" };
+    }
+    const scriptText = extractPowerShellFence(text.slice("/handoff run".length));
+    return { kind: "run", scriptText };
+  }
+
+  if (lower.startsWith("/handoff stage")) {
+    const scriptText = extractPowerShellFence(text.slice("/handoff stage".length));
+    return { kind: "stage", scriptText };
+  }
+
+  return null;
+}
+
+function handoffShellHelpText() {
+  return [
+    "NEX HANDOFF ACTION SHELL",
+    "=======================",
+    "Set Local Voice / Relay to HANDOFF.",
+    "",
+    "Then paste a ChatGPT/Codex script into chat like this:",
+    "",
+    "/handoff run",
+    "```powershell",
+    "# script goes here",
+    "```",
+    "",
+    "What happens:",
+    "- Electron writes the script to reports/handoff_queue/<time>/handoff_action.ps1",
+    "- Hidden PowerShell runs it with cwd at the repo root",
+    "- Output returns here as a compact report",
+    "- No visible PowerShell window is required",
+    "",
+    "Boundary:",
+    NEX_HANDOFF_ACTION_SHELL_BOUNDARY
+  ].join("\n");
+}
+
+function formatHandoffShellResult(result) {
+  const code = Number(result?.code ?? -1);
+  const ok = code === 0;
+  const stdout = String(result?.stdout || "").trim();
+  const stderr = String(result?.stderr || "").trim();
+  const evidence = [stdout, stderr ? `STDERR:\n${stderr}` : ""].filter(Boolean).join("\n\n") || "No process output returned.";
+  const clipped = evidence.length > 9000 ? `${evidence.slice(0, 9000)}\n\n[handoff evidence clipped at 9000 chars]` : evidence;
+
+  return [
+    "NEX HANDOFF ACTION REPORT",
+    "========================",
+    "What ran: human-authorized HANDOFF script",
+    `Result: ${ok ? "PASS" : "BLOCKED"}`,
+    `Exit code: ${Number.isNaN(code) ? "unknown" : code}`,
+    result?.script_path ? `Script path: ${result.script_path}` : "",
+    result?.report_path ? `Report path: ${result.report_path}` : "",
+    "",
+    "Human-readable meaning:",
+    ok
+      ? "The script completed through the hidden local PowerShell bridge."
+      : "The script was blocked or returned a non-zero exit code.",
+    "",
+    "Evidence:",
+    clipped,
+    "",
+    "Next allowed action:",
+    ok
+      ? "Review the output, then ask ChatGPT/NEX for the next governed patch or lane."
+      : "Inspect the blocker. Do not push or compound until the failure is resolved.",
+    "",
+    "Boundary:",
+    result?.boundary || NEX_HANDOFF_ACTION_SHELL_BOUNDARY
+  ].filter(Boolean).join("\n");
+}
+
+async function runHandoffShellAction(scriptText) {
+  if (!scriptText || !scriptText.trim()) {
+    const blocked = [
+      "NEX HANDOFF ACTION BLOCKED",
+      "=========================",
+      "Reason: no script text was provided after /handoff run.",
+      "",
+      handoffShellHelpText()
+    ].join("\n");
+    appendChat("ai", blocked, "NEX / handoff-shell / blocked");
+    writeOutput(blocked, { preTranslated: true });
+    return;
+  }
+
+  if (!window.nexus.runHandoffScript) {
+    const blocked = [
+      "NEX HANDOFF ACTION BLOCKED",
+      "=========================",
+      "Reason: preload does not expose runHandoffScript.",
+      "",
+      "Boundary:",
+      NEX_HANDOFF_ACTION_SHELL_BOUNDARY
+    ].join("\n");
+    appendChat("ai", blocked, "NEX / handoff-shell / blocked");
+    writeOutput(blocked, { preTranslated: true });
+    return;
+  }
+
+  activeLane.textContent = "handoff:shell";
+  statusEl.textContent = "handoff-running";
+  setProcessing(true);
+  setBuffer(22, "handoff");
+  pushConsole("NEXUS", "HANDOFF action shell engaged. Hidden PowerShell bridge is running the authorized script.");
+
+  try {
+    setBuffer(48, "handoff");
+    const result = await window.nexus.runHandoffScript({
+      scriptText,
+      role: "HANDOFF",
+      source: "nex_chat_handoff",
+      authorized: true,
+      timeoutMs: 900000
+    });
+    const report = formatHandoffShellResult(result);
+    setBuffer(result.code === 0 ? 100 : 0, result.code === 0 ? "complete" : "blocked");
+    statusEl.textContent = result.code === 0 ? "stable" : "blocked";
+    writeOutput(report, { preTranslated: true });
+    appendChat("ai", report, "NEX / HANDOFF / action-shell");
+  } catch (error) {
+    const report = [
+      "NEX HANDOFF ACTION EXCEPTION",
+      "===========================",
+      "Result: BLOCKED",
+      "",
+      "Evidence:",
+      error.stack || error.message,
+      "",
+      "Boundary:",
+      NEX_HANDOFF_ACTION_SHELL_BOUNDARY
+    ].join("\n");
+    setBuffer(0, "error");
+    statusEl.textContent = "blocked";
+    writeOutput(report, { preTranslated: true });
+    appendChat("ai", report, "NEX / HANDOFF / action-shell-error");
+  } finally {
+    setProcessing(false);
+  }
+}
 async function sendNexMessage(prompt) {
   if (nexBusy) return;
   clearSystemErrorHud();
@@ -908,6 +1066,52 @@ operatorForm?.addEventListener("submit", async (event) => {
     return;
   }
 
+  const handoffAction = parseHandoffShellAction(raw);
+  if (handoffAction?.kind === "help") {
+    appendChat("human", raw, "handoff shell help");
+    const help = handoffShellHelpText();
+    appendChat("ai", help, "NEX / HANDOFF / action-shell-help");
+    writeOutput(help, { preTranslated: true });
+    return;
+  }
+
+  if (handoffAction?.kind === "blocked_role") {
+    const blocked = [
+      "NEX HANDOFF ACTION BLOCKED",
+      "=========================",
+      "Reason: Local Voice / Relay must be set to HANDOFF before /handoff run can execute a script.",
+      "",
+      "Boundary:",
+      NEX_HANDOFF_ACTION_SHELL_BOUNDARY
+    ].join("\n");
+    appendChat("human", raw, "handoff shell blocked");
+    appendChat("ai", blocked, "NEX / HANDOFF / blocked");
+    writeOutput(blocked, { preTranslated: true });
+    return;
+  }
+
+  if (handoffAction?.kind === "stage") {
+    const staged = [
+      "NEX HANDOFF ACTION STAGED",
+      "========================",
+      "The script was recognized but not executed.",
+      "",
+      "Run it with /handoff run when you are ready.",
+      "",
+      "Boundary:",
+      NEX_HANDOFF_ACTION_SHELL_BOUNDARY
+    ].join("\n");
+    appendChat("human", raw, "handoff shell staged");
+    appendChat("ai", staged, "NEX / HANDOFF / staged");
+    writeOutput(staged, { preTranslated: true });
+    return;
+  }
+
+  if (handoffAction?.kind === "run") {
+    appendChat("human", "/handoff run [script]", "HANDOFF action authorized");
+    await runHandoffShellAction(handoffAction.scriptText);
+    return;
+  }
   const command = parseGovernedChatCommand(raw);
   if (command?.kind === "help") {
     appendChat("human", raw, "shell relay help");
@@ -933,6 +1137,7 @@ loadSurfaceState().catch((error) => {
   setBuffer(0, "error");
   writeOutput(error.stack || error.message, { preTranslated: true });
 });
+
 
 
 
