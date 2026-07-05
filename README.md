@@ -1532,3 +1532,40 @@ See:
 docs/ui/NEXUS_ELECTRON_SELECTOR_SWITCH.md
 ```
 <!-- NEXUS-ELECTRON-SELECTOR:END -->
+
+<!-- NEX-CHAT-BRIDGE:START -->
+## NEX Chat Bridge
+
+The Electron HUD now names the local AI interface avatar **NEX**.
+
+The center panel is chat-first:
+
+```text
+NEX AI Output
+Human Chat
+```
+
+Enter sends a human message. Shift+Enter inserts a newline.
+
+The selected local reasoning role controls the bounded chat route:
+
+```text
+FAST     -> Phi-3
+BALANCED -> Phi-3
+DEEP     -> Mistral
+HANDOFF  -> ChatGPT/Codex packet mode
+```
+
+Boundary:
+
+- NEX replies are recommendation-only.
+- Chat does not execute model output as shell.
+- Chat does not mutate files from model output.
+- Human authorization remains required for durable mutation.
+
+See:
+
+```text
+docs/ui/NEX_CHAT_BRIDGE.md
+```
+<!-- NEX-CHAT-BRIDGE:END -->

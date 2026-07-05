@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -94,6 +94,7 @@ function Promote {
 function Invoke-NexusNN {
     param(
         [string]$Intent = "What should we do next?",
+        [string]$Role = "ALL",
         [switch]$UseModel
     )
 
@@ -101,7 +102,7 @@ function Invoke-NexusNN {
         $Intent = "What should we do next?"
     }
 
-    $args = @("-m", "nexus_gate.nn_router.compile", "--root", ".", "--intent", $Intent)
+    $args = @("-m", "nexus_gate.nn_router.compile", "--root", ".", "--intent", $Intent, "--role", $Role)
     if ($UseModel.IsPresent) {
         $args += "--call-model"
     }
@@ -110,6 +111,10 @@ function Invoke-NexusNN {
     if ($LASTEXITCODE -ne 0) { throw "NEXUS NN router compile failed." }
 }
 switch ($Command) {
+    "fast" { Invoke-NexusNN -Intent $Tag -Role "FAST" -UseModel:$CallModel }
+    "balanced" { Invoke-NexusNN -Intent $Tag -Role "BALANCED" -UseModel:$CallModel }
+    "deep" { Invoke-NexusNN -Intent $Tag -Role "DEEP" -UseModel:$CallModel }
+    "align-score" { python -m nexus_gate.nn_router.scorecard --root . --json; if ($LASTEXITCODE -ne 0) { throw "NEXUS drift scorecard failed." } }
     "nn" { Invoke-NexusNN -Intent $Tag -UseModel:$CallModel }
     "nn-health" { Invoke-NexusNN -Intent "NEXUS NN router health check: report local model roles and policy gates." }
     "ask" { Invoke-NexusNN -Intent $Tag -UseModel:$CallModel }
@@ -140,4 +145,5 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
+
 

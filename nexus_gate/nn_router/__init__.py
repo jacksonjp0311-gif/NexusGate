@@ -1,12 +1,16 @@
-"""NEXUS GATE bounded NN model router.
+﻿"""NEXUS bounded NN model router."""
 
-This package routes reasoning packets to bounded local model roles and
-handoff outputs. It does not grant authority to models and does not execute
-model output.
-"""
-
-from .contract import VERSION, ROUTER_LAW, SAFETY_CONTRACT, ROLE_PREFERENCES, build_policy_manifest
-from .detect import detect_ollama_inventory, assign_roles
+from .contract import (
+    VERSION,
+    ROUTER_LAW,
+    SAFETY_CONTRACT,
+    ROLE_PREFERENCES,
+    build_policy_manifest,
+    build_route_decision,
+    choose_model,
+    normalize_target_role,
+    selected_roles,
+)
 
 __all__ = [
     "VERSION",
@@ -14,6 +18,9 @@ __all__ = [
     "SAFETY_CONTRACT",
     "ROLE_PREFERENCES",
     "build_policy_manifest",
-    "detect_ollama_inventory",
-    "assign_roles",
+    "build_route_decision",
+    "choose_model",
+    "normalize_target_role",
+    "selected_roles",
 ]
+

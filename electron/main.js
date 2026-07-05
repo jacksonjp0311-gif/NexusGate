@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+﻿const { app, BrowserWindow, ipcMain } = require("electron");
 const fs = require("fs");
 const path = require("path");
 const { spawn } = require("child_process");
@@ -29,6 +29,57 @@ const READ_SURFACES = new Set([
   "reports/tui/nexus_tui_surface_latest.json"
 ]);
 
+const NEX_CHAT_ROLES = new Set(["FAST", "BALANCED", "DEEP", "HANDOFF"]);
+const NEX_MAX_PROMPT_CHARS = 4000;
+
+function sanitizeNexPrompt(value) {
+  const text = String(value || "").replace(/\0/g, "").trim();
+  if (!text) {
+    throw new Error("NEX prompt is empty.");
+  }
+  if (text.length > NEX_MAX_PROMPT_CHARS) {
+    throw new Error(`NEX prompt exceeds ${NEX_MAX_PROMPT_CHARS} characters.`);
+  }
+  return text;
+}
+
+function normalizeNexRole(value) {
+  const role = String(value || "DEEP").toUpperCase();
+  if (!NEX_CHAT_ROLES.has(role)) {
+    throw new Error(`NEX role is not allowlisted: ${value}`);
+  }
+  return role;
+}
+
+function readJsonIfPresent(filePath) {
+  try {
+    if (!fs.existsSync(filePath)) return null;
+    return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  } catch (error) {
+    return { parse_error: error.message };
+  }
+}
+
+function runNexPython(args) {
+  return new Promise((resolve) => {
+    const child = spawn("python", args, {
+      cwd: repoRoot,
+      shell: false,
+      windowsHide: true
+    });
+
+    let stdout = "";
+    let stderr = "";
+    child.stdout.on("data", (chunk) => { stdout += chunk.toString(); });
+    child.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
+    child.on("error", (error) => {
+      resolve({ code: -1, stdout, stderr: stderr + error.message });
+    });
+    child.on("close", (code) => {
+      resolve({ code, stdout, stderr });
+    });
+  });
+}
 const ALLOWLISTED_COMMANDS = new Set([
   "evolve",
   "interface",
@@ -177,6 +228,41 @@ ipcMain.handle("nexus:runLane", async (_event, lane) => {
   });
 });
 
+ipcMain.handle("nexus:askNex", async (_event, packet = {}) => {
+  const prompt = sanitizeNexPrompt(packet.prompt);
+  const role = normalizeNexRole(packet.role);
+  const callModel = Boolean(packet.callModel) && role !== "HANDOFF";
+
+  const args = [
+    "-m",
+    "nexus_gate.nn_router.compile",
+    "--root",
+    ".",
+    "--intent",
+    prompt,
+    "--role",
+    role,
+    "--json"
+  ];
+
+  if (callModel) {
+    args.push("--call-model");
+  }
+
+  const result = await runNexPython(args);
+  const reportPath = path.join(repoRoot, "reports", "nexus_nn_router_report_latest.json");
+  const report = readJsonIfPresent(reportPath);
+
+  return {
+    code: result.code,
+    stdout: result.stdout,
+    stderr: result.stderr,
+    role,
+    callModel,
+    report,
+    boundary: "NEX chat is recommendation-only. It does not execute model output, mutate repo files from model output, or grant authority."
+  };
+});
 ipcMain.handle("nexus:getContract", async () => ({
   readSurfaces: Array.from(READ_SURFACES),
   allowlistedCommands: Array.from(ALLOWLISTED_COMMANDS),
@@ -196,3 +282,4 @@ app.on("activate", () => {
     createWindow();
   }
 });
+

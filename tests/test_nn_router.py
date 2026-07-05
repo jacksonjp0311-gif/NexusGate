@@ -1,4 +1,4 @@
-import json
+﻿import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -26,6 +26,7 @@ class TestNexusNNRouter(unittest.TestCase):
         self.assertFalse(SAFETY_CONTRACT["arbitrary_shell_allowed"])
         self.assertFalse(SAFETY_CONTRACT["secrets_access_allowed"])
         self.assertFalse(SAFETY_CONTRACT["external_api_writes_allowed"])
+        self.assertTrue(SAFETY_CONTRACT["role_targeting_required_for_deep_calls"])
 
     def test_choose_model_prefers_phi3_for_fast(self):
         inventory = {"phi3:mini": {"name": "phi3:mini"}}
@@ -57,16 +58,19 @@ class TestNexusNNRouter(unittest.TestCase):
                 models_root=root / "missing-models",
                 call_model=False,
             )
-            self.assertEqual(report["version"], "0.6.2")
+            self.assertEqual(report["version"], "0.6.4")
             self.assertEqual(report["intent"], "What should we do next?")
             self.assertEqual(report["model_responses"], [])
             self.assertEqual(report["authority_boundary"]["models"], "recommendation_only")
+            self.assertEqual(report["target_role"], "ALL")
 
     def test_policy_manifest_contains_core_rules(self):
         policy = build_policy_manifest()
         self.assertIn("No authority, no mutation.", policy["router_law"])
         self.assertIn("No model output may directly execute tools or mutate files.", policy["router_law"])
+        self.assertIn("DEEP", policy["valid_target_roles"])
 
 
 if __name__ == "__main__":
     unittest.main()
+

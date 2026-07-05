@@ -64,25 +64,38 @@
         </section>
       </aside>
 
-      <section class="hud-frame console-panel">
-        <div class="panel-title">NEXUS Console</div>
-        <div class="console-stream" id="console-stream">
-          <p><span>NEXUS&gt;</span> /run evolve</p>
-          <p><b>[NEXUS]</b> Lane context loading...</p>
-        </div>
-        <div class="buffer-row">
-          <span>BUFFER</span>
-          <div class="buffer-track"><i id="buffer-fill"></i></div>
+            <section class="hud-frame console-panel nex-chat-panel" data-compat-title="NEXUS Console">
+        <div class="nex-buffer-top" aria-label="NEX link buffer">
+          <span>NEX Link Buffer</span>
+          <div class="buffer-track electric-chain" aria-hidden="true">
+            <i id="buffer-fill"></i>
+            <em></em><em></em><em></em><em></em><em></em>
+          </div>
           <strong id="buffer-value">0%</strong>
         </div>
-        <pre class="output" id="output">Loading governed NEXUS surfaces...</pre>
-        <form class="operator-input" id="operator-form">
-          <label for="operator-command">Human Input</label>
-          <textarea id="operator-command" rows="3" autocomplete="off" placeholder="/domain, /reflect, /status, /study <summary>, or note for handoff"></textarea>
-          <button type="submit">Send</button>
+
+        <div class="panel-title chat-title">
+          <span class="nex-interface-symbol">NEX</span>
+          <span>NEX AI Output</span>
+        </div>
+
+        <div class="chat-viewport" id="console-stream" aria-live="polite">
+          <article class="chat-message ai-message" id="nex-ai-card">
+            <div class="nex-avatar" aria-hidden="true"><span>NEX</span></div>
+            <div class="message-body">
+              <header><strong>NEX</strong><small>governed local interface</small></header>
+              <pre class="output ai-output" id="output">NEX online. Select a local voice, then send a message. Replies are recommendation-only evidence, not authority.</pre>
+            </div>
+          </article>
+        </div>
+
+        <form class="operator-input nex-input" id="operator-form">
+          <div class="human-avatar" aria-hidden="true"><span>YOU</span></div>
+          <label for="operator-command">Human Chat</label>
+          <textarea id="operator-command" rows="3" autocomplete="off" placeholder="Ask NEX. Enter sends. Shift+Enter makes a new line. /status runs a governed lane."></textarea>
+          <button type="submit" id="nex-send-button">Send</button>
         </form>
       </section>
-
       <aside class="right-stack">
         <section class="hud-frame feedback-panel">
           <h2>Feedback Summary</h2>
@@ -129,3 +142,5 @@
   <script src="./renderer.js"></script>
 </body>
 </html>
+
+

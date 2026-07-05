@@ -1,0 +1,28 @@
+{
+  "claim_boundary": "Scorecard is local development evidence only. It is not a proof of correctness, safety, security, production readiness, or empirical truth.",
+  "drift_flags": [
+    "live_model_call_not_yet_observed"
+  ],
+  "generated_utc": "2026-07-05T04:31:52.752871+00:00",
+  "kind": "drift_reduction_scorecard",
+  "next_recommendation": "Use the NEX Electron chat with a selected role, inspect generated report evidence, then keep model output recommendation-only.",
+  "observations": {
+    "authority_boundary_blocked": true,
+    "compiler_pass": true,
+    "live_model_call_observed": false,
+    "mistral_deep_ready": true,
+    "private_paths_absent": true,
+    "router_current": true,
+    "unit_tests_visible_pass": true
+  },
+  "scores": {
+    "accuracy_guard_score": 1.0,
+    "coding_gate_score": 1.0,
+    "drift_reduction_score": 1.0,
+    "overall_score": 1.0
+  },
+  "status": "pass",
+  "system": "NEXUS GATE",
+  "target_role": "DEEP",
+  "version": "0.6.4"
+}

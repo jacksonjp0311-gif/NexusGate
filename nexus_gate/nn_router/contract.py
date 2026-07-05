@@ -1,4 +1,4 @@
-"""Policy contract for the NEXUS bounded NN model router v0.6.2.
+﻿"""Policy contract for the NEXUS bounded NN model router v0.6.4.
 
 The router distributes intelligence, not authority. It prepares bounded
 recommendations and handoff packets. It does not execute tool calls, mutate
@@ -11,7 +11,9 @@ from dataclasses import dataclass, asdict
 from typing import Dict, List, Mapping, Optional
 
 
-VERSION = "0.6.2"
+VERSION = "0.6.4"
+
+VALID_TARGET_ROLES: List[str] = ["ALL", "FAST", "BALANCED", "DEEP", "HANDOFF"]
 
 ROUTER_LAW: List[str] = [
     "No adapter, no bridge.",
@@ -34,6 +36,7 @@ SAFETY_CONTRACT: Dict[str, bool] = {
     "external_api_writes_allowed": False,
     "local_ollama_api_allowed_only_when_requested": True,
     "human_authorizes_durable_mutation": True,
+    "role_targeting_required_for_deep_calls": True,
 }
 
 ROLE_PREFERENCES: Dict[str, List[str]] = {
@@ -55,6 +58,7 @@ ALLOWED_ROUTE_KINDS: List[str] = [
     "health",
     "recommendation",
     "handoff",
+    "drift_scorecard",
 ]
 
 BLOCKED_CAPABILITIES: List[str] = [
@@ -93,6 +97,20 @@ class RouteDecision:
 
     def to_dict(self) -> Dict[str, object]:
         return asdict(self)
+
+
+def normalize_target_role(role: str | None) -> str:
+    normalized = (role or "ALL").upper().strip()
+    if normalized not in VALID_TARGET_ROLES:
+        raise ValueError(f"Unsupported NEXUS NN role: {role}")
+    return normalized
+
+
+def selected_roles(target_role: str | None) -> List[str]:
+    normalized = normalize_target_role(target_role)
+    if normalized == "ALL":
+        return ["FAST", "BALANCED", "DEEP", "HANDOFF"]
+    return [normalized]
 
 
 def choose_model(available_models: Mapping[str, object], role: str) -> RoleAssignment:
@@ -135,6 +153,7 @@ def build_policy_manifest() -> Dict[str, object]:
         "safety_contract": dict(SAFETY_CONTRACT),
         "role_preferences": {key: list(value) for key, value in ROLE_PREFERENCES.items()},
         "role_descriptions": dict(ROLE_DESCRIPTIONS),
+        "valid_target_roles": list(VALID_TARGET_ROLES),
         "allowed_route_kinds": list(ALLOWED_ROUTE_KINDS),
         "blocked_capabilities": list(BLOCKED_CAPABILITIES),
         "authority_boundary": {
@@ -142,6 +161,7 @@ def build_policy_manifest() -> Dict[str, object]:
             "tools": "gated_by_nexus",
             "durable_mutation": "human_authorized",
             "handoffs": "compressed_context_only",
+            "deep_reasoning": "role_targeted_mistral_recommendation_only",
         },
     }
 
@@ -165,3 +185,4 @@ def build_route_decision(
         recommendation_only=True,
         reason=assignment.reason,
     )
+

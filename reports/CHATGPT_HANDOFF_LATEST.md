@@ -1,8 +1,9 @@
 # NEXUS ChatGPT Handoff Latest
 
-- Version: 0.6.2
-- Generated UTC: 2026-07-05T02:34:50.441886+00:00
-- Intent: What should we do next?
+- Version: 0.6.4
+- Generated UTC: 2026-07-05T04:27:06.829763+00:00
+- Intent: NEX chat bridge dry run: verify role targeted DEEP routing without granting authority.
+- Target role: DEEP
 - Boundary: recommendation-only; human authorizes durable mutation.
 
 ## Canonical Rules
@@ -27,8 +28,9 @@
 
 1. Inspect the generated NN router report.
 2. Treat local model text as recommendation context only.
-3. Route durable repo mutation through NEXUS gates and human authorization.
-4. Preserve evidence ledger and replay requirements before compounding.
+3. Use role-targeted DEEP reasoning when Mistral inspection is required.
+4. Route durable repo mutation through NEXUS gates and human authorization.
+5. Preserve evidence ledger and replay requirements before compounding.
 
 ## BB/EGAT Packet
 

@@ -1,0 +1,15 @@
+{
+  "claim_boundary": "Scorecard is local development evidence only. It is not a proof of correctness, safety, security, production readiness, or empirical truth.",
+  "drift_flags": [
+    "live_model_call_not_yet_observed"
+  ],
+  "generated_utc": "2026-07-05T04:31:52.752871+00:00",
+  "scores": {
+    "accuracy_guard_score": 1.0,
+    "coding_gate_score": 1.0,
+    "drift_reduction_score": 1.0,
+    "overall_score": 1.0
+  },
+  "status": "pass",
+  "version": "0.6.4"
+}
