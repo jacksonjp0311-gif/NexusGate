@@ -1,4 +1,4 @@
-﻿# NEXUS Versioning Rehydration
+# NEXUS Versioning Rehydration
 
 Version: v0.8.0B
 
@@ -216,3 +216,12 @@ Deduplicates docs/ENTRYPOINTS.md GitHub Repository section.
 Keeps runtime packet read-only and human-authority bounded.
 ```
 
+
+
+## v0.8.3J Geometric Failure Mode Ledger Close
+
+```text
+No repeated failure without chart update.
+Saves the v0.8.3A-I wound chain as explicit failure-mode evidence.
+Keeps cleanup bounded: restore tracked evidence before patching and clean only untracked residue.
+```

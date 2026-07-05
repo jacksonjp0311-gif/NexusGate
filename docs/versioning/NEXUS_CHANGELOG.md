@@ -1,4 +1,4 @@
-﻿# NEXUS GATE Changelog
+# NEXUS GATE Changelog
 
 ## Purpose
 
@@ -81,3 +81,12 @@ Closes lazy import readback wound with importlib-backed package init.
 Preserves geo-clean cleanup and warning seal.
 ```
 
+
+
+## v0.8.3J - Geometric Failure Mode Ledger Close
+
+```text
+Records the v0.8.3 geometric-router sealing wounds in the Failure Mode Doctor and chart.
+Adds the PowerShell backtick string parse wound from the first failure-mode save attempt.
+Restores tracked report evidence before staging docs-only failure-mode changes.
+```

@@ -76,3 +76,15 @@ Boundary: this chart is a local development control. It does not prove safety, s
 - electron_contract_drift: Electron/dashboard plan gains read surfaces or commands outside the tested contract.
 - electron_shell_authority_leak: Electron scaffold exposes Node integration, arbitrary shell execution, graph mutation, secret access, or bypasses NEXUS lanes.
 - electron_preflight_missing: Electron scaffold exists without a compiled preflight report in the normal evolve evidence chain.
+
+
+## v0.8.3 Geometric Router Failure Modes
+
+- `readme_anchor_drift`: README/tests; new docs patch removes required compatibility anchor; block; restore old anchor plus new line and rerun readme tests.
+- `untracked_cleanup_git_restore_pathspec`: scripts/cleanup; git restore is used on generated untracked files; warning; use Remove-Item for untracked residue and git restore only tracked paths.
+- `runpy_eager_package_import`: Python/package; package __init__ imports module also executed with python -m; warning; make __init__ passive/lazy and run python -W error smoke.
+- `lazy_import_readback_false_positive`: tests/readback; guard flags lazy import text as eager import; warning; test exact boundary or use importlib lazy access.
+- `readme_line_budget_boundary`: README/tests; README hits exact forbidden line-count boundary; block; compact blank lines while preserving required markers.
+- `powershell_child_command_expansion`: PowerShell/scripts; expandable child command removes $null variable; warning; avoid assignment or escape child command text.
+- `tracked_report_cleanup_hazard`: cleanup/evidence; cleanup deletes tracked report evidence; block; restore tracked evidence before patch and cleanup only untracked residue.
+- `powershell_backtick_string_parse_wound`: PowerShell/scripts; backtick escaped closing quote in dynamic string; block; avoid backtick-heavy string construction.
