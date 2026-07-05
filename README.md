@@ -1,10 +1,10 @@
 ﻿# NEXUS GATE
 
-**Governed Connective Point for Human-Directed Local Intelligence**
+**Reflective Intelligence Layer for AI Systems**
 
-NEXUS GATE is a local-first governed connective point. It routes human intent, AI reasoning, local models, Dev Mode, HANDOFF scripts, Failure Doctor scans, compiler evidence, wound lessons, and GitHub durability through explicit gates.
+NEXUS GATE is a local-first reflective intelligence layer for AI systems. It gives AI systems a governed mirror: origin alignment, state routing, local model reflection, HANDOFF action boundaries, Failure Doctor diagnosis, compiler evidence, wound lessons, UI feedback, and GitHub durability through explicit gates.
 
-It is not another agent framework. It is the gateway where human direction, AI recommendations, local tools, evidence, and durable commits meet without granting autonomous authority.
+It is not another agent framework and it is not just the entry portal. The Desktop Entry Portal is the human doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems oriented, bounded, diagnosable, and evidence-governed without granting autonomous authority.
 
 ```text
 Human intent
@@ -18,6 +18,14 @@ Human intent
   -> ledger | report | registry update
 ```
 
+
+## Reflective Intelligence for AI Systems
+
+NEXUS GATE is the reflective intelligence layer behind the entry point. The portal is only the doorway.
+
+It connects AI reasoning, local execution, UI reflection, memory surfaces, failure-mode diagnosis, replay evidence, and human authorization into one governed operating loop.
+
+The system's purpose is not to make tools autonomous. Its purpose is to make AI systems observable, diagnosable, bounded, and able to compound only through evidence and human-authorized gates.
 
 ## NEXUS Connective Point
 
@@ -87,8 +95,8 @@ NEXUS GATE is a governed agentic transfer workbench. It tests whether a local ru
 
 ### Current version
 
-NEXUS GATE is currently at the v0.8.0 portal rehydration line: cyber ice-blue Desktop Portal, Failure Doctor, HANDOFF bridge, Dev Mode, and Electron connective HUD.
-Current strategic direction: interactive connective point for human-directed AI, local troubleshooting, bounded repair routes, compiler evidence, and durable GitHub compounding.
+NEXUS GATE is currently at the v0.8.1 UI cleanup line: reflective intelligence for AI systems, cyber ice-blue Desktop Entry Portal, empty left rail, closing telemetry HUD, Failure Doctor, HANDOFF bridge, Dev Mode, and Electron selector HUD.
+Current strategic direction: reflective intelligence for AI systems: local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, replayable lessons, and durable GitHub compounding under human authority.
 
 Current operator surfaces:
 

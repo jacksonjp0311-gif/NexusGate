@@ -2,7 +2,7 @@
   "name": "nexus-gate-electron-shell",
   "version": "0.3.6",
   "private": true,
-  "description": "Governed connective point HUD for NEXUS GATE evidence, selector, and doctor surfaces.",
+  "description": "Reflective intelligence HUD for governed AI systems, evidence, selector, and doctor surfaces.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",

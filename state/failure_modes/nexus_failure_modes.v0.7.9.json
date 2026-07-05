@@ -1,6 +1,6 @@
 {
   "system": "NEXUS GATE",
-  "version": "0.7.9B-compact-failure-doctor",
+  "version": "0.8.1D-compact-failure-doctor-registry",
   "schema": "nexus.failure_modes.compact.v1",
   "syntax": "FM := id,key,n,who,why,what,when,signs,doctor,retry,authority",
   "goal": "Human-readable and AI-parsable failure memory for troubleshooting, safe cleanup, and bounded retry.",
@@ -143,6 +143,63 @@
       "doctor": "Explain missing authority and next lawful human selection.",
       "retry": "Re-run as human-selected HANDOFF or entrypoint action.",
       "authority": "human_authorization_required"
+    },
+    {
+      "id": "FM-090",
+      "key": "native_command_stderr_noise",
+      "n": 90,
+      "who": "PowerShell All-One runner",
+      "why": "Native command progress, test, npm, compiler, or shell output may appear on stderr even when the meaningful evidence is in the captured command log.",
+      "what": "Runner can stop before Doctor classification if stdout/stderr capture is not normalized.",
+      "when": "Captured tests, compiler, npm, Git, PowerShell, or shell command execution.",
+      "signs": [
+        "stdout and stderr",
+        "stderr noise",
+        "native command",
+        "nonzero exit",
+        "compact log tail"
+      ],
+      "doctor": "Safe-capture stdout and stderr into a log, classify the nonzero exit, and print a compact tail for bounded retry.",
+      "retry": "Rerun the bounded validation command with captured stdout/stderr and inspect the compact log tail.",
+      "authority": "human_selected_retry"
+    },
+    {
+      "id": "FM-100",
+      "key": "json_bom_wound",
+      "n": 100,
+      "who": "JSON artifact writer",
+      "why": "Machine JSON was written with UTF-8 BOM or mixed encoding and later loaded by strict JSON tooling.",
+      "what": "JSONDecodeError or preflight/compiler parse failure blocks validation.",
+      "when": "Package metadata, preflight JSON, compiler JSON, state, registry, or report loading.",
+      "signs": [
+        "UTF-8 BOM",
+        "JSONDecodeError",
+        "Unexpected UTF-8 BOM",
+        "utf-8-sig",
+        "strict utf-8"
+      ],
+      "doctor": "Read possibly contaminated JSON with utf-8-sig and rewrite machine JSON as utf-8 without BOM.",
+      "retry": "Rerun JSON parse checks, focused tests, full suite, and compiler.",
+      "authority": "human_selected_retry"
+    },
+    {
+      "id": "FM-110",
+      "key": "ui_contract_cleanup",
+      "n": 110,
+      "who": "Electron renderer/UI contract",
+      "why": "UI moved selector authority to Mode Selection HUD, but old left glyph, stale tests, or close/open residue can remain.",
+      "what": "Left rail shows obsolete Relay Glyph, selector launcher residue, Mode Selection HUD does not open, or telemetry HUD does not close.",
+      "when": "After portal/HUD rehydration or selector relocation.",
+      "signs": [
+        "Relay Glyph still visible",
+        "selector-hud-open still present",
+        "selector-knot missing from active selector surface",
+        "Mode Selection HUD does not open",
+        "telemetry close button does not close panel"
+      ],
+      "doctor": "Inspect index, renderer, styles, and selector tests as a single UI contract before retrying UI tests.",
+      "retry": "Keep left rail empty, move selector knot into Mode Selection, harden open/close JS, rerun UI tests, full suite, and compiler.",
+      "authority": "human_selected_patch"
     }
   ]
 }

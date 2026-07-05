@@ -38,21 +38,8 @@
             <dt>Safe Mode</dt><dd>on</dd>
           </dl>
         </section>
-        <section class="hud-frame panel role-selector-panel compact-selector-panel" aria-label="Local reasoning selector launcher">
-          <h2>Relay Glyph</h2>
-          <button class="selector-glyph-button" type="button" id="selector-hud-open" title="Open yellow model selector HUD">
-            <div class="selector-switch" id="selector-switch" data-role="DEEP" aria-hidden="true">
-              <div class="selector-knot" id="selector-knot">
-                <span class="knot-triangle"></span>
-                <span class="knot-loop loop-a"></span>
-                <span class="knot-loop loop-b"></span>
-                <span class="knot-core"></span>
-              </div>
-            </div>
-          </button>
-          <p class="selector-mini-copy">Model selection moved to the yellow HUD under System Monitor.</p>
-        </section>
-      </aside>
+        <section class="hud-frame panel role-selector-panel empty-selector-panel" aria-label="Reserved empty left rail" data-empty-left-rail="true"></section>
+</aside>
 
             <section class="hud-frame console-panel nex-chat-panel" data-compat-title="NEXUS Console">
         <div class="nex-buffer-top" aria-label="NEX link buffer">
@@ -74,7 +61,7 @@
             <div class="nex-avatar" aria-hidden="true"><span>NEX</span></div>
             <div class="message-body">
               <header><strong>NEX</strong><small>governed local interface</small></header>
-              <pre class="output ai-output" id="output">Hello. I am NEX - your bounded connective point. Select a local voice from the yellow Relay HUD, ask one thing, and I will return recommendation-only feedback with any blocker made clear.</pre>
+              <pre class="output ai-output" id="output">Hello. I am NEX - your bounded reflective intelligence surface. Select a local voice from the yellow Relay HUD, ask one thing, and I will return recommendation-only feedback with any blocker made clear.</pre>
             </div>
           </article>
         </div>
@@ -116,15 +103,28 @@
               <span>GPU <strong id="tm-gpu">--</strong></span>
             </div>
           </section>
-          <section class="model-selector-station" aria-label="Yellow Relay HUD">
-            <button class="model-selector-button" type="button" id="model-selector-toggle">
-              <span>Yellow Relay HUD</span>
-              <strong id="selector-hud-status">DEEP / Mistral</strong>
+          <section class="model-selector-station" aria-label="Mode Selection HUD">
+            <button class="model-selector-button mode-selection-button" type="button" id="model-selector-toggle" aria-expanded="false" aria-controls="model-selector-hud">
+              <span class="mode-selection-glyph" aria-hidden="true">
+                <span class="selector-switch mode-selector-switch" id="selector-switch" data-role="DEEP">
+                  <span class="selector-knot" id="selector-knot">
+                    <span class="knot-triangle"></span>
+                    <span class="knot-loop loop-a"></span>
+                    <span class="knot-loop loop-b"></span>
+                    <span class="knot-loop loop-c"></span>
+                    <span class="knot-core"></span>
+                  </span>
+                </span>
+              </span>
+              <span class="mode-selection-copy">
+                <span class="mode-selection-title">Mode Selection</span>
+                <strong id="selector-hud-status">DEEP / Mistral</strong>
+              </span>
             </button>
-            <section class="model-selector-hud" id="model-selector-hud" hidden aria-label="Expanded local model selector HUD">
+            <section class="model-selector-hud" id="model-selector-hud" hidden aria-label="Expanded mode selection HUD">
               <div class="model-selector-head">
                 <div>
-                  <span>Cyber Ice Relay</span>
+                  <span>Mode Selection</span>
                   <strong>Local Voice / Relay</strong>
                 </div>
                 <button type="button" id="model-selector-close">close</button>

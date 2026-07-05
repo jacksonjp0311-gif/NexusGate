@@ -13,7 +13,7 @@ const copyRoleCommand = document.getElementById("copy-role-command");
 const modelSelectorHud = document.getElementById("model-selector-hud");
 const modelSelectorToggle = document.getElementById("model-selector-toggle");
 const modelSelectorClose = document.getElementById("model-selector-close");
-const selectorHudOpen = document.getElementById("selector-hud-open");
+const selectorHudOpen = document.getElementById("selector-hud-open"); // optional: left glyph was removed in v0.8.1 // optional: left glyph was removed in v0.8.1
 const selectorHudStatus = document.getElementById("selector-hud-status");
 const nexAiCard = document.getElementById("nex-ai-card");
 const sendButton = document.getElementById("nex-send-button");
@@ -26,6 +26,7 @@ let allowlistedCommands = [];
 let nexBusy = false;
 let nexStopRequested = false;
 let telemetryLoopHandle = null;
+let modelSelectorHudBound = false;
 const SELECTOR_UI_ONLY_BOUNDARY = "Selector changes UI planning context only. It does not call models, execute shell, mutate repo files, or grant authority.";
 const NEX_MODEL_RESPONSE_STAGE_MARKER = 'stage: "nex_model_response"';
 const NEX_MODEL_BRIDGE_STAGE_MARKER = 'stage: "nex_model_bridge"';
@@ -462,6 +463,7 @@ function toggleTelemetryHud(force) {
   const next = typeof force === "boolean" ? force : !telemetryHud.classList.contains("is-expanded");
   telemetryHud.classList.toggle("is-expanded", next);
   telemetryHud.toggleAttribute("hidden", !next);
+  telemetryHud.style.display = next ? "" : "none";
   if (next) refreshTelemetry();
 }
 function toggleModelSelectorHud(force) {
@@ -469,6 +471,13 @@ function toggleModelSelectorHud(force) {
   const next = typeof force === "boolean" ? force : !modelSelectorHud.classList.contains("is-expanded");
   modelSelectorHud.classList.toggle("is-expanded", next);
   modelSelectorHud.toggleAttribute("hidden", !next);
+  modelSelectorHud.style.display = next ? "" : "none";
+  modelSelectorToggle?.setAttribute("aria-expanded", String(next));
+}
+
+function bindModelSelectorHud() {
+  if (modelSelectorHudBound) return;
+  modelSelectorHudBound = true;
 }
 
 function setClock() {
@@ -514,18 +523,15 @@ function setSelectorRole(role, source = "change") {
   if (roleModel) roleModel.textContent = setting.label;
   if (roleCommand) roleCommand.textContent = setting.command;
   if (selectorHudStatus) selectorHudStatus.textContent = setting.label;
-  if (selectorHudStatus) selectorHudStatus.textContent = setting.label;
 
   pushConsole("NEXUS", `${setting.note} Selector source=${source}.`);
 }
 
 function initRoleSelector() {
-  if (!roleSelect || !selectorSwitch) return;
+  bindModelSelectorHud();
+  if (!roleSelect) return;
   roleSelect.addEventListener("change", () => setSelectorRole(roleSelect.value, "select"));
-  selectorSwitch.addEventListener("click", () => { setSelectorRole(roleSelect.value, "glyph"); toggleModelSelectorHud(true); });
-  selectorHudOpen?.addEventListener("click", () => toggleModelSelectorHud(true));
-  modelSelectorToggle?.addEventListener("click", () => toggleModelSelectorHud());
-  modelSelectorClose?.addEventListener("click", () => toggleModelSelectorHud(false));
+  selectorSwitch?.addEventListener("click", () => { setSelectorRole(roleSelect.value, "glyph"); toggleModelSelectorHud(true); });
   copyRoleCommand?.addEventListener("click", async () => {
     const command = roleCommand?.textContent || "";
     if (!command) return;
@@ -983,6 +989,7 @@ async function loadSurfaceState() {
   setBuffer(10, "hydrate");
   toggleTelemetryHud(false);
   clearSystemErrorHud();
+  bindModelSelectorHud();
 
   const contract = await window.nexus.getContract();
   allowlistedCommands = contract.allowlistedCommands || [];

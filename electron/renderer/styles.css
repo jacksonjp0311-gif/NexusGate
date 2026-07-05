@@ -1385,8 +1385,6 @@ body.nex-processing .nex-interface-symbol {
 }
 
 /* NEXUS v0.7.0: real-time monitor, stop-button clearance, system error HUD. */
-.telemetry-hud[hidden],
-
 .compact-selector-panel {
   min-height: 118px;
   display: grid;
@@ -1914,3 +1912,150 @@ body.system-error-active .chat-viewport {
   color: #fde68a !important;
 }
 
+
+
+/* NEXUS v0.8.1: UI cleanup - telemetry close and empty left rail. */
+.telemetry-hud[hidden],
+.model-selector-hud[hidden],
+.system-error-hud[hidden] {
+  display: none !important;
+}
+
+.empty-selector-panel {
+  min-height: 118px;
+  opacity: .42;
+  background: linear-gradient(180deg, rgba(2, 6, 23, .72), rgba(8, 13, 25, .54));
+}
+
+.empty-selector-panel > * {
+  display: none !important;
+}
+
+
+/* NEXUS v0.8.1D: Mode Selection lives on the right; left rail remains empty. */
+.model-selector-station {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(34, 211, 238, .22);
+}
+
+.mode-selection-button,
+.model-selector-button.mode-selection-button {
+  width: 100%;
+  min-height: 54px;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  background:
+    linear-gradient(180deg, rgba(6, 24, 43, .96), rgba(2, 6, 23, .94));
+  border: 1px solid rgba(34, 211, 238, .34);
+  box-shadow: 0 0 18px rgba(34, 211, 238, .12), inset 0 0 28px rgba(34, 211, 238, .045);
+  cursor: pointer;
+  text-align: left;
+}
+
+.mode-selection-button:hover,
+.mode-selection-button[aria-expanded="true"] {
+  border-color: rgba(34, 211, 238, .72);
+  box-shadow: 0 0 22px rgba(34, 211, 238, .24), inset 0 0 30px rgba(34, 211, 238, .08);
+}
+
+.mode-selection-glyph {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(34, 211, 238, .24);
+  background: rgba(2, 6, 23, .72);
+}
+
+.mode-selector-switch {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  background: transparent;
+}
+
+.mode-selector-switch .selector-knot {
+  width: 34px;
+  height: 34px;
+}
+
+.mode-selector-switch .knot-triangle {
+  left: 7px;
+  top: 4px;
+  border-left-width: 10px;
+  border-right-width: 10px;
+  border-bottom-width: 20px;
+}
+
+.mode-selector-switch .knot-loop {
+  width: 18px;
+  height: 18px;
+}
+
+.mode-selector-switch .loop-a { left: 8px; top: 2px; }
+.mode-selector-switch .loop-b { left: 2px; top: 14px; }
+.mode-selector-switch .loop-c { right: 2px; top: 14px; }
+
+.mode-selector-switch .knot-core {
+  left: 14px;
+  top: 14px;
+  width: 6px;
+  height: 6px;
+}
+
+.mode-selection-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.mode-selection-title {
+  color: var(--cyan);
+  text-transform: uppercase;
+  font: 700 12px Consolas, monospace;
+  letter-spacing: .02em;
+}
+
+.mode-selection-copy strong {
+  color: var(--green);
+  font: 700 13px Consolas, monospace;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.model-selector-hud[hidden],
+.telemetry-hud[hidden],
+.system-error-hud[hidden] {
+  display: none !important;
+}
+
+.model-selector-hud.is-expanded {
+  display: block;
+  z-index: 60;
+}
+
+.empty-selector-panel > * {
+  display: none !important;
+}
+
+
+/* NEXUS v0.8.1D override: retire yellow button color for Mode Selection. */
+.model-selector-button.mode-selection-button {
+  color: var(--text) !important;
+  background:
+    linear-gradient(180deg, rgba(6, 24, 43, .96), rgba(2, 6, 23, .94)) !important;
+  border-color: rgba(34, 211, 238, .34) !important;
+}
+
+
+/* NEXUS v0.8.1D override: retire yellow button color for Mode Selection. */
+.model-selector-button.mode-selection-button {
+  color: var(--text) !important;
+  background:
+    linear-gradient(180deg, rgba(6, 24, 43, .96), rgba(2, 6, 23, .94)) !important;
+  border-color: rgba(34, 211, 238, .34) !important;
+}

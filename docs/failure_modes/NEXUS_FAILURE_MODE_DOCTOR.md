@@ -81,3 +81,16 @@ doctor: rewrite machine JSON with utf-8 no BOM
 retry: rerun JSON tests, full suite, and compiler
 authority: human_selected_retry
 ```
+
+
+## FM-110 ui_contract_cleanup
+
+```text
+who: Electron renderer/UI contract
+why: selector authority moved to Yellow Relay HUD but old left glyph/telemetry residue remained
+what: obsolete Relay Glyph appears or telemetry HUD does not close
+when: after portal/HUD rehydration
+doctor: inspect index/renderer/styles as one UI contract
+retry: remove left glyph, keep Yellow Relay HUD, force hidden CSS, rerun UI tests/full suite/compiler
+authority: human_selected_patch
+```
