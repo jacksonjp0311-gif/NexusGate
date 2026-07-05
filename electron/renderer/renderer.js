@@ -478,6 +478,8 @@ function toggleModelSelectorHud(force) {
 function bindModelSelectorHud() {
   if (modelSelectorHudBound) return;
   modelSelectorHudBound = true;
+  modelSelectorToggle?.addEventListener("click", () => toggleModelSelectorHud());
+  modelSelectorClose?.addEventListener("click", () => toggleModelSelectorHud(false));
 }
 
 function setClock() {

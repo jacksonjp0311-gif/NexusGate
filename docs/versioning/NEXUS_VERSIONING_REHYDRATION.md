@@ -46,3 +46,12 @@ HANDOFF = human-authorized action bridge.
 ## Boundary
 
 Versioning is continuity evidence. It is not proof of correctness, safety, security, production readiness, or autonomous authority.
+
+
+## v0.8.1E Mode Selection pop-out HUD
+
+```text
+Mode Selection button remains in the right feedback column.
+Mode Selection HUD opens as a fixed overlay, matching the Telemetry HUD format.
+The HUD no longer expands inside the right column scroll area.
+```

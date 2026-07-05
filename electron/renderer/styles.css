@@ -2059,3 +2059,113 @@ body.system-error-active .chat-viewport {
     linear-gradient(180deg, rgba(6, 24, 43, .96), rgba(2, 6, 23, .94)) !important;
   border-color: rgba(34, 211, 238, .34) !important;
 }
+
+
+/* NEXUS v0.8.1E: Mode Selection HUD is a fixed pop-out like Telemetry. */
+.model-selector-hud {
+  position: fixed !important;
+  right: 28px;
+  top: 128px;
+  z-index: 62;
+  width: min(620px, calc(100vw - 56px));
+  max-height: calc(100vh - 180px);
+  margin-top: 0 !important;
+  padding: 14px !important;
+  overflow: auto;
+  color: #fef3c7;
+  background:
+    linear-gradient(135deg, rgba(24, 18, 3, .82), rgba(2, 6, 23, .66)),
+    radial-gradient(circle at 80% 20%, rgba(250, 204, 21, .22), transparent 36%);
+  border: 1px solid rgba(250, 204, 21, .62) !important;
+  box-shadow: 0 0 40px rgba(250, 204, 21, .30), inset 0 0 26px rgba(250, 204, 21, .08) !important;
+  backdrop-filter: blur(10px);
+}
+
+.model-selector-hud[hidden] {
+  display: none !important;
+}
+
+.model-selector-hud.is-expanded {
+  display: block !important;
+}
+
+.model-selector-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(250, 204, 21, .28);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.model-selector-head span {
+  display: block;
+  color: #facc15;
+  font: 11px Consolas, monospace;
+  text-transform: uppercase;
+}
+
+.model-selector-head strong {
+  display: block;
+  margin-top: 4px;
+  color: #fef3c7;
+  font: 700 18px Consolas, monospace;
+  text-transform: uppercase;
+}
+
+#model-selector-close {
+  color: #fef3c7;
+  background: rgba(127, 29, 29, .52);
+  border: 1px solid rgba(248, 113, 113, .5);
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.model-selector-hud .selector-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #fde68a;
+  font: 11px Consolas, monospace;
+  text-transform: uppercase;
+}
+
+.model-selector-hud select {
+  width: 100%;
+  min-height: 32px;
+  margin: 6px 0 8px;
+  color: #020617;
+  background: linear-gradient(90deg, #facc15, #f59e0b);
+  border: 1px solid rgba(254, 240, 138, .76);
+  font: 800 13px Consolas, monospace;
+}
+
+.model-selector-hud .selector-copy {
+  padding: 10px;
+  border: 1px solid rgba(250, 204, 21, .28);
+  background: rgba(2, 6, 23, .72);
+  box-shadow: inset 0 0 18px rgba(250, 204, 21, .035);
+  font: 12px/1.35 Consolas, monospace;
+}
+
+.model-selector-hud .selector-copy strong {
+  color: #facc15;
+  text-shadow: 0 0 9px rgba(250, 204, 21, .38);
+}
+
+.model-selector-hud .selector-copy span {
+  display: block;
+  margin-top: 4px;
+  max-height: 54px;
+  overflow: auto;
+  color: #bae6fd;
+}
+
+.model-selector-hud .selector-copy-button {
+  width: 100%;
+  min-height: 34px;
+  margin-top: 10px;
+  color: #bae6fd;
+  border: 1px solid rgba(34, 211, 238, .34);
+  background: rgba(2, 6, 23, .82);
+}

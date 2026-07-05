@@ -31,5 +31,12 @@ class TestPortalUiCleanupV081(unittest.TestCase):
         self.assertIn("display: none !important", styles)
 
 
+    def test_mode_selection_hud_is_popout_not_inline_scroll(self):
+        styles = (ROOT / "electron" / "renderer" / "styles.css").read_text(encoding="utf-8-sig")
+        self.assertIn("NEXUS v0.8.1E: Mode Selection HUD is a fixed pop-out like Telemetry.", styles)
+        self.assertIn("position: fixed !important", styles)
+        self.assertIn("max-height: calc(100vh - 180px)", styles)
+
+
 if __name__ == "__main__":
     unittest.main()
