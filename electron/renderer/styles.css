@@ -1386,6 +1386,99 @@ body.nex-processing .nex-interface-symbol {
 
 /* NEXUS v0.7.0: real-time monitor, stop-button clearance, system error HUD. */
 .telemetry-hud[hidden],
+
+.compact-selector-panel {
+  min-height: 118px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 8px;
+}
+
+.selector-glyph-button {
+  width: 72px;
+  height: 62px;
+  border: 1px solid rgba(250, 204, 21, .55);
+  background: radial-gradient(circle at 50% 35%, rgba(250, 204, 21, .24), rgba(2, 6, 23, .92) 70%);
+  color: var(--yellow);
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(250, 204, 21, .18);
+}
+
+.selector-mini-copy {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.model-selector-station {
+  margin-top: 10px;
+  border-top: 1px solid rgba(250, 204, 21, .35);
+  padding-top: 10px;
+}
+
+.model-selector-button {
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #facc15, #f59e0b);
+  border: 1px solid rgba(250, 204, 21, .82);
+  color: #020617;
+  padding: 8px 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.model-selector-hud {
+  margin-top: 8px;
+  border: 1px solid rgba(250, 204, 21, .7);
+  background: linear-gradient(180deg, rgba(15, 23, 42, .98), rgba(2, 6, 23, .98));
+  box-shadow: 0 0 24px rgba(250, 204, 21, .22), inset 0 0 22px rgba(250, 204, 21, .08);
+  padding: 10px;
+}
+
+.model-selector-hud[hidden] {
+  display: none;
+}
+
+.model-selector-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  color: var(--yellow);
+  text-transform: uppercase;
+}
+
+.model-selector-head button {
+  background: rgba(2, 6, 23, .92);
+  border: 1px solid rgba(250, 204, 21, .55);
+  color: var(--yellow);
+  cursor: pointer;
+}
+
+.model-selector-hud select {
+  width: 100%;
+  margin: 6px 0;
+  background: #facc15;
+  color: #020617;
+  border: 1px solid rgba(250, 204, 21, .9);
+  font-weight: 800;
+}
+
+.model-selector-hud .selector-copy {
+  border: 1px solid rgba(250, 204, 21, .5);
+  background: rgba(2, 6, 23, .86);
+  color: var(--yellow);
+  padding: 8px;
+  overflow-wrap: anywhere;
+}
+
 .system-error-hud[hidden] {
   display: none !important;
 }

@@ -55,3 +55,29 @@ Human authorization unlocks dangerous transitions.
 ```
 
 NEXUS adopts that split without importing autonomous authority.
+
+
+## FM-090 native_command_stderr_noise
+
+```text
+who: PowerShell All-One runner
+why: native command progress/test output can appear on stderr
+what: runner may stop before Doctor can classify
+when: captured tests/compiler/npm/shell command
+doctor: safe-capture stdout/stderr into a log
+retry: rerun bounded validation with compact log tail on nonzero exit
+authority: human_selected_retry
+```
+
+
+## FM-100 json_bom_wound
+
+```text
+who: JSON artifact writer
+why: JSON was written with UTF-8 BOM but loaded as strict utf-8
+what: JSONDecodeError blocks preflight/full-suite
+when: package/preflight/compiler JSON loading
+doctor: rewrite machine JSON with utf-8 no BOM
+retry: rerun JSON tests, full suite, and compiler
+authority: human_selected_retry
+```

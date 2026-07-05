@@ -38,29 +38,19 @@
             <dt>Safe Mode</dt><dd>on</dd>
           </dl>
         </section>
-        <section class="hud-frame panel role-selector-panel" aria-label="Local reasoning selector">
-          <h2>Reasoning Selector</h2>
-          <div class="selector-switch" id="selector-switch" data-role="DEEP" title="Click or change selection to pulse the role selector">
-            <div class="selector-knot" id="selector-knot" aria-hidden="true">
-              <span class="knot-triangle"></span>
-              <span class="knot-loop loop-a"></span>
-              <span class="knot-loop loop-b"></span>
-              <span class="knot-loop loop-c"></span>
-              <span class="knot-core"></span>
+        <section class="hud-frame panel role-selector-panel compact-selector-panel" aria-label="Local reasoning selector launcher">
+          <h2>Relay Glyph</h2>
+          <button class="selector-glyph-button" type="button" id="selector-hud-open" title="Open yellow model selector HUD">
+            <div class="selector-switch" id="selector-switch" data-role="DEEP" aria-hidden="true">
+              <div class="selector-knot" id="selector-knot">
+                <span class="knot-triangle"></span>
+                <span class="knot-loop loop-a"></span>
+                <span class="knot-loop loop-b"></span>
+                <span class="knot-core"></span>
+              </div>
             </div>
-          </div>
-          <label class="selector-label" for="role-select">Local Voice / Relay</label>
-          <select id="role-select" aria-label="Select local reasoning voice">
-            <option value="FAST">FAST / Phi-3</option>
-            <option value="BALANCED">BALANCED / Phi-3</option>
-            <option value="DEEP" selected>DEEP / Mistral</option>
-            <option value="HANDOFF">HANDOFF / ChatGPT-Codex</option>
-          </select>
-          <div class="selector-copy">
-            <strong id="role-model">DEEP -> Mistral</strong>
-            <span id="role-command">.\scripts\nexus.ps1 deep -CallModel</span>
-          </div>
-          <button class="ghost-button selector-copy-button" type="button" id="copy-role-command">Copy command</button>
+          </button>
+          <p class="selector-mini-copy">Model selection moved to the yellow HUD under System Monitor.</p>
         </section>
       </aside>
 
@@ -84,7 +74,7 @@
             <div class="nex-avatar" aria-hidden="true"><span>NEX</span></div>
             <div class="message-body">
               <header><strong>NEX</strong><small>governed local interface</small></header>
-              <pre class="output ai-output" id="output">Hello. I am NEX - your bounded reflective intelligence surface. Select a local voice and ask one thing.</pre>
+              <pre class="output ai-output" id="output">Hello. I am NEX - your bounded connective point. Select a local voice from the yellow Relay HUD, ask one thing, and I will return recommendation-only feedback with any blocker made clear.</pre>
             </div>
           </article>
         </div>
@@ -125,6 +115,33 @@
               <span>RAM <strong id="tm-ram">--%</strong></span>
               <span>GPU <strong id="tm-gpu">--</strong></span>
             </div>
+          </section>
+          <section class="model-selector-station" aria-label="Yellow Relay HUD">
+            <button class="model-selector-button" type="button" id="model-selector-toggle">
+              <span>Yellow Relay HUD</span>
+              <strong id="selector-hud-status">DEEP / Mistral</strong>
+            </button>
+            <section class="model-selector-hud" id="model-selector-hud" hidden aria-label="Expanded local model selector HUD">
+              <div class="model-selector-head">
+                <div>
+                  <span>Cyber Ice Relay</span>
+                  <strong>Local Voice / Relay</strong>
+                </div>
+                <button type="button" id="model-selector-close">close</button>
+              </div>
+              <label class="selector-label" for="role-select">Local Voice / Relay</label>
+              <select id="role-select" aria-label="Select local reasoning voice">
+                <option value="FAST">FAST / Phi-3</option>
+                <option value="BALANCED">BALANCED / Phi-3</option>
+                <option value="DEEP" selected>DEEP / Mistral</option>
+                <option value="HANDOFF">HANDOFF / ChatGPT-Codex</option>
+              </select>
+              <div class="selector-copy">
+                <strong id="role-model">DEEP -> Mistral</strong>
+                <span id="role-command">.\scripts\nexus.ps1 deep -CallModel</span>
+              </div>
+              <button class="ghost-button selector-copy-button" type="button" id="copy-role-command">Copy command</button>
+            </section>
           </section>
           <section class="telemetry-hud" id="telemetry-hud" hidden aria-label="Expanded local telemetry HUD">
             <div class="telemetry-hud-head">

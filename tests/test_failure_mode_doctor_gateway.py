@@ -22,9 +22,16 @@ class TestFailureModeDoctorGateway(unittest.TestCase):
         signs = [str(item).lower() for item in launcher_mode["signs"]]
         self.assertIn("unexpected parser symbol", signs)
 
+    def test_failure_modes_include_native_capture_doctor_trap(self):
+        data = json.loads((ROOT / "state" / "failure_modes" / "nexus_failure_modes.v0.7.9.json").read_text(encoding="utf-8-sig"))
+        mode = next(item for item in data["modes"] if item["key"] == "native_command_stderr_noise")
+        self.assertEqual(mode["id"], "FM-090")
+        self.assertIn("stdout and stderr", mode["doctor"].lower())
+        self.assertIn("human_selected_retry", mode["authority"])
+
     def test_launcher_has_failure_modes_entrypoint(self):
         script = (ROOT / "scripts" / "desktop" / "open_nexus_gate_console.ps1").read_text(encoding="utf-8-sig")
-        self.assertIn('Write-Host "8. Failure Modes / Doctor"', script)
+        self.assertIn('Failure Modes / Doctor', script)
         self.assertIn("Invoke-NexusFailureModeDoctorConsole", script)
         self.assertIn("NEXUS FAILURE MODES / DOCTOR", script)
         self.assertIn("Doctor scan current state", script)
@@ -53,3 +60,4 @@ class TestFailureModeDoctorGateway(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

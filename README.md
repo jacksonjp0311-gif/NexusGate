@@ -1,10 +1,10 @@
 ﻿# NEXUS GATE
 
-**Governed Agentic Transfer Layer for Modular AI Frameworks**
+**Governed Connective Point for Human-Directed Local Intelligence**
 
-NEXUS GATE is a local-first governed runtime for transferring permissioned operational meaning across agent frameworks. It routes agent state, tool intent, memory signals, framework events, and execution authority through explicit contracts, authority gates, RHP rehydration checks, shadow execution, evidence ledgers, failure-mode routing, and clean disengagement.
+NEXUS GATE is a local-first governed connective point. It routes human intent, AI reasoning, local models, Dev Mode, HANDOFF scripts, Failure Doctor scans, compiler evidence, wound lessons, and GitHub durability through explicit gates.
 
-It is not another agent framework. It is the governed transfer boundary between frameworks.
+It is not another agent framework. It is the gateway where human direction, AI recommendations, local tools, evidence, and durable commits meet without granting autonomous authority.
 
 ```text
 Human intent
@@ -18,6 +18,40 @@ Human intent
   -> ledger | report | registry update
 ```
 
+
+## NEXUS Connective Point
+
+```text
+NEXUS GATE is the gateway.
+Human intent enters.
+AI recommends.
+Doctor classifies.
+Dev Mode validates.
+HANDOFF acts only when human-authorized.
+Evidence decides what may compound.
+```
+
+Desktop Portal quote:
+
+```text
+The gate does not give intelligence authority.
+The gate gives authority a visible path through intelligence.
+```
+
+Current gateway surfaces:
+
+| Selection | Surface | Purpose |
+|---:|---|---|
+| 1 | Open NexusGate | Full Electron operator HUD |
+| 2 | Dev Mode / Handoff Console | Patch, compiler, wound evidence |
+| 3 | Status / health surface | Current health route |
+| 4 | Terminal TUI surface | Terminal dashboard |
+| 5 | NN router health | Local model readiness |
+| 6 | Ask NEXUS router | Recommendation-only local route |
+| 7 | Open repo folder | Human inspection |
+| 8 | Failure Modes / Doctor | Scan, classify, safe clean, retry checks |
+
+Versioning and long rehydration notes live in `docs/versioning/NEXUS_VERSIONING_REHYDRATION.md`.
 
 ## Failure Modes / Doctor Gateway
 
@@ -53,8 +87,8 @@ NEXUS GATE is a governed agentic transfer workbench. It tests whether a local ru
 
 ### Current version
 
-NEXUS GATE is currently at the v0.5.1 reflective neural assembly and chat intelligence distribution lab surface.
-Current strategic direction: Reflective Intelligence Gateway + Domain Intelligence Orchestrator + governed intelligence distribution.
+NEXUS GATE is currently at the v0.8.0 portal rehydration line: cyber ice-blue Desktop Portal, Failure Doctor, HANDOFF bridge, Dev Mode, and Electron connective HUD.
+Current strategic direction: interactive connective point for human-directed AI, local troubleshooting, bounded repair routes, compiler evidence, and durable GitHub compounding.
 
 Current operator surfaces:
 

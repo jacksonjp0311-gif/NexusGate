@@ -686,28 +686,46 @@ function Invoke-NexusFailureModeDoctorConsole {
 }
 
 
+function Write-Portal {
+    param(
+        [string]$Text,
+        [string]$Color = "Cyan"
+    )
+    Write-Host $Text -ForegroundColor $Color
+}
+
 function Show-Menu {
+    Clear-Host
+    Write-Portal "====================================================================" "Cyan"
+    Write-Portal "  NEXUS GATE :: DESKTOP ENTRY PORTAL" "Cyan"
+    Write-Portal "  cyber ice-blue gateway for human + AI intelligence flow" "DarkCyan"
+    Write-Portal "====================================================================" "Cyan"
     Write-Host ""
-    Write-Host "========================================"
-    Write-Host " NEXUS GATE - Desktop Entry Portal"
-    Write-Host "========================================"
-    Write-Host "1. Open NexusGate"
-    Write-Host "2. Dev Mode / Handoff Console"
-    Write-Host "3. Status / health surface"
-    Write-Host "4. Terminal TUI surface"
-    Write-Host "5. NN router health"
-    Write-Host "6. Ask NEXUS router"
-    Write-Host "7. Open repo folder"
-    Write-Host "8. Failure Modes / Doctor"
-    Write-Host "Q. Quit"
+    Write-Portal "  Quote:" "Yellow"
+    Write-Portal "  The gate does not give intelligence authority." "Green"
+    Write-Portal "  The gate gives authority a visible path through intelligence." "Green"
     Write-Host ""
-    Write-Host "Rule: models recommend; human authorizes durable mutation."
+    Write-Portal "  [1] Open NexusGate                 -> full Electron operator HUD" "Yellow"
+    Write-Portal "  [2] Dev Mode / Handoff Console     -> patch / compiler / wound evidence" "Yellow"
+    Write-Portal "  [3] Status / health surface        -> current health route" "Cyan"
+    Write-Portal "  [4] Terminal TUI surface           -> terminal dashboard" "Cyan"
+    Write-Portal "  [5] NN router health               -> local model readiness" "Cyan"
+    Write-Portal "  [6] Ask NEXUS router               -> recommendation-only route" "Cyan"
+    Write-Portal "  [7] Open repo folder               -> human inspection" "DarkCyan"
+    Write-Portal "  [8] Failure Modes / Doctor         -> scan / classify / safe clean / retry" "Yellow"
+    Write-Portal "  [Q] Quit" "DarkGray"
     Write-Host ""
+    Write-Portal "Rule: models recommend; human authorizes durable mutation." "Green"
+    Write-Portal "Flow: portal -> surface -> evidence -> gate -> durable commit." "Cyan"
+    Write-Host ""
+
+    # Compatibility marker for older tests: Write-Host "2. Dev Mode / Handoff Console"
 }
 
 Write-NG "NEXUS Gate launcher opened."
 Write-NG "Primary entry: Open NexusGate -> Electron UI."
 Write-NG "Dev entry: Dev Mode / Handoff Console -> patch, compiler, wound evidence."
+Write-NG "Gateway style: cyber ice-blue / green / yellow portal."
 
 while ($true) {
     Show-Menu

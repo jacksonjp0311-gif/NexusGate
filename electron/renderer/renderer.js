@@ -10,6 +10,11 @@ const selectorSwitch = document.getElementById("selector-switch");
 const roleModel = document.getElementById("role-model");
 const roleCommand = document.getElementById("role-command");
 const copyRoleCommand = document.getElementById("copy-role-command");
+const modelSelectorHud = document.getElementById("model-selector-hud");
+const modelSelectorToggle = document.getElementById("model-selector-toggle");
+const modelSelectorClose = document.getElementById("model-selector-close");
+const selectorHudOpen = document.getElementById("selector-hud-open");
+const selectorHudStatus = document.getElementById("selector-hud-status");
 const nexAiCard = document.getElementById("nex-ai-card");
 const sendButton = document.getElementById("nex-send-button");
 const stopButton = document.getElementById("nex-stop-button");
@@ -459,6 +464,13 @@ function toggleTelemetryHud(force) {
   telemetryHud.toggleAttribute("hidden", !next);
   if (next) refreshTelemetry();
 }
+function toggleModelSelectorHud(force) {
+  if (!modelSelectorHud) return;
+  const next = typeof force === "boolean" ? force : !modelSelectorHud.classList.contains("is-expanded");
+  modelSelectorHud.classList.toggle("is-expanded", next);
+  modelSelectorHud.toggleAttribute("hidden", !next);
+}
+
 function setClock() {
   document.getElementById("system-time").textContent = new Date().toISOString().slice(0, 19).replace("T", " ");
 }
@@ -501,6 +513,8 @@ function setSelectorRole(role, source = "change") {
   }
   if (roleModel) roleModel.textContent = setting.label;
   if (roleCommand) roleCommand.textContent = setting.command;
+  if (selectorHudStatus) selectorHudStatus.textContent = setting.label;
+  if (selectorHudStatus) selectorHudStatus.textContent = setting.label;
 
   pushConsole("NEXUS", `${setting.note} Selector source=${source}.`);
 }
@@ -508,7 +522,10 @@ function setSelectorRole(role, source = "change") {
 function initRoleSelector() {
   if (!roleSelect || !selectorSwitch) return;
   roleSelect.addEventListener("change", () => setSelectorRole(roleSelect.value, "select"));
-  selectorSwitch.addEventListener("click", () => setSelectorRole(roleSelect.value, "glyph"));
+  selectorSwitch.addEventListener("click", () => { setSelectorRole(roleSelect.value, "glyph"); toggleModelSelectorHud(true); });
+  selectorHudOpen?.addEventListener("click", () => toggleModelSelectorHud(true));
+  modelSelectorToggle?.addEventListener("click", () => toggleModelSelectorHud());
+  modelSelectorClose?.addEventListener("click", () => toggleModelSelectorHud(false));
   copyRoleCommand?.addEventListener("click", async () => {
     const command = roleCommand?.textContent || "";
     if (!command) return;

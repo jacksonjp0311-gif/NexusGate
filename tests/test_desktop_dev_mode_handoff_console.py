@@ -14,10 +14,10 @@ class TestDesktopDevModeHandoffConsole(unittest.TestCase):
 
     def test_launcher_main_menu_routes_dev_mode(self):
         script = (ROOT / "scripts" / "desktop" / "open_nexus_gate_console.ps1").read_text(encoding="utf-8-sig")
-        self.assertIn('Write-Host "2. Dev Mode / Handoff Console"', script)
+        self.assertIn('2. Dev Mode / Handoff Console', script)
         self.assertIn('elseif ($choice -eq "2")', script)
         self.assertIn("Invoke-NexusDevMode", script)
-        self.assertIn('Write-Host "7. Open repo folder"', script)
+        self.assertIn('Open repo folder', script)
 
     def test_dev_mode_has_core_operations(self):
         script = (ROOT / "scripts" / "desktop" / "open_nexus_gate_console.ps1").read_text(encoding="utf-8-sig")
