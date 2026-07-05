@@ -22,6 +22,9 @@ let nexBusy = false;
 let nexStopRequested = false;
 let telemetryLoopHandle = null;
 const SELECTOR_UI_ONLY_BOUNDARY = "Selector changes UI planning context only. It does not call models, execute shell, mutate repo files, or grant authority.";
+const NEX_MODEL_RESPONSE_STAGE_MARKER = 'stage: "nex_model_response"';
+const NEX_MODEL_BRIDGE_STAGE_MARKER = 'stage: "nex_model_bridge"';
+const NEX_TIMEOUT_ERROR_HUD_BOUNDARY = "Model response ok=false is system evidence and opens the red HUD, not normal AI output.";
 const NEX_CHAT_APPEND_ONLY_BOUNDARY = "append-only chat: NEX responses appear once in the conversation stream and are not mirrored into the pinned output card.";
 
 const laneIcons = {
@@ -581,6 +584,7 @@ async function sendNexMessage(prompt) {
     const report = result.report || {};
     const modelResponses = Array.isArray(report.model_responses) ? report.model_responses : [];
     const responseText = modelResponses.map((item) => item.response || item.error || "").filter(Boolean).join("\n\n").trim();
+    const modelError = modelResponses.find((item) => item && item.ok === false);
 
     let visible = responseText;
     if (!visible) {
@@ -591,12 +595,13 @@ async function sendNexMessage(prompt) {
       }, null, 2));
     }
 
-    if (result.code !== 0) {
+    if (result.code !== 0 || modelError) {
+      const modelEvidence = modelError ? JSON.stringify(modelError, null, 2) : "";
       const systemReport = buildSystemErrorReport({
-        stage: "nex_model_bridge",
+        stage: modelError ? "nex_model_response" : "nex_model_bridge",
         role,
         code: result.code,
-        stderr: result.stderr,
+        stderr: [result.stderr, modelEvidence].filter(Boolean).join("\n"),
         stdout: result.stdout,
         report
       });
@@ -606,9 +611,9 @@ async function sendNexMessage(prompt) {
 
     visible = reflectNexFailure(visible, role);
 
-    appendChat("ai", visible, result.code === 0 ? `NEX / ${role} / recommendation-only` : `NEX / ${role} / system-error`);
-    statusEl.textContent = result.code === 0 ? "stable" : "blocked";
-    setBuffer(result.code === 0 ? 100 : 0, result.code === 0 ? "complete" : "error");
+    appendChat("ai", visible, (!modelError && result.code === 0) ? `NEX / ${role} / recommendation-only` : `NEX / ${role} / system-error`);
+    statusEl.textContent = (!modelError && result.code === 0) ? "stable" : "blocked";
+    setBuffer((!modelError && result.code === 0) ? 100 : 0, (!modelError && result.code === 0) ? "complete" : "error");
   } catch (error) {
     const systemReport = buildSystemErrorReport({
       stage: "nex_chat_exception",
@@ -803,6 +808,9 @@ loadSurfaceState().catch((error) => {
   setBuffer(0, "error");
   writeOutput(error.stack || error.message, { preTranslated: true });
 });
+
+
+
 
 
 
