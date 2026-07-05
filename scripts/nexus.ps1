@@ -1,4 +1,4 @@
-# NEXUS GATE compact PowerShell command surface
+﻿# NEXUS GATE compact PowerShell command surface
 # Legacy direct compiler markers retained for audit/tests:
 # nexus_gate.adapters.compile
 # nexus_gate.receptors.compile
@@ -12,12 +12,13 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
     [string]$Tag = "",
-    [switch]$NoCommit
+    [switch]$NoCommit,
+    [switch]$CallModel
 )
 
 $ErrorActionPreference = "Stop"
@@ -90,7 +91,28 @@ function Promote {
     Write-Host "[OK] Promotion gate passed."
 }
 
+function Invoke-NexusNN {
+    param(
+        [string]$Intent = "What should we do next?",
+        [switch]$UseModel
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Intent)) {
+        $Intent = "What should we do next?"
+    }
+
+    $args = @("-m", "nexus_gate.nn_router.compile", "--root", ".", "--intent", $Intent)
+    if ($UseModel.IsPresent) {
+        $args += "--call-model"
+    }
+
+    python @args
+    if ($LASTEXITCODE -ne 0) { throw "NEXUS NN router compile failed." }
+}
 switch ($Command) {
+    "nn" { Invoke-NexusNN -Intent $Tag -UseModel:$CallModel }
+    "nn-health" { Invoke-NexusNN -Intent "NEXUS NN router health check: report local model roles and policy gates." }
+    "ask" { Invoke-NexusNN -Intent $Tag -UseModel:$CallModel }
     "rehydrate" { Show-Rehydration; Run-Compiler; Write-Host "[OK] Rehydration complete." }
     "compile" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 compile }
     "strict" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_strict_compile.ps1 }
@@ -118,3 +140,4 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
+

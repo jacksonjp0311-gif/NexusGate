@@ -1,0 +1,192 @@
+﻿{
+  "authority_boundary": {
+    "handoffs": "compressed_context_only",
+    "models": "recommendation_only",
+    "repo_mutation": "human_authorized_after_gates",
+    "tool_execution": "blocked_from_model_output"
+  },
+  "generated_utc": "2026-07-05T02:34:50.441886+00:00",
+  "intent": "What should we do next?",
+  "inventory": {
+    "blob_count": 10,
+    "manifest_count": 3,
+    "missing_blobs": [],
+    "models": {
+      "mistral:latest": {
+        "manifest_path": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models\\manifests\\registry.ollama.ai\\library\\mistral\\latest",
+        "manifest_present": true,
+        "name": "mistral:latest",
+        "quant": "Q4_K_M",
+        "referenced_blob_count": 5,
+        "type": "7.2B"
+      },
+      "phi3:latest": {
+        "manifest_path": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models\\manifests\\registry.ollama.ai\\library\\phi3\\latest",
+        "manifest_present": true,
+        "name": "phi3:latest",
+        "quant": "Q4_0",
+        "referenced_blob_count": 5,
+        "type": "3.8B"
+      },
+      "phi3:mini": {
+        "manifest_path": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models\\manifests\\registry.ollama.ai\\library\\phi3\\mini",
+        "manifest_present": true,
+        "name": "phi3:mini",
+        "quant": "Q4_0",
+        "referenced_blob_count": 5,
+        "type": "3.8B"
+      }
+    },
+    "models_root": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models",
+    "models_root_exists": true,
+    "ollama_models_env": null,
+    "orphan_blobs": [],
+    "total_blob_size_bytes": 6549003297,
+    "total_blob_size_gb": 6.1
+  },
+  "model_responses": [],
+  "models_root": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models",
+  "outputs": {
+    "chatgpt_handoff": "reports/CHATGPT_HANDOFF_LATEST.md",
+    "codex_handoff": "reports/CODEX_HANDOFF_LATEST.md",
+    "report": "reports/nexus_nn_router_report_latest.json",
+    "state": "state/nexus_nn_router_index.v0.6.2.json"
+  },
+  "policy": {
+    "allowed_route_kinds": [
+      "inventory",
+      "health",
+      "recommendation",
+      "handoff"
+    ],
+    "authority_boundary": {
+      "durable_mutation": "human_authorized",
+      "handoffs": "compressed_context_only",
+      "models": "recommendation_only",
+      "tools": "gated_by_nexus"
+    },
+    "blocked_capabilities": [
+      "arbitrary_shell",
+      "direct_tool_execution",
+      "file_mutation_from_model_output",
+      "secret_access",
+      "external_api_write",
+      "authority_claim",
+      "memory_promotion_without_replay_evidence",
+      "compounding_without_evidence_ledger"
+    ],
+    "role_descriptions": {
+      "BALANCED": "Balanced local recommendation voice using Phi-3 when available.",
+      "DEEP": "Deeper local recommendation voice using Mistral when available.",
+      "FAST": "Quick local recommendation voice using Phi-3 when available.",
+      "HANDOFF": "No local model required; writes ChatGPT/Codex handoff packets."
+    },
+    "role_preferences": {
+      "BALANCED": [
+        "phi3:mini",
+        "phi3:latest"
+      ],
+      "DEEP": [
+        "mistral:latest"
+      ],
+      "FAST": [
+        "phi3:mini",
+        "phi3:latest"
+      ],
+      "HANDOFF": []
+    },
+    "router_law": [
+      "No adapter, no bridge.",
+      "No schema, no route.",
+      "No codec, no transfer.",
+      "No authority, no mutation.",
+      "No replay evidence, no memory promotion.",
+      "No evidence ledger, no compounding.",
+      "Distribute intelligence, not authority.",
+      "No model output may directly execute tools or mutate files."
+    ],
+    "safety_contract": {
+      "arbitrary_shell_allowed": false,
+      "external_api_writes_allowed": false,
+      "human_authorizes_durable_mutation": true,
+      "local_ollama_api_allowed_only_when_requested": true,
+      "model_grants_authority": false,
+      "model_output_executes_tools": false,
+      "model_output_mutates_files": false,
+      "recommendation_only": true,
+      "secrets_access_allowed": false
+    },
+    "version": "0.6.2"
+  },
+  "role_assignments": {
+    "BALANCED": {
+      "available": true,
+      "model": "phi3:mini",
+      "reason": "Selected preferred local model phi3:mini.",
+      "role": "BALANCED"
+    },
+    "DEEP": {
+      "available": true,
+      "model": "mistral:latest",
+      "reason": "Selected preferred local model mistral:latest.",
+      "role": "DEEP"
+    },
+    "FAST": {
+      "available": true,
+      "model": "phi3:mini",
+      "reason": "Selected preferred local model phi3:mini.",
+      "role": "FAST"
+    },
+    "HANDOFF": {
+      "available": true,
+      "model": null,
+      "reason": "HANDOFF writes packets and requires no local model.",
+      "role": "HANDOFF"
+    }
+  },
+  "root": "<repo-root>",
+  "route_decisions": [
+    {
+      "call_model": false,
+      "intent": "What should we do next?",
+      "model": "phi3:mini",
+      "model_called": false,
+      "reason": "Selected preferred local model phi3:mini.",
+      "recommendation_only": true,
+      "role": "FAST",
+      "route_kind": "recommendation"
+    },
+    {
+      "call_model": false,
+      "intent": "What should we do next?",
+      "model": "phi3:mini",
+      "model_called": false,
+      "reason": "Selected preferred local model phi3:mini.",
+      "recommendation_only": true,
+      "role": "BALANCED",
+      "route_kind": "recommendation"
+    },
+    {
+      "call_model": false,
+      "intent": "What should we do next?",
+      "model": "mistral:latest",
+      "model_called": false,
+      "reason": "Selected preferred local model mistral:latest.",
+      "recommendation_only": true,
+      "role": "DEEP",
+      "route_kind": "recommendation"
+    },
+    {
+      "call_model": false,
+      "intent": "What should we do next?",
+      "model": null,
+      "model_called": false,
+      "reason": "HANDOFF writes packets and requires no local model.",
+      "recommendation_only": true,
+      "role": "HANDOFF",
+      "route_kind": "handoff"
+    }
+  ],
+  "version": "0.6.2"
+}
+
