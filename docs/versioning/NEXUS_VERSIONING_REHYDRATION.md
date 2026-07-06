@@ -225,3 +225,13 @@ No repeated failure without chart update.
 Saves the v0.8.3A-I wound chain as explicit failure-mode evidence.
 Keeps cleanup bounded: restore tracked evidence before patching and clean only untracked residue.
 ```
+
+
+## v0.8.4B NexusCell Portal Access and Manifest Seal
+
+```text
+NexusCell appears in Desktop Entry Portal as [10] NexusCell / Containment.
+The access point is doctrine and manifest visibility only.
+No execution backend is enabled.
+No containment, rollback, or security claim may be made from portal visibility alone.
+```

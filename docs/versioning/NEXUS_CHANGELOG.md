@@ -90,3 +90,13 @@ Records the v0.8.3 geometric-router sealing wounds in the Failure Mode Doctor an
 Adds the PowerShell backtick string parse wound from the first failure-mode save attempt.
 Restores tracked report evidence before staging docs-only failure-mode changes.
 ```
+
+
+## v0.8.4B - NexusCell Portal Access and Manifest Seal
+
+```text
+Adds Desktop Entry Portal access for NexusCell.
+Adds read-only NexusCell console surface for doctrine, compact laws, and manifest.
+Adds state/nexus_cell/cell_manifest.v0.8.4.json.
+Keeps NexusCell doctrine-only: no execution backend, no sandbox claim, no rollback claim.
+```

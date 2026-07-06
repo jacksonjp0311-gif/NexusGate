@@ -1,4 +1,4 @@
-﻿param(
+param(
     [string]$RepoRoot = "",
     [switch]$InstallElectronDeps
 )
@@ -688,6 +688,68 @@ function Invoke-NexusFailureModeDoctorConsole {
 
 
 
+function Invoke-NexusCellConsole {
+    while ($true) {
+        Write-Host ""
+        Write-Host "========================================"
+        Write-Host " NEXUSCELL / EXECUTION CONTAINMENT"
+        Write-Host "========================================"
+        Write-Host "1. Open local NexusCell folder"
+        Write-Host "2. Open NexusCell architecture doc"
+        Write-Host "3. Open GitHub NexusCell architecture"
+        Write-Host "4. Show compact NexusCell laws"
+        Write-Host "5. Show NexusCell manifest"
+        Write-Host "B. Back to main menu"
+        Write-Host ""
+        Write-Host "Rule: NexusCell governs execution; no backend executes without explicit authority."
+        Write-Host ""
+
+        $cellChoice = Read-Host "NexusCell"
+
+        if ($cellChoice -eq "1") {
+            explorer.exe (Join-Path $RepoRoot "NexusCell") | Out-Null
+        }
+        elseif ($cellChoice -eq "2") {
+            explorer.exe (Join-Path $RepoRoot "docs\nexus_cell\NEXUS_CELL_ARCHITECTURE.md") | Out-Null
+        }
+        elseif ($cellChoice -eq "3") {
+            Invoke-NexusOpenUrl ($GitHubRepoUrl + "/blob/main/docs/nexus_cell/NEXUS_CELL_ARCHITECTURE.md")
+        }
+        elseif ($cellChoice -eq "4") {
+            Write-Host ""
+            Write-NG "NexusCell compact laws:"
+            Write-Host "A sandbox contains code." -ForegroundColor Green
+            Write-Host "NexusCell governs execution." -ForegroundColor Green
+            Write-Host "No execution without containment." -ForegroundColor Yellow
+            Write-Host "No containment without authority." -ForegroundColor Yellow
+            Write-Host "No authority without evidence." -ForegroundColor Yellow
+            Write-Host "No evidence without ledger." -ForegroundColor Yellow
+            Write-Host "No ledger without compiler visibility." -ForegroundColor Yellow
+            Write-Host "No compounding without human authorization." -ForegroundColor Yellow
+            Write-Host ""
+            Read-Host "Press Enter to return to NexusCell"
+        }
+        elseif ($cellChoice -eq "5") {
+            $manifestPath = Join-Path $RepoRoot "state\nexus_cell\cell_manifest.v0.8.4.json"
+            Write-Host ""
+            if (Test-Path -LiteralPath $manifestPath -PathType Leaf) {
+                Get-Content -LiteralPath $manifestPath -Raw | Write-Host
+            }
+            else {
+                Write-NG "NexusCell manifest has not been created yet."
+            }
+            Write-Host ""
+            Read-Host "Press Enter to return to NexusCell"
+        }
+        elseif ($cellChoice -eq "B" -or $cellChoice -eq "b") {
+            return
+        }
+        else {
+            Write-NG "Unknown NexusCell choice."
+        }
+    }
+}
+
 function Invoke-NexusOpenUrl {
     param([string]$Url)
     Write-NG ("Opening: {0}" -f $Url)
@@ -773,6 +835,7 @@ function Show-Menu {
     Write-Portal "  [7] Open repo folder               -> human inspection" "DarkCyan"
     Write-Portal "  [8] Failure Modes / Doctor         -> scan / classify / safe clean / retry" "Yellow"
     Write-Portal "  [9] GitHub / README / Docs         -> repo links / entrypoints / changelog" "Cyan"
+    Write-Portal "  [10] NexusCell / Containment       -> execution governance doctrine" "Yellow"
     Write-Portal "  [Q] Quit" "DarkGray"
     Write-Host ""
     Write-Portal "Rule: models recommend; human authorizes durable mutation." "Green"
@@ -818,6 +881,9 @@ while ($true) {
     }
     elseif ($choice -eq "9") {
         Invoke-NexusResourceMenu
+    }
+    elseif ($choice -eq "10") {
+        Invoke-NexusCellConsole
     }
     elseif ($choice -eq "Q" -or $choice -eq "q") {
         Write-OK "closing NEXUS Gate launcher"

@@ -1,4 +1,4 @@
-﻿# NexusCell Architecture and Execution Governance Doctrine
+# NexusCell Architecture and Execution Governance Doctrine
 
 Version: v0.8.4A-draft
 Status: Doctrine / architecture / extraction map
@@ -572,3 +572,22 @@ interconnect-visible,
 human-authorized.
 ```
 
+
+
+## v0.8.4B Portal Access and Manifest Seal
+
+NexusCell is now visible from the Desktop Entry Portal as a doctrine and manifest surface.
+
+```text
+[10] NexusCell / Containment -> execution governance doctrine
+```
+
+This access point is read-only. It opens the local NexusCell organ, the architecture doctrine, the GitHub doctrine document, compact laws, and the manifest.
+
+Boundary:
+
+```text
+Portal access is not execution authority.
+Manifest visibility is not backend enablement.
+No NexusCell backend executes until explicit implementation and human authorization.
+```

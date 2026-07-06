@@ -1,0 +1,77 @@
+{
+  "authority_modes": [
+    "reject",
+    "abstain",
+    "shadow",
+    "engage",
+    "defer",
+    "escalate"
+  ],
+  "capability_vector": [
+    "fs_read",
+    "fs_write",
+    "network",
+    "secrets",
+    "registry",
+    "process_spawn",
+    "service_install",
+    "git_write",
+    "host_mount",
+    "clipboard",
+    "gpu"
+  ],
+  "claim_boundary": "NexusCell v0.8.4B exposes doctrine and manifest visibility only; it does not enable an execution backend, sandbox, rollback system, autonomous authority, or production security proof.",
+  "desktop_portal": {
+    "allowed_surfaces": [
+      "open local NexusCell folder",
+      "open NexusCell architecture doc",
+      "open GitHub NexusCell architecture",
+      "show compact NexusCell laws",
+      "show manifest"
+    ],
+    "enabled": true,
+    "forbidden_surfaces": [
+      "execute code",
+      "enable backend",
+      "mount host resources",
+      "inject secrets",
+      "write git",
+      "claim rollback"
+    ],
+    "menu_entry": "[10] NexusCell / Containment",
+    "mode": "read_only_doctrine_manifest_access"
+  },
+  "interconnect_nodes_future": [
+    "runtime:nexus_cell",
+    "policy:nexus_cell",
+    "ledger:nexus_cell",
+    "reports:nexus_cell",
+    "receipt:nexus_cell",
+    "boundary:nexus_cell",
+    "seal:nexus_cell"
+  ],
+  "laws": [
+    "No execution without containment.",
+    "No containment without authority.",
+    "No authority without evidence.",
+    "No evidence without ledger.",
+    "No ledger without compiler visibility.",
+    "No compounding without human authorization."
+  ],
+  "name": "NexusCell",
+  "next_versions": {
+    "v0.8.4C": "Read-only planner doctrine tests and report stub.",
+    "v0.8.5": "Plan-only Python package surface with no execution.",
+    "v0.8.6": "Shadow receipts with no mutation, no network, no secrets."
+  },
+  "root_organs": {
+    "docs": "docs/nexus_cell/",
+    "human_facing": "NexusCell/",
+    "ledger_future": "ledger/nexus_cell/",
+    "python_package_future": "nexus_gate/nexus_cell/",
+    "reports_future": "reports/nexus_cell/",
+    "state": "state/nexus_cell/"
+  },
+  "status": "doctrine_manifest_ui_access_only",
+  "version": "v0.8.4B"
+}

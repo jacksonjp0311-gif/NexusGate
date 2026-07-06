@@ -1,4 +1,4 @@
-﻿# NEXUS GATE Entrypoints
+# NEXUS GATE Entrypoints
 
 ## Desktop Entry Portal
 
@@ -120,3 +120,20 @@ bash scripts/nexus.sh geo-clean
 
 Use cleanup after smoke tests, full-suite runs, or failed scripts that leave generated report residue.
 
+
+
+## NexusCell Execution Containment
+
+```powershell
+Get-Content .\docs\nexus_cell\NEXUS_CELL_ARCHITECTURE.md -TotalCount 120
+Get-Content .\state\nexus_cell\cell_manifest.v0.8.4.json -Raw
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\desktop\open_nexus_gate_console.ps1
+```
+
+Desktop Portal access:
+
+```text
+[10] NexusCell / Containment -> execution governance doctrine
+```
+
+Boundary: NexusCell is doctrine/manifest/UI access only at v0.8.4B. No execution backend is enabled.
