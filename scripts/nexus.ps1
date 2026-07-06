@@ -1,4 +1,4 @@
-# NEXUS GATE compact PowerShell command surface
+﻿# NEXUS GATE compact PowerShell command surface
 # Legacy direct compiler markers retained for audit/tests:
 # nexus_gate.adapters.compile
 # nexus_gate.receptors.compile
@@ -190,11 +190,11 @@ function Invoke-NexusCellPolicyCli {
 }
 
 switch ($Command) {
-    "cell-policy" {'Invoke-NexusCellPolicyCli'}
-    "cell-ledger" {'Invoke-NexusCellLedgerCli'}
-    "cell-doctor" {'Invoke-NexusCellDoctorCli'}
-    "cell" {'Invoke-NexusCellDoctorCli'}
-    "cell-run" {'Invoke-NexusCellRunCli'}
+    "cell-policy" { Invoke-NexusCellPolicyCli }
+    "cell-ledger" { Invoke-NexusCellLedgerCli }
+    "cell-doctor" { Invoke-NexusCellDoctorCli }
+    "cell" { Invoke-NexusCellDoctorCli }
+    "cell-run" { Invoke-NexusCellRunCli }
     "cell-bridge" { Invoke-NexusCellBridge -Intent $Tag }
     "shell" { Invoke-NexusShell -Intent $Tag }
     "cell-context" { Invoke-NexusCellContext -Intent $Tag }
@@ -235,3 +235,4 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
+
