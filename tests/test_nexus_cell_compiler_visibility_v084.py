@@ -1,4 +1,4 @@
-﻿import unittest
+import unittest
 from pathlib import Path
 
 from nexus_gate.compiler.compiler import NexusCompiler, REQUIRED_PATHS
@@ -29,7 +29,7 @@ class TestNexusCellCompilerVisibilityV084(unittest.TestCase):
         gate = compiler.gates[0]
         self.assertEqual(gate.gate, "nexus_cell_planner_visibility")
         self.assertEqual(gate.status, "pass")
-        self.assertIn(gate.evidence["status"], {"compiler_visible_planner_no_execution", "context_bridge_visible_no_execution", "operator_shell_visible_no_execution"})
+        self.assertIn(gate.evidence["status"], {"compiler_visible_planner_no_execution", "context_bridge_visible_no_execution", "operator_shell_visible_no_execution", "core_bridge_visible_no_execution", "full_core_runtime_visible_controlled"})
 
     def test_docs_record_compiler_visibility_boundary(self):
         doc = read("docs/nexus_cell/NEXUS_CELL_COMPILER_VISIBILITY.md")
@@ -40,4 +40,3 @@ class TestNexusCellCompilerVisibilityV084(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

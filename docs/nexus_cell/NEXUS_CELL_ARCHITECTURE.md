@@ -1,4 +1,4 @@
-﻿# NexusCell Architecture and Execution Governance Doctrine
+# NexusCell Architecture and Execution Governance Doctrine
 
 Version: v0.8.4A-draft
 Status: Doctrine / architecture / extraction map
@@ -753,3 +753,62 @@ doctor: patch test and compiler status sets to include the full no-execution pro
 boundary: accepted status progression does not grant execution authority
 ```
 
+
+
+## v0.8.7 NexusCell Core Bridge Seal
+
+NexusCell now has a real Python core contract and bridge packet builder.
+
+```text
+intent
+-> planner
+-> context bridge
+-> core contract
+-> bridge packet
+-> read-only governance handoff
+```
+
+Boundary:
+
+```text
+The core bridge does not execute.
+The core bridge does not create a sandbox.
+The core bridge does not spawn processes.
+The core bridge does not mount host paths.
+The core bridge does not expose secrets.
+The core bridge does not use network.
+The core bridge does not mutate git.
+The core bridge does not claim rollback.
+The core bridge does not self-authorize.
+```
+
+
+## v0.8.8 NexusCell Full Core Runtime Seal
+
+NexusCell now has the full control surface:
+
+```text
+policy map
+authority gate
+receipt builder
+controlled internal runner
+run packet
+compiler visibility
+PowerShell lane
+Desktop Portal lane
+```
+
+Boundary:
+
+```text
+No arbitrary shell execution.
+No backend sandbox proof.
+No host mount.
+No network.
+No secrets.
+No git mutation.
+No rollback claim.
+No self-authorization.
+```
+
+Controlled lane execution requires explicit human authorization and remains limited to named internal lanes.

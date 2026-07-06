@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import argparse
 import compileall
@@ -77,6 +77,15 @@ REQUIRED_PATHS = [
     "nexus_gate/nexus_cell/plan.py",
     "docs/nexus_cell/NEXUS_CELL_CONTEXT_BRIDGE.md",
     "nexus_gate/nexus_cell/context_bridge.py",
+    "nexus_gate/nexus_cell/bridge.py",
+    "nexus_gate/nexus_cell/run.py",
+    "nexus_gate/nexus_cell/runner.py",
+    "nexus_gate/nexus_cell/receipt.py",
+    "nexus_gate/nexus_cell/authority.py",
+    "nexus_gate/nexus_cell/policy.py",
+    "docs/nexus_cell/NEXUS_CELL_FULL_CORE_RUNTIME.md",
+    "nexus_gate/nexus_cell/core.py",
+    "docs/nexus_cell/NEXUS_CELL_CORE_BRIDGE.md",
     "nexus_gate/nexus_shell/shell.py",
     "nexus_gate/nexus_shell/__main__.py",
     "nexus_gate/nexus_shell/__init__.py",
@@ -426,7 +435,7 @@ class NexusCompiler:
             self.add("nexus_cell_planner_visibility", "fail", "NexusCell forbidden boundary is incomplete.", {"missing": missing_forbidden})
             return
 
-        if manifest.get("status") not in {"compiler_visible_planner_no_execution", "context_bridge_visible_no_execution", "operator_shell_visible_no_execution"}:
+        if manifest.get("status") not in {"compiler_visible_planner_no_execution", "context_bridge_visible_no_execution", "operator_shell_visible_no_execution", "core_bridge_visible_no_execution", "full_core_runtime_visible_controlled"}:
             self.add("nexus_cell_planner_visibility", "fail", "NexusCell planner status is not an accepted read-only compiler-visible status.", {"status": manifest.get("status")})
             return
 
@@ -477,7 +486,7 @@ class NexusCompiler:
         except Exception as exc:
             self.add("nexus_cell_context_bridge_visibility", "fail", "NexusCell manifest failed to parse.", {"error": str(exc)})
             return
-        if manifest.get("status") not in {"context_bridge_visible_no_execution", "operator_shell_visible_no_execution"}:
+        if manifest.get("status") not in {"context_bridge_visible_no_execution", "operator_shell_visible_no_execution", "core_bridge_visible_no_execution", "full_core_runtime_visible_controlled"}:
             self.add("nexus_cell_context_bridge_visibility", "fail", "NexusCell context bridge status is not an accepted active status.", {"status": manifest.get("status")})
             return
         try:
@@ -535,6 +544,94 @@ class NexusCompiler:
             "status": manifest.get("status"),
             "mode": packet.get("mode"),
             "available_commands": packet.get("available_commands"),
+            "claim_boundary": packet.get("claim_boundary"),
+        })
+
+
+    def gate_nexus_cell_core_bridge_visibility(self) -> None:
+        required = [
+            "docs/nexus_cell/NEXUS_CELL_CORE_BRIDGE.md",
+            "nexus_gate/nexus_cell/core.py",
+            "nexus_gate/nexus_cell/bridge.py",
+            "state/nexus_cell/cell_manifest.v0.8.4.json",
+            "scripts/nexus.ps1",
+            "scripts/desktop/open_nexus_gate_console.ps1",
+        ]
+        missing = [rel for rel in required if not (self.root / rel).exists()]
+        if missing:
+            self.add("nexus_cell_core_bridge_visibility", "fail", "NexusCell core bridge surface missing.", {"missing": missing})
+            return
+        try:
+            manifest = json.loads((self.root / "state/nexus_cell/cell_manifest.v0.8.4.json").read_text(encoding="utf-8"))
+        except Exception as exc:
+            self.add("nexus_cell_core_bridge_visibility", "fail", "NexusCell manifest failed to parse.", {"error": str(exc)})
+            return
+        if manifest.get("status") not in {"core_bridge_visible_no_execution", "full_core_runtime_visible_controlled"}:
+            self.add("nexus_cell_core_bridge_visibility", "fail", "NexusCell core bridge status is not accepted.", {"status": manifest.get("status")})
+            return
+        try:
+            from nexus_gate.nexus_cell.bridge import build_cell_bridge_packet
+            packet = build_cell_bridge_packet(self.root, "inspect docs only", context_limit=6)
+        except Exception as exc:
+            self.add("nexus_cell_core_bridge_visibility", "fail", "NexusCell core bridge failed to build packet.", {"error": str(exc)})
+            return
+        boundary = packet.get("boundary", {})
+        if boundary.get("execution_enabled") is not False or boundary.get("process_spawn_enabled") is not False:
+            self.add("nexus_cell_core_bridge_visibility", "fail", "NexusCell bridge boundary drifted.", {"boundary": boundary})
+            return
+        self.add("nexus_cell_core_bridge_visibility", "pass", "NexusCell core bridge is compiler-visible and no-execution bounded.", {
+            "version": manifest.get("version"),
+            "status": manifest.get("status"),
+            "mode": packet.get("mode"),
+            "cell_phase": packet.get("cell_contract", {}).get("cell_phase"),
+            "claim_boundary": packet.get("claim_boundary"),
+        })
+
+
+    def gate_nexus_cell_full_core_runtime_visibility(self) -> None:
+        required = [
+            "docs/nexus_cell/NEXUS_CELL_FULL_CORE_RUNTIME.md",
+            "nexus_gate/nexus_cell/policy.py",
+            "nexus_gate/nexus_cell/authority.py",
+            "nexus_gate/nexus_cell/receipt.py",
+            "nexus_gate/nexus_cell/runner.py",
+            "nexus_gate/nexus_cell/run.py",
+            "state/nexus_cell/cell_manifest.v0.8.4.json",
+            "scripts/nexus.ps1",
+            "scripts/desktop/open_nexus_gate_console.ps1",
+        ]
+        missing = [rel for rel in required if not (self.root / rel).exists()]
+        if missing:
+            self.add("nexus_cell_full_core_runtime_visibility", "fail", "NexusCell full core runtime surface missing.", {"missing": missing})
+            return
+        try:
+            manifest = json.loads((self.root / "state/nexus_cell/cell_manifest.v0.8.4.json").read_text(encoding="utf-8"))
+        except Exception as exc:
+            self.add("nexus_cell_full_core_runtime_visibility", "fail", "NexusCell manifest failed to parse.", {"error": str(exc)})
+            return
+        if manifest.get("status") != "full_core_runtime_visible_controlled":
+            self.add("nexus_cell_full_core_runtime_visibility", "fail", "NexusCell full core runtime status is not active.", {"status": manifest.get("status")})
+            return
+        try:
+            from nexus_gate.nexus_cell.runner import build_run_packet
+            packet = build_run_packet(self.root, lane="cell-bridge", intent="inspect docs only", execute=False, human_authorized=False)
+        except Exception as exc:
+            self.add("nexus_cell_full_core_runtime_visibility", "fail", "NexusCell full core failed to build packet.", {"error": str(exc)})
+            return
+        boundary = packet.get("boundary", {})
+        if boundary.get("arbitrary_command_execution") is not False:
+            self.add("nexus_cell_full_core_runtime_visibility", "fail", "NexusCell full core exposed arbitrary execution.", {"boundary": boundary})
+            return
+        if packet.get("execution", {}).get("executed") is not False:
+            self.add("nexus_cell_full_core_runtime_visibility", "fail", "NexusCell full core executed during visibility gate.", {"execution": packet.get("execution")})
+            return
+        self.add("nexus_cell_full_core_runtime_visibility", "pass", "NexusCell full core runtime is compiler-visible and controlled.", {
+            "version": manifest.get("version"),
+            "status": manifest.get("status"),
+            "mode": packet.get("mode"),
+            "lane": packet.get("lane"),
+            "authority": packet.get("authority"),
+            "receipt_id": packet.get("receipt", {}).get("receipt_id"),
             "claim_boundary": packet.get("claim_boundary"),
         })
 
@@ -600,6 +697,8 @@ class NexusCompiler:
         self.gate_compact_commands()
         self.gate_nexus_cell_planner_visibility()
         self.gate_nexus_cell_context_bridge_visibility()
+        self.gate_nexus_cell_core_bridge_visibility()
+        self.gate_nexus_cell_full_core_runtime_visibility()
         self.gate_nexus_shell_operator_visibility()
         self.gate_python_compile()
         self.gate_route_contracts()
@@ -656,4 +755,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

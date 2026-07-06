@@ -282,3 +282,21 @@ NexusShell becomes the Python-native full-scope operator surface.
 It routes status, rehydrate, compile, Doctor, NexusCell planner, context bridge, and handoff lanes.
 It does not enable arbitrary execution or autonomous mutation.
 ```
+
+
+## v0.8.7 NexusCell Core Bridge
+
+```text
+NexusCell now has a Python core contract and bridge packet builder.
+The bridge emits read-only governance handoff packets.
+No execution backend is enabled.
+```
+
+
+## v0.8.8 NexusCell Full Core Runtime
+
+```text
+NexusCell now has a policy map, authority gate, receipt builder, and controlled internal runner.
+This is not arbitrary shell execution and not a sandbox proof.
+Human authorization is required for controlled lane execution.
+```

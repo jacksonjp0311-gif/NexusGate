@@ -19,6 +19,8 @@ NEXUS_SHELL_COMMANDS = [
     "doctor",
     "cell-plan",
     "cell-context",
+    "cell-bridge",
+    "cell-run",
     "handoff",
     "help",
 ]
@@ -30,6 +32,8 @@ LANE_COMMANDS = {
     "doctor": "Open Desktop Portal -> Failure Modes / Doctor",
     "cell-plan": ".\\scripts\\nexus.ps1 cell-plan -Tag \"...\"",
     "cell-context": ".\\scripts\\nexus.ps1 cell-context -Tag \"...\"",
+    "cell-bridge": ".\\scripts\\nexus.ps1 cell-bridge -Tag \"...\"",
+    "cell-run": ".\\scripts\\nexus.ps1 cell-run -Tag \"cell-bridge\"",
     "handoff": "python -m nexus_gate.nexus_shell.shell --command handoff --intent \"...\" --json",
     "help": "python -m nexus_gate.nexus_shell.shell --command help --json",
 }

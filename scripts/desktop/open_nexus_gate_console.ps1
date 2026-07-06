@@ -701,6 +701,8 @@ function Invoke-NexusCellConsole {
         Write-Host "5. Show NexusCell manifest"
         Write-Host "6. Plan gated invocation (read-only)"
         Write-Host "7. Build context bridge packet (read-only)"
+        Write-Host "8. Build core bridge packet (read-only)"
+        Write-Host "9. Build full core run packet (controlled, no execute by default)"
         Write-Host "B. Back to main menu"
         Write-Host ""
         Write-Host "Rule: NexusCell governs execution; no backend executes without explicit authority."
@@ -752,6 +754,18 @@ function Invoke-NexusCellConsole {
         elseif ($cellChoice -eq "7") {
             $intent = Read-Host "Intent to bridge"
             & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot "scripts\nexus.ps1") cell-context -Tag $intent
+            Write-Host ""
+            Read-Host "Press Enter to return to NexusCell"
+        }
+        elseif ($cellChoice -eq "8") {
+            $intent = Read-Host "Intent to bridge through NexusCell core"
+            & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot "scripts\nexus.ps1") cell-bridge -Tag $intent
+            Write-Host ""
+            Read-Host "Press Enter to return to NexusCell"
+        }
+        elseif ($cellChoice -eq "9") {
+            $lane = Read-Host "Controlled lane (status/compile/tests/cell-plan/cell-context/cell-bridge)"
+            & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot "scripts\nexus.ps1") cell-run -Tag $lane
             Write-Host ""
             Read-Host "Press Enter to return to NexusCell"
         }

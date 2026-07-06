@@ -202,3 +202,37 @@ Desktop Portal access:
 ```
 
 Boundary: NexusShell routes governed lanes only. It does not self-authorize execution.
+
+
+## NexusCell Core Bridge
+
+```powershell
+python -m nexus_gate.nexus_cell.bridge --root . --intent "inspect docs only" --json
+.\scripts\nexus.ps1 cell-bridge -Tag "inspect docs only"
+```
+
+Desktop Portal access:
+
+```text
+[10] NexusCell / Containment
+8. Build core bridge packet (read-only)
+```
+
+Boundary: core bridge emits contracts and handoff packets only. It does not execute.
+
+
+## NexusCell Full Core Runtime
+
+```powershell
+python -m nexus_gate.nexus_cell.run --root . --lane cell-bridge --intent "inspect docs only" --json
+.\scripts\nexus.ps1 cell-run -Tag "cell-bridge"
+```
+
+Desktop Portal access:
+
+```text
+[10] NexusCell / Containment
+9. Build full core run packet (controlled, no execute by default)
+```
+
+Boundary: controlled runner exposes named internal lanes only; no arbitrary shell execution.

@@ -158,3 +158,28 @@ Adds Desktop Portal [11] NexusShell / Operator.
 Adds compiler gate nexus_shell_operator_visibility.
 Keeps no-execution/no-backend/no-self-authorization boundary.
 ```
+
+
+## v0.8.7 - NexusCell Core Bridge
+
+```text
+Adds nexus_gate.nexus_cell.core.
+Adds nexus_gate.nexus_cell.bridge.
+Adds cell-bridge command to scripts/nexus.ps1.
+Adds Desktop Portal NexusCell core bridge option.
+Adds compiler gate nexus_cell_core_bridge_visibility.
+Emits reports/nexus_cell_bridge_packet_latest.json and state/nexus_cell/bridge_state_latest.json.
+Keeps no-execution/no-backend/no-self-authorization boundary.
+```
+
+
+## v0.8.8 - NexusCell Full Core Runtime
+
+```text
+Adds policy, authority, receipt, runner, and run modules.
+Adds cell-run command to scripts/nexus.ps1.
+Adds Desktop Portal NexusCell full core runtime option.
+Adds compiler gate nexus_cell_full_core_runtime_visibility.
+Adds controlled internal lanes: status, compile, tests, cell-plan, cell-context, cell-bridge.
+Keeps no-arbitrary-shell/no-network/no-secrets/no-git-mutation/no-self-authorization boundary.
+```

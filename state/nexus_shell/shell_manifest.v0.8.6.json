@@ -20,7 +20,9 @@
       "cell-plan",
       "cell-context",
       "handoff",
-      "help"
+      "help",
+      "cell-bridge",
+      "cell-run"
     ],
     "desktop_portal": "[11] NexusShell / Operator",
     "enabled": true,

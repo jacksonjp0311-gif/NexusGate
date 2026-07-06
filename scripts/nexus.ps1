@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -151,7 +151,27 @@ function Invoke-NexusShell {
     if ($LASTEXITCODE -ne 0) { throw "NexusShell operator packet failed." }
 }
 
+function Invoke-NexusCellBridge {
+    param([string]$Intent = "Build a NexusCell core bridge packet.")
+    if ([string]::IsNullOrWhiteSpace($Intent)) {
+        $Intent = "Build a NexusCell core bridge packet."
+    }
+    python -m nexus_gate.nexus_cell.bridge --root . --intent $Intent --json
+    if ($LASTEXITCODE -ne 0) { throw "NexusCell core bridge failed." }
+}
+
+function Invoke-NexusCellRun {
+    param([string]$Lane = "cell-bridge")
+    if ([string]::IsNullOrWhiteSpace($Lane)) {
+        $Lane = "cell-bridge"
+    }
+    python -m nexus_gate.nexus_cell.run --root . --lane $Lane --intent ("NexusCell controlled lane: " + $Lane) --json
+    if ($LASTEXITCODE -ne 0) { throw "NexusCell full core run packet failed." }
+}
+
 switch ($Command) {
+    "cell-run" { Invoke-NexusCellRun -Lane $Tag }
+    "cell-bridge" { Invoke-NexusCellBridge -Intent $Tag }
     "shell" { Invoke-NexusShell -Intent $Tag }
     "cell-context" { Invoke-NexusCellContext -Intent $Tag }
     "cell-plan" { Invoke-NexusCellPlan -Intent $Tag }

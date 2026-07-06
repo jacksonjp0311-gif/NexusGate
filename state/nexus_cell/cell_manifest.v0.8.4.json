@@ -20,7 +20,7 @@
     "clipboard",
     "gpu"
   ],
-  "claim_boundary": "NexusCell v0.8.6 is routed through NexusShell operator visibility; no execution backend, sandboxing, rollback, secrets, network, git mutation, or autonomous authority is enabled.",
+  "claim_boundary": "NexusCell v0.8.8 adds policy, authority, receipt, and a controlled internal runner; it does not provide arbitrary shell execution, sandbox proof, host mounts, secrets, network, git mutation, rollback, or autonomous authority.",
   "compiler_visibility": {
     "boundary": "Compiler visibility proves the planner surface is present and bounded; it is not execution authority.",
     "enabled": true,
@@ -48,6 +48,21 @@
       "state/nexus_cell/context_bridge_state_latest.json"
     ],
     "script_command": ".\\scripts\\nexus.ps1 cell-context -Tag \"...\""
+  },
+  "core_bridge": {
+    "boundary": "Core bridge emits read-only governance contracts and handoff packets only; it does not execute or contain code.",
+    "command": "python -m nexus_gate.nexus_cell.bridge --root . --intent \"...\" --json",
+    "enabled": true,
+    "mode": "nexus_cell_core_bridge_no_execution",
+    "modules": [
+      "nexus_gate.nexus_cell.core",
+      "nexus_gate.nexus_cell.bridge"
+    ],
+    "outputs": [
+      "reports/nexus_cell_bridge_packet_latest.json",
+      "state/nexus_cell/bridge_state_latest.json"
+    ],
+    "script_command": ".\\scripts\\nexus.ps1 cell-bridge -Tag \"...\""
   },
   "desktop_portal": {
     "allowed_surfaces": [
@@ -82,6 +97,29 @@
       "planner_visibility_not_backend_enablement",
       "doctor_trap_without_self_authority"
     ]
+  },
+  "full_core_runtime": {
+    "boundary": "No arbitrary shell execution, sandbox proof, host mount, network, secrets, git mutation, rollback, or self-authorization.",
+    "command": "python -m nexus_gate.nexus_cell.run --root . --lane cell-bridge --intent \"...\" --json",
+    "controlled_lanes": [
+      "status",
+      "compile",
+      "tests",
+      "cell-plan",
+      "cell-context",
+      "cell-bridge"
+    ],
+    "enabled": true,
+    "execution_rule": "execution requires both --execute and --human-authorized and is limited to named internal lanes",
+    "mode": "nexus_cell_full_core_controlled_runner",
+    "modules": [
+      "nexus_gate.nexus_cell.policy",
+      "nexus_gate.nexus_cell.authority",
+      "nexus_gate.nexus_cell.receipt",
+      "nexus_gate.nexus_cell.runner",
+      "nexus_gate.nexus_cell.run"
+    ],
+    "script_command": ".\\scripts\\nexus.ps1 cell-run -Tag \"cell-bridge\""
   },
   "interconnect_nodes_future": [
     "runtime:nexus_cell",
@@ -139,6 +177,6 @@
     "reports_future": "reports/nexus_cell/",
     "state": "state/nexus_cell/"
   },
-  "status": "operator_shell_visible_no_execution",
-  "version": "v0.8.6"
+  "status": "full_core_runtime_visible_controlled",
+  "version": "v0.8.8"
 }
