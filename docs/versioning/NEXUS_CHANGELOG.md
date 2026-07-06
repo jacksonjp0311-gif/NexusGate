@@ -134,3 +134,15 @@ Adds compiler_visibility_not_authority and planner_visibility_not_backend_enable
 Adds doctor_trap_without_self_authority.
 Keeps no-execution boundary and human-authorized repair doctrine.
 ```
+
+
+## v0.8.5 - NexusCell Context Bridge
+
+```text
+Adds nexus_gate.nexus_cell.context_bridge.
+Adds cell-context command to scripts/nexus.ps1.
+Adds Desktop Portal context bridge option.
+Adds compiler gate nexus_cell_context_bridge_visibility.
+Emits reports/nexus_cell_context_bridge_latest.json and state/nexus_cell/context_bridge_state_latest.json.
+Keeps no-execution boundary and avoids whole-repo dumps.
+```

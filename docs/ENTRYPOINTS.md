@@ -169,3 +169,20 @@ nexus_cell_planner_visibility
 ```
 
 Boundary: the compiler sees the planner and verifies read-only limits. It does not authorize execution.
+
+
+## NexusCell Context Bridge
+
+```powershell
+python -m nexus_gate.nexus_cell.context_bridge --root . --intent "inspect docs only" --json
+.\scripts\nexus.ps1 cell-context -Tag "inspect docs only"
+```
+
+Desktop Portal access:
+
+```text
+[10] NexusCell / Containment
+7. Build context bridge packet (read-only)
+```
+
+Boundary: context bridge emits bounded references and digests only. It does not execute.

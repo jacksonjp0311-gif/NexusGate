@@ -264,3 +264,12 @@ No repeated NexusCell failure without chart/Doctor update.
 Tests should freeze invariants, not stale version labels.
 Doctor traps and recommends; human authorizes repair.
 ```
+
+
+## v0.8.5 NexusCell Context Bridge
+
+```text
+NexusCell planner decisions now compile into bounded context bridge packets.
+The bridge selects evidence refs and digests.
+No execution backend is enabled.
+```

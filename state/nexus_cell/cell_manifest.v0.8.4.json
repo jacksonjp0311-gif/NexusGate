@@ -20,7 +20,7 @@
     "clipboard",
     "gpu"
   ],
-  "claim_boundary": "NexusCell v0.8.4E preserves the failure-mode ledger for planner and compiler visibility wounds; it still does not enable execution, sandboxing, rollback, secrets, network, git mutation, or autonomous authority.",
+  "claim_boundary": "NexusCell v0.8.5 adds a read-only context bridge; it still does not enable execution, sandboxing, rollback, secrets, network, git mutation, or autonomous authority.",
   "compiler_visibility": {
     "boundary": "Compiler visibility proves the planner surface is present and bounded; it is not execution authority.",
     "enabled": true,
@@ -36,6 +36,18 @@
       "state/nexus_cell/cell_manifest.v0.8.4.json",
       "nexus_gate/nexus_cell/plan.py"
     ]
+  },
+  "context_bridge": {
+    "boundary": "Context bridge selects bounded evidence references only; it does not embed file contents or execute.",
+    "command": "python -m nexus_gate.nexus_cell.context_bridge --root . --intent \"...\" --json",
+    "enabled": true,
+    "mode": "read_only_context_bridge_no_execution",
+    "module": "nexus_gate.nexus_cell.context_bridge",
+    "outputs": [
+      "reports/nexus_cell_context_bridge_latest.json",
+      "state/nexus_cell/context_bridge_state_latest.json"
+    ],
+    "script_command": ".\\scripts\\nexus.ps1 cell-context -Tag \"...\""
   },
   "desktop_portal": {
     "allowed_surfaces": [
@@ -90,9 +102,9 @@
   ],
   "name": "NexusCell",
   "next_versions": {
-    "v0.8.4F": "NexusCell compiler gate accepts v0.8.4E manifest while preserving compiler_visible_planner_no_execution status.",
-    "v0.8.5": "Plan-only package expansion and context bridge.",
-    "v0.8.6": "Shadow receipts with no mutation, no network, no secrets."
+    "v0.8.5A": "Failure-mode ledger update for context bridge progression if needed.",
+    "v0.8.6": "Shadow receipts with no mutation, no network, no secrets.",
+    "v0.8.7": "Receipt ledger continuity without execution backend."
   },
   "planner": {
     "command": "python -m nexus_gate.nexus_cell.plan --root . --intent \"...\" --json",
@@ -122,6 +134,6 @@
     "reports_future": "reports/nexus_cell/",
     "state": "state/nexus_cell/"
   },
-  "status": "compiler_visible_planner_no_execution",
-  "version": "v0.8.4E"
+  "status": "context_bridge_visible_no_execution",
+  "version": "v0.8.5"
 }

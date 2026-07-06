@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -133,7 +133,17 @@ function Invoke-NexusCellPlan {
     if ($LASTEXITCODE -ne 0) { throw "NexusCell read-only planner failed." }
 }
 
+function Invoke-NexusCellContext {
+    param([string]$Intent = "Build a bounded NexusCell context bridge.")
+    if ([string]::IsNullOrWhiteSpace($Intent)) {
+        $Intent = "Build a bounded NexusCell context bridge."
+    }
+    python -m nexus_gate.nexus_cell.context_bridge --root . --intent $Intent --json
+    if ($LASTEXITCODE -ne 0) { throw "NexusCell context bridge failed." }
+}
+
 switch ($Command) {
+    "cell-context" { Invoke-NexusCellContext -Intent $Tag }
     "cell-plan" { Invoke-NexusCellPlan -Intent $Tag }
     "geo-clean" { Invoke-NexusGeoClean }
     "geo" { Invoke-NexusGeo -Intent $Tag }

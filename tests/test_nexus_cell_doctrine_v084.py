@@ -1,4 +1,4 @@
-﻿
+
 import json
 import unittest
 from pathlib import Path
@@ -30,8 +30,8 @@ class TestNexusCellDoctrineV084(unittest.TestCase):
 
     def test_manifest_is_doctrine_only_and_ui_visible(self):
         manifest = json.loads(read("state/nexus_cell/cell_manifest.v0.8.4.json"))
-        self.assertTrue(str(manifest["version"]).startswith("v0.8.4"))
-        self.assertIn(manifest["status"], {"doctrine_manifest_ui_access_only", "read_only_planner_enabled_no_execution", "compiler_visible_planner_no_execution"})
+        self.assertTrue(str(manifest["version"]).startswith("v0.8."))
+        self.assertIn(manifest["status"], {"doctrine_manifest_ui_access_only", "read_only_planner_enabled_no_execution", "compiler_visible_planner_no_execution", "context_bridge_visible_no_execution"})
         self.assertTrue(manifest["desktop_portal"]["enabled"])
         self.assertEqual(manifest["desktop_portal"]["menu_entry"], "[10] NexusCell / Containment")
         forbidden = set(manifest["desktop_portal"]["forbidden_surfaces"])
@@ -63,4 +63,3 @@ class TestNexusCellDoctrineV084(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

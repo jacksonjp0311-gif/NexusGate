@@ -683,3 +683,24 @@ Doctor traps and recommends.
 Human authorizes repair.
 Compiler validates compounding.
 ```
+
+
+## v0.8.5 Context Bridge Seal
+
+NexusCell now emits a read-only context bridge packet:
+
+```text
+intent -> planner -> capability/risk/authority -> bounded context refs -> evidence digests -> bridge hash
+```
+
+Boundary:
+
+```text
+The context bridge does not execute.
+The context bridge does not enable a backend.
+The context bridge does not use network.
+The context bridge does not expose secrets.
+The context bridge does not mutate git.
+The context bridge does not claim rollback.
+The context bridge does not embed file contents by default.
+```

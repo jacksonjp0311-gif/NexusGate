@@ -75,6 +75,8 @@ REQUIRED_PATHS = [
     "scripts/nexus_strict_compile.ps1",
     "scripts/nexus_strict_compile.sh",
     "nexus_gate/nexus_cell/plan.py",
+    "docs/nexus_cell/NEXUS_CELL_CONTEXT_BRIDGE.md",
+    "nexus_gate/nexus_cell/context_bridge.py",
     "nexus_gate/nexus_cell/__init__.py",
     "state/nexus_cell/cell_manifest.v0.8.4.json",
     "docs/nexus_cell/NEXUS_CELL_PLANNER.md",
@@ -418,8 +420,8 @@ class NexusCompiler:
             self.add("nexus_cell_planner_visibility", "fail", "NexusCell forbidden boundary is incomplete.", {"missing": missing_forbidden})
             return
 
-        if manifest.get("status") != "compiler_visible_planner_no_execution":
-            self.add("nexus_cell_planner_visibility", "fail", "NexusCell planner status is not compiler-visible read-only planner.", {"status": manifest.get("status")})
+        if manifest.get("status") not in {"compiler_visible_planner_no_execution", "context_bridge_visible_no_execution"}:
+            self.add("nexus_cell_planner_visibility", "fail", "NexusCell planner status is not an accepted read-only compiler-visible status.", {"status": manifest.get("status")})
             return
 
         try:
@@ -452,6 +454,42 @@ class NexusCompiler:
             "risk_score": plan.get("risk_score"),
             "visible_outputs": visible_outputs,
             "claim_boundary": plan.get("claim_boundary"),
+        })
+
+    def gate_nexus_cell_context_bridge_visibility(self) -> None:
+        required = [
+            "docs/nexus_cell/NEXUS_CELL_CONTEXT_BRIDGE.md",
+            "nexus_gate/nexus_cell/context_bridge.py",
+            "state/nexus_cell/cell_manifest.v0.8.4.json",
+        ]
+        missing = [rel for rel in required if not (self.root / rel).exists()]
+        if missing:
+            self.add("nexus_cell_context_bridge_visibility", "fail", "NexusCell context bridge surface missing.", {"missing": missing})
+            return
+        try:
+            manifest = json.loads((self.root / "state/nexus_cell/cell_manifest.v0.8.4.json").read_text(encoding="utf-8"))
+        except Exception as exc:
+            self.add("nexus_cell_context_bridge_visibility", "fail", "NexusCell manifest failed to parse.", {"error": str(exc)})
+            return
+        if manifest.get("status") != "context_bridge_visible_no_execution":
+            self.add("nexus_cell_context_bridge_visibility", "fail", "NexusCell context bridge status is not active.", {"status": manifest.get("status")})
+            return
+        try:
+            from nexus_gate.nexus_cell.context_bridge import build_context_bridge
+            packet = build_context_bridge(self.root, "inspect docs only", limit=8)
+        except Exception as exc:
+            self.add("nexus_cell_context_bridge_visibility", "fail", "Context bridge failed to build packet.", {"error": str(exc)})
+            return
+        boundary = packet.get("boundary", {})
+        if boundary.get("execution_enabled") is not False or boundary.get("file_contents_embedded") is not False:
+            self.add("nexus_cell_context_bridge_visibility", "fail", "Context bridge boundary drifted.", {"boundary": boundary})
+            return
+        self.add("nexus_cell_context_bridge_visibility", "pass", "NexusCell context bridge is compiler-visible and read-only bounded.", {
+            "version": manifest.get("version"),
+            "status": manifest.get("status"),
+            "mode": packet.get("mode"),
+            "context_ref_count": packet.get("context_ref_count"),
+            "claim_boundary": packet.get("claim_boundary"),
         })
 
     def gate_python_compile(self) -> None:
@@ -515,6 +553,7 @@ class NexusCompiler:
         self.gate_direct_compiler_calls()
         self.gate_compact_commands()
         self.gate_nexus_cell_planner_visibility()
+        self.gate_nexus_cell_context_bridge_visibility()
         self.gate_python_compile()
         self.gate_route_contracts()
         self.gate_unit_tests()

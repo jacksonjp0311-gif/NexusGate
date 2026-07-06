@@ -1,4 +1,4 @@
-﻿import json
+import json
 import unittest
 from pathlib import Path
 
@@ -39,8 +39,8 @@ class TestNexusCellPlannerV084(unittest.TestCase):
 
     def test_manifest_and_portal_expose_planner(self):
         manifest = json.loads(read("state/nexus_cell/cell_manifest.v0.8.4.json"))
-        self.assertTrue(str(manifest["version"]).startswith("v0.8.4"))
-        self.assertIn(manifest["status"], {"read_only_planner_enabled_no_execution", "compiler_visible_planner_no_execution"})
+        self.assertTrue(str(manifest["version"]).startswith("v0.8."))
+        self.assertIn(manifest["status"], {"read_only_planner_enabled_no_execution", "compiler_visible_planner_no_execution", "context_bridge_visible_no_execution"})
         self.assertTrue(manifest["planner"]["enabled"])
         portal = read("scripts/desktop/open_nexus_gate_console.ps1")
         self.assertIn("6. Plan gated invocation (read-only)", portal)
@@ -56,4 +56,3 @@ class TestNexusCellPlannerV084(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
