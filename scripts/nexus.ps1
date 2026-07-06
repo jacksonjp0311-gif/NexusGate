@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -142,7 +142,17 @@ function Invoke-NexusCellContext {
     if ($LASTEXITCODE -ne 0) { throw "NexusCell context bridge failed." }
 }
 
+function Invoke-NexusShell {
+    param([string]$Intent = "Inspect NexusGate status.", [string]$ShellCommand = "status")
+    if ([string]::IsNullOrWhiteSpace($Intent)) {
+        $Intent = "Inspect NexusGate status."
+    }
+    python -m nexus_gate.nexus_shell.shell --root . --command $ShellCommand --intent $Intent --json
+    if ($LASTEXITCODE -ne 0) { throw "NexusShell operator packet failed." }
+}
+
 switch ($Command) {
+    "shell" { Invoke-NexusShell -Intent $Tag }
     "cell-context" { Invoke-NexusCellContext -Intent $Tag }
     "cell-plan" { Invoke-NexusCellPlan -Intent $Tag }
     "geo-clean" { Invoke-NexusGeoClean }

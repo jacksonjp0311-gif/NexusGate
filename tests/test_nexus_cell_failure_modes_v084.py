@@ -38,7 +38,7 @@ class TestNexusCellFailureModesV084(unittest.TestCase):
     def test_manifest_links_failure_visibility(self):
         manifest = json.loads(read("state/nexus_cell/cell_manifest.v0.8.4.json"))
         self.assertTrue(str(manifest["version"]).startswith("v0.8."))
-        self.assertIn(manifest["status"], {"compiler_visible_planner_no_execution", "context_bridge_visible_no_execution"})
+        self.assertIn(manifest["status"], {"compiler_visible_planner_no_execution", "context_bridge_visible_no_execution", "operator_shell_visible_no_execution"})
         self.assertTrue(manifest["failure_mode_visibility"]["enabled"])
         self.assertIn("stale_manifest_version_pin", manifest["failure_mode_visibility"]["modes"])
         self.assertIn("does not self-authorize", manifest["failure_mode_visibility"]["boundary"])

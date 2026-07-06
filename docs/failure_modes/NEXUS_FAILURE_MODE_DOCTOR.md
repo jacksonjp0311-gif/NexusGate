@@ -1,4 +1,4 @@
-# NEXUS Failure Mode Doctor
+﻿# NEXUS Failure Mode Doctor
 
 Version: v0.7.9B
 
@@ -265,3 +265,30 @@ doctor: explain self-healing boundary and provide human-authorized close script
 retry: run close script after human approval; rerun gates; commit only after evidence
 authority: human_selected_patch
 ```
+
+## FM-133 stale_compiler_visibility_status_set
+
+```text
+who: NexusCell compiler visibility test/gate
+why: accepted status set froze before NexusShell operator progression
+what: v0.8.6 advanced manifest status to operator_shell_visible_no_execution but older gate/test still expected earlier compiler/context statuses
+when: v0.8.6 NexusShell operator close
+signs: gate.status fail in test_compiler_gate_passes_directly
+doctor: accept lawful read-only status progression while preserving no-execution boundary
+retry: patch compiler gate/test status set; rerun NexusShell/NexusCell/full-suite/compiler
+authority: human_selected_retry
+```
+
+## FM-134 close_script_partial_status_patch
+
+```text
+who: NexusShell close script / regression test
+why: close script patched compiler status progression but missed one test accepted-status set
+what: gate passed with operator_shell_visible_no_execution but test still accepted only earlier statuses
+when: v0.8.6B NexusShell close
+signs: AssertionError: operator_shell_visible_no_execution not found in accepted set
+doctor: patch test set to accept the full read-only status progression
+retry: rerun NexusShell/NexusCell/full-suite/compiler
+authority: human_selected_retry
+```
+

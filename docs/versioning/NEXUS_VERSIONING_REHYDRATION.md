@@ -273,3 +273,12 @@ NexusCell planner decisions now compile into bounded context bridge packets.
 The bridge selects evidence refs and digests.
 No execution backend is enabled.
 ```
+
+
+## v0.8.6 NexusShell Full-Scope Operator
+
+```text
+NexusShell becomes the Python-native full-scope operator surface.
+It routes status, rehydrate, compile, Doctor, NexusCell planner, context bridge, and handoff lanes.
+It does not enable arbitrary execution or autonomous mutation.
+```

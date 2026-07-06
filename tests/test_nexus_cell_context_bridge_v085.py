@@ -38,7 +38,7 @@ class TestNexusCellContextBridgeV085(unittest.TestCase):
     def test_manifest_and_commands_expose_context_bridge(self):
         manifest = json.loads(read("state/nexus_cell/cell_manifest.v0.8.4.json"))
         self.assertTrue(str(manifest["version"]).startswith("v0.8."))
-        self.assertEqual(manifest["status"], "context_bridge_visible_no_execution")
+        self.assertIn(manifest["status"], {"context_bridge_visible_no_execution", "operator_shell_visible_no_execution"})
         self.assertTrue(manifest["context_bridge"]["enabled"])
         self.assertIn("cell-context", read("scripts/nexus.ps1"))
         self.assertIn("Build context bridge packet", read("scripts/desktop/open_nexus_gate_console.ps1"))

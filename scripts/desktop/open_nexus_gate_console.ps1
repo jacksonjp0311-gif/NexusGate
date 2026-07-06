@@ -764,6 +764,50 @@ function Invoke-NexusCellConsole {
     }
 }
 
+function Invoke-NexusShellConsole {
+    while ($true) {
+        Write-Host ""
+        Write-Host "========================================"
+        Write-Host " NEXUSSHELL / OPERATOR"
+        Write-Host "========================================"
+        Write-Host "1. Build shell status packet"
+        Write-Host "2. Build shell handoff packet"
+        Write-Host "3. Open NexusShell docs"
+        Write-Host "4. Open NexusShell folder"
+        Write-Host "B. Back to main menu"
+        Write-Host ""
+        Write-Host "Rule: NexusShell routes governed lanes; it does not self-authorize execution."
+        Write-Host ""
+
+        $shellChoice = Read-Host "NexusShell"
+
+        if ($shellChoice -eq "1") {
+            $intent = Read-Host "Intent"
+            & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot "scripts/nexus.ps1") shell -Tag $intent
+            Write-Host ""
+            Read-Host "Press Enter to return to NexusShell"
+        }
+        elseif ($shellChoice -eq "2") {
+            $intent = Read-Host "Handoff intent"
+            python -m nexus_gate.nexus_shell.shell --root $RepoRoot --command handoff --intent $intent --json
+            Write-Host ""
+            Read-Host "Press Enter to return to NexusShell"
+        }
+        elseif ($shellChoice -eq "3") {
+            explorer.exe (Join-Path $RepoRoot "docs/nexus_shell/NEXUS_SHELL_OPERATOR.md") | Out-Null
+        }
+        elseif ($shellChoice -eq "4") {
+            explorer.exe (Join-Path $RepoRoot "NexusShell") | Out-Null
+        }
+        elseif ($shellChoice -eq "B" -or $shellChoice -eq "b") {
+            return
+        }
+        else {
+            Write-NG "Unknown NexusShell choice."
+        }
+    }
+}
+
 function Invoke-NexusOpenUrl {
     param([string]$Url)
     Write-NG ("Opening: {0}" -f $Url)
@@ -850,6 +894,7 @@ function Show-Menu {
     Write-Portal "  [8] Failure Modes / Doctor         -> scan / classify / safe clean / retry" "Yellow"
     Write-Portal "  [9] GitHub / README / Docs         -> repo links / entrypoints / changelog" "Cyan"
     Write-Portal "  [10] NexusCell / Containment       -> execution governance doctrine" "Yellow"
+    Write-Portal "  [11] NexusShell / Operator         -> full-scope no-execution shell" "Green"
     Write-Portal "  [Q] Quit" "DarkGray"
     Write-Host ""
     Write-Portal "Rule: models recommend; human authorizes durable mutation." "Green"
@@ -898,6 +943,9 @@ while ($true) {
     }
     elseif ($choice -eq "10") {
         Invoke-NexusCellConsole
+    }
+    elseif ($choice -eq "11") {
+        Invoke-NexusShellConsole
     }
     elseif ($choice -eq "Q" -or $choice -eq "q") {
         Write-OK "closing NEXUS Gate launcher"

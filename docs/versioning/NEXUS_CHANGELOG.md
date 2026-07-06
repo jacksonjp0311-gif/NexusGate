@@ -146,3 +146,15 @@ Adds compiler gate nexus_cell_context_bridge_visibility.
 Emits reports/nexus_cell_context_bridge_latest.json and state/nexus_cell/context_bridge_state_latest.json.
 Keeps no-execution boundary and avoids whole-repo dumps.
 ```
+
+
+## v0.8.6 - NexusShell Full-Scope Operator
+
+```text
+Adds nexus_gate.nexus_shell package.
+Adds full-scope no-execution operator packet builder.
+Adds shell command to scripts/nexus.ps1.
+Adds Desktop Portal [11] NexusShell / Operator.
+Adds compiler gate nexus_shell_operator_visibility.
+Keeps no-execution/no-backend/no-self-authorization boundary.
+```

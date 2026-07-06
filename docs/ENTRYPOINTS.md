@@ -186,3 +186,19 @@ Desktop Portal access:
 ```
 
 Boundary: context bridge emits bounded references and digests only. It does not execute.
+
+
+## NexusShell Operator
+
+```powershell
+python -m nexus_gate.nexus_shell.shell --root . --command status --intent "inspect docs only" --json
+.\scripts\nexus.ps1 shell -Tag "inspect docs only"
+```
+
+Desktop Portal access:
+
+```text
+[11] NexusShell / Operator
+```
+
+Boundary: NexusShell routes governed lanes only. It does not self-authorize execution.

@@ -1,0 +1,36 @@
+{
+  "boundary": {
+    "backend_enabled": false,
+    "execution_enabled": false,
+    "git_write_enabled": false,
+    "network_enabled": false,
+    "rollback_claim_enabled": false,
+    "secrets_enabled": false,
+    "shell_mutation_enabled": false
+  },
+  "claim_boundary": "NexusShell routes and summarizes governed operator lanes only; it does not execute arbitrary commands, enable backends, expose secrets, use network, mutate git, claim rollback, or self-authorize.",
+  "name": "NexusShell",
+  "nexus_shell": {
+    "command": "python -m nexus_gate.nexus_shell.shell --root . --command status --intent \"...\" --json",
+    "commands": [
+      "status",
+      "rehydrate",
+      "compile",
+      "doctor",
+      "cell-plan",
+      "cell-context",
+      "handoff",
+      "help"
+    ],
+    "desktop_portal": "[11] NexusShell / Operator",
+    "enabled": true,
+    "module": "nexus_gate.nexus_shell.shell",
+    "outputs": [
+      "reports/nexus_shell_packet_latest.json",
+      "state/nexus_shell/shell_state_latest.json"
+    ],
+    "script_command": ".\\scripts\\nexus.ps1 shell -Tag \"...\""
+  },
+  "status": "operator_shell_visible_no_execution",
+  "version": "v0.8.6"
+}

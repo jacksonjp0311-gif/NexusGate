@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import argparse
 import compileall
@@ -77,6 +77,12 @@ REQUIRED_PATHS = [
     "nexus_gate/nexus_cell/plan.py",
     "docs/nexus_cell/NEXUS_CELL_CONTEXT_BRIDGE.md",
     "nexus_gate/nexus_cell/context_bridge.py",
+    "nexus_gate/nexus_shell/shell.py",
+    "nexus_gate/nexus_shell/__main__.py",
+    "nexus_gate/nexus_shell/__init__.py",
+    "state/nexus_shell/shell_manifest.v0.8.6.json",
+    "docs/nexus_shell/NEXUS_SHELL_OPERATOR.md",
+    "NexusShell/README.md",
     "nexus_gate/nexus_cell/__init__.py",
     "state/nexus_cell/cell_manifest.v0.8.4.json",
     "docs/nexus_cell/NEXUS_CELL_PLANNER.md",
@@ -420,7 +426,7 @@ class NexusCompiler:
             self.add("nexus_cell_planner_visibility", "fail", "NexusCell forbidden boundary is incomplete.", {"missing": missing_forbidden})
             return
 
-        if manifest.get("status") not in {"compiler_visible_planner_no_execution", "context_bridge_visible_no_execution"}:
+        if manifest.get("status") not in {"compiler_visible_planner_no_execution", "context_bridge_visible_no_execution", "operator_shell_visible_no_execution"}:
             self.add("nexus_cell_planner_visibility", "fail", "NexusCell planner status is not an accepted read-only compiler-visible status.", {"status": manifest.get("status")})
             return
 
@@ -471,8 +477,8 @@ class NexusCompiler:
         except Exception as exc:
             self.add("nexus_cell_context_bridge_visibility", "fail", "NexusCell manifest failed to parse.", {"error": str(exc)})
             return
-        if manifest.get("status") != "context_bridge_visible_no_execution":
-            self.add("nexus_cell_context_bridge_visibility", "fail", "NexusCell context bridge status is not active.", {"status": manifest.get("status")})
+        if manifest.get("status") not in {"context_bridge_visible_no_execution", "operator_shell_visible_no_execution"}:
+            self.add("nexus_cell_context_bridge_visibility", "fail", "NexusCell context bridge status is not an accepted active status.", {"status": manifest.get("status")})
             return
         try:
             from nexus_gate.nexus_cell.context_bridge import build_context_bridge
@@ -489,6 +495,46 @@ class NexusCompiler:
             "status": manifest.get("status"),
             "mode": packet.get("mode"),
             "context_ref_count": packet.get("context_ref_count"),
+            "claim_boundary": packet.get("claim_boundary"),
+        })
+
+
+    def gate_nexus_shell_operator_visibility(self) -> None:
+        required = [
+            "NexusShell/README.md",
+            "docs/nexus_shell/NEXUS_SHELL_OPERATOR.md",
+            "state/nexus_shell/shell_manifest.v0.8.6.json",
+            "nexus_gate/nexus_shell/shell.py",
+            "scripts/nexus.ps1",
+            "scripts/desktop/open_nexus_gate_console.ps1",
+        ]
+        missing = [rel for rel in required if not (self.root / rel).exists()]
+        if missing:
+            self.add("nexus_shell_operator_visibility", "fail", "NexusShell operator surface missing.", {"missing": missing})
+            return
+        try:
+            manifest = json.loads((self.root / "state/nexus_shell/shell_manifest.v0.8.6.json").read_text(encoding="utf-8"))
+        except Exception as exc:
+            self.add("nexus_shell_operator_visibility", "fail", "NexusShell manifest failed to parse.", {"error": str(exc)})
+            return
+        if manifest.get("status") != "operator_shell_visible_no_execution":
+            self.add("nexus_shell_operator_visibility", "fail", "NexusShell status drifted.", {"status": manifest.get("status")})
+            return
+        try:
+            from nexus_gate.nexus_shell.shell import build_shell_packet
+            packet = build_shell_packet(self.root, "inspect docs only", command="status", context_limit=6)
+        except Exception as exc:
+            self.add("nexus_shell_operator_visibility", "fail", "NexusShell failed to build packet.", {"error": str(exc)})
+            return
+        boundary = packet.get("boundary", {})
+        if boundary.get("execution_enabled") is not False or boundary.get("shell_mutation_enabled") is not False:
+            self.add("nexus_shell_operator_visibility", "fail", "NexusShell boundary drifted.", {"boundary": boundary})
+            return
+        self.add("nexus_shell_operator_visibility", "pass", "NexusShell operator is compiler-visible and no-execution bounded.", {
+            "version": manifest.get("version"),
+            "status": manifest.get("status"),
+            "mode": packet.get("mode"),
+            "available_commands": packet.get("available_commands"),
             "claim_boundary": packet.get("claim_boundary"),
         })
 
@@ -554,6 +600,7 @@ class NexusCompiler:
         self.gate_compact_commands()
         self.gate_nexus_cell_planner_visibility()
         self.gate_nexus_cell_context_bridge_visibility()
+        self.gate_nexus_shell_operator_visibility()
         self.gate_python_compile()
         self.gate_route_contracts()
         self.gate_unit_tests()
@@ -609,3 +656,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

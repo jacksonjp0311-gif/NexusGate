@@ -1,4 +1,4 @@
-# NEXUS GATE Failure Mode Chart
+﻿# NEXUS GATE Failure Mode Chart
 
 This chart must be visible during rehydration.
 
@@ -97,3 +97,6 @@ Boundary: this chart is a local development control. It does not prove safety, s
 - `compiler_visibility_not_authority`: NexusCell/compiler; compiler visibility is mistaken for execution authority; critical; restore boundary that compiler visibility is not backend enablement.
 - `planner_visibility_not_backend_enablement`: NexusCell/planner; read-only planning is mistaken for sandbox execution; critical; restore no-execution/no-backend/no-rollback boundary.
 - `doctor_trap_without_self_authority`: Doctor/repair loop; Doctor trap is expected to mutate source automatically; warning; Doctor classifies/recommends and human authorizes patch.
+- `stale_compiler_visibility_status_set`: NexusCell/compiler tests; accepted status set froze before NexusShell operator progression; block; accept lawful read-only status progression and rerun shell/cell/compiler gates.
+- `close_script_partial_status_patch`: scripts/tests; close script patches source gate but misses regression accepted-status set; block; patch tests and rerun shell/cell/compiler gates.
+

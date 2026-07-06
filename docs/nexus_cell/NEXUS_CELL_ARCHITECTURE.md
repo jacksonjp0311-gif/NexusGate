@@ -1,4 +1,4 @@
-# NexusCell Architecture and Execution Governance Doctrine
+﻿# NexusCell Architecture and Execution Governance Doctrine
 
 Version: v0.8.4A-draft
 Status: Doctrine / architecture / extraction map
@@ -704,3 +704,52 @@ The context bridge does not mutate git.
 The context bridge does not claim rollback.
 The context bridge does not embed file contents by default.
 ```
+
+
+## v0.8.6 NexusShell Operator Seal
+
+NexusShell now provides a Python-native full-scope no-execution operator shell.
+
+```text
+status
+rehydrate
+compile
+doctor
+cell-plan
+cell-context
+handoff
+help
+```
+
+Boundary:
+
+```text
+NexusShell routes governed lanes.
+NexusShell does not execute arbitrary commands.
+NexusShell does not enable an execution backend.
+NexusShell does not mutate git.
+NexusShell does not self-authorize.
+```
+
+## v0.8.6B NexusShell Close Note
+
+The NexusShell operator upgrade exposed a stale compiler-visibility accepted-status set.
+
+```text
+wound: stale_compiler_visibility_status_set
+cause: NexusCell planner compiler gate accepted compiler_visible_planner_no_execution and context_bridge_visible_no_execution but not operator_shell_visible_no_execution
+doctor: extend accepted read-only status progression while keeping no-execution boundary
+boundary: shell visibility is not execution authority, backend enablement, rollback, secrets, network, or git mutation
+```
+
+## v0.8.6C NexusShell Final Close Note
+
+The NexusShell close script patched the compiler gate progression but left one test accepted-status set one version behind.
+
+```text
+wound: close_script_partial_status_patch
+cause: test accepted status set did not include operator_shell_visible_no_execution
+doctor: patch test and compiler status sets to include the full no-execution progression
+boundary: accepted status progression does not grant execution authority
+```
+
