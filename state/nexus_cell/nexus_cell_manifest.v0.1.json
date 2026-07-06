@@ -1,0 +1,25 @@
+{
+  "claim_boundary": "NexusCell is local development execution-governance infrastructure.\n\nIt is not a production security proof.\nIt is not a perfect sandbox.\nIt is not malware-proof.\nIt is not AGI.\nIt is not autonomous authority.\nIt is not a correctness proof.\nIt is not full rollback until Return Seal backend exists.\nIt does not replace human authorization.",
+  "commands": [
+    "python -m nexus_gate.nexus_cell.cli doctor --root .",
+    "python -m nexus_gate.nexus_cell.cli run --root . --runner mock --payload .\\NexusCell\\examples\\hello.ps1",
+    "python -m nexus_gate.cli cell doctor --root .",
+    ".\\scripts\\nexus.ps1 cell-doctor"
+  ],
+  "hud_fields": [
+    "containment status",
+    "authority decision",
+    "runner",
+    "risk score",
+    "receipt id",
+    "ledger hash",
+    "policy hash",
+    "return seal status",
+    "claim boundary"
+  ],
+  "name": "NexusCell",
+  "python_core": "nexus_gate.nexus_cell",
+  "status": "implemented_local_dev_execution_governance",
+  "thesis": "NexusCell is the execution containment organ of NexusGate.\n\nIt extracts the agent-sandbox lifecycle intelligence of CubeSandbox,\ntranslates it into Python-native NexusGate law,\nand evolves the sandbox into a governed execution system:\n\nauthority-gated,\nboundary-sealed,\nreceipt-emitting,\nledger-backed,\ninterconnect-visible,\nhuman-authorized.",
+  "version": "0.1.0"
+}

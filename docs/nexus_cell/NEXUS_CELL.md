@@ -41,26 +41,3 @@ It is not a correctness proof.
 It is not full rollback until Return Seal backend exists.
 It does not replace human authorization.
 ```
-
-
-## Desktop Portal Access
-
-```text
-NEXUS GATE :: DESKTOP ENTRY PORTAL
-[10] NexusCell / Containment -> execution governance doctrine
-[12] NexusCell - Containment Cell / Execution Gate
-```
-
-Legacy boundary phrase preserved for v0.8.4 doctrine compatibility:
-
-```text
-No execution backend is defined here yet.
-```
-
-v0.1 clarification:
-
-```text
-NexusCell now defines local development execution-governance infrastructure and a mock runner.
-The mock runner does not execute payload code.
-Windows Sandbox and Hyper-V paths are scaffolded only until explicitly enabled and validated.
-```

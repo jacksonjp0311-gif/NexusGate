@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 set -euo pipefail
 # Rehydration/compatibility markers retained for audit/tests:
 # FAILURE_MODE_CHART
@@ -68,3 +68,28 @@ case "$COMMAND" in
     ;;
 esac
 
+
+
+# NexusCell parity shortcuts
+case "${1:-}" in
+  cell|cell-doctor)
+    shift || true
+    python -m nexus_gate.nexus_cell.cli doctor --root .
+    exit $?
+    ;;
+  cell-run)
+    shift || true
+    python -m nexus_gate.nexus_cell.cli run --root . --runner mock --payload ./NexusCell/examples/hello.ps1
+    exit $?
+    ;;
+  cell-ledger)
+    shift || true
+    python -m nexus_gate.nexus_cell.cli ledger --root .
+    exit $?
+    ;;
+  cell-policy)
+    shift || true
+    python -m nexus_gate.nexus_cell.cli policy --root .
+    exit $?
+    ;;
+esac

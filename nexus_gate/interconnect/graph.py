@@ -380,3 +380,31 @@ def write_interconnect_report(report: InterconnectReport, root: str | Path = "."
         "latest": str(latest_report),
         "graph": str(graph_path),
     }
+
+NEXUS_CELL_INTERCONNECT_DECLARATION = {
+    "nodes": [
+        "runtime:nexus_cell",
+        "policy:nexus_cell",
+        "ledger:nexus_cell",
+        "reports:nexus_cell",
+        "receipt:nexus_cell",
+        "boundary:nexus_cell",
+        "seal:nexus_cell",
+    ],
+    "edges": [
+        ["router:authority_gate", "runtime:nexus_cell"],
+        ["runtime:nexus_cell", "receipt:nexus_cell"],
+        ["receipt:nexus_cell", "ledger:nexus_cell"],
+        ["ledger:nexus_cell", "reports:local"],
+        ["reports:local", "feedback:engine"],
+        ["feedback:engine", "operator_surface"],
+    ],
+    "gates": [
+        "No authority, no containment.",
+        "No receipt, no execution claim.",
+        "No ledger, no compounding.",
+        "No report visibility, no promotion.",
+        "No feedback without compiled reports.",
+        "Human authorizes mutation.",
+    ],
+}

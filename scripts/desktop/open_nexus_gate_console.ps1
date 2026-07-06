@@ -822,6 +822,42 @@ function Invoke-NexusShellConsole {
     }
 }
 
+function Invoke-NexusCellExecutionGateConsole {
+    while ($true) {
+        Write-Host ""
+        Write-Host "========================================"
+        Write-Host " NexusCell - Containment Cell / Execution Gate"
+        Write-Host "========================================"
+        Write-Host "1. NexusCell doctor"
+        Write-Host "2. NexusCell run hello payload"
+        Write-Host "3. NexusCell ledger"
+        Write-Host "4. NexusCell policy"
+        Write-Host "B. Back"
+        Write-Host ""
+        Write-Host "Rule: local evidence, human authorization, no autonomous mutation, compiler/evolve gates."
+        Write-Host ""
+        $cellGateChoice = Read-Host "NexusCell Gate"
+        if ($cellGateChoice -eq "1") {
+            & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot "scripts\nexus.ps1") cell-doctor
+            Read-Host "Press Enter to return to NexusCell Gate"
+        }
+        elseif ($cellGateChoice -eq "2") {
+            & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot "scripts\nexus.ps1") cell-run
+            Read-Host "Press Enter to return to NexusCell Gate"
+        }
+        elseif ($cellGateChoice -eq "3") {
+            & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot "scripts\nexus.ps1") cell-ledger
+            Read-Host "Press Enter to return to NexusCell Gate"
+        }
+        elseif ($cellGateChoice -eq "4") {
+            & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot "scripts\nexus.ps1") cell-policy
+            Read-Host "Press Enter to return to NexusCell Gate"
+        }
+        elseif ($cellGateChoice -eq "B" -or $cellGateChoice -eq "b") { return }
+        else { Write-NG "Unknown NexusCell Gate choice." }
+    }
+}
+
 function Invoke-NexusOpenUrl {
     param([string]$Url)
     Write-NG ("Opening: {0}" -f $Url)
@@ -908,6 +944,7 @@ function Show-Menu {
     Write-Portal "  [8] Failure Modes / Doctor         -> scan / classify / safe clean / retry" "Yellow"
     Write-Portal "  [9] GitHub / README / Docs         -> repo links / entrypoints / changelog" "Cyan"
     Write-Portal "  [10] NexusCell / Containment       -> execution governance doctrine" "Yellow"
+    Write-Portal "  [12] NexusCell - Containment Cell / Execution Gate" "Yellow"
     Write-Portal "  [11] NexusShell / Operator         -> full-scope no-execution shell" "Green"
     Write-Portal "  [Q] Quit" "DarkGray"
     Write-Host ""
@@ -957,6 +994,9 @@ while ($true) {
     }
     elseif ($choice -eq "10") {
         Invoke-NexusCellConsole
+    }
+    elseif ($choice -eq "12") {
+        Invoke-NexusCellExecutionGateConsole
     }
     elseif ($choice -eq "11") {
         Invoke-NexusShellConsole

@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -169,8 +169,32 @@ function Invoke-NexusCellRun {
     if ($LASTEXITCODE -ne 0) { throw "NexusCell full core run packet failed." }
 }
 
+function Invoke-NexusCellDoctorCli {
+    python -m nexus_gate.nexus_cell.cli doctor --root .
+    if ($LASTEXITCODE -ne 0) { throw "NexusCell doctor failed." }
+}
+
+function Invoke-NexusCellRunCli {
+    python -m nexus_gate.nexus_cell.cli run --root . --runner mock --payload ".\NexusCell\examples\hello.ps1"
+    if ($LASTEXITCODE -ne 0) { throw "NexusCell mock run failed." }
+}
+
+function Invoke-NexusCellLedgerCli {
+    python -m nexus_gate.nexus_cell.cli ledger --root .
+    if ($LASTEXITCODE -ne 0) { throw "NexusCell ledger failed." }
+}
+
+function Invoke-NexusCellPolicyCli {
+    python -m nexus_gate.nexus_cell.cli policy --root .
+    if ($LASTEXITCODE -ne 0) { throw "NexusCell policy failed." }
+}
+
 switch ($Command) {
-    "cell-run" { Invoke-NexusCellRun -Lane $Tag }
+    "cell-policy" {'Invoke-NexusCellPolicyCli'}
+    "cell-ledger" {'Invoke-NexusCellLedgerCli'}
+    "cell-doctor" {'Invoke-NexusCellDoctorCli'}
+    "cell" {'Invoke-NexusCellDoctorCli'}
+    "cell-run" {'Invoke-NexusCellRunCli'}
     "cell-bridge" { Invoke-NexusCellBridge -Intent $Tag }
     "shell" { Invoke-NexusShell -Intent $Tag }
     "cell-context" { Invoke-NexusCellContext -Intent $Tag }
