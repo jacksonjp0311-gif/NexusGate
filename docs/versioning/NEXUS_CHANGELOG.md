@@ -123,3 +123,14 @@ Adds docs/nexus_cell/NEXUS_CELL_COMPILER_VISIBILITY.md.
 Updates manifest status to compiler_visible_planner_no_execution.
 Keeps no-execution boundary: compiler visibility is not authority, containment, rollback, or backend enablement.
 ```
+
+
+## v0.8.4E - NexusCell Failure-Mode Ledger
+
+```text
+Records NexusCell planner/compiler wounds in the Failure Mode Doctor and chart.
+Adds stale_manifest_version_pin and stale_planner_manifest_version_pin.
+Adds compiler_visibility_not_authority and planner_visibility_not_backend_enablement.
+Adds doctor_trap_without_self_authority.
+Keeps no-execution boundary and human-authorized repair doctrine.
+```

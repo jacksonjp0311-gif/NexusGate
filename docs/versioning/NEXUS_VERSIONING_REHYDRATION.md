@@ -254,3 +254,13 @@ NexusCell planner is now visible to the gated compiler.
 The compiler checks static surfaces, manifest boundary, and planner read-only behavior.
 No execution backend is enabled.
 ```
+
+
+## v0.8.4E NexusCell Failure-Mode Ledger
+
+```text
+NexusCell failure wounds are now rehydration-visible.
+No repeated NexusCell failure without chart/Doctor update.
+Tests should freeze invariants, not stale version labels.
+Doctor traps and recommends; human authorizes repair.
+```

@@ -1,4 +1,4 @@
-﻿# NexusCell Architecture and Execution Governance Doctrine
+# NexusCell Architecture and Execution Governance Doctrine
 
 Version: v0.8.4A-draft
 Status: Doctrine / architecture / extraction map
@@ -659,3 +659,27 @@ doctor: update tests to verify NexusCell v0.8.4 invariants and accepted status p
 boundary: Doctor traps and recommends; human authorizes repair
 ```
 
+
+
+## v0.8.4E Failure-Mode Ledger Seal
+
+NexusCell planner/compiler wounds are now recorded in the global Failure Mode Doctor and Failure Mode Chart.
+
+Recorded modes:
+
+```text
+stale_manifest_version_pin
+stale_planner_manifest_version_pin
+compiler_visibility_not_authority
+planner_visibility_not_backend_enablement
+doctor_trap_without_self_authority
+```
+
+Boundary:
+
+```text
+Failure-mode visibility is not self-healing authority.
+Doctor traps and recommends.
+Human authorizes repair.
+Compiler validates compounding.
+```

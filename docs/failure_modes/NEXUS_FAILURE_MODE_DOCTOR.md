@@ -195,3 +195,73 @@ doctor: avoid backtick-heavy dynamic string construction in PowerShell
 retry: use append-only Python patch section or literal marker checks
 authority: human_selected_retry
 ```
+
+
+## v0.8.4 NexusCell Wound Ledger
+
+These wounds came from evolving NexusCell from doctrine to portal visibility, read-only planning, and compiler-visible planner integrity. They are preserved so future agents do not freeze exact version labels instead of invariant boundaries.
+
+## FM-128 stale_manifest_version_pin
+
+```text
+who: NexusCell doctrine test
+why: test froze exact manifest version instead of invariant lineage
+what: v0.8.4C planner correctly advanced manifest version, but v0.8.4B test expected exactly v0.8.4B
+when: v0.8.4C read-only planner close
+signs: AssertionError: 'v0.8.4C' != 'v0.8.4B'
+doctor: verify v0.8.4 lineage and boundary invariants instead of exact version
+retry: patch doctrine test to accept accepted status progression; rerun planner/doctrine/full-suite/compiler
+authority: human_selected_retry
+```
+
+## FM-129 stale_planner_manifest_version_pin
+
+```text
+who: NexusCell planner test
+why: planner test froze exact v0.8.4C manifest version
+what: v0.8.4D compiler visibility correctly advanced manifest version, but planner test expected exactly v0.8.4C
+when: v0.8.4D compiler visibility close
+signs: AssertionError: 'v0.8.4D' != 'v0.8.4C'
+doctor: verify planner invariants, portal visibility, and accepted status progression
+retry: patch planner/doctrine tests to accept v0.8.4 lineage; rerun compiler-visibility/planner/doctrine/full-suite/compiler
+authority: human_selected_retry
+```
+
+## FM-130 compiler_visibility_not_authority
+
+```text
+who: NexusCell compiler visibility gate
+why: compiler visibility may be mistaken for execution authority
+what: compiler can prove surfaces and boundaries exist, but cannot authorize execution, containment, rollback, secrets, network, or git mutation
+when: v0.8.4D compiler visibility seal
+signs: code or docs imply compiler visibility enables backend or execution
+doctor: enforce claim boundary that visibility is not authority
+retry: restore boundary docs/tests and rerun compiler visibility gate
+authority: human_authorizes_future_backend
+```
+
+## FM-131 planner_visibility_not_backend_enablement
+
+```text
+who: NexusCell planner/package surface
+why: read-only planner output may be mistaken for a sandbox backend
+what: planner emits capability/risk/authority evidence only; it does not execute or contain code
+when: v0.8.4C planner and v0.8.4D compiler visibility
+signs: docs, UI, or commands imply cell-plan runs code, creates sandbox, or grants rollback
+doctor: enforce no-execution/no-backend/no-rollback claim boundary
+retry: restore manifest forbidden surfaces and rerun planner/portal/compiler tests
+authority: human_authorizes_future_execution_backend
+```
+
+## FM-132 doctor_trap_without_self_authority
+
+```text
+who: Doctor / repair loop
+why: operator may expect Doctor to patch after classification
+what: Doctor traps failure and recommends bounded retry, but may not mutate durable source without human authorization
+when: any Doctor trap before commit
+signs: question: why did the doctor not heal this?
+doctor: explain self-healing boundary and provide human-authorized close script
+retry: run close script after human approval; rerun gates; commit only after evidence
+authority: human_selected_patch
+```

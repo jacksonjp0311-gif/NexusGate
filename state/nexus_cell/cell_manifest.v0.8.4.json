@@ -20,7 +20,7 @@
     "clipboard",
     "gpu"
   ],
-  "claim_boundary": "NexusCell v0.8.4D makes the read-only planner visible to the gated compiler; it still does not enable execution, sandboxing, rollback, secrets, network, git mutation, or autonomous authority.",
+  "claim_boundary": "NexusCell v0.8.4E preserves the failure-mode ledger for planner and compiler visibility wounds; it still does not enable execution, sandboxing, rollback, secrets, network, git mutation, or autonomous authority.",
   "compiler_visibility": {
     "boundary": "Compiler visibility proves the planner surface is present and bounded; it is not execution authority.",
     "enabled": true,
@@ -58,6 +58,19 @@
     "menu_entry": "[10] NexusCell / Containment",
     "mode": "read_only_doctrine_manifest_planner_access"
   },
+  "failure_mode_visibility": {
+    "boundary": "Failure-mode visibility records wounds and retry routes; it does not self-authorize source mutation.",
+    "chart_section": "docs/failure_modes/FAILURE_MODE_CHART.md#v084-nexuscell-failure-modes",
+    "doctor_section": "docs/failure_modes/NEXUS_FAILURE_MODE_DOCTOR.md#v084-nexuscell-wound-ledger",
+    "enabled": true,
+    "modes": [
+      "stale_manifest_version_pin",
+      "stale_planner_manifest_version_pin",
+      "compiler_visibility_not_authority",
+      "planner_visibility_not_backend_enablement",
+      "doctor_trap_without_self_authority"
+    ]
+  },
   "interconnect_nodes_future": [
     "runtime:nexus_cell",
     "policy:nexus_cell",
@@ -77,7 +90,7 @@
   ],
   "name": "NexusCell",
   "next_versions": {
-    "v0.8.4E": "NexusCell failure-mode chart entries for planner/manifest/compiler wounds.",
+    "v0.8.4F": "NexusCell compiler gate accepts v0.8.4E manifest while preserving compiler_visible_planner_no_execution status.",
     "v0.8.5": "Plan-only package expansion and context bridge.",
     "v0.8.6": "Shadow receipts with no mutation, no network, no secrets."
   },
@@ -110,5 +123,5 @@
     "state": "state/nexus_cell/"
   },
   "status": "compiler_visible_planner_no_execution",
-  "version": "v0.8.4D"
+  "version": "v0.8.4E"
 }

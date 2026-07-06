@@ -88,3 +88,12 @@ Boundary: this chart is a local development control. It does not prove safety, s
 - `powershell_child_command_expansion`: PowerShell/scripts; expandable child command removes $null variable; warning; avoid assignment or escape child command text.
 - `tracked_report_cleanup_hazard`: cleanup/evidence; cleanup deletes tracked report evidence; block; restore tracked evidence before patch and cleanup only untracked residue.
 - `powershell_backtick_string_parse_wound`: PowerShell/scripts; backtick escaped closing quote in dynamic string; block; avoid backtick-heavy string construction.
+
+
+## v0.8.4 NexusCell Failure Modes
+
+- `stale_manifest_version_pin`: NexusCell/tests; exact manifest version was frozen while manifest advanced within v0.8.4 lineage; block; test invariant lineage and accepted status progression.
+- `stale_planner_manifest_version_pin`: NexusCell/planner tests; planner test pinned v0.8.4C while compiler visibility advanced to v0.8.4D; block; test planner invariants instead of exact version.
+- `compiler_visibility_not_authority`: NexusCell/compiler; compiler visibility is mistaken for execution authority; critical; restore boundary that compiler visibility is not backend enablement.
+- `planner_visibility_not_backend_enablement`: NexusCell/planner; read-only planning is mistaken for sandbox execution; critical; restore no-execution/no-backend/no-rollback boundary.
+- `doctor_trap_without_self_authority`: Doctor/repair loop; Doctor trap is expected to mutate source automatically; warning; Doctor classifies/recommends and human authorizes patch.
