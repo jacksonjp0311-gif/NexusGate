@@ -699,6 +699,7 @@ function Invoke-NexusCellConsole {
         Write-Host "3. Open GitHub NexusCell architecture"
         Write-Host "4. Show compact NexusCell laws"
         Write-Host "5. Show NexusCell manifest"
+        Write-Host "6. Plan gated invocation (read-only)"
         Write-Host "B. Back to main menu"
         Write-Host ""
         Write-Host "Rule: NexusCell governs execution; no backend executes without explicit authority."
@@ -738,6 +739,12 @@ function Invoke-NexusCellConsole {
             else {
                 Write-NG "NexusCell manifest has not been created yet."
             }
+            Write-Host ""
+            Read-Host "Press Enter to return to NexusCell"
+        }
+        elseif ($cellChoice -eq "6") {
+            $intent = Read-Host "Intent to plan"
+            & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $RepoRoot "scripts\nexus.ps1") cell-plan -Tag $intent
             Write-Host ""
             Read-Host "Press Enter to return to NexusCell"
         }

@@ -20,14 +20,15 @@
     "clipboard",
     "gpu"
   ],
-  "claim_boundary": "NexusCell v0.8.4B exposes doctrine and manifest visibility only; it does not enable an execution backend, sandbox, rollback system, autonomous authority, or production security proof.",
+  "claim_boundary": "NexusCell v0.8.4C enables read-only planning and risk scoring only; it does not enable an execution backend, sandbox, rollback system, autonomous authority, secret exposure, network access, or git mutation.",
   "desktop_portal": {
     "allowed_surfaces": [
       "open local NexusCell folder",
       "open NexusCell architecture doc",
       "open GitHub NexusCell architecture",
       "show compact NexusCell laws",
-      "show manifest"
+      "show manifest",
+      "plan gated invocation without execution"
     ],
     "enabled": true,
     "forbidden_surfaces": [
@@ -39,7 +40,7 @@
       "claim rollback"
     ],
     "menu_entry": "[10] NexusCell / Containment",
-    "mode": "read_only_doctrine_manifest_access"
+    "mode": "read_only_doctrine_manifest_planner_access"
   },
   "interconnect_nodes_future": [
     "runtime:nexus_cell",
@@ -60,9 +61,29 @@
   ],
   "name": "NexusCell",
   "next_versions": {
-    "v0.8.4C": "Read-only planner doctrine tests and report stub.",
-    "v0.8.5": "Plan-only Python package surface with no execution.",
+    "v0.8.4D": "Compiler/evolve visibility for NexusCell planner reports.",
+    "v0.8.5": "Plan-only package expansion and context bridge.",
     "v0.8.6": "Shadow receipts with no mutation, no network, no secrets."
+  },
+  "planner": {
+    "command": "python -m nexus_gate.nexus_cell.plan --root . --intent \"...\" --json",
+    "enabled": true,
+    "forbidden": [
+      "execute code",
+      "spawn user-requested process",
+      "create sandbox",
+      "inject secrets",
+      "use network",
+      "write git",
+      "claim rollback"
+    ],
+    "mode": "read_only_planner_no_execution",
+    "module": "nexus_gate.nexus_cell.plan",
+    "outputs": [
+      "reports/nexus_cell_plan_latest.json",
+      "state/nexus_cell/planner_state_latest.json"
+    ],
+    "script_command": ".\\scripts\\nexus.ps1 cell-plan -Tag \"...\""
   },
   "root_organs": {
     "docs": "docs/nexus_cell/",
@@ -72,6 +93,6 @@
     "reports_future": "reports/nexus_cell/",
     "state": "state/nexus_cell/"
   },
-  "status": "doctrine_manifest_ui_access_only",
-  "version": "v0.8.4B"
+  "status": "read_only_planner_enabled_no_execution",
+  "version": "v0.8.4C"
 }

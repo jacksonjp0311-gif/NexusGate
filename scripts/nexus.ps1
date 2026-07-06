@@ -1,4 +1,4 @@
-﻿# NEXUS GATE compact PowerShell command surface
+# NEXUS GATE compact PowerShell command surface
 # Legacy direct compiler markers retained for audit/tests:
 # nexus_gate.adapters.compile
 # nexus_gate.receptors.compile
@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -124,7 +124,17 @@ function Invoke-NexusNN {
     python @args
     if ($LASTEXITCODE -ne 0) { throw "NEXUS NN router compile failed." }
 }
+function Invoke-NexusCellPlan {
+    param([string]$Intent = "Plan a gated NexusCell invocation.")
+    if ([string]::IsNullOrWhiteSpace($Intent)) {
+        $Intent = "Plan a gated NexusCell invocation."
+    }
+    python -m nexus_gate.nexus_cell.plan --root . --intent $Intent --json
+    if ($LASTEXITCODE -ne 0) { throw "NexusCell read-only planner failed." }
+}
+
 switch ($Command) {
+    "cell-plan" { Invoke-NexusCellPlan -Intent $Tag }
     "geo-clean" { Invoke-NexusGeoClean }
     "geo" { Invoke-NexusGeo -Intent $Tag }
     "fast" { Invoke-NexusNN -Intent $Tag -Role "FAST" -UseModel:$CallModel }
@@ -161,4 +171,3 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
-

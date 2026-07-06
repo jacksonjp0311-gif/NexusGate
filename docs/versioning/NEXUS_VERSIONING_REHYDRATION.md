@@ -235,3 +235,13 @@ The access point is doctrine and manifest visibility only.
 No execution backend is enabled.
 No containment, rollback, or security claim may be made from portal visibility alone.
 ```
+
+
+## v0.8.4C NexusCell Read-Only Planner
+
+```text
+First Python-native NexusCell package surface.
+cell-plan scores intent and emits evidence only.
+No execution backend is enabled.
+No containment, rollback, network, secret, or git mutation claim is permitted.
+```

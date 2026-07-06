@@ -100,3 +100,15 @@ Adds read-only NexusCell console surface for doctrine, compact laws, and manifes
 Adds state/nexus_cell/cell_manifest.v0.8.4.json.
 Keeps NexusCell doctrine-only: no execution backend, no sandbox claim, no rollback claim.
 ```
+
+
+## v0.8.4C - NexusCell Read-Only Planner
+
+```text
+Adds nexus_gate.nexus_cell Python package.
+Adds read-only planner for capability vector, risk score, authority decision, and route mode.
+Adds cell-plan command to scripts/nexus.ps1.
+Adds Desktop Portal NexusCell planner option.
+Emits reports/nexus_cell_plan_latest.json and state/nexus_cell/planner_state_latest.json.
+Keeps no-execution boundary: no backend, no sandbox, no secrets, no network, no git mutation, no rollback claim.
+```

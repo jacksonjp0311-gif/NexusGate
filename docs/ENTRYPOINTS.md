@@ -137,3 +137,20 @@ Desktop Portal access:
 ```
 
 Boundary: NexusCell is doctrine/manifest/UI access only at v0.8.4B. No execution backend is enabled.
+
+
+## NexusCell Read-Only Planner
+
+```powershell
+python -m nexus_gate.nexus_cell.plan --root . --intent "inspect docs only" --json
+.\scripts\nexus.ps1 cell-plan -Tag "inspect docs only"
+```
+
+Desktop Portal access:
+
+```text
+[10] NexusCell / Containment
+6. Plan gated invocation (read-only)
+```
+
+Boundary: planner emits risk/authority evidence only. It does not execute.

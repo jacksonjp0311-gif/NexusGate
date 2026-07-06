@@ -1,4 +1,4 @@
-# NexusCell Architecture and Execution Governance Doctrine
+﻿# NexusCell Architecture and Execution Governance Doctrine
 
 Version: v0.8.4A-draft
 Status: Doctrine / architecture / extraction map
@@ -591,3 +591,39 @@ Portal access is not execution authority.
 Manifest visibility is not backend enablement.
 No NexusCell backend executes until explicit implementation and human authorization.
 ```
+
+
+## v0.8.4C Read-Only Planner Seal
+
+NexusCell now has its first Python-native package surface:
+
+```text
+nexus_gate/nexus_cell/
+python -m nexus_gate.nexus_cell.plan --root . --intent "..." --json
+```
+
+The planner converts intent into a capability vector, risk score, authority decision, route mode, and report/state evidence.
+
+Boundary:
+
+```text
+The planner does not execute.
+The planner does not spawn a user-requested process.
+The planner does not create a sandbox.
+The planner does not expose secrets.
+The planner does not use network.
+The planner does not write git.
+The planner does not claim rollback.
+```
+
+## v0.8.4C1 Planner Close Note
+
+The read-only planner upgrade exposed a stale manifest-version pin in the v0.8.4B doctrine test.
+
+```text
+wound: stale_manifest_version_pin
+cause: doctrine test expected exactly v0.8.4B while the manifest advanced to v0.8.4C
+doctor: update doctrine test to verify invariant boundary and portal visibility instead of freezing exact version
+boundary: Doctor traps and recommends; human authorizes repair
+```
+
