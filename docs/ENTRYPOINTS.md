@@ -154,3 +154,18 @@ Desktop Portal access:
 ```
 
 Boundary: planner emits risk/authority evidence only. It does not execute.
+
+
+## NexusCell Compiler Visibility
+
+```powershell
+python -m nexus_gate.compiler --root . --json
+```
+
+Compiler gate:
+
+```text
+nexus_cell_planner_visibility
+```
+
+Boundary: the compiler sees the planner and verifies read-only limits. It does not authorize execution.

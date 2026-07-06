@@ -112,3 +112,14 @@ Adds Desktop Portal NexusCell planner option.
 Emits reports/nexus_cell_plan_latest.json and state/nexus_cell/planner_state_latest.json.
 Keeps no-execution boundary: no backend, no sandbox, no secrets, no network, no git mutation, no rollback claim.
 ```
+
+
+## v0.8.4D - NexusCell Compiler Visibility
+
+```text
+Adds nexus_cell_planner_visibility gate to the gated compiler.
+Adds NexusCell required static surfaces to compiler required paths.
+Adds docs/nexus_cell/NEXUS_CELL_COMPILER_VISIBILITY.md.
+Updates manifest status to compiler_visible_planner_no_execution.
+Keeps no-execution boundary: compiler visibility is not authority, containment, rollback, or backend enablement.
+```

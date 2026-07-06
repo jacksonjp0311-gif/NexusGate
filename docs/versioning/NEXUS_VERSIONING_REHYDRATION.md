@@ -245,3 +245,12 @@ cell-plan scores intent and emits evidence only.
 No execution backend is enabled.
 No containment, rollback, network, secret, or git mutation claim is permitted.
 ```
+
+
+## v0.8.4D NexusCell Compiler Visibility
+
+```text
+NexusCell planner is now visible to the gated compiler.
+The compiler checks static surfaces, manifest boundary, and planner read-only behavior.
+No execution backend is enabled.
+```

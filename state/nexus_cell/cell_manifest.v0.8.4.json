@@ -20,7 +20,23 @@
     "clipboard",
     "gpu"
   ],
-  "claim_boundary": "NexusCell v0.8.4C enables read-only planning and risk scoring only; it does not enable an execution backend, sandbox, rollback system, autonomous authority, secret exposure, network access, or git mutation.",
+  "claim_boundary": "NexusCell v0.8.4D makes the read-only planner visible to the gated compiler; it still does not enable execution, sandboxing, rollback, secrets, network, git mutation, or autonomous authority.",
+  "compiler_visibility": {
+    "boundary": "Compiler visibility proves the planner surface is present and bounded; it is not execution authority.",
+    "enabled": true,
+    "gate": "nexus_cell_planner_visibility",
+    "optional_runtime_outputs": [
+      "reports/nexus_cell_plan_latest.json",
+      "state/nexus_cell/planner_state_latest.json"
+    ],
+    "static_surfaces": [
+      "NexusCell/README.md",
+      "docs/nexus_cell/NEXUS_CELL_ARCHITECTURE.md",
+      "docs/nexus_cell/NEXUS_CELL_PLANNER.md",
+      "state/nexus_cell/cell_manifest.v0.8.4.json",
+      "nexus_gate/nexus_cell/plan.py"
+    ]
+  },
   "desktop_portal": {
     "allowed_surfaces": [
       "open local NexusCell folder",
@@ -61,7 +77,7 @@
   ],
   "name": "NexusCell",
   "next_versions": {
-    "v0.8.4D": "Compiler/evolve visibility for NexusCell planner reports.",
+    "v0.8.4E": "NexusCell failure-mode chart entries for planner/manifest/compiler wounds.",
     "v0.8.5": "Plan-only package expansion and context bridge.",
     "v0.8.6": "Shadow receipts with no mutation, no network, no secrets."
   },
@@ -93,6 +109,6 @@
     "reports_future": "reports/nexus_cell/",
     "state": "state/nexus_cell/"
   },
-  "status": "read_only_planner_enabled_no_execution",
-  "version": "v0.8.4C"
+  "status": "compiler_visible_planner_no_execution",
+  "version": "v0.8.4D"
 }

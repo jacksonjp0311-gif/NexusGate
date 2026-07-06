@@ -74,6 +74,12 @@ REQUIRED_PATHS = [
     "scripts/nexus_promote.sh",
     "scripts/nexus_strict_compile.ps1",
     "scripts/nexus_strict_compile.sh",
+    "nexus_gate/nexus_cell/plan.py",
+    "nexus_gate/nexus_cell/__init__.py",
+    "state/nexus_cell/cell_manifest.v0.8.4.json",
+    "docs/nexus_cell/NEXUS_CELL_PLANNER.md",
+    "docs/nexus_cell/NEXUS_CELL_ARCHITECTURE.md",
+    "NexusCell/README.md",
 ]
 
 MINI_README_DIRS = [
@@ -382,6 +388,72 @@ class NexusCompiler:
             return
         self.add("compact_commands", "pass", "Compact command surface is present.", {"required": required})
 
+
+    def gate_nexus_cell_planner_visibility(self) -> None:
+        required = [
+            "NexusCell/README.md",
+            "docs/nexus_cell/NEXUS_CELL_ARCHITECTURE.md",
+            "docs/nexus_cell/NEXUS_CELL_PLANNER.md",
+            "state/nexus_cell/cell_manifest.v0.8.4.json",
+            "nexus_gate/nexus_cell/__init__.py",
+            "nexus_gate/nexus_cell/plan.py",
+            "scripts/nexus.ps1",
+            "scripts/desktop/open_nexus_gate_console.ps1",
+        ]
+        missing = [rel for rel in required if not (self.root / rel).exists()]
+        if missing:
+            self.add("nexus_cell_planner_visibility", "fail", "NexusCell planner surface missing.", {"missing": missing})
+            return
+
+        try:
+            manifest = json.loads((self.root / "state/nexus_cell/cell_manifest.v0.8.4.json").read_text(encoding="utf-8"))
+        except Exception as exc:
+            self.add("nexus_cell_planner_visibility", "fail", "NexusCell manifest failed to parse.", {"error": str(exc)})
+            return
+
+        forbidden = set(manifest.get("desktop_portal", {}).get("forbidden_surfaces", []))
+        required_forbidden = {"execute code", "enable backend", "claim rollback"}
+        missing_forbidden = sorted(required_forbidden - forbidden)
+        if missing_forbidden:
+            self.add("nexus_cell_planner_visibility", "fail", "NexusCell forbidden boundary is incomplete.", {"missing": missing_forbidden})
+            return
+
+        if manifest.get("status") != "compiler_visible_planner_no_execution":
+            self.add("nexus_cell_planner_visibility", "fail", "NexusCell planner status is not compiler-visible read-only planner.", {"status": manifest.get("status")})
+            return
+
+        try:
+            from nexus_gate.nexus_cell.plan import build_plan
+            plan = build_plan(self.root, "inspect docs only")
+        except Exception as exc:
+            self.add("nexus_cell_planner_visibility", "fail", "NexusCell planner could not build a read-only plan.", {"error": str(exc)})
+            return
+
+        boundary = plan.get("boundary", {}) if isinstance(plan, dict) else {}
+        if boundary.get("execution_enabled") is not False:
+            self.add("nexus_cell_planner_visibility", "fail", "NexusCell planner boundary allowed execution.", {"boundary": boundary})
+            return
+        if plan.get("mode") != "read_only_planner_no_execution":
+            self.add("nexus_cell_planner_visibility", "fail", "NexusCell planner mode drifted.", {"mode": plan.get("mode")})
+            return
+
+        latest_report = self.root / "reports" / "nexus_cell_plan_latest.json"
+        latest_state = self.root / "state" / "nexus_cell" / "planner_state_latest.json"
+        visible_outputs = {
+            "latest_report_exists": latest_report.exists(),
+            "latest_state_exists": latest_state.exists(),
+        }
+
+        self.add("nexus_cell_planner_visibility", "pass", "NexusCell planner is compiler-visible and read-only bounded.", {
+            "version": manifest.get("version"),
+            "status": manifest.get("status"),
+            "planner_mode": plan.get("mode"),
+            "authority_decision": plan.get("authority_decision"),
+            "risk_score": plan.get("risk_score"),
+            "visible_outputs": visible_outputs,
+            "claim_boundary": plan.get("claim_boundary"),
+        })
+
     def gate_python_compile(self) -> None:
         ok = compileall.compile_dir(str(self.root / "nexus_gate"), quiet=1)
         tests_ok = compileall.compile_dir(str(self.root / "tests"), quiet=1)
@@ -442,6 +514,7 @@ class NexusCompiler:
         self.gate_forbidden_bypass_markers()
         self.gate_direct_compiler_calls()
         self.gate_compact_commands()
+        self.gate_nexus_cell_planner_visibility()
         self.gate_python_compile()
         self.gate_route_contracts()
         self.gate_unit_tests()

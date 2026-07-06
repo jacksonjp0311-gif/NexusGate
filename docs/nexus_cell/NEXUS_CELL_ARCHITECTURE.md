@@ -627,3 +627,35 @@ doctor: update doctrine test to verify invariant boundary and portal visibility 
 boundary: Doctor traps and recommends; human authorizes repair
 ```
 
+
+
+## v0.8.4D Compiler Visibility Seal
+
+NexusCell planner evidence is now visible to the gated compiler through:
+
+```text
+nexus_cell_planner_visibility
+```
+
+This gate confirms the static doctrine, manifest, package, CLI surface, and read-only planner boundary.
+
+Boundary:
+
+```text
+Compiler visibility is not execution authority.
+Compiler visibility is not containment.
+Compiler visibility is not rollback.
+Compiler visibility does not enable a backend.
+```
+
+## v0.8.4D1 Compiler Visibility Close Note
+
+The compiler visibility upgrade exposed a stale planner-test manifest pin.
+
+```text
+wound: stale_planner_manifest_version_pin
+cause: planner test expected exactly v0.8.4C while compiler visibility advanced the manifest to v0.8.4D
+doctor: update tests to verify NexusCell v0.8.4 invariants and accepted status progression
+boundary: Doctor traps and recommends; human authorizes repair
+```
+
