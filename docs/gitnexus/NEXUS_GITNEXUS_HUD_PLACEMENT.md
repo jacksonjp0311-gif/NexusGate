@@ -1,15 +1,16 @@
-# NexusGate GITNEXUS HUD Placement v0.1.2
+# NexusGate GITNEXUS Floating Left Dock v0.1.3
 
-GITNEXUS now mounts in the left rail below Neural Activity.
+The previous left-rail insertion could be hidden by the existing left panel
+overflow/height. v0.1.3 uses a measured fixed-position dock appended to body.
 
-## Why
+The dock measures:
+- the left rail / process-lanes column,
+- the Neural Activity panel bottom,
+- the bottom governance/status bar,
 
-The right rail was too crowded and compressed the GITNEXUS station under Mode
-Selection. The visual slot available in the current NexusGate HUD is the left
-column below Neural Activity.
+then floats GITNEXUS in the empty left slot.
 
-## Boundary
-
+Boundary:
 - Evidence only.
 - No autonomous authority.
 - No shell execution from model output.
