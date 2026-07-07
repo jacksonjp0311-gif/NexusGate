@@ -1,4 +1,4 @@
-# NEXUS GATE compact PowerShell command surface
+﻿# NEXUS GATE compact PowerShell command surface
 # Legacy direct compiler markers retained for audit/tests:
 # nexus_gate.adapters.compile
 # nexus_gate.receptors.compile
@@ -208,7 +208,11 @@ switch ($Command) {
     "nn" { Invoke-NexusNN -Intent $Tag -UseModel:$CallModel }
     "nn-health" { Invoke-NexusNN -Intent "NEXUS NN router health check: report local model roles and policy gates." }
     "tnn" { Invoke-NexusNN -Intent $Tag -Role "TNN" -UseModel:$CallModel }
-    "tnn-chat" { Invoke-NexusNN -Intent $Tag -Role "TNN" -UseModel:$true }
+    "tnn-chat" {
+        Invoke-NexusNN -Intent $Tag -Role "TNN" -UseModel:$true
+        python ".\Tesseract Neural Network\brain\view_latest_chat.py"
+        if ($LASTEXITCODE -ne 0) { throw "TNN chat renderer failed." }
+    }
     "ask" { Invoke-NexusNN -Intent $Tag -UseModel:$CallModel }
     "rehydrate" { Show-Rehydration; Run-Compiler; Write-Host "[OK] Rehydration complete." }
     "compile" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 compile }
@@ -237,3 +241,4 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
+

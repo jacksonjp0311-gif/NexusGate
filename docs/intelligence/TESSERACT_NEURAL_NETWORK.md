@@ -1,14 +1,14 @@
-# Tesseract Neural Network v0.2.0
+﻿# Tesseract Neural Network v0.2.0
 
 TNN is now a NexusGate-local neural chat brain targeting Mistral through Ollama.
 
 ```text
 NexusGate chat
-→ TNN surface
-→ TNN chat engine
-→ TNN context + memory + receipts
-→ tnn-mistral:latest / mistral:latest
-→ snappy operator response
+â†’ TNN surface
+â†’ TNN chat engine
+â†’ TNN context + memory + receipts
+â†’ tnn-mistral:latest / mistral:latest
+â†’ snappy operator response
 ```
 
 ## Weight strategy
@@ -33,3 +33,9 @@ TNN is recommendation-only. It can chat and reason through local Mistral, but it
 ## v0.2.0E Fast Timeout Seal
 
 Ollama socket timeouts are converted into bounded TNN chat packets instead of router crashes. Snappy mode uses a 6-second fast gate, 1024 context, and 120-token response target.
+## v0.2.0F Chat Renderer Seal
+
+	nn-chat now renders the actual TNN response body from eports/nexus_nn_router_report_latest.json instead of only printing the router envelope.
+## v0.2.0G Viewer Renderer Seal
+
+	nn-chat now invokes the router and then renders the actual TNN response body through Tesseract Neural Network/brain/view_latest_chat.py. This avoids injecting a large PowerShell helper into the command switch and keeps the shell parser stable.
