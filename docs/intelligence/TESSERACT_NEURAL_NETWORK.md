@@ -45,3 +45,6 @@ TNN disables fallback on timeout by default so a slow model does not double late
 ## v0.2.0I Turbo Context Seal
 
 TNN turbo chat removes heavy memory/context from the default path. It sends only intent, core local flags, and the boundary to Mistral. Deep memory can be re-enabled with TNN_INCLUDE_MEMORY=1. Turbo mode targets 512 context and 48 generated tokens.
+## v0.2.0J Streaming Chat Seal
+
+	nn-chat now uses Tesseract Neural Network/brain/stream_chat.py for live operator chat. It prints the chat header immediately, streams Ollama tokens as they arrive, writes TNN memory, and avoids waiting for the router envelope before showing the answer.
