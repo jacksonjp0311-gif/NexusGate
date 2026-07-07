@@ -1,0 +1,12 @@
+{
+  "claim_boundary": "This distributes compact failure evidence into docs/state/reports. It is not autonomous authority, not a proof of correctness, and not a production safety claim.",
+  "name": "Nexus Failure Intelligence Distributor",
+  "outputs": [
+    "state/failure_intelligence/nexus_failure_intelligence_latest.json",
+    "state/failure_intelligence/nexus_failure_intelligence_manifest.v0.1.3.json",
+    "reports/nexus_failure_intelligence_latest.md"
+  ],
+  "rehydration_rule": "Before generating a close script, load the latest failure intelligence packet and target only the named wound.",
+  "status": "local_failure_to_rehydration_intelligence",
+  "version": "0.1.3"
+}
