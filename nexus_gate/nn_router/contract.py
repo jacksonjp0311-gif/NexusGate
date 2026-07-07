@@ -40,8 +40,8 @@ SAFETY_CONTRACT: Dict[str, bool] = {
 }
 
 ROLE_PREFERENCES: Dict[str, List[str]] = {
-    "FAST": ["tnn-phi4-mini:latest", "phi4:mini", "phi4:latest", "phi3:mini", "phi3:latest"],
-    "BALANCED": ["tnn-phi4-mini:latest", "phi4:mini", "phi4:latest", "phi3:mini", "phi3:latest"],
+    "FAST": ["tnn-phi4-mini:latest", "phi4:mini", "phi4:latest", "tnn-phi4-mini:latest", "tnn-phi4-mini:latest"],
+    "BALANCED": ["tnn-phi4-mini:latest", "phi4:mini", "phi4:latest", "tnn-phi4-mini:latest", "tnn-phi4-mini:latest"],
     "DEEP": ["mistral:latest"],
     "TNN": ["tnn-phi4-mini:latest"],
     "HANDOFF": [],

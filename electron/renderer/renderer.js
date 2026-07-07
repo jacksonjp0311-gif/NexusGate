@@ -55,14 +55,14 @@ const laneIcons = {
 
 const roleSettings = {
   FAST: {
-    label: "FAST -> Phi-3",
+    label: "FAST -> Phi-4-mini",
     command: ".\\scripts\\nexus.ps1 fast -Tag \"Quick bounded recommendation.\" -CallModel",
-    note: "FAST selected. Phi-3 quick recommendation voice is active for local planning."
+    note: "FAST selected. Phi-4-mini hot recommendation voice is active for local planning."
   },
   BALANCED: {
-    label: "BALANCED -> Phi-3",
+    label: "BALANCED -> Phi-4-mini",
     command: ".\\scripts\\nexus.ps1 balanced -Tag \"Balanced bounded recommendation.\" -CallModel",
-    note: "BALANCED selected. Phi-3 balanced recommendation voice is active for local planning."
+    note: "BALANCED selected. Phi-4-mini balanced recommendation voice is active for local planning."
   },
   DEEP: {
     label: "DEEP -> Mistral",
@@ -302,7 +302,7 @@ function classifySystemError(rawText) {
     return {
       cause: "local model response timeout",
       recommendations: [
-        "Use FAST / Phi-3 for the next bounded test.",
+        "Use FAST / Phi-4-mini for the next bounded test.",
         "Keep DEEP / Mistral for shorter prompts until runtime pressure is visible.",
         "Open System Monitor and inspect CPU/RAM/Ollama pressure.",
         "Use Stop Transmission if the local model stalls again."
@@ -316,7 +316,7 @@ function classifySystemError(rawText) {
       recommendations: [
         "Let the entry portal start the hidden Ollama backend.",
         "Confirm System Monitor shows Ollama online.",
-        "Retry FAST / Phi-3 before DEEP / Mistral.",
+        "Retry FAST / Phi-4-mini before DEEP / Mistral.",
         "If blocked, restart the desktop portal rather than opening a second Ollama shell."
       ]
     };
@@ -327,7 +327,7 @@ function classifySystemError(rawText) {
       cause: "GPU/CUDA runner failure",
       recommendations: [
         "Keep NEX CPU fallback enabled.",
-        "Use FAST / Phi-3 first.",
+        "Use FAST / Phi-4-mini first.",
         "Do not switch back to GPU until driver/runtime compatibility is fixed.",
         "Preserve num_gpu=0 for NEX local calls."
       ]
@@ -351,7 +351,7 @@ function classifySystemError(rawText) {
     recommendations: [
       "Inspect the system-compiled report below.",
       "Run the focused test tied to the failing surface.",
-      "Retry FAST / Phi-3 after the blocker is removed.",
+      "Retry FAST / Phi-4-mini after the blocker is removed.",
       "Keep model output recommendation-only."
     ]
   };
@@ -1168,3 +1168,4 @@ loadSurfaceState().catch((error) => {
   setBuffer(0, "error");
   writeOutput(error.stack || error.message, { preTranslated: true });
 });
+

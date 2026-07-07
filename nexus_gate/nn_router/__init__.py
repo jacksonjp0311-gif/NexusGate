@@ -1,4 +1,4 @@
-﻿"""NEXUS bounded NN model router."""
+"""NEXUS bounded NN model router."""
 
 from .contract import (
     VERSION,

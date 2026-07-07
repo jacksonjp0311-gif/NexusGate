@@ -1,0 +1,8 @@
+nexus_gate/nn_router/contract.py:43: "FAST": ["tnn-phi4-mini:latest", "phi4:mini", "phi4:latest", "phi3:mini", "phi3:latest"],
+nexus_gate/nn_router/contract.py:43: "FAST": ["tnn-phi4-mini:latest", "phi4:mini", "phi4:latest", "phi3:mini", "phi3:latest"],
+nexus_gate/nn_router/contract.py:44: "BALANCED": ["tnn-phi4-mini:latest", "phi4:mini", "phi4:latest", "phi3:mini", "phi3:latest"],
+nexus_gate/nn_router/contract.py:44: "BALANCED": ["tnn-phi4-mini:latest", "phi4:mini", "phi4:latest", "phi3:mini", "phi3:latest"],
+tests/test_nexus_mode_role_truth_bridge_v020zw.py:32: self.assertNotIn("mistral-chat-brain", blob)
+tests/test_nexus_mode_role_truth_bridge_v020zw.py:36: self.assertNotIn("Phi-3", blob)
+docs/runtime/NEXUS_MODE_ROLE_TRUTH_BRIDGE.md:16: The NN router contract and tests now align with the active Phi-4-mini truth layer. FAST and BALANCED expect 	nn-phi4-mini:latest instead of the retired Phi-3 model family.
+docs/runtime/NEXUS_MODE_ROLE_TRUTH_BRIDGE.md:20: egistry.ollama.ai/library/tnn-phi4-mini/latest, producing 	nn-phi4-mini:latest in router inventory instead of the retired Phi-3 mini fixture.

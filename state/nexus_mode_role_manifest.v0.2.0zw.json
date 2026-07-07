@@ -1,0 +1,47 @@
+{
+  "schema": "nexus.mode_role_manifest.v0.2.0ZX",
+  "status": "truth_bridge_no_bom",
+  "boundary": "recommendation-only; no autonomous repo mutation; model output cannot execute tools",
+  "roles": {
+    "FAST": {
+      "label": "FAST / Phi-4-mini",
+      "backend": "tnn-phi4-mini:latest",
+      "brain": "Tesseract Neural Network/phi4-mini-hot-brain",
+      "available": true,
+      "command": ".\\scripts\\nexus.ps1 tnn-chat -Tag \"<ask>\" -CallModel",
+      "description": "Phi-4-mini hot recommendation voice"
+    },
+    "BALANCED": {
+      "label": "BALANCED / Phi-4-mini",
+      "backend": "tnn-phi4-mini:latest",
+      "brain": "Tesseract Neural Network/phi4-mini-hot-brain",
+      "available": true,
+      "command": ".\\scripts\\nexus.ps1 tnn-chat -Tag \"<ask>\" -CallModel",
+      "description": "Phi-4-mini balanced recommendation voice"
+    },
+    "DEEP": {
+      "label": "DEEP / Mistral",
+      "backend": "tnn-mistral:latest",
+      "brain": "Tesseract Neural Network/mistral-deep-brain",
+      "available": true,
+      "command": ".\\scripts\\nexus.ps1 tnn-deep -Tag \"<ask>\"",
+      "description": "Mistral deep recommendation voice"
+    },
+    "TNN": {
+      "label": "Tesseract Neural Network",
+      "backend": "tnn-phi4-mini:latest",
+      "brain": "Tesseract Neural Network/phi4-mini-hot-brain",
+      "available": true,
+      "command": ".\\scripts\\nexus.ps1 tnn-chat -Tag \"<ask>\" -CallModel",
+      "description": "Tesseract Neural Network Phi-4-mini hot lane"
+    },
+    "HANDOFF": {
+      "label": "HANDOFF / ChatGPT-Codex",
+      "backend": "ChatGPT-Codex relay",
+      "brain": "ChatGPT-Codex handoff relay",
+      "available": true,
+      "command": "/handoff run",
+      "description": "Compressed handoff relay"
+    }
+  }
+}
