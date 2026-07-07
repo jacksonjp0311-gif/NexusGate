@@ -11,10 +11,10 @@
     "nexus_cell_policy_change": false
   },
   "counts": {
-    "files": 824,
-    "symbols": 1042,
+    "files": 833,
+    "symbols": 1081,
     "edges": 478,
-    "changed_files": 59
+    "changed_files": 51
   },
-  "last_generated_at": "2026-07-07T23:09:30.421383+00:00"
+  "last_generated_at": "2026-07-07T23:30:41.450108+00:00"
 }

@@ -67,6 +67,8 @@ def safe_read(path: Path) -> str:
 
 
 def should_skip(path: Path) -> bool:
+    if ".bak_" in path.name or path.name.endswith(".bak"):
+        return True
     return bool(set(path.parts).intersection(EXCLUDE_DIRS))
 
 

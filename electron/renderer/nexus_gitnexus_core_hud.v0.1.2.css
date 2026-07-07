@@ -1,0 +1,311 @@
+/* NEXUS GITNEXUS Core HUD v0.1.2
+   Left rail placement repair + compact program HUD.
+   Evidence-only. Does not alter Mode Selection Green HUD assets.
+*/
+
+.gitnexus-core-station {
+  margin-top: 10px;
+  padding: 9px;
+  border: 1px solid rgba(85, 247, 255, .32);
+  background:
+    radial-gradient(circle at 14% 12%, rgba(85,247,255,.14), transparent 35%),
+    linear-gradient(180deg, rgba(1,22,36,.88), rgba(0,8,18,.92));
+  box-shadow: inset 0 0 18px rgba(85,247,255,.07), 0 0 18px rgba(85,247,255,.08);
+  overflow: hidden;
+}
+
+.gitnexus-core-station-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 7px;
+}
+
+.gitnexus-core-title {
+  color: #55f7ff;
+  font: 900 10px/1.2 Consolas, monospace;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(85,247,255,.62);
+}
+
+.gitnexus-core-badge {
+  color: #7dff4d;
+  border: 1px solid rgba(125,255,77,.34);
+  background: rgba(125,255,77,.06);
+  padding: 3px 5px;
+  font: 900 8px/1 Consolas, monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.gitnexus-core-button {
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid rgba(85,247,255,.54);
+  background: linear-gradient(135deg, rgba(85,247,255,.19), rgba(23,136,255,.08));
+  color: #88faff;
+  cursor: pointer;
+  text-transform: uppercase;
+  font: 900 10px Consolas, monospace;
+  letter-spacing: .09em;
+  box-shadow: inset 0 0 14px rgba(85,247,255,.07);
+}
+
+.gitnexus-core-button:hover {
+  background: linear-gradient(135deg, rgba(85,247,255,.28), rgba(23,136,255,.14));
+  color: #ffffff;
+}
+
+.gitnexus-core-mini {
+  margin-top: 7px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.gitnexus-core-mini span {
+  min-width: 0;
+  border: 1px solid rgba(85,247,255,.18);
+  background: rgba(1, 10, 20, .72);
+  color: rgba(223,251,255,.70);
+  font: 8px Consolas, monospace;
+  padding: 5px;
+  text-transform: uppercase;
+}
+
+.gitnexus-core-mini strong {
+  display: block;
+  margin-top: 3px;
+  color: #7dff4d;
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gitnexus-core-note {
+  margin-top: 7px;
+  color: rgba(223,251,255,.60);
+  font: 8px/1.35 Consolas, monospace;
+}
+
+/* Full program overlay */
+.gitnexus-core-program[hidden] {
+  display: none !important;
+}
+
+.gitnexus-core-program {
+  position: fixed;
+  z-index: 9998;
+  inset: 54px 18px 42px 18px;
+  display: grid;
+  grid-template-rows: 42px minmax(0, 1fr);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(85,247,255,.14), transparent 34%),
+    linear-gradient(180deg, rgba(1,8,18,.985), rgba(0,1,6,.99));
+  border: 1px solid rgba(85,247,255,.42);
+  box-shadow: 0 0 45px rgba(85,247,255,.20), inset 0 0 45px rgba(85,247,255,.055);
+  color: #dffbff;
+  font-family: Consolas, "Segoe UI", monospace;
+  overflow: hidden;
+}
+
+.gitnexus-core-program-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  border-bottom: 1px solid rgba(85,247,255,.24);
+  background: rgba(1, 9, 18, .72);
+}
+
+.gitnexus-core-program-head strong {
+  color: #55f7ff;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-shadow: 0 0 14px rgba(85,247,255,.65);
+}
+
+.gitnexus-core-program-head span {
+  color: #7dff4d;
+  font-size: 10px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+}
+
+.gitnexus-core-program-head button {
+  height: 28px;
+  border: 1px solid rgba(85,247,255,.48);
+  background: rgba(1,4,12,.72);
+  color: #88faff;
+  cursor: pointer;
+  text-transform: uppercase;
+  font: 10px Consolas, monospace;
+}
+
+.gitnexus-core-program-body {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(360px, 1.15fr) minmax(320px, .85fr);
+  grid-template-rows: minmax(0, 1fr) 188px;
+  gap: 10px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.gitnexus-panel {
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid rgba(85,247,255,.25);
+  background:
+    radial-gradient(circle at 32% 24%, rgba(85,247,255,.08), transparent 36%),
+    linear-gradient(180deg, rgba(1,12,24,.74), rgba(0,4,10,.82));
+  box-shadow: inset 0 0 26px rgba(85,247,255,.045);
+  overflow: hidden;
+}
+
+.gitnexus-panel h2 {
+  margin: 0;
+  padding: 12px 14px 8px;
+  color: #55f7ff;
+  font: 900 12px Consolas, monospace;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.gitnexus-graph-panel {
+  grid-row: span 2;
+  position: relative;
+}
+
+.gitnexus-graph-canvas {
+  position: absolute;
+  inset: 46px 14px 14px;
+  border: 1px solid rgba(85,247,255,.16);
+  background:
+    radial-gradient(circle at 45% 50%, rgba(85,247,255,.12), transparent 28%),
+    radial-gradient(circle at 65% 20%, rgba(125,255,77,.06), transparent 22%),
+    #010713;
+  overflow: hidden;
+}
+
+.gitnexus-graph-canvas svg {
+  width: 100%;
+  height: 100%;
+}
+
+.gitnexus-edge {
+  fill: none;
+  stroke: rgba(85,247,255,.70);
+  stroke-width: .7;
+  filter: drop-shadow(0 0 4px rgba(85,247,255,.70));
+}
+
+.gitnexus-node {
+  fill: rgba(85,247,255,.18);
+  stroke: #55f7ff;
+  stroke-width: .8;
+  filter: drop-shadow(0 0 8px rgba(85,247,255,.75));
+}
+
+.gitnexus-node-hot {
+  fill: rgba(125,255,77,.18);
+  stroke: #7dff4d;
+}
+
+.gitnexus-node-label {
+  fill: rgba(223,251,255,.78);
+  font: 3px Consolas, monospace;
+}
+
+.gitnexus-side-grid {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 10px;
+  padding: 0 14px 14px;
+}
+
+.gitnexus-kv {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  color: rgba(223,251,255,.70);
+  font: 12px Consolas, monospace;
+}
+
+.gitnexus-kv b {
+  color: #7dff4d;
+  font-weight: 900;
+  text-align: right;
+}
+
+.gitnexus-recommendation {
+  padding: 10px;
+  border: 1px solid rgba(125,255,77,.22);
+  background: rgba(125,255,77,.045);
+  color: rgba(223,251,255,.86);
+  font: 12px/1.45 Consolas, monospace;
+}
+
+.gitnexus-scroll {
+  overflow: auto;
+  padding: 0 14px 14px;
+  color: rgba(223,251,255,.76);
+  font: 11px/1.45 Consolas, monospace;
+  white-space: pre-wrap;
+}
+
+.gitnexus-list-row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 8px;
+  border-bottom: 1px solid rgba(85,247,255,.08);
+  padding: 4px 0;
+}
+
+.gitnexus-list-row em {
+  color: rgba(85,247,255,.72);
+  font-style: normal;
+}
+
+.gitnexus-list-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gitnexus-list-row b {
+  color: #7dff4d;
+  font-weight: 900;
+}
+
+.gitnexus-footer-line {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(223,251,255,.54);
+  font: 10px Consolas, monospace;
+  pointer-events: none;
+}
+
+@media (max-width: 1280px) {
+  .gitnexus-core-program {
+    inset: 48px 10px 36px 10px;
+  }
+
+  .gitnexus-core-program-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 48vh auto 160px;
+    overflow: auto;
+  }
+
+  .gitnexus-graph-panel {
+    grid-row: span 1;
+    min-height: 360px;
+  }
+}
