@@ -1,5 +1,5 @@
-<!doctype html>
-<!-- Compatibility markers: AI HANDOFF PACKAGE; PROCESS LANES; FEEDBACK SUMMARY. -->
+﻿<!doctype html>
+<!-- Compatibility markers: AI Handoff Package; Process Lanes; Feedback Summary; AI HANDOFF PACKAGE; PROCESS LANES; FEEDBACK SUMMARY. -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -257,6 +257,319 @@
   }
 </style>
 <!-- NEXUS_SPIRAL_GATE_LOGO_V010_STYLE_END -->
+
+
+
+
+<!-- NEXUS_METRICS_HUD_V010_STYLE_BEGIN -->
+<style id="nexus-metrics-hud-v010-style">
+  .right-stack {
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .handoff-panel {
+    display: none !important;
+  }
+
+  .nexus-metrics-zone {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 1fr) 390px;
+    gap: 10px;
+    min-height: 198px;
+    overflow: hidden;
+  }
+
+  .nexus-metrics-left-reserve {
+    min-height: 100%;
+    pointer-events: none;
+  }
+
+  .nexus-metrics-hud {
+    grid-column: 2 / 4;
+    padding: 10px 12px 9px;
+    display: grid;
+    grid-template-rows: 24px minmax(0, 1fr) 34px;
+    gap: 8px;
+    min-width: 0;
+    min-height: 0;
+    border-color: rgba(34, 211, 238, 0.42);
+    background:
+      radial-gradient(circle at 12% 14%, rgba(34, 211, 238, .13), transparent 28%),
+      linear-gradient(180deg, rgba(4, 23, 41, .96), rgba(2, 9, 20, .94));
+    box-shadow:
+      0 0 22px rgba(34, 211, 238, .16),
+      inset 0 0 34px rgba(34, 211, 238, .07);
+  }
+
+  .nexus-metrics-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .nexus-metrics-title {
+    color: #80f7ff;
+    font: 900 15px/1 "Segoe UI", Arial, sans-serif;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(34, 211, 238, .78);
+  }
+
+  .nexus-metrics-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #86efac;
+    font: 11px Consolas, monospace;
+    text-transform: uppercase;
+  }
+
+  .nexus-metrics-status::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: #86efac;
+    box-shadow: 0 0 10px rgba(134, 239, 172, .86);
+  }
+
+  .nexus-metrics-grid {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(160px, .88fr) minmax(190px, 1.15fr) minmax(230px, 1.35fr) minmax(170px, .9fr) minmax(210px, 1fr);
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  .nexus-metric-card {
+    min-width: 0;
+    min-height: 0;
+    padding: 8px;
+    border: 1px solid rgba(34, 211, 238, .22);
+    background:
+      linear-gradient(180deg, rgba(3, 20, 36, .92), rgba(2, 8, 18, .72)),
+      repeating-linear-gradient(0deg, rgba(125, 211, 252, .035) 0 1px, transparent 1px 12px);
+    box-shadow: inset 0 0 18px rgba(34, 211, 238, .045);
+    overflow: hidden;
+  }
+
+  .nexus-metric-card h3 {
+    margin: 0 0 8px;
+    color: #55f7ff;
+    font: 800 11px/1 Consolas, monospace;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+
+  .nexus-metric-stack {
+    display: grid;
+    gap: 5px;
+  }
+
+  .nexus-metric-line {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 7px;
+    min-height: 24px;
+    border-bottom: 1px solid rgba(125, 211, 252, .08);
+    color: #dffbff;
+    font: 11px Consolas, monospace;
+  }
+
+  .nexus-metric-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(34, 211, 238, .25);
+    border-radius: 999px;
+    color: #55f7ff;
+    font-size: 9px;
+    box-shadow: inset 0 0 8px rgba(34, 211, 238, .12);
+  }
+
+  .nexus-metric-key {
+    color: #5ee9ff;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nexus-metric-value {
+    color: #86efac;
+    font-weight: 800;
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+
+  .nexus-chart {
+    width: 100%;
+    height: 116px;
+    display: block;
+  }
+
+  .nexus-chart-grid {
+    stroke: rgba(125, 211, 252, .13);
+    stroke-width: 1;
+  }
+
+  .nexus-chart-axis {
+    stroke: rgba(125, 211, 252, .24);
+    stroke-width: 1.2;
+  }
+
+  .nexus-chart-line {
+    fill: none;
+    stroke: #38bdf8;
+    stroke-width: 2.4;
+    filter: drop-shadow(0 0 5px rgba(56, 189, 248, .65));
+  }
+
+  .nexus-chart-line.green {
+    stroke: #22c55e;
+  }
+
+  .nexus-bar {
+    fill: url(#nexusMetricsBarGradV010);
+    filter: drop-shadow(0 0 6px rgba(34, 211, 238, .5));
+  }
+
+  .nexus-chart-labels,
+  .nexus-spark-label {
+    color: #93e8ff;
+    font: 10px Consolas, monospace;
+  }
+
+  .nexus-pressure-head {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    margin-bottom: 4px;
+    font: 9px Consolas, monospace;
+    color: #93e8ff;
+    text-transform: uppercase;
+  }
+
+  .nexus-pressure-head strong {
+    display: block;
+    color: #86efac;
+    margin-top: 2px;
+    overflow-wrap: anywhere;
+  }
+
+  .nexus-lane-row {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) 38px;
+    align-items: center;
+    gap: 7px;
+    min-height: 28px;
+    color: #c8f7ff;
+    font: 10px Consolas, monospace;
+    text-transform: uppercase;
+  }
+
+  .nexus-sparkline {
+    height: 18px;
+    background:
+      linear-gradient(90deg, transparent, rgba(34, 211, 238, .12), transparent),
+      linear-gradient(180deg, transparent 49%, rgba(125, 211, 252, .16) 50%, transparent 51%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nexus-sparkline::after {
+    content: "";
+    position: absolute;
+    inset: 4px 0 3px;
+    clip-path: polygon(0 80%, 10% 55%, 18% 70%, 27% 25%, 34% 50%, 43% 35%, 52% 75%, 62% 20%, 72% 45%, 81% 15%, 91% 60%, 100% 38%, 100% 100%, 0 100%);
+    background: linear-gradient(90deg, rgba(34, 211, 238, .18), rgba(34, 211, 238, .95));
+    box-shadow: 0 0 10px rgba(34, 211, 238, .5);
+  }
+
+  .nexus-summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 8px;
+  }
+
+  .nexus-summary-item {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 6px;
+    min-height: 34px;
+    color: #dffbff;
+    font: 10px Consolas, monospace;
+  }
+
+  .nexus-summary-item b {
+    color: #55f7ff;
+    text-transform: uppercase;
+  }
+
+  .nexus-summary-item span {
+    color: #bdefff;
+    display: block;
+    margin-top: 2px;
+    overflow-wrap: anywhere;
+  }
+
+  .nexus-summary-item strong {
+    color: #86efac;
+    font-weight: 900;
+  }
+
+  .nexus-metrics-footer {
+    display: grid;
+    grid-template-columns: 1.05fr .85fr .95fr 1.1fr .9fr;
+    gap: 8px;
+    min-height: 0;
+  }
+
+  .nexus-metrics-footer span {
+    min-width: 0;
+    padding: 7px 10px;
+    border: 1px solid rgba(34, 211, 238, .2);
+    background: rgba(2, 6, 23, .5);
+    color: #e0f2fe;
+    font: 11px Consolas, monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nexus-metrics-footer b {
+    color: #55f7ff;
+    text-transform: uppercase;
+    margin-right: 10px;
+  }
+
+  .nexus-live-dot {
+    color: #86efac !important;
+    text-align: right;
+  }
+
+  @media (max-width: 1280px) {
+    .nexus-metrics-zone {
+      grid-template-columns: 190px minmax(0, 1fr) 330px;
+      min-height: 250px;
+    }
+
+    .nexus-metrics-grid {
+      grid-template-columns: repeat(2, minmax(220px, 1fr));
+      overflow-y: auto;
+    }
+
+    .nexus-metrics-footer {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
+<!-- NEXUS_METRICS_HUD_V010_STYLE_END -->
 </head>
 <body>
 <!-- NEXUS_SPIRAL_GATE_LOGO_V010_DOM_BEGIN -->
@@ -490,25 +803,98 @@
             </div>
             <pre id="system-error-report">No active system error.</pre>
           </section>        </section>
-
-        <section class="hud-frame handoff-panel">
-          <h2>AI Handoff Package <small>Ready</small></h2>
-          <div class="file-row"><span>ai_feedback_context_latest.json</span><strong>ready</strong></div>
-          <div class="file-row"><span>FEEDBACK_LOG.md</span><strong>ready</strong></div>
-          <div class="file-row"><span>nexus_tui_surface_latest.json</span><strong>ready</strong></div>
-          <button class="ghost-button" type="button" id="refresh">/ai send --latest</button>
-        </section>
+        <!-- NEXUS_METRICS_HUD_V010_AI_HANDOFF_BOX_REMOVED -->
       </aside>
     </section>
+    <section class="nexus-metrics-zone" aria-label="NEXUS consolidated metrics zone">
+  <!-- NEXUS_METRICS_HUD_V010_COMPAT_MARKERS: AI Handoff Package; Human Feedback; visible AI Handoff Package box removed; six bottom metric boxes consolidated. -->
+  <div class="nexus-metrics-left-reserve" aria-hidden="true"></div>
+  <section class="hud-frame nexus-metrics-hud" aria-label="NEXUS Metrics">
+    <div class="nexus-metrics-head">
+      <strong class="nexus-metrics-title">NEXUS METRICS</strong>
+      <span class="nexus-metrics-status">live analytics</span>
+    </div>
 
-    <section class="module-grid" aria-label="NEXUS subsystem modules">
-      <article class="hud-frame module cyan"><h3>Human Feedback</h3><dl><dt>Notes</dt><dd id="note-count">0</dd><dt>Sentiment</dt><dd>constructive</dd><dt>Status</dt><dd>receiving</dd></dl></article>
-      <article class="hud-frame module magenta"><h3>AI Feedback</h3><dl><dt>Insights</dt><dd id="insight-count">0</dd><dt>Confidence</dt><dd>0.82</dd><dt>Status</dt><dd>analyzed</dd></dl></article>
-      <article class="hud-frame module amber"><h3>Debugging</h3><dl><dt>Errors</dt><dd id="error-count">0</dd><dt>Trace ID</dt><dd>local</dd><dt>Status</dt><dd>investigating</dd></dl></article>
-      <article class="hud-frame module green"><h3>Self-Healing</h3><dl><dt>Suggestions</dt><dd id="heal-count">0</dd><dt>Auto Heal</dt><dd>disabled</dd><dt>Status</dt><dd>standby</dd></dl></article>
-      <article class="hud-frame module blue"><h3>Reflection</h3><dl><dt>Reflections</dt><dd id="reflection-count">0</dd><dt>Pattern</dt><dd>strong</dd><dt>Status</dt><dd>synthesizing</dd></dl></article>
-      <article class="hud-frame module gold"><h3>Interconnect</h3><dl><dt>Links</dt><dd id="link-count">0</dd><dt>Health</dt><dd id="graph-health">unknown</dd><dt>Status</dt><dd>degraded</dd></dl></article>
-    </section>
+    <div class="nexus-metrics-grid">
+      <article class="nexus-metric-card">
+        <h3>Core Metrics</h3>
+        <div class="nexus-metric-stack">
+          <div class="nexus-metric-line"><i class="nexus-metric-icon">H</i><span class="nexus-metric-key">Overall Health</span><strong class="nexus-metric-value" id="nexus-metrics-health">100.0</strong></div>
+          <div class="nexus-metric-line"><i class="nexus-metric-icon">A</i><span class="nexus-metric-key">AI Confidence</span><strong class="nexus-metric-value">0.82</strong></div>
+          <div class="nexus-metric-line"><i class="nexus-metric-icon">S</i><span class="nexus-metric-key">System Stability</span><strong class="nexus-metric-value">stable</strong></div>
+          <div class="nexus-metric-line"><i class="nexus-metric-icon">L</i><span class="nexus-metric-key">Link Integrity</span><strong class="nexus-metric-value" id="graph-health">context-fallback</strong></div>
+          <div class="nexus-metric-line"><i class="nexus-metric-icon">G</i><span class="nexus-metric-key">Governance</span><strong class="nexus-metric-value">enforced</strong></div>
+        </div>
+      </article>
+
+      <article class="nexus-metric-card">
+        <h3>Health Trend (24h)</h3>
+        <svg class="nexus-chart" viewBox="0 0 240 116" aria-label="Health and confidence trend chart">
+          <line class="nexus-chart-grid" x1="10" y1="18" x2="230" y2="18"/>
+          <line class="nexus-chart-grid" x1="10" y1="48" x2="230" y2="48"/>
+          <line class="nexus-chart-grid" x1="10" y1="78" x2="230" y2="78"/>
+          <line class="nexus-chart-axis" x1="10" y1="100" x2="230" y2="100"/>
+          <line class="nexus-chart-axis" x1="10" y1="10" x2="10" y2="100"/>
+          <polyline class="nexus-chart-line" points="10,82 30,65 50,71 70,58 90,46 110,34 130,42 150,38 170,51 190,43 210,36 230,28"/>
+          <polyline class="nexus-chart-line green" points="10,92 30,78 50,84 70,73 90,65 110,59 130,57 150,50 170,55 190,48 210,52 230,39"/>
+        </svg>
+      </article>
+
+      <article class="nexus-metric-card">
+        <h3>Pressure Analysis</h3>
+        <div class="nexus-pressure-head">
+          <span>Evidence<strong id="nexus-metrics-pressure">high</strong></span>
+          <span>Dominant<strong id="nexus-metrics-dominant">none</strong></span>
+          <span>Trend<strong id="nexus-metrics-trend">context-fallback</strong></span>
+        </div>
+        <svg class="nexus-chart" viewBox="0 0 260 116" aria-label="Pressure analysis bar chart">
+          <defs>
+            <linearGradient id="nexusMetricsBarGradV010" x1="0%" x2="0%" y1="0%" y2="100%">
+              <stop offset="0%" stop-color="#55f7ff"/>
+              <stop offset="100%" stop-color="#0ea5e9" stop-opacity=".28"/>
+            </linearGradient>
+          </defs>
+          <line class="nexus-chart-grid" x1="20" y1="20" x2="248" y2="20"/>
+          <line class="nexus-chart-grid" x1="20" y1="58" x2="248" y2="58"/>
+          <line class="nexus-chart-axis" x1="20" y1="96" x2="248" y2="96"/>
+          <rect class="nexus-bar" x="36" y="26" width="18" height="70"/>
+          <rect class="nexus-bar" x="86" y="52" width="18" height="44"/>
+          <rect class="nexus-bar" x="136" y="66" width="18" height="30"/>
+          <rect class="nexus-bar" x="186" y="76" width="18" height="20"/>
+          <rect class="nexus-bar" x="228" y="82" width="18" height="14"/>
+        </svg>
+      </article>
+
+      <article class="nexus-metric-card">
+        <h3>Lane Activity</h3>
+        <div class="nexus-lane-row"><span>Evolve</span><i class="nexus-sparkline"></i><strong>72%</strong></div>
+        <div class="nexus-lane-row"><span>Interface</span><i class="nexus-sparkline"></i><strong>64%</strong></div>
+        <div class="nexus-lane-row"><span>Feedback</span><i class="nexus-sparkline"></i><strong>58%</strong></div>
+        <div class="nexus-lane-row"><span>Reflect</span><i class="nexus-sparkline"></i><strong>61%</strong></div>
+      </article>
+
+      <article class="nexus-metric-card">
+        <h3>Summary Output</h3>
+        <div class="nexus-summary-grid">
+          <div class="nexus-summary-item"><i class="nexus-metric-icon">N</i><span><b>Notes</b><span>Constructive feedback received.</span></span><strong id="note-count">3</strong></div>
+          <div class="nexus-summary-item"><i class="nexus-metric-icon">I</i><span><b>Insights</b><span>No new AI insights detected.</span></span><strong id="insight-count">0</strong></div>
+          <div class="nexus-summary-item"><i class="nexus-metric-icon">E</i><span><b>Errors</b><span>System running clean.</span></span><strong id="error-count">0</strong></div>
+          <div class="nexus-summary-item"><i class="nexus-metric-icon">S</i><span><b>Suggestions</b><span>Auto-heal remains bounded.</span></span><strong id="heal-count">0</strong></div>
+          <div class="nexus-summary-item"><i class="nexus-metric-icon">R</i><span><b>Reflections</b><span>Strong reflection pattern.</span></span><strong id="reflection-count">0</strong></div>
+          <div class="nexus-summary-item"><i class="nexus-metric-icon">L</i><span><b>Links</b><span>Context fallback active.</span></span><strong id="link-count">0</strong></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="nexus-metrics-footer">
+      <span><b>Trace ID</b> local</span>
+      <span><b>Auto Heal</b> disabled</span>
+      <span><b>Overall Status</b> standby</span>
+      <span><b>Summary</b><em id="nexus-metrics-summary-copy">Core systems nominal.</em></span>
+      <span class="nexus-live-dot"><b>Last Updated</b><em id="nexus-metrics-updated">--:--:--</em> live</span>
+    </div>
+  </section>
+</section>
 
     <footer class="bottom-bus hud-frame">
       <section><strong>Governance</strong><span>policy: strict</span><span>audit: enabled</span><span>compliance: enforced</span></section>
@@ -602,5 +988,68 @@
 })();
 </script>
 <!-- NEXUS_SPIRAL_GATE_LOGO_V010_SCRIPT_END -->
+
+
+
+
+<!-- NEXUS_METRICS_HUD_V010_SCRIPT_BEGIN -->
+<script id="nexus-metrics-hud-v010-script">
+(function () {
+  if (window.__nexusMetricsHudV010) {
+    return;
+  }
+  window.__nexusMetricsHudV010 = true;
+
+  function text(id, fallback) {
+    var node = document.getElementById(id);
+    var value = node ? String(node.textContent || "").trim() : "";
+    return value || fallback;
+  }
+
+  function syncMetrics() {
+    var health = text("health", "100.0");
+    var pressure = text("pressure", "high");
+    var dominant = text("dominant", "none");
+    var trend = text("trend", "context-fallback");
+    var note = text("note-count", "3");
+    var insight = text("insight-count", "0");
+    var error = text("error-count", "0");
+    var heal = text("heal-count", "0");
+    var reflection = text("reflection-count", "0");
+    var link = text("link-count", "0");
+    var graphHealth = text("graph-health", "context-fallback");
+
+    var set = function (id, value) {
+      var node = document.getElementById(id);
+      if (node) node.textContent = value;
+    };
+
+    set("nexus-metrics-health", health);
+    set("nexus-metrics-pressure", pressure);
+    set("nexus-metrics-dominant", dominant);
+    set("nexus-metrics-trend", trend);
+    set("nexus-metrics-notes-summary", note);
+    set("nexus-metrics-insights-summary", insight);
+    set("nexus-metrics-errors-summary", error);
+    set("nexus-metrics-suggestions-summary", heal);
+    set("nexus-metrics-reflections-summary", reflection);
+    set("nexus-metrics-links-summary", link);
+    set("nexus-metrics-link-health-summary", graphHealth);
+    set("nexus-metrics-updated", new Date().toLocaleTimeString());
+
+    var summary = "Core systems nominal. No repair pressure detected. NEXUS GATE is operating in balanced mode with enforced governance. Continue current trajectory.";
+    if (String(pressure).toLowerCase() === "high") {
+      summary = "Evidence pressure is high, but no repair pressure is detected. Continue current trajectory and keep governance enforced.";
+    }
+    set("nexus-metrics-summary-copy", summary);
+  }
+
+  window.nexusMetricsHudSync = syncMetrics;
+  syncMetrics();
+  window.setInterval(syncMetrics, 4000);
+})();
+</script>
+<!-- NEXUS_METRICS_HUD_V010_SCRIPT_END -->
 </body>
 </html>
+

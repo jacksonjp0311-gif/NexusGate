@@ -1,9 +1,9 @@
 ﻿"""Streaming TNN chat lane for NexusGate.
 
-v0.2.0V â€” Hot Lane Label Hygiene:
-- Phi-4-mini hot lane gets accurate labels
-- Mistral deep lane remains explicit
-- model stream heading is no longer hardcoded to Mistral
+v0.2.0W â€” Operator Compactness Guard:
+- Phi-4-mini hot lane is fast and now compacted
+- hot model text is buffered, normalized, capped, and de-dangled before print
+- Mistral deep lane remains longer-form
 """
 
 from __future__ import annotations
@@ -11,13 +11,14 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import socket
 import sys
 import time
 import urllib.error
 import urllib.request
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List
 
 BRAIN_DIR = Path(__file__).resolve().parent
 if str(BRAIN_DIR) not in sys.path:
@@ -32,8 +33,10 @@ MODEL = os.environ.get("TNN_MODEL", "tnn-phi4-mini:latest")
 TNN_ROOT = Path(__file__).resolve().parents[1]
 SYSTEM_PROMPT_PATH = TNN_ROOT / "brain" / "system_prompt.md"
 
-ENGINE_VERSION = "tnn.stream_chat.v0.2.0V"
+ENGINE_VERSION = "tnn.stream_chat.v0.2.0W"
 MIN_MEANINGFUL_PARTIAL_CHARS = 36
+HOT_MAX_LINES = 5
+HOT_MAX_CHARS = 520
 
 DEFENSIVE_ALLOWLIST = [
     "harden against vulnerabilities",
@@ -88,11 +91,15 @@ def model_label(model: str) -> str:
     return "Tesseract Neural Network/local-operator-brain"
 
 
-def stream_heading(model: str) -> str:
+def is_hot_model(model: str) -> bool:
     low = model.lower()
-    if "phi4" in low or "phi-4" in low:
+    return "phi4" in low or "phi-4" in low
+
+
+def stream_heading(model: str) -> str:
+    if is_hot_model(model):
         return "TNN // HOT MODEL STREAM"
-    if "mistral" in low:
+    if "mistral" in model.lower():
         return "TNN // DEEP MODEL STREAM"
     return "TNN // MODEL STREAM"
 
@@ -134,7 +141,7 @@ def fast_scaffold(intent: str) -> str:
 
 
 def model_budget_hit_message(partial_chars: int, started: bool, model: str) -> str:
-    label = "hot model" if ("phi4" in model.lower() or "phi-4" in model.lower()) else "model"
+    label = "hot model" if is_hot_model(model) else "model"
     if started:
         return (
             "TNN // MODEL BUDGET HIT\n"
@@ -157,23 +164,47 @@ def meaningful_partial(text: str) -> bool:
         return False
     if any(stripped.endswith(mark) for mark in [".", "!", "?"]):
         return True
-    words = stripped.split()
-    return len(words) >= 8
+    return len(stripped.split()) >= 8
 
 
-def should_flush(buffer: str) -> bool:
-    if not buffer:
-        return False
-    if len(buffer) >= 72:
-        return True
-    return any(buffer.endswith(mark) for mark in [".", "!", "?", "\n", ":", ";"])
+def normalize_hot_response(text: str) -> str:
+    text = re.sub(r"\s+", " ", text).strip()
+    text = re.sub(r"^(Sure[,!\s]+|Okay[,!\s]+|Here('?s| is)\s+)", "", text, flags=re.I).strip()
+    if not text:
+        return "next: wire the TNN hot lane into Electron and show the model-health badge."
 
+    parts = re.split(r"(?<=[.!?])\s+", text)
+    clean_parts: List[str] = []
+    for part in parts:
+        item = part.strip(" -\t\r\n")
+        if not item:
+            continue
+        if len(item.split()) < 3 and not item.endswith((".", "!", "?")):
+            continue
+        clean_parts.append(item)
+        if len(clean_parts) >= HOT_MAX_LINES:
+            break
 
-def safe_flush(buffer: str, printed_any: bool) -> Tuple[str, bool]:
-    if not buffer:
-        return "", printed_any
-    print(buffer, end="", flush=True)
-    return "", True
+    if not clean_parts:
+        clean_parts = [text]
+
+    joined = "\n".join(clean_parts)
+    if len(joined) > HOT_MAX_CHARS:
+        cut = joined[:HOT_MAX_CHARS].rsplit(" ", 1)[0].strip()
+        if cut and not cut.endswith((".", "!", "?")):
+            cut += "."
+        joined = cut
+
+    lines = [line.strip() for line in joined.splitlines() if line.strip()]
+    if lines:
+        last = lines[-1]
+        last_words = last.split()
+        dangling_starts = {"using", "with", "by", "for", "to", "and", "or", "in", "on", "via", "through"}
+        if (not last.endswith((".", "!", "?"))) and (len(last_words) < 7 or last_words[-1].lower() in dangling_starts):
+            lines = lines[:-1]
+    if not lines:
+        return "next: wire the TNN hot lane into Electron and show the model-health badge."
+    return "\n".join(lines[:HOT_MAX_LINES])
 
 
 def stream_generate(
@@ -188,6 +219,7 @@ def stream_generate(
     scaffold_at: float | None = None
     prompt = build_context(intent)
     system = read_system_prompt()
+    hot = is_hot_model(model) and not deep
 
     payload = {
         "model": model,
@@ -196,10 +228,10 @@ def stream_generate(
         "stream": True,
         "keep_alive": "30m",
         "options": {
-            "temperature": 0.12,
-            "top_p": 0.8,
+            "temperature": 0.10 if hot else 0.12,
+            "top_p": 0.75 if hot else 0.8,
             "num_ctx": 512,
-            "num_predict": 48 if not deep else 120,
+            "num_predict": 40 if hot else 120,
             "repeat_penalty": 1.12,
         },
     }
@@ -212,13 +244,11 @@ def stream_generate(
     )
 
     chunks: List[str] = []
-    buffer = ""
-    printed_any = False
-    stream_completed = False
     ok = True
     error = ""
     boundary_rewrite = False
     model_budget_hit = False
+    stream_completed = False
     scaffold_text = ""
 
     print("")
@@ -250,26 +280,15 @@ def stream_generate(
                     if first_token_at is None:
                         first_token_at = time.perf_counter()
                     chunks.append(piece)
-                    buffer += piece
 
                 joined = "".join(chunks)
                 if violates_operator_boundary(joined):
                     boundary_rewrite = True
-                    buffer = ""
                     break
-
-                if should_flush(buffer):
-                    buffer, printed_any = safe_flush(buffer, printed_any)
 
                 if item.get("done"):
                     stream_completed = True
                     break
-
-        if buffer and not boundary_rewrite:
-            buffer, printed_any = safe_flush(buffer, printed_any)
-
-        if printed_any:
-            print("", flush=True)
     except (TimeoutError, socket.timeout) as exc:
         ok = False
         error = f"Ollama timed out after {timeout}s: {exc}"
@@ -285,26 +304,23 @@ def stream_generate(
 
     raw_model_text = "".join(chunks).strip()
     partial_chars = len(raw_model_text)
-    model_text = raw_model_text
 
     if boundary_rewrite:
         ok = True
         error = "operator boundary rewrite applied"
         model_text = safe_fallback(intent)
-        if printed_any:
-            print("")
-        print(model_text, flush=True)
     elif model_budget_hit:
         if raw_model_text and meaningful_partial(raw_model_text):
-            model_text = "TNN // MODEL PARTIAL\n" + raw_model_text
-            print(model_text, flush=True)
+            model_text = "TNN // MODEL PARTIAL\n" + (normalize_hot_response(raw_model_text) if hot else raw_model_text)
         else:
             model_text = model_budget_hit_message(partial_chars=partial_chars, started=bool(raw_model_text), model=model)
-            print(model_text, flush=True)
-    elif not model_text:
+    elif raw_model_text:
+        model_text = normalize_hot_response(raw_model_text) if hot else raw_model_text
+    else:
         model_budget_hit = True
         model_text = model_budget_hit_message(partial_chars=0, started=False, model=model)
-        print(model_text, flush=True)
+
+    print(model_text, flush=True)
 
     total_latency_ms = int((time.perf_counter() - start) * 1000)
     scaffold_ms = None if scaffold_at is None else int((scaffold_at - start) * 1000)
@@ -334,6 +350,7 @@ def stream_generate(
         "error": error,
         "boundary_rewrite": boundary_rewrite,
         "deep": deep,
+        "hot_compacted": hot,
         "boundary": "recommendation-only; no offensive cyber guidance; no shell execution, mutation, live pulls, scraping, or autonomous authority",
     }
     write_memory(packet)
@@ -350,7 +367,7 @@ def stream_generate(
         print("model_budget_hit: true")
     if error:
         print(f"note: {error}")
-    print("mode: hot_stream_guard_v5" if not deep else "mode: deep_stream_guard_v5")
+    print("mode: hot_compact_guard_v6" if hot else "mode: deep_stream_guard_v6")
     return packet
 
 

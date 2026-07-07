@@ -91,3 +91,12 @@ Close U resumes the Phi-4-mini hot lane after the Close T validation harness wou
 ## v0.2.0V Hot Lane Label Hygiene Seal
 
 TNN stream labels are now dynamic. Phi-4-mini hot lane output renders as TNN // HOT MODEL STREAM and Tesseract Neural Network/phi4-mini-hot-brain, while Mistral deep lane output renders as TNN // DEEP MODEL STREAM and Tesseract Neural Network/mistral-deep-brain.
+## v0.2.0W Operator Compactness Guard Seal
+
+Phi-4-mini hot-lane output is now buffered, normalized, capped, and de-dangled before terminal render. The hot lane keeps fast local model latency while enforcing concise operator-style responses. Mistral deep lane remains longer-form.
+## v0.2.0X Electron Marker Resume Seal
+
+Close X resumes the v0.2.0W compact hot-lane guard after the Electron HUD compatibility marker wound. The renderer now preserves the exact AI Handoff Package marker expected by full tests while retaining the Phi-4-mini compact hot-lane output guard.
+## v0.2.0Y Test Discovery Resume Seal
+
+Close Y resumes the v0.2.0X Electron marker repair after the Python unittest import-path wound. Electron HUD/preflight tests now run through unittest discovery, preserving the Phi-4-mini compact hot-lane guard and the exact AI Handoff Package compatibility marker.
