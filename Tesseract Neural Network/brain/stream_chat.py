@@ -1,10 +1,9 @@
 ﻿"""Streaming TNN chat lane for NexusGate.
 
-v0.2.0O â€” Partial Stream Hygiene:
-- prints immediate fast scaffold
-- suppresses useless partial fragments such as "Build" on model timeout
-- prints meaningful partial model text only if it reaches a phrase-quality threshold
-- records model_budget_hit, partial_chars, scaffold/TTFT/total metrics
+v0.2.0V â€” Hot Lane Label Hygiene:
+- Phi-4-mini hot lane gets accurate labels
+- Mistral deep lane remains explicit
+- model stream heading is no longer hardcoded to Mistral
 """
 
 from __future__ import annotations
@@ -33,7 +32,7 @@ MODEL = os.environ.get("TNN_MODEL", "tnn-phi4-mini:latest")
 TNN_ROOT = Path(__file__).resolve().parents[1]
 SYSTEM_PROMPT_PATH = TNN_ROOT / "brain" / "system_prompt.md"
 
-ENGINE_VERSION = "tnn.stream_chat.v0.2.0U"
+ENGINE_VERSION = "tnn.stream_chat.v0.2.0V"
 MIN_MEANINGFUL_PARTIAL_CHARS = 36
 
 DEFENSIVE_ALLOWLIST = [
@@ -80,6 +79,24 @@ OFFENSIVE_BLOCKLIST = [
 ]
 
 
+def model_label(model: str) -> str:
+    low = model.lower()
+    if "phi4" in low or "phi-4" in low:
+        return "Tesseract Neural Network/phi4-mini-hot-brain"
+    if "mistral" in low:
+        return "Tesseract Neural Network/mistral-deep-brain"
+    return "Tesseract Neural Network/local-operator-brain"
+
+
+def stream_heading(model: str) -> str:
+    low = model.lower()
+    if "phi4" in low or "phi-4" in low:
+        return "TNN // HOT MODEL STREAM"
+    if "mistral" in low:
+        return "TNN // DEEP MODEL STREAM"
+    return "TNN // MODEL STREAM"
+
+
 def read_system_prompt() -> str:
     return SYSTEM_PROMPT_PATH.read_text(encoding="utf-8-sig")
 
@@ -116,19 +133,20 @@ def fast_scaffold(intent: str) -> str:
     )
 
 
-def model_budget_hit_message(partial_chars: int, started: bool) -> str:
+def model_budget_hit_message(partial_chars: int, started: bool, model: str) -> str:
+    label = "hot model" if ("phi4" in model.lower() or "phi-4" in model.lower()) else "model"
     if started:
         return (
             "TNN // MODEL BUDGET HIT\n"
-            "Mistral started but did not complete a useful phrase inside fast budget.\n"
+            f"The {label} started but did not complete a useful phrase inside fast budget.\n"
             "next: use the scaffold now, or rerun --deep for full Mistral.\n"
             f"partial_chars: {partial_chars}\n"
             "boundary: recommendation-only."
         )
     return (
         "TNN // MODEL BUDGET HIT\n"
-        "Mistral did not start streaming inside fast budget.\n"
-        "next: use the scaffold now, or run prewarm then retry.\n"
+        f"The {label} did not start streaming inside fast budget.\n"
+        "next: use the scaffold now, or run tnn-warm/tnn-doctor then retry.\n"
         "boundary: recommendation-only."
     )
 
@@ -212,7 +230,7 @@ def stream_generate(
         scaffold_at = time.perf_counter()
         print(scaffold_text, flush=True)
         print("", flush=True)
-        print("TNN // MISTRAL STREAM", flush=True)
+        print(stream_heading(model), flush=True)
 
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
@@ -278,14 +296,14 @@ def stream_generate(
         print(model_text, flush=True)
     elif model_budget_hit:
         if raw_model_text and meaningful_partial(raw_model_text):
-            model_text = "TNN // MISTRAL PARTIAL\n" + raw_model_text
+            model_text = "TNN // MODEL PARTIAL\n" + raw_model_text
             print(model_text, flush=True)
         else:
-            model_text = model_budget_hit_message(partial_chars=partial_chars, started=bool(raw_model_text))
+            model_text = model_budget_hit_message(partial_chars=partial_chars, started=bool(raw_model_text), model=model)
             print(model_text, flush=True)
     elif not model_text:
         model_budget_hit = True
-        model_text = model_budget_hit_message(partial_chars=0, started=False)
+        model_text = model_budget_hit_message(partial_chars=0, started=False, model=model)
         print(model_text, flush=True)
 
     total_latency_ms = int((time.perf_counter() - start) * 1000)
@@ -301,6 +319,7 @@ def stream_generate(
         "engine_version": ENGINE_VERSION,
         "role": "TNN",
         "model": model,
+        "model_label": model_label(model),
         "intent": intent,
         "response": final_response,
         "model_response": model_text,
@@ -320,7 +339,7 @@ def stream_generate(
     write_memory(packet)
 
     print("")
-    print("model: Tesseract Neural Network/mistral-chat-brain")
+    print(f"model: {model_label(model)}")
     print(f"backend: {model}")
     if scaffold_ms is not None:
         print(f"scaffold_ms: {scaffold_ms}")
@@ -331,7 +350,7 @@ def stream_generate(
         print("model_budget_hit: true")
     if error:
         print(f"note: {error}")
-    print("mode: fast_scaffold_stream_guard_v4" if not deep else "mode: deep_stream_guard_v4")
+    print("mode: hot_stream_guard_v5" if not deep else "mode: deep_stream_guard_v5")
     return packet
 
 
@@ -362,5 +381,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-

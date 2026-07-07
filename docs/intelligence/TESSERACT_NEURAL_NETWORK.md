@@ -88,3 +88,6 @@ TNN hot-lane chat now targets 	nn-phi4-mini:latest, built from the first availab
 ## v0.2.0U Phi-4 Hot Lane Resume Seal
 
 Close U resumes the Phi-4-mini hot lane after the Close T validation harness wound. Phi-4-mini was successfully pulled, 	nn-phi4-mini:latest was created, Phi-3 was removed, and the repo now defaults the TNN hot lane to Phi-4-mini while preserving Mistral as 	nn-deep.
+## v0.2.0V Hot Lane Label Hygiene Seal
+
+TNN stream labels are now dynamic. Phi-4-mini hot lane output renders as TNN // HOT MODEL STREAM and Tesseract Neural Network/phi4-mini-hot-brain, while Mistral deep lane output renders as TNN // DEEP MODEL STREAM and Tesseract Neural Network/mistral-deep-brain.
