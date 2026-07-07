@@ -14,6 +14,47 @@ TNN_ROOT = ROOT / "Tesseract Neural Network"
 
 
 class TesseractNeuralNetworkSelfContainedTests(unittest.TestCase):
+
+    def tearDown(self):
+        bundle_path = TNN_ROOT / "receipts" / "receipt_bundle_latest.json"
+        state_path = TNN_ROOT / "state" / "tnn_state_latest.json"
+        bundle_path.parent.mkdir(parents=True, exist_ok=True)
+        state_path.parent.mkdir(parents=True, exist_ok=True)
+        bundle_path.write_text(json.dumps({
+            "ok": True,
+            "source": "nexusgate_local_seed",
+            "root_found": True,
+            "self_contained": True,
+            "neuralforge_required": False,
+            "receipts": {
+                "source_intake": {
+                    "ok": True,
+                    "registry_allowed": True,
+                    "live_pull_allowed": False,
+                    "scraping_allowed": False,
+                    "raw_collection_allowed": False,
+                    "mutation_allowed": False,
+                    "claim_boundary": "NexusGate-local TNN seed; no live network calls, scraping, raw collection, or mutation.",
+                    "source_count": 0,
+                    "source_intake_version": "tnn.local_seed.v0.1.1A"
+                }
+            },
+            "missing_receipts": ["control_bundle", "approval", "sandbox_plan"],
+            "blocked_reasons": [],
+            "tnn_version": "nexus.tesseract_neural_network.v0.1.1AAA",
+            "claim_boundary": "NexusGate-local seed bundle. No external source is required at runtime."
+        }, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        state_path.write_text(json.dumps({
+            "ok": True,
+            "role": "TNN",
+            "model": "Tesseract Neural Network/self-contained-receipt-core",
+            "tnn_version": "nexus.tesseract_neural_network.v0.1.1AAA",
+            "self_contained": True,
+            "neuralforge_required": False,
+            "local_bundle": "receipts/receipt_bundle_latest.json",
+            "source": "nexusgate_local_seed"
+        }, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
     def test_folder_exists_and_has_self_contained_payload(self):
         folder = TNN_ROOT
         self.assertTrue(folder.exists())

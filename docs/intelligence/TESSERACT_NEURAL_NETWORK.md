@@ -26,3 +26,8 @@ Runtime does not require NeuralForge. NeuralForge is only an explicit refresh so
 ## Boundary
 
 Recommendation-only. No shell execution, patch application, main-branch mutation, live API pulls, scraping, or autonomous authority.
+
+
+## v0.1.1A State Hygiene Seal
+
+The committed local receipt bundle is a NexusGate-local seed. Unit tests must not leave temporary NeuralForge fixture paths in committed TNN state. Optional NeuralForge refresh remains explicit.

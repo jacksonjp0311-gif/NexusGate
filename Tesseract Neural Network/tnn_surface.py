@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-TNN_VERSION = "nexus.tesseract_neural_network.v0.1.1"
+TNN_VERSION = "nexus.tesseract_neural_network.v0.1.1A"
 TNN_MODEL_NAME = "Tesseract Neural Network/self-contained-receipt-core"
 
 TNN_ROOT = Path(__file__).resolve().parent
@@ -37,7 +37,7 @@ DEFAULT_BUNDLE: Dict[str, Any] = {
             "mutation_allowed": False,
             "claim_boundary": "NexusGate-local TNN seed; no live network calls, scraping, raw collection, or mutation.",
             "source_count": 0,
-            "source_intake_version": "tnn.local_seed.v0.1.1",
+            "source_intake_version": "tnn.local_seed.v0.1.1A",
         }
     },
     "missing_receipts": ["control_bundle", "approval", "sandbox_plan"],

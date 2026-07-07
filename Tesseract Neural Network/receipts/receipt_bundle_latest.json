@@ -1,27 +1,28 @@
 {
   "blocked_reasons": [],
-  "claim_boundary": "Local cached receipt bundle. NeuralForge was only used as an explicit refresh source.",
+  "claim_boundary": "NexusGate-local seed bundle. No external source is required at runtime.",
   "missing_receipts": [
+    "control_bundle",
     "approval",
-    "sandbox_plan",
-    "source_intake"
+    "sandbox_plan"
   ],
   "neuralforge_required": false,
   "ok": true,
   "receipts": {
-    "control_bundle": {
+    "source_intake": {
+      "claim_boundary": "NexusGate-local TNN seed; no live network calls, scraping, raw collection, or mutation.",
+      "live_pull_allowed": false,
       "mutation_allowed": false,
       "ok": true,
-      "patch_proposal_receipts": [
-        {},
-        {},
-        {}
-      ],
-      "ready_for_human_review": true
+      "raw_collection_allowed": false,
+      "registry_allowed": true,
+      "scraping_allowed": false,
+      "source_count": 0,
+      "source_intake_version": "tnn.local_seed.v0.1.1A"
     }
   },
+  "root_found": true,
   "self_contained": true,
-  "source": "explicit_neuralforge_refresh",
-  "source_root": "C:\\Users\\jacks\\AppData\\Local\\Temp\\tmpkbws1wjh",
-  "tnn_version": "nexus.tesseract_neural_network.v0.1.1"
+  "source": "nexusgate_local_seed",
+  "tnn_version": "nexus.tesseract_neural_network.v0.1.1A"
 }

@@ -27,8 +27,9 @@
   "kind": "self_contained_minimal_nn_core",
   "name": "Tesseract Neural Network",
   "role": "TNN",
+  "runtime_state_hygiene": "local seed bundle restored after tests; no temp fixture paths may remain in committed TNN state",
   "self_contained_runtime": true,
   "source": "NexusGate-local TNN receipt cache, with optional explicit NeuralForge refresh",
   "vendored_neuralforge": false,
-  "version": "nexus.tesseract_neural_network.v0.1.1"
+  "version": "nexus.tesseract_neural_network.v0.1.1A"
 }
