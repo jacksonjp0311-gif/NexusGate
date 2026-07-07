@@ -32,6 +32,7 @@ class TestNexusModeSelectionGreenV020Z(unittest.TestCase):
             "--nexus-mode-green",
             ".model-selector-hud",
             "#role-select",
+            ".nexus-mode-current",
             ".system-monitor-station",
             ".telemetry-popout-button",
             ".model-selector-button.mode-selection-button",
@@ -44,6 +45,16 @@ class TestNexusModeSelectionGreenV020Z(unittest.TestCase):
         self.assertIn("AI Handoff Package", html)
         self.assertIn("Process Lanes", html)
         self.assertIn("Feedback Summary", html)
+
+    def test_no_mojibake_glyphs_in_green_assets(self):
+        blob = CSS.read_text(encoding="utf-8") + JS.read_text(encoding="utf-8")
+        for bad in ["Ã¢", "â†’", "âš¡", "âš–", "âœ£", "â˜š", "â—‡"]:
+            self.assertNotIn(bad, blob)
+
+    def test_native_select_is_visually_hidden(self):
+        css = CSS.read_text(encoding="utf-8")
+        self.assertIn("pointer-events: none", css)
+        self.assertIn("left: -9999px", css)
 
 
 if __name__ == "__main__":

@@ -243,3 +243,77 @@
 .knot-core {
   filter: drop-shadow(0 0 10px rgba(125, 255, 77, 0.72)) !important;
 }
+
+/* v0.2.0ZV â€” Custom selector repair: hide native dropdown, remove mojibake risk. */
+#role-select {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+  left: -9999px !important;
+  top: auto !important;
+}
+
+.nexus-mode-current {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 16px;
+  margin: 8px 0 10px;
+  color: var(--nexus-mode-green);
+  background:
+    linear-gradient(180deg, rgba(0, 36, 22, 0.96), rgba(0, 12, 16, 0.96));
+  border: 1px solid rgba(125, 255, 77, 0.74);
+  box-shadow:
+    0 0 0 1px rgba(125, 255, 77, 0.08),
+    0 0 24px rgba(125, 255, 77, 0.16),
+    inset 0 0 24px rgba(125, 255, 77, 0.07);
+  font: 900 13px/1.2 Consolas, "Segoe UI", monospace;
+  letter-spacing: 0.035em;
+  cursor: default;
+}
+
+.nexus-mode-current::after {
+  content: "V";
+  transform: scaleX(1.35);
+  color: var(--nexus-mode-green);
+  text-shadow: 0 0 10px rgba(125, 255, 77, 0.7);
+}
+
+.nexus-mode-green-list {
+  margin-top: 0 !important;
+}
+
+.nexus-mode-green-option {
+  grid-template-columns: 42px minmax(0, 1fr) 74px !important;
+}
+
+.nexus-mode-green-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(125, 255, 77, 0.34);
+  color: var(--nexus-mode-green);
+  font-size: 10px !important;
+  font-weight: 900;
+  text-shadow: none !important;
+  box-shadow: inset 0 0 10px rgba(125, 255, 77, 0.08), 0 0 10px rgba(125, 255, 77, 0.14);
+}
+
+.nexus-mode-green-badge {
+  text-align: right;
+}
+
+#selector-hud-status,
+#role-model {
+  letter-spacing: 0.08em;
+}
+
+.selector-copy strong,
+#role-model {
+  color: var(--nexus-mode-green) !important;
+}
