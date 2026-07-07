@@ -76,3 +76,6 @@ This makes TNN usable as a local operator surface rather than only a Python back
 ## v0.2.0Q Operator Command ValidateSet Seal
 
 The 	nn-health, 	nn-warm, and 	nn-deep commands are now admitted through the scripts/nexus.ps1 ValidateSet gate and wired to their switch handlers. This repairs the v0.2.0P shell whitelist wound.
+## v0.2.0R Warm Hygiene Seal
+
+	nn-warm is now bounded and operator-safe. Slow/cold Ollama responses produce TNN WARM // NOT READY plus eports/tnn_warm_latest.json instead of raw Python traceback. The scaffold lane remains available even when local Mistral is cold.

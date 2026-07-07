@@ -218,7 +218,7 @@ switch ($Command) {
     }
     "tnn-warm" {
         python ".\Tesseract Neural Network\brain\prewarm_tnn_mistral.py"
-        if ($LASTEXITCODE -ne 0) { throw "TNN prewarm failed." }
+        if ($LASTEXITCODE -ne 0) { Write-Warning "TNN warm returned non-zero; scaffold lane remains available." }
     }
     "tnn-deep" {
         python ".\Tesseract Neural Network\brain\stream_chat.py" --intent "$Tag" --deep
@@ -252,6 +252,7 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
+
 
 
 
