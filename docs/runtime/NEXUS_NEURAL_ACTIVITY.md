@@ -225,3 +225,28 @@ OPEN:
 ```
 
 This makes the small panel use the same source program as the pop-out instead of a visual approximation.
+## v0.1.1 Canonical Visual Organ
+
+Neural Activity is now a stable visual organ of NexusGate.
+
+Canonical implementation:
+
+```text
+HUD panel = live embedded Neural Cathedral preview
+OPEN = full standalone Neural Cathedral
+source = neural_activity/index.html
+surrogate previews = deprecated
+```
+
+Do not reintroduce surrogate panel previews unless the real embed is explicitly unavailable.
+
+Future evolution should be:
+- crop/scale polish
+- preview performance tuning
+- access affordance polish
+- visual telemetry labels
+
+Not:
+- governance changes
+- execution authority changes
+- autonomous mutation authority

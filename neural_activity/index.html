@@ -250,6 +250,19 @@ html.nexus-neural-embed-aa .spinner {
   display: none !important;
 }
 </style>
+<script id="NEXUS_NEURAL_ACTIVITY_V011_EMBED_KNOBS">
+(function () {
+  try {
+    var params = new URLSearchParams(window.location.search || "");
+    if (params.get("embed") === "1") {
+      document.documentElement.setAttribute("data-nexus-neural-embed", "true");
+      document.documentElement.style.setProperty("--nexus-neural-embed-scale", params.get("scale") || "1.0");
+      document.documentElement.style.setProperty("--nexus-neural-embed-crop-x", params.get("cropX") || "50%");
+      document.documentElement.style.setProperty("--nexus-neural-embed-crop-y", params.get("cropY") || "50%");
+    }
+  } catch (err) {}
+})();
+</script>
 </head>
 <body>
 <div class="overlay"></div>

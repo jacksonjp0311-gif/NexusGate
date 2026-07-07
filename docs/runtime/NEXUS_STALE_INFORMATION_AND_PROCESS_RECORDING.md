@@ -51,3 +51,16 @@ Tracked files are restored. Untracked generated files are removed. This prevents
 ## Untracked Directory Rule
 
 Use `git status --short --untracked-files=all` for pre-stage residue checks. Plain `git status --short` can collapse intended new files into directory summaries such as `?? state/process/`, which causes false residue failures.
+## Neural Activity visual close lesson
+
+The failure sequence was useful:
+
+```text
+- iframe collapsed
+- canvas preview collapsed
+- SVG/DOM preview finally displayed
+- surrogate preview was incorrect
+- AA fixed the architecture by embedding the real source program
+```
+
+Lesson: once visibility is solved, return to the real source of truth rather than preserving a workaround.

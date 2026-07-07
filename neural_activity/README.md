@@ -1,25 +1,34 @@
-# Neural Activity / Neural Cathedral
+# Neural Activity
 
-Version: v0.1.0
+Canonical status: v0.1.1 visual organ.
 
-Neural Activity is a self-contained bioelectric visualization surface ported into NexusGate.
+This folder contains the Neural Cathedral visual program used by NexusGate.
 
-It runs as:
+## Runtime surfaces
+
+- `index.html` â€” full standalone Neural Cathedral program.
+- HUD preview â€” `electron/renderer/index.html` embeds `index.html?embed=1`.
+- OPEN control â€” launches the full standalone program.
+
+## Boundary
+
+Neural Activity is a visual surface only.
+
+It does not change:
+- model authority
+- NexusCell execution authority
+- governance policy
+- memory policy
+- filesystem mutation authority
+
+## Rehydration note
+
+AA is the canonical architecture:
 
 ```text
-neural_activity/index.html
+small HUD panel = live embedded source program
+OPEN = full standalone source program
+surrogate previews = deprecated
 ```
 
-It is also embedded into the Electron HUD left rail as a preview panel and can open as a full pop-out program.
-
-## Boundaries
-
-This is a visual/program surface. It does not grant execution authority, model authority, memory authority, or NexusCell authority.
-
-## Entry Points
-
-```text
-Electron HUD: Neural Activity panel -> Open Cathedral
-Desktop portal: [13] Neural Activity / Cathedral
-Local file: neural_activity/index.html
-```
+v0.1.1 locks that knowledge so a future system does not repeat the Y/Z surrogate path.

@@ -1,6 +1,6 @@
 # NEXUS GATE
 **Reflective Intelligence Layer for AI Systems**
-NEXUS GATE is a local-first reflective intelligence layer for AI systems. It gives AI systems a governed mirror: origin alignment, state routing, local model reflection, HANDOFF action boundaries, Failure Doctor diagnosis, compiler evidence, wound lessons, UI feedback, NexusCell receipts, and GitHub durability through explicit gates.
+NEXUS GATE is a local-first reflective intelligence layer for AI systems. It gives AI systems a governed mirror: origin alignment, state routing, local model reflection, HANDOFF action boundaries, Failure Doctor diagnosis, compiler evidence, wound lessons, UI feedback, NexusCell + Neural Activity receipts, and GitHub durability through explicit gates.
 It is not another agent framework and it is not just the entry portal. The Desktop Entry Portal is the human doorway. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
 ```text
 human intent -> origin alignment -> route/authority gate -> evidence -> human-authorized durable mutation

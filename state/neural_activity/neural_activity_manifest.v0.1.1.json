@@ -1,0 +1,24 @@
+{
+    "version":  "v0.1.1",
+    "name":  "Nexus Neural Activity Canonical Visual Organ",
+    "status":  "canonical_visual_organ",
+    "canonical_implementation":  "AA live embedded Neural Cathedral preview",
+    "source_program":  "neural_activity/index.html",
+    "hud_preview":  "electron renderer embeds neural_activity/index.html?embed=1",
+    "standalone_access":  "OPEN control launches full Neural Cathedral",
+    "deprecated_paths":  [
+                             "Y/Z surrogate DOM mini-preview",
+                             "canvas-only preview",
+                             "SVG-only preview",
+                             "collapsed iframe attempts without embed mode"
+                         ],
+    "next_safe_evolutions":  [
+                                 "crop/scale polish",
+                                 "performance tuning",
+                                 "visual telemetry labels",
+                                 "access affordance polish"
+                             ],
+    "claim_boundary":  "visual surface only; no authority, governance, NexusCell execution, model routing, or memory policy changes",
+    "evidence_commit":  "c9995a3",
+    "encoding_lock":  "utf-8-no-bom"
+}
