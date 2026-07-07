@@ -1,4 +1,4 @@
-"""Self-contained Tesseract Neural Network surface for NexusGate.
+﻿"""Self-contained Tesseract Neural Network surface for NexusGate.
 
 TNN v0.2.0 is a local neural chat brain backed by Mistral/Ollama.
 """
@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-TNN_VERSION = "nexus.tesseract_neural_network.v0.2.0E"
+TNN_VERSION = "nexus.tesseract_neural_network.v0.2.0I"
 TNN_MODEL_NAME = "Tesseract Neural Network/mistral-chat-brain"
 
 TNN_ROOT = Path(__file__).resolve().parent
@@ -75,7 +75,7 @@ def load_local_bundle() -> Dict[str, Any]:
 def build_model_response(intent: str) -> Dict[str, Any]:
     bundle = load_local_bundle()
     chat_engine = _load_module("tnn_chat_engine", TNN_ROOT / "brain" / "chat_engine.py")
-    chat = chat_engine.chat(intent, timeout=6.0)
+    chat = chat_engine.chat(intent)
     response = {
         "role": "TNN",
         "model": TNN_MODEL_NAME,
@@ -115,3 +115,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

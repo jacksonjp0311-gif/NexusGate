@@ -1,7 +1,7 @@
-﻿"""Fast local Ollama adapter for TNN Mistral chat brain.
+﻿"""Turbo local Ollama adapter for TNN Mistral chat brain.
 
-v0.2.0H: no fallback on timeout by default. Fallback doubles latency, so it is
-opt-in only through TNN_ALLOW_FALLBACK=1 and intended for missing-model cases.
+v0.2.0I: snappy path uses compact prompt, 512 ctx, 48-token target, and no
+fallback on timeout. Fallback is opt-in only for missing-model recovery.
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ from typing import Any, Dict, Optional
 OLLAMA_URL = os.environ.get("TNN_OLLAMA_URL", "http://127.0.0.1:11434")
 DEFAULT_MODEL = os.environ.get("TNN_MODEL", "tnn-mistral:latest")
 FALLBACK_MODEL = os.environ.get("TNN_FALLBACK_MODEL", "mistral:latest")
-DEFAULT_TIMEOUT = float(os.environ.get("TNN_TIMEOUT_SECONDS", "6"))
+DEFAULT_TIMEOUT = float(os.environ.get("TNN_TIMEOUT_SECONDS", "8"))
 ALLOW_FALLBACK = os.environ.get("TNN_ALLOW_FALLBACK", "0").strip().lower() in {"1", "true", "yes"}
 
 
@@ -26,7 +26,7 @@ class OllamaError(RuntimeError):
 
 
 def _post_json(url: str, payload: Dict[str, Any], timeout: float) -> Dict[str, Any]:
-    data = json.dumps(payload).encode("utf-8")
+    data = json.dumps(payload, separators=(",", ":")).encode("utf-8")
     request = urllib.request.Request(
         url,
         data=data,
@@ -66,7 +66,7 @@ def generate(
     system: str,
     model: Optional[str] = None,
     timeout: float = DEFAULT_TIMEOUT,
-    num_predict: int = 80,
+    num_predict: int = 48,
 ) -> Dict[str, Any]:
     chosen = model or DEFAULT_MODEL
     payload = {
@@ -76,9 +76,9 @@ def generate(
         "stream": False,
         "keep_alive": "30m",
         "options": {
-            "temperature": 0.2,
-            "top_p": 0.88,
-            "num_ctx": 768,
+            "temperature": 0.18,
+            "top_p": 0.85,
+            "num_ctx": 512,
             "num_predict": num_predict,
             "repeat_penalty": 1.08,
         },

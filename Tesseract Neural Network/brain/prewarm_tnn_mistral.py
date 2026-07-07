@@ -4,13 +4,19 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
+from pathlib import Path
+
+BRAIN_DIR = Path(__file__).resolve().parent
+if str(BRAIN_DIR) not in sys.path:
+    sys.path.insert(0, str(BRAIN_DIR))
 
 from ollama_adapter import generate, OllamaError, DEFAULT_MODEL
 
 
 SYSTEM = "You are TNN. Reply with exactly: TNN READY"
-PROMPT = "Warm the model. Reply with exactly: TNN READY"
+PROMPT = "TNN READY"
 
 
 def main() -> None:
@@ -22,13 +28,7 @@ def main() -> None:
 
     start = time.perf_counter()
     try:
-        result = generate(
-            prompt=PROMPT,
-            system=SYSTEM,
-            model=args.model,
-            timeout=args.timeout,
-            num_predict=8,
-        )
+        result = generate(prompt=PROMPT, system=SYSTEM, model=args.model, timeout=args.timeout, num_predict=4)
         packet = {
             "ok": True,
             "model": result.get("model_requested", args.model),

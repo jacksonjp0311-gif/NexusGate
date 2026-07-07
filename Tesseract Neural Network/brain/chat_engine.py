@@ -1,4 +1,4 @@
-"""TNN v0.2.0 Mistral chat engine."""
+﻿"""TNN v0.2.0I Mistral turbo chat engine."""
 
 from __future__ import annotations
 
@@ -9,25 +9,25 @@ import time
 from pathlib import Path
 from typing import Any, Dict
 
-from ollama_adapter import generate, OllamaError, DEFAULT_MODEL, FALLBACK_MODEL
-from context_builder import build_context
-from memory_store import write_memory
-
-
 BRAIN_DIR = Path(__file__).resolve().parent
 if str(BRAIN_DIR) not in sys.path:
     sys.path.insert(0, str(BRAIN_DIR))
 
+from ollama_adapter import generate, OllamaError, DEFAULT_MODEL, DEFAULT_TIMEOUT
+from context_builder import build_context
+from memory_store import write_memory
+
+
 TNN_ROOT = Path(__file__).resolve().parents[1]
 SYSTEM_PROMPT_PATH = TNN_ROOT / "brain" / "system_prompt.md"
-CHAT_ENGINE_VERSION = "tnn.chat_engine.v0.2.0"
+CHAT_ENGINE_VERSION = "tnn.chat_engine.v0.2.0I"
 
 
 def read_system_prompt() -> str:
     return SYSTEM_PROMPT_PATH.read_text(encoding="utf-8-sig")
 
 
-def tighten(text: str, max_lines: int = 10) -> str:
+def tighten(text: str, max_lines: int = 6) -> str:
     lines = [line.rstrip() for line in text.strip().splitlines()]
     lines = [line for line in lines if line.strip()]
     if not lines:
@@ -35,12 +35,12 @@ def tighten(text: str, max_lines: int = 10) -> str:
     return "\n".join(lines[:max_lines])
 
 
-def chat(intent: str, model: str | None = None, timeout: float = 6.0) -> Dict[str, Any]:
+def chat(intent: str, model: str | None = None, timeout: float = DEFAULT_TIMEOUT) -> Dict[str, Any]:
     start = time.perf_counter()
     system = read_system_prompt()
     prompt = build_context(intent)
     try:
-        result = generate(prompt=prompt, system=system, model=model, timeout=timeout)
+        result = generate(prompt=prompt, system=system, model=model, timeout=timeout, num_predict=48)
         raw = result.get("response", "")
         response = tighten(raw)
         ok = True
@@ -50,10 +50,10 @@ def chat(intent: str, model: str | None = None, timeout: float = 6.0) -> Dict[st
     except OllamaError as exc:
         response = (
             "TNN // MODEL WARMING\n"
-            "Mistral/Ollama did not answer inside the fast gate.\n"
-            "next: retry once; if cold, start Ollama or rebuild tnn-mistral.\n"
-            "safe: NexusGate did not crash and no shell action was taken.\n"
-            "boundary: recommendation-only; no mutation authority."
+            "Mistral did not answer inside turbo gate.\n"
+            "next: run prewarm, then retry once.\n"
+            "safe: NexusGate did not crash.\n"
+            "boundary: recommendation-only."
         )
         ok = False
         error = str(exc)
@@ -66,7 +66,6 @@ def chat(intent: str, model: str | None = None, timeout: float = 6.0) -> Dict[st
         "engine_version": CHAT_ENGINE_VERSION,
         "role": "TNN",
         "model": model_used,
-        "fallback_model": FALLBACK_MODEL,
         "fallback_used": fallback_used,
         "intent": intent,
         "response": response,
@@ -82,7 +81,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--intent", required=True)
     parser.add_argument("--model", default="")
-    parser.add_argument("--timeout", type=float, default=6.0)
+    parser.add_argument("--timeout", type=float, default=DEFAULT_TIMEOUT)
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
     packet = chat(args.intent, model=args.model or None, timeout=args.timeout)

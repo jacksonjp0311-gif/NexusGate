@@ -42,3 +42,6 @@ Ollama socket timeouts are converted into bounded TNN chat packets instead of ro
 ## v0.2.0H Fast Prewarm Seal
 
 TNN disables fallback on timeout by default so a slow model does not double latency. prewarm_tnn_mistral.py keeps 	nn-mistral:latest resident before chat. Snappy mode targets 6 seconds, 768 context, and 80 generated tokens.
+## v0.2.0I Turbo Context Seal
+
+TNN turbo chat removes heavy memory/context from the default path. It sends only intent, core local flags, and the boundary to Mistral. Deep memory can be re-enabled with TNN_INCLUDE_MEMORY=1. Turbo mode targets 512 context and 48 generated tokens.
