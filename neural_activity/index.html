@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXUS Neural Activity</title>
+<style>
+:root {
+  --cyan: #00f0ff;
+  --gold: #ffaa00;
+  --magenta: #ff00aa;
+  --bg-dark: #010204;
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.07) 45%, rgba(0, 240, 255, 0.08));
+  --glass-border: rgba(255, 255, 255, 0.24);
+  --glass-highlight: rgba(255, 255, 255, 0.42);
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark);
+  overflow: hidden;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: white;
+  user-select: none;
+}
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  background:
+    radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.85) 100%),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px);
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
+}
+.hud-panel {
+  position: absolute;
+  z-index: 20;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  backdrop-filter: blur(28px) saturate(170%);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 var(--glass-highlight),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  overflow: hidden;
+}
+#hud-left { top: clamp(12px, 3vw, 28px); left: clamp(12px, 3vw, 28px); padding: 14px; width: min(230px, calc(100vw - 24px)); }
+#hud-right { bottom: clamp(12px, 3vw, 28px); right: clamp(12px, 3vw, 28px); padding: 10px 14px; min-width: 130px; text-align: right; }
+.hud-header { border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 8px; margin-bottom: 10px; }
+h1 {
+  font-size: 11px;
+  letter-spacing: 2.6px;
+  color: var(--cyan);
+  margin: 0 0 4px 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+.subtitle { font-size: 8px; color: rgba(255,255,255,0.4); letter-spacing: 1.4px; }
+.hud-row { display:flex; justify-content:space-between; gap:18px; margin-bottom:8px; font-size:9px; letter-spacing:0.8px; }
+.hud-label { color: rgba(255,255,255,0.5); text-transform: uppercase; }
+.hud-value { font-weight:600; color:var(--cyan); text-shadow:0 0 8px rgba(0,240,255,0.5); font-variant-numeric:tabular-nums; }
+.value-active { color: var(--gold); text-shadow: 0 0 10px rgba(255, 170, 0, 0.6); }
+.value-refract { color: var(--magenta); text-shadow: 0 0 10px rgba(255, 0, 170, 0.6); }
+.btn-trigger {
+  margin-top: 12px;
+  width: 100%;
+  padding: 9px 10px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.24);
+  color: var(--cyan);
+  font-size: 9px;
+  letter-spacing: 2px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 0 15px rgba(0,240,255,0.1);
+}
+.btn-trigger:hover { background: rgba(0,240,255,0.15); box-shadow: 0 0 20px rgba(0,240,255,0.4); }
+.btn-trigger.disabled { border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.3); background: transparent; box-shadow: none; cursor: not-allowed; }
+#instructions {
+  position:absolute;
+  bottom: clamp(14px, 4vw, 40px); left:50%;
+  transform:translateX(-50%);
+  z-index:20;
+  font-size:9px;
+  letter-spacing:1.6px;
+  color:rgba(255,255,255,0.4);
+  pointer-events:none;
+  text-transform:uppercase;
+  animation:pulseText 2s infinite;
+  white-space:nowrap;
+}
+@keyframes pulseText { 0%,100% { opacity:0.3; } 50% { opacity:0.8; } }
+#cursor {
+  position:fixed;
+  top:0; left:0;
+  width:24px; height:24px;
+  border:1px solid rgba(0,240,255,0.8);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  z-index:9999;
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: screen;
+  box-shadow: 0 0 10px rgba(0,240,255,0.4);
+}
+#cursor.click { width:12px; height:12px; background: var(--cyan); border-color: transparent; }
+#loader {
+  position:absolute;
+  top:0; left:0; width:100%; height:100%;
+  background: var(--bg-dark);
+  z-index:9000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  transition: opacity 1s ease;
+}
+.spinner {
+  width:50px; height:50px;
+  border:2px solid rgba(0,240,255,0.1);
+  border-top-color: var(--cyan);
+  border-radius:50%;
+  animation:spin 1s cubic-bezier(0.4,0,0.2,1) infinite;
+  margin-bottom:24px;
+  box-shadow:0 0 20px rgba(0,240,255,0.2);
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+html.embed #hud-left, html.embed #hud-right, html.embed #instructions, html.embed #cursor { display:none; }
+html.embed .overlay {
+  background:
+    radial-gradient(circle at center, transparent 52%, rgba(0, 0, 0, 0.78) 100%),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.12) 0px, rgba(0,0,0,0.12) 1px, transparent 1px, transparent 2px);
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.82);
+}
+html.embed #loader h1 { font-size:8px !important; letter-spacing:1.1px; }
+@media (max-width:720px) {
+  #hud-left { top:max(10px, env(safe-area-inset-top)); left:10px; width:min(220px, calc(100vw - 20px)); padding:8px 9px; border-radius:13px; }
+  #hud-right { right:10px; bottom:max(54px, env(safe-area-inset-bottom)); padding:8px 10px; min-width:112px; }
+  h1 { font-size:9px; letter-spacing:1.5px; margin-bottom:0; }
+  .subtitle { font-size:6px; letter-spacing:0.7px; text-align:right; }
+  .hud-row { gap:10px; margin-bottom:4px; font-size:7px; letter-spacing:0.55px; }
+  .btn-trigger { margin-top:6px; padding:6px 8px; font-size:7px; letter-spacing:1.2px; }
+  #instructions { bottom:max(16px, env(safe-area-inset-bottom)); font-size:8px; letter-spacing:1.1px; }
+  #cursor { display:none; }
+}
+</style>
+<script>
+if (new URLSearchParams(location.search).has("embed")) {
+  document.documentElement.classList.add("embed");
+}
+</script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<style id="nexus-embed-fit-close-t">
+html.embed, html.embed body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #010204;
+}
+html.embed canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+html.embed #loader {
+  transition: opacity 0.35s ease;
+}
+html.embed .spinner {
+  width: 26px;
+  height: 26px;
+  margin-bottom: 10px;
+}
+</style>
+<script id="nexus-neural-embed-aa-bootstrap">
+(function () {
+  try {
+    var params = new URLSearchParams(window.location.search || "");
+    if (params.get("embed") === "1") {
+      document.documentElement.classList.add("nexus-neural-embed-aa");
+      document.documentElement.classList.add("embed");
+    }
+  } catch (err) {}
+})();
+</script>
+<style id="nexus-neural-embed-aa-style">
+html.nexus-neural-embed-aa,
+html.nexus-neural-embed-aa body {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #010204 !important;
+}
+
+html.nexus-neural-embed-aa canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+
+html.nexus-neural-embed-aa #hud-left,
+html.nexus-neural-embed-aa #hud-right,
+html.nexus-neural-embed-aa #instructions,
+html.nexus-neural-embed-aa #cursor {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+html.nexus-neural-embed-aa .overlay {
+  background:
+    radial-gradient(circle at center, transparent 54%, rgba(0,0,0,0.72) 100%),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.12) 0px, rgba(0,0,0,0.12) 1px, transparent 1px, transparent 2px) !important;
+  box-shadow: inset 0 0 46px rgba(0,0,0,0.78) !important;
+}
+
+html.nexus-neural-embed-aa #loader {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+html.nexus-neural-embed-aa .spinner {
+  display: none !important;
+}
+</style>
+</head>
+<body>
+<div class="overlay"></div>
+<div id="cursor"></div>
+<div id="loader">
+  <div class="spinner"></div>
+  <h1 style="color: rgba(255,255,255,0.6); font-size: 11px;">INITIALIZING BIOELECTRIC ENGINE</h1>
+</div>
+<div id="hud-left" class="hud-panel">
+  <div class="hud-header">
+    <h1>Neural Cathedral</h1>
+    <div class="subtitle">ID: NC-09 // BIOELECTRIC ENGINE</div>
+  </div>
+  <div class="hud-row"><span class="hud-label">Membrane V</span><span class="hud-value" id="val-membrane">-70.0 mV</span></div>
+  <div class="hud-row"><span class="hud-label">Dendrite State</span><span class="hud-value" id="val-dendrites">CALM</span></div>
+  <div class="hud-row"><span class="hud-label">Axon Load</span><span class="hud-value" id="val-axon">02%</span></div>
+  <div class="hud-row"><span class="hud-label">Signal Phase</span><span class="hud-value" id="val-state">RESTING</span></div>
+  <div class="hud-row"><span class="hud-label">Synaptic Coh</span><span class="hud-value" id="val-sync">24%</span></div>
+  <button class="btn-trigger" id="btn-fire">Manual Override</button>
+</div>
+<div id="hud-right" class="hud-panel">
+  <div class="hud-row"><span class="hud-label">Cam X</span><span class="hud-value" id="val-cam-x">0.00</span></div>
+  <div class="hud-row"><span class="hud-label">Cam Y</span><span class="hud-value" id="val-cam-y">0.00</span></div>
+  <div class="hud-row"><span class="hud-label">Cam Z</span><span class="hud-value" id="val-cam-z">0.00</span></div>
+</div>
+<div id="instructions">Click anywhere to trigger impulse</div>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
+
+const EMBED = document.documentElement.classList.contains("embed");
+const cursor = document.getElementById("cursor");
+if (cursor) {
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+  });
+  document.addEventListener("mousedown", () => cursor.classList.add("click"));
+  document.addEventListener("mouseup", () => cursor.classList.remove("click"));
+}
+
+const CONFIG = {
+  somaRadius: 4.0,
+  dendriteTrees: EMBED ? 8 : 14,
+  axonTrees: EMBED ? 2 : 4,
+  colors: {
+    cyan: new THREE.Color("#00e5ff"),
+    blue: new THREE.Color("#0033aa"),
+    gold: new THREE.Color("#ffaa00"),
+    orange: new THREE.Color("#ff4400"),
+    magenta: new THREE.Color("#ff0066"),
+    violet: new THREE.Color("#6600ff")
+  }
+};
+
+const STATE = { phase: 0, progress: 0, membraneV: -70.0, axonLoad: 2, sync: 24, isAnimating: false };
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x010204, 0.018);
+
+const camera = new THREE.PerspectiveCamera(EMBED ? 52 : 45, window.innerWidth / window.innerHeight, 0.1, 500);
+camera.position.set(EMBED ? 24 : 30, EMBED ? 18 : 20, EMBED ? 48 : 40);
+
+const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, EMBED ? 1.25 : 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
+document.body.appendChild(renderer.domElement);
+
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), EMBED ? 1.15 : 1.8, 0.6, 0.1);
+composer.addPass(bloomPass);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.04;
+controls.autoRotate = true;
+controls.autoRotateSpeed = EMBED ? 0.35 : 0.6;
+controls.enablePan = false;
+controls.minDistance = 15;
+controls.maxDistance = 140;
+
+const networkGroup = new THREE.Group();
+scene.add(networkGroup);
+
+const somaMaterial = new THREE.MeshBasicMaterial({ color: CONFIG.colors.cyan, transparent: true, opacity: 0.38, blending: THREE.AdditiveBlending });
+const somaWire = new THREE.MeshBasicMaterial({ color: CONFIG.colors.gold, transparent: true, opacity: 0.35, wireframe: true, blending: THREE.AdditiveBlending });
+networkGroup.add(new THREE.Mesh(new THREE.IcosahedronGeometry(CONFIG.somaRadius, 5), somaMaterial));
+networkGroup.add(new THREE.Mesh(new THREE.IcosahedronGeometry(CONFIG.somaRadius * 1.08, 2), somaWire));
+
+const branchMat = new THREE.MeshBasicMaterial({ color: CONFIG.colors.cyan, transparent: true, opacity: 0.62, blending: THREE.AdditiveBlending, depthWrite: false });
+const axonMat = new THREE.MeshBasicMaterial({ color: CONFIG.colors.gold, transparent: true, opacity: 0.78, blending: THREE.AdditiveBlending, depthWrite: false });
+const synapsePositions = [];
+function addSynapse(pos) { synapsePositions.push(pos.x, pos.y, pos.z); }
+
+function buildBranch(startPt, dir, length, radius, level, maxLevels, isAxon) {
+  const segments = 10;
+  const points = [startPt.clone()];
+  let cur = startPt.clone();
+  let cDir = dir.clone();
+  for (let i = 0; i < segments; i++) {
+    const curl = new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).multiplyScalar(isAxon ? 0.25 : 0.85);
+    cDir.add(curl).normalize();
+    cur = cur.clone().add(cDir.clone().multiplyScalar(length / segments));
+    points.push(cur.clone());
+  }
+  const curve = new THREE.CatmullRomCurve3(points);
+  networkGroup.add(new THREE.Mesh(new THREE.TubeGeometry(curve, segments * 2, radius, 6, false), isAxon ? axonMat : branchMat));
+  if (level < maxLevels) {
+    const childCount = isAxon ? (Math.random() > 0.35 ? 1 : 2) : (Math.random() > 0.22 ? 2 : 3);
+    for (let j = 0; j < childCount; j++) {
+      const splitDir = cDir.clone().add(new THREE.Vector3(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5).multiplyScalar(0.85)).normalize();
+      buildBranch(cur, splitDir, length * (0.58 + Math.random() * 0.34), radius * 0.66, level + 1, maxLevels, isAxon);
+    }
+  } else {
+    addSynapse(cur);
+  }
+}
+
+for (let i = 0; i < CONFIG.dendriteTrees; i++) {
+  let dir = new THREE.Vector3(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5).normalize();
+  if (dir.z > 0.3) dir.z -= 0.8;
+  dir.normalize();
+  buildBranch(dir.clone().multiplyScalar(CONFIG.somaRadius - 0.5), dir, EMBED ? 9 : 12 + Math.random()*5, EMBED ? 0.28 : 0.4, 0, EMBED ? 1 : 2, false);
+}
+for (let i = 0; i < CONFIG.axonTrees; i++) {
+  const dir = new THREE.Vector3((Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5, 1.0).normalize();
+  buildBranch(dir.clone().multiplyScalar(CONFIG.somaRadius - 0.5), dir, EMBED ? 20 : 25 + Math.random()*10, EMBED ? 0.42 : 0.6, 0, EMBED ? 1 : 2, true);
+}
+
+const synGeo = new THREE.BufferGeometry();
+synGeo.setAttribute("position", new THREE.Float32BufferAttribute(synapsePositions, 3));
+networkGroup.add(new THREE.Points(synGeo, new THREE.PointsMaterial({ color: CONFIG.colors.gold, size: EMBED ? 0.9 : 1.4, transparent: true, opacity: 0.82, blending: THREE.AdditiveBlending, depthWrite: false })));
+
+const dustGeo = new THREE.BufferGeometry();
+const dustCount = EMBED ? 280 : 800;
+const dustPos = new Float32Array(dustCount * 3);
+for (let i = 0; i < dustCount * 3; i++) dustPos[i] = (Math.random() - 0.5) * 150;
+dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPos, 3));
+const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ color: CONFIG.colors.cyan, size: EMBED ? 0.13 : 0.2, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending, depthWrite: false }));
+scene.add(dust);
+
+const btnFire = document.getElementById("btn-fire");
+function triggerImpulse(e) {
+  if (EMBED) return;
+  if (e && e.target && e.target.closest && e.target.closest(".hud-panel") && e.target !== btnFire) return;
+  if (STATE.isAnimating) return;
+  STATE.isAnimating = true;
+  STATE.phase = 1;
+  STATE.progress = 0;
+  if (btnFire) { btnFire.classList.add("disabled"); btnFire.innerText = "FIRING SEQUENCE..."; }
+}
+window.addEventListener("pointerdown", triggerImpulse);
+if (btnFire) btnFire.addEventListener("click", triggerImpulse);
+
+const ui = {
+  membrane: document.getElementById("val-membrane"),
+  dendrites: document.getElementById("val-dendrites"),
+  axon: document.getElementById("val-axon"),
+  state: document.getElementById("val-state"),
+  sync: document.getElementById("val-sync"),
+  camX: document.getElementById("val-cam-x"),
+  camY: document.getElementById("val-cam-y"),
+  camZ: document.getElementById("val-cam-z")
+};
+
+function updateUI(time) {
+  if (EMBED) return;
+  ui.camX.innerText = camera.position.x.toFixed(2);
+  ui.camY.innerText = camera.position.y.toFixed(2);
+  ui.camZ.innerText = camera.position.z.toFixed(2);
+  let targetMembrane = -70.0, targetAxon = 2, targetSync = 24 + Math.sin(time * 2) * 5;
+  let stateText = "RESTING", denText = "CALM";
+  [ui.membrane, ui.axon, ui.state].forEach((el) => el.className = "hud-value");
+  if (STATE.phase === 1) { stateText = "INCOMING STIMULUS"; denText = "ACTIVE LOAD"; targetMembrane = -55; targetSync = 45; ui.state.classList.add("value-active"); }
+  if (STATE.phase === 2) { stateText = "SOMA MERGE"; denText = "CONVERGED"; targetMembrane = 40; targetSync = 85; ui.membrane.classList.add("value-active"); ui.state.classList.add("value-active"); }
+  if (STATE.phase === 3) { stateText = "AXON OUTFLOW"; targetMembrane = 20; targetAxon = 98; targetSync = 99; ui.axon.classList.add("value-active"); ui.state.classList.add("value-active"); }
+  if (STATE.phase === 4) { stateText = "REFRACTORY PERIOD"; targetMembrane = -80; targetAxon = 15; targetSync = 15; ui.membrane.classList.add("value-refract"); ui.state.classList.add("value-refract"); }
+  STATE.membraneV += (targetMembrane - STATE.membraneV) * 0.15;
+  STATE.axonLoad += (targetAxon - STATE.axonLoad) * 0.15;
+  STATE.sync += (targetSync - STATE.sync) * 0.15;
+  ui.membrane.innerText = `${STATE.membraneV > 0 ? "+" : ""}${STATE.membraneV.toFixed(1)} mV`;
+  ui.axon.innerText = `${Math.round(STATE.axonLoad).toString().padStart(2, "0")}%`;
+  ui.sync.innerText = `${Math.round(STATE.sync).toString().padStart(2, "0")}%`;
+  ui.state.innerText = stateText;
+  ui.dendrites.innerText = denText;
+}
+
+const clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  const dt = clock.getDelta();
+  const time = clock.getElapsedTime();
+  controls.update();
+  dust.rotation.y = time * 0.02;
+  dust.rotation.x = Math.sin(time * 0.01) * 0.05;
+  networkGroup.rotation.y += dt * (EMBED ? 0.07 : 0.035);
+  if (STATE.isAnimating) {
+    let speed = 1;
+    if (STATE.phase === 2) speed = 2.4;
+    if (STATE.phase === 4) speed = 0.55;
+    STATE.progress += dt * speed;
+    const pulse = Math.sin(Math.min(1, STATE.progress) * Math.PI);
+    networkGroup.scale.setScalar(1 + pulse * 0.04);
+    bloomPass.strength = (EMBED ? 1.15 : 1.8) + pulse * 1.1;
+    if (STATE.progress >= 1) {
+      STATE.progress = 0;
+      STATE.phase += 1;
+      if (STATE.phase > 4) {
+        STATE.phase = 0;
+        STATE.isAnimating = false;
+        networkGroup.scale.setScalar(1);
+        if (btnFire) { btnFire.classList.remove("disabled"); btnFire.innerText = "MANUAL OVERRIDE"; }
+      }
+    }
+  } else {
+    bloomPass.strength += ((EMBED ? 1.15 : 1.8) - bloomPass.strength) * 0.05;
+  }
+  updateUI(time);
+  composer.render();
+}
+setTimeout(() => {
+  const loader = document.getElementById("loader");
+  loader.style.opacity = "0";
+  setTimeout(() => loader.style.display = "none", 1000);
+}, EMBED ? 600 : 1200);
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, EMBED ? 1.25 : 2));
+  renderer.setSize(window.innerWidth, window.innerHeight, false);
+  composer.setSize(window.innerWidth, window.innerHeight);
+});
+animate();
+</script>
+</body>
+</html>

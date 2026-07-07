@@ -1,0 +1,14 @@
+﻿{
+  "version": "v0.1.6l",
+  "name": "nexus_ui_center_chat_repair",
+  "intent": [
+    "restore full-window HUD width",
+    "remove Lane Context",
+    "keep one intentional empty left spacer",
+    "equal side rails",
+    "center the chat/output column without rewriting chat input geometry"
+  ],
+  "entrypoint": "electron/renderer/nexus_ui_center_chat_repair.v0.1.6l.css",
+  "index_wired": true,
+  "claim_boundary": "local layout repair only"
+}

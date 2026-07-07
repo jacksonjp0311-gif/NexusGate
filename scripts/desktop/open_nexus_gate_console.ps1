@@ -858,6 +858,31 @@ function Invoke-NexusCellExecutionGateConsole {
     }
 }
 
+function Invoke-NexusNeuralActivity {
+    Write-Host ""
+    Write-NG "Opening Neural Activity / Neural Cathedral."
+    Write-NG "Boundary: visual surface only; no execution authority changes."
+
+    $neuralPath = Join-Path $RepoRoot "neural_activity\index.html"
+
+    if (-not (Test-Path -LiteralPath $neuralPath -PathType Leaf)) {
+        Write-FAIL ("Neural Activity entrypoint missing: {0}" -f $neuralPath)
+        Read-Host "Press Enter to return to NEXUS menu"
+        return
+    }
+
+    try {
+        & rundll32.exe url.dll,FileProtocolHandler $neuralPath
+        Write-OK "Neural Activity open request sent."
+    }
+    catch {
+        Write-FAIL ("Could not open Neural Activity: {0}" -f $_.Exception.Message)
+    }
+
+    Write-Host ""
+    Read-Host "Press Enter to return to NEXUS menu"
+}
+
 function Invoke-NexusOpenUrl {
     param([string]$Url)
     Write-NG ("Opening: {0}" -f $Url)
@@ -946,6 +971,7 @@ function Show-Menu {
     Write-Portal "  [10] NexusCell / Containment       -> execution governance doctrine" "Yellow"
     Write-Portal "  [12] NexusCell - Containment Cell / Execution Gate" "Yellow"
     Write-Portal "  [11] NexusShell / Operator         -> full-scope no-execution shell" "Green"
+    Write-Portal "  [13] Neural Activity / Cathedral   -> bioelectric popout HUD" "Magenta"
     Write-Portal "  [Q] Quit" "DarkGray"
     Write-Host ""
     Write-Portal "Rule: models recommend; human authorizes durable mutation." "Green"
@@ -1000,6 +1026,9 @@ while ($true) {
     }
     elseif ($choice -eq "11") {
         Invoke-NexusShellConsole
+    }
+    elseif ($choice -eq "13") {
+        Invoke-NexusNeuralActivity
     }
     elseif ($choice -eq "Q" -or $choice -eq "q") {
         Write-OK "closing NEXUS Gate launcher"

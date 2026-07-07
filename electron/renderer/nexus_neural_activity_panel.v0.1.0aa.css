@@ -1,0 +1,39 @@
+/* NEXUS Neural Activity Panel CLOSE AA v0.1.0
+   Live preview restoration:
+   - the visible DOM surrogate is removed
+   - left HUD preview embeds the actual Neural Cathedral program
+   - neural_activity/index.html gets embed mode to hide its HUD and render only the live scene
+*/
+
+:root {
+  --nexus-neural-panel-height: clamp(300px, 36vh, 430px);
+}
+
+.left-stack {
+  grid-template-rows: auto var(--nexus-neural-panel-height) !important;
+}
+
+.hud-shell .main-grid .left-stack > section.hud-frame.panel.role-selector-panel.empty-selector-panel.neural-activity-panel[data-neural-activity-mounted="close-aa"] {
+  display: block !important;
+  position: relative !important;
+  height: var(--nexus-neural-panel-height) !important;
+  min-height: var(--nexus-neural-panel-height) !important;
+  max-height: var(--nexus-neural-panel-height) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.neural-activity-live-frame {
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  border: 0 !important;
+  background: #010204 !important;
+}

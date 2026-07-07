@@ -1,26 +1,34 @@
-# Nexus UI Balanced Chat Layout
+﻿# NEXUS UI BALANCED CHAT LAYOUT
 
-Version: v0.1.6
+Version: repair v0.1.6l
 
-Purpose: rebalance the operator HUD so the center chat/output column sits visually centered between equal side rails.
+This repair rolls back the broken K behavior and replaces it with a narrow CSS-only override.
 
-Human layout request:
+## What K Broke
 
-```text
-remove the Lane Context box
-move the chat inward so the chat box is more centered
-make the health-score side use the same space as the other side
-leave an empty left-side spacer after removal, about the screenshot size
-```
+- K imposed an artificial max-width shell, creating too much blank space on both sides.
+- K touched chat/input geometry too aggressively.
+- K left local J/K residue files that were not committed.
 
-Boundary: UI layout patch only. It does not change authority, policy, model routing, health scoring, telemetry scoring, memory, NexusCell execution, or governance.
+## Intent
 
-## Wiring Lock
+- restore full-window HUD width
+- remove Lane Context from the visible rail layout
+- keep one intentional empty spacer below Process Lanes
+- keep equal side rails so the center column is actually centered
+- avoid rewriting the chat input layout
+- keep the health/feedback rail readable without forcing a redesign
 
-The renderer patch is not active unless the detected HTML entrypoint is committed with:
+## Wiring
 
 ```html
-<script src="./nexus_ui_layout_balance_patch.v0.1.6.js" data-nexus-ui-layout="balanced-chat-v0.1.6"></script>
+<link rel="stylesheet" href="./nexus_ui_center_chat_repair.v0.1.6l.css">
 ```
 
-A future script must stage the exact HTML file listed in `state/ui/nexus_ui_balanced_chat_layout.v0.1.6.json`, not a wildcard such as `*.htm`, because missing pathspecs can fail while leaving the intended HTML file unstaged.
+Older layout experiments are intentionally removed from `electron/renderer/index.html`.
+
+## Claim Boundary
+
+This is a local UI layout repair.
+It is not a full redesign.
+It patches the existing Electron renderer structure in place.

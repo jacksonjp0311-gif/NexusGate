@@ -1,0 +1,11 @@
+{
+    "version":  "v0.1.0-close-aa",
+    "name":  "Nexus Neural Activity Live Embedded Preview",
+    "status":  "local_visual_close",
+    "bug":  "Visible DOM surrogate preview did not match or behave like the full Neural Cathedral",
+    "fix":  "Cache-busted AA bridge/CSS; live iframe embed of neural_activity/index.html with embed mode hiding standalone HUD",
+    "entrypoint":  "neural_activity/index.html",
+    "electron_panel":  "electron/renderer/index.html#empty-selector-panel-live-iframe",
+    "claim_boundary":  "visual surface only; no authority, governance, NexusCell execution, model routing, or memory policy changes",
+    "encoding_lock":  "utf-8-no-bom"
+}

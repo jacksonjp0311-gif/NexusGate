@@ -1,0 +1,148 @@
+﻿/* NEXUS UI CENTER CHAT REPAIR v0.1.6l
+   Narrow repair after K regression:
+   - no artificial shell max-width
+   - no chat input grid rewrite
+   - no JS DOM guessing
+   - equal side rails using actual renderer classes
+*/
+:root {
+  --nexus-ui-l-side: clamp(270px, 16vw, 320px);
+  --nexus-ui-l-gap: 10px;
+  --nexus-ui-l-spacer: clamp(220px, 29vh, 330px);
+}
+
+/* Full Electron width. */
+.hud-shell {
+  width: 100vw !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 12px !important;
+}
+
+/* Equal side rails center the middle column. */
+.main-grid {
+  display: grid !important;
+  grid-template-columns:
+    var(--nexus-ui-l-side)
+    minmax(0, 1fr)
+    var(--nexus-ui-l-side) !important;
+  gap: var(--nexus-ui-l-gap) !important;
+  overflow: hidden !important;
+  align-items: stretch !important;
+}
+
+.left-stack,
+.right-stack {
+  width: var(--nexus-ui-l-side) !important;
+  min-width: var(--nexus-ui-l-side) !important;
+  max-width: var(--nexus-ui-l-side) !important;
+  min-inline-size: 0 !important;
+}
+
+/* Left rail: Process Lanes + one empty spacer only. */
+.left-stack {
+  display: grid !important;
+  grid-template-rows: auto var(--nexus-ui-l-spacer) !important;
+  gap: var(--nexus-ui-l-gap) !important;
+  align-content: start !important;
+  overflow: hidden !important;
+}
+
+.left-stack > .process-panel {
+  min-height: 150px !important;
+  max-height: 185px !important;
+}
+
+.left-stack > .lane-context {
+  display: none !important;
+}
+
+.left-stack > .empty-selector-panel {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: var(--nexus-ui-l-spacer) !important;
+  min-height: var(--nexus-ui-l-spacer) !important;
+  max-height: var(--nexus-ui-l-spacer) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.left-stack .nexus-left-blank-spacer,
+.left-stack [data-nexus-ui="lane-context-spacer-v0.1.6"] {
+  display: none !important;
+}
+
+.left-stack > :not(.process-panel):not(.empty-selector-panel):not(.lane-context) {
+  display: none !important;
+}
+
+/* Center column: do not rewrite chat input geometry. */
+.console-panel.nex-chat-panel,
+.chat-viewport,
+.message-body,
+.output {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.console-panel.nex-chat-panel {
+  width: 100% !important;
+  justify-self: stretch !important;
+}
+
+/* Right rail: equal width and compact text. */
+.right-stack,
+.feedback-panel,
+.handoff-panel {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.score-line {
+  grid-template-columns: 120px minmax(0, 1fr) !important;
+  gap: 10px !important;
+}
+
+#health {
+  font-size: clamp(32px, 2.1vw, 40px) !important;
+}
+
+.mini-chart {
+  min-width: 0 !important;
+  height: 46px !important;
+  gap: 3px !important;
+}
+
+.metric-row,
+.file-row {
+  min-width: 0 !important;
+  gap: 8px !important;
+  font-size: 12px !important;
+}
+
+.metric-row span,
+.file-row span {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.metric-row strong,
+.file-row strong,
+#next {
+  min-width: 0 !important;
+  max-width: 56% !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+.metric-next strong,
+#next {
+  line-height: 1.25 !important;
+}
+
+@media (max-width: 1280px) {
+  :root { --nexus-ui-l-side: 250px; }
+  .metric-row, .file-row { font-size: 11px !important; }
+}
