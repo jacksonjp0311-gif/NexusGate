@@ -1,0 +1,245 @@
+﻿/*
+  NEXUS GATE â€” Mode Selection Green HUD v0.2.0Z
+  Canonical compatibility asset for Local Voice / Relay, System Monitor, and Mode Selection card.
+  Visual-only surface: no execution authority, no shell authority, no autonomous model routing change.
+*/
+
+:root {
+  --nexus-mode-green: #7dff4d;
+  --nexus-mode-green-soft: rgba(125, 255, 77, 0.72);
+  --nexus-mode-green-dim: rgba(125, 255, 77, 0.24);
+  --nexus-mode-green-faint: rgba(125, 255, 77, 0.08);
+  --nexus-mode-panel: rgba(0, 18, 15, 0.96);
+  --nexus-mode-text: #effff0;
+}
+
+/* System Monitor and Mode Selection: unified green HUD surface. */
+.system-monitor-station,
+.model-selector-station,
+.telemetry-hud,
+.system-error-hud,
+.model-selector-hud {
+  border-color: var(--nexus-mode-green-dim) !important;
+}
+
+.telemetry-popout-button,
+.model-selector-button.mode-selection-button,
+.model-selector-hud,
+.telemetry-hud,
+.system-error-hud {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(125, 255, 77, 0.16), transparent 34%),
+    linear-gradient(180deg, rgba(0, 25, 18, 0.96), rgba(1, 8, 15, 0.96)) !important;
+  border: 1px solid var(--nexus-mode-green-dim) !important;
+  box-shadow:
+    0 0 24px rgba(57, 255, 96, 0.14),
+    inset 0 0 28px rgba(57, 255, 96, 0.06) !important;
+}
+
+.telemetry-popout-button span,
+.telemetry-hud-head span,
+.model-selector-button .mode-selection-title,
+.model-selector-head span,
+.selector-label {
+  color: var(--nexus-mode-green) !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.telemetry-popout-button strong,
+#telemetry-status,
+#selector-hud-status,
+#role-model,
+.model-selector-button strong {
+  color: var(--nexus-mode-green) !important;
+  text-shadow: 0 0 12px rgba(125, 255, 77, 0.58) !important;
+}
+
+.telemetry-mini-grid span,
+.telemetry-hud-grid article {
+  background:
+    linear-gradient(180deg, rgba(0, 22, 18, 0.92), rgba(0, 8, 12, 0.92)) !important;
+  border: 1px solid rgba(125, 255, 77, 0.22) !important;
+  box-shadow: inset 0 0 16px rgba(125, 255, 77, 0.05) !important;
+}
+
+.telemetry-mini-grid strong,
+.telemetry-hud-grid strong {
+  color: var(--nexus-mode-text) !important;
+}
+
+/* Local Voice / Relay modal cleanup. */
+.model-selector-hud {
+  width: min(620px, calc(100vw - 48px)) !important;
+  padding: 18px 20px 20px !important;
+  color: var(--nexus-mode-text) !important;
+  outline: 1px solid rgba(125, 255, 77, 0.34);
+  outline-offset: 4px;
+}
+
+.model-selector-head {
+  border-bottom: 1px solid rgba(125, 255, 77, 0.28) !important;
+  padding-bottom: 12px !important;
+  margin-bottom: 14px !important;
+}
+
+.model-selector-head strong {
+  color: var(--nexus-mode-text) !important;
+  font-size: 22px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 0 16px rgba(125, 255, 77, 0.2);
+}
+
+#model-selector-close,
+#copy-role-command {
+  color: var(--nexus-mode-green) !important;
+  background: rgba(0, 16, 18, 0.92) !important;
+  border: 1px solid rgba(125, 255, 77, 0.48) !important;
+  box-shadow: 0 0 18px rgba(125, 255, 77, 0.12) !important;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#model-selector-close:hover,
+#copy-role-command:hover {
+  color: #06120a !important;
+  background: var(--nexus-mode-green) !important;
+  box-shadow:
+    0 0 12px rgba(125, 255, 77, 0.72),
+    0 0 28px rgba(125, 255, 77, 0.24) !important;
+}
+
+/* Native selector: no yellow, no Phi-3. */
+#role-select {
+  width: 100% !important;
+  min-height: 46px !important;
+  padding: 0 14px !important;
+  color: var(--nexus-mode-green) !important;
+  background:
+    linear-gradient(180deg, rgba(0, 36, 22, 0.96), rgba(0, 12, 16, 0.96)) !important;
+  border: 1px solid rgba(125, 255, 77, 0.68) !important;
+  box-shadow:
+    0 0 0 1px rgba(125, 255, 77, 0.08),
+    0 0 24px rgba(125, 255, 77, 0.14),
+    inset 0 0 24px rgba(125, 255, 77, 0.07) !important;
+  border-radius: 4px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.035em !important;
+  outline: none !important;
+}
+
+#role-select option {
+  color: var(--nexus-mode-text);
+  background: #02120f;
+  font-weight: 800;
+}
+
+#role-select:focus {
+  border-color: var(--nexus-mode-green) !important;
+  box-shadow:
+    0 0 0 1px rgba(125, 255, 77, 0.32),
+    0 0 26px rgba(125, 255, 77, 0.28),
+    inset 0 0 26px rgba(125, 255, 77, 0.08) !important;
+}
+
+/* Clean visual list below the native select. */
+.nexus-mode-green-list {
+  display: grid;
+  gap: 0;
+  margin: 10px 0 12px;
+  border: 1px solid rgba(125, 255, 77, 0.4);
+  background:
+    linear-gradient(180deg, rgba(0, 28, 20, 0.72), rgba(0, 10, 16, 0.72));
+  box-shadow:
+    inset 0 0 24px rgba(125, 255, 77, 0.06),
+    0 0 22px rgba(125, 255, 77, 0.1);
+}
+
+.nexus-mode-green-option {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 42px;
+  padding: 0 14px;
+  color: #dfffe2;
+  border: 0;
+  border-bottom: 1px solid rgba(125, 255, 77, 0.12);
+  background: transparent;
+  font: 800 13px/1.2 Consolas, "Segoe UI", monospace;
+  letter-spacing: 0.025em;
+  cursor: pointer;
+  text-align: left;
+}
+
+.nexus-mode-green-option:last-child {
+  border-bottom: 0;
+}
+
+.nexus-mode-green-option:hover {
+  background: rgba(125, 255, 77, 0.1);
+  color: #fff;
+}
+
+.nexus-mode-green-option.is-active {
+  color: var(--nexus-mode-green);
+  background:
+    linear-gradient(90deg, rgba(125, 255, 77, 0.3), rgba(125, 255, 77, 0.08) 48%, transparent);
+  box-shadow:
+    inset 3px 0 0 var(--nexus-mode-green),
+    inset 0 0 18px rgba(125, 255, 77, 0.1);
+  text-shadow: 0 0 10px rgba(125, 255, 77, 0.54);
+}
+
+.nexus-mode-green-icon {
+  color: var(--nexus-mode-green);
+  font-size: 18px;
+  text-align: center;
+  text-shadow: 0 0 11px rgba(125, 255, 77, 0.66);
+}
+
+.nexus-mode-green-badge {
+  color: rgba(223, 255, 226, 0.62);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.selector-copy {
+  padding: 12px 14px !important;
+  background:
+    linear-gradient(180deg, rgba(0, 22, 18, 0.9), rgba(0, 10, 15, 0.9)) !important;
+  border: 1px solid rgba(125, 255, 77, 0.22) !important;
+}
+
+#role-command {
+  color: rgba(223, 255, 226, 0.74) !important;
+}
+
+/* Small right rail mode card. */
+.model-selector-station {
+  background:
+    linear-gradient(180deg, rgba(0, 34, 20, 0.92), rgba(0, 10, 16, 0.92)) !important;
+  box-shadow:
+    0 0 24px rgba(125, 255, 77, 0.14),
+    inset 0 0 26px rgba(125, 255, 77, 0.06) !important;
+}
+
+.model-selector-button.mode-selection-button {
+  width: 100%;
+  color: var(--nexus-mode-text) !important;
+}
+
+.selector-switch,
+#selector-switch {
+  border-color: var(--nexus-mode-green-dim) !important;
+  box-shadow: 0 0 18px rgba(125, 255, 77, 0.18) !important;
+}
+
+.selector-knot,
+#selector-knot,
+.knot-core {
+  filter: drop-shadow(0 0 10px rgba(125, 255, 77, 0.72)) !important;
+}

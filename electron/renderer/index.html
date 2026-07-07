@@ -262,6 +262,9 @@
 
 
 
+
+
+
 <!-- NEXUS_METRICS_HUD_V010_STYLE_BEGIN -->
 <style id="nexus-metrics-hud-v010-style">
   .right-stack {
@@ -274,7 +277,7 @@
 
   .nexus-metrics-zone {
     display: grid;
-    grid-template-columns: 296px minmax(0, 1fr) 390px;
+    grid-template-columns: 314px minmax(0, 1fr) 390px;
     gap: 10px;
     min-height: 198px;
     overflow: hidden;
@@ -556,7 +559,7 @@
 
   @media (max-width: 1280px) {
     .nexus-metrics-zone {
-      grid-template-columns: 268px minmax(0, 1fr) 330px;
+      grid-template-columns: 286px minmax(0, 1fr) 330px;
       min-height: 250px;
     }
 
@@ -571,6 +574,7 @@
   }
 </style>
 <!-- NEXUS_METRICS_HUD_V010_STYLE_END -->
+  <link rel="stylesheet" href="./nexus_mode_selection_green.v0.2.0z.css">
 </head>
 <body>
 <!-- NEXUS_SPIRAL_GATE_LOGO_V010_DOM_BEGIN -->
@@ -688,7 +692,7 @@
             <div class="nex-avatar" aria-hidden="true"><span>NEX</span></div>
             <div class="message-body">
               <header><strong>NEX</strong><small>governed local interface</small></header>
-              <pre class="output ai-output" id="output">Hello. I am NEX - your bounded reflective intelligence surface. Select a local voice from the yellow Relay HUD, ask one thing, and I will return recommendation-only feedback with any blocker made clear.</pre>
+              <pre class="output ai-output" id="output">Hello. I am NEX - your bounded reflective intelligence surface. Select a local voice from the green Relay HUD, ask one thing, and I will return recommendation-only feedback with any blocker made clear.</pre>
             </div>
           </article>
         </div>
@@ -758,8 +762,8 @@
               </div>
               <label class="selector-label" for="role-select">Local Voice / Relay</label>
               <select id="role-select" aria-label="Select local reasoning voice">
-                <option value="FAST">FAST / Phi-3</option>
-                <option value="BALANCED">BALANCED / Phi-3</option>
+                <option value="FAST">FAST / Phi-4-mini</option>
+                <option value="BALANCED">BALANCED / Phi-4-mini</option>
                 <option value="DEEP" selected>DEEP / Mistral</option>
                 <option value="TNN">Tesseract Neural Network</option>
                 <option value="HANDOFF">HANDOFF / ChatGPT-Codex</option>
@@ -774,7 +778,7 @@
           <section class="telemetry-hud" id="telemetry-hud" hidden aria-label="Expanded local telemetry HUD">
             <div class="telemetry-hud-head">
               <div>
-                <span>Cyberpunk Yellow HUD</span>
+                <span>NEXUS Green HUD</span>
                 <strong>Local Telemetry Station</strong>
               </div>
               <button type="button" id="telemetry-close">close</button>
@@ -994,6 +998,9 @@
 
 
 
+
+
+
 <!-- NEXUS_METRICS_HUD_V010_SCRIPT_BEGIN -->
 <script id="nexus-metrics-hud-v010-script">
 (function () {
@@ -1052,6 +1059,10 @@
 })();
 </script>
 <!-- NEXUS_METRICS_HUD_V010_SCRIPT_END -->
+  <script src="./nexus_mode_selection_green.v0.2.0z.js"></script>
 </body>
 </html>
+
+
+
 
