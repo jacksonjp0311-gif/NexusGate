@@ -79,3 +79,6 @@ The 	nn-health, 	nn-warm, and 	nn-deep commands are now admitted through the scr
 ## v0.2.0R Warm Hygiene Seal
 
 	nn-warm is now bounded and operator-safe. Slow/cold Ollama responses produce TNN WARM // NOT READY plus eports/tnn_warm_latest.json instead of raw Python traceback. The scaffold lane remains available even when local Mistral is cold.
+## v0.2.0S Model Doctor Seal
+
+TNN now exposes 	nn-doctor, a local Ollama/Mistral diagnostic command. It checks Ollama CLI/API availability, installed/running model state, probes 	nn-mistral:latest, classifies the backend, and writes eports/tnn_model_doctor_latest.json plus .md.

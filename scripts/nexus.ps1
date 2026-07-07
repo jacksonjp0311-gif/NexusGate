@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -216,6 +216,10 @@ switch ($Command) {
         python ".\Tesseract Neural Network\brain\bench_tnn_runtime.py"
         if ($LASTEXITCODE -ne 0) { throw "TNN runtime health failed." }
     }
+    "tnn-doctor" {
+        python ".\Tesseract Neural Network\brain\doctor_tnn_model.py"
+        if ($LASTEXITCODE -ne 0) { Write-Warning "TNN model doctor returned non-zero." }
+    }
     "tnn-warm" {
         python ".\Tesseract Neural Network\brain\prewarm_tnn_mistral.py"
         if ($LASTEXITCODE -ne 0) { Write-Warning "TNN warm returned non-zero; scaffold lane remains available." }
@@ -252,6 +256,8 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
+
+
 
 
 
