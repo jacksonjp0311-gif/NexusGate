@@ -54,8 +54,8 @@ class TesseractNeuralNetworkChatBrainTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         packet = json.loads(result.stdout)
         self.assertFalse(packet["ok"])
-        self.assertIn("MODEL OFFLINE", packet["response"])
-        self.assertIn("no shell execution", packet["boundary"])
+        self.assertIn("MODEL WARMING", packet["response"])
+        self.assertIn("recommendation-only", packet["boundary"])
 
     def test_tnn_surface_offline_path_returns_chat_packet(self):
         env = os.environ.copy()
@@ -75,7 +75,7 @@ class TesseractNeuralNetworkChatBrainTests(unittest.TestCase):
         self.assertTrue(packet["self_contained"])
         self.assertFalse(packet["neuralforge_required"])
         self.assertIn("chat_packet", packet)
-        self.assertIn("MODEL OFFLINE", packet["response"])
+        self.assertIn("MODEL WARMING", packet["response"])
 
 
 if __name__ == "__main__":

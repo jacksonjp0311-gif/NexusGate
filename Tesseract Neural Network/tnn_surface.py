@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-TNN_VERSION = "nexus.tesseract_neural_network.v0.2.0"
+TNN_VERSION = "nexus.tesseract_neural_network.v0.2.0E"
 TNN_MODEL_NAME = "Tesseract Neural Network/mistral-chat-brain"
 
 TNN_ROOT = Path(__file__).resolve().parent
@@ -75,7 +75,7 @@ def load_local_bundle() -> Dict[str, Any]:
 def build_model_response(intent: str) -> Dict[str, Any]:
     bundle = load_local_bundle()
     chat_engine = _load_module("tnn_chat_engine", TNN_ROOT / "brain" / "chat_engine.py")
-    chat = chat_engine.chat(intent, timeout=12.0)
+    chat = chat_engine.chat(intent, timeout=6.0)
     response = {
         "role": "TNN",
         "model": TNN_MODEL_NAME,

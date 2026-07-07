@@ -28,3 +28,8 @@ tnn-mistral:latest
 ## Boundary
 
 TNN is recommendation-only. It can chat and reason through local Mistral, but it cannot execute shell commands, mutate files, scrape, perform live API pulls, or claim autonomous authority.
+
+
+## v0.2.0E Fast Timeout Seal
+
+Ollama socket timeouts are converted into bounded TNN chat packets instead of router crashes. Snappy mode uses a 6-second fast gate, 1024 context, and 120-token response target.

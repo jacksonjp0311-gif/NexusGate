@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import socket
 import urllib.error
 import urllib.request
 from typing import Any, Dict, Optional
@@ -12,7 +13,7 @@ from typing import Any, Dict, Optional
 OLLAMA_URL = os.environ.get("TNN_OLLAMA_URL", "http://127.0.0.1:11434")
 DEFAULT_MODEL = os.environ.get("TNN_MODEL", "tnn-mistral:latest")
 FALLBACK_MODEL = os.environ.get("TNN_FALLBACK_MODEL", "mistral:latest")
-DEFAULT_TIMEOUT = float(os.environ.get("TNN_TIMEOUT_SECONDS", "12"))
+DEFAULT_TIMEOUT = float(os.environ.get("TNN_TIMEOUT_SECONDS", "6"))
 
 
 class OllamaError(RuntimeError):
@@ -34,10 +35,14 @@ def _post_json(url: str, payload: Dict[str, Any], timeout: float) -> Dict[str, A
     except urllib.error.HTTPError as error:
         body = error.read().decode("utf-8", errors="replace")
         raise OllamaError(f"Ollama HTTP {error.code}: {body}") from error
+    except (TimeoutError, socket.timeout) as error:
+        raise OllamaError(f"Ollama timed out after {timeout}s: {error}") from error
     except urllib.error.URLError as error:
         raise OllamaError(f"Ollama unavailable: {error}") from error
     except json.JSONDecodeError as error:
         raise OllamaError(f"Ollama returned invalid JSON: {error}") from error
+    except Exception as error:
+        raise OllamaError(f"Ollama transport failure: {error}") from error
 
 
 def generate(
@@ -45,7 +50,7 @@ def generate(
     system: str,
     model: Optional[str] = None,
     timeout: float = DEFAULT_TIMEOUT,
-    num_predict: int = 220,
+    num_predict: int = 120,
 ) -> Dict[str, Any]:
     chosen = model or DEFAULT_MODEL
     payload = {
@@ -57,7 +62,7 @@ def generate(
         "options": {
             "temperature": 0.25,
             "top_p": 0.9,
-            "num_ctx": 2048,
+            "num_ctx": 1024,
             "num_predict": num_predict,
             "repeat_penalty": 1.08,
         },

@@ -35,7 +35,7 @@ def tighten(text: str, max_lines: int = 10) -> str:
     return "\n".join(lines[:max_lines])
 
 
-def chat(intent: str, model: str | None = None, timeout: float = 12.0) -> Dict[str, Any]:
+def chat(intent: str, model: str | None = None, timeout: float = 6.0) -> Dict[str, Any]:
     start = time.perf_counter()
     system = read_system_prompt()
     prompt = build_context(intent)
@@ -49,10 +49,11 @@ def chat(intent: str, model: str | None = None, timeout: float = 12.0) -> Dict[s
         fallback_used = bool(result.get("fallback_used", False))
     except OllamaError as exc:
         response = (
-            "TNN // MODEL OFFLINE\n"
-            "Mistral/Ollama did not answer inside the gate.\n"
-            "next: start Ollama or build the tnn-mistral model tag, then retry.\n"
-            "boundary: no shell execution was performed."
+            "TNN // MODEL WARMING\n"
+            "Mistral/Ollama did not answer inside the fast gate.\n"
+            "next: retry once; if cold, start Ollama or rebuild tnn-mistral.\n"
+            "safe: NexusGate did not crash and no shell action was taken.\n"
+            "boundary: recommendation-only; no mutation authority."
         )
         ok = False
         error = str(exc)
@@ -81,7 +82,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--intent", required=True)
     parser.add_argument("--model", default="")
-    parser.add_argument("--timeout", type=float, default=12.0)
+    parser.add_argument("--timeout", type=float, default=6.0)
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
     packet = chat(args.intent, model=args.model or None, timeout=args.timeout)

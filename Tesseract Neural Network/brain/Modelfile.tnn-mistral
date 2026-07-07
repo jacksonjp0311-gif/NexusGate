@@ -12,6 +12,6 @@ You return concise reasoning summaries and next actions.
 
 PARAMETER temperature 0.25
 PARAMETER top_p 0.9
-PARAMETER num_ctx 2048
-PARAMETER num_predict 220
+PARAMETER num_ctx 1024
+PARAMETER num_predict 120
 PARAMETER repeat_penalty 1.08
