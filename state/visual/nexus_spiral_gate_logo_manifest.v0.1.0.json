@@ -1,0 +1,49 @@
+{
+    "version":  "v0.1.0-close-m",
+    "name":  "Nexus Spiral Gate Logo",
+    "status":  "visual_approved_full_dist_residue_sealed",
+    "previous_head":  "3defe4b",
+    "target_file":  "electron/renderer/index.html",
+    "visual_correction":  "reduced portal size, removed translucent backing box, removed cross-buffer pulse bar, and hid original brand h1",
+    "features":  [
+                     "compact portal size",
+                     "transparent logo backing",
+                     "hidden original brand h1",
+                     "no cross-buffer energy bar",
+                     "local send pulse only",
+                     "continuous portal spin",
+                     "outer gear detail",
+                     "inner gear detail",
+                     "central black-hole core"
+                 ],
+    "removed_visuals":  [
+                            "nexus-gate-energy-v010",
+                            "nexus-gate-ether-stream",
+                            "translucent header backing box"
+                        ],
+    "send_triggers":  [
+                          "button click containing SEND",
+                          "button click containing TRANSMISSION",
+                          "Enter key in input or textarea",
+                          "form submit",
+                          "nexus:message-sent custom event"
+                      ],
+    "public_hook":  "window.nexusGatePulse(reason)",
+    "tnn_import_order_fixed":  true,
+    "runtime_residue_restored":  true,
+    "no_authority_change":  true,
+    "no_execution_change":  true,
+    "boundary_note":  "visual UI patch plus local import-order safety fix; no execution authority changed",
+    "encoding_lock":  "utf-8-no-bom",
+    "close_j_reason":  "Preserved visually approved upward text alignment and fixed parser-safe test-doc insertion before push.",
+    "close_k_reason":  "Preserved visually approved upward text alignment, parser-safe test-doc insertion, and restored TNN surface runtime residue before push.",
+    "close_l_reason":  "Preserved visually approved upward text alignment, parser-safe test-doc insertion, restored TNN surface runtime residue, and restored dist pack manifest runtime residue before push.",
+    "text_alignment_fixed":  true,
+    "title_top_px":  9,
+    "subtitle_top_px":  48,
+    "tnn_surface_residue_restored":  true,
+    "pack_manifest_residue_restored":  true,
+    "dist_bundle_residue_restored":  true,
+    "full_dist_residue_restored":  true,
+    "close_m_reason":  "Preserved visually approved upward text alignment, parser-safe test-doc insertion, restored TNN surface runtime residue, and restored full dist runtime output residue before push."
+}
