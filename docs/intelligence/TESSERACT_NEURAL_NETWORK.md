@@ -57,3 +57,6 @@ TNN streaming chat now buffers short output spans before printing, allowing defe
 ## v0.2.0M Fast Scaffold Seal
 
 TNN chat now prints an immediate safe operator scaffold before waiting for local Mistral. The fast lane uses an 8-second model budget by default; stream_chat.py --deep keeps the longer full-Mistral path for deeper reasoning.
+## v0.2.0N Runtime Health Seal
+
+TNN now includes ench_tnn_runtime.py, which runs the fast scaffold chat lane, captures scaffold/TTFT/total latency, classifies the local model state as hot/warm/slow/offline, and writes eports/tnn_runtime_health_latest.json for future Electron health badges.
