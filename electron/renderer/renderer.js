@@ -1,4 +1,4 @@
-﻿const laneRoot = document.getElementById("lanes");
+const laneRoot = document.getElementById("lanes");
 const output = document.getElementById("output");
 const statusEl = document.getElementById("status");
 const consoleStream = document.getElementById("console-stream");
@@ -68,6 +68,11 @@ const roleSettings = {
     label: "DEEP -> Mistral",
     command: ".\\scripts\\nexus.ps1 deep -Tag \"Use Mistral for DEEP recommendation.\" -CallModel",
     note: "DEEP selected. Mistral is the deeper recommendation voice; output remains non-authoritative."
+  },
+  TNN: {
+    label: "TNN -> Tesseract Neural Network",
+    command: ".\\scripts\\nexus.ps1 tnn -Tag \"Read Tesseract Neural Network state.\" -CallModel",
+    note: "Tesseract Neural Network selected. Minimal governed NN surface is active."
   },
   HANDOFF: {
     label: "HANDOFF -> ChatGPT/Codex",
@@ -1163,18 +1168,3 @@ loadSurfaceState().catch((error) => {
   setBuffer(0, "error");
   writeOutput(error.stack || error.message, { preTranslated: true });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

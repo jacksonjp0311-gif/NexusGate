@@ -28,7 +28,8 @@ $Global:Lanes = @(
     [ordered]@{ key="8"; name="runtime";      tab="RUNTIME";     desc="Run bounded runtime compiler" },
     [ordered]@{ key="9"; name="pack";         tab="RELEASE";     desc="Compile pack manifest/bundle" },
     [ordered]@{ key="10"; name="reflect";     tab="REFLECT";     desc="Compile reflective intelligence loop and lineage evidence" },
-    [ordered]@{ key="11"; name="domain";      tab="DOMAIN";      desc="Compile domain intelligence and repo-native learning evidence" }
+    [ordered]@{ key="11"; name="domain";      tab="DOMAIN";      desc="Compile domain intelligence and repo-native learning evidence" },
+    [ordered]@{ key="14"; name="tnn";         tab="TNN";         desc="Tesseract Neural Network minimal governed NN surface" }
 )
 
 function Add-TranscriptLine {
@@ -131,6 +132,7 @@ function Header {
     Write-Host '| [8] runtime                   |                                                    | /copy exports handoff            |' -ForegroundColor Gray
     Write-Host '| [9] pack                      |                                                    | /snapshot opens HUD bridge       |' -ForegroundColor Gray
     Write-Host '| [10] reflect                  |                                                    | /lineage shows version manifest  |' -ForegroundColor Gray
+    Write-Host '| [14] tnn                       | [TNN] Tesseract Neural Network surface            | minimal governed NN lane        |' -ForegroundColor Cyan
     Write-Host '| [11] domain                   |                                                    | /study creates study packet      |' -ForegroundColor Gray
     Write-HudRule 118
     Write-Host '| HUMAN FEEDBACK | AI FEEDBACK | DEBUGGING | SELF-HEALING | REFLECTION | INTERCONNECT | GOVERNANCE: strict audit enabled |' -ForegroundColor DarkCyan

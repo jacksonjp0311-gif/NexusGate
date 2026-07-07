@@ -1,4 +1,4 @@
-﻿const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
@@ -44,7 +44,7 @@ const READ_SURFACES = new Set([
   "reports/tui/nexus_tui_surface_latest.json"
 ]);
 
-const NEX_CHAT_ROLES = new Set(["FAST", "BALANCED", "DEEP", "HANDOFF"]);
+const NEX_CHAT_ROLES = new Set(["FAST", "BALANCED", "DEEP", "TNN", "HANDOFF"]);
 const NEX_MAX_PROMPT_CHARS = 4000;
 const HANDOFF_SCRIPT_MAX_CHARS = 180000;
 let activeNexChild = null;
@@ -727,9 +727,3 @@ app.on("activate", () => {
     createWindow();
   }
 });
-
-
-
-
-
-

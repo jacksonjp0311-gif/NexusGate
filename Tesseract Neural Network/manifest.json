@@ -1,0 +1,17 @@
+{
+  "authority_boundary": {
+    "autonomous_authority": false,
+    "live_api_pull": false,
+    "main_branch_mutation": false,
+    "patch_application": false,
+    "recommendation_only": true,
+    "scraping": false,
+    "shell_execution": false
+  },
+  "kind": "minimal_nn_surface",
+  "name": "Tesseract Neural Network",
+  "role": "TNN",
+  "source": "NeuralForge / Tesseract Pathway Network receipts",
+  "vendored_neuralforge": false,
+  "version": "nexus.tesseract_neural_network.v0.1.0"
+}

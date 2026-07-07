@@ -1,4 +1,4 @@
-﻿"""Compile NEXUS bounded NN router report and handoff packets."""
+"""Compile NEXUS bounded NN router report and handoff packets."""
 
 from __future__ import annotations
 
@@ -11,6 +11,7 @@ from typing import Any, Dict, List, Optional
 from .contract import VERSION, build_policy_manifest, build_route_decision, normalize_target_role, selected_roles
 from .detect import DEFAULT_MODELS_ROOT, assign_roles, detect_ollama_inventory
 from .ollama_client import call_local_ollama
+from .tesseract_neural_network import build_tesseract_neural_network_response
 
 
 def _utc_now() -> str:
@@ -131,7 +132,7 @@ def _packet_lines(title: str, report: Dict[str, object]) -> List[str]:
     lines.append("## Role Assignments")
     lines.append("")
     if isinstance(assignments, dict):
-        for role in ["FAST", "BALANCED", "DEEP", "HANDOFF"]:
+        for role in ["FAST", "BALANCED", "DEEP", "TNN", "HANDOFF"]:
             value = assignments.get(role, {})
             if isinstance(value, dict):
                 model = value.get("model") or "none"
@@ -201,8 +202,11 @@ def build_distribution(
 
     model_responses = []
     if call_model:
-        call_roles = ["FAST", "DEEP"] if target_role == "ALL" else [role for role in roles if role != "HANDOFF"]
+        call_roles = ["FAST", "DEEP", "TNN"] if target_role == "ALL" else [role for role in roles if role != "HANDOFF"]
         for role in call_roles:
+            if role == "TNN":
+                model_responses.append(build_tesseract_neural_network_response(intent=intent))
+                continue
             assignment = assignments.get(role, {})
             model = assignment.get("model") if isinstance(assignment, dict) else None
             if model:
@@ -264,7 +268,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--intent", default="What should we do next?", help="Recommendation intent.")
     parser.add_argument("--models-root", default=str(DEFAULT_MODELS_ROOT), help="Local Ollama models root.")
     parser.add_argument("--call-model", action="store_true", help="Optionally call local Ollama loopback API.")
-    parser.add_argument("--role", default="ALL", choices=["ALL", "FAST", "BALANCED", "DEEP", "HANDOFF"], help="Target a specific router role.")
+    parser.add_argument("--role", default="ALL", choices=["ALL", "FAST", "BALANCED", "DEEP", "TNN", "HANDOFF"], help="Target a specific router role.")
     parser.add_argument("--json", action="store_true", help="Print report JSON to stdout.")
     args = parser.parse_args(argv)
 
@@ -296,5 +300,3 @@ def main(argv: Optional[List[str]] = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-

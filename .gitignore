@@ -7,3 +7,5 @@ Thumbs.db
 logs/*.log
 reports/tmp/
 electron/node_modules/
+reports/tesseract_neural_network/*.json
+reports/tesseract_neural_network/*.jsonl

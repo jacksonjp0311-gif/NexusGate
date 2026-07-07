@@ -1,4 +1,4 @@
-﻿"""Policy contract for the NEXUS bounded NN model router v0.6.4.
+"""Policy contract for the NEXUS bounded NN model router v0.6.4.
 
 The router distributes intelligence, not authority. It prepares bounded
 recommendations and handoff packets. It does not execute tool calls, mutate
@@ -13,7 +13,7 @@ from typing import Dict, List, Mapping, Optional
 
 VERSION = "0.6.4"
 
-VALID_TARGET_ROLES: List[str] = ["ALL", "FAST", "BALANCED", "DEEP", "HANDOFF"]
+VALID_TARGET_ROLES: List[str] = ["ALL", "FAST", "BALANCED", "DEEP", "TNN", "HANDOFF"]
 
 ROUTER_LAW: List[str] = [
     "No adapter, no bridge.",
@@ -43,6 +43,7 @@ ROLE_PREFERENCES: Dict[str, List[str]] = {
     "FAST": ["phi3:mini", "phi3:latest"],
     "BALANCED": ["phi3:mini", "phi3:latest"],
     "DEEP": ["mistral:latest"],
+    "TNN": [],
     "HANDOFF": [],
 }
 
@@ -50,6 +51,7 @@ ROLE_DESCRIPTIONS: Dict[str, str] = {
     "FAST": "Quick local recommendation voice using Phi-3 when available.",
     "BALANCED": "Balanced local recommendation voice using Phi-3 when available.",
     "DEEP": "Deeper local recommendation voice using Mistral when available.",
+    "TNN": "Tesseract Neural Network minimal governed NN surface.",
     "HANDOFF": "No local model required; writes ChatGPT/Codex handoff packets.",
 }
 
@@ -109,7 +111,7 @@ def normalize_target_role(role: str | None) -> str:
 def selected_roles(target_role: str | None) -> List[str]:
     normalized = normalize_target_role(target_role)
     if normalized == "ALL":
-        return ["FAST", "BALANCED", "DEEP", "HANDOFF"]
+        return ["FAST", "BALANCED", "DEEP", "TNN", "HANDOFF"]
     return [normalized]
 
 
@@ -120,6 +122,14 @@ def choose_model(available_models: Mapping[str, object], role: str) -> RoleAssig
     does not authorize any action.
     """
     normalized_role = role.upper()
+    if normalized_role == "TNN":
+        return RoleAssignment(
+            role="TNN",
+            model="Tesseract Neural Network/minimal-receipt-surface",
+            available=True,
+            reason="TNN reads minimal NeuralForge governance receipts through NexusGate.",
+        )
+
     if normalized_role == "HANDOFF":
         return RoleAssignment(
             role="HANDOFF",
@@ -185,4 +195,3 @@ def build_route_decision(
         recommendation_only=True,
         reason=assignment.reason,
     )
-

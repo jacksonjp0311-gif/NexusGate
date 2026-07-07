@@ -1,4 +1,4 @@
-﻿# NEXUS GATE compact PowerShell command surface
+# NEXUS GATE compact PowerShell command surface
 # Legacy direct compiler markers retained for audit/tests:
 # nexus_gate.adapters.compile
 # nexus_gate.receptors.compile
@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -207,6 +207,7 @@ switch ($Command) {
     "align-score" { python -m nexus_gate.nn_router.scorecard --root . --json; if ($LASTEXITCODE -ne 0) { throw "NEXUS drift scorecard failed." } }
     "nn" { Invoke-NexusNN -Intent $Tag -UseModel:$CallModel }
     "nn-health" { Invoke-NexusNN -Intent "NEXUS NN router health check: report local model roles and policy gates." }
+    "tnn" { Invoke-NexusNN -Intent $Tag -Role "TNN" -UseModel:$CallModel }
     "ask" { Invoke-NexusNN -Intent $Tag -UseModel:$CallModel }
     "rehydrate" { Show-Rehydration; Run-Compiler; Write-Host "[OK] Rehydration complete." }
     "compile" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 compile }
@@ -235,4 +236,3 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
-

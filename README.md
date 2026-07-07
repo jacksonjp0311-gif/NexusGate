@@ -1,7 +1,8 @@
 # NEXUS GATE
 **Reflective Intelligence Layer for AI Systems**
 NEXUS GATE is a local-first reflective intelligence layer for AI systems. It gives AI systems a governed mirror: origin alignment, state routing, local model reflection, HANDOFF action boundaries, Failure Doctor diagnosis, compiler evidence, wound lessons, UI feedback, NexusCell + Neural Activity receipts, and GitHub durability through explicit gates.
-It is not another agent framework and it is not just the entry portal. The Desktop Entry Portal is the human doorway. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
+Runtime lineage seals: v0.8.1 UI cleanup line; v0.8.3F geo preflight cleanup and warning seal line; python -m nexus_gate.geometric_memory.router; geo-clean; `docs/runtime/NEXUS_NEURAL_ACTIVITY.md`; `docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md`; Failure Intelligence Distributor.
+It is not another agent framework and it is not just the entry portal. The Spiral Core Desktop Portal is the human doorway. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
 ```text
 human intent -> origin alignment -> route/authority gate -> evidence -> human-authorized durable mutation
 ```
@@ -41,7 +42,7 @@ Open local docs folder
 ## Current Operator Surfaces
 | Surface | Purpose |
 |---|---|
-| Desktop Entry Portal | Human doorway into all local operator lanes. |
+| Spiral Core Desktop Portal | Human doorway into all local operator lanes; blue/light-blue black-hole command face. |
 | Electron HUD | Visual operator HUD with NEX chat, telemetry, balanced chat rail, Mode Selection, and HANDOFF package. |
 | PowerShell TUI | Terminal HUD for governed local lanes. |
 | Dev Mode / HANDOFF | Human-authorized patch, compiler, and wound-evidence room. |
@@ -49,19 +50,21 @@ Open local docs folder
 | Mode Selection HUD | Local voice/relay selector. Selection is not authority. |
 | GitHub / README / Docs | Portal submenu for repo link, README, entrypoints, changelog, and local docs. |
 | NexusCell | Execution-governance organ: authority, risk, policy, receipt, ledger, and return-seal evidence for scripts. |
+| Neural Activity | Canonical visual organ: live embedded Neural Cathedral HUD preview; OPEN launches full program. |
 ## NEXUS Connective Point
 ```text
-Portal = gateway.
+Spiral Core Portal = gateway face.
 NEXUS GATE = reflective intelligence layer for AI systems.
 Electron = presentation/operator HUD.
 Doctor = diagnosis / safe-clean / retry cockpit.
 HANDOFF = human-authorized action bridge.
 NexusCell = execution-governance organ.
+Neural Activity = visual organ.
 Evidence decides what may compound.
 ```
 ## Human Director Box
-NEXUS GATE is currently at the v0.8.1 UI cleanup line, the v0.8.3F geo preflight cleanup and warning seal line, the NexusCell v0.1 script-evolution line, the Failure Intelligence Distributor v0.1.3 line, and the Reflective Local Loop v0.1.4 line: compact root README, Desktop Portal, GitHub/docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, and NexusCell receipt/ledger evidence.
-Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, and durable GitHub compounding under human authority.
+NEXUS GATE is currently at the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub/docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, and live Neural Cathedral preview evidence.
+Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, and durable GitHub compounding under human authority.
 ## Geometric Memory Router
 NEXUS Geometric Memory Router is the next rehydration layer. It does not train or mutate model weights. It maps every request through four typed axes before repair or compounding:
 ```text
@@ -199,6 +202,8 @@ python -m nexus_gate.compiler --root . --json
 | Future system handoff | `docs/runtime/NEXUS_FUTURE_SYSTEM_REHYDRATION_HANDOFF.md` |
 | Stale/process recording | `docs/runtime/NEXUS_STALE_INFORMATION_AND_PROCESS_RECORDING.md` |
 | Balanced chat layout | `docs/runtime/NEXUS_UI_BALANCED_CHAT_LAYOUT.md` |
+| Neural Activity | `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` |
+| Spiral Core Portal | `docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md` |
 | GitHub repo | `https://github.com/jacksonjp0311-gif/NexusGate` |
 | Geometric memory router | `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md` |
 | Geometry manifest | `state/nexus_geometric_memory_manifest.v0.8.3.json` |
@@ -211,3 +216,4 @@ Autonomous authority is not.
 Organic evolution is allowed.
 Ungated compounding is not.
 ```
+- `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` â€” neural activity / cathedral HUD surface.
