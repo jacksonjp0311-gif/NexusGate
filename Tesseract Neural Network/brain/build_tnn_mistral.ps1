@@ -1,4 +1,4 @@
-param(
+﻿param(
   [string]$ModelName = "tnn-mistral:latest"
 )
 
@@ -19,3 +19,5 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host "TNN Mistral adapter ready: $ModelName"
+Write-Host "Prewarming model..."
+python ".\Tesseract Neural Network\brain\prewarm_tnn_mistral.py" --model $ModelName

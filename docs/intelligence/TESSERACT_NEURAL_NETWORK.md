@@ -39,3 +39,6 @@ Ollama socket timeouts are converted into bounded TNN chat packets instead of ro
 ## v0.2.0G Viewer Renderer Seal
 
 	nn-chat now invokes the router and then renders the actual TNN response body through Tesseract Neural Network/brain/view_latest_chat.py. This avoids injecting a large PowerShell helper into the command switch and keeps the shell parser stable.
+## v0.2.0H Fast Prewarm Seal
+
+TNN disables fallback on timeout by default so a slow model does not double latency. prewarm_tnn_mistral.py keeps 	nn-mistral:latest resident before chat. Snappy mode targets 6 seconds, 768 context, and 80 generated tokens.
