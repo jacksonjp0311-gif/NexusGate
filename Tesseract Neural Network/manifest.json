@@ -8,10 +8,27 @@
     "scraping": false,
     "shell_execution": false
   },
-  "kind": "minimal_nn_surface",
+  "excluded_parts": [
+    "full NeuralForge source tree",
+    "patch executor",
+    "live API puller",
+    "scraper",
+    "autonomous mutation authority"
+  ],
+  "external_neuralforge_required": false,
+  "included_parts": [
+    "local receipt cache",
+    "local state file",
+    "minimal receipt reader",
+    "explicit optional refresh adapter",
+    "NN-router response surface",
+    "portal selector entry"
+  ],
+  "kind": "self_contained_minimal_nn_core",
   "name": "Tesseract Neural Network",
   "role": "TNN",
-  "source": "NeuralForge / Tesseract Pathway Network receipts",
+  "self_contained_runtime": true,
+  "source": "NexusGate-local TNN receipt cache, with optional explicit NeuralForge refresh",
   "vendored_neuralforge": false,
-  "version": "nexus.tesseract_neural_network.v0.1.0"
+  "version": "nexus.tesseract_neural_network.v0.1.1"
 }

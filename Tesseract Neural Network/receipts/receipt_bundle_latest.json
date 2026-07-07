@@ -1,0 +1,27 @@
+{
+  "blocked_reasons": [],
+  "claim_boundary": "Local cached receipt bundle. NeuralForge was only used as an explicit refresh source.",
+  "missing_receipts": [
+    "approval",
+    "sandbox_plan",
+    "source_intake"
+  ],
+  "neuralforge_required": false,
+  "ok": true,
+  "receipts": {
+    "control_bundle": {
+      "mutation_allowed": false,
+      "ok": true,
+      "patch_proposal_receipts": [
+        {},
+        {},
+        {}
+      ],
+      "ready_for_human_review": true
+    }
+  },
+  "self_contained": true,
+  "source": "explicit_neuralforge_refresh",
+  "source_root": "C:\\Users\\jacks\\AppData\\Local\\Temp\\tmpkbws1wjh",
+  "tnn_version": "nexus.tesseract_neural_network.v0.1.1"
+}

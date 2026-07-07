@@ -1,35 +1,48 @@
-"""Tesseract Neural Network minimal surface for NexusGate."""
+"""Self-contained Tesseract Neural Network surface for NexusGate.
+
+TNN v0.1.1 runs from the NexusGate repository without requiring the
+NeuralForge checkout at runtime. NeuralForge can be used only as an explicit
+refresh source through refresh_from_neuralforge.py.
+"""
 
 from __future__ import annotations
 
 import argparse
 import json
-import os
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-TNN_VERSION = "nexus.tesseract_neural_network.v0.1.0"
-TNN_MODEL_NAME = "Tesseract Neural Network/minimal-receipt-surface"
+TNN_VERSION = "nexus.tesseract_neural_network.v0.1.1"
+TNN_MODEL_NAME = "Tesseract Neural Network/self-contained-receipt-core"
 
-RECEIPT_PATHS = {
-    "control_bundle": "artifacts/tpn/control_bundle_report_v1_13_latest.json",
-    "approval": "artifacts/tpn/approval_report_v1_14_latest.json",
-    "sandbox_plan": "artifacts/tpn/sandbox_plan_report_v1_15_latest.json",
-    "source_intake": "artifacts/tpn/source_intake_report_v1_16_latest.json",
+TNN_ROOT = Path(__file__).resolve().parent
+RECEIPTS_DIR = TNN_ROOT / "receipts"
+STATE_DIR = TNN_ROOT / "state"
+LOCAL_BUNDLE_PATH = RECEIPTS_DIR / "receipt_bundle_latest.json"
+LOCAL_STATE_PATH = STATE_DIR / "tnn_state_latest.json"
+
+DEFAULT_BUNDLE: Dict[str, Any] = {
+    "ok": True,
+    "source": "nexusgate_local_seed",
+    "root_found": True,
+    "neuralforge_required": False,
+    "self_contained": True,
+    "receipts": {
+        "source_intake": {
+            "ok": True,
+            "registry_allowed": True,
+            "live_pull_allowed": False,
+            "scraping_allowed": False,
+            "raw_collection_allowed": False,
+            "mutation_allowed": False,
+            "claim_boundary": "NexusGate-local TNN seed; no live network calls, scraping, raw collection, or mutation.",
+            "source_count": 0,
+            "source_intake_version": "tnn.local_seed.v0.1.1",
+        }
+    },
+    "missing_receipts": ["control_bundle", "approval", "sandbox_plan"],
+    "blocked_reasons": [],
 }
-
-
-def default_neuralforge_root() -> Optional[Path]:
-    for candidate in [
-        os.environ.get("NEURALFORGE_ROOT", ""),
-        str(Path.home() / "OneDrive" / "Desktop" / "NeuralForge"),
-        str(Path.home() / "Desktop" / "NeuralForge"),
-    ]:
-        if candidate:
-            path = Path(candidate).expanduser()
-            if path.exists() and path.is_dir():
-                return path.resolve()
-    return None
 
 
 def read_json(path: Path) -> Optional[Dict[str, Any]]:
@@ -38,8 +51,27 @@ def read_json(path: Path) -> Optional[Dict[str, Any]]:
     try:
         data = json.loads(path.read_text(encoding="utf-8-sig"))
         return data if isinstance(data, dict) else None
-    except Exception as error:
+    except (OSError, json.JSONDecodeError) as error:
         return {"parse_error": str(error), "path": str(path)}
+
+
+def write_json(path: Path, data: Dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def load_local_bundle() -> Dict[str, Any]:
+    bundle = read_json(LOCAL_BUNDLE_PATH)
+    if bundle is None:
+        bundle = dict(DEFAULT_BUNDLE)
+        write_json(LOCAL_BUNDLE_PATH, bundle)
+    bundle.setdefault("ok", True)
+    bundle.setdefault("self_contained", True)
+    bundle.setdefault("neuralforge_required", False)
+    bundle.setdefault("receipts", {})
+    bundle.setdefault("missing_receipts", [])
+    bundle.setdefault("blocked_reasons", [])
+    return bundle
 
 
 def bool_text(value: Any) -> str:
@@ -50,37 +82,6 @@ def bool_text(value: Any) -> str:
     return "unknown"
 
 
-def collect_receipts(neuralforge_root: Optional[Path] = None) -> Dict[str, Any]:
-    root = neuralforge_root or default_neuralforge_root()
-    if not root:
-        return {
-            "ok": False,
-            "root_found": False,
-            "neuralforge_root": "",
-            "receipts": {},
-            "missing_receipts": list(RECEIPT_PATHS.keys()),
-            "blocked_reasons": ["NeuralForge root not found."],
-        }
-
-    receipts: Dict[str, Any] = {}
-    missing: list[str] = []
-    for name, rel in RECEIPT_PATHS.items():
-        value = read_json(root / rel)
-        if value is None:
-            missing.append(name)
-        else:
-            receipts[name] = value
-
-    return {
-        "ok": True,
-        "root_found": True,
-        "neuralforge_root": str(root),
-        "receipts": receipts,
-        "missing_receipts": missing,
-        "blocked_reasons": [],
-    }
-
-
 def summarize(bundle: Dict[str, Any], intent: str) -> str:
     lines = [
         "TESSERACT NEURAL NETWORK",
@@ -88,15 +89,12 @@ def summarize(bundle: Dict[str, Any], intent: str) -> str:
         f"Intent: {intent}",
         f"Version: {TNN_VERSION}",
         "",
+        "Status: ONLINE",
+        "Runtime: NexusGate-local self-contained core",
+        f"NeuralForge required: {bool_text(bundle.get('neuralforge_required'))}",
+        f"Self-contained: {bool_text(bundle.get('self_contained'))}",
+        "",
     ]
-    if not bundle.get("root_found"):
-        lines.extend([
-            "Status: BLOCKED",
-            "Reason: NeuralForge root not found.",
-            "",
-            "Boundary: no shell execution, no patch application, no live API pull, no scraping, no autonomous mutation.",
-        ])
-        return "\n".join(lines)
 
     receipts = bundle.get("receipts", {})
     control = receipts.get("control_bundle", {}) if isinstance(receipts, dict) else {}
@@ -104,11 +102,7 @@ def summarize(bundle: Dict[str, Any], intent: str) -> str:
     sandbox = receipts.get("sandbox_plan", {}) if isinstance(receipts, dict) else {}
     source = receipts.get("source_intake", {}) if isinstance(receipts, dict) else {}
 
-    lines.append("Status: ONLINE")
-    lines.append(f"NeuralForge: {bundle.get('neuralforge_root')}")
-    lines.append("")
-
-    if control:
+    if isinstance(control, dict) and control:
         proposals = control.get("patch_proposal_receipts") or []
         lines.extend([
             "Control bundle:",
@@ -118,7 +112,8 @@ def summarize(bundle: Dict[str, Any], intent: str) -> str:
             f"- mutation_allowed: {bool_text(control.get('mutation_allowed'))}",
             "",
         ])
-    if approval:
+
+    if isinstance(approval, dict) and approval:
         lines.extend([
             "Approval:",
             f"- decision: {approval.get('decision', approval.get('approval_status', 'unknown'))}",
@@ -127,7 +122,8 @@ def summarize(bundle: Dict[str, Any], intent: str) -> str:
             f"- mutation_allowed: {bool_text(approval.get('mutation_allowed'))}",
             "",
         ])
-    if sandbox:
+
+    if isinstance(sandbox, dict) and sandbox:
         lines.extend([
             "Sandbox plan:",
             f"- ok: {bool_text(sandbox.get('ok'))}",
@@ -136,7 +132,8 @@ def summarize(bundle: Dict[str, Any], intent: str) -> str:
             f"- apply_allowed: {bool_text(sandbox.get('apply_allowed'))}",
             "",
         ])
-    if source:
+
+    if isinstance(source, dict) and source:
         lines.extend([
             "Source intake:",
             f"- registry_allowed: {bool_text(source.get('registry_allowed'))}",
@@ -148,35 +145,50 @@ def summarize(bundle: Dict[str, Any], intent: str) -> str:
 
     missing = bundle.get("missing_receipts") or []
     if missing:
-        lines.append("Missing receipts: " + ", ".join(str(x) for x in missing))
+        lines.append("Missing optional receipts: " + ", ".join(str(x) for x in missing))
         lines.append("")
+
     lines.extend([
-        "Recommendation: use Tesseract Neural Network as the governed NexusGate NN lane.",
-        "Boundary: recommendation-only; no shell execution, patch application, main-branch mutation, live API pulls, scraping, or autonomous authority.",
+        "Recommendation:",
+        "Use TNN as the governed NexusGate NN lane. It can operate from NexusGate-local state without NeuralForge as a runtime dependency.",
+        "",
+        "Boundary:",
+        "Recommendation-only. No shell execution, no patch application, no main-branch mutation, no live API pulls, no scraping, no autonomous authority.",
     ])
     return "\n".join(lines)
 
 
-def build_model_response(intent: str, neuralforge_root: Optional[Path] = None) -> Dict[str, Any]:
-    bundle = collect_receipts(neuralforge_root)
-    return {
+def build_model_response(intent: str) -> Dict[str, Any]:
+    bundle = load_local_bundle()
+    response = {
         "role": "TNN",
         "model": TNN_MODEL_NAME,
-        "ok": bool(bundle.get("ok")),
+        "ok": bool(bundle.get("ok", True)),
         "response": summarize(bundle, intent),
         "tnn_version": TNN_VERSION,
+        "self_contained": True,
+        "neuralforge_required": False,
         "receipt_bundle": bundle,
     }
+    write_json(LOCAL_STATE_PATH, {
+        "ok": response["ok"],
+        "role": response["role"],
+        "model": response["model"],
+        "tnn_version": TNN_VERSION,
+        "self_contained": True,
+        "neuralforge_required": False,
+        "last_intent": intent,
+        "local_bundle": str(LOCAL_BUNDLE_PATH),
+    })
+    return response
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--intent", default="Read Tesseract Neural Network state.")
-    parser.add_argument("--neuralforge-root", default="")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
-    root = Path(args.neuralforge_root).resolve() if args.neuralforge_root else None
-    response = build_model_response(args.intent, root)
+    response = build_model_response(args.intent)
     print(json.dumps(response, indent=2, sort_keys=True) if args.json else response["response"])
 
 

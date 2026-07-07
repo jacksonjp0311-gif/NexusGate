@@ -1,4 +1,4 @@
-"""NexusGate NN-router shim for the repo-local Tesseract Neural Network folder."""
+"""NexusGate NN-router shim for the repo-local self-contained TNN core."""
 
 from __future__ import annotations
 

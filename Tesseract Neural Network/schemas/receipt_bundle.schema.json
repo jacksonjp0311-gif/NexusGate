@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "blocked_reasons": {
+      "type": "array"
+    },
+    "missing_receipts": {
+      "type": "array"
+    },
+    "neuralforge_required": {
+      "const": false
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "receipts": {
+      "type": "object"
+    },
+    "self_contained": {
+      "const": true
+    }
+  },
+  "required": [
+    "ok",
+    "self_contained",
+    "neuralforge_required",
+    "receipts"
+  ],
+  "title": "Tesseract Neural Network Receipt Bundle",
+  "type": "object"
+}

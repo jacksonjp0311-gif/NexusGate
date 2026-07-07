@@ -216,4 +216,4 @@ Autonomous authority is not.
 Organic evolution is allowed.
 Ungated compounding is not.
 ```
-- `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` â€” neural activity / cathedral HUD surface.
+- `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` Ã¢â‚¬â€ neural activity / cathedral HUD surface.

@@ -1,12 +1,12 @@
 {
-  "neuralforge_default_roots": [
-    "%USERPROFILE%/OneDrive/Desktop/NeuralForge",
-    "%USERPROFILE%/Desktop/NeuralForge"
-  ],
-  "receipts": {
+  "local_bundle": "receipts/receipt_bundle_latest.json",
+  "local_state": "state/tnn_state_latest.json",
+  "mode": "local_first",
+  "optional_refresh_sources": {
     "approval": "artifacts/tpn/approval_report_v1_14_latest.json",
     "control_bundle": "artifacts/tpn/control_bundle_report_v1_13_latest.json",
     "sandbox_plan": "artifacts/tpn/sandbox_plan_report_v1_15_latest.json",
     "source_intake": "artifacts/tpn/source_intake_report_v1_16_latest.json"
-  }
+  },
+  "runtime_dependency_on_neuralforge": false
 }

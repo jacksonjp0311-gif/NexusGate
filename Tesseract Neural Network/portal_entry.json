@@ -1,6 +1,6 @@
 {
   "command": "tnn",
-  "description": "minimal governed NN surface",
+  "description": "self-contained governed NN core",
   "key": "14",
   "name": "Tesseract Neural Network",
   "powershell": ".\\scripts\\nexus.ps1 tnn -Tag \"Read Tesseract Neural Network state.\" -CallModel"

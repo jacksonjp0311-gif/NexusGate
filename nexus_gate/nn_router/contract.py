@@ -51,7 +51,7 @@ ROLE_DESCRIPTIONS: Dict[str, str] = {
     "FAST": "Quick local recommendation voice using Phi-3 when available.",
     "BALANCED": "Balanced local recommendation voice using Phi-3 when available.",
     "DEEP": "Deeper local recommendation voice using Mistral when available.",
-    "TNN": "Tesseract Neural Network minimal governed NN surface.",
+    "TNN": "Tesseract Neural Network self-contained governed NN core.",
     "HANDOFF": "No local model required; writes ChatGPT/Codex handoff packets.",
 }
 
@@ -125,9 +125,9 @@ def choose_model(available_models: Mapping[str, object], role: str) -> RoleAssig
     if normalized_role == "TNN":
         return RoleAssignment(
             role="TNN",
-            model="Tesseract Neural Network/minimal-receipt-surface",
+            model="Tesseract Neural Network/self-contained-receipt-core",
             available=True,
-            reason="TNN reads minimal NeuralForge governance receipts through NexusGate.",
+            reason="TNN reads NexusGate-local Tesseract Neural Network state without requiring NeuralForge.",
         )
 
     if normalized_role == "HANDOFF":

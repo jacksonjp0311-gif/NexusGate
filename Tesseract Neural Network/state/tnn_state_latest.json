@@ -1,0 +1,10 @@
+{
+  "last_intent": "NexusGate TNN self-contained portal smoke",
+  "local_bundle": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\Tesseract Neural Network\\receipts\\receipt_bundle_latest.json",
+  "model": "Tesseract Neural Network/self-contained-receipt-core",
+  "neuralforge_required": false,
+  "ok": true,
+  "role": "TNN",
+  "self_contained": true,
+  "tnn_version": "nexus.tesseract_neural_network.v0.1.1"
+}
