@@ -63,3 +63,16 @@ TNN now includes ench_tnn_runtime.py, which runs the fast scaffold chat lane, c
 ## v0.2.0O Partial Stream Hygiene Seal
 
 TNN no longer prints useless partial model fragments such as a single word when the fast model budget is hit. Meaningful partials are labeled as TNN // MISTRAL PARTIAL; otherwise the scaffold remains primary and the health report records model_budget_hit, partial_chars, and stream completion state.
+## v0.2.0P Operator Command Seal
+
+TNN now exposes shell-level operator commands:
+
+- 	nn-chat â€” instant scaffold plus short-budget streaming Mistral lane.
+- 	nn-health â€” writes and prints the latest TNN runtime health badge report.
+- 	nn-warm â€” prewarms 	nn-mistral:latest.
+- 	nn-deep â€” runs the longer full-Mistral stream path.
+
+This makes TNN usable as a local operator surface rather than only a Python backend.
+## v0.2.0Q Operator Command ValidateSet Seal
+
+The 	nn-health, 	nn-warm, and 	nn-deep commands are now admitted through the scripts/nexus.ps1 ValidateSet gate and wired to their switch handlers. This repairs the v0.2.0P shell whitelist wound.

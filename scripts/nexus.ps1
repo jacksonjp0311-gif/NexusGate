@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -212,6 +212,18 @@ switch ($Command) {
         python ".\Tesseract Neural Network\brain\stream_chat.py" --intent "$Tag"
         if ($LASTEXITCODE -ne 0) { throw "TNN streaming chat failed." }
     }
+    "tnn-health" {
+        python ".\Tesseract Neural Network\brain\bench_tnn_runtime.py"
+        if ($LASTEXITCODE -ne 0) { throw "TNN runtime health failed." }
+    }
+    "tnn-warm" {
+        python ".\Tesseract Neural Network\brain\prewarm_tnn_mistral.py"
+        if ($LASTEXITCODE -ne 0) { throw "TNN prewarm failed." }
+    }
+    "tnn-deep" {
+        python ".\Tesseract Neural Network\brain\stream_chat.py" --intent "$Tag" --deep
+        if ($LASTEXITCODE -ne 0) { throw "TNN deep chat failed." }
+    }
     "ask" { Invoke-NexusNN -Intent $Tag -UseModel:$CallModel }
     "rehydrate" { Show-Rehydration; Run-Compiler; Write-Host "[OK] Rehydration complete." }
     "compile" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 compile }
@@ -240,5 +252,7 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
+
+
 
 
