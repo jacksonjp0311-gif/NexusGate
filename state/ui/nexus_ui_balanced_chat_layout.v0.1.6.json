@@ -1,0 +1,30 @@
+{
+  "applied_targets": [
+    {
+      "html": "electron/renderer/index.html",
+      "script": "electron/renderer/nexus_ui_layout_balance_patch.v0.1.6.js"
+    }
+  ],
+  "branch": "main",
+  "claim_boundary": "UI layout patch only. It does not change authority, policy, model routing, health scoring, telemetry scoring, memory, NexusCell execution, or governance.",
+  "created_at": "2026-07-07T10:49:50.545323+00:00",
+  "name": "Nexus UI balanced chat layout",
+  "parent_commit_before_ui_layout_update": "cefbacc",
+  "patch_strategy": [
+    "find HTML UI entrypoint",
+    "inject renderer-side DOM layout normalizer",
+    "hide lane context panel",
+    "insert blank spacer",
+    "equalize side rails",
+    "center chat/output column",
+    "record target files in manifest"
+  ],
+  "request": {
+    "center": "chat/output column",
+    "equalize": "left rail and health-score rail spacing",
+    "preserve": "empty left spacer roughly screenshot-sized",
+    "remove": "lane context box"
+  },
+  "status": "ui_layout_patch",
+  "version": "0.1.6"
+}

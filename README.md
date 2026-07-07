@@ -42,7 +42,7 @@ Open local docs folder
 | Surface | Purpose |
 |---|---|
 | Desktop Entry Portal | Human doorway into all local operator lanes. |
-| Electron HUD | Visual operator HUD with NEX chat, telemetry, Mode Selection, and HANDOFF package. |
+| Electron HUD | Visual operator HUD with NEX chat, telemetry, balanced chat rail, Mode Selection, and HANDOFF package. |
 | PowerShell TUI | Terminal HUD for governed local lanes. |
 | Dev Mode / HANDOFF | Human-authorized patch, compiler, and wound-evidence room. |
 | Failure Doctor | Scan, classify, safe clean, compact retry. |
@@ -198,6 +198,7 @@ python -m nexus_gate.compiler --root . --json
 | Failure intelligence | `docs/runtime/NEXUS_FAILURE_INTELLIGENCE_DISTRIBUTOR.md` |
 | Future system handoff | `docs/runtime/NEXUS_FUTURE_SYSTEM_REHYDRATION_HANDOFF.md` |
 | Stale/process recording | `docs/runtime/NEXUS_STALE_INFORMATION_AND_PROCESS_RECORDING.md` |
+| Balanced chat layout | `docs/runtime/NEXUS_UI_BALANCED_CHAT_LAYOUT.md` |
 | GitHub repo | `https://github.com/jacksonjp0311-gif/NexusGate` |
 | Geometric memory router | `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md` |
 | Geometry manifest | `state/nexus_geometric_memory_manifest.v0.8.3.json` |
