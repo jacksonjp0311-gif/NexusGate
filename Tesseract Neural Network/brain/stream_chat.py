@@ -1,10 +1,10 @@
 ﻿"""Streaming TNN chat lane for NexusGate.
 
-v0.2.0L â€” Stream Guard v2:
-- streams local Mistral tokens through a short safety buffer
-- allows defensive engineering language such as repo hardening and vulnerability audits
-- rewrites before unsafe buffered phrases are printed
-- records time-to-first-token and total latency
+v0.2.0M â€” Fast Scaffold Lane:
+- prints an immediate safe operator scaffold
+- gives Mistral a short fast budget by default
+- keeps deep Mistral available with --deep
+- preserves Stream Guard v2 boundary logic
 """
 
 from __future__ import annotations
@@ -33,7 +33,7 @@ MODEL = os.environ.get("TNN_MODEL", "tnn-mistral:latest")
 TNN_ROOT = Path(__file__).resolve().parents[1]
 SYSTEM_PROMPT_PATH = TNN_ROOT / "brain" / "system_prompt.md"
 
-ENGINE_VERSION = "tnn.stream_chat.v0.2.0L"
+ENGINE_VERSION = "tnn.stream_chat.v0.2.0M"
 
 DEFENSIVE_ALLOWLIST = [
     "harden against vulnerabilities",
@@ -105,6 +105,16 @@ def safe_fallback(intent: str) -> str:
     )
 
 
+def fast_scaffold(intent: str) -> str:
+    return (
+        "TNN // FAST SCAFFOLD\n"
+        "next: wire the streaming TNN lane into the Electron chat panel.\n"
+        "then: add a latency benchmark and model-health badge.\n"
+        "verify: run tests, commit, push.\n"
+        "boundary: recommendation-only."
+    )
+
+
 def should_flush(buffer: str) -> bool:
     if not buffer:
         return False
@@ -120,9 +130,16 @@ def safe_flush(buffer: str, printed_any: bool) -> Tuple[str, bool]:
     return "", True
 
 
-def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
+def stream_generate(
+    intent: str,
+    model: str,
+    timeout: float,
+    scaffold: bool = True,
+    deep: bool = False,
+) -> Dict[str, Any]:
     start = time.perf_counter()
     first_token_at: float | None = None
+    scaffold_at: float | None = None
     prompt = build_context(intent)
     system = read_system_prompt()
 
@@ -136,7 +153,7 @@ def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
             "temperature": 0.12,
             "top_p": 0.8,
             "num_ctx": 512,
-            "num_predict": 48,
+            "num_predict": 48 if not deep else 120,
             "repeat_penalty": 1.12,
         },
     }
@@ -154,10 +171,18 @@ def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
     ok = True
     error = ""
     boundary_rewrite = False
+    scaffold_text = ""
 
     print("")
     print("TNN CHAT")
     print("--------", flush=True)
+
+    if scaffold:
+        scaffold_text = fast_scaffold(intent)
+        scaffold_at = time.perf_counter()
+        print(scaffold_text, flush=True)
+        print("", flush=True)
+        print("TNN // MISTRAL STREAM", flush=True)
 
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
@@ -206,42 +231,49 @@ def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
         ok = False
         error = f"Ollama stream failure: {exc}"
 
-    text = "".join(chunks).strip()
+    model_text = "".join(chunks).strip()
 
     if boundary_rewrite:
         ok = True
         error = "operator boundary rewrite applied"
-        text = safe_fallback(intent)
+        model_text = safe_fallback(intent)
         if printed_any:
             print("")
-        print(text, flush=True)
+        print(model_text, flush=True)
 
-    if not ok or not text:
-        if not text:
-            text = (
-                "TNN // MODEL WARMING\n"
-                "Mistral did not stream a response yet.\n"
-                "next: run prewarm, then retry once.\n"
+    if not ok or not model_text:
+        if not model_text:
+            model_text = (
+                "TNN // MODEL BUDGET HIT\n"
+                "Mistral did not stream inside the fast budget.\n"
+                "next: use the scaffold now, or rerun with --deep for full Mistral.\n"
                 "safe: NexusGate did not crash.\n"
                 "boundary: recommendation-only."
             )
-        print(text, flush=True)
+        print(model_text, flush=True)
 
     total_latency_ms = int((time.perf_counter() - start) * 1000)
+    scaffold_ms = None if scaffold_at is None else int((scaffold_at - start) * 1000)
     ttft_ms = None if first_token_at is None else int((first_token_at - start) * 1000)
 
+    final_response = model_text
+    if scaffold_text and (not ok or not "".join(chunks).strip()):
+        final_response = scaffold_text + "\n\n" + model_text
+
     packet = {
-        "ok": ok and bool(text),
+        "ok": bool(final_response),
         "engine_version": ENGINE_VERSION,
         "role": "TNN",
         "model": model,
         "intent": intent,
-        "response": text,
+        "response": final_response,
+        "scaffold_ms": scaffold_ms,
         "time_to_first_token_ms": ttft_ms,
         "latency_ms": total_latency_ms,
         "total_latency_ms": total_latency_ms,
         "error": error,
         "boundary_rewrite": boundary_rewrite,
+        "deep": deep,
         "boundary": "recommendation-only; no offensive cyber guidance; no shell execution, mutation, live pulls, scraping, or autonomous authority",
     }
     write_memory(packet)
@@ -249,12 +281,14 @@ def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
     print("")
     print("model: Tesseract Neural Network/mistral-chat-brain")
     print(f"backend: {model}")
+    if scaffold_ms is not None:
+        print(f"scaffold_ms: {scaffold_ms}")
     if ttft_ms is not None:
         print(f"ttft_ms: {ttft_ms}")
     print(f"total_ms: {total_latency_ms}")
     if error:
         print(f"note: {error}")
-    print("mode: stream_guard_v2")
+    print("mode: fast_scaffold_stream_guard_v3" if not deep else "mode: deep_stream_guard_v3")
     return packet
 
 
@@ -262,11 +296,23 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--intent", required=True)
     parser.add_argument("--model", default=MODEL)
-    parser.add_argument("--timeout", type=float, default=float(os.environ.get("TNN_STREAM_TIMEOUT_SECONDS", "45")))
+    parser.add_argument("--timeout", type=float, default=None)
+    parser.add_argument("--deep", action="store_true")
+    parser.add_argument("--no-scaffold", action="store_true")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
-    packet = stream_generate(args.intent, model=args.model, timeout=args.timeout)
+    timeout = args.timeout
+    if timeout is None:
+        timeout = float(os.environ.get("TNN_STREAM_TIMEOUT_SECONDS", "8" if not args.deep else "45"))
+
+    packet = stream_generate(
+        args.intent,
+        model=args.model,
+        timeout=timeout,
+        scaffold=not args.no_scaffold,
+        deep=args.deep,
+    )
     if args.json:
         print(json.dumps(packet, indent=2, sort_keys=True))
 

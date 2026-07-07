@@ -54,3 +54,6 @@ TNN streaming chat is locked to NexusGate repo/product engineering. If local Mis
 ## v0.2.0L Stream Guard v2 Seal
 
 TNN streaming chat now buffers short output spans before printing, allowing defensive engineering phrases such as harden against vulnerabilities while blocking offensive drift phrases before they reach the terminal. It records time-to-first-token and total latency.
+## v0.2.0M Fast Scaffold Seal
+
+TNN chat now prints an immediate safe operator scaffold before waiting for local Mistral. The fast lane uses an 8-second model budget by default; stream_chat.py --deep keeps the longer full-Mistral path for deeper reasoning.
