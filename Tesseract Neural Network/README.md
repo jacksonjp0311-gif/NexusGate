@@ -1,18 +1,28 @@
 # Tesseract Neural Network
 
-Self-contained minimal NexusGate NN core for Tesseract governance state.
+Self-contained NexusGate-local neural chat brain.
 
-This folder intentionally avoids vendoring NeuralForge. Runtime reads NexusGate-local receipt cache first:
+TNN uses local Mistral through Ollama:
 
 ```text
-receipts/receipt_bundle_latest.json
-state/tnn_state_latest.json
+brain/chat_engine.py
+brain/ollama_adapter.py
+brain/context_builder.py
+brain/memory_store.py
+brain/system_prompt.md
+brain/Modelfile.tnn-mistral
 ```
 
-NeuralForge is optional and only used through explicit refresh:
+Build the adapted local model tag:
 
 ```powershell
-python ".\Tesseract Neural Network\refresh_from_neuralforge.py" --json
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\Tesseract Neural Network\brain\build_tnn_mistral.ps1"
 ```
 
-Boundary: recommendation-only, no shell execution, no patch application, no live API pull, no scraping, no autonomous authority.
+Run through NexusGate:
+
+```powershell
+.\scripts\nexus.ps1 tnn -Tag "Think through the next move." -CallModel
+```
+
+Boundary: no raw weights in repo, no hidden chain-of-thought exposure, no shell execution, no patch application, no live API pull, no scraping, no autonomous authority.

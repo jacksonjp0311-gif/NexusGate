@@ -1,10 +1,12 @@
 {
-  "local_bundle": "receipts/receipt_bundle_latest.json",
-  "model": "Tesseract Neural Network/self-contained-receipt-core",
+  "backend_model": "tnn-mistral:latest",
+  "last_intent": "Think fast from TNN",
+  "last_latency_ms": 4115,
+  "local_bundle": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\Tesseract Neural Network\\receipts\\receipt_bundle_latest.json",
+  "model": "Tesseract Neural Network/mistral-chat-brain",
   "neuralforge_required": false,
-  "ok": true,
+  "ok": false,
   "role": "TNN",
   "self_contained": true,
-  "source": "nexusgate_local_seed",
-  "tnn_version": "nexus.tesseract_neural_network.v0.1.1A"
+  "tnn_version": "nexus.tesseract_neural_network.v0.2.0"
 }

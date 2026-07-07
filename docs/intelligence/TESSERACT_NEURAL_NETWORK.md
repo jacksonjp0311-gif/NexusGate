@@ -1,33 +1,30 @@
-# Tesseract Neural Network v0.1.1
+# Tesseract Neural Network v0.2.0
 
-TNN is now self-contained inside NexusGate.
+TNN is now a NexusGate-local neural chat brain targeting Mistral through Ollama.
 
 ```text
-NexusGate/
-└─ Tesseract Neural Network/
-   ├─ tnn_surface.py
-   ├─ refresh_from_neuralforge.py
-   ├─ receipts/receipt_bundle_latest.json
-   ├─ state/tnn_state_latest.json
-   ├─ schemas/receipt_bundle.schema.json
-   ├─ manifest.json
-   ├─ receipt_paths.json
-   └─ portal_entry.json
+NexusGate chat
+→ TNN surface
+→ TNN chat engine
+→ TNN context + memory + receipts
+→ tnn-mistral:latest / mistral:latest
+→ snappy operator response
 ```
 
-Runtime does not require NeuralForge. NeuralForge is only an explicit refresh source.
+## Weight strategy
 
-## Command
+Raw Mistral weights are not copied into the repo. TNN adapts the existing local `mistral:latest` weights through an Ollama Modelfile:
 
 ```powershell
-.\scripts\nexus.ps1 tnn -Tag "Read Tesseract Neural Network state." -CallModel
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\Tesseract Neural Network\brain\build_tnn_mistral.ps1"
+```
+
+This creates:
+
+```text
+tnn-mistral:latest
 ```
 
 ## Boundary
 
-Recommendation-only. No shell execution, patch application, main-branch mutation, live API pulls, scraping, or autonomous authority.
-
-
-## v0.1.1A State Hygiene Seal
-
-The committed local receipt bundle is a NexusGate-local seed. Unit tests must not leave temporary NeuralForge fixture paths in committed TNN state. Optional NeuralForge refresh remains explicit.
+TNN is recommendation-only. It can chat and reason through local Mistral, but it cannot execute shell commands, mutate files, scrape, perform live API pulls, or claim autonomous authority.

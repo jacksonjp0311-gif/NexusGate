@@ -1,35 +1,47 @@
 {
   "authority_boundary": {
     "autonomous_authority": false,
+    "hidden_chain_of_thought_exposed": false,
     "live_api_pull": false,
     "main_branch_mutation": false,
     "patch_application": false,
+    "raw_weight_copy": false,
     "recommendation_only": true,
     "scraping": false,
     "shell_execution": false
   },
+  "backend": "ollama/mistral",
   "excluded_parts": [
+    "raw Mistral weight blobs",
     "full NeuralForge source tree",
+    "hidden chain-of-thought exposure",
+    "autonomous shell",
     "patch executor",
     "live API puller",
-    "scraper",
-    "autonomous mutation authority"
+    "scraper"
   ],
   "external_neuralforge_required": false,
+  "fallback_model": "mistral:latest",
+  "fast_chat_target": true,
   "included_parts": [
+    "TNN chat engine",
+    "Ollama Mistral adapter",
+    "TNN system prompt",
+    "context builder",
+    "memory store",
+    "Mistral Modelfile adapter",
     "local receipt cache",
     "local state file",
-    "minimal receipt reader",
-    "explicit optional refresh adapter",
-    "NN-router response surface",
-    "portal selector entry"
+    "NN-router surface"
   ],
-  "kind": "self_contained_minimal_nn_core",
+  "kind": "local_neural_chat_brain",
+  "latency_target_seconds": 12,
   "name": "Tesseract Neural Network",
+  "primary_model": "tnn-mistral:latest",
+  "raw_weight_copy": false,
   "role": "TNN",
-  "runtime_state_hygiene": "local seed bundle restored after tests; no temp fixture paths may remain in committed TNN state",
   "self_contained_runtime": true,
-  "source": "NexusGate-local TNN receipt cache, with optional explicit NeuralForge refresh",
   "vendored_neuralforge": false,
-  "version": "nexus.tesseract_neural_network.v0.1.1A"
+  "version": "nexus.tesseract_neural_network.v0.2.0",
+  "weight_strategy": "derive local Ollama model tag from mistral:latest through Modelfile; do not vendor raw weights into repo"
 }
