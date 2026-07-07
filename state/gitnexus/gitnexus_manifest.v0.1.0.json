@@ -1,0 +1,20 @@
+{
+  "name": "NexusGate GITNEXUS",
+  "version": "v0.1.0",
+  "status": "python_native_codegraph_evidence_organ",
+  "latest_report": "reports/gitnexus_report_latest.json",
+  "boundary": {
+    "evidence_only": true,
+    "autonomous_authority": false,
+    "shell_execution": false,
+    "file_mutation_from_model_output": false,
+    "nexus_cell_policy_change": false
+  },
+  "counts": {
+    "files": 824,
+    "symbols": 1042,
+    "edges": 478,
+    "changed_files": 59
+  },
+  "last_generated_at": "2026-07-07T23:09:30.421383+00:00"
+}

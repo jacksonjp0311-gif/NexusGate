@@ -101,6 +101,9 @@ def detect_ollama_inventory(models_root: Optional[os.PathLike] = None) -> Dict[s
         if name.startswith("mistral:"):
             model_type = "7.2B"
             quantization = "Q4_K_M"
+        if name.startswith("tnn-phi4-mini:") or name.startswith("phi4:"):
+            model_type = "Phi-4-mini"
+            quantization = "Q4_K_M"
         if name.startswith("phi3:"):
             model_type = "3.8B"
             quantization = "Q4_0"

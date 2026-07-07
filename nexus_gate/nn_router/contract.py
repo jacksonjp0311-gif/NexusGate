@@ -40,18 +40,17 @@ SAFETY_CONTRACT: Dict[str, bool] = {
 }
 
 ROLE_PREFERENCES: Dict[str, List[str]] = {
-    "FAST": ["phi3:mini", "phi3:latest"],
-    "BALANCED": ["phi3:mini", "phi3:latest"],
+    "FAST": ["tnn-phi4-mini:latest", "phi4:mini", "phi4:latest", "phi3:mini", "phi3:latest"],
+    "BALANCED": ["tnn-phi4-mini:latest", "phi4:mini", "phi4:latest", "phi3:mini", "phi3:latest"],
     "DEEP": ["mistral:latest"],
-    "TNN": [],
+    "TNN": ["tnn-phi4-mini:latest"],
     "HANDOFF": [],
 }
-
 ROLE_DESCRIPTIONS: Dict[str, str] = {
-    "FAST": "Quick local recommendation voice using Phi-3 when available.",
-    "BALANCED": "Balanced local recommendation voice using Phi-3 when available.",
+    "FAST": "Quick local recommendation voice using Phi-4-mini when available.",
+    "BALANCED": "Balanced local recommendation voice using Phi-4-mini when available.",
     "DEEP": "Deeper local recommendation voice using Mistral when available.",
-    "TNN": "Tesseract Neural Network local Mistral chat brain.",
+    "TNN": "Tesseract Neural Network local Phi-4-mini hot lane with bounded NexusGate context, memory, and gates.",
     "HANDOFF": "No local model required; writes ChatGPT/Codex handoff packets.",
 }
 
@@ -125,9 +124,9 @@ def choose_model(available_models: Mapping[str, object], role: str) -> RoleAssig
     if normalized_role == "TNN":
         return RoleAssignment(
             role="TNN",
-            model="Tesseract Neural Network/mistral-chat-brain",
+            model="Tesseract Neural Network/phi4-mini-hot-brain",
             available=True,
-            reason="TNN chats through local Mistral using NexusGate-local context, memory, and gates.",
+            reason="TNN chats through local Phi-4-mini using NexusGate-local context, memory, and gates.",
         )
 
     if normalized_role == "HANDOFF":
@@ -195,3 +194,4 @@ def build_route_decision(
         recommendation_only=True,
         reason=assignment.reason,
     )
+

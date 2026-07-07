@@ -1,4 +1,4 @@
-﻿import json
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -28,23 +28,23 @@ class TestNexusNNRouter(unittest.TestCase):
         self.assertFalse(SAFETY_CONTRACT["external_api_writes_allowed"])
         self.assertTrue(SAFETY_CONTRACT["role_targeting_required_for_deep_calls"])
 
-    def test_choose_model_prefers_phi3_for_fast(self):
-        inventory = {"phi3:mini": {"name": "phi3:mini"}}
+    def test_choose_model_prefers_phi4_for_fast(self):
+        inventory = {"tnn-phi4-mini:latest": {"name": "tnn-phi4-mini:latest"}}
         assignment = choose_model(inventory, "FAST")
         self.assertTrue(assignment.available)
-        self.assertEqual(assignment.model, "phi3:mini")
+        self.assertEqual(assignment.model, "tnn-phi4-mini:latest")
 
     def test_detect_fake_ollama_manifests_and_assign_roles(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            self._write_manifest(root, "phi3", "mini")
+            self._write_manifest(root, "tnn-phi4-mini", "latest")
             self._write_manifest(root, "mistral", "latest")
             inventory = detect_ollama_inventory(root)
-            self.assertIn("phi3:mini", inventory["models"])
+            self.assertIn("tnn-phi4-mini:latest", inventory["models"])
             self.assertIn("mistral:latest", inventory["models"])
             roles = assign_roles(inventory)
-            self.assertEqual(roles["FAST"]["model"], "phi3:mini")
-            self.assertEqual(roles["BALANCED"]["model"], "phi3:mini")
+            self.assertEqual(roles["FAST"]["model"], "tnn-phi4-mini:latest")
+            self.assertEqual(roles["BALANCED"]["model"], "tnn-phi4-mini:latest")
             self.assertEqual(roles["DEEP"]["model"], "mistral:latest")
             self.assertTrue(roles["HANDOFF"]["available"])
             self.assertIsNone(roles["HANDOFF"]["model"])

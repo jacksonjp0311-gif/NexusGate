@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NexusGate GITNEXUS HUD</title>
+  <link rel="stylesheet" href="./gitnexus_hud.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <section><h1>GITNEXUS</h1><p>NexusGate-native codegraph evidence HUD</p></section>
+      <section class="status"><span>AUTHORITY</span><strong>EVIDENCE ONLY</strong></section>
+    </header>
+    <section class="grid">
+      <article class="card hero"><h2>Repo Graph</h2><div class="graph"><i class="node n1"></i><i class="node n2"></i><i class="node n3"></i><i class="node n4"></i><svg viewBox="0 0 100 100"><path d="M20 55 C40 25,60 35,78 18"/><path d="M20 55 C42 72,58 62,76 82"/><path d="M20 55 C35 52,50 50,68 50"/><path d="M68 50 C73 39,75 30,78 18"/></svg></div></article>
+      <article class="card"><h2>Counts</h2><dl><dt>Files</dt><dd id="files">--</dd><dt>Symbols</dt><dd id="symbols">--</dd><dt>Edges</dt><dd id="edges">--</dd><dt>Changed</dt><dd id="changed">--</dd></dl></article>
+      <article class="card"><h2>Impact</h2><dl><dt>Risk</dt><dd id="risk">unknown</dd><dt>Affected</dt><dd id="affected">--</dd><dt>Action</dt><dd id="action">scan</dd></dl></article>
+      <article class="card wide"><h2>Recommendation</h2><pre id="recommendation">Run scripts/nexus_gitnexus.ps1 scan</pre></article>
+      <article class="card wide"><h2>Top Imported Files</h2><pre id="top-imported">Waiting for report...</pre></article>
+    </section>
+    <footer><span>No autonomous authority.</span><span>No shell execution from model output.</span><span>No NexusCell policy change.</span></footer>
+  </main>
+  <script src="./gitnexus_hud.js"></script>
+</body>
+</html>
