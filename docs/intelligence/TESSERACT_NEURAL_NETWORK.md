@@ -51,3 +51,6 @@ TNN turbo chat removes heavy memory/context from the default path. It sends only
 ## v0.2.0K Operator Alignment Seal
 
 TNN streaming chat is locked to NexusGate repo/product engineering. If local Mistral drifts into offensive cyber language such as targets, attack strategy, entry points, exploitation, or credential access, the stream pivots to a safe operator-alignment response.
+## v0.2.0L Stream Guard v2 Seal
+
+TNN streaming chat now buffers short output spans before printing, allowing defensive engineering phrases such as harden against vulnerabilities while blocking offensive drift phrases before they reach the terminal. It records time-to-first-token and total latency.

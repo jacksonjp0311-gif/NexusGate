@@ -1,4 +1,4 @@
-﻿"""TNN v0.2.0K Mistral turbo chat engine."""
+﻿"""TNN v0.2.0L Mistral turbo chat engine."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ from stream_chat import violates_operator_boundary, safe_fallback
 
 TNN_ROOT = Path(__file__).resolve().parents[1]
 SYSTEM_PROMPT_PATH = TNN_ROOT / "brain" / "system_prompt.md"
-CHAT_ENGINE_VERSION = "tnn.chat_engine.v0.2.0K"
+CHAT_ENGINE_VERSION = "tnn.chat_engine.v0.2.0L"
 
 
 def read_system_prompt() -> str:
