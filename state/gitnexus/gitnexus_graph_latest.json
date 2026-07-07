@@ -1,6 +1,6 @@
 {
   "version": "nexus.gitnexus_bridge.v0.1.0",
-  "generated_at": "2026-07-07T23:43:31.556329+00:00",
+  "generated_at": "2026-07-07T23:56:10.911006+00:00",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "boundary": {
     "evidence_only": true,
@@ -10,10 +10,10 @@
     "nexus_cell_policy_change": false
   },
   "counts": {
-    "files": 845,
-    "symbols": 1163,
+    "files": 851,
+    "symbols": 1236,
     "edges": 478,
-    "changed_files": 44
+    "changed_files": 43
   },
   "files": {
     ".github/workflows/ci.yml": {
@@ -193,8 +193,8 @@
     "docs/feedback/FEEDBACK_LOG.md": {
       "path": "docs/feedback/FEEDBACK_LOG.md",
       "suffix": ".md",
-      "bytes": 114923,
-      "sha256": "91d51d3fa70032997b6f409b0ba60e7a126e7a43cab4301be267853e0e25b501"
+      "bytes": 116519,
+      "sha256": "c3164cfc53d2763d8a37f8be66ff0a7477985997b5499abcd57a9b24b9807148"
     },
     "docs/feedback/FEEDBACK_SYSTEM.md": {
       "path": "docs/feedback/FEEDBACK_SYSTEM.md",
@@ -219,6 +219,12 @@
       "suffix": ".md",
       "bytes": 550,
       "sha256": "ea56b1be106a9e1238793c01dd6c78673728ffc36e9d3e17735476b77dca841f"
+    },
+    "docs/gitnexus/NEXUS_GITNEXUS_INTERACTIVE_HUD.md": {
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_INTERACTIVE_HUD.md",
+      "suffix": ".md",
+      "bytes": 1139,
+      "sha256": "5305b60b172febd1abb74e8ac8a5a8a5694aa4b9df0f4bc40180372ecd7bc12c"
     },
     "docs/goal/GOAL_LOCK.md": {
       "path": "docs/goal/GOAL_LOCK.md",
@@ -463,8 +469,8 @@
     "docs/runtime/NEXUS_CONVERSATION_OUTPUT_BRIDGE.md": {
       "path": "docs/runtime/NEXUS_CONVERSATION_OUTPUT_BRIDGE.md",
       "suffix": ".md",
-      "bytes": 599,
-      "sha256": "7ec2f5cafd3b4dfc93cddef3cc277b94011192f539d4ee2328c9b6866edfcc88"
+      "bytes": 601,
+      "sha256": "04c12a4a7fb74f73093f4da7d287174914026b4ce78dff42faae58fe9595270a"
     },
     "docs/runtime/NEXUS_FAILURE_INTELLIGENCE_DISTRIBUTOR.md": {
       "path": "docs/runtime/NEXUS_FAILURE_INTELLIGENCE_DISTRIBUTOR.md",
@@ -889,14 +895,20 @@
     "electron/renderer/index.html": {
       "path": "electron/renderer/index.html",
       "suffix": ".html",
-      "bytes": 40190,
-      "sha256": "d8786d2a11b3bf6e9e7488e661c6f344ff16b828d1bd1820106a68feeeedaace"
+      "bytes": 40262,
+      "sha256": "094a8ce3d244a3d8d3d5408bba5bb7e233680522eeb74b5f908606f0b3bde74b"
     },
     "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js": {
       "path": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
       "suffix": ".js",
       "bytes": 6724,
       "sha256": "57fee233d3dcd49b4c8ec6d26594e16f2f8e306aff42fa59027df90881616f29"
+    },
+    "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js": {
+      "path": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "suffix": ".js",
+      "bytes": 9042,
+      "sha256": "853db8c2f840f587e87c17dae5fd6676a6d9572ae135a1ee15e553f9da63ff5f"
     },
     "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.css": {
       "path": "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.css",
@@ -957,6 +969,18 @@
       "suffix": ".js",
       "bytes": 21164,
       "sha256": "a9bb4ce6defcd360999d4d2bfb0a9b03fe7ca0d2c5a9bce21a58f2bb82de98ab"
+    },
+    "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.css": {
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.css",
+      "suffix": ".css",
+      "bytes": 10041,
+      "sha256": "e64ba8394baffca077eb651c0785560961be789164f0ebc0997b6f180eafe317"
+    },
+    "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js": {
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "suffix": ".js",
+      "bytes": 34976,
+      "sha256": "89ee50a74949e72e91318ef557668ca694140167c9db8b40ad9ef395107fc73d"
     },
     "electron/renderer/nexus_mode_role_truth_bridge.v0.2.0zw.js": {
       "path": "electron/renderer/nexus_mode_role_truth_bridge.v0.2.0zw.js",
@@ -1045,20 +1069,20 @@
     "GITNEXUS/reports/gitnexus_report_latest.json": {
       "path": "GITNEXUS/reports/gitnexus_report_latest.json",
       "suffix": ".json",
-      "bytes": 586754,
-      "sha256": "982cafae4dd707ea36271461225487328e58422c31c3a69c5a3f108cc6ccac01"
+      "bytes": 593671,
+      "sha256": "f3495ed5a7b8222c04701ab6121676ce9acf0829a2d40b2b14c32f41a4b6412b"
     },
     "GITNEXUS/state/gitnexus_graph_latest.json": {
       "path": "GITNEXUS/state/gitnexus_graph_latest.json",
       "suffix": ".json",
-      "bytes": 586754,
-      "sha256": "982cafae4dd707ea36271461225487328e58422c31c3a69c5a3f108cc6ccac01"
+      "bytes": 593671,
+      "sha256": "f3495ed5a7b8222c04701ab6121676ce9acf0829a2d40b2b14c32f41a4b6412b"
     },
     "GITNEXUS/state/gitnexus_manifest.v0.1.0.json": {
       "path": "GITNEXUS/state/gitnexus_manifest.v0.1.0.json",
       "suffix": ".json",
       "bytes": 544,
-      "sha256": "85088be538ca8b8979d8d24ef2eb84149053238ea356775522977dca010954de"
+      "sha256": "f89dc48614c28750e5f20516b5c276a0c3f6fe285e3775443cb7a9e9572df083"
     },
     "labs/reflective_neural_assembly/assembly/__init__.py": {
       "path": "labs/reflective_neural_assembly/assembly/__init__.py",
@@ -2125,14 +2149,14 @@
     "reports/CHATGPT_HANDOFF_LATEST.md": {
       "path": "reports/CHATGPT_HANDOFF_LATEST.md",
       "suffix": ".md",
-      "bytes": 2383,
-      "sha256": "3c90fa9fb9e1167c411ee1ca237aefa10c1420f9c4e0d281ddcd05a167ba3cb9"
+      "bytes": 2370,
+      "sha256": "fca14d3535ac76ec89b2c7d82f4e207d1f98a66bac3bfdb7d5c0a45b2e73087e"
     },
     "reports/CODEX_HANDOFF_LATEST.md": {
       "path": "reports/CODEX_HANDOFF_LATEST.md",
       "suffix": ".md",
-      "bytes": 2381,
-      "sha256": "836dca6665f471d8d6d99acbf8b5135751a4ab274d46843459672e1c58683c7b"
+      "bytes": 2368,
+      "sha256": "a6d69b31f101bd4577dd7693ba93aa908437df44edfd556b8bd7786d6166dc08"
     },
     "reports/electron_ui_fix/nexus_electron_allowlist_regression_rescue_20260703_220153.json": {
       "path": "reports/electron_ui_fix/nexus_electron_allowlist_regression_rescue_20260703_220153.json",
@@ -2161,8 +2185,8 @@
     "reports/gitnexus_report_latest.json": {
       "path": "reports/gitnexus_report_latest.json",
       "suffix": ".json",
-      "bytes": 586754,
-      "sha256": "982cafae4dd707ea36271461225487328e58422c31c3a69c5a3f108cc6ccac01"
+      "bytes": 593671,
+      "sha256": "f3495ed5a7b8222c04701ab6121676ce9acf0829a2d40b2b14c32f41a4b6412b"
     },
     "reports/handoff_queue/20260705074942/handoff_action.ps1": {
       "path": "reports/handoff_queue/20260705074942/handoff_action.ps1",
@@ -3058,6 +3082,18 @@
       "bytes": 5545,
       "sha256": "dd63ce307bc93d0f064f8c284cbf6ea8080e64eeac1c94b5e59e90248a8bd34c"
     },
+    "reports/human_surface/20260707_194503/14_electron_preflight.json": {
+      "path": "reports/human_surface/20260707_194503/14_electron_preflight.json",
+      "suffix": ".json",
+      "bytes": 5545,
+      "sha256": "9bf7a1537349aa22a469803e13e6995391f891af1b0dbdb6e95b39cc2e76ffe8"
+    },
+    "reports/human_surface/20260707_195156/14_electron_preflight.json": {
+      "path": "reports/human_surface/20260707_195156/14_electron_preflight.json",
+      "suffix": ".json",
+      "bytes": 5545,
+      "sha256": "e4be842252f471d0fb5268bd2ea221dc191a234101b60f5fce9af7d1f0133f3b"
+    },
     "reports/nexus_adapter_compile_report_latest.json": {
       "path": "reports/nexus_adapter_compile_report_latest.json",
       "suffix": ".json",
@@ -3212,7 +3248,7 @@
       "path": "reports/nexus_bounded_runtime_report_latest.json",
       "suffix": ".json",
       "bytes": 6295,
-      "sha256": "be2e84ab1bd3c9ac693a7fcce5c87e78a20e1212814a3e239322b98e15d8523b"
+      "sha256": "45980e181a9a0b743f2f2160ea825d1865107fb34acaff2ed5d5d4a44aaf3052"
     },
     "reports/nexus_bridge_compile_report_latest.json": {
       "path": "reports/nexus_bridge_compile_report_latest.json",
@@ -3224,7 +3260,7 @@
       "path": "reports/nexus_cell/receipt_latest.json",
       "suffix": ".json",
       "bytes": 1722,
-      "sha256": "de0e7e8b3060735e3633a28a7eda7c3e3c04c8d16627109d50d6bedd92ac6e75"
+      "sha256": "f741e8c943aa390f008dc7a6c6e0a4a3d0944bc045aa9aa9a5173187d2cfcf9b"
     },
     "reports/nexus_compile_report_20260703_020334.json": {
       "path": "reports/nexus_compile_report_20260703_020334.json",
@@ -3376,23 +3412,17 @@
       "bytes": 6607,
       "sha256": "cf17d77392bbcf1582a7fc338ba2b320f3cac25db6337711d89780417e6983c7"
     },
-    "reports/nexus_compile_report_20260707_233619.json": {
-      "path": "reports/nexus_compile_report_20260707_233619.json",
-      "suffix": ".json",
-      "bytes": 11074,
-      "sha256": "a5bf677741de1eeff44a50eb3c86feb307fa155505a15aebf337beec4815079d"
-    },
     "reports/nexus_compile_report_latest.json": {
       "path": "reports/nexus_compile_report_latest.json",
       "suffix": ".json",
       "bytes": 11074,
-      "sha256": "a5bf677741de1eeff44a50eb3c86feb307fa155505a15aebf337beec4815079d"
+      "sha256": "c25173fe75ba19a4d462db6c1248a47b4e4458dd7a0e18f70e549290cf66cedb"
     },
     "reports/nexus_domain_intelligence_report_latest.json": {
       "path": "reports/nexus_domain_intelligence_report_latest.json",
       "suffix": ".json",
       "bytes": 3633,
-      "sha256": "09a8cfe941e35dc6c84711721f31689ffe530dbb5a024fe0ddbbb1821baffe3e"
+      "sha256": "42c408da864b03765d91079472199515786e04eaf7d355ee420984283c13cc3a"
     },
     "reports/nexus_drift_reduction_scorecard_latest.json": {
       "path": "reports/nexus_drift_reduction_scorecard_latest.json",
@@ -3404,19 +3434,19 @@
       "path": "reports/nexus_electron_environment_report_latest.json",
       "suffix": ".json",
       "bytes": 1610,
-      "sha256": "8cd80e1e17a9d89219f9a17acc849eabc11cdce5639b7afbc3385259828045a8"
+      "sha256": "31faedc4b603f7c1d63085c45498765b87eb46799696b4b4697f2e183b9474a8"
     },
     "reports/nexus_electron_preflight_report_latest.json": {
       "path": "reports/nexus_electron_preflight_report_latest.json",
       "suffix": ".json",
       "bytes": 5540,
-      "sha256": "2cdeb04344b25eb0f67e85f5fac99941ab1a49eabcf3277ffd29c120ccc8fc67"
+      "sha256": "9edb00bdaeea9a648d23d6283449a087bd1ee802eaa05a2148474ac3b3082142"
     },
     "reports/nexus_electron_smoke_report_latest.json": {
       "path": "reports/nexus_electron_smoke_report_latest.json",
       "suffix": ".json",
-      "bytes": 1561,
-      "sha256": "7164e8921b2d65a63c7bd6f8ec9ef382e3e4248fd5d0e8df28b1fa07e50c0655"
+      "bytes": 1592,
+      "sha256": "66207269c730bc83cf06f2240787989d1aafd9e838168db023ef1a184ef41437"
     },
     "reports/nexus_evidence_compaction_report_20260703_113822.json": {
       "path": "reports/nexus_evidence_compaction_report_20260703_113822.json",
@@ -3488,7 +3518,7 @@
       "path": "reports/nexus_evidence_compaction_report_latest.json",
       "suffix": ".json",
       "bytes": 627,
-      "sha256": "ee2bbb1cd3784aaff3be1aae46f69c5ddfd59e83407d045806d7bd962385a80b"
+      "sha256": "a610a36e02d5e4e69be4639bc780a6b034d3e5d4a39d5bd959a7fa236e80bdbe"
     },
     "reports/nexus_feedback_interface_report_20260703_120054.json": {
       "path": "reports/nexus_feedback_interface_report_20260703_120054.json",
@@ -3524,7 +3554,7 @@
       "path": "reports/nexus_feedback_interface_report_latest.json",
       "suffix": ".json",
       "bytes": 1479,
-      "sha256": "39bc5cf759a26d3de373c96988a3d5da55442fe7e853ee7c94080ff63a788d76"
+      "sha256": "9fffcc20143737be076abcd4223414daaf27cc60f297b37826816925fb25fc4c"
     },
     "reports/nexus_feedback_report_20260703_113822.json": {
       "path": "reports/nexus_feedback_report_20260703_113822.json",
@@ -3595,14 +3625,14 @@
     "reports/nexus_feedback_report_latest.json": {
       "path": "reports/nexus_feedback_report_latest.json",
       "suffix": ".json",
-      "bytes": 21556,
-      "sha256": "6f34c390ac27b6758e3595c626a858010a0dd221e645c6589c65f1d2a4053f11"
+      "bytes": 21565,
+      "sha256": "236ad148b8813de64de42b2652d6c1927960e59c668cd9c9bdd1901b255b7b3d"
     },
     "reports/nexus_geometric_memory_packet_latest.json": {
       "path": "reports/nexus_geometric_memory_packet_latest.json",
       "suffix": ".json",
       "bytes": 1677,
-      "sha256": "7ac8ad6089084f843753654d703dcd5407cd94733ec8e49834606cdc1ca4c4c2"
+      "sha256": "98db1949e864b1b5d2bc5c6554201a8ea83bd68943464ceb5218905973ff0364"
     },
     "reports/nexus_interconnect_report_20260703_113822.json": {
       "path": "reports/nexus_interconnect_report_20260703_113822.json",
@@ -3674,13 +3704,13 @@
       "path": "reports/nexus_interconnect_report_latest.json",
       "suffix": ".json",
       "bytes": 15674,
-      "sha256": "fa362be60e52e9b89ef8a148d668a59cedb96d6b3667a94f92b82f8b3e621ccb"
+      "sha256": "b335bbed13b337e67214ccad7d225e73279d0bbd2dba4713abb8afa672223c69"
     },
     "reports/nexus_nn_router_report_latest.json": {
       "path": "reports/nexus_nn_router_report_latest.json",
       "suffix": ".json",
-      "bytes": 7957,
-      "sha256": "a1ca865e5eee912cd7ec22a62c16a5cb1e6c826900fe6a4fdb37d901493f7bb9"
+      "bytes": 7944,
+      "sha256": "d4a3aece2b1d5a8abfde5f0840021f8a5fd3fc3b663cf9043facf27ac760d127"
     },
     "reports/nexus_receptor_compile_report_latest.json": {
       "path": "reports/nexus_receptor_compile_report_latest.json",
@@ -3692,7 +3722,7 @@
       "path": "reports/nexus_reflective_loop_report_latest.json",
       "suffix": ".json",
       "bytes": 4057,
-      "sha256": "979b5b4491da94b875b5d19021ae7aeafec279a8f4f9bce7325362a1d1ec4df2"
+      "sha256": "583f7e568046835ce0655fbf7c89c0c746526c25863b2bc26199eab6825bdba5"
     },
     "reports/nexus_runtime_compile_report_latest.json": {
       "path": "reports/nexus_runtime_compile_report_latest.json",
@@ -3760,17 +3790,17 @@
       "bytes": 2667,
       "sha256": "a33d4e0abae76ae8b52a1fc2554a2e90919064db1454c6b45b5008cd9d011e6b"
     },
-    "reports/nexus_self_healing_report_20260707_233615.json": {
-      "path": "reports/nexus_self_healing_report_20260707_233615.json",
+    "reports/nexus_self_healing_report_20260707_235133.json": {
+      "path": "reports/nexus_self_healing_report_20260707_235133.json",
       "suffix": ".json",
       "bytes": 2731,
-      "sha256": "db1ad01da9a7f817d416a445d190734892c46d8a113b312a64168e6b9ed76169"
+      "sha256": "49d7f097b1ba3f2cd0fba8dd3db68382ebf09171fe992e5780e7cee4be83cdb1"
     },
     "reports/nexus_self_healing_report_latest.json": {
       "path": "reports/nexus_self_healing_report_latest.json",
       "suffix": ".json",
       "bytes": 2731,
-      "sha256": "db1ad01da9a7f817d416a445d190734892c46d8a113b312a64168e6b9ed76169"
+      "sha256": "49d7f097b1ba3f2cd0fba8dd3db68382ebf09171fe992e5780e7cee4be83cdb1"
     },
     "reports/README.md": {
       "path": "reports/README.md",
@@ -4016,7 +4046,7 @@
       "path": "state/ai_feedback_context_latest.json",
       "suffix": ".json",
       "bytes": 2433,
-      "sha256": "85e8f0330c16972f8aca7b2fbf771b76d059ffd200c97c849a0c83c53881788e"
+      "sha256": "52261d5d1fe3d4191340f73fd58afb6a0d08cdc4f13805e92c380b28209d8f74"
     },
     "state/ai_feedback_interface_index.v0.2.3.json": {
       "path": "state/ai_feedback_interface_index.v0.2.3.json",
@@ -4117,14 +4147,14 @@
     "state/gitnexus/gitnexus_graph_latest.json": {
       "path": "state/gitnexus/gitnexus_graph_latest.json",
       "suffix": ".json",
-      "bytes": 586754,
-      "sha256": "982cafae4dd707ea36271461225487328e58422c31c3a69c5a3f108cc6ccac01"
+      "bytes": 593671,
+      "sha256": "f3495ed5a7b8222c04701ab6121676ce9acf0829a2d40b2b14c32f41a4b6412b"
     },
     "state/gitnexus/gitnexus_manifest.v0.1.0.json": {
       "path": "state/gitnexus/gitnexus_manifest.v0.1.0.json",
       "suffix": ".json",
       "bytes": 544,
-      "sha256": "85088be538ca8b8979d8d24ef2eb84149053238ea356775522977dca010954de"
+      "sha256": "f89dc48614c28750e5f20516b5c276a0c3f6fe285e3775443cb7a9e9572df083"
     },
     "state/goal_lock.v0.1.6.json": {
       "path": "state/goal_lock.v0.1.6.json",
@@ -4142,7 +4172,7 @@
       "path": "state/interconnect_graph.v0.2.2.json",
       "suffix": ".json",
       "bytes": 15674,
-      "sha256": "fa362be60e52e9b89ef8a148d668a59cedb96d6b3667a94f92b82f8b3e621ccb"
+      "sha256": "b335bbed13b337e67214ccad7d225e73279d0bbd2dba4713abb8afa672223c69"
     },
     "state/interface_adapter_contract_index.v0.3.7.json": {
       "path": "state/interface_adapter_contract_index.v0.3.7.json",
@@ -4214,7 +4244,7 @@
       "path": "state/nexus_geometric_memory_runtime_latest.json",
       "suffix": ".json",
       "bytes": 388,
-      "sha256": "0ab849bc5c38646fac16792b42b6e14d746ad5baefc15a07029cfb4487845dfc"
+      "sha256": "9f5270cc301a763c8a6c600d043954a4d868fee5a2c5e79dd872e7b11d40a6ca"
     },
     "state/nexus_lineage_manifest_latest.json": {
       "path": "state/nexus_lineage_manifest_latest.json",
@@ -4238,7 +4268,7 @@
       "path": "state/nexus_nn_router_index.v0.6.4.json",
       "suffix": ".json",
       "bytes": 4291,
-      "sha256": "ad3664bf26d582dac3525effd3ef30ac54e87f36494204a818c89f2ccfa380c4"
+      "sha256": "36846d4bb1a8ce45e7dfa6b07d3aba877824a3264bd946cbb493cf520685f2bd"
     },
     "state/nexus_ps_shell_index.v0.2.4.json": {
       "path": "state/nexus_ps_shell_index.v0.2.4.json",
@@ -4459,8 +4489,8 @@
     "Tesseract Neural Network/memory/conversation_latest.json": {
       "path": "Tesseract Neural Network/memory/conversation_latest.json",
       "suffix": ".json",
-      "bytes": 744,
-      "sha256": "21a16ff93c78a059700a0fd2a01cb1d07e4c35df04ea17674f2d4a30c66626e5"
+      "bytes": 745,
+      "sha256": "427314cffe78e504a151e4f0ffc6edb7d6f5890a72c30b0a6a9de5452d022879"
     },
     "Tesseract Neural Network/portal_entry.json": {
       "path": "Tesseract Neural Network/portal_entry.json",
@@ -4502,7 +4532,7 @@
       "path": "Tesseract Neural Network/state/tnn_state_latest.json",
       "suffix": ".json",
       "bytes": 460,
-      "sha256": "16e810a0e7268b8771a9562712507c1980bff36a5a0bc536d8ff024563d62a42"
+      "sha256": "7e62704fa6ea182a141b659fa68137eeea6b72ecf06b232babf155bf54f208b7"
     },
     "Tesseract Neural Network/tnn_surface.py": {
       "path": "Tesseract Neural Network/tnn_surface.py",
@@ -4771,8 +4801,8 @@
     "tests/test_gitnexus_hud_assets.py": {
       "path": "tests/test_gitnexus_hud_assets.py",
       "suffix": ".py",
-      "bytes": 1895,
-      "sha256": "cd07465eabac689846c6ea1c26f542884e0a01e580b456cfa1708ccf72cd1ea4"
+      "bytes": 2049,
+      "sha256": "5fc319255dbf0822099b7716348f7d6edca34a65d22cde70bd7059daaa0a5003"
     },
     "tests/test_goal_lock_adapter_lane.py": {
       "path": "tests/test_goal_lock_adapter_lane.py",
@@ -4887,6 +4917,12 @@
       "suffix": ".py",
       "bytes": 1571,
       "sha256": "456f61541e1968374d51a06d941894e901b6221aab28809abbcfced34d0be710"
+    },
+    "tests/test_nexus_conversation_output_bridge_v021b.py": {
+      "path": "tests/test_nexus_conversation_output_bridge_v021b.py",
+      "suffix": ".py",
+      "bytes": 1410,
+      "sha256": "50e2b34053df156a7e37a79902b96ffb489b27d81948ae9e6abfeab6bb0b3ab8"
     },
     "tests/test_nexus_lineage_manifest.py": {
       "path": "tests/test_nexus_lineage_manifest.py",
@@ -5309,6 +5345,108 @@
       "kind": "function",
       "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
       "line": 186
+    },
+    {
+      "name": "$",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 11
+    },
+    {
+      "name": "selectedRole",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 15
+    },
+    {
+      "name": "roleLabel",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 21
+    },
+    {
+      "name": "currentHumanPrompt",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 31
+    },
+    {
+      "name": "isOperatorCommand",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 37
+    },
+    {
+      "name": "isSimpleHumanChat",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 46
+    },
+    {
+      "name": "looksLikeAuditCard",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 56
+    },
+    {
+      "name": "looksLikeStaleEngineeringMove",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 65
+    },
+    {
+      "name": "parseAuditCard",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 75
+    },
+    {
+      "name": "naturalGreeting",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 86
+    },
+    {
+      "name": "conversationalizeAudit",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 97
+    },
+    {
+      "name": "patchNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 123
+    },
+    {
+      "name": "patchOutput",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 141
+    },
+    {
+      "name": "suppressMismatchedSelectorEvents",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 145
+    },
+    {
+      "name": "annotatePromptIntent",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 167
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 188
+    },
+    {
+      "name": "observeWhenReady",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "line": 227
     },
     {
       "name": "mk",
@@ -5939,6 +6077,306 @@
       "kind": "function",
       "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
       "line": 406
+    },
+    {
+      "name": "make",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 29
+    },
+    {
+      "name": "text",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 35
+    },
+    {
+      "name": "clamp",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 40
+    },
+    {
+      "name": "hash",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 44
+    },
+    {
+      "name": "safeName",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 54
+    },
+    {
+      "name": "colorFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 58
+    },
+    {
+      "name": "clusterFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 69
+    },
+    {
+      "name": "loadReport",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 81
+    },
+    {
+      "name": "rectOk",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 91
+    },
+    {
+      "name": "findLeftRail",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 95
+    },
+    {
+      "name": "findNeuralActivityRect",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 110
+    },
+    {
+      "name": "findFooterTop",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 129
+    },
+    {
+      "name": "dockGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 139
+    },
+    {
+      "name": "positionDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 152
+    },
+    {
+      "name": "addNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 160
+    },
+    {
+      "name": "buildModel",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 168
+    },
+    {
+      "name": "filteredNodes",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 272
+    },
+    {
+      "name": "relax",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 283
+    },
+    {
+      "name": "graphBounds",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 333
+    },
+    {
+      "name": "fitCanvas",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 345
+    },
+    {
+      "name": "worldToScreen",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 358
+    },
+    {
+      "name": "screenToWorld",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 373
+    },
+    {
+      "name": "visibleNodeSet",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 387
+    },
+    {
+      "name": "draw",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 392
+    },
+    {
+      "name": "nearestNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 486
+    },
+    {
+      "name": "selectNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 508
+    },
+    {
+      "name": "rows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 542
+    },
+    {
+      "name": "attachCanvasInteractions",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 551
+    },
+    {
+      "name": "fillHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 635
+    },
+    {
+      "name": "createBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 672
+    },
+    {
+      "name": "bindHudControls",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 707
+    },
+    {
+      "name": "openBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 754
+    },
+    {
+      "name": "drawMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 774
+    },
+    {
+      "name": "ensureDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 811
+    },
+    {
+      "name": "setMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 849
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 856
+    },
+    {
+      "name": "aScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 121
+    },
+    {
+      "name": "bScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 122
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 195
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 233
+    },
+    {
+      "name": "force",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 295
+    },
+    {
+      "name": "rx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 377
+    },
+    {
+      "name": "ry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 378
+    },
+    {
+      "name": "r",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 452
+    },
+    {
+      "name": "mx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 489
+    },
+    {
+      "name": "my",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 490
+    },
+    {
+      "name": "d",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 498
+    },
+    {
+      "name": "syms",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 537
+    },
+    {
+      "name": "changed",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 645
+    },
+    {
+      "name": "toggle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 716
     },
     {
       "name": "$",
@@ -10441,13 +10879,13 @@
       "line": 12
     },
     {
-      "name": "test_gitnexus_big_nexus_assets_exist",
+      "name": "test_gitnexus_interactive_assets_exist",
       "kind": "function",
       "file": "tests/test_gitnexus_hud_assets.py",
       "line": 20
     },
     {
-      "name": "test_gitnexus_uses_canvas_big_hud",
+      "name": "test_gitnexus_interactive_features_present",
       "kind": "function",
       "file": "tests/test_gitnexus_hud_assets.py",
       "line": 24
@@ -10456,7 +10894,7 @@
       "name": "test_no_iframe_full_hud",
       "kind": "function",
       "file": "tests/test_gitnexus_hud_assets.py",
-      "line": 38
+      "line": 41
     },
     {
       "name": "TestGoalLockAdapterLane",
@@ -11069,6 +11507,42 @@
       "kind": "function",
       "file": "tests/test_nexus_conversation_output_bridge_v021a.py",
       "line": 34
+    },
+    {
+      "name": "TestNexusConversationOutputBridgeV021B",
+      "kind": "class",
+      "file": "tests/test_nexus_conversation_output_bridge_v021b.py",
+      "line": 10
+    },
+    {
+      "name": "test_bridge_is_linked",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021b.py",
+      "line": 11
+    },
+    {
+      "name": "test_bridge_catches_partial_audit_cards",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021b.py",
+      "line": 15
+    },
+    {
+      "name": "test_bridge_recognizes_you_there_as_chat",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021b.py",
+      "line": 20
+    },
+    {
+      "name": "test_bridge_suppresses_stale_engineering_move",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021b.py",
+      "line": 25
+    },
+    {
+      "name": "test_bridge_keeps_operator_split",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021b.py",
+      "line": 31
     },
     {
       "name": "TestNexusLineageManifest",
@@ -14972,6 +15446,7 @@
     "docs/gitnexus/NEXUS_GITNEXUS_BIG_HUD.md": [],
     "docs/gitnexus/NEXUS_GITNEXUS_CORE_PORT.md": [],
     "docs/gitnexus/NEXUS_GITNEXUS_HUD_PLACEMENT.md": [],
+    "docs/gitnexus/NEXUS_GITNEXUS_INTERACTIVE_HUD.md": [],
     "docs/goal/GOAL_LOCK.md": [],
     "docs/injections/rhp_nexus_ai_shell_v0_1_3.md": [],
     "docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md": [],
@@ -15094,6 +15569,7 @@
     "electron/README.md": [],
     "electron/renderer/index.html": [],
     "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js": [],
+    "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js": [],
     "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.css": [],
     "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.js": [],
     "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.css": [],
@@ -15104,6 +15580,8 @@
     "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js": [],
     "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.css": [],
     "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js": [],
+    "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.css": [],
+    "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js": [],
     "electron/renderer/nexus_mode_role_truth_bridge.v0.2.0zw.js": [],
     "electron/renderer/nexus_mode_selection_green.v0.2.0z.css": [],
     "electron/renderer/nexus_mode_selection_green.v0.2.0z.js": [],
@@ -16554,6 +17032,8 @@
     "reports/human_surface/20260707_193103/14_electron_preflight.json": [],
     "reports/human_surface/20260707_193343/14_electron_preflight.json": [],
     "reports/human_surface/20260707_193704/14_electron_preflight.json": [],
+    "reports/human_surface/20260707_194503/14_electron_preflight.json": [],
+    "reports/human_surface/20260707_195156/14_electron_preflight.json": [],
     "reports/nexus_adapter_compile_report_latest.json": [],
     "reports/nexus_bounded_runtime_report_20260703_103439.json": [],
     "reports/nexus_bounded_runtime_report_20260703_103440.json": [],
@@ -16607,7 +17087,6 @@
     "reports/nexus_compile_report_20260703_114546.json": [],
     "reports/nexus_compile_report_20260703_120057.json": [],
     "reports/nexus_compile_report_20260703_120103.json": [],
-    "reports/nexus_compile_report_20260707_233619.json": [],
     "reports/nexus_compile_report_latest.json": [],
     "reports/nexus_domain_intelligence_report_latest.json": [],
     "reports/nexus_drift_reduction_scorecard_latest.json": [],
@@ -16671,7 +17150,7 @@
     "reports/nexus_self_healing_report_20260703_120059.json": [],
     "reports/nexus_self_healing_report_20260703_120101.json": [],
     "reports/nexus_self_healing_report_20260703_120103.json": [],
-    "reports/nexus_self_healing_report_20260707_233615.json": [],
+    "reports/nexus_self_healing_report_20260707_235133.json": [],
     "reports/nexus_self_healing_report_latest.json": [],
     "reports/README.md": [],
     "ROADMAP.md": [],
@@ -17187,6 +17666,11 @@
       "pathlib.Path",
       "unittest"
     ],
+    "tests/test_nexus_conversation_output_bridge_v021b.py": [
+      "pathlib",
+      "pathlib.Path",
+      "unittest"
+    ],
     "tests/test_nexus_lineage_manifest.py": [
       "json",
       "pathlib",
@@ -17406,12 +17890,12 @@
       "\"Tesseract Neural Network/state/tnn_state_latest.json\"",
       "NexusCell/ledger/nexus_cell_continuity.jsonl",
       "docs/feedback/FEEDBACK_LOG.md",
-      "docs/gitnexus/NEXUS_GITNEXUS_BIG_HUD.md",
+      "docs/gitnexus/NEXUS_GITNEXUS_INTERACTIVE_HUD.md",
       "docs/runtime/NEXUS_METRICS_HUD.md",
       "electron/renderer/index.html",
       "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.css",
-      "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.css",
-      "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.css",
+      "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
       "electron/reports/",
       "ledger/nexus_cell/continuity.jsonl",
       "ledger/nexus_gate_ledger.v0.1.0.jsonl",
@@ -17420,7 +17904,6 @@
       "reports/compact_compile_logs/",
       "reports/nexus_bounded_runtime_report_latest.json",
       "reports/nexus_cell/",
-      "reports/nexus_compile_report_20260707_233619.json",
       "reports/nexus_compile_report_latest.json",
       "reports/nexus_domain_intelligence_report_latest.json",
       "reports/nexus_electron_environment_report_latest.json",
@@ -17434,7 +17917,7 @@
       "reports/nexus_nn_router_report_latest.json",
       "reports/nexus_phi4_stale_hits_after_zac.txt",
       "reports/nexus_reflective_loop_report_latest.json",
-      "reports/nexus_self_healing_report_20260707_233615.json",
+      "reports/nexus_self_healing_report_20260707_235133.json",
       "reports/nexus_self_healing_report_latest.json",
       "reports/tui/",
       "state/ai_feedback_context_latest.json",
@@ -17538,9 +18021,9 @@
     "summary": "High codegraph impact pressure. Inspect affected files before durable mutation.",
     "next_action": "inspect_before_commit",
     "risk": "high",
-    "changed_count": 44,
+    "changed_count": 43,
     "affected_count": 0,
     "edge_count": 478,
-    "symbol_count": 1163
+    "symbol_count": 1236
   }
 }
