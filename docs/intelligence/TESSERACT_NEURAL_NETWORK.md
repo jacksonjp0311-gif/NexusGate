@@ -82,3 +82,9 @@ The 	nn-health, 	nn-warm, and 	nn-deep commands are now admitted through the scr
 ## v0.2.0S Model Doctor Seal
 
 TNN now exposes 	nn-doctor, a local Ollama/Mistral diagnostic command. It checks Ollama CLI/API availability, installed/running model state, probes 	nn-mistral:latest, classifies the backend, and writes eports/tnn_model_doctor_latest.json plus .md.
+## v0.2.0T Phi-4-mini Hot Lane Seal
+
+TNN hot-lane chat now targets 	nn-phi4-mini:latest, built from the first available Phi-4-mini Ollama candidate. Mistral remains preserved as the 	nn-deep lane via 	nn-mistral:latest. Phi-3 models are removed only after Phi-4-mini is pulled, the TNN hot model is created, and the smoke test passes.
+## v0.2.0U Phi-4 Hot Lane Resume Seal
+
+Close U resumes the Phi-4-mini hot lane after the Close T validation harness wound. Phi-4-mini was successfully pulled, 	nn-phi4-mini:latest was created, Phi-3 was removed, and the repo now defaults the TNN hot lane to Phi-4-mini while preserving Mistral as 	nn-deep.

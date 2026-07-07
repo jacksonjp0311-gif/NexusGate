@@ -26,7 +26,7 @@ REPO_ROOT = TNN_ROOT.parent
 REPORT_PATH = REPO_ROOT / "reports" / "tnn_warm_latest.json"
 
 OLLAMA_URL = os.environ.get("TNN_OLLAMA_URL", "http://127.0.0.1:11434")
-DEFAULT_MODEL = os.environ.get("TNN_MODEL", "tnn-mistral:latest")
+DEFAULT_MODEL = os.environ.get("TNN_MODEL", "tnn-phi4-mini:latest")
 
 
 def post_generate(model: str, timeout: float) -> Dict[str, Any]:
@@ -149,3 +149,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+

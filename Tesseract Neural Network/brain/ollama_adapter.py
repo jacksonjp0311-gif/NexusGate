@@ -15,7 +15,7 @@ from typing import Any, Dict, Optional
 
 
 OLLAMA_URL = os.environ.get("TNN_OLLAMA_URL", "http://127.0.0.1:11434")
-DEFAULT_MODEL = os.environ.get("TNN_MODEL", "tnn-mistral:latest")
+DEFAULT_MODEL = os.environ.get("TNN_MODEL", "tnn-phi4-mini:latest")
 FALLBACK_MODEL = os.environ.get("TNN_FALLBACK_MODEL", "mistral:latest")
 DEFAULT_TIMEOUT = float(os.environ.get("TNN_TIMEOUT_SECONDS", "8"))
 ALLOW_FALLBACK = os.environ.get("TNN_ALLOW_FALLBACK", "0").strip().lower() in {"1", "true", "yes"}
@@ -99,3 +99,5 @@ def generate(
             data["fallback_reason"] = str(first_error)
             return data
         raise
+
+

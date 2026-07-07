@@ -30,7 +30,7 @@ REPORT_JSON = REPO_ROOT / "reports" / "tnn_model_doctor_latest.json"
 REPORT_MD = REPO_ROOT / "reports" / "tnn_model_doctor_latest.md"
 
 OLLAMA_URL = os.environ.get("TNN_OLLAMA_URL", "http://127.0.0.1:11434")
-DEFAULT_MODEL = os.environ.get("TNN_MODEL", "tnn-mistral:latest")
+DEFAULT_MODEL = os.environ.get("TNN_MODEL", "tnn-phi4-mini:latest")
 
 
 def run_cmd(args: List[str], timeout: float = 8.0) -> Dict[str, Any]:
@@ -208,7 +208,7 @@ def recommended_next(state: str) -> str:
     if state in {"ready_hot", "ready_warm"}:
         return "Run .\\scripts\\nexus.ps1 tnn-chat or wire the TNN health badge into Electron."
     if state == "model_missing":
-        return "Run .\\Tesseract Neural Network\\brain\\build_tnn_mistral.ps1 or verify `ollama list` contains tnn-mistral:latest."
+        return "Run .\\Tesseract Neural Network\\brain\\build_tnn_mistral.ps1 or verify `ollama list` contains tnn-phi4-mini:latest."
     if state == "ollama_unavailable":
         return "Start or restart Ollama, then rerun .\\scripts\\nexus.ps1 tnn-doctor."
     if state in {"cold_or_slow", "slow_partial"}:
@@ -302,3 +302,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+

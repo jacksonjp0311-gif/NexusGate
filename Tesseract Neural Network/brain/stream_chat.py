@@ -29,11 +29,11 @@ from memory_store import write_memory
 
 
 OLLAMA_URL = os.environ.get("TNN_OLLAMA_URL", "http://127.0.0.1:11434")
-MODEL = os.environ.get("TNN_MODEL", "tnn-mistral:latest")
+MODEL = os.environ.get("TNN_MODEL", "tnn-phi4-mini:latest")
 TNN_ROOT = Path(__file__).resolve().parents[1]
 SYSTEM_PROMPT_PATH = TNN_ROOT / "brain" / "system_prompt.md"
 
-ENGINE_VERSION = "tnn.stream_chat.v0.2.0O"
+ENGINE_VERSION = "tnn.stream_chat.v0.2.0U"
 MIN_MEANINGFUL_PARTIAL_CHARS = 36
 
 DEFENSIVE_ALLOWLIST = [
@@ -362,3 +362,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+

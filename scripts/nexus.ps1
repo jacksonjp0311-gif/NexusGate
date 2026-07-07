@@ -225,7 +225,7 @@ switch ($Command) {
         if ($LASTEXITCODE -ne 0) { Write-Warning "TNN warm returned non-zero; scaffold lane remains available." }
     }
     "tnn-deep" {
-        python ".\Tesseract Neural Network\brain\stream_chat.py" --intent "$Tag" --deep
+        python ".\Tesseract Neural Network\brain\stream_chat.py" --intent "$Tag" --model "tnn-mistral:latest" --deep
         if ($LASTEXITCODE -ne 0) { throw "TNN deep chat failed." }
     }
     "ask" { Invoke-NexusNN -Intent $Tag -UseModel:$CallModel }
@@ -256,6 +256,8 @@ switch ($Command) {
     "status" { Show-Status }
     "promote" { Promote }
 }
+
+
 
 
 
