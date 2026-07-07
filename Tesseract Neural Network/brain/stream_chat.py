@@ -1,8 +1,7 @@
 ﻿"""Streaming TNN chat lane for NexusGate.
 
-This bypasses the router envelope for live operator chat and streams tokens as
-Ollama emits them. It preserves the governed TNN system prompt, compact context,
-memory write, and recommendation-only boundary.
+Streams local Mistral tokens for operator chat while enforcing NexusGate's
+safe-development domain. v0.2.0K adds an alignment guard against cyber-offense drift.
 """
 
 from __future__ import annotations
@@ -31,9 +30,37 @@ MODEL = os.environ.get("TNN_MODEL", "tnn-mistral:latest")
 TNN_ROOT = Path(__file__).resolve().parents[1]
 SYSTEM_PROMPT_PATH = TNN_ROOT / "brain" / "system_prompt.md"
 
+RISK_TERMS = [
+    "attack strategy",
+    "entry points",
+    "exploit",
+    "exploitation",
+    "credential",
+    "payload",
+    "persistence",
+    "evasion",
+    "targets within",
+    "vulnerabilities",
+]
+
 
 def read_system_prompt() -> str:
     return SYSTEM_PROMPT_PATH.read_text(encoding="utf-8-sig")
+
+
+def violates_operator_boundary(text: str) -> bool:
+    low = text.lower()
+    return any(term in low for term in RISK_TERMS)
+
+
+def safe_fallback(intent: str) -> str:
+    return (
+        "TNN // OPERATOR ALIGNMENT\n"
+        "next: harden the NexusGate chat lane: add tests, tune prompt, verify stream latency.\n"
+        "then: commit only validated repo/product changes.\n"
+        "focus: UX, memory, reliability, and safe automation.\n"
+        "boundary: no offensive cyber planning."
+    )
 
 
 def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
@@ -48,11 +75,11 @@ def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
         "stream": True,
         "keep_alive": "30m",
         "options": {
-            "temperature": 0.18,
-            "top_p": 0.85,
+            "temperature": 0.12,
+            "top_p": 0.8,
             "num_ctx": 512,
             "num_predict": 48,
-            "repeat_penalty": 1.08,
+            "repeat_penalty": 1.12,
         },
     }
 
@@ -66,6 +93,7 @@ def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
     chunks: List[str] = []
     ok = True
     error = ""
+    boundary_rewrite = False
 
     print("")
     print("TNN CHAT")
@@ -87,6 +115,13 @@ def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
                 piece = item.get("response") or ""
                 if piece:
                     chunks.append(piece)
+
+                joined = "".join(chunks)
+                if violates_operator_boundary(joined):
+                    boundary_rewrite = True
+                    break
+
+                if piece:
                     print(piece, end="", flush=True)
 
                 if item.get("done"):
@@ -103,6 +138,14 @@ def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
         error = f"Ollama stream failure: {exc}"
 
     text = "".join(chunks).strip()
+
+    if boundary_rewrite:
+        ok = True
+        error = "operator boundary rewrite applied"
+        text = safe_fallback(intent)
+        print("")
+        print(text, flush=True)
+
     if not ok or not text:
         if not text:
             text = (
@@ -116,15 +159,16 @@ def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
 
     latency_ms = int((time.perf_counter() - start) * 1000)
     packet = {
-        "ok": ok and bool("".join(chunks).strip()),
-        "engine_version": "tnn.stream_chat.v0.2.0J",
+        "ok": ok and bool(text),
+        "engine_version": "tnn.stream_chat.v0.2.0K",
         "role": "TNN",
         "model": model,
         "intent": intent,
         "response": text,
         "latency_ms": latency_ms,
         "error": error,
-        "boundary": "recommendation-only; no shell execution, mutation, live pulls, scraping, or autonomous authority",
+        "boundary_rewrite": boundary_rewrite,
+        "boundary": "recommendation-only; no offensive cyber guidance; no shell execution, mutation, live pulls, scraping, or autonomous authority",
     }
     write_memory(packet)
 
@@ -133,7 +177,7 @@ def stream_generate(intent: str, model: str, timeout: float) -> Dict[str, Any]:
     print(f"backend: {model}")
     print(f"latency_ms: {latency_ms}")
     if error:
-        print(f"error: {error}")
+        print(f"note: {error}")
     print("mode: stream")
     return packet
 

@@ -48,3 +48,6 @@ TNN turbo chat removes heavy memory/context from the default path. It sends only
 ## v0.2.0J Streaming Chat Seal
 
 	nn-chat now uses Tesseract Neural Network/brain/stream_chat.py for live operator chat. It prints the chat header immediately, streams Ollama tokens as they arrive, writes TNN memory, and avoids waiting for the router envelope before showing the answer.
+## v0.2.0K Operator Alignment Seal
+
+TNN streaming chat is locked to NexusGate repo/product engineering. If local Mistral drifts into offensive cyber language such as targets, attack strategy, entry points, exploitation, or credential access, the stream pivots to a safe operator-alignment response.

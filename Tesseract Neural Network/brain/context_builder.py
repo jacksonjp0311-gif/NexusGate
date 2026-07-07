@@ -60,14 +60,16 @@ def build_context(intent: str) -> str:
     missing = bundle.get("missing_receipts") or []
 
     lines = [
-        "TNN TURBO CHAT",
+        "TNN TURBO OPERATOR CHAT",
         f"intent: {intent}",
+        "domain: NexusGate repo/product engineering, not cyber offense.",
         f"self_contained: {bundle.get('self_contained')}",
         f"neuralforge_required: {bundle.get('neuralforge_required')}",
         f"blocked: {', '.join(blocked) if blocked else 'none'}",
         f"missing_optional: {', '.join(missing) if missing else 'none'}",
         "boundary: recommendation-only; no shell, no mutation, no live pulls.",
-        "answer: max 5 short lines. give next move first.",
+        "forbidden: targets, attack strategy, exploitation, entry points, credential access, evasion, persistence.",
+        "answer: max 5 short lines. give the next safe repo/build move first.",
     ]
 
     memory = recent_memory()

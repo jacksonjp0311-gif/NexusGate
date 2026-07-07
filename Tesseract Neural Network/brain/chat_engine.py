@@ -1,4 +1,4 @@
-﻿"""TNN v0.2.0I Mistral turbo chat engine."""
+﻿"""TNN v0.2.0K Mistral turbo chat engine."""
 
 from __future__ import annotations
 
@@ -16,11 +16,12 @@ if str(BRAIN_DIR) not in sys.path:
 from ollama_adapter import generate, OllamaError, DEFAULT_MODEL, DEFAULT_TIMEOUT
 from context_builder import build_context
 from memory_store import write_memory
+from stream_chat import violates_operator_boundary, safe_fallback
 
 
 TNN_ROOT = Path(__file__).resolve().parents[1]
 SYSTEM_PROMPT_PATH = TNN_ROOT / "brain" / "system_prompt.md"
-CHAT_ENGINE_VERSION = "tnn.chat_engine.v0.2.0I"
+CHAT_ENGINE_VERSION = "tnn.chat_engine.v0.2.0K"
 
 
 def read_system_prompt() -> str:
@@ -39,12 +40,16 @@ def chat(intent: str, model: str | None = None, timeout: float = DEFAULT_TIMEOUT
     start = time.perf_counter()
     system = read_system_prompt()
     prompt = build_context(intent)
+    boundary_rewrite = False
     try:
         result = generate(prompt=prompt, system=system, model=model, timeout=timeout, num_predict=48)
         raw = result.get("response", "")
         response = tighten(raw)
+        if violates_operator_boundary(response):
+            response = safe_fallback(intent)
+            boundary_rewrite = True
         ok = True
-        error = ""
+        error = "operator boundary rewrite applied" if boundary_rewrite else ""
         model_used = result.get("model_requested", model or DEFAULT_MODEL)
         fallback_used = bool(result.get("fallback_used", False))
     except OllamaError as exc:
@@ -71,7 +76,8 @@ def chat(intent: str, model: str | None = None, timeout: float = DEFAULT_TIMEOUT
         "response": response,
         "latency_ms": latency_ms,
         "error": error,
-        "boundary": "recommendation-only; no shell execution, mutation, live pulls, scraping, or autonomous authority",
+        "boundary_rewrite": boundary_rewrite,
+        "boundary": "recommendation-only; no offensive cyber guidance; no shell execution, mutation, live pulls, scraping, or autonomous authority",
     }
     write_memory(packet)
     return packet
