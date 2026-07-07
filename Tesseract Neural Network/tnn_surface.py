@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-TNN_VERSION = "nexus.tesseract_neural_network.v0.2.0N"
+TNN_VERSION = "nexus.tesseract_neural_network.v0.2.0O"
 TNN_MODEL_NAME = "Tesseract Neural Network/mistral-chat-brain"
 
 TNN_ROOT = Path(__file__).resolve().parent
@@ -115,6 +115,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
 
 

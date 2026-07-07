@@ -60,3 +60,6 @@ TNN chat now prints an immediate safe operator scaffold before waiting for local
 ## v0.2.0N Runtime Health Seal
 
 TNN now includes ench_tnn_runtime.py, which runs the fast scaffold chat lane, captures scaffold/TTFT/total latency, classifies the local model state as hot/warm/slow/offline, and writes eports/tnn_runtime_health_latest.json for future Electron health badges.
+## v0.2.0O Partial Stream Hygiene Seal
+
+TNN no longer prints useless partial model fragments such as a single word when the fast model budget is hit. Meaningful partials are labeled as TNN // MISTRAL PARTIAL; otherwise the scaffold remains primary and the health report records model_budget_hit, partial_chars, and stream completion state.

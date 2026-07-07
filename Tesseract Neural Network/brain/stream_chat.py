@@ -1,10 +1,10 @@
 ﻿"""Streaming TNN chat lane for NexusGate.
 
-v0.2.0M â€” Fast Scaffold Lane:
-- prints an immediate safe operator scaffold
-- gives Mistral a short fast budget by default
-- keeps deep Mistral available with --deep
-- preserves Stream Guard v2 boundary logic
+v0.2.0O â€” Partial Stream Hygiene:
+- prints immediate fast scaffold
+- suppresses useless partial fragments such as "Build" on model timeout
+- prints meaningful partial model text only if it reaches a phrase-quality threshold
+- records model_budget_hit, partial_chars, scaffold/TTFT/total metrics
 """
 
 from __future__ import annotations
@@ -33,7 +33,8 @@ MODEL = os.environ.get("TNN_MODEL", "tnn-mistral:latest")
 TNN_ROOT = Path(__file__).resolve().parents[1]
 SYSTEM_PROMPT_PATH = TNN_ROOT / "brain" / "system_prompt.md"
 
-ENGINE_VERSION = "tnn.stream_chat.v0.2.0M"
+ENGINE_VERSION = "tnn.stream_chat.v0.2.0O"
+MIN_MEANINGFUL_PARTIAL_CHARS = 36
 
 DEFENSIVE_ALLOWLIST = [
     "harden against vulnerabilities",
@@ -115,6 +116,33 @@ def fast_scaffold(intent: str) -> str:
     )
 
 
+def model_budget_hit_message(partial_chars: int, started: bool) -> str:
+    if started:
+        return (
+            "TNN // MODEL BUDGET HIT\n"
+            "Mistral started but did not complete a useful phrase inside fast budget.\n"
+            "next: use the scaffold now, or rerun --deep for full Mistral.\n"
+            f"partial_chars: {partial_chars}\n"
+            "boundary: recommendation-only."
+        )
+    return (
+        "TNN // MODEL BUDGET HIT\n"
+        "Mistral did not start streaming inside fast budget.\n"
+        "next: use the scaffold now, or run prewarm then retry.\n"
+        "boundary: recommendation-only."
+    )
+
+
+def meaningful_partial(text: str) -> bool:
+    stripped = " ".join(text.split())
+    if len(stripped) < MIN_MEANINGFUL_PARTIAL_CHARS:
+        return False
+    if any(stripped.endswith(mark) for mark in [".", "!", "?"]):
+        return True
+    words = stripped.split()
+    return len(words) >= 8
+
+
 def should_flush(buffer: str) -> bool:
     if not buffer:
         return False
@@ -168,9 +196,11 @@ def stream_generate(
     chunks: List[str] = []
     buffer = ""
     printed_any = False
+    stream_completed = False
     ok = True
     error = ""
     boundary_rewrite = False
+    model_budget_hit = False
     scaffold_text = ""
 
     print("")
@@ -214,6 +244,7 @@ def stream_generate(
                     buffer, printed_any = safe_flush(buffer, printed_any)
 
                 if item.get("done"):
+                    stream_completed = True
                     break
 
         if buffer and not boundary_rewrite:
@@ -224,14 +255,19 @@ def stream_generate(
     except (TimeoutError, socket.timeout) as exc:
         ok = False
         error = f"Ollama timed out after {timeout}s: {exc}"
+        model_budget_hit = True
     except urllib.error.URLError as exc:
         ok = False
         error = f"Ollama unavailable: {exc}"
+        model_budget_hit = True
     except Exception as exc:
         ok = False
         error = f"Ollama stream failure: {exc}"
+        model_budget_hit = True
 
-    model_text = "".join(chunks).strip()
+    raw_model_text = "".join(chunks).strip()
+    partial_chars = len(raw_model_text)
+    model_text = raw_model_text
 
     if boundary_rewrite:
         ok = True
@@ -240,16 +276,16 @@ def stream_generate(
         if printed_any:
             print("")
         print(model_text, flush=True)
-
-    if not ok or not model_text:
-        if not model_text:
-            model_text = (
-                "TNN // MODEL BUDGET HIT\n"
-                "Mistral did not stream inside the fast budget.\n"
-                "next: use the scaffold now, or rerun with --deep for full Mistral.\n"
-                "safe: NexusGate did not crash.\n"
-                "boundary: recommendation-only."
-            )
+    elif model_budget_hit:
+        if raw_model_text and meaningful_partial(raw_model_text):
+            model_text = "TNN // MISTRAL PARTIAL\n" + raw_model_text
+            print(model_text, flush=True)
+        else:
+            model_text = model_budget_hit_message(partial_chars=partial_chars, started=bool(raw_model_text))
+            print(model_text, flush=True)
+    elif not model_text:
+        model_budget_hit = True
+        model_text = model_budget_hit_message(partial_chars=0, started=False)
         print(model_text, flush=True)
 
     total_latency_ms = int((time.perf_counter() - start) * 1000)
@@ -257,7 +293,7 @@ def stream_generate(
     ttft_ms = None if first_token_at is None else int((first_token_at - start) * 1000)
 
     final_response = model_text
-    if scaffold_text and (not ok or not "".join(chunks).strip()):
+    if scaffold_text and (model_budget_hit or not stream_completed):
         final_response = scaffold_text + "\n\n" + model_text
 
     packet = {
@@ -267,6 +303,11 @@ def stream_generate(
         "model": model,
         "intent": intent,
         "response": final_response,
+        "model_response": model_text,
+        "raw_partial_response": raw_model_text,
+        "partial_chars": partial_chars,
+        "model_budget_hit": model_budget_hit,
+        "stream_completed": stream_completed,
         "scaffold_ms": scaffold_ms,
         "time_to_first_token_ms": ttft_ms,
         "latency_ms": total_latency_ms,
@@ -286,9 +327,11 @@ def stream_generate(
     if ttft_ms is not None:
         print(f"ttft_ms: {ttft_ms}")
     print(f"total_ms: {total_latency_ms}")
+    if model_budget_hit:
+        print("model_budget_hit: true")
     if error:
         print(f"note: {error}")
-    print("mode: fast_scaffold_stream_guard_v3" if not deep else "mode: deep_stream_guard_v3")
+    print("mode: fast_scaffold_stream_guard_v4" if not deep else "mode: deep_stream_guard_v4")
     return packet
 
 

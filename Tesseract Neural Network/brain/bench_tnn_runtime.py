@@ -1,8 +1,4 @@
-﻿"""TNN runtime health + benchmark reporter.
-
-Runs the streaming TNN lane, captures scaffold/model timing metrics, writes a
-stable health report for operators and UI surfaces.
-"""
+﻿"""TNN runtime health + benchmark reporter."""
 
 from __future__ import annotations
 
@@ -33,7 +29,11 @@ TEXT_REPORT_PATH = REPO_ROOT / "reports" / "tnn_runtime_health_latest.md"
 def classify(packet: Dict[str, Any]) -> str:
     if not packet.get("ok"):
         return "offline"
-    scaffold_ms = packet.get("scaffold_ms")
+    if packet.get("model_budget_hit") and packet.get("time_to_first_token_ms") is not None:
+        return "warm_partial"
+    if packet.get("model_budget_hit"):
+        return "scaffold_only"
+
     ttft_ms = packet.get("time_to_first_token_ms")
     total_ms = packet.get("total_latency_ms") or packet.get("latency_ms")
 
@@ -66,10 +66,13 @@ def write_reports(packet: Dict[str, Any], captured: str, intent: str) -> Dict[st
         "scaffold_ms": packet.get("scaffold_ms"),
         "ttft_ms": packet.get("time_to_first_token_ms"),
         "total_ms": packet.get("total_latency_ms") or packet.get("latency_ms"),
+        "model_budget_hit": packet.get("model_budget_hit"),
+        "partial_chars": packet.get("partial_chars"),
+        "stream_completed": packet.get("stream_completed"),
         "boundary_rewrite": packet.get("boundary_rewrite"),
         "deep": packet.get("deep"),
         "error": packet.get("error") or "",
-        "mode": "fast_scaffold_stream_guard_v3",
+        "mode": "fast_scaffold_stream_guard_v4",
         "ui_badge": {
             "label": f"TNN {state.upper()}",
             "state": state,
@@ -93,6 +96,9 @@ def write_reports(packet: Dict[str, Any], captured: str, intent: str) -> Dict[st
         f"- scaffold_ms: {report['scaffold_ms']}",
         f"- ttft_ms: {report['ttft_ms']}",
         f"- total_ms: {report['total_ms']}",
+        f"- model_budget_hit: {report['model_budget_hit']}",
+        f"- partial_chars: {report['partial_chars']}",
+        f"- stream_completed: {report['stream_completed']}",
         f"- boundary_rewrite: {report['boundary_rewrite']}",
         f"- mode: {report['mode']}",
         "",
@@ -145,6 +151,8 @@ def main() -> None:
     print(f"scaffold_ms: {report['scaffold_ms']}")
     print(f"ttft_ms: {report['ttft_ms']}")
     print(f"total_ms: {report['total_ms']}")
+    print(f"model_budget_hit: {report['model_budget_hit']}")
+    print(f"partial_chars: {report['partial_chars']}")
     print(f"report: {REPORT_PATH}")
     print(f"badge: {report['ui_badge']['label']}")
     print("")
