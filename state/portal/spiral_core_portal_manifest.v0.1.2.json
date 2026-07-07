@@ -1,0 +1,46 @@
+{
+    "version":  "v0.1.2-close-h",
+    "name":  "NexusGate Spiral Core Portal",
+    "status":  "visual_close_pending_human_inspection",
+    "close_h_reason":  "convert live portal text to blue/light-blue palette only",
+    "target":  "NEXUS GATE :: SPIRAL CORE PORTAL",
+    "changed_surface":  "scripts/desktop/open_nexus_gate_console.ps1 Show-Menu only",
+    "preserved_routes":  [
+                             "1",
+                             "2",
+                             "3",
+                             "4",
+                             "5",
+                             "6",
+                             "7",
+                             "8",
+                             "9",
+                             "10",
+                             "11",
+                             "12",
+                             "13",
+                             "Q"
+                         ],
+    "selector_color_hierarchy":  {
+                                     "default":  "Cyan",
+                                     "alternate":  "Blue"
+                                 },
+    "disallowed_selector_colors":  [
+                                       "Yellow",
+                                       "Magenta",
+                                       "Green"
+                                   ],
+    "preserved_legacy_markers":  [
+                                     "NEXUS GATE :: DESKTOP ENTRY PORTAL",
+                                     "cyber ice-blue gateway for human + AI intelligence flow",
+                                     "The gate does not give intelligence authority.",
+                                     "The gate gives authority a visible path through intelligence.",
+                                     "[9] GitHub / README / Docs"
+                                 ],
+    "preserved_boundary":  "models recommend; human authorizes durable mutation",
+    "no_authority_change":  true,
+    "no_execution_change":  true,
+    "ascii_only_portal_art":  true,
+    "evidence_previous_commit":  "99fb899",
+    "encoding_lock":  "utf-8-no-bom"
+}
