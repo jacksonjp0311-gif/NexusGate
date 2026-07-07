@@ -60,8 +60,8 @@ NexusCell = execution-governance organ.
 Evidence decides what may compound.
 ```
 ## Human Director Box
-NEXUS GATE is currently at the v0.8.1 UI cleanup line, the v0.8.3F geo preflight cleanup and warning seal line, and the NexusCell v0.1 script-evolution line: compact root README, Desktop Portal, GitHub/docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, and NexusCell receipt/ledger evidence.
-Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, replayable lessons, NexusCell receipts, and durable GitHub compounding under human authority.
+NEXUS GATE is currently at the v0.8.1 UI cleanup line, the v0.8.3F geo preflight cleanup and warning seal line, the NexusCell v0.1 script-evolution line, the Failure Intelligence Distributor v0.1.3 line, and the Reflective Local Loop v0.1.4 line: compact root README, Desktop Portal, GitHub/docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, and NexusCell receipt/ledger evidence.
+Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, and durable GitHub compounding under human authority.
 ## Geometric Memory Router
 NEXUS Geometric Memory Router is the next rehydration layer. It does not train or mutate model weights. It maps every request through four typed axes before repair or compounding:
 ```text
@@ -158,6 +158,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\nexus.ps1 cell-led
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\nexus.ps1 cell-policy
 ```
 Failures compile into compact reports: stage, exit code, log path, traceback heads, failed tests, verifier, and stability lock. Do not dump huge assertion strings into chat.
+Reflective Local Loop records failure -> compact wound -> safe self-heal -> retry -> verifier -> stability lock so future systems can continue without chat context.
 A receipt is evidence, not proof of correctness, not a production security proof, and not permission for autonomous mutation. Clean transient reports, runtime receipts, latest state snapshots, and runtime ledger growth unless intentionally committed as evidence. Before commit, show `git status --short` and `git diff --cached --name-only`.
 ### Dual-Shell Development Rule
 ```text
@@ -193,6 +194,10 @@ python -m nexus_gate.compiler --root . --json
 | Runtime commands | `docs/runtime/` |
 | NexusCell | `docs/nexus_cell/NEXUS_CELL.md` |
 | Script run contract | `docs/runtime/NEXUS_SCRIPT_EVOLUTION_RUN_CONTRACT.md` |
+| Reflective local loop | `docs/runtime/NEXUS_REFLECTIVE_LOCAL_LOOP.md` |
+| Failure intelligence | `docs/runtime/NEXUS_FAILURE_INTELLIGENCE_DISTRIBUTOR.md` |
+| Future system handoff | `docs/runtime/NEXUS_FUTURE_SYSTEM_REHYDRATION_HANDOFF.md` |
+| Stale/process recording | `docs/runtime/NEXUS_STALE_INFORMATION_AND_PROCESS_RECORDING.md` |
 | GitHub repo | `https://github.com/jacksonjp0311-gif/NexusGate` |
 | Geometric memory router | `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md` |
 | Geometry manifest | `state/nexus_geometric_memory_manifest.v0.8.3.json` |

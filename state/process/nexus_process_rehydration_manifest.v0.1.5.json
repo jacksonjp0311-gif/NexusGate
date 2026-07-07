@@ -1,0 +1,42 @@
+{
+  "branch": "main",
+  "claim_boundary": "Repository evidence supports rehydration and coding continuity. It is not autonomous authority, not a proof of correctness, and not a production safety or security claim.",
+  "created_at": "2026-07-07T02:48:44.543538+00:00",
+  "name": "Nexus process rehydration manifest",
+  "parent_commit_before_process_lineage_update": "afe9f00",
+  "process_spine": [
+    "rehydrate from repository",
+    "patch smallest intended surface",
+    "run reflective local loop",
+    "compile compact failure intelligence",
+    "self-heal known deterministic wounds only",
+    "retry",
+    "verify",
+    "clean residue using tracked-safe restore/clean/restore",
+    "expand untracked directories with --untracked-files=all before residue checks",
+    "commit only when authorized",
+    "push only when authorized",
+    "record stability lock"
+  ],
+  "read_first": [
+    "README.md",
+    "docs/README.md",
+    "docs/ENTRYPOINTS.md",
+    "docs/runtime/NEXUS_SCRIPT_EVOLUTION_RUN_CONTRACT.md",
+    "docs/runtime/NEXUS_REFLECTIVE_LOCAL_LOOP.md",
+    "docs/runtime/NEXUS_FAILURE_INTELLIGENCE_DISTRIBUTOR.md",
+    "docs/runtime/NEXUS_FUTURE_SYSTEM_REHYDRATION_HANDOFF.md",
+    "docs/runtime/NEXUS_STALE_INFORMATION_AND_PROCESS_RECORDING.md"
+  ],
+  "required_final_sections": [
+    "WHAT WAS DONE",
+    "REFLECTIVE CHANGE LOG",
+    "VERIFIER",
+    "STABILITY LOCK"
+  ],
+  "stability_lock_requires_clean_status": true,
+  "status": "future_system_handoff",
+  "tracked_report_rule": "Do not Remove-Item tracked reports. Restore reports, git clean untracked reports, then restore reports again.",
+  "untracked_directory_rule": "Use git status --short --untracked-files=all before pre-stage residue gates so intended files do not collapse into directory-only summaries.",
+  "version": "0.1.5"
+}
