@@ -34,3 +34,9 @@ python -m nexus_gate.loops.runner --root . --loop evolution-radar --intent "what
 ## Boundary
 
 These loops are local evidence tools. They do not grant autonomous authority, shell authority, git write authority, network access, secret access, memory promotion, safety proof, security proof, correctness proof, or commit/push permission.
+
+## v0.9.4 Personal Coding Paradise
+
+Adds creative and operational loops for an AI-assisted local coding cockpit: idea-forge, architecture-sketch, patch-plan, test-strategy, debug-lens, refactor-map, ui-polish, performance-scout, docs-weaver, memory-anchor, command-palette, session-brief, commit-story, risk-register, paradise-index, code-garden-map, friction-detector, local-oracle, pair-programming-brief, continuity-seal, paradise-preflight, creative-build-chain, debug-recovery-chain, and safe-ship-chain.
+
+All loops remain local, read-only by default, packet-producing, compiler-visible, and human-authorized for execution through the loop runner.

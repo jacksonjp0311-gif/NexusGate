@@ -171,3 +171,9 @@ python -m nexus_gate.loops.runner --root . --loop release-seal --intent "<releas
 ## AI Loop Toolkit v0.9.3
 
 Before inventing a new patch flow, prefer an existing local loop card. Use `repo-radar` for situational awareness, `scope-hygiene` before staging, `claim-boundary-audit` before public docs, `surface-map` before architecture work, `stale-surface-scan` after version bumps, `next-action-router` when the next move is uncertain, `handoff-pack` before switching sessions, `dependency-preflight` before environment work, `alignment-score` before release, `boundary-scan` before adding commands, `release-brief` before sealing, and `evolution-radar` when planning the next system upgrade.
+
+## Personal Coding Paradise v0.9.4
+
+The AI loop toolkit now includes creative planning, debug recovery, docs weaving, local oracle, command palette, continuity seal, and safe shipping loops.
+
+Required rule: use local loop packets as evidence. Do not turn a loop recommendation into autonomous mutation. The AI is a meta-orchestrator; NexusGate is the local evidence boundary; the human authorizes durable change.

@@ -1,5 +1,10 @@
-## v0.9.2 - AI-Callable Loop Fabric and Wound-Indexed Resume
+## v0.9.4 Personal Coding Paradise Loop Toolkit
 Status: current
+
+Adds creative planning, debug recovery, docs weaving, local oracle, command palette, continuity seal, and safe shipping loops as AI-callable local JSON packet tools.
+
+## v0.9.2 - AI-Callable Loop Fabric and Wound-Indexed Resume
+Status: historical
 
 - Preserve local loops as AI-callable named orchestration surfaces.
 - Emit HUD-ready loop cards with function, operator use, authority boundary, and stages.

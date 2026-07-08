@@ -119,6 +119,9 @@ REQUIRED_PATHS = [
     "nexus_gate/loops/toolkit.py",
     "state/loops/nexus_loop_cards.v0.9.3.json",
     "tests/test_ai_loop_toolkit_v093.py",
+    "docs/runtime/NEXUS_PERSONAL_CODING_PARADISE.md",
+    "state/loops/nexus_loop_cards.v0.9.4.json",
+    "tests/test_personal_coding_paradise_v094.py",
 ]
 
 MINI_README_DIRS = [
@@ -319,12 +322,12 @@ class NexusCompiler:
     def gate_update_chart_current(self) -> None:
         path = self.root / "docs/updates/UPDATE_CHART.md"
         text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
-        required = ["v0.9.3", "AI Loop Toolkit Expansion", "No version step without update chart entry"]
+        required = ["v0.9.4", "Personal Coding Paradise", "No version step without update chart entry"]
         missing = [item for item in required if item not in text]
         if missing:
-            self.add("update_chart_current", "fail", "Update chart missing current v0.9.3 AI loop toolkit state.", {"missing": missing})
+            self.add("update_chart_current", "fail", "Update chart missing current v0.9.4 personal coding paradise state.", {"missing": missing})
             return
-        self.add("update_chart_current", "pass", "Update chart includes current v0.9.3 AI loop toolkit state.", {"required": required})
+        self.add("update_chart_current", "pass", "Update chart includes current v0.9.4 personal coding paradise state.", {"required": required})
 
     def gate_cold_evidence_contracts(self) -> None:
         doc = self.root / "docs/evidence/COLD_EVIDENCE_ENGINE.md"
@@ -662,22 +665,22 @@ class NexusCompiler:
 
     def gate_version_alignment_current_line(self) -> None:
         checks = {
-            "README.md": ["v0.9.3", "AI Loop Toolkit Expansion"],
-            "ROADMAP.md": ["v0.9.3", "Status: current"],
-            "docs/versioning/NEXUS_CHANGELOG.md": ["v0.9.3", "AI Loop Toolkit Expansion"],
-            "pyproject.toml": ["version = \"0.9.3\""],
+            "README.md": ["v0.9.4", "Personal Coding Paradise"],
+            "ROADMAP.md": ["v0.9.4", "Status: current"],
+            "docs/versioning/NEXUS_CHANGELOG.md": ["v0.9.4", "Personal Coding Paradise"],
+            "pyproject.toml": ["version = \"0.9.4\""],
         }
         failures = []
         for rel, tokens in checks.items():
             path = self.root / rel
-            text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
-            missing = [token for token in tokens if token not in text]
+            surface = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
+            missing = [token for token in tokens if token not in surface]
             if missing:
                 failures.append({"path": rel, "missing": missing})
         if failures:
-            self.add("version_alignment_current_line", "fail", "v0.9.3 identity missing from required surfaces.", {"failures": failures})
+            self.add("version_alignment_current_line", "fail", "v0.9.4 identity missing from required surfaces.", {"failures": failures})
             return
-        self.add("version_alignment_current_line", "pass", "v0.9.3 identity is aligned across README, changelog, roadmap, and pyproject.", {"surfaces": sorted(checks)})
+        self.add("version_alignment_current_line", "pass", "v0.9.4 identity is aligned across README, changelog, roadmap, and pyproject.", {"surfaces": sorted(checks)})
 
     def gate_readme_encoding_clean(self) -> None:
         path = self.root / "README.md"
@@ -774,6 +777,30 @@ class NexusCompiler:
             "scope-hygiene",
             "stale-surface-scan",
             "surface-map",
+            "safe-ship-chain",
+            "debug-recovery-chain",
+            "creative-build-chain",
+            "paradise-preflight",
+            "continuity-seal",
+            "pair-programming-brief",
+            "local-oracle",
+            "friction-detector",
+            "code-garden-map",
+            "paradise-index",
+            "risk-register",
+            "commit-story",
+            "session-brief",
+            "command-palette",
+            "memory-anchor",
+            "docs-weaver",
+            "performance-scout",
+            "ui-polish",
+            "refactor-map",
+            "debug-lens",
+            "test-strategy",
+            "patch-plan",
+            "architecture-sketch",
+            "idea-forge",
         }
 
         try:
@@ -934,7 +961,7 @@ class NexusCompiler:
         status = "pass" if not failed else "fail"
         return CompileReport(
             system="NEXUS GATE",
-            version="0.9.3-ai-loop-toolkit-compiler",
+            version="0.9.4-personal-coding-paradise-compiler",
             root=str(self.root),
             status=status,
             generated_at_utc=datetime.now(timezone.utc).isoformat(),

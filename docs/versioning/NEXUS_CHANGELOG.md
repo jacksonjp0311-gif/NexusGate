@@ -1,3 +1,9 @@
+## v0.9.4 - Personal Coding Paradise Loop Toolkit
+
+- Added personal coding paradise loops as AI-callable local toolkit cards.
+- Preserved authority boundary: no autonomous authority, no network, no secrets, no git write.
+- Added compiler-visible tests and loop-card emission for v0.9.4.
+
 # NEXUS GATE Changelog
 
 ## Purpose

@@ -103,6 +103,20 @@
       "description": "Emit read-only AI loop toolkit packet: alignment-score.",
       "mutates": false
     },
+    "toolkit_architecture_sketch": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "architecture-sketch",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: architecture-sketch.",
+      "mutates": false
+    },
     "toolkit_boundary_scan": {
       "argv": [
         "python",
@@ -131,6 +145,90 @@
       "description": "Emit read-only AI loop toolkit packet: claim-boundary-audit.",
       "mutates": false
     },
+    "toolkit_claim_boundary_audit": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "claim-boundary-audit",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: claim-boundary-audit.",
+      "mutates": false
+    },
+    "toolkit_code_garden_map": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "code-garden-map",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: code-garden-map.",
+      "mutates": false
+    },
+    "toolkit_command_palette": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "command-palette",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: command-palette.",
+      "mutates": false
+    },
+    "toolkit_commit_story": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "commit-story",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: commit-story.",
+      "mutates": false
+    },
+    "toolkit_continuity_seal": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "continuity-seal",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: continuity-seal.",
+      "mutates": false
+    },
+    "toolkit_debug_lens": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "debug-lens",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: debug-lens.",
+      "mutates": false
+    },
     "toolkit_dependency_preflight": {
       "argv": [
         "python",
@@ -143,6 +241,20 @@
         "--json"
       ],
       "description": "Emit read-only AI loop toolkit packet: dependency-preflight.",
+      "mutates": false
+    },
+    "toolkit_docs_weaver": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "docs-weaver",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: docs-weaver.",
       "mutates": false
     },
     "toolkit_evolution_radar": {
@@ -159,6 +271,20 @@
       "description": "Emit read-only AI loop toolkit packet: evolution-radar.",
       "mutates": false
     },
+    "toolkit_friction_detector": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "friction-detector",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: friction-detector.",
+      "mutates": false
+    },
     "toolkit_handoff_pack": {
       "argv": [
         "python",
@@ -173,6 +299,48 @@
       "description": "Emit read-only AI loop toolkit packet: handoff-pack.",
       "mutates": false
     },
+    "toolkit_idea_forge": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "idea-forge",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: idea-forge.",
+      "mutates": false
+    },
+    "toolkit_local_oracle": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "local-oracle",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: local-oracle.",
+      "mutates": false
+    },
+    "toolkit_memory_anchor": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "memory-anchor",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: memory-anchor.",
+      "mutates": false
+    },
     "toolkit_next_action": {
       "argv": [
         "python",
@@ -185,6 +353,90 @@
         "--json"
       ],
       "description": "Emit read-only AI loop toolkit packet: next-action-router.",
+      "mutates": false
+    },
+    "toolkit_next_action_router": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "next-action-router",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: next-action-router.",
+      "mutates": false
+    },
+    "toolkit_pair_programming_brief": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "pair-programming-brief",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: pair-programming-brief.",
+      "mutates": false
+    },
+    "toolkit_paradise_index": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "paradise-index",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: paradise-index.",
+      "mutates": false
+    },
+    "toolkit_patch_plan": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "patch-plan",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: patch-plan.",
+      "mutates": false
+    },
+    "toolkit_performance_scout": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "performance-scout",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: performance-scout.",
+      "mutates": false
+    },
+    "toolkit_refactor_map": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "refactor-map",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: refactor-map.",
       "mutates": false
     },
     "toolkit_release_brief": {
@@ -215,6 +467,20 @@
       "description": "Emit read-only AI loop toolkit packet: repo-radar.",
       "mutates": false
     },
+    "toolkit_risk_register": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "risk-register",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: risk-register.",
+      "mutates": false
+    },
     "toolkit_scope_hygiene": {
       "argv": [
         "python",
@@ -229,7 +495,35 @@
       "description": "Emit read-only AI loop toolkit packet: scope-hygiene.",
       "mutates": false
     },
+    "toolkit_session_brief": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "session-brief",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: session-brief.",
+      "mutates": false
+    },
     "toolkit_stale_scan": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "stale-surface-scan",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: stale-surface-scan.",
+      "mutates": false
+    },
+    "toolkit_stale_surface_scan": {
       "argv": [
         "python",
         "-m",
@@ -255,6 +549,34 @@
         "--json"
       ],
       "description": "Emit read-only AI loop toolkit packet: surface-map.",
+      "mutates": false
+    },
+    "toolkit_test_strategy": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "test-strategy",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: test-strategy.",
+      "mutates": false
+    },
+    "toolkit_ui_polish": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "ui-polish",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: ui-polish.",
       "mutates": false
     },
     "unit_tests": {
@@ -292,8 +614,8 @@
     "secrets_enabled": false,
     "self_authorization_enabled": false
   },
-  "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, tool packets, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
-  "generated_for": "NEXUS_GATE_v0.9.3",
+  "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, creative planning, tool packets, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
+  "generated_for": "NEXUS_GATE_v0.9.4",
   "loops": {
     "ai-orchestrator-preflight": {
       "ai_callable": true,
@@ -358,6 +680,32 @@
       ],
       "stop_on_failure": true,
       "title": "Alignment Score"
+    },
+    "architecture-sketch": {
+      "ai_callable": true,
+      "description": "Sketch the local architecture surfaces touched by a proposed feature.",
+      "display_group": "Design",
+      "function": "Sketch the local architecture surfaces touched by a proposed feature.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before patching a new organ or loop family.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_architecture_sketch",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_architecture_sketch_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Architecture Sketch"
     },
     "boundary-scan": {
       "ai_callable": true,
@@ -440,6 +788,84 @@
       "stop_on_failure": true,
       "title": "Claim Boundary Audit"
     },
+    "code-garden-map": {
+      "ai_callable": true,
+      "description": "Map code/docs/tests/electron surfaces as a garden of organs.",
+      "display_group": "Design",
+      "function": "Map code/docs/tests/electron surfaces as a garden of organs.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use for orientation before large changes.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_code_garden_map",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_code_garden_map_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Code Garden Map"
+    },
+    "command-palette": {
+      "ai_callable": true,
+      "description": "Emit all local loop command surfaces as a command palette.",
+      "display_group": "Operator Tools",
+      "function": "Emit all local loop command surfaces as a command palette.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when choosing what the AI should call next.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_command_palette",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_command_palette_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Command Palette"
+    },
+    "commit-story": {
+      "ai_callable": true,
+      "description": "Draft the human release story from intended changes and loop evidence.",
+      "display_group": "Release",
+      "function": "Draft the human release story from intended changes and loop evidence.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before commit messages or release summaries.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_commit_story",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_commit_story_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Commit Story"
+    },
     "compiler-wound-focus": {
       "ai_callable": true,
       "description": "Run compiler and focus exact failed gates.",
@@ -463,6 +889,126 @@
       ],
       "stop_on_failure": false,
       "title": "Compiler Wound Focus"
+    },
+    "continuity-seal": {
+      "ai_callable": true,
+      "description": "Verify that docs, loop cards, registry, resume packet, and compiler evidence are visible.",
+      "display_group": "Continuity",
+      "function": "Verify that docs, loop cards, registry, resume packet, and compiler evidence are visible.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before ending a session.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_continuity_seal",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_continuity_seal_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Continuity Seal"
+    },
+    "creative-build-chain": {
+      "ai_callable": true,
+      "description": "Generate an idea, sketch architecture, plan a patch, and choose tests before code changes.",
+      "display_group": "Coding Paradise",
+      "function": "Turns creative intent into a bounded, testable build plan.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when designing a new feature or tool loop.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "loop": "idea-forge",
+          "name": "idea_forge",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "architecture-sketch",
+          "name": "architecture_sketch",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "patch-plan",
+          "name": "patch_plan",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "test-strategy",
+          "name": "test_strategy",
+          "type": "loop_ref"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Creative Build Chain"
+    },
+    "debug-lens": {
+      "ai_callable": true,
+      "description": "Summarize latest failure evidence into a single active wound lens.",
+      "display_group": "Debug",
+      "function": "Summarize latest failure evidence into a single active wound lens.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use after a failed gate.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_debug_lens",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_debug_lens_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Debug Lens"
+    },
+    "debug-recovery-chain": {
+      "ai_callable": true,
+      "description": "Convert a failed gate into a focused debug lens, test strategy, and compiler wound focus.",
+      "display_group": "Coding Paradise",
+      "function": "Resumes from wounds without rerunning green gates.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use immediately after a failed gate or compiler failure.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "loop": "wound-indexed-resume",
+          "name": "wound_indexed_resume",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "debug-lens",
+          "name": "debug_lens",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "test-strategy",
+          "name": "test_strategy",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "compiler-wound-focus",
+          "name": "compiler_wound_focus",
+          "type": "loop_ref"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Debug Recovery Chain"
     },
     "dependency-preflight": {
       "ai_callable": true,
@@ -532,6 +1078,32 @@
       "stop_on_failure": false,
       "title": "Docs Doctrine Preflight"
     },
+    "docs-weaver": {
+      "ai_callable": true,
+      "description": "Find docs that should be updated together to preserve orientation.",
+      "display_group": "Documentation",
+      "function": "Find docs that should be updated together to preserve orientation.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when changing any public-facing surface.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_docs_weaver",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_docs_weaver_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Docs Weaver"
+    },
     "evolution-radar": {
       "ai_callable": true,
       "description": "Generate creative but bounded next-evolution candidates for NexusGate.",
@@ -600,6 +1172,32 @@
       "stop_on_failure": false,
       "title": "Failure Intelligence"
     },
+    "friction-detector": {
+      "ai_callable": true,
+      "description": "Detect workflow friction such as dirty tree, stale versions, backups, and failed compiler gates.",
+      "display_group": "Debug",
+      "function": "Detect workflow friction such as dirty tree, stale versions, backups, and failed compiler gates.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when progress feels stuck.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_friction_detector",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_friction_detector_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Friction Detector"
+    },
     "handoff-pack": {
       "ai_callable": true,
       "description": "Build a compact ChatGPT/Codex handoff packet from local evidence.",
@@ -652,6 +1250,32 @@
       "stop_on_failure": true,
       "title": "Hud Loop Sync"
     },
+    "idea-forge": {
+      "ai_callable": true,
+      "description": "Generate bounded next-build ideas from repo state, loop cards, and current intent.",
+      "display_group": "Creative",
+      "function": "Generate bounded next-build ideas from repo state, loop cards, and current intent.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when the system is clean enough to evolve.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_idea_forge",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_idea_forge_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Idea Forge"
+    },
     "impact-map": {
       "ai_callable": true,
       "description": "Build read-only GITNEXUS impact evidence.",
@@ -675,6 +1299,58 @@
       ],
       "stop_on_failure": true,
       "title": "Impact Map"
+    },
+    "local-oracle": {
+      "ai_callable": true,
+      "description": "Recommend the next three loops from current local evidence.",
+      "display_group": "Orchestration",
+      "function": "Recommend the next three loops from current local evidence.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when asking what should happen next.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_local_oracle",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_local_oracle_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Local Oracle"
+    },
+    "memory-anchor": {
+      "ai_callable": true,
+      "description": "Build a compact continuity anchor with HEAD, latest commits, current loops, and doctrine.",
+      "display_group": "Continuity",
+      "function": "Build a compact continuity anchor with HEAD, latest commits, current loops, and doctrine.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before handoff or session restart.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_memory_anchor",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_memory_anchor_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Memory Anchor"
     },
     "next-action-router": {
       "ai_callable": true,
@@ -701,6 +1377,170 @@
       ],
       "stop_on_failure": true,
       "title": "Next Action Router"
+    },
+    "pair-programming-brief": {
+      "ai_callable": true,
+      "description": "Emit a brief that tells ChatGPT exactly how to help next.",
+      "display_group": "Continuity",
+      "function": "Emit a brief that tells ChatGPT exactly how to help next.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before asking the AI for a closer or analysis.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_pair_programming_brief",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_pair_programming_brief_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Pair Programming Brief"
+    },
+    "paradise-index": {
+      "ai_callable": true,
+      "description": "Index all paradise loops as a personal coding cockpit.",
+      "display_group": "Coding Paradise",
+      "function": "Index all paradise loops as a personal coding cockpit.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when navigating the toolkit.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_paradise_index",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_paradise_index_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Paradise Index"
+    },
+    "paradise-preflight": {
+      "ai_callable": true,
+      "description": "Prime the local coding paradise with repo radar, dependency preflight, boundary scan, and command palette evidence.",
+      "display_group": "Coding Paradise",
+      "function": "Combines awareness, environment, authority boundary, and available loop commands before a build session.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use at the beginning of a serious coding session.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "loop": "repo-radar",
+          "name": "repo_radar",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "dependency-preflight",
+          "name": "dependency_preflight",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "boundary-scan",
+          "name": "boundary_scan",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "command-palette",
+          "name": "command_palette",
+          "type": "loop_ref"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Paradise Preflight"
+    },
+    "patch-plan": {
+      "ai_callable": true,
+      "description": "Convert intent into a minimal intended-file patch plan with gates.",
+      "display_group": "Build Planning",
+      "function": "Convert intent into a minimal intended-file patch plan with gates.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before generating a closer script.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_patch_plan",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_patch_plan_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Patch Plan"
+    },
+    "performance-scout": {
+      "ai_callable": true,
+      "description": "Find lightweight performance and size signals without profiling side effects.",
+      "display_group": "Performance",
+      "function": "Find lightweight performance and size signals without profiling side effects.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before optimizing or when tests feel slow.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_performance_scout",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_performance_scout_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Performance Scout"
+    },
+    "refactor-map": {
+      "ai_callable": true,
+      "description": "Map refactor candidates without changing files.",
+      "display_group": "Design",
+      "function": "Map refactor candidates without changing files.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when code shape is getting dense.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_refactor_map",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_refactor_map_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Refactor Map"
     },
     "reflective-validation": {
       "ai_callable": true,
@@ -896,6 +1736,71 @@
       "stop_on_failure": false,
       "title": "Rhp Core"
     },
+    "risk-register": {
+      "ai_callable": true,
+      "description": "List repo-local risks, dirty surfaces, boundary risks, and stale surfaces.",
+      "display_group": "Safety",
+      "function": "List repo-local risks, dirty surfaces, boundary risks, and stale surfaces.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before staging or release-seal.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_risk_register",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_risk_register_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Risk Register"
+    },
+    "safe-ship-chain": {
+      "ai_callable": true,
+      "description": "Run scope hygiene, claim/boundary audits, release brief, and commit story before human-authorized seal.",
+      "display_group": "Coding Paradise",
+      "function": "Prepares a clean release narrative without granting commit or push authority.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before release-seal and human-authorized commit/push.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "loop": "scope-hygiene",
+          "name": "scope_hygiene",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "claim-boundary-audit",
+          "name": "claim_boundary_audit",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "boundary-scan",
+          "name": "boundary_scan",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "release-brief",
+          "name": "release_brief",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "commit-story",
+          "name": "commit_story",
+          "type": "loop_ref"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Safe Ship Chain"
+    },
     "scope-hygiene": {
       "ai_callable": true,
       "description": "Classify local changes into intended source/docs/tests versus residue/backups/runtime churn.",
@@ -956,6 +1861,32 @@
       "stop_on_failure": true,
       "title": "Script Evolution"
     },
+    "session-brief": {
+      "ai_callable": true,
+      "description": "Create a compact session brief for ChatGPT/Codex continuation.",
+      "display_group": "Continuity",
+      "function": "Create a compact session brief for ChatGPT/Codex continuation.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use at the end or start of a work block.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_session_brief",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_session_brief_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Session Brief"
+    },
     "stale-surface-scan": {
       "ai_callable": true,
       "description": "Find likely stale version/current-line references without treating lineage references as failures.",
@@ -1007,6 +1938,58 @@
       ],
       "stop_on_failure": true,
       "title": "Surface Map"
+    },
+    "test-strategy": {
+      "ai_callable": true,
+      "description": "Select targeted tests, bounded suite policy, and compiler gates for a change.",
+      "display_group": "Validation",
+      "function": "Select targeted tests, bounded suite policy, and compiler gates for a change.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before or after patching.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_test_strategy",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_test_strategy_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Test Strategy"
+    },
+    "ui-polish": {
+      "ai_callable": true,
+      "description": "Inspect HUD/operator surfaces and suggest visual/usability polishing moves.",
+      "display_group": "HUD",
+      "function": "Inspect HUD/operator surfaces and suggest visual/usability polishing moves.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before UI/HUD work.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_ui_polish",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_ui_polish_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Ui Polish"
     },
     "validate-promote": {
       "ai_callable": true,
@@ -1067,7 +2050,7 @@
       "title": "Wound Indexed Resume"
     }
   },
-  "registry_scope": "ai_callable_local_loop_toolkit_expansion",
+  "registry_scope": "personal_coding_paradise_ai_loop_toolkit",
   "system": "NEXUS_META_LOOP_REGISTRY",
-  "version": "0.3.0"
+  "version": "0.4.0"
 }

@@ -105,3 +105,4 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.9.2 AI Loop Fabric | AI-callable local loop fabric; wound-indexed resume; bounded validation; HUD loop sync | No version step without update chart entry |
 
 | v0.9.3 | AI Loop Toolkit Expansion | Added creative AI-callable local loops and HUD-ready cards | No version step without update chart entry |
+| v0.9.4 | Personal Coding Paradise Loop Toolkit | AI-callable local coding loops, cards, docs, tests, compiler visibility | No version step without update chart entry |
