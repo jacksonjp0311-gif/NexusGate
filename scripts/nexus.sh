@@ -15,6 +15,19 @@ cd "$ROOT"
 COMMAND="${1:-rehydrate}"
 
 case "$COMMAND" in
+  loops)
+    python -m nexus_gate.loops.runner --root . --list
+    ;;
+  loop-registry)
+    cat loops/nexus_loop_registry.v0.1.json
+    ;;
+  meta-loop)
+    shift || true
+    LOOP_NAME="${1:-rhp-core}"
+    shift || true
+    INTENT="${*:-Nexus meta loop trigger.}"
+    python -m nexus_gate.loops.runner --root . --loop "$LOOP_NAME" --intent "$INTENT"
+    ;;
   geo-clean)
     python -m nexus_gate.geometric_memory.cleanup --root . --json
     ;;

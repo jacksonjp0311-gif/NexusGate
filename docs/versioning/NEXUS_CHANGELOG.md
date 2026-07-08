@@ -183,3 +183,11 @@ Adds compiler gate nexus_cell_full_core_runtime_visibility.
 Adds controlled internal lanes: status, compile, tests, cell-plan, cell-context, cell-bridge.
 Keeps no-arbitrary-shell/no-network/no-secrets/no-git-mutation/no-self-authorization boundary.
 ```
+
+## v0.9.0 - Meta Loop Registry
+
+- Added root `loops/` folder as the human-visible named loop registry surface.
+- Added `nexus_gate.loops.runner` for local loop trigger packets.
+- Added canonical loops: `rhp-core`, `script-evolution`, `reflective-validation`, `failure-intelligence`, and `validate-promote`.
+- Added PowerShell and Bash trigger surfaces.
+- Boundary: meta-loops are local orchestration receipts, not autonomous authority, arbitrary shell execution, memory promotion, commit authority, push authority, or proof of correctness/security/safety.

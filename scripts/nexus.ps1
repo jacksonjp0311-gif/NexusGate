@@ -1,4 +1,4 @@
-﻿# NEXUS GATE compact PowerShell command surface
+# NEXUS GATE compact PowerShell command surface
 # Legacy direct compiler markers retained for audit/tests:
 # nexus_gate.adapters.compile
 # nexus_gate.receptors.compile
@@ -12,13 +12,16 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "loops", "loop-registry")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
     [string]$Tag = "",
     [switch]$NoCommit,
-    [switch]$CallModel
+    [switch]$CallModel,
+    [string]$Loop = "rhp-core",
+    [switch]$Execute,
+    [switch]$HumanAuthorized
 )
 
 $ErrorActionPreference = "Stop"
@@ -105,6 +108,39 @@ function Invoke-NexusGeoClean {
     if ($LASTEXITCODE -ne 0) { throw "NEXUS geometric cleanup failed." }
 }
 
+
+function Invoke-NexusMetaLoop {
+    param(
+        [string]$LoopName = "rhp-core",
+        [string]$Intent = "Nexus meta loop trigger.",
+        [switch]$Run,
+        [switch]$Authorized
+    )
+    if ([string]::IsNullOrWhiteSpace($LoopName)) {
+        $LoopName = "rhp-core"
+    }
+    if ([string]::IsNullOrWhiteSpace($Intent)) {
+        $Intent = "Nexus meta loop trigger."
+    }
+    $args = @("-m", "nexus_gate.loops.runner", "--root", ".", "--loop", $LoopName, "--intent", $Intent)
+    if ($Run.IsPresent) {
+        $args += "--execute"
+    }
+    if ($Authorized.IsPresent) {
+        $args += "--human-authorized"
+    }
+    python @args
+    if ($LASTEXITCODE -ne 0) { throw "NEXUS meta loop failed." }
+}
+
+function Show-NexusLoopRegistry {
+    if (Test-Path .\loops\nexus_loop_registry.v0.1.json) {
+        python -m nexus_gate.loops.runner --root . --list
+    }
+    if (-not (Test-Path .\loops\nexus_loop_registry.v0.1.json)) {
+        throw "Loop registry missing."
+    }
+}
 function Invoke-NexusNN {
     param(
         [string]$Intent = "What should we do next?",
@@ -190,6 +226,9 @@ function Invoke-NexusCellPolicyCli {
 }
 
 switch ($Command) {
+    "loop-registry" { Show-NexusLoopRegistry }
+    "loops" { python -m nexus_gate.loops.runner --root . --list; if ($LASTEXITCODE -ne 0) { throw "NEXUS loop list failed." } }
+    "meta-loop" { Invoke-NexusMetaLoop -LoopName $Loop -Intent $Tag -Run:$Execute -Authorized:$HumanAuthorized }
     "cell-policy" { Invoke-NexusCellPolicyCli }
     "cell-ledger" { Invoke-NexusCellLedgerCli }
     "cell-doctor" { Invoke-NexusCellDoctorCli }

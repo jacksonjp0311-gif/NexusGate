@@ -120,7 +120,24 @@ bash scripts/nexus.sh geo-clean
 
 Use cleanup after smoke tests, full-suite runs, or failed scripts that leave generated report residue.
 
+## Nexus Meta Loop Registry
 
+```powershell
+python -m nexus_gate.loops.runner --root . --list
+python -m nexus_gate.loops.runner --root . --loop rhp-core --intent "inspect repo"
+python -m nexus_gate.loops.runner --root . --loop validate-promote --intent "verify patch" --execute --human-authorized
+
+.\scripts\nexus.ps1 loops
+.\scripts\nexus.ps1 meta-loop -Loop rhp-core -Tag "inspect repo"
+.\scripts\nexus.ps1 meta-loop -Loop validate-promote -Tag "verify patch" -Execute -HumanAuthorized
+```
+
+```bash
+bash scripts/nexus.sh loops
+bash scripts/nexus.sh meta-loop rhp-core "inspect repo"
+```
+
+Boundary: meta-loops execute only named allowlisted local stages. They do not grant autonomous authority, arbitrary shell execution, network, secrets, memory promotion, commit, or push.
 
 ## NexusCell Execution Containment
 

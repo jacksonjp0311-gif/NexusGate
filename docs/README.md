@@ -23,6 +23,7 @@ Local Role:
 | Core algorithms | `algorithms/NEXUS_CORE_ALGORITHMS.md` |
 | Failure Doctor | `failure_modes/NEXUS_FAILURE_MODE_DOCTOR.md` |
 | Runtime commands | `runtime/` |
+| Meta Loop Registry | `runtime/NEXUS_META_LOOP_REGISTRY.md` and `../loops/README.md` |
 | UI / Electron / Portal | `ui/` |
 | Version history | `versioning/NEXUS_CHANGELOG.md` |
 | Extended README archive | `readme/NEXUS_README_EXTENDED_REFERENCE.md` |

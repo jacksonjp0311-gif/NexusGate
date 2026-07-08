@@ -1,4 +1,4 @@
-﻿# NEXUS Core Algorithms
+# NEXUS Core Algorithms
 
 ## Rehydration Algorithm
 
@@ -74,3 +74,10 @@ runtime smoke/test -> generated report residue -> geo-clean -> skip tracked file
 
 Cleanup is a preflight surface, not a repair surface. It removes generated residue only.
 
+## Meta Loop Registry Algorithm
+
+```text
+human intent -> named loop trigger -> registry resolution -> stage execution/planning -> receipt packet -> verifier/stability lock -> human-authorized compounding only
+```
+
+The loop body is repository-owned. Generated scripts should pass intent and loop name, not regenerate the full local operating procedure.

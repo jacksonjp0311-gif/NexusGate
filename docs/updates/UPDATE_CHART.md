@@ -85,3 +85,11 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.3.6 | Electron HUD Runtime | stable | Installs the local Electron runtime, adds a governed HUD desktop shell smoke path, commits the lockfile, and keeps the visible title to NEXUS GATE. |
 | v0.3.7 | Reflective Intelligence Gateway | stable | Formalizes the reflective intelligence loop, interface adapter contract, lineage manifest, reflect lane, TUI /reflect and /lineage views, and compiler-gated reflective report. |
 | v0.4.0 | Domain Intelligence Orchestrator | current | Adds repo-native domain learning doctrine, domain card schemas, Codex orchestration protocol, domain compiler lane, TUI /domain and /study views, and claim-discipline gates. |
+
+## v0.9.0 - Meta Loop Registry
+
+- Added root `loops/` folder as the human-visible named loop registry surface.
+- Added `nexus_gate.loops.runner` for local loop trigger packets.
+- Added canonical loops: `rhp-core`, `script-evolution`, `reflective-validation`, `failure-intelligence`, and `validate-promote`.
+- Added PowerShell and Bash trigger surfaces.
+- Boundary: meta-loops are local orchestration receipts, not autonomous authority, arbitrary shell execution, memory promotion, commit authority, push authority, or proof of correctness/security/safety.
