@@ -8,75 +8,51 @@ ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "electron" / "renderer" / "index.html"
 
 
-EXPECTED_GITNEXUS_ASSETS = [
-    "nexus_gitnexus_standalone_hud.v0.4.1.css",
-    "nexus_gitnexus_standalone_hud.v0.4.1.js",
-]
-
-FORBIDDEN_GITNEXUS_TOKENS = [
-    "nexus_gitnexus_core_hud",
-    "nexus_gitnexus_geometric_mini",
-    "nexus_gitnexus_exact_mini_mirror",
-    "nexus_gitnexus_scope_hygiene",
-    "nexus_gitnexus_scope_switch",
-    "nexus_gitnexus_standalone_hud.v0.4.0",
-]
-
-ACTIVE_BRIDGE = "nexus_conversation_output_bridge.v0.2.1f.js"
-INACTIVE_BRIDGES = [
-    "nexus_conversation_output_bridge.v0.2.1a.js",
-    "nexus_conversation_output_bridge.v0.2.1b.js",
-    "nexus_conversation_output_bridge.v0.2.1c.js",
-    "nexus_conversation_output_bridge.v0.2.1d.js",
-    "nexus_conversation_output_bridge.v0.2.1e.js",
-]
-
-
 class TestGitNexusHudAssets(unittest.TestCase):
-    def test_expected_runtime_safe_standalone_assets_are_present_once(self):
+    def test_upstream_bridge_assets_are_active_once(self):
         html = INDEX.read_text(encoding="utf-8", errors="ignore")
-        for asset in EXPECTED_GITNEXUS_ASSETS:
-            self.assertEqual(html.count(asset), 1, asset)
+        self.assertEqual(html.count("nexus_gitnexus_upstream_bridge.v0.5.0.css"), 1)
+        self.assertEqual(html.count("nexus_gitnexus_upstream_bridge.v0.5.0.js"), 1)
 
-    def test_old_gitnexus_owner_assets_are_not_active(self):
+    def test_old_custom_gitnexus_owners_are_not_active(self):
         html = INDEX.read_text(encoding="utf-8", errors="ignore")
-        for token in FORBIDDEN_GITNEXUS_TOKENS:
+        forbidden = [
+            "nexus_gitnexus_core_hud",
+            "nexus_gitnexus_geometric_mini",
+            "nexus_gitnexus_exact_mini_mirror",
+            "nexus_gitnexus_scope_hygiene",
+            "nexus_gitnexus_scope_switch",
+            "nexus_gitnexus_standalone_hud",
+        ]
+        for token in forbidden:
             self.assertNotIn(token, html)
 
     def test_active_bridge_is_v021f_only(self):
         html = INDEX.read_text(encoding="utf-8", errors="ignore")
-        self.assertEqual(html.count(ACTIVE_BRIDGE), 1)
-        for bridge in INACTIVE_BRIDGES:
-            self.assertNotIn(bridge, html)
+        self.assertEqual(html.count("nexus_conversation_output_bridge.v0.2.1f.js"), 1)
+        for suffix in ["a", "b", "c", "d", "e"]:
+            self.assertNotIn(f"nexus_conversation_output_bridge.v0.2.1{suffix}.js", html)
 
-    def test_runtime_safe_behavior_exists(self):
-        js = (ROOT / "electron" / "renderer" / "nexus_gitnexus_standalone_hud.v0.4.1.js").read_text(
+    def test_upstream_bridge_is_iframe_not_fake_full_graph_engine(self):
+        js = (ROOT / "electron" / "renderer" / "nexus_gitnexus_upstream_bridge.v0.5.0.js").read_text(
             encoding="utf-8", errors="ignore"
         )
         for token in [
-            "gitnexus-core-left-dock",
-            "gitnexus-standalone-hud",
-            "gnx-mini-canvas-v041",
-            "gnx-full-canvas-v041",
-            "state.fullVisible",
-            "cancelAnimationFrame(state.fullRaf)",
-            "bindRuntimeSafeHotkeys",
-            "if (!open) return;",
-            "gitnexusOpenHud",
+            "https://gitnexus.vercel.app",
+            "http://localhost:4747",
+            "gitnexus-upstream-hud",
+            "iframe",
+            "nexusOpenGitNexus",
         ]:
             self.assertIn(token, js)
 
-    def test_runtime_safe_css_exists(self):
-        css = (ROOT / "electron" / "renderer" / "nexus_gitnexus_standalone_hud.v0.4.1.css").read_text(
-            encoding="utf-8", errors="ignore"
-        )
-        for token in [
-            "gnx-mini-dock",
-            "gnx-mini-v041",
-            "gnx-hud-v041",
-            "gnx-full-canvas-v041",
-        ]:
-            self.assertIn(token, css)
+    def test_serve_helper_exists(self):
+        helper = ROOT / "scripts" / "nexus_gitnexus_upstream.ps1"
+        self.assertTrue(helper.exists())
+        text = helper.read_text(encoding="utf-8", errors="ignore")
+        self.assertIn("gitnexus", text)
+        self.assertIn("serve", text)
+        self.assertIn("analyze", text)
 
 
 if __name__ == "__main__":
