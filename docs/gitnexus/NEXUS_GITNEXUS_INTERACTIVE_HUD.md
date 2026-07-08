@@ -76,3 +76,13 @@ The mini GITNEXUS dock now mounts as a singleton. Repeated remount loops and
 duplicate dock creation are removed. The mini dock uses one animation loop, one
 instance, duplicate cleanup, and resize debouncing to prevent flicker or triple
 box rendering.
+
+## v0.3.7W single-owner mini dock
+
+This fixes the PowerShell variable collision from pass V and applies the intended
+single-owner model:
+
+- `nexus_gitnexus_core_hud.v0.3.7` owns the full popup HUD only.
+- `nexus_gitnexus_geometric_mini.v0.3.7` owns the mini dock only.
+- Older active GITNEXUS mini/exact/geometric links are removed from `index.html`.
+- The active conversation bridge remains `v0.2.1f` only.
