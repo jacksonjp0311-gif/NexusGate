@@ -10,8 +10,9 @@ Runtime lineage seals:
 - v0.8.1 UI cleanup line
 - v0.8.3F geo preflight cleanup and warning seal line
 - v0.9.0 Meta Loop Registry
-- v0.9.3 AI Loop Toolkit Expansion and v0.9.4 Personal Coding Paradise loop toolkit
+- v0.9.3 AI Loop Toolkit Expansion
 - v0.9.4 Personal Coding Paradise loop toolkit
+- v0.9.5 AI Toolbelt Surface
 - v0.9.1 origin-aligned GITNEXUS impact bridge
 - python -m nexus_gate.geometric_memory.router
 - geo-clean
@@ -51,13 +52,14 @@ Open GitHub repository Open GitHub README Open docs/ENTRYPOINTS.md Open docs/ver
 | Neural Activity | Canonical visual organ: live embedded Neural Cathedral HUD preview; OPEN launches full program. |
 | Nexus Loops / Cards | HUD-ready JSON cards for RHP, script evolution, validation, failure intelligence, and promotion loops. |
 | Personal Coding Paradise | AI-callable loop cards for idea forge, patch plans, debug lens, docs weaving, local oracle, and continuity seals. |
+| AI Toolbelt | Operator-facing map of loop chains: orient, plan, debug, hygiene, ship, memory, and UI/HUD. |
 ## NEXUS Connective Point
 ```text
 Spiral Core Portal = gateway face. NEXUS GATE = reflective intelligence layer for AI systems. Electron = presentation/operator HUD. Doctor = diagnosis / safe-clean / retry cockpit. HANDOFF = human-authorized action bridge. NexusCell = execution-governance organ. Neural Activity = visual organ. Evidence decides what may compound.
 ```
 
 ## Human Director Box
-NEXUS GATE is currently at the v0.9.3 AI Loop Toolkit Expansion and v0.9.4 Personal Coding Paradise loop toolkit line with the v0.9.1A README and ChatGPT script-doctrine addendum while preserving the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub / README / Docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, GITNEXUS impact evidence, ChatGPT/script gate doctrine, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, GITNEXUS impact packets, AI-callable local loop cards, wound-indexed resume packets, and durable GitHub compounding under human authority. v0.9.4 adds a personal coding paradise toolkit: creative planning, debug recovery, docs weaving, command palette, local oracle, continuity seals, and safe shipping loops. v0.9.2 AI-callable local loop fabric lets ChatGPT/Codex act as a meta-orchestrator by selecting named local loops while the repository keeps authority, evidence, gates, and human authorization boundaries.
+NEXUS GATE is currently at the v0.9.5 AI Toolbelt Surface line with the v0.9.1A README and ChatGPT script-doctrine addendum while preserving the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub / README / Docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, GITNEXUS impact evidence, ChatGPT/script gate doctrine, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, GITNEXUS impact packets, AI-callable local loop cards, wound-indexed resume packets, and durable GitHub compounding under human authority. v0.9.4 adds a personal coding paradise toolkit, and v0.9.5 turns it into the AI Toolbelt Surface: creative planning, debug recovery, docs weaving, command palette, local oracle, continuity seals, and safe shipping loops. v0.9.2 AI-callable local loop fabric lets ChatGPT/Codex act as a meta-orchestrator by selecting named local loops while the repository keeps authority, evidence, gates, and human authorization boundaries.
 
 ## Lessons From the v0.9.1 Seal
 ```text
@@ -73,7 +75,32 @@ Stage intended files only.
 Commit and push only after the seal.
 ```
 
-The v0.9.1 GITNEXUS impact bridge seal established the working ChatGPT/script pattern for this repository: use compact machine state, name the active wound, resume from the failed gate, preserve prior green gates, write receipts, and never convert model output into autonomous authority. Before any future generated script changes this repo, read `chatgpt/scripts.md`. v0.9.3 AI Loop Toolkit Expansion and v0.9.4 Personal Coding Paradise loop toolkit gives the AI a wider local toolbelt: repo radar, scope hygiene, claim audit, surface map, stale scan, next-action router, handoff pack, dependency preflight, alignment score, boundary scan, release brief, and evolution radar.
+The v0.9.1 GITNEXUS impact bridge seal established the working ChatGPT/script pattern for this repository: use compact machine state, name the active wound, resume from the failed gate, preserve prior green gates, write receipts, and never convert model output into autonomous authority. Before any future generated script changes this repo, read `chatgpt/scripts.md`. v0.9.3 AI Loop Toolkit Expansion and v0.9.4 Personal Coding Paradise loop toolkit gives the AI a wider local toolbelt: repo radar, scope hygiene, claim audit, surface map, stale scan, next-action router, handoff pack, dependency preflight, alignment score, boundary scan, release brief, evolution radar, toolbelt index, toolbelt dashboard, and toolbelt ship chain.
+
+## AI Toolbelt
+The AI Toolbelt is the practical command map for the personal coding paradise. It turns the loop registry into an operator-facing toolbelt so ChatGPT/Codex can recommend a local loop, the repo can run that loop, and the human can review the packet before any durable mutation.
+
+```text
+Orient -> Plan -> Debug -> Hygiene -> Ship -> Memory -> UI/HUD
+```
+
+Core toolbelt chains:
+```text
+Start: toolbelt-start -> toolbelt-dashboard -> next-action-router
+Build: idea-forge -> architecture-sketch -> patch-plan -> test-strategy
+Debug: debug-lens -> wound-indexed-resume -> compiler-wound-focus
+Ship: scope-hygiene -> boundary-scan -> release-brief -> release-seal
+Continuity: handoff-pack -> session-brief -> memory-anchor -> continuity-seal
+```
+
+Local command:
+```powershell
+python -m nexus_gate.loops.toolbelt --root . --json
+python -m nexus_gate.loops.runner --root . --loop toolbelt-start --intent "<intent>" --execute --human-authorized --json
+python -m nexus_gate.loops.runner --root . --loop toolbelt-dashboard --intent "<intent>" --execute --human-authorized --json
+```
+
+Boundary: the toolbelt is a local read-only operator index. It grants no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.
 
 ## Geometric Memory Router
 NEXUS Geometric Memory Router is the next rehydration layer. It does not train or mutate model weights. It maps every request through four typed axes before repair or compounding:

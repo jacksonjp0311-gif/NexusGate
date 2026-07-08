@@ -1,6 +1,6 @@
 [project]
 name = "nexus-gate"
-version = "0.9.4"
+version = "0.9.5"
 description = "Reflective Intelligence Layer for AI Systems"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -11,4 +11,4 @@ nexus = "nexus_gate.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["nexus_gate*"]
-# current-line: v0.9.4 personal coding paradise loop toolkit
+# current-line: v0.9.5 AI Toolbelt Surface

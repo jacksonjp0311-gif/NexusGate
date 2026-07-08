@@ -89,6 +89,18 @@
       "description": "Emit loop cards.",
       "mutates": false
     },
+    "toolbelt_index": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolbelt",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "description": "Emit the AI Toolbelt index packet.",
+      "mutates": false
+    },
     "toolkit_alignment_score": {
       "argv": [
         "python",
@@ -614,8 +626,8 @@
     "secrets_enabled": false,
     "self_authorization_enabled": false
   },
-  "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, creative planning, tool packets, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
-  "generated_for": "NEXUS_GATE_v0.9.4",
+  "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, tool packets, toolbelt maps, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
+  "generated_for": "NEXUS_GATE_v0.9.5",
   "loops": {
     "ai-orchestrator-preflight": {
       "ai_callable": true,
@@ -1965,6 +1977,136 @@
       "stop_on_failure": true,
       "title": "Test Strategy"
     },
+    "toolbelt-dashboard": {
+      "ai_callable": true,
+      "description": "Emit the compact local dashboard for repo status, loop groups, recommended chain, and safety boundary.",
+      "display_group": "AI Toolbelt",
+      "function": "A single JSON dashboard for the AI and human to align on what tools exist and what should run next.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when you want the AI to stop guessing and select from the current toolbelt.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolbelt_index",
+          "name": "emit_toolbelt_index",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 120,
+          "name": "toolbelt_latest",
+          "path": "state/loops/nexus_toolbelt_latest.json",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "command": "toolkit_alignment_score",
+          "name": "alignment_score",
+          "type": "command"
+        },
+        {
+          "command": "toolkit_boundary_scan",
+          "name": "boundary_scan",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Toolbelt Dashboard"
+    },
+    "toolbelt-index": {
+      "ai_callable": true,
+      "description": "Build the operator-visible AI toolbelt index from loop cards and registry evidence.",
+      "display_group": "AI Toolbelt",
+      "function": "Creates the local command/toolbelt map for orientation, planning, debugging, documentation, shipping, and continuity.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use first when the AI needs to see the full local toolkit and choose a grounded next loop.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolbelt_index",
+          "name": "emit_toolbelt_index",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 120,
+          "name": "toolbelt_latest",
+          "path": "state/loops/nexus_toolbelt_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Toolbelt Index"
+    },
+    "toolbelt-ship": {
+      "ai_callable": true,
+      "description": "Prepare a safe ship lane from scope hygiene through release brief and release seal.",
+      "display_group": "AI Toolbelt",
+      "function": "Chains hygiene, boundary, release brief, and release seal evidence before a human-authorized commit/push script.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use after a patch when the repo appears ready to validate and ship.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_scope_hygiene",
+          "name": "scope_hygiene",
+          "type": "command"
+        },
+        {
+          "command": "toolkit_boundary_scan",
+          "name": "boundary_scan",
+          "type": "command"
+        },
+        {
+          "command": "toolkit_release_brief",
+          "name": "release_brief",
+          "type": "command"
+        },
+        {
+          "loop": "release-seal",
+          "name": "release_seal",
+          "type": "loop_ref"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Toolbelt Ship"
+    },
+    "toolbelt-start": {
+      "ai_callable": true,
+      "description": "Start a coding session through rehydration, repo radar, toolbelt index, and next-action routing.",
+      "display_group": "AI Toolbelt",
+      "function": "Boots the personal coding paradise flow without giving the AI direct authority.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use at the beginning of a new session or after a context break.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "loop": "ai-orchestrator-preflight",
+          "name": "ai_orchestrator_preflight",
+          "type": "loop_ref"
+        },
+        {
+          "command": "toolbelt_index",
+          "name": "emit_toolbelt_index",
+          "type": "command"
+        },
+        {
+          "command": "toolkit_repo_radar",
+          "name": "repo_radar",
+          "type": "command"
+        },
+        {
+          "command": "toolkit_next_action",
+          "name": "next_action",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Toolbelt Start"
+    },
     "ui-polish": {
       "ai_callable": true,
       "description": "Inspect HUD/operator surfaces and suggest visual/usability polishing moves.",
@@ -2050,7 +2192,7 @@
       "title": "Wound Indexed Resume"
     }
   },
-  "registry_scope": "personal_coding_paradise_ai_loop_toolkit",
+  "registry_scope": "ai_toolbelt_local_loop_fabric",
   "system": "NEXUS_META_LOOP_REGISTRY",
-  "version": "0.4.0"
+  "version": "0.5.0"
 }

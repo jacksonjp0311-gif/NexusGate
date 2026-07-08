@@ -119,6 +119,10 @@ REQUIRED_PATHS = [
     "nexus_gate/loops/toolkit.py",
     "state/loops/nexus_loop_cards.v0.9.3.json",
     "tests/test_ai_loop_toolkit_v093.py",
+            "docs/runtime/NEXUS_AI_TOOLBELT.md",
+            "nexus_gate/loops/toolbelt.py",
+            "state/loops/nexus_toolbelt_latest.json",
+            "tests/test_ai_toolbelt_v095.py",
     "docs/runtime/NEXUS_PERSONAL_CODING_PARADISE.md",
     "state/loops/nexus_loop_cards.v0.9.4.json",
     "tests/test_personal_coding_paradise_v094.py",
@@ -665,10 +669,10 @@ class NexusCompiler:
 
     def gate_version_alignment_current_line(self) -> None:
         checks = {
-            "README.md": ["v0.9.4", "Personal Coding Paradise"],
-            "ROADMAP.md": ["v0.9.4", "Status: current"],
-            "docs/versioning/NEXUS_CHANGELOG.md": ["v0.9.4", "Personal Coding Paradise"],
-            "pyproject.toml": ["version = \"0.9.4\""],
+            "README.md": ["v0.9.5", "AI Toolbelt Surface"],
+            "ROADMAP.md": ["v0.9.5", "Status: current"],
+            "docs/versioning/NEXUS_CHANGELOG.md": ["v0.9.5", "AI Toolbelt Surface"],
+            "pyproject.toml": ["version = \"0.9.5\""],
         }
         failures = []
         for rel, tokens in checks.items():
@@ -678,9 +682,9 @@ class NexusCompiler:
             if missing:
                 failures.append({"path": rel, "missing": missing})
         if failures:
-            self.add("version_alignment_current_line", "fail", "v0.9.4 identity missing from required surfaces.", {"failures": failures})
+            self.add("version_alignment_current_line", "fail", "v0.9.5 identity missing from required surfaces.", {"failures": failures})
             return
-        self.add("version_alignment_current_line", "pass", "v0.9.4 identity is aligned across README, changelog, roadmap, and pyproject.", {"surfaces": sorted(checks)})
+        self.add("version_alignment_current_line", "pass", "v0.9.5 identity is aligned across README, changelog, roadmap, and pyproject.", {"surfaces": sorted(checks)})
 
     def gate_readme_encoding_clean(self) -> None:
         path = self.root / "README.md"
@@ -715,6 +719,10 @@ class NexusCompiler:
     "nexus_gate/loops/toolkit.py",
     "state/loops/nexus_loop_cards.v0.9.3.json",
     "tests/test_ai_loop_toolkit_v093.py",
+            "docs/runtime/NEXUS_AI_TOOLBELT.md",
+            "nexus_gate/loops/toolbelt.py",
+            "state/loops/nexus_toolbelt_latest.json",
+            "tests/test_ai_toolbelt_v095.py",
         ]
         missing = [rel for rel in required if not (self.root / rel).exists()]
         if missing:
@@ -750,6 +758,10 @@ class NexusCompiler:
     "nexus_gate/loops/toolkit.py",
     "state/loops/nexus_loop_cards.v0.9.3.json",
     "tests/test_ai_loop_toolkit_v093.py",
+            "docs/runtime/NEXUS_AI_TOOLBELT.md",
+            "nexus_gate/loops/toolbelt.py",
+            "state/loops/nexus_toolbelt_latest.json",
+            "tests/test_ai_toolbelt_v095.py",
         ]
         missing_paths = [rel for rel in required_paths if not (self.root / rel).exists()]
         if missing_paths:
@@ -801,6 +813,10 @@ class NexusCompiler:
             "patch-plan",
             "architecture-sketch",
             "idea-forge",
+            "toolbelt-index",
+            "toolbelt-start",
+            "toolbelt-dashboard",
+            "toolbelt-ship",
         }
 
         try:
@@ -961,7 +977,7 @@ class NexusCompiler:
         status = "pass" if not failed else "fail"
         return CompileReport(
             system="NEXUS GATE",
-            version="0.9.4-personal-coding-paradise-compiler",
+            version="0.9.5-personal-coding-paradise-compiler",
             root=str(self.root),
             status=status,
             generated_at_utc=datetime.now(timezone.utc).isoformat(),

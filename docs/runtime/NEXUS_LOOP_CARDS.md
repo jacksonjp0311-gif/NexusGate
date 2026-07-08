@@ -7,7 +7,7 @@ Boundary: loop cards describe governed local loops. They do not grant autonomous
 
 ## Card Surfaces
 
-- `state/loops/nexus_loop_cards.v0.9.4.json`
+- `state/loops/nexus_loop_cards.v0.9.5.json`
 - `state/loops/nexus_loop_cards_latest.json`
 - `python -m nexus_gate.loops.cards --root . --json`
 - Spiral Core Portal option `[14] Nexus Loops / Cards`
@@ -381,6 +381,38 @@ Boundary: loop cards describe governed local loops. They do not grant autonomous
 - Function: Select targeted tests, bounded suite policy, and compiler gates for a change.
 - Command: `python -m nexus_gate.loops.runner --root . --loop test-strategy --intent "<intent>" --json`
 - Execute: `python -m nexus_gate.loops.runner --root . --loop test-strategy --intent "<intent>" --execute --human-authorized --json`
+
+### Toolbelt Dashboard
+
+- Loop: `toolbelt-dashboard`
+- Group: `AI Toolbelt`
+- Function: A single JSON dashboard for the AI and human to align on what tools exist and what should run next.
+- Command: `python -m nexus_gate.loops.runner --root . --loop toolbelt-dashboard --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop toolbelt-dashboard --intent "<intent>" --execute --human-authorized --json`
+
+### Toolbelt Index
+
+- Loop: `toolbelt-index`
+- Group: `AI Toolbelt`
+- Function: Creates the local command/toolbelt map for orientation, planning, debugging, documentation, shipping, and continuity.
+- Command: `python -m nexus_gate.loops.runner --root . --loop toolbelt-index --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop toolbelt-index --intent "<intent>" --execute --human-authorized --json`
+
+### Toolbelt Ship
+
+- Loop: `toolbelt-ship`
+- Group: `AI Toolbelt`
+- Function: Chains hygiene, boundary, release brief, and release seal evidence before a human-authorized commit/push script.
+- Command: `python -m nexus_gate.loops.runner --root . --loop toolbelt-ship --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop toolbelt-ship --intent "<intent>" --execute --human-authorized --json`
+
+### Toolbelt Start
+
+- Loop: `toolbelt-start`
+- Group: `AI Toolbelt`
+- Function: Boots the personal coding paradise flow without giving the AI direct authority.
+- Command: `python -m nexus_gate.loops.runner --root . --loop toolbelt-start --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop toolbelt-start --intent "<intent>" --execute --human-authorized --json`
 
 ### Ui Polish
 

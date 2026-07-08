@@ -177,3 +177,15 @@ Before inventing a new patch flow, prefer an existing local loop card. Use `repo
 The AI loop toolkit now includes creative planning, debug recovery, docs weaving, local oracle, command palette, continuity seal, and safe shipping loops.
 
 Required rule: use local loop packets as evidence. Do not turn a loop recommendation into autonomous mutation. The AI is a meta-orchestrator; NexusGate is the local evidence boundary; the human authorizes durable change.
+
+## AI Toolbelt Surface
+
+Before proposing a new code-changing closer, prefer the local toolbelt when it can provide evidence:
+
+```powershell
+python -m nexus_gate.loops.toolbelt --root . --json
+python -m nexus_gate.loops.runner --root . --loop toolbelt-start --intent "<intent>" --execute --human-authorized --json
+python -m nexus_gate.loops.runner --root . --loop toolbelt-dashboard --intent "<intent>" --execute --human-authorized --json
+```
+
+Toolbelt output is evidence, not authority. It may recommend a loop, chain, or repair path, but durable mutation still requires compiler seal and human authorization.

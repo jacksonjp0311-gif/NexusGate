@@ -1,0 +1,317 @@
+{
+  "boundary": {
+    "arbitrary_command_execution": false,
+    "autonomous_authority": false,
+    "git_commit_enabled": false,
+    "git_push_enabled": false,
+    "git_stage_enabled": false,
+    "network_enabled": false,
+    "repo_mutation_enabled": false,
+    "secrets_enabled": false
+  },
+  "card_count": 53,
+  "claim_boundary": "The AI Toolbelt is a local read-only operator index. It grants no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
+  "command_surface": "python -m nexus_gate.loops.toolbelt --root . --json",
+  "generated_utc": "2026-07-08T22:23:59.475362+00:00",
+  "groups": [
+    {
+      "available_loops": [
+        "repo-radar",
+        "ai-orchestrator-preflight",
+        "toolbelt-index",
+        "toolbelt-dashboard",
+        "next-action-router",
+        "local-oracle"
+      ],
+      "chain": "repo-radar -> toolbelt-index -> next-action-router",
+      "commands": [
+        "python -m nexus_gate.loops.runner --root . --loop repo-radar --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop ai-orchestrator-preflight --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop toolbelt-index --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop toolbelt-dashboard --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop next-action-router --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop local-oracle --intent \"<intent>\" --json"
+      ],
+      "execute_commands": [
+        "python -m nexus_gate.loops.runner --root . --loop repo-radar --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop ai-orchestrator-preflight --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop toolbelt-index --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop toolbelt-dashboard --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop next-action-router --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop local-oracle --intent \"<intent>\" --execute --human-authorized --json"
+      ],
+      "group_id": "orient",
+      "loops": [
+        "repo-radar",
+        "ai-orchestrator-preflight",
+        "toolbelt-index",
+        "toolbelt-dashboard",
+        "next-action-router",
+        "local-oracle"
+      ],
+      "missing_cards": [],
+      "missing_loops": [],
+      "purpose": "Rehydrate from repo truth, see status, and select the next local loop.",
+      "ready": true,
+      "title": "Orient"
+    },
+    {
+      "available_loops": [
+        "idea-forge",
+        "architecture-sketch",
+        "patch-plan",
+        "test-strategy",
+        "creative-build-chain",
+        "pair-programming-brief"
+      ],
+      "chain": "idea-forge -> architecture-sketch -> patch-plan -> test-strategy",
+      "commands": [
+        "python -m nexus_gate.loops.runner --root . --loop idea-forge --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop architecture-sketch --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop patch-plan --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop test-strategy --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop creative-build-chain --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop pair-programming-brief --intent \"<intent>\" --json"
+      ],
+      "execute_commands": [
+        "python -m nexus_gate.loops.runner --root . --loop idea-forge --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop architecture-sketch --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop patch-plan --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop test-strategy --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop creative-build-chain --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop pair-programming-brief --intent \"<intent>\" --execute --human-authorized --json"
+      ],
+      "group_id": "plan",
+      "loops": [
+        "idea-forge",
+        "architecture-sketch",
+        "patch-plan",
+        "test-strategy",
+        "creative-build-chain",
+        "pair-programming-brief"
+      ],
+      "missing_cards": [],
+      "missing_loops": [],
+      "purpose": "Turn intent into architecture, patch plan, test plan, and bounded build chain.",
+      "ready": true,
+      "title": "Plan"
+    },
+    {
+      "available_loops": [
+        "debug-lens",
+        "wound-indexed-resume",
+        "compiler-wound-focus",
+        "debug-recovery-chain",
+        "failure-intelligence",
+        "friction-detector"
+      ],
+      "chain": "debug-lens -> wound-indexed-resume -> compiler-wound-focus",
+      "commands": [
+        "python -m nexus_gate.loops.runner --root . --loop debug-lens --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop wound-indexed-resume --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop compiler-wound-focus --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop debug-recovery-chain --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop failure-intelligence --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop friction-detector --intent \"<intent>\" --json"
+      ],
+      "execute_commands": [
+        "python -m nexus_gate.loops.runner --root . --loop debug-lens --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop wound-indexed-resume --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop compiler-wound-focus --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop debug-recovery-chain --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop failure-intelligence --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop friction-detector --intent \"<intent>\" --execute --human-authorized --json"
+      ],
+      "group_id": "debug",
+      "loops": [
+        "debug-lens",
+        "wound-indexed-resume",
+        "compiler-wound-focus",
+        "debug-recovery-chain",
+        "failure-intelligence",
+        "friction-detector"
+      ],
+      "missing_cards": [],
+      "missing_loops": [],
+      "purpose": "Narrow failures into wounds and select the smallest healing surface.",
+      "ready": true,
+      "title": "Debug"
+    },
+    {
+      "available_loops": [
+        "scope-hygiene",
+        "claim-boundary-audit",
+        "boundary-scan",
+        "stale-surface-scan",
+        "risk-register",
+        "dependency-preflight"
+      ],
+      "chain": "scope-hygiene -> boundary-scan -> claim-boundary-audit",
+      "commands": [
+        "python -m nexus_gate.loops.runner --root . --loop scope-hygiene --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop claim-boundary-audit --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop boundary-scan --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop stale-surface-scan --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop risk-register --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop dependency-preflight --intent \"<intent>\" --json"
+      ],
+      "execute_commands": [
+        "python -m nexus_gate.loops.runner --root . --loop scope-hygiene --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop claim-boundary-audit --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop boundary-scan --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop stale-surface-scan --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop risk-register --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop dependency-preflight --intent \"<intent>\" --execute --human-authorized --json"
+      ],
+      "group_id": "hygiene",
+      "loops": [
+        "scope-hygiene",
+        "claim-boundary-audit",
+        "boundary-scan",
+        "stale-surface-scan",
+        "risk-register",
+        "dependency-preflight"
+      ],
+      "missing_cards": [],
+      "missing_loops": [],
+      "purpose": "Keep scope clean, claims bounded, stale surfaces visible, and authority intact.",
+      "ready": true,
+      "title": "Hygiene"
+    },
+    {
+      "available_loops": [
+        "bounded-validation",
+        "release-brief",
+        "toolbelt-ship",
+        "release-seal",
+        "commit-story",
+        "continuity-seal"
+      ],
+      "chain": "bounded-validation -> release-brief -> release-seal -> commit-story",
+      "commands": [
+        "python -m nexus_gate.loops.runner --root . --loop bounded-validation --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop release-brief --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop toolbelt-ship --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop release-seal --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop commit-story --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop continuity-seal --intent \"<intent>\" --json"
+      ],
+      "execute_commands": [
+        "python -m nexus_gate.loops.runner --root . --loop bounded-validation --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop release-brief --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop toolbelt-ship --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop release-seal --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop commit-story --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop continuity-seal --intent \"<intent>\" --execute --human-authorized --json"
+      ],
+      "group_id": "ship",
+      "loops": [
+        "bounded-validation",
+        "release-brief",
+        "toolbelt-ship",
+        "release-seal",
+        "commit-story",
+        "continuity-seal"
+      ],
+      "missing_cards": [],
+      "missing_loops": [],
+      "purpose": "Validate, summarize, seal, and prepare human-authorized durable mutation.",
+      "ready": true,
+      "title": "Ship"
+    },
+    {
+      "available_loops": [
+        "handoff-pack",
+        "session-brief",
+        "memory-anchor",
+        "docs-weaver",
+        "continuity-seal",
+        "paradise-index"
+      ],
+      "chain": "handoff-pack -> session-brief -> memory-anchor -> continuity-seal",
+      "commands": [
+        "python -m nexus_gate.loops.runner --root . --loop handoff-pack --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop session-brief --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop memory-anchor --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop docs-weaver --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop continuity-seal --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop paradise-index --intent \"<intent>\" --json"
+      ],
+      "execute_commands": [
+        "python -m nexus_gate.loops.runner --root . --loop handoff-pack --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop session-brief --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop memory-anchor --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop docs-weaver --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop continuity-seal --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop paradise-index --intent \"<intent>\" --execute --human-authorized --json"
+      ],
+      "group_id": "memory",
+      "loops": [
+        "handoff-pack",
+        "session-brief",
+        "memory-anchor",
+        "docs-weaver",
+        "continuity-seal",
+        "paradise-index"
+      ],
+      "missing_cards": [],
+      "missing_loops": [],
+      "purpose": "Preserve continuity through handoff packs, session briefs, docs weaving, and memory anchors.",
+      "ready": true,
+      "title": "Memory"
+    },
+    {
+      "available_loops": [
+        "hud-loop-sync",
+        "command-palette",
+        "ui-polish",
+        "code-garden-map",
+        "surface-map"
+      ],
+      "chain": "hud-loop-sync -> command-palette -> ui-polish",
+      "commands": [
+        "python -m nexus_gate.loops.runner --root . --loop hud-loop-sync --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop command-palette --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop ui-polish --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop code-garden-map --intent \"<intent>\" --json",
+        "python -m nexus_gate.loops.runner --root . --loop surface-map --intent \"<intent>\" --json"
+      ],
+      "execute_commands": [
+        "python -m nexus_gate.loops.runner --root . --loop hud-loop-sync --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop command-palette --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop ui-polish --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop code-garden-map --intent \"<intent>\" --execute --human-authorized --json",
+        "python -m nexus_gate.loops.runner --root . --loop surface-map --intent \"<intent>\" --execute --human-authorized --json"
+      ],
+      "group_id": "ui",
+      "loops": [
+        "hud-loop-sync",
+        "command-palette",
+        "ui-polish",
+        "code-garden-map",
+        "surface-map"
+      ],
+      "missing_cards": [],
+      "missing_loops": [],
+      "purpose": "Support the operator surface: loop cards, command palette, UI polish, and code garden maps.",
+      "ready": true,
+      "title": "UI / HUD"
+    }
+  ],
+  "intent": "unit",
+  "loop_count": 53,
+  "loop_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-index --intent \"<intent>\" --execute --human-authorized --json",
+  "missing_loop_count": 0,
+  "missing_loops": [],
+  "mode": "nexus_ai_toolbelt",
+  "ready_group_count": 7,
+  "recommended_first": "toolbelt-start",
+  "recommended_when_dirty": "scope-hygiene",
+  "recommended_when_failed": "debug-recovery-chain",
+  "recommended_when_ready": "toolbelt-ship",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "schema": "NEXUS_AI_TOOLBELT.v0.9.5",
+  "status": "pass",
+  "toolbelt_group_count": 7,
+  "version": "0.9.5"
+}

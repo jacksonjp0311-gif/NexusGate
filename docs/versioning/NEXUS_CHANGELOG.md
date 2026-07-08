@@ -269,3 +269,8 @@ Keeps no-arbitrary-shell/no-network/no-secrets/no-git-mutation/no-self-authoriza
 - Added `nexus_gate/loops/toolkit.py` packet emitter.
 - Regenerated v0.9.3 loop cards for HUD-ready loop rendering.
 - Preserved local-only authority boundaries: no autonomous authority, no git write, no network, no secrets.
+## v0.9.5 - AI Toolbelt Surface
+
+- Adds the AI Toolbelt Surface over the personal coding paradise loops.
+- Adds `nexus_gate.loops.toolbelt` and README toolbelt section.
+- Preserves no-autonomous-authority, no-network, no-secrets, and no-git-write boundaries.

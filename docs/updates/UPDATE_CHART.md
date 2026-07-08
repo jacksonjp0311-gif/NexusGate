@@ -106,3 +106,6 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 
 | v0.9.3 | AI Loop Toolkit Expansion | Added creative AI-callable local loops and HUD-ready cards | No version step without update chart entry |
 | v0.9.4 | Personal Coding Paradise Loop Toolkit | AI-callable local coding loops, cards, docs, tests, compiler visibility | No version step without update chart entry |
+## v0.9.5 - AI Toolbelt Surface
+
+No version step without update chart entry. Adds operator-visible toolbelt index and README Toolbelt section.
