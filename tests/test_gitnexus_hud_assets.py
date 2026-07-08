@@ -9,10 +9,10 @@ INDEX = ROOT / "electron" / "renderer" / "index.html"
 
 
 class TestGitNexusHudAssets(unittest.TestCase):
-    def test_local_hud_assets_are_active_once(self):
+    def test_local_hud_v052_assets_are_active_once(self):
         html = INDEX.read_text(encoding="utf-8", errors="ignore")
-        self.assertEqual(html.count("nexus_gitnexus_local_hud.v0.5.1.css"), 1)
-        self.assertEqual(html.count("nexus_gitnexus_local_hud.v0.5.1.js"), 1)
+        self.assertEqual(html.count("nexus_gitnexus_local_hud.v0.5.2.css"), 1)
+        self.assertEqual(html.count("nexus_gitnexus_local_hud.v0.5.2.js"), 1)
 
     def test_remote_or_old_gitnexus_owners_are_not_active(self):
         html = INDEX.read_text(encoding="utf-8", errors="ignore")
@@ -26,6 +26,7 @@ class TestGitNexusHudAssets(unittest.TestCase):
             "nexus_gitnexus_scope_hygiene",
             "nexus_gitnexus_scope_switch",
             "nexus_gitnexus_standalone_hud",
+            "nexus_gitnexus_local_hud.v0.5.1",
         ]
         for token in forbidden:
             self.assertNotIn(token, html)
@@ -36,8 +37,8 @@ class TestGitNexusHudAssets(unittest.TestCase):
         for suffix in ["a", "b", "c", "d", "e"]:
             self.assertNotIn(f"nexus_conversation_output_bridge.v0.2.1{suffix}.js", html)
 
-    def test_local_hud_is_not_iframe_server_bridge(self):
-        js = (ROOT / "electron" / "renderer" / "nexus_gitnexus_local_hud.v0.5.1.js").read_text(
+    def test_local_hud_is_dynamic_and_not_remote(self):
+        js = (ROOT / "electron" / "renderer" / "nexus_gitnexus_local_hud.v0.5.2.js").read_text(
             encoding="utf-8", errors="ignore"
         )
         self.assertNotIn("gitnexus.vercel.app", js)
@@ -47,15 +48,20 @@ class TestGitNexusHudAssets(unittest.TestCase):
             "gitnexus-local-hud",
             "gnx-local-mini-canvas",
             "gnx-local-full-canvas",
+            "tickPhysics",
+            "updateCamera",
+            "focusNode",
+            "FORCE",
+            "ORBIT",
+            "CIRCLE",
             "ALT-DRAG / SHIFT-WHEEL = ROTATE",
             "nexusOpenGitNexus",
-            "drawGraph",
-            "loadGraph",
+            "nexusGitNexusRefresh",
         ]:
             self.assertIn(token, js)
 
     def test_local_hud_css_exists(self):
-        css = (ROOT / "electron" / "renderer" / "nexus_gitnexus_local_hud.v0.5.1.css").read_text(
+        css = (ROOT / "electron" / "renderer" / "nexus_gitnexus_local_hud.v0.5.2.css").read_text(
             encoding="utf-8", errors="ignore"
         )
         for token in [

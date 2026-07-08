@@ -1,0 +1,1075 @@
+(() => {
+  const VERSION = "v0.5.2";
+  const MINI_ID = "gitnexus-core-left-dock";
+  const HUD_ID = "gitnexus-local-hud";
+  const STORE_KEY = "__nexusGitNexusLocalHudV052";
+
+  const state = window[STORE_KEY] || (window[STORE_KEY] = {
+    miniRaf: 0,
+    fullRaf: 0,
+    resizeTimer: 0,
+    graph: null,
+    graphLoaded: false,
+    fullOpen: false,
+    paused: false,
+    layoutMode: "force",
+    drag: null,
+    hover: null,
+    selected: null,
+    search: "",
+    lastT: 0,
+    fps: 0,
+    frameCount: 0,
+    showEdges: true,
+    showLabels: true,
+    coreOnly: false,
+    miniRot: 0,
+    camera: { x: 0, y: 0, zoom: 1, rot: 0 },
+    target: { x: 0, y: 0, zoom: 1, rot: 0 },
+    velocity: { x: 0, y: 0, zoom: 0, rot: 0 }
+  });
+
+  const COLORS = {
+    bg: "#020712",
+    cyan: "#55f7ff",
+    cyan2: "#00eaff",
+    green: "#7dff4d",
+    amber: "#ffaa00",
+    violet: "#a855f7",
+    blue: "#5b7cff",
+    red: "#ff5f7f",
+    dim: "rgba(85,247,255,0.18)",
+    text: "#dffcff",
+    smoke: "rgba(160, 190, 200, 0.72)"
+  };
+
+  const TYPE_COLOR = {
+    py: COLORS.cyan,
+    js: COLORS.amber,
+    ts: COLORS.amber,
+    tsx: COLORS.amber,
+    jsx: COLORS.amber,
+    test: COLORS.violet,
+    state: COLORS.green,
+    report: COLORS.green,
+    doc: COLORS.blue,
+    core: COLORS.cyan,
+    other: COLORS.smoke
+  };
+
+  const CORE_TYPES = new Set(["core", "py", "js", "test"]);
+  const LAYOUT_LABELS = {
+    force: "FORCE",
+    orbit: "ORBIT",
+    circle: "CIRCLE"
+  };
+
+  function q(sel, root = document) { return root.querySelector(sel); }
+  function qa(sel, root = document) { return Array.from(root.querySelectorAll(sel)); }
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function safeText(value, fallback = "") {
+    if (value == null) return fallback;
+    return String(value).replace(/[^\x20-\x7E]/g, "").slice(0, 260);
+  }
+
+  function hashText(s) {
+    let h = 2166136261;
+    for (let i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
+
+  function classify(path) {
+    const p = String(path || "").toLowerCase();
+    if (p.includes("/tests/") || p.includes("\\tests\\") || p.startsWith("tests/") || p.includes("test_")) return "test";
+    if (p.includes("/state/") || p.includes("\\state\\") || p.startsWith("state/")) return "state";
+    if (p.includes("/reports/") || p.includes("\\reports\\") || p.startsWith("reports/")) return "report";
+    if (p.includes("/docs/") || p.includes("\\docs\\") || p.endsWith(".md")) return "doc";
+    if (p.includes("nexus_gate/") || p.includes("nexus_gate\\")) return "core";
+    if (p.endsWith(".py")) return "py";
+    if (p.endsWith(".js")) return "js";
+    if (p.endsWith(".ts")) return "ts";
+    if (p.endsWith(".tsx")) return "tsx";
+    if (p.endsWith(".jsx")) return "jsx";
+    return "other";
+  }
+
+  function findFooterTop() {
+    const footer = qa("footer, section, div")
+      .map((node) => ({ rect: node.getBoundingClientRect(), text: String(node.textContent || "").toUpperCase() }))
+      .filter((item) => item.text.includes("GOVERNANCE") && item.text.includes("SYSTEM BUS"))
+      .sort((a, b) => b.rect.top - a.rect.top)[0]?.rect;
+    return footer && footer.top > window.innerHeight * 0.5 ? footer.top : window.innerHeight - 48;
+  }
+
+  function findLeftRailRect() {
+    const neural = qa("aside, section, article, div")
+      .map((node) => ({ rect: node.getBoundingClientRect(), text: String(node.textContent || "").toUpperCase() }))
+      .filter((item) =>
+        item.rect.width >= 220 &&
+        item.rect.width <= 430 &&
+        item.rect.left >= -20 &&
+        item.rect.left < 140 &&
+        item.text.includes("NEURAL ACTIVITY")
+      )
+      .sort((a, b) => (b.rect.width * b.rect.height) - (a.rect.width * a.rect.height))[0]?.rect;
+
+    if (neural) return neural;
+    return { left: 8, right: 310, top: Math.round(window.innerHeight * 0.2), bottom: Math.round(window.innerHeight * 0.58), width: 302, height: 300 };
+  }
+
+  function dockGeometry() {
+    const rail = findLeftRailRect();
+    const footerTop = findFooterTop();
+    const left = Math.max(4, rail.left);
+    const width = Math.max(260, Math.min(405, rail.width || (rail.right - rail.left)));
+    const top = Math.min((rail.bottom || 360) + 10, footerTop - 235);
+    const height = Math.max(215, footerTop - top - 10);
+    return {
+      left: Math.round(left),
+      top: Math.round(top),
+      width: Math.round(width),
+      height: Math.round(height)
+    };
+  }
+
+  function ensureMiniDock() {
+    qa("#" + MINI_ID).slice(1).forEach((node) => node.remove());
+
+    let dock = document.getElementById(MINI_ID);
+    if (!dock) {
+      dock = document.createElement("section");
+      dock.id = MINI_ID;
+      document.body.appendChild(dock);
+    }
+
+    const geo = dockGeometry();
+    dock.className = "gnx-local-mini-dock gnx-polished";
+    dock.dataset.version = VERSION;
+    dock.style.left = geo.left + "px";
+    dock.style.top = geo.top + "px";
+    dock.style.width = geo.width + "px";
+    dock.style.height = geo.height + "px";
+
+    if (!dock.querySelector(".gnx-local-mini")) {
+      dock.innerHTML = `
+        <section class="gnx-local-mini">
+          <div class="gnx-local-mini-head">
+            <div class="gnx-local-mini-brand">
+              <span class="gnx-local-orb"></span>
+              <div>
+                <div class="gnx-local-title">GITNEXUS</div>
+                <div class="gnx-local-sub">LOCAL CODEGRAPH</div>
+              </div>
+            </div>
+            <button class="gnx-local-open" type="button">OPEN</button>
+          </div>
+          <button class="gnx-local-mini-body" type="button" title="Open local GITNEXUS HUD">
+            <canvas id="gnx-local-mini-canvas"></canvas>
+            <span class="gnx-local-caption">LIVE LOCAL CODEGRAPH</span>
+          </button>
+        </section>
+      `;
+      q(".gnx-local-open", dock)?.addEventListener("click", openHud);
+      q(".gnx-local-mini-body", dock)?.addEventListener("click", openHud);
+    }
+
+    return dock;
+  }
+
+  function fitCanvas(canvas) {
+    if (!canvas) return null;
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    const w = Math.max(1, Math.floor(rect.width));
+    const h = Math.max(1, Math.floor(rect.height));
+    const tw = Math.floor(w * dpr);
+    const th = Math.floor(h * dpr);
+    if (canvas.width !== tw || canvas.height !== th) {
+      canvas.width = tw;
+      canvas.height = th;
+    }
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx, w, h };
+  }
+
+  function extractCandidateFiles(json) {
+    const files = [];
+    const seen = new Set();
+
+    function add(path, weight = 1) {
+      const p = safeText(path).replace(/\\/g, "/");
+      if (!p || p.length < 2) return;
+      if (p.includes(".bak_") || p.endsWith(".bak") || p.includes("__pycache__")) return;
+      if (seen.has(p)) return;
+      seen.add(p);
+      files.push({ path: p, weight: Math.max(1, Number(weight) || 1) });
+    }
+
+    function walk(x, depth = 0) {
+      if (!x || depth > 5) return;
+      if (Array.isArray(x)) {
+        for (const item of x.slice(0, 1800)) walk(item, depth + 1);
+        return;
+      }
+      if (typeof x !== "object") return;
+
+      const pathKeys = ["path", "file", "filePath", "name", "id", "source", "target"];
+      for (const key of pathKeys) {
+        const v = x[key];
+        if (typeof v === "string" && /[\/\\.]|nexus_gate|electron|reports|state|ledger|docs|tests|GITNEXUS/i.test(v)) {
+          add(v, x.weight || x.count || x.imports || x.score || 1);
+        }
+      }
+
+      const arrays = ["nodes", "files", "changed_files", "top_imported_files", "relationships", "edges", "affected_files"];
+      for (const key of arrays) {
+        if (Array.isArray(x[key])) walk(x[key], depth + 1);
+      }
+
+      if (depth < 2) {
+        for (const k of Object.keys(x).slice(0, 50)) walk(x[k], depth + 1);
+      }
+    }
+
+    walk(json, 0);
+    return files;
+  }
+
+  function buildFallbackFiles() {
+    const roots = [
+      "docs/context/rcc_nexus_index.json",
+      "nexus_gate/__init__.py",
+      "nexus_gate/core/packets.py",
+      "nexus_gate/runtime/router.py",
+      "nexus_gate/compiler/compiler.py",
+      "nexus_gate/compiler/gates.py",
+      "nexus_gate/geometric_memory/score.py",
+      "nexus_gate/adapters/local_demo.py",
+      "nexus_gate/adapters/registry.py",
+      "nexus_gate/nexus_cell/plan.py",
+      "nexus_gate/nexus_cell/policy.py",
+      "nexus_gate/receptors/registry.py",
+      "nexus_gate/receptors/compatibility.py",
+      "nexus_gate/nexus_cell/context_bridge.py",
+      "nexus_gate/nn_router/contract.py",
+      "nexus_gate/bridge/runtime.py",
+      "nexus_gate/bridge/session.py",
+      "nexus_gate/self_healing/engine.py",
+      "electron/renderer/index.html",
+      "electron/main.js",
+      "electron/preload.js",
+      "reports/nexus_compile_report_latest.json",
+      "reports/nexus_electron_smoke_report_latest.json",
+      "state/interconnect_graph.v0.2.2.json",
+      "ledger/nexus_gate_ledger.v0.1.0.jsonl",
+      "docs/runtime/NEXUS_METRICS_HUD.md",
+      "docs/gitnexus/NEXUS_GITNEXUS_LOCAL_HUD.md",
+      "tests/test_gitnexus_hud_assets.py",
+      "tests/test_nn_router.py"
+    ];
+    const files = [];
+    for (let round = 0; round < 10; round++) {
+      roots.forEach((p, i) => files.push({ path: p.replace(/(\.[a-z0-9]+)$/i, "_" + round + "$1"), weight: 1 + ((i + round) % 13) }));
+    }
+    return files;
+  }
+
+  function buildGraphFromFiles(files) {
+    if (!files || files.length < 12) files = buildFallbackFiles();
+
+    const nodes = [];
+    const edges = [];
+    const byPath = new Map();
+
+    function addNode(id, path, kind, weight, folder = false) {
+      if (byPath.has(id)) return byPath.get(id);
+      const h = hashText(id);
+      const clusterMap = { py: 0, core: 0, js: 1, ts: 1, tsx: 1, jsx: 1, test: 2, state: 3, report: 3, doc: 4, other: 5 };
+      const cluster = clusterMap[kind] ?? 5;
+      const golden = Math.PI * (3 - Math.sqrt(5));
+      const idx = nodes.length + 1;
+      const baseR = folder ? 95 + cluster * 55 : 150 + cluster * 46 + Math.sqrt(idx) * 11;
+      const angle = idx * golden + cluster * 0.78 + (h % 360) * Math.PI / 1800;
+      const tx = Math.cos(angle) * baseR + ((h & 255) - 128) * 0.18;
+      const ty = Math.sin(angle) * baseR + (((h >> 8) & 255) - 128) * 0.18;
+      const node = {
+        id,
+        path,
+        name: path.split("/").filter(Boolean).pop() || path,
+        kind,
+        cluster,
+        folder,
+        weight: Math.max(1, Number(weight) || 1),
+        x: tx + (((h >> 16) & 127) - 64),
+        y: ty + (((h >> 23) & 127) - 64),
+        tx,
+        ty,
+        vx: 0,
+        vy: 0,
+        hot: false,
+        degree: 0,
+        phase: (h % 628) / 100
+      };
+      nodes.push(node);
+      byPath.set(id, node);
+      return node;
+    }
+
+    const root = addNode("nexus-gate", "nexus-gate", "core", 30, true);
+    files.slice(0, 1000).forEach((f) => {
+      const path = safeText(f.path || f, "unknown");
+      const kind = classify(path);
+      const n = addNode(path, path, kind, f.weight || 1, false);
+      const parts = path.split("/").filter(Boolean);
+      const folder = parts.length > 1 ? parts[0] + "/" : "root/";
+      const folderNode = addNode("folder:" + folder, folder, classify(folder), 10, true);
+      edges.push({ a: root.id, b: folderNode.id, type: "contains", weight: 0.7 });
+      edges.push({ a: folderNode.id, b: n.id, type: "contains", weight: 0.45 });
+    });
+
+    const top = nodes.filter((n) => !n.id.startsWith("folder:") && n.id !== root.id);
+    top.forEach((n, i) => {
+      const h = hashText(n.id);
+      const j = h % Math.max(1, top.length);
+      if (top[j] && top[j] !== n && (i % 2 === 0 || n.kind === top[j].kind)) {
+        edges.push({ a: n.id, b: top[j].id, type: n.kind === top[j].kind ? "same-kind" : "trace", weight: n.kind === top[j].kind ? 0.30 : 0.15 });
+      }
+      if (i % 9 === 0 && top[i + 5]) edges.push({ a: n.id, b: top[i + 5].id, type: "pulse", weight: 0.11 });
+    });
+
+    edges.forEach((e) => {
+      const a = byPath.get(e.a), b = byPath.get(e.b);
+      if (a) a.degree += 1;
+      if (b) b.degree += 1;
+    });
+
+    nodes.sort((a, b) => (b.degree + b.weight) - (a.degree + a.weight));
+    nodes.slice(0, Math.max(12, Math.floor(nodes.length * 0.09))).forEach((n) => { n.hot = true; });
+
+    return { nodes, edges, byId: byPath, counts: { files: files.length, symbols: nodes.length, edges: edges.length } };
+  }
+
+  async function tryReadJson(path) {
+    try {
+      const res = await fetch(path + "?t=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) return null;
+      return await res.json();
+    } catch {
+      return null;
+    }
+  }
+
+  async function loadGraph(force = false) {
+    if (state.graphLoaded && state.graph && !force) return state.graph;
+
+    const paths = [
+      "../../GITNEXUS/state/gitnexus_graph_latest.json",
+      "../../state/gitnexus/gitnexus_graph_latest.json",
+      "../../GITNEXUS/reports/gitnexus_report_latest.json",
+      "../../reports/gitnexus_report_latest.json",
+      "../../reports/nexus_compile_report_latest.json",
+      "../../state/interconnect_graph.v0.2.2.json"
+    ];
+
+    let files = [];
+    let source = "fallback";
+    for (const path of paths) {
+      const json = await tryReadJson(path);
+      if (!json) continue;
+      const extracted = extractCandidateFiles(json);
+      if (extracted.length > files.length) {
+        files = extracted;
+        source = path.replace("../../", "");
+      }
+    }
+
+    if (files.length < 12) files = buildFallbackFiles();
+    state.graph = buildGraphFromFiles(files);
+    state.graph.source = source;
+    state.graphLoaded = true;
+    updateHudStats();
+    updateTopFiles();
+    return state.graph;
+  }
+
+  function visibleNode(n) {
+    if (!n) return false;
+    if (state.coreOnly && !CORE_TYPES.has(n.kind)) return false;
+    const s = String(state.search || "").toLowerCase().trim();
+    if (s && !String(n.path).toLowerCase().includes(s) && !String(n.name).toLowerCase().includes(s)) return false;
+    return true;
+  }
+
+  function tickPhysics(dt) {
+    const graph = state.graph;
+    if (!graph || state.paused) return;
+
+    const nodes = graph.nodes;
+    const edges = graph.edges;
+    const byId = graph.byId || new Map(nodes.map((n) => [n.id, n]));
+    const simNodes = nodes.slice(0, Math.min(520, nodes.length));
+    const mode = state.layoutMode;
+
+    const pull = mode === "force" ? 0.014 : mode === "orbit" ? 0.020 : 0.026;
+    const repel = mode === "force" ? 2600 : mode === "orbit" ? 1500 : 2100;
+    const damping = mode === "force" ? 0.88 : 0.90;
+
+    for (const n of simNodes) {
+      if (!visibleNode(n)) continue;
+      let tx = n.tx;
+      let ty = n.ty;
+
+      if (mode === "orbit") {
+        const angle = Math.atan2(n.ty, n.tx) + 0.0022 * dt * (1 + n.cluster * 0.08);
+        const r = Math.hypot(n.tx, n.ty);
+        tx = Math.cos(angle) * r;
+        ty = Math.sin(angle) * r;
+      } else if (mode === "circle") {
+        const ring = 105 + n.cluster * 88;
+        const angle = (hashText(n.id) % 6283) / 1000 + state.lastT * 0.00004;
+        tx = Math.cos(angle) * ring;
+        ty = Math.sin(angle) * ring;
+      }
+
+      n.vx += (tx - n.x) * pull * dt;
+      n.vy += (ty - n.y) * pull * dt;
+    }
+
+    for (let i = 0; i < simNodes.length; i++) {
+      const a = simNodes[i];
+      if (!visibleNode(a)) continue;
+      for (let j = i + 1; j < simNodes.length; j++) {
+        const b = simNodes[j];
+        if (!visibleNode(b)) continue;
+        let dx = a.x - b.x;
+        let dy = a.y - b.y;
+        let d2 = dx * dx + dy * dy + 0.01;
+        if (d2 > 20000) continue;
+        const d = Math.sqrt(d2);
+        const min = (a.folder || b.folder) ? 22 : 16;
+        const f = (repel / d2) * dt;
+        dx /= d;
+        dy /= d;
+        const extra = d < min ? (min - d) * 0.08 * dt : 0;
+        a.vx += dx * (f + extra);
+        a.vy += dy * (f + extra);
+        b.vx -= dx * (f + extra);
+        b.vy -= dy * (f + extra);
+      }
+    }
+
+    for (const e of edges.slice(0, 1400)) {
+      const a = byId.get(e.a), b = byId.get(e.b);
+      if (!a || !b || !visibleNode(a) || !visibleNode(b)) continue;
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const d = Math.sqrt(dx * dx + dy * dy) + 0.01;
+      const rest = e.type === "contains" ? (a.folder || b.folder ? 80 : 56) : 150;
+      const k = (e.weight || 0.2) * 0.012 * dt;
+      const f = (d - rest) * k;
+      const fx = (dx / d) * f;
+      const fy = (dy / d) * f;
+      a.vx += fx;
+      a.vy += fy;
+      b.vx -= fx;
+      b.vy -= fy;
+    }
+
+    for (const n of simNodes) {
+      n.vx *= damping;
+      n.vy *= damping;
+      n.x += clamp(n.vx, -12, 12) * dt;
+      n.y += clamp(n.vy, -12, 12) * dt;
+    }
+  }
+
+  function updateCamera(dt) {
+    state.target.zoom = clamp(state.target.zoom, 0.08, 9);
+    state.camera.x = lerp(state.camera.x, state.target.x, 0.16);
+    state.camera.y = lerp(state.camera.y, state.target.y, 0.16);
+    state.camera.zoom = lerp(state.camera.zoom, state.target.zoom, 0.18);
+    state.camera.rot = lerp(state.camera.rot, state.target.rot, 0.18);
+
+    state.target.x += state.velocity.x * dt;
+    state.target.y += state.velocity.y * dt;
+    state.target.rot += state.velocity.rot * dt;
+    state.target.zoom += state.velocity.zoom * dt;
+
+    state.velocity.x *= 0.90;
+    state.velocity.y *= 0.90;
+    state.velocity.rot *= 0.90;
+    state.velocity.zoom *= 0.88;
+
+    if (Math.abs(state.velocity.x) < 0.01) state.velocity.x = 0;
+    if (Math.abs(state.velocity.y) < 0.01) state.velocity.y = 0;
+    if (Math.abs(state.velocity.rot) < 0.00001) state.velocity.rot = 0;
+    if (Math.abs(state.velocity.zoom) < 0.00001) state.velocity.zoom = 0;
+  }
+
+  function worldProject(n, fit, mini = false) {
+    const cam = mini
+      ? { x: 0, y: 0, zoom: Math.min(fit.w, fit.h) / 720, rot: state.miniRot }
+      : state.camera;
+
+    const ca = Math.cos(cam.rot), sa = Math.sin(cam.rot);
+    const x = n.x * ca - n.y * sa;
+    const y = n.x * sa + n.y * ca;
+    return {
+      x: fit.w / 2 + (x + cam.x) * cam.zoom,
+      y: fit.h / 2 + (y + cam.y) * cam.zoom
+    };
+  }
+
+  function edgeEnergy(e, t) {
+    return 0.35 + 0.35 * Math.sin(t * 0.004 + (hashText(e.a + e.b) % 628) / 100);
+  }
+
+  function drawGraph(ctx, w, h, opts = {}) {
+    const graph = state.graph || buildGraphFromFiles(buildFallbackFiles());
+    const nodes = graph.nodes || [];
+    const edges = graph.edges || [];
+    const mini = Boolean(opts.mini);
+    const t = performance.now();
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = COLORS.bg;
+    ctx.fillRect(0, 0, w, h);
+
+    const bg = ctx.createRadialGradient(w * 0.50, h * 0.50, 0, w * 0.50, h * 0.50, Math.max(w, h) * 0.52);
+    bg.addColorStop(0, "rgba(0,240,255,0.11)");
+    bg.addColorStop(0.28, "rgba(255,170,0,0.055)");
+    bg.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+
+    const byId = graph.byId || new Map(nodes.map((n) => [n.id, n]));
+    const fit = { w, h };
+
+    const hover = state.hover;
+    const selected = state.selected;
+    const focusId = selected || hover;
+    const neighbors = new Set();
+    if (focusId) {
+      for (const e of edges) {
+        if (e.a === focusId) neighbors.add(e.b);
+        if (e.b === focusId) neighbors.add(e.a);
+      }
+    }
+
+    if (state.showEdges) {
+      ctx.lineCap = "round";
+      for (const e of edges.slice(0, mini ? 1100 : 1800)) {
+        const a = byId.get(e.a), b = byId.get(e.b);
+        if (!a || !b || !visibleNode(a) || !visibleNode(b)) continue;
+        const pa = worldProject(a, fit, mini), pb = worldProject(b, fit, mini);
+        const onPath = focusId && (e.a === focusId || e.b === focusId);
+        const energy = edgeEnergy(e, t);
+        const alpha = onPath ? 0.62 : mini ? 0.12 : 0.14 + energy * 0.07;
+        const isTrace = e.type === "trace" || e.type === "pulse";
+        ctx.strokeStyle = isTrace
+          ? `rgba(255,170,0,${alpha})`
+          : `rgba(0,240,255,${alpha})`;
+        ctx.lineWidth = onPath ? (mini ? 1.2 : 1.8) : (mini ? 0.42 : Math.max(0.48, (e.weight || 0.2) * 1.15));
+        ctx.beginPath();
+        ctx.moveTo(pa.x, pa.y);
+        const mx = (pa.x + pb.x) / 2;
+        const my = (pa.y + pb.y) / 2;
+        const bend = Math.sin((hashText(e.a + e.b) % 628) / 100) * (mini ? 7 : 18);
+        ctx.quadraticCurveTo(mx + bend, my - bend, pb.x, pb.y);
+        ctx.stroke();
+      }
+    }
+
+    const ordered = nodes.filter(visibleNode).slice().sort((a, b) => (a.hot === b.hot ? 0 : a.hot ? 1 : -1));
+    for (const n of ordered) {
+      const p = worldProject(n, fit, mini);
+      if (p.x < -80 || p.y < -80 || p.x > w + 80 || p.y > h + 80) continue;
+      const color = TYPE_COLOR[n.kind] || TYPE_COLOR.other;
+      const pulse = 1 + Math.sin(t * 0.003 + n.phase) * 0.10;
+      const hotBoost = n.hot ? 1.45 : 1;
+      const focusBoost = n.id === selected ? 2.05 : n.id === hover ? 1.75 : neighbors.has(n.id) ? 1.30 : 1;
+      const base = mini ? 1.8 : 2.35;
+      const r = clamp((base + Math.sqrt(n.weight || 1) * (mini ? 0.72 : 0.92)) * pulse * hotBoost * focusBoost, mini ? 1.7 : 2.1, mini ? 8.5 : 16);
+
+      if (!mini && focusId && n.id !== focusId && !neighbors.has(n.id)) {
+        ctx.globalAlpha = 0.52;
+      } else {
+        ctx.globalAlpha = 1;
+      }
+
+      ctx.shadowBlur = n.hot || neighbors.has(n.id) || n.id === selected ? (mini ? 18 : 28) : (mini ? 8 : 12);
+      ctx.shadowColor = n.id === selected ? COLORS.text : n.hot ? "rgba(255,170,0,0.82)" : color;
+      ctx.fillStyle = n.hot ? COLORS.amber : color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (n.id === hover || n.id === selected) {
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = n.id === selected ? COLORS.text : COLORS.green;
+        ctx.lineWidth = mini ? 1 : 2;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r + (mini ? 4 : 7), 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    ctx.shadowBlur = 0;
+
+    if (!mini && state.showLabels) {
+      ctx.font = "10px Consolas, monospace";
+      ctx.textBaseline = "middle";
+      const labels = ordered
+        .filter((n) => n.hot || n.id === selected || n.id === hover || neighbors.has(n.id) || (state.camera.zoom > 1.05 && (n.kind === "core" || n.kind === "py")))
+        .slice(0, 120);
+      for (const n of labels) {
+        const p = worldProject(n, fit, false);
+        if (p.x < 0 || p.y < 0 || p.x > w || p.y > h) continue;
+        ctx.fillStyle = n.id === selected ? COLORS.text : neighbors.has(n.id) ? COLORS.green : "rgba(220,250,255,0.78)";
+        ctx.fillText(safeText(n.name, "node").slice(0, 44), p.x + 10, p.y - 4);
+      }
+    }
+
+    if (mini) {
+      ctx.fillStyle = "rgba(220,250,255,0.72)";
+      ctx.font = "9px Consolas, monospace";
+      ctx.fillText("LOCAL / " + String(state.layoutMode).toUpperCase(), 8, 14);
+    }
+  }
+
+  function startMini() {
+    if (state.miniRaf) cancelAnimationFrame(state.miniRaf);
+    const loop = (t) => {
+      const canvas = document.getElementById("gnx-local-mini-canvas");
+      const fit = fitCanvas(canvas);
+      if (fit) {
+        const dt = state.lastT ? clamp((t - state.lastT) / 16.67, 0.25, 2.5) : 1;
+        state.miniRot += 0.0028 * dt;
+        if (!state.fullOpen) tickPhysics(dt * 0.35);
+        drawGraph(fit.ctx, fit.w, fit.h, { mini: true });
+      }
+      state.miniRaf = requestAnimationFrame(loop);
+    };
+    state.miniRaf = requestAnimationFrame(loop);
+  }
+
+  function ensureHud() {
+    let hud = document.getElementById(HUD_ID);
+    if (hud) return hud;
+
+    hud = document.createElement("section");
+    hud.id = HUD_ID;
+    hud.className = "gnx-local-hud is-hidden";
+    hud.innerHTML = `
+      <div class="gnx-local-top">
+        <div class="gnx-local-brand">
+          <span class="gnx-local-orb"></span>
+          <div>
+            <div class="gnx-local-hud-title">GITNEXUS</div>
+            <div class="gnx-local-hud-sub">NEXUSGATE LOCAL CODEGRAPH</div>
+          </div>
+        </div>
+        <input class="gnx-local-search" type="search" placeholder="Search nodes, files, symbols... Ctrl+K" />
+        <button class="gnx-local-btn" data-fit>FIT</button>
+        <button class="gnx-local-btn" data-zoom-in>+</button>
+        <button class="gnx-local-btn" data-zoom-out>-</button>
+        <button class="gnx-local-btn" data-turn>TURN</button>
+        <button class="gnx-local-btn is-on" data-edges>EDGES</button>
+        <button class="gnx-local-btn is-on" data-labels>LABELS</button>
+        <button class="gnx-local-btn" data-core>CORE</button>
+        <button class="gnx-local-btn is-on" data-layout>FORCE</button>
+        <button class="gnx-local-btn" data-refresh>REFRESH</button>
+        <button class="gnx-local-btn gnx-local-close" data-close>CLOSE</button>
+      </div>
+      <main class="gnx-local-main">
+        <aside class="gnx-local-left">
+          <h3>EXPLORER</h3>
+          <div class="gnx-local-count-grid">
+            <div><span>FILES</span><b data-gnx-count="files">--</b></div>
+            <div><span>SYMBOLS</span><b data-gnx-count="symbols">--</b></div>
+            <div><span>EDGES</span><b data-gnx-count="edges">--</b></div>
+            <div><span>SOURCE</span><b data-gnx-source>local</b></div>
+          </div>
+          <div class="gnx-local-legend">
+            <span><i style="background:#55f7ff"></i>Python/Core</span>
+            <span><i style="background:#ffaa00"></i>Electron/UI</span>
+            <span><i style="background:#a855f7"></i>Tests</span>
+            <span><i style="background:#7dff4d"></i>State/Reports</span>
+            <span><i style="background:#5b7cff"></i>Docs</span>
+          </div>
+          <ol class="gnx-local-top-files" data-top-files></ol>
+        </aside>
+        <section class="gnx-local-canvas-shell">
+          <div class="gnx-local-hints">DRAG = PAN &nbsp;&nbsp; WHEEL = ZOOM &nbsp;&nbsp; ALT-DRAG / SHIFT-WHEEL = ROTATE &nbsp;&nbsp; SPACE = PAUSE</div>
+          <canvas id="gnx-local-full-canvas"></canvas>
+          <div class="gnx-local-status" data-status>No node selected.</div>
+        </section>
+        <aside class="gnx-local-right">
+          <h3>RECOMMENDATION</h3>
+          <div class="gnx-local-recommend">Dynamic local codegraph. Inspect connected pressure before durable mutation.</div>
+          <h3>TOP FILES</h3>
+          <ol class="gnx-local-top-files" data-top-files-right></ol>
+          <h3>SELECTED NODE</h3>
+          <div class="gnx-local-selected" data-selected>No node selected.</div>
+        </aside>
+      </main>
+      <footer class="gnx-local-foot">
+        <span>Evidence only.</span>
+        <span data-fps>FPS --</span>
+        <span>No NexusCell policy change.</span>
+        <span>No shell execution from model output.</span>
+      </footer>
+    `;
+    document.body.appendChild(hud);
+
+    q("[data-close]", hud).addEventListener("click", closeHud);
+    q("[data-fit]", hud).addEventListener("click", fitFull);
+    q("[data-zoom-in]", hud).addEventListener("click", () => { zoomAroundCenter(1.18); });
+    q("[data-zoom-out]", hud).addEventListener("click", () => { zoomAroundCenter(1 / 1.18); });
+    q("[data-turn]", hud).addEventListener("click", () => { state.target.rot += Math.PI / 9; });
+    q("[data-refresh]", hud).addEventListener("click", async () => {
+      await loadGraph(true);
+      fitFull();
+    });
+    q("[data-edges]", hud).addEventListener("click", (e) => {
+      state.showEdges = !state.showEdges;
+      e.currentTarget.classList.toggle("is-on", state.showEdges);
+    });
+    q("[data-labels]", hud).addEventListener("click", (e) => {
+      state.showLabels = !state.showLabels;
+      e.currentTarget.classList.toggle("is-on", state.showLabels);
+    });
+    q("[data-core]", hud).addEventListener("click", (e) => {
+      state.coreOnly = !state.coreOnly;
+      e.currentTarget.classList.toggle("is-on", state.coreOnly);
+    });
+    q("[data-layout]", hud).addEventListener("click", (e) => {
+      state.layoutMode = state.layoutMode === "force" ? "orbit" : state.layoutMode === "orbit" ? "circle" : "force";
+      e.currentTarget.textContent = LAYOUT_LABELS[state.layoutMode] || state.layoutMode.toUpperCase();
+    });
+    q(".gnx-local-search", hud).addEventListener("input", (e) => {
+      state.search = e.currentTarget.value || "";
+      const hit = firstSearchHit();
+      if (hit) focusNode(hit, false);
+    });
+
+    const canvas = q("#gnx-local-full-canvas", hud);
+    canvas.addEventListener("pointerdown", (ev) => {
+      canvas.setPointerCapture(ev.pointerId);
+      state.drag = { x: ev.clientX, y: ev.clientY, mode: ev.altKey ? "rotate" : "pan", moved: false };
+      state.velocity.x = 0;
+      state.velocity.y = 0;
+      state.velocity.rot = 0;
+      ev.preventDefault();
+    });
+    canvas.addEventListener("pointermove", (ev) => {
+      if (!state.drag) {
+        pickNode(ev, true);
+        return;
+      }
+      const dx = ev.clientX - state.drag.x;
+      const dy = ev.clientY - state.drag.y;
+      state.drag.x = ev.clientX;
+      state.drag.y = ev.clientY;
+      if (Math.abs(dx) + Math.abs(dy) > 2) state.drag.moved = true;
+      if (state.drag.mode === "rotate" || ev.altKey) {
+        const delta = dx * 0.008;
+        state.target.rot += delta;
+        state.velocity.rot = delta * 0.08;
+      } else {
+        const deltaX = dx / Math.max(0.1, state.target.zoom);
+        const deltaY = dy / Math.max(0.1, state.target.zoom);
+        state.target.x += deltaX;
+        state.target.y += deltaY;
+        state.velocity.x = deltaX * 0.10;
+        state.velocity.y = deltaY * 0.10;
+      }
+      ev.preventDefault();
+    });
+    canvas.addEventListener("pointerup", (ev) => {
+      const moved = state.drag?.moved;
+      state.drag = null;
+      try { canvas.releasePointerCapture(ev.pointerId); } catch {}
+      if (!moved) pickNode(ev, false);
+    });
+    canvas.addEventListener("pointerleave", () => { state.drag = null; });
+    canvas.addEventListener("wheel", (ev) => {
+      if (ev.shiftKey) {
+        const delta = ev.deltaY * -0.002;
+        state.target.rot += delta;
+        state.velocity.rot = delta * 0.08;
+      } else {
+        const factor = Math.exp(-ev.deltaY * 0.001);
+        zoomAtEvent(ev, factor);
+      }
+      ev.preventDefault();
+    }, { passive: false });
+    canvas.addEventListener("dblclick", (ev) => {
+      const n = pickNode(ev, false);
+      if (n) focusNode(n, true);
+      if (!n) fitFull();
+    });
+
+    return hud;
+  }
+
+  function updateHudStats() {
+    const g = state.graph;
+    const files = g?.counts?.files ?? 0;
+    const symbols = g?.counts?.symbols ?? 0;
+    const edges = g?.counts?.edges ?? 0;
+    qa("[data-gnx-count='files']").forEach((n) => { n.textContent = String(files); });
+    qa("[data-gnx-count='symbols']").forEach((n) => { n.textContent = String(symbols); });
+    qa("[data-gnx-count='edges']").forEach((n) => { n.textContent = String(edges); });
+    qa("[data-gnx-source]").forEach((n) => { n.textContent = safeText(g?.source || "local").slice(0, 14); });
+  }
+
+  function updateTopFiles() {
+    const graph = state.graph;
+    if (!graph) return;
+    const files = graph.nodes
+      .filter((n) => !n.id.startsWith("folder:") && n.id !== "nexus-gate")
+      .sort((a, b) => (b.degree + b.weight) - (a.degree + a.weight))
+      .slice(0, 28);
+
+    function fill(sel) {
+      qa(sel).forEach((list) => {
+        list.innerHTML = files.map((n, i) =>
+          `<li data-node-id="${encodeURIComponent(n.id)}"><span>${String(i + 1).padStart(2, "0")}</span><b>${safeText(n.path).slice(0, 52)}</b><em>${Math.round((n.degree || 0) + (n.weight || 1))}</em></li>`
+        ).join("");
+        qa("li", list).forEach((li) => {
+          li.addEventListener("click", () => {
+            const id = decodeURIComponent(li.getAttribute("data-node-id") || "");
+            const node = state.graph?.byId?.get(id);
+            if (node) focusNode(node, true);
+          });
+        });
+      });
+    }
+    fill("[data-top-files]");
+    fill("[data-top-files-right]");
+  }
+
+  function fitFull() {
+    const graph = state.graph;
+    if (!graph || !graph.nodes.length) return;
+    const canvas = document.getElementById("gnx-local-full-canvas");
+    const fit = fitCanvas(canvas);
+    if (!fit) return;
+
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    graph.nodes.filter(visibleNode).forEach((n) => {
+      minX = Math.min(minX, n.x);
+      maxX = Math.max(maxX, n.x);
+      minY = Math.min(minY, n.y);
+      maxY = Math.max(maxY, n.y);
+    });
+    const bw = Math.max(1, maxX - minX);
+    const bh = Math.max(1, maxY - minY);
+    state.target.zoom = clamp(Math.min(fit.w / bw, fit.h / bh) * 0.78, 0.08, 4);
+    state.target.x = -(minX + maxX) / 2;
+    state.target.y = -(minY + maxY) / 2;
+    state.target.rot = 0;
+  }
+
+  function zoomAroundCenter(factor) {
+    state.target.zoom = clamp(state.target.zoom * factor, 0.08, 9);
+    state.velocity.zoom = (factor - 1) * 0.012;
+  }
+
+  function zoomAtEvent(ev, factor) {
+    const oldZoom = state.target.zoom;
+    const newZoom = clamp(oldZoom * factor, 0.08, 9);
+    state.target.zoom = newZoom;
+    state.velocity.zoom = (factor - 1) * 0.012;
+  }
+
+  function screenToNearestNode(ev) {
+    const graph = state.graph;
+    if (!graph) return null;
+    const canvas = document.getElementById("gnx-local-full-canvas");
+    const fit = fitCanvas(canvas);
+    if (!fit) return null;
+    const rect = canvas.getBoundingClientRect();
+    const mx = ev.clientX - rect.left;
+    const my = ev.clientY - rect.top;
+
+    let best = null;
+    let bestD = 999999;
+    for (const n of graph.nodes) {
+      if (!visibleNode(n)) continue;
+      const p = worldProject(n, fit, false);
+      const d = Math.hypot(p.x - mx, p.y - my);
+      if (d < bestD) {
+        bestD = d;
+        best = n;
+      }
+    }
+    if (best && bestD < 24) return best;
+    return null;
+  }
+
+  function pickNode(ev, hoverOnly) {
+    const node = screenToNearestNode(ev);
+    if (hoverOnly) {
+      state.hover = node ? node.id : null;
+      return node;
+    }
+    if (node) {
+      state.selected = node.id;
+      const text = `${node.path} | kind=${node.kind} | degree=${node.degree} | weight=${Math.round(node.weight || 1)}`;
+      const sel = q("[data-selected]");
+      const status = q("[data-status]");
+      if (sel) sel.textContent = text;
+      if (status) status.textContent = "Selected: " + text;
+    } else {
+      state.selected = null;
+      const sel = q("[data-selected]");
+      const status = q("[data-status]");
+      if (sel) sel.textContent = "No node selected.";
+      if (status) status.textContent = "No node selected.";
+    }
+    return node;
+  }
+
+  function focusNode(node, tight) {
+    state.selected = node.id;
+    state.target.x = -node.x;
+    state.target.y = -node.y;
+    if (tight) state.target.zoom = clamp(state.target.zoom * 1.5, 0.45, 3.4);
+    const text = `${node.path} | kind=${node.kind} | degree=${node.degree} | weight=${Math.round(node.weight || 1)}`;
+    const sel = q("[data-selected]");
+    const status = q("[data-status]");
+    if (sel) sel.textContent = text;
+    if (status) status.textContent = "Focused: " + text;
+  }
+
+  function firstSearchHit() {
+    const graph = state.graph;
+    if (!graph) return null;
+    const s = String(state.search || "").toLowerCase().trim();
+    if (!s) return null;
+    return graph.nodes.find((n) => String(n.path).toLowerCase().includes(s) || String(n.name).toLowerCase().includes(s)) || null;
+  }
+
+  function startFull() {
+    if (state.fullRaf) cancelAnimationFrame(state.fullRaf);
+    state.lastT = performance.now();
+    const loop = (t) => {
+      if (!state.fullOpen) {
+        state.fullRaf = 0;
+        return;
+      }
+
+      const dt = clamp((t - state.lastT) / 16.67, 0.25, 2.5);
+      state.lastT = t;
+      state.frameCount += 1;
+      if (state.frameCount % 24 === 0) {
+        state.fps = Math.round(60 / dt);
+        const fps = q("[data-fps]");
+        if (fps) fps.textContent = `FPS ${state.fps}`;
+      }
+
+      tickPhysics(dt);
+      updateCamera(dt);
+
+      const canvas = document.getElementById("gnx-local-full-canvas");
+      const fit = fitCanvas(canvas);
+      if (fit) drawGraph(fit.ctx, fit.w, fit.h, { mini: false });
+      state.fullRaf = requestAnimationFrame(loop);
+    };
+    state.fullRaf = requestAnimationFrame(loop);
+  }
+
+  function openHud() {
+    ensureHud();
+    const hud = document.getElementById(HUD_ID);
+    hud.classList.remove("is-hidden");
+    state.fullOpen = true;
+    if (!state.graphLoaded) {
+      loadGraph().then(() => { updateHudStats(); updateTopFiles(); fitFull(); });
+    } else {
+      updateHudStats();
+      updateTopFiles();
+      fitFull();
+    }
+    startFull();
+  }
+
+  function closeHud() {
+    const hud = document.getElementById(HUD_ID);
+    if (hud) hud.classList.add("is-hidden");
+    state.fullOpen = false;
+    if (state.fullRaf) {
+      cancelAnimationFrame(state.fullRaf);
+      state.fullRaf = 0;
+    }
+  }
+
+  function scheduleDock() {
+    if (state.resizeTimer) clearTimeout(state.resizeTimer);
+    state.resizeTimer = setTimeout(() => ensureMiniDock(), 100);
+  }
+
+  function bindKeys() {
+    if (window.__gitnexusLocalHudKeysV052) return;
+    window.__gitnexusLocalHudKeysV052 = true;
+
+    window.addEventListener("keydown", (ev) => {
+      const hud = document.getElementById(HUD_ID);
+      const open = hud && !hud.classList.contains("is-hidden");
+      if (ev.ctrlKey && String(ev.key).toLowerCase() === "k") {
+        if (open) {
+          q(".gnx-local-search", hud)?.focus();
+          ev.preventDefault();
+        }
+        return;
+      }
+      if (!open) return;
+
+      const key = String(ev.key).toLowerCase();
+      const pan = 34 / Math.max(0.1, state.target.zoom);
+
+      if (key === "escape") { closeHud(); ev.preventDefault(); }
+      if (key === " ") { state.paused = !state.paused; ev.preventDefault(); }
+      if (key === "f") { const n = state.selected && state.graph?.byId?.get(state.selected); if (n) focusNode(n, true); ev.preventDefault(); }
+      if (key === "r") { fitFull(); ev.preventDefault(); }
+      if (key === "[" ) { state.target.rot -= 0.14; ev.preventDefault(); }
+      if (key === "]" ) { state.target.rot += 0.14; ev.preventDefault(); }
+      if (key === "+" || key === "=") { zoomAroundCenter(1.12); ev.preventDefault(); }
+      if (key === "-" || key === "_") { zoomAroundCenter(1 / 1.12); ev.preventDefault(); }
+      if (key === "arrowleft" || key === "a") { state.target.x += pan; ev.preventDefault(); }
+      if (key === "arrowright" || key === "d") { state.target.x -= pan; ev.preventDefault(); }
+      if (key === "arrowup" || key === "w") { state.target.y += pan; ev.preventDefault(); }
+      if (key === "arrowdown" || key === "s") { state.target.y -= pan; ev.preventDefault(); }
+    });
+  }
+
+  function boot() {
+    ensureMiniDock();
+    ensureHud();
+    if (!state.graphLoaded) loadGraph().then(() => { updateHudStats(); updateTopFiles(); });
+    startMini();
+    bindKeys();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
+  }
+
+  window.addEventListener("load", boot);
+  window.addEventListener("resize", scheduleDock);
+  window.nexusOpenGitNexus = openHud;
+  window.nexusCloseGitNexus = closeHud;
+  window.nexusGitNexusRefresh = () => loadGraph(true);
+})();
