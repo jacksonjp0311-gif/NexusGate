@@ -1,0 +1,21 @@
+/* GITNEXUS scope hygiene v0.3.8 */
+.gitnexus-scope-hidden,
+[data-gitnexus-scope-hidden="true"] {
+  display: none !important;
+}
+
+.gitnexus-scope-hygiene-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(125, 255, 77, 0.62);
+  color: #7dff4d;
+  background: rgba(0, 24, 10, 0.80);
+  font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 5px 9px;
+  margin-left: 8px;
+  white-space: nowrap;
+}
