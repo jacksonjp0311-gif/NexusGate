@@ -1,40 +1,43 @@
-# NexusGate GITNEXUS Interactive HUD v0.3.0
+# NexusGate GITNEXUS Interactive HUD v0.3.1
 
-v0.3.0 turns the small dock into a mini GitNexus UI and upgrades the full HUD
-into an interactive graph explorer.
+v0.3.1 finalizes the mini dock and keeps the full interactive explorer.
 
-## Borrowed interaction pattern
+## Mini dock
 
-The real GitNexus web app uses:
-- search/header controls,
-- file tree/filter panels,
-- graph canvas,
-- selected-node focus,
-- zoom/reset/layout controls,
-- highlighted/animated graph states.
+The main NexusGate dock is intentionally only:
 
-NexusGate ports the interaction pattern into a dependency-free native Electron
-renderer overlay.
+```text
+GITNEXUS header
+animated graph preview
+Open GitNexus HUD button
+```
 
-## New behavior
+No file/symbol/edge/risk cards render in the main dashboard slot.
 
-Small dock:
-- mini animated codegraph canvas,
-- file/symbol/edge/risk stats,
-- full HUD open button.
+## Full HUD controls
 
-Full HUD:
-- drag canvas to pan,
-- wheel to zoom,
-- Alt-drag or Turn button to rotate,
-- drag nodes to reposition/pin,
-- click nodes to inspect,
-- search files/symbols,
-- toggle edges, labels, changed-only, and symbols,
-- render file nodes, symbol nodes, import edges, and defines edges,
-- track changed files, hot imported files, connected nodes, and selected node details.
+- Drag canvas: pan
+- Mouse wheel: zoom
+- Alt-drag: rotate
+- Turn / left rotate / right rotate buttons
+- Drag node: move/pin node
+- Click node: inspect
+- Search: highlight files/symbols
+- Toggle edges, labels, changed-only, symbols
 
 ## Boundary
 
 Evidence only. No autonomous authority. No shell execution from model output.
 No NexusCell policy change. No Mode Selection Green HUD asset changes.
+
+## v0.3.1K body-tail hygiene
+
+The GITNEXUS HUD script is loaded from `<head>` with `defer`. This keeps the
+existing renderer body-tail script order intact, including the metrics HUD and
+mode-selection assets. The dock still mounts after DOM parsing.
+
+## v0.3.1M conversation bridge lineage
+
+The conversation output bridge lineage remains linked as `v0.2.1a`, `v0.2.1b`,
+and `v0.2.1c`. GITNEXUS does not own or collapse that lineage. GITNEXUS is
+loaded from head with `defer` and does not pollute the metrics/body tail.
