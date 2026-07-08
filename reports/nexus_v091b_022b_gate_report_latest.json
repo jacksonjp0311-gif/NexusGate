@@ -1,0 +1,285 @@
+{
+  "version": "0.9.1B",
+  "script": "022B",
+  "status": "sealed_pending_commit",
+  "gates": [
+    {
+      "gate": "01",
+      "name": "Show HEAD",
+      "status": "pass",
+      "started_at": "2026-07-08T14:52:24.644716+00:00",
+      "evidence": {
+        "argv": [
+          "git",
+          "log",
+          "-1",
+          "--oneline"
+        ],
+        "returncode": 0,
+        "stdout_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\git_head.stdout.log",
+        "stderr_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\git_head.stderr.log",
+        "stdout_tail": "98306e2 docs: add ChatGPT script doctrine and README lessons\n",
+        "stderr_tail": ""
+      },
+      "finished_at": "2026-07-08T14:52:24.697427+00:00"
+    },
+    {
+      "gate": "02",
+      "name": "RHP core loop registry visibility",
+      "status": "pass",
+      "started_at": "2026-07-08T14:52:24.698797+00:00",
+      "evidence": {
+        "registry": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\loops\\nexus_loop_registry.v0.1.json",
+        "exists": true
+      },
+      "finished_at": "2026-07-08T14:52:24.698797+00:00"
+    },
+    {
+      "gate": "03",
+      "name": "Patch loop cards, portal, README, doctrine",
+      "status": "pass",
+      "started_at": "2026-07-08T14:52:24.698797+00:00",
+      "evidence": {
+        "patched": true,
+        "files": [
+          "README.md",
+          "chatgpt/scripts.md",
+          "scripts/desktop/open_nexus_gate_console.ps1",
+          "nexus_gate/loops/cards.py",
+          "docs/runtime/NEXUS_LOOP_CARDS.md",
+          "state/loops/nexus_loop_cards.v0.9.1B.json",
+          "state/loops/nexus_loop_cards_latest.json",
+          "docs/versioning/NEXUS_CHANGELOG.md",
+          "docs/updates/UPDATE_CHART.md",
+          "tests/test_loop_cards_portal_v091b.py",
+          "reports/nexus_v091b_022b_gate_report_latest.json",
+          "reports/nexus_v091b_022b_gate_report_latest.md",
+          "reports/nexus_v091b_022b_machine_state_latest.json"
+        ]
+      },
+      "finished_at": "2026-07-08T14:52:24.884317+00:00"
+    },
+    {
+      "gate": "04",
+      "name": "Quarantine known untracked prior-wound tests",
+      "status": "pass",
+      "started_at": "2026-07-08T14:52:24.884317+00:00",
+      "evidence": {
+        "moved": []
+      },
+      "finished_at": "2026-07-08T14:52:24.885318+00:00"
+    },
+    {
+      "gate": "05",
+      "name": "Compile all Python source and tests",
+      "status": "pass",
+      "started_at": "2026-07-08T14:52:24.886317+00:00",
+      "evidence": {
+        "argv": [
+          "C:\\Program Files\\Python312\\python.exe",
+          "-m",
+          "compileall",
+          "nexus_gate",
+          "tests"
+        ],
+        "returncode": 0,
+        "stdout_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\compileall.stdout.log",
+        "stderr_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\compileall.stderr.log",
+        "stdout_tail": "Listing 'nexus_gate'...\nListing 'nexus_gate\\\\adapters'...\nListing 'nexus_gate\\\\bridge'...\nListing 'nexus_gate\\\\build'...\nListing 'nexus_gate\\\\compiler'...\nListing 'nexus_gate\\\\core'...\nListing 'nexus_gate\\\\domain'...\nListing 'nexus_gate\\\\evidence'...\nListing 'nexus_gate\\\\failure_intelligence'...\nListing 'nexus_gate\\\\feedback'...\nListing 'nexus_gate\\\\geometric_memory'...\nListing 'nexus_gate\\\\gitnexus'...\nListing 'nexus_gate\\\\gitnexus_bridge'...\nListing 'nexus_gate\\\\interconnect'...\nListing 'nexus_gate\\\\loops'...\nListing 'nexus_gate\\\\nexus_cell'...\nListing 'nexus_gate\\\\nexus_cell\\\\boundary'...\nListing 'nexus_gate\\\\nexus_cell\\\\runners'...\nListing 'nexus_gate\\\\nexus_cell\\\\secrets'...\nListing 'nexus_gate\\\\nexus_shell'...\nListing 'nexus_gate\\\\nn_router'...\nListing 'nexus_gate\\\\policies'...\nListing 'nexus_gate\\\\receptors'...\nListing 'nexus_gate\\\\reflection'...\nListing 'nexus_gate\\\\runtime'...\nListing 'nexus_gate\\\\schemas'...\nListing 'nexus_gate\\\\self_healing'...\nListing 'nexus_gate\\\\ui'...\nListing 'tests'...\nListing 'tests\\\\_quarantine_prior_wounds'...\nCompiling 'tests\\\\test_loop_cards_portal_v091b.py'...\n",
+        "stderr_tail": ""
+      },
+      "finished_at": "2026-07-08T14:52:25.137717+00:00"
+    },
+    {
+      "gate": "06A",
+      "name": "Run loop card portal tests",
+      "status": "pass",
+      "started_at": "2026-07-08T14:52:25.137717+00:00",
+      "evidence": {
+        "argv": [
+          "C:\\Program Files\\Python312\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_loop_cards_portal_v091b.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "stdout_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\test_loop_cards_portal_v091b.stdout.log",
+        "stderr_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\test_loop_cards_portal_v091b.stderr.log",
+        "stdout_tail": "",
+        "stderr_tail": "test_each_loop_card_is_hud_ready (test_loop_cards_portal_v091b.TestLoopCardsPortalV091B.test_each_loop_card_is_hud_ready) ... ok\ntest_loop_cards_match_registry (test_loop_cards_portal_v091b.TestLoopCardsPortalV091B.test_loop_cards_match_registry) ... ok\ntest_loop_cards_module_imports_and_builds (test_loop_cards_portal_v091b.TestLoopCardsPortalV091B.test_loop_cards_module_imports_and_builds) ... ok\ntest_portal_exposes_loop_cards (test_loop_cards_portal_v091b.TestLoopCardsPortalV091B.test_portal_exposes_loop_cards) ... ok\ntest_readme_and_chatgpt_doctrine_expose_loop_cards (test_loop_cards_portal_v091b.TestLoopCardsPortalV091B.test_readme_and_chatgpt_doctrine_expose_loop_cards) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.072s\n\nOK\n"
+      },
+      "finished_at": "2026-07-08T14:52:25.457469+00:00"
+    },
+    {
+      "gate": "06B",
+      "name": "Run README preservation tests",
+      "status": "pass",
+      "started_at": "2026-07-08T14:52:25.457469+00:00",
+      "evidence": {
+        "argv": [
+          "C:\\Program Files\\Python312\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_readme*.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "stdout_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\test_readme_preservation.stdout.log",
+        "stderr_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\test_readme_preservation.stderr.log",
+        "stdout_tail": "",
+        "stderr_tail": "t_documentation_map_includes_new_runtime_organs) ... ok\ntest_operator_surfaces_are_current (test_readme_freshness_v012.TestReadmeFreshnessV012.test_operator_surfaces_are_current) ... ok\ntest_readme_names_current_portal_and_neural_activity (test_readme_freshness_v012.TestReadmeFreshnessV012.test_readme_names_current_portal_and_neural_activity) ... ok\ntest_strict_compact_root_readme_ceiling (test_readme_freshness_v012.TestReadmeFreshnessV012.test_strict_compact_root_readme_ceiling) ... ok\ntest_bulk_readme_history_moved_to_docs (test_readme_rehydration_v082.TestReadmeRehydrationV082.test_bulk_readme_history_moved_to_docs) ... ok\ntest_entrypoints_and_algorithm_docs_exist (test_readme_rehydration_v082.TestReadmeRehydrationV082.test_entrypoints_and_algorithm_docs_exist) ... ok\ntest_mini_readmes_have_echo_location (test_readme_rehydration_v082.TestReadmeRehydrationV082.test_mini_readmes_have_echo_location) ... ok\ntest_root_readme_is_compact_but_preserves_required_markers (test_readme_rehydration_v082.TestReadmeRehydrationV082.test_root_readme_is_compact_but_preserves_required_markers) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.074s\n\nOK\n"
+      },
+      "finished_at": "2026-07-08T14:52:25.668422+00:00"
+    },
+    {
+      "gate": "07",
+      "name": "Emit loop cards packet",
+      "status": "pass",
+      "started_at": "2026-07-08T14:52:25.668422+00:00",
+      "evidence": {
+        "argv": [
+          "C:\\Program Files\\Python312\\python.exe",
+          "-m",
+          "nexus_gate.loops.cards",
+          "--root",
+          ".",
+          "--json"
+        ],
+        "returncode": 0,
+        "stdout_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\emit_loop_cards.stdout.log",
+        "stderr_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\emit_loop_cards.stderr.log",
+        "stdout_tail": "\"type\": \"command\",\n          \"command\": \"compiler\"\n        },\n        {\n          \"name\": \"git_status_visibility\",\n          \"type\": \"command\",\n          \"command\": \"git_status\"\n        }\n      ],\n      \"stages_summary\": [\n        \"compile_python:command\",\n        \"unit_tests:command\",\n        \"compiler_gate:command\",\n        \"git_status_visibility:command\"\n      ],\n      \"hud\": {\n        \"card_kind\": \"nexus_loop\",\n        \"display_group\": \"Promotion\",\n        \"primary_action\": \"inspect_or_run_through_governed_loop_runner\",\n        \"human_card_ready\": true\n      }\n    }\n  ],\n  \"authority_boundary\": {\n    \"autonomous_authority\": false,\n    \"arbitrary_command_execution\": false,\n    \"network_enabled\": false,\n    \"secrets_enabled\": false,\n    \"git_write_enabled\": false,\n    \"memory_promotion_enabled\": false,\n    \"self_authorization_enabled\": false,\n    \"human_authorization_required_for_command_execution\": true\n  },\n  \"claim_boundary\": \"Loop cards are human/HUD-readable surfaces for existing registry loops. They do not grant autonomous authority, shell authority, git write authority, memory promotion, network access, secret access, safety proof, security proof, or correctness proof.\"\n}\n",
+        "stderr_tail": ""
+      },
+      "finished_at": "2026-07-08T14:52:25.772009+00:00"
+    },
+    {
+      "gate": "08",
+      "name": "Run bounded tracked unittest suite per file",
+      "status": "pass",
+      "started_at": "2026-07-08T14:52:25.772009+00:00",
+      "evidence": {
+        "tracked_test_files": 98,
+        "results": [
+          {
+            "file": "test_repo_native_learning.py",
+            "returncode": 0,
+            "stderr_tail": "test_repo_native_learning_doctrine_and_index (test_repo_native_learning.TestRepoNativeLearning.test_repo_native_learning_doctrine_and_index) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+            "stdout_tail": ""
+          },
+          {
+            "file": "test_rhp_nexus_surface.py",
+            "returncode": 0,
+            "stderr_tail": "test_context_files_exist (test_rhp_nexus_surface.TestRhpNexusSurface.test_context_files_exist) ... ok\ntest_failure_modes_exist (test_rhp_nexus_surface.TestRhpNexusSurface.test_failure_modes_exist) ... ok\ntest_root_readme_trisection (test_rhp_nexus_surface.TestRhpNexusSurface.test_root_readme_trisection) ... ok\ntest_scripts_call_compiler_directly (test_rhp_nexus_surface.TestRhpNexusSurface.test_scripts_call_compiler_directly) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n",
+            "stdout_tail": ""
+          },
+          {
+            "file": "test_runtime_command_surface.py",
+            "returncode": 0,
+            "stderr_tail": "test_compact_command_has_runtime_mode (test_runtime_command_surface.TestRuntimeCommandSurface.test_compact_command_has_runtime_mode) ... ok\ntest_runtime_docs_and_scripts_exist (test_runtime_command_surface.TestRuntimeCommandSurface.test_runtime_docs_and_scripts_exist) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n",
+            "stdout_tail": ""
+          },
+          {
+            "file": "test_runtime_router.py",
+            "returncode": 0,
+            "stderr_tail": "test_missing_schema_rejects (test_runtime_router.TestNexusGateRuntime.test_missing_schema_rejects) ... ok\ntest_read_only_engages (test_runtime_router.TestNexusGateRuntime.test_read_only_engages) ... ok\ntest_unverified_tool_call_shadows (test_runtime_router.TestNexusGateRuntime.test_unverified_tool_call_shadows) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+            "stdout_tail": ""
+          },
+          {
+            "file": "test_self_healing_feedback.py",
+            "returncode": 0,
+            "stderr_tail": "test_command_surface_contains_heal_lane (test_self_healing_feedback.TestSelfHealingFeedback.test_command_surface_contains_heal_lane) ... ok\ntest_dry_run_and_apply_gate_do_not_write (test_self_healing_feedback.TestSelfHealingFeedback.test_dry_run_and_apply_gate_do_not_write) ... ok\ntest_recommendations_have_cms_required_shape (test_self_healing_feedback.TestSelfHealingFeedback.test_recommendations_have_cms_required_shape) ... ok\ntest_self_healing_report_compiles_without_autonomous_writes (test_self_healing_feedback.TestSelfHealingFeedback.test_self_healing_report_compiles_without_autonomous_writes) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.066s\n\nOK\n",
+            "stdout_tail": ""
+          },
+          {
+            "file": "test_spiral_core_portal_v012.py",
+            "returncode": 0,
+            "stderr_tail": "sts (test_spiral_core_portal_v012.TestSpiralCorePortalV012.test_doctrine_lines_and_legacy_markers_remain_visible_to_tests) ... ok\ntest_no_mojibake_or_unicode_block_art_remains_in_launcher (test_spiral_core_portal_v012.TestSpiralCorePortalV012.test_no_mojibake_or_unicode_block_art_remains_in_launcher) ... ok\ntest_selector_block_is_left_aligned (test_spiral_core_portal_v012.TestSpiralCorePortalV012.test_selector_block_is_left_aligned) ... ok\ntest_selector_color_hierarchy_is_blue_and_cyan_only (test_spiral_core_portal_v012.TestSpiralCorePortalV012.test_selector_color_hierarchy_is_blue_and_cyan_only) ... ok\ntest_spiral_core_identity_is_default_menu_face (test_spiral_core_portal_v012.TestSpiralCorePortalV012.test_spiral_core_identity_is_default_menu_face) ... ok\ntest_spiral_core_lines_stay_within_terminal_width (test_spiral_core_portal_v012.TestSpiralCorePortalV012.test_spiral_core_lines_stay_within_terminal_width) ... ok\ntest_visual_balance_has_black_hole_core_not_flat_band (test_spiral_core_portal_v012.TestSpiralCorePortalV012.test_visual_balance_has_black_hole_core_not_flat_band) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.012s\n\nOK\n",
+            "stdout_tail": ""
+          },
+          {
+            "file": "test_spiral_gate_logo_v010.py",
+            "returncode": 0,
+            "stderr_tail": "test_close_j_text_alignment_is_centered (test_spiral_gate_logo_v010.TestSpiralGateLogoV010.test_close_j_text_alignment_is_centered) ... ok\ntest_cross_buffer_energy_bar_is_removed (test_spiral_gate_logo_v010.TestSpiralGateLogoV010.test_cross_buffer_energy_bar_is_removed) ... ok\ntest_docs_lock_boundary (test_spiral_gate_logo_v010.TestSpiralGateLogoV010.test_docs_lock_boundary) ... ok\ntest_gear_vortex_and_send_hooks_remain (test_spiral_gate_logo_v010.TestSpiralGateLogoV010.test_gear_vortex_and_send_hooks_remain) ... ok\ntest_logo_is_compact_and_has_no_backing_box (test_spiral_gate_logo_v010.TestSpiralGateLogoV010.test_logo_is_compact_and_has_no_backing_box) ... ok\ntest_manifest_records_close_h_corrections (test_spiral_gate_logo_v010.TestSpiralGateLogoV010.test_manifest_records_close_h_corrections) ... ok\ntest_tnn_import_order_wound_is_closed (test_spiral_gate_logo_v010.TestSpiralGateLogoV010.test_tnn_import_order_wound_is_closed) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.005s\n\nOK\n",
+            "stdout_tail": ""
+          },
+          {
+            "file": "test_strict_compiler_surface.py",
+            "returncode": 0,
+            "stderr_tail": "test_cold_evidence_docs_exist (test_strict_compiler_surface.TestStrictCompilerSurface.test_cold_evidence_docs_exist) ... ok\ntest_compact_command_has_strict_mode (test_strict_compiler_surface.TestStrictCompilerSurface.test_compact_command_has_strict_mode) ... ok\ntest_strict_compiler_scripts_exist (test_strict_compiler_surface.TestStrictCompilerSurface.test_strict_compiler_scripts_exist) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n",
+            "stdout_tail": ""
+          },
+          {
+            "file": "test_tesseract_neural_network_minimal.py",
+            "returncode": 0,
+            "stderr_tail": "test_chat_brain_files_exist (test_tesseract_neural_network_minimal.TesseractNeuralNetworkChatBrainTests.test_chat_brain_files_exist) ... ok\ntest_chat_engine_offline_path_is_bounded (test_tesseract_neural_network_minimal.TesseractNeuralNetworkChatBrainTests.test_chat_engine_offline_path_is_bounded) ... ok\ntest_contract_contains_tnn_role (test_tesseract_neural_network_minimal.TesseractNeuralNetworkChatBrainTests.test_contract_contains_tnn_role) ... ok\ntest_manifest_marks_mistral_chat_brain (test_tesseract_neural_network_minimal.TesseractNeuralNetworkChatBrainTests.test_manifest_marks_mistral_chat_brain) ... ok\ntest_tnn_surface_offline_path_returns_chat_packet (test_tesseract_neural_network_minimal.TesseractNeuralNetworkChatBrainTests.test_tnn_surface_offline_path_returns_chat_packet) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 4.649s\n\nOK\n",
+            "stdout_tail": ""
+          },
+          {
+            "file": "test_tui_electron_bridge.py",
+            "returncode": 0,
+            "stderr_tail": "test_bridge_docs_and_state_exist (test_tui_electron_bridge.TestTuiElectronBridge.test_bridge_docs_and_state_exist) ... ok\ntest_snapshot_surface_pair_is_documented (test_tui_electron_bridge.TestTuiElectronBridge.test_snapshot_surface_pair_is_documented) ... ok\ntest_tui_bridge_commands_exist (test_tui_electron_bridge.TestTuiElectronBridge.test_tui_bridge_commands_exist) ... ok\ntest_ui_alias_routes_to_terminal_tui (test_tui_electron_bridge.TestTuiElectronBridge.test_ui_alias_routes_to_terminal_tui) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n",
+            "stdout_tail": ""
+          },
+          {
+            "file": "test_tui_hud_operator_surface.py",
+            "returncode": 0,
+            "stderr_tail": "test_electron_renderer_uses_hud_layout_without_new_authority (test_tui_hud_operator_surface.TestTuiHudOperatorSurface.test_electron_renderer_uses_hud_layout_without_new_authority) ... ok\ntest_hud_docs_and_index_exist (test_tui_hud_operator_surface.TestTuiHudOperatorSurface.test_hud_docs_and_index_exist) ... ok\ntest_power_shell_tui_contains_hud_regions (test_tui_hud_operator_surface.TestTuiHudOperatorSurface.test_power_shell_tui_contains_hud_regions) ... ok\ntest_snapshot_contains_hud_bridge_markup (test_tui_hud_operator_surface.TestTuiHudOperatorSurface.test_snapshot_contains_hud_bridge_markup) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n",
+            "stdout_tail": ""
+          },
+          {
+            "file": "test_ui_balanced_chat_layout.py",
+            "returncode": 0,
+            "stderr_tail": "test_css_targets_real_renderer_classes_without_chat_rewrite (test_ui_balanced_chat_layout.TestUiBalancedChatLayout.test_css_targets_real_renderer_classes_without_chat_rewrite) ... ok\ntest_doc_records_repair_intent (test_ui_balanced_chat_layout.TestUiBalancedChatLayout.test_doc_records_repair_intent) ... ok\ntest_index_wires_l_repair_and_removes_old_experiments (test_ui_balanced_chat_layout.TestUiBalancedChatLayout.test_index_wires_l_repair_and_removes_old_experiments) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n",
+            "stdout_tail": ""
+          }
+        ]
+      },
+      "finished_at": "2026-07-08T14:53:03.271623+00:00"
+    },
+    {
+      "gate": "09",
+      "name": "Run Nexus compiler",
+      "status": "pass",
+      "started_at": "2026-07-08T14:53:03.271623+00:00",
+      "evidence": {
+        "argv": [
+          "C:\\Program Files\\Python312\\python.exe",
+          "-m",
+          "nexus_gate.compiler",
+          "--root",
+          ".",
+          "--json"
+        ],
+        "returncode": 0,
+        "stdout_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\nexus_compiler.stdout.log",
+        "stderr_log": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\compact_compile_logs\\v091b_022b\\nexus_compiler.stderr.log",
+        "stdout_tail": "         },\n          {\n            \"file\": \"test_tui_electron_bridge.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"....\\n----------------------------------------------------------------------\\nRan 4 tests in 0.002s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_tui_hud_operator_surface.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"....\\n----------------------------------------------------------------------\\nRan 4 tests in 0.002s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_ui_balanced_chat_layout.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"...\\n----------------------------------------------------------------------\\nRan 3 tests in 0.001s\\n\\nOK\\n\"\n          }\n        ]\n      }\n    },\n    {\n      \"gate\": \"ledger_appendable\",\n      \"status\": \"pass\",\n      \"message\": \"Ledger is appendable.\",\n      \"evidence\": {\n        \"path\": \"ledger\\\\nexus_gate_ledger.v0.1.0.jsonl\"\n      }\n    }\n  ],\n  \"claim_boundary\": \"Local development gate only. Not a production validation, safety proof, security proof, or correctness proof.\"\n}\n",
+        "stderr_tail": ""
+      },
+      "finished_at": "2026-07-08T14:53:28.774780+00:00"
+    }
+  ],
+  "machine_state": {
+    "repo": "NexusGate",
+    "target": "v0.9.1B",
+    "script": "022B",
+    "state": "sealed_pending_commit",
+    "active_wound": null,
+    "last_good_gate": "09",
+    "stage_policy": "intended_files_only",
+    "push_requested": true,
+    "started_at": "2026-07-08T14:52:24.643713+00:00",
+    "updated_at": "2026-07-08T14:53:28.774780+00:00"
+  },
+  "claim_boundary": "Local development gate only. Not a production validation, safety proof, security proof, or correctness proof."
+}

@@ -940,6 +940,76 @@ function Invoke-NexusResourceMenu {
     }
 }
 
+
+function Invoke-NexusLoopCardsConsole {
+    while ($true) {
+        Write-Host ""
+        Write-Host "========================================"
+        Write-Host " NEXUS LOOPS / HUD CARDS"
+        Write-Host "========================================"
+        Write-Host "Rule: loop cards describe governed loops; they do not self-authorize execution."
+        Write-Host ""
+
+        $latestPath = Join-Path $RepoRoot "state\loops\nexus_loop_cards_latest.json"
+        $versionedPath = Join-Path $RepoRoot "state\loops\nexus_loop_cards.v0.9.1B.json"
+        $cardsPath = $latestPath
+        if (-not (Test-Path -LiteralPath $cardsPath -PathType Leaf)) {
+            $cardsPath = $versionedPath
+        }
+
+        if (-not (Test-Path -LiteralPath $cardsPath -PathType Leaf)) {
+            Write-FAIL ("Loop card packet missing: {0}" -f $cardsPath)
+            Write-NG "Choose R to rebuild from loops/nexus_loop_registry.v0.1.json."
+        }
+        else {
+            try {
+                $packet = Get-Content -LiteralPath $cardsPath -Raw | ConvertFrom-Json
+                Write-OK ("Loop card packet: {0} cards" -f $packet.card_count)
+                Write-NG ("Source registry: {0}" -f $packet.source_registry)
+                Write-Host ""
+                foreach ($card in @($packet.cards | Sort-Object order)) {
+                    $fn = $card.PSObject.Properties["function"].Value
+                    Write-Host ("[{0}] {1}" -f $card.order, $card.title) -ForegroundColor Cyan
+                    Write-Host ("  loop    : {0}" -f $card.loop_id)
+                    Write-Host ("  function: {0}" -f $fn)
+                    Write-Host ("  use     : {0}" -f $card.operator_use)
+                    Write-Host ("  command : {0}" -f $card.command_surface) -ForegroundColor Blue
+                    Write-Host ("  auth    : human_required={0}; mutates={1}; stop_on_failure={2}" -f $card.requires_human_authorization, $card.mutates, $card.stop_on_failure)
+                    Write-Host ""
+                }
+            }
+            catch {
+                Write-FAIL ("Loop card JSON parse failed: {0}" -f $_.Exception.Message)
+            }
+        }
+
+        Write-Host "R. Rebuild loop cards from registry"
+        Write-Host "J. Open loop card JSON"
+        Write-Host "D. Open loop card docs"
+        Write-Host "B. Back to main menu"
+        Write-Host ""
+        $loopChoice = Read-Host "Loop Cards"
+
+        if ($loopChoice -eq "R" -or $loopChoice -eq "r") {
+            python -m nexus_gate.loops.cards --root $RepoRoot --json | Out-Null
+            if ($LASTEXITCODE -eq 0) { Write-OK "Loop cards rebuilt." } else { Write-FAIL "Loop card rebuild failed." }
+            Read-Host "Press Enter to continue"
+        }
+        elseif ($loopChoice -eq "J" -or $loopChoice -eq "j") {
+            if (Test-Path -LiteralPath $cardsPath -PathType Leaf) { explorer.exe $cardsPath | Out-Null }
+        }
+        elseif ($loopChoice -eq "D" -or $loopChoice -eq "d") {
+            explorer.exe (Join-Path $RepoRoot "docs\runtime\NEXUS_LOOP_CARDS.md") | Out-Null
+        }
+        elseif ($loopChoice -eq "B" -or $loopChoice -eq "b") {
+            return
+        }
+        else {
+            Write-NG "Unknown Loop Cards choice."
+        }
+    }
+}
+
 function Write-Portal {
     param(
         [string]$Text,
@@ -1002,6 +1072,7 @@ function Show-Menu {
     Write-Portal "  [11] NexusShell / Operator                  -> full-scope no-execution shell" "Blue"
     Write-Portal "  [12] NexusCell - Containment Cell / Gate    -> containment execution gate" "Blue"
     Write-Portal "  [13] Neural Activity / Cathedral            -> bioelectric popout HUD" "Cyan"
+    Write-Portal "  [14] Nexus Loops / Cards                   -> JSON loop cards / HUD-ready registry" "Blue"
     Write-Portal "  [Q]  Quit" "Blue"
     Write-Host ""
     Write-Portal "========================================================================================================================" "Cyan"
@@ -1027,6 +1098,7 @@ function Show-Menu {
     # Write-Host "[11] NexusShell / Operator"
     # Write-Host "[12] NexusCell - Containment Cell / Execution Gate"
     # Write-Host "[13] Neural Activity / Cathedral"
+    # Write-Host "[14] Nexus Loops / Cards"
     # Write-Host "Gateway style: cyber ice-blue / green / yellow portal."
 }
 
@@ -1078,6 +1150,9 @@ while ($true) {
     }
     elseif ($choice -eq "13") {
         Invoke-NexusNeuralActivity
+    }
+    elseif ($choice -eq "14") {
+        Invoke-NexusLoopCardsConsole
     }
     elseif ($choice -eq "Q" -or $choice -eq "q") {
         Write-OK "closing NEXUS Gate launcher"

@@ -233,3 +233,12 @@ Keeps no-arbitrary-shell/no-network/no-secrets/no-git-mutation/no-self-authoriza
 - Records v0.9.1 seal lessons: gates are certificates, do not backtrack without changed inputs, heal only the active wound, and stage intended files only.
 - Adds `chatgpt/scripts.md` as the required read-before-coding doctrine for ChatGPT/script generated patches.
 - Keeps human authorization, compiler visibility, and no-autonomous-authority boundaries unchanged.
+
+## v0.9.1B - Loop Cards Portal
+
+- Preserved canonical local loops as HUD-ready JSON cards.
+- Added `state/loops/nexus_loop_cards.v0.9.1B.json` and latest alias.
+- Added `docs/runtime/NEXUS_LOOP_CARDS.md`.
+- Surfaced `[14] Nexus Loops / Cards` in the Spiral Core Portal.
+- Recorded ChatGPT/script doctrine: loops are registry -> JSON card -> portal card -> future HUD surface.
+- Boundary: loop cards describe governed loops; they do not grant autonomous authority, shell authority, git write authority, memory promotion, network access, secret access, safety proof, security proof, or correctness proof.

@@ -112,3 +112,20 @@ Every generated closer should print or write a compact state packet:
 ## Non-Authority Boundary
 
 This doctrine improves repository continuity. It does not grant autonomous authority, production safety proof, security proof, correctness proof, provider authority, memory write authority, shell authority, commit authority, or push authority.
+
+## Loop Cards and Portal Preservation
+
+Every durable local loop must remain visible as data, not only prose. When a loop is added or changed, preserve the canonical registry and emit a HUD-ready JSON card with:
+
+```json
+{
+  "loop_id": "name",
+  "description": "what the loop is",
+  "function": "what the loop does for the coding process",
+  "command_surface": "how a governed runner invokes it",
+  "authority_boundary": "what the loop cannot authorize",
+  "hud": "human card metadata"
+}
+```
+
+The Spiral Core Portal must expose the loop cards through a human-readable surface. Future HUDs should render `state/loops/nexus_loop_cards_latest.json` instead of scraping terminal text. Loops are preserved as registry -> JSON card -> portal card -> future HUD surface.

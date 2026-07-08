@@ -38,6 +38,7 @@ Open GitHub repository Open GitHub README Open docs/ENTRYPOINTS.md Open docs/ver
 | GitHub / README / Docs | Portal submenu for repo link, README, entrypoints, changelog, and local docs. |
 | NexusCell | Execution-governance organ: authority, risk, policy, receipt, ledger, and return-seal evidence for scripts. |
 | Neural Activity | Canonical visual organ: live embedded Neural Cathedral HUD preview; OPEN launches full program. |
+| Nexus Loops / Cards | HUD-ready JSON cards for RHP, script evolution, validation, failure intelligence, and promotion loops. |
 ## NEXUS Connective Point
 ```text
 Spiral Core Portal = gateway face. NEXUS GATE = reflective intelligence layer for AI systems. Electron = presentation/operator HUD. Doctor = diagnosis / safe-clean / retry cockpit. HANDOFF = human-authorized action bridge. NexusCell = execution-governance organ. Neural Activity = visual organ. Evidence decides what may compound.
@@ -150,6 +151,7 @@ python -m unittest discover -s tests python -m nexus_gate.compiler --root . --js
 | Neural Activity | `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` |
 | Spiral Core Portal | `docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md` |
 | GITNEXUS impact bridge | `docs/gitnexus/NEXUS_GITNEXUS_IMPACT_BRIDGE.md` |
+| NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |
 | Geometric memory router | `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md` |
 | Geometry manifest | `state/nexus_geometric_memory_manifest.v0.8.3.json` |
 ## What this is not
@@ -157,5 +159,7 @@ Not production validated. Not a safety proof. Not a security proof. Not a correc
 ## Compact Law
 ```text
 Reflective intelligence is permitted. Autonomous authority is not. Organic evolution is allowed. Ungated compounding is not.
+
+v0.9.1A = README/script doctrine. v0.9.1B = loop cards surfaced in the Spiral Core Portal. Gates are certificates; active wounds resume without backtracking; loop cards preserve system loops for a future human HUD.
 ```
 - `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` - neural activity / cathedral HUD surface.

@@ -98,3 +98,4 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 
 | v0.9.1 | Origin Alignment + GITNEXUS Impact Bridge | current | Aligns version surfaces, fixes README encoding, adds read-only GITNEXUS impact bridge, NexusCell lane, compiler guards, and tests. |
 | v0.9.1A | README Professionalization + ChatGPT Script Doctrine | stable | Adds read-before-coding doctrine, gate resume lessons, and compact README improvements without changing runtime authority. |
+| v0.9.1B | Loop Cards Portal | Loop registry preserved as HUD-ready JSON cards and exposed in Spiral Core Portal. | compiler + bounded tests | Loop cards are descriptive evidence surfaces, not execution authority. |

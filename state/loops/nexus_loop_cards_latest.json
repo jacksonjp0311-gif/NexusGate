@@ -1,0 +1,347 @@
+{
+  "schema": "NEXUS_LOOP_CARD_SET.v0.9.1B",
+  "version": "0.9.1B",
+  "system": "NEXUS_LOOP_CARDS",
+  "generated_for": "NEXUS_GATE_v0.9.1B",
+  "source_registry": "loops/nexus_loop_registry.v0.1.json",
+  "generated_at": "2026-07-08T14:52:25.759590+00:00",
+  "card_count": 5,
+  "cards": [
+    {
+      "schema": "NEXUS_LOOP_CARD.v0.9.1B",
+      "order": 1,
+      "loop_id": "failure-intelligence",
+      "title": "Failure Intelligence",
+      "description": "Read latest wound and failure surfaces so the next patch closes the exact wound instead of drifting.",
+      "function": "Read failure surfaces so the next closer heals the active wound rather than drifting.",
+      "operator_use": "Use after a failed gate to identify the next exact repair target.",
+      "command_surface": "python -m nexus_gate.loops.runner --root . --loop failure-intelligence --intent \"<intent>\" --json",
+      "powershell_surface": ".\\scripts\\nexus.ps1 meta-loop -Loop failure-intelligence -Tag \"<intent>\"",
+      "mutates": false,
+      "requires_human_authorization": false,
+      "stop_on_failure": false,
+      "authority_boundary": {
+        "autonomous_authority": false,
+        "arbitrary_command_execution": false,
+        "network_enabled": false,
+        "secrets_enabled": false,
+        "git_write_enabled": false,
+        "memory_promotion_enabled": false,
+        "self_authorization_enabled": false,
+        "human_authorization_required_for_command_execution": true
+      },
+      "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
+      "stages": [
+        {
+          "name": "compiled_failure_json",
+          "type": "read",
+          "path": "reports/nexus_compiled_failure_latest.json"
+        },
+        {
+          "name": "compiled_failure_md",
+          "type": "read",
+          "path": "reports/nexus_compiled_failure_latest.md"
+        },
+        {
+          "name": "failure_chart",
+          "type": "read",
+          "path": "docs/failure_modes/FAILURE_MODE_CHART.md"
+        },
+        {
+          "name": "update_chart",
+          "type": "read",
+          "path": "docs/updates/UPDATE_CHART.md"
+        }
+      ],
+      "stages_summary": [
+        "compiled_failure_json:read",
+        "compiled_failure_md:read",
+        "failure_chart:read",
+        "update_chart:read"
+      ],
+      "hud": {
+        "card_kind": "nexus_loop",
+        "display_group": "Failure Intelligence",
+        "primary_action": "inspect_or_run_through_governed_loop_runner",
+        "human_card_ready": true
+      }
+    },
+    {
+      "schema": "NEXUS_LOOP_CARD.v0.9.1B",
+      "order": 2,
+      "loop_id": "reflective-validation",
+      "title": "Reflective Validation",
+      "description": "Run compiler/test gates and convert failure into compact local intelligence.",
+      "function": "Run compile/test/compiler gates and convert failures into compact wound intelligence.",
+      "operator_use": "Use after a patch when you need gate evidence and wound capture.",
+      "command_surface": "python -m nexus_gate.loops.runner --root . --loop reflective-validation --intent \"<intent>\" --json",
+      "powershell_surface": ".\\scripts\\nexus.ps1 meta-loop -Loop reflective-validation -Tag \"<intent>\"",
+      "mutates": false,
+      "requires_human_authorization": true,
+      "stop_on_failure": true,
+      "authority_boundary": {
+        "autonomous_authority": false,
+        "arbitrary_command_execution": false,
+        "network_enabled": false,
+        "secrets_enabled": false,
+        "git_write_enabled": false,
+        "memory_promotion_enabled": false,
+        "self_authorization_enabled": false,
+        "human_authorization_required_for_command_execution": true
+      },
+      "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
+      "stages": [
+        {
+          "name": "compile_python",
+          "type": "command",
+          "command": "compileall"
+        },
+        {
+          "name": "unit_tests",
+          "type": "command",
+          "command": "unit_tests"
+        },
+        {
+          "name": "compiler_gate",
+          "type": "command",
+          "command": "compiler"
+        }
+      ],
+      "stages_summary": [
+        "compile_python:command",
+        "unit_tests:command",
+        "compiler_gate:command"
+      ],
+      "hud": {
+        "card_kind": "nexus_loop",
+        "display_group": "Validation",
+        "primary_action": "inspect_or_run_through_governed_loop_runner",
+        "human_card_ready": true
+      }
+    },
+    {
+      "schema": "NEXUS_LOOP_CARD.v0.9.1B",
+      "order": 3,
+      "loop_id": "rhp-core",
+      "title": "Rhp Core",
+      "description": "Deep repository-origin rehydration before patching or compounding.",
+      "function": "Rehydrate repository origin before patching, compounding, or agent continuation.",
+      "operator_use": "Use first when resuming from chat, memory, or a dirty session.",
+      "command_surface": "python -m nexus_gate.loops.runner --root . --loop rhp-core --intent \"<intent>\" --json",
+      "powershell_surface": ".\\scripts\\nexus.ps1 meta-loop -Loop rhp-core -Tag \"<intent>\"",
+      "mutates": false,
+      "requires_human_authorization": false,
+      "stop_on_failure": false,
+      "authority_boundary": {
+        "autonomous_authority": false,
+        "arbitrary_command_execution": false,
+        "network_enabled": false,
+        "secrets_enabled": false,
+        "git_write_enabled": false,
+        "memory_promotion_enabled": false,
+        "self_authorization_enabled": false,
+        "human_authorization_required_for_command_execution": true
+      },
+      "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
+      "stages": [
+        {
+          "name": "anchor_root_readme",
+          "type": "read",
+          "path": "README.md"
+        },
+        {
+          "name": "docs_index",
+          "type": "read",
+          "path": "docs/README.md"
+        },
+        {
+          "name": "entrypoints",
+          "type": "read",
+          "path": "docs/ENTRYPOINTS.md"
+        },
+        {
+          "name": "core_algorithms",
+          "type": "read",
+          "path": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md"
+        },
+        {
+          "name": "script_evolution_contract",
+          "type": "read",
+          "path": "docs/runtime/NEXUS_SCRIPT_EVOLUTION_RUN_CONTRACT.md"
+        },
+        {
+          "name": "reflective_local_loop",
+          "type": "read",
+          "path": "docs/runtime/NEXUS_REFLECTIVE_LOCAL_LOOP.md"
+        },
+        {
+          "name": "future_handoff",
+          "type": "read",
+          "path": "docs/runtime/NEXUS_FUTURE_SYSTEM_REHYDRATION_HANDOFF.md"
+        },
+        {
+          "name": "failure_chart",
+          "type": "read",
+          "path": "docs/failure_modes/FAILURE_MODE_CHART.md"
+        },
+        {
+          "name": "update_chart",
+          "type": "read",
+          "path": "docs/updates/UPDATE_CHART.md"
+        },
+        {
+          "name": "latest_compiler_report",
+          "type": "read",
+          "path": "reports/nexus_compile_report_latest.json"
+        }
+      ],
+      "stages_summary": [
+        "anchor_root_readme:read",
+        "docs_index:read",
+        "entrypoints:read",
+        "core_algorithms:read",
+        "script_evolution_contract:read",
+        "reflective_local_loop:read",
+        "future_handoff:read",
+        "failure_chart:read",
+        "update_chart:read",
+        "latest_compiler_report:read"
+      ],
+      "hud": {
+        "card_kind": "nexus_loop",
+        "display_group": "Origin",
+        "primary_action": "inspect_or_run_through_governed_loop_runner",
+        "human_card_ready": true
+      }
+    },
+    {
+      "schema": "NEXUS_LOOP_CARD.v0.9.1B",
+      "order": 4,
+      "loop_id": "script-evolution",
+      "title": "Script Evolution",
+      "description": "Plan and bound a generated script so the script triggers local intelligence instead of duplicating it.",
+      "function": "Shape generated scripts so ChatGPT/Codex work through local governed intelligence instead of loose patches.",
+      "operator_use": "Use before generating a new All-One closer or code-changing script.",
+      "command_surface": "python -m nexus_gate.loops.runner --root . --loop script-evolution --intent \"<intent>\" --json",
+      "powershell_surface": ".\\scripts\\nexus.ps1 meta-loop -Loop script-evolution -Tag \"<intent>\"",
+      "mutates": false,
+      "requires_human_authorization": false,
+      "stop_on_failure": true,
+      "authority_boundary": {
+        "autonomous_authority": false,
+        "arbitrary_command_execution": false,
+        "network_enabled": false,
+        "secrets_enabled": false,
+        "git_write_enabled": false,
+        "memory_promotion_enabled": false,
+        "self_authorization_enabled": false,
+        "human_authorization_required_for_command_execution": true
+      },
+      "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
+      "stages": [
+        {
+          "name": "rhp_core",
+          "type": "loop_ref",
+          "loop": "rhp-core"
+        },
+        {
+          "name": "cell_doctor_visibility",
+          "type": "command",
+          "command": "cell_doctor"
+        },
+        {
+          "name": "compiler_visibility",
+          "type": "command",
+          "command": "compiler"
+        },
+        {
+          "name": "git_status_visibility",
+          "type": "command",
+          "command": "git_status"
+        }
+      ],
+      "stages_summary": [
+        "rhp_core:loop_ref",
+        "cell_doctor_visibility:command",
+        "compiler_visibility:command",
+        "git_status_visibility:command"
+      ],
+      "hud": {
+        "card_kind": "nexus_loop",
+        "display_group": "Script Governance",
+        "primary_action": "inspect_or_run_through_governed_loop_runner",
+        "human_card_ready": true
+      }
+    },
+    {
+      "schema": "NEXUS_LOOP_CARD.v0.9.1B",
+      "order": 5,
+      "loop_id": "validate-promote",
+      "title": "Validate Promote",
+      "description": "Verify candidate patch and stop before commit/push unless the human-authorized outer script performs it.",
+      "function": "Validate a candidate patch and stop before durable mutation unless a human-authorized outer script promotes it.",
+      "operator_use": "Use as the final local validation loop before commit/push authority.",
+      "command_surface": "python -m nexus_gate.loops.runner --root . --loop validate-promote --intent \"<intent>\" --json",
+      "powershell_surface": ".\\scripts\\nexus.ps1 meta-loop -Loop validate-promote -Tag \"<intent>\"",
+      "mutates": false,
+      "requires_human_authorization": true,
+      "stop_on_failure": true,
+      "authority_boundary": {
+        "autonomous_authority": false,
+        "arbitrary_command_execution": false,
+        "network_enabled": false,
+        "secrets_enabled": false,
+        "git_write_enabled": false,
+        "memory_promotion_enabled": false,
+        "self_authorization_enabled": false,
+        "human_authorization_required_for_command_execution": true
+      },
+      "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
+      "stages": [
+        {
+          "name": "compile_python",
+          "type": "command",
+          "command": "compileall"
+        },
+        {
+          "name": "unit_tests",
+          "type": "command",
+          "command": "unit_tests"
+        },
+        {
+          "name": "compiler_gate",
+          "type": "command",
+          "command": "compiler"
+        },
+        {
+          "name": "git_status_visibility",
+          "type": "command",
+          "command": "git_status"
+        }
+      ],
+      "stages_summary": [
+        "compile_python:command",
+        "unit_tests:command",
+        "compiler_gate:command",
+        "git_status_visibility:command"
+      ],
+      "hud": {
+        "card_kind": "nexus_loop",
+        "display_group": "Promotion",
+        "primary_action": "inspect_or_run_through_governed_loop_runner",
+        "human_card_ready": true
+      }
+    }
+  ],
+  "authority_boundary": {
+    "autonomous_authority": false,
+    "arbitrary_command_execution": false,
+    "network_enabled": false,
+    "secrets_enabled": false,
+    "git_write_enabled": false,
+    "memory_promotion_enabled": false,
+    "self_authorization_enabled": false,
+    "human_authorization_required_for_command_execution": true
+  },
+  "claim_boundary": "Loop cards are human/HUD-readable surfaces for existing registry loops. They do not grant autonomous authority, shell authority, git write authority, memory promotion, network access, secret access, safety proof, security proof, or correctness proof."
+}
