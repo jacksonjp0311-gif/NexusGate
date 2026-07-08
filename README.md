@@ -34,7 +34,7 @@ Open GitHub repository Open GitHub README Open docs/ENTRYPOINTS.md Open docs/ver
 Spiral Core Portal = gateway face. NEXUS GATE = reflective intelligence layer for AI systems. Electron = presentation/operator HUD. Doctor = diagnosis / safe-clean / retry cockpit. HANDOFF = human-authorized action bridge. NexusCell = execution-governance organ. Neural Activity = visual organ. Evidence decides what may compound.
 ```
 ## Human Director Box
-NEXUS GATE is currently at the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub/docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, and durable GitHub compounding under human authority.
+NEXUS GATE is currently at the v0.9.1 origin-aligned GITNEXUS impact bridge line while preserving the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub / README / Docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, GITNEXUS impact evidence, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, GITNEXUS impact packets, and durable GitHub compounding under human authority.
 ## Geometric Memory Router
 NEXUS Geometric Memory Router is the next rehydration layer. It does not train or mutate model weights. It maps every request through four typed axes before repair or compounding:
 ```text
@@ -117,10 +117,11 @@ python -m unittest discover -s tests python -m nexus_gate.compiler --root . --js
 | Failure intelligence | `docs/runtime/NEXUS_FAILURE_INTELLIGENCE_DISTRIBUTOR.md` |
 | Future system handoff | `docs/runtime/NEXUS_FUTURE_SYSTEM_REHYDRATION_HANDOFF.md` |
 | Stale/process recording | `docs/runtime/NEXUS_STALE_INFORMATION_AND_PROCESS_RECORDING.md` |
+| GitHub repo | `https://github.com/jacksonjp0311-gif/NexusGate` |
 | Balanced chat layout | `docs/runtime/NEXUS_UI_BALANCED_CHAT_LAYOUT.md` |
 | Neural Activity | `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` |
 | Spiral Core Portal | `docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md` |
-| GitHub repo | `https://github.com/jacksonjp0311-gif/NexusGate` |
+| GITNEXUS impact bridge | `docs/gitnexus/NEXUS_GITNEXUS_IMPACT_BRIDGE.md` |
 | Geometric memory router | `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md` |
 | Geometry manifest | `state/nexus_geometric_memory_manifest.v0.8.3.json` |
 ## What this is not
@@ -129,4 +130,4 @@ Not production validated. Not a safety proof. Not a security proof. Not a correc
 ```text
 Reflective intelligence is permitted. Autonomous authority is not. Organic evolution is allowed. Ungated compounding is not.
 ```
-- `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` Ã¢â‚¬â€ neural activity / cathedral HUD surface.
+- `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` - neural activity / cathedral HUD surface.

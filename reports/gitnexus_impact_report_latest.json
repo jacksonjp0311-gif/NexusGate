@@ -1,0 +1,661 @@
+{
+  "boundary": {
+    "autonomous_authority": false,
+    "execution_enabled": false,
+    "git_write_enabled": false,
+    "mutation_enabled": false,
+    "network_enabled": false,
+    "read_only": true,
+    "secrets_enabled": false
+  },
+  "candidate_sources": [
+    "state/gitnexus/gitnexus_graph_latest.json",
+    "GITNEXUS/state/gitnexus_graph_latest.json",
+    "reports/gitnexus_report_latest.json",
+    "GITNEXUS/reports/gitnexus_report_latest.json",
+    "state/interconnect_graph.v0.2.2.json"
+  ],
+  "claim_boundary": "GITNEXUS impact packets are local read-only evidence. They do not execute code, mutate files, write git history, access secrets/network, or grant autonomous authority.",
+  "generated_utc": "2026-07-08T13:51:58.251953+00:00",
+  "graph_source": "state/gitnexus/gitnexus_graph_latest.json",
+  "impact_count": 915,
+  "impact_packet_id": "93f5eec3562e7f1c7852c4ea4b28c263d9a065bbdaa210ce7fd7e6267cc89c97",
+  "impacted_files": [
+    {
+      "impact_score": 4,
+      "path": "nexus_gate/gitnexus_bridge/__init__.py",
+      "tags": [
+        "gitnexus",
+        "core"
+      ]
+    },
+    {
+      "impact_score": 4,
+      "path": "nexus_gate/gitnexus_bridge/__main__.py",
+      "tags": [
+        "gitnexus",
+        "core"
+      ]
+    },
+    {
+      "impact_score": 4,
+      "path": "nexus_gate/gitnexus_bridge/engine.py",
+      "tags": [
+        "gitnexus",
+        "core"
+      ]
+    },
+    {
+      "impact_score": 4,
+      "path": "tests/test_gitnexus_bridge.py",
+      "tags": [
+        "gitnexus",
+        "test"
+      ]
+    },
+    {
+      "impact_score": 4,
+      "path": "tests/test_gitnexus_hud_assets.py",
+      "tags": [
+        "gitnexus",
+        "test"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "GITNEXUS/README.md",
+      "tags": [
+        "gitnexus",
+        "doc"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "GITNEXUS/hud/gitnexus_hud.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "GITNEXUS/hud/gitnexus_hud.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "GITNEXUS/hud/index.html",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "GITNEXUS/ledger/gitnexus_ledger.jsonl",
+      "tags": [
+        "gitnexus"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "GITNEXUS/reports/gitnexus_report_latest.json",
+      "tags": [
+        "gitnexus"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "GITNEXUS/reports/gitnexus_report_latest.json.bak_scope_hygiene_x",
+      "tags": [
+        "gitnexus"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "GITNEXUS/state/gitnexus_graph_latest.json",
+      "tags": [
+        "gitnexus"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "GITNEXUS/state/gitnexus_graph_latest.json.bak_scope_hygiene_x",
+      "tags": [
+        "gitnexus"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "GITNEXUS/state/gitnexus_manifest.v0.1.0.json",
+      "tags": [
+        "gitnexus"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_BIG_HUD.md",
+      "tags": [
+        "gitnexus",
+        "doc"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_CORE_PORT.md",
+      "tags": [
+        "gitnexus",
+        "doc"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_HUD_PLACEMENT.md",
+      "tags": [
+        "gitnexus",
+        "doc"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_INTERACTIVE_HUD.md",
+      "tags": [
+        "gitnexus",
+        "doc"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_SCOPE_HYGIENE.md",
+      "tags": [
+        "gitnexus",
+        "doc"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.css",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js",
+      "tags": [
+        "gitnexus",
+        "ui"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "ledger/gitnexus/gitnexus_ledger.jsonl",
+      "tags": [
+        "gitnexus"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "reports/compact_compile_logs/gitnexus_scope_hygiene_cleaner.py",
+      "tags": [
+        "gitnexus",
+        "evidence"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "reports/gitnexus_report_latest.json",
+      "tags": [
+        "gitnexus",
+        "evidence"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "reports/gitnexus_report_latest.json.bak_scope_hygiene_x",
+      "tags": [
+        "gitnexus",
+        "evidence"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "scripts/nexus_gitnexus.ps1",
+      "tags": [
+        "gitnexus"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "state/gitnexus/gitnexus_graph_latest.json",
+      "tags": [
+        "gitnexus",
+        "evidence"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "state/gitnexus/gitnexus_graph_latest.json.bak_scope_hygiene_x",
+      "tags": [
+        "gitnexus",
+        "evidence"
+      ]
+    },
+    {
+      "impact_score": 3,
+      "path": "state/gitnexus/gitnexus_manifest.v0.1.0.json",
+      "tags": [
+        "gitnexus",
+        "evidence"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "labs/reflective_neural_assembly/tests/test_reflective_neural_assembly.py",
+      "tags": [
+        "test"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/README.md",
+      "tags": [
+        "core",
+        "doc"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/__init__.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/adapters/__init__.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/adapters/base.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/adapters/compile.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/adapters/local_demo.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/adapters/registry.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/bridge/__init__.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/bridge/compile.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/bridge/runtime.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/bridge/runtime_compiler.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/bridge/session.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/cli.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/compiler/README.md",
+      "tags": [
+        "core",
+        "doc"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/compiler/__init__.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/compiler/__main__.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/compiler/compiler.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/compiler/gates.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/core/README.md",
+      "tags": [
+        "core",
+        "doc"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/core/__init__.py",
+      "tags": [
+        "core"
+      ]
+    },
+    {
+      "impact_score": 2,
+      "path": "nexus_gate/core/packets.py",
+      "tags": [
+        "core"
+      ]
+    }
+  ],
+  "intent": "compiler visibility gate",
+  "mode": "gitnexus_impact_bridge_read_only",
+  "nexus_cell_lane": "gitnexus-impact",
+  "outputs": {
+    "packet": "state/gitnexus/gitnexus_impact_packet_latest.json",
+    "report_json": "reports/gitnexus_impact_report_latest.json",
+    "report_md": "reports/gitnexus_impact_report_latest.md"
+  },
+  "top_impacted_files": [
+    "nexus_gate/gitnexus_bridge/__init__.py",
+    "nexus_gate/gitnexus_bridge/__main__.py",
+    "nexus_gate/gitnexus_bridge/engine.py",
+    "tests/test_gitnexus_bridge.py",
+    "tests/test_gitnexus_hud_assets.py",
+    "GITNEXUS/README.md",
+    "GITNEXUS/hud/gitnexus_hud.css",
+    "GITNEXUS/hud/gitnexus_hud.js",
+    "GITNEXUS/hud/index.html",
+    "GITNEXUS/ledger/gitnexus_ledger.jsonl",
+    "GITNEXUS/reports/gitnexus_report_latest.json",
+    "GITNEXUS/reports/gitnexus_report_latest.json.bak_scope_hygiene_x"
+  ],
+  "version": "0.9.1"
+}

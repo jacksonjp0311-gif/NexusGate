@@ -12,6 +12,7 @@ CONTROLLED_LANES: Dict[str, Dict[str, object]] = {
     "cell-context":{"argv":["python","-m","nexus_gate.nexus_cell.context_bridge","--root",".","--intent","NexusCell controlled context lane","--json"],"mutates":False,"description":"Build context packet."},
     "cell-bridge":{"argv":["python","-m","nexus_gate.nexus_cell.bridge","--root",".","--intent","NexusCell controlled bridge lane","--json"],"mutates":False,"description":"Build core bridge packet."},
     "meta-loop":{"argv":["python","-m","nexus_gate.loops.runner","--root",".","--loop","rhp-core","--intent","NexusCell controlled meta-loop lane"],"mutates":False,"description":"Build meta-loop rehydration packet."},
+    "gitnexus-impact":{"argv":["python","-m","nexus_gate.gitnexus.impact","--root",".","--intent","NexusCell controlled bridge lane","--json"],"mutates":False,"description":"Build read-only GITNEXUS impact packet."},
 }
 FORBIDDEN_CAPABILITIES=["network","secrets","service_install","registry","host_mount","git_write"]
 BOUNDARY={"arbitrary_command_execution":False,"network_enabled":False,"secrets_enabled":False,"host_mount_enabled":False,"git_write_enabled":False,"rollback_claim_enabled":False,"self_authorization_enabled":False}

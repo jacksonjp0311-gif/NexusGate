@@ -16,9 +16,11 @@ Versioning docs = rehydration continuity.
 v0.8.1D Mode Selection HUD button
 v0.8.1E Mode Selection fixed pop-out HUD
 v0.8.2D README/doc rehydration and documentation compression
+v0.9.0 Meta Loop Registry
+v0.9.1 Origin-aligned GITNEXUS impact bridge
 ```
 
-## Selected Historical Anchors
+## Selected Historical Anchors## Selected Historical Anchors## Selected Historical Anchors
 
 ### v0.2.4b - PowerShell HUD TUI
 
@@ -191,3 +193,35 @@ Keeps no-arbitrary-shell/no-network/no-secrets/no-git-mutation/no-self-authoriza
 - Added canonical loops: `rhp-core`, `script-evolution`, `reflective-validation`, `failure-intelligence`, and `validate-promote`.
 - Added PowerShell and Bash trigger surfaces.
 - Boundary: meta-loops are local orchestration receipts, not autonomous authority, arbitrary shell execution, memory promotion, commit authority, push authority, or proof of correctness/security/safety.
+
+## v0.9.1 - Origin Alignment + GITNEXUS Impact Bridge
+
+- Aligns root README, changelog Current Line, ROADMAP, and pyproject identity to the active reflective-intelligence line.
+- Fixes the README encoding wound in the Neural Activity documentation map row.
+- Adds read-only GITNEXUS impact packet generation for codegraph evidence.
+- Adds NexusCell controlled lane visibility for `gitnexus-impact` without execution, mutation, network, secrets, git write, or self-authorization.
+- Adds compiler guards for version alignment, README encoding cleanliness, and GITNEXUS impact bridge visibility.
+
+
+## v0.9.1 - Origin-Aligned GITNEXUS Impact Bridge
+
+- Aligns README, changelog current line, roadmap, and pyproject identity.
+- Adds README encoding guard.
+- Adds `nexus_gate.gitnexus.impact` read-only impact bridge.
+- Adds `gitnexus-impact` NexusCell controlled lane.
+- Adds compiler visibility for version alignment and GITNEXUS impact evidence.
+- Boundary: impact packets are evidence only; no execution, mutation, network, secrets, git write, or autonomous authority.
+
+
+## v0.8.2D README/doc rehydration and documentation compression
+
+- Preserved compact root README and moved bulk history to docs.
+
+
+## v0.9.1 - Origin-aligned GITNEXUS Impact Bridge
+
+- Aligns root identity surfaces to v0.9.1.
+- Adds read-only GITNEXUS impact packet generation.
+- Adds NexusCell `gitnexus-impact` controlled lane as evidence only.
+- Adds compiler visibility for version alignment, README encoding cleanliness, and GITNEXUS impact bridge surfaces.
+- Boundary: no execution authority, no git write authority from model output, no autonomous mutation.

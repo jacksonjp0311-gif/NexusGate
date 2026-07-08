@@ -93,3 +93,7 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 - Added canonical loops: `rhp-core`, `script-evolution`, `reflective-validation`, `failure-intelligence`, and `validate-promote`.
 - Added PowerShell and Bash trigger surfaces.
 - Boundary: meta-loops are local orchestration receipts, not autonomous authority, arbitrary shell execution, memory promotion, commit authority, push authority, or proof of correctness/security/safety.
+
+## v0.9.1 - Origin Alignment + GITNEXUS Impact Bridge
+
+| v0.9.1 | Origin Alignment + GITNEXUS Impact Bridge | current | Aligns version surfaces, fixes README encoding, adds read-only GITNEXUS impact bridge, NexusCell lane, compiler guards, and tests. |

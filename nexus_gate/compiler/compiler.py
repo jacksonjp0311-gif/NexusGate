@@ -97,6 +97,12 @@ REQUIRED_PATHS = [
     "docs/nexus_cell/NEXUS_CELL_PLANNER.md",
     "docs/nexus_cell/NEXUS_CELL_ARCHITECTURE.md",
     "NexusCell/README.md",
+    "docs/gitnexus/NEXUS_GITNEXUS_IMPACT_BRIDGE.md",
+    "state/gitnexus/gitnexus_impact_manifest.v0.9.1.json",
+    "nexus_gate/gitnexus/__init__.py",
+    "nexus_gate/gitnexus/__main__.py",
+    "nexus_gate/gitnexus/impact.py",
+    "tests/test_gitnexus_impact_bridge_v091.py",
 ]
 
 MINI_README_DIRS = [
@@ -297,12 +303,12 @@ class NexusCompiler:
     def gate_update_chart_current(self) -> None:
         path = self.root / "docs/updates/UPDATE_CHART.md"
         text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
-        required = ["v0.1.5", "Strict compiler", "Cold Evidence", "No version step without update chart entry"]
+        required = ["v0.1.5", "v0.9.1", "GITNEXUS Impact Bridge", "No version step without update chart entry"]
         missing = [item for item in required if item not in text]
         if missing:
-            self.add("update_chart_current", "fail", "Update chart missing current v0.1.5 state.", {"missing": missing})
+            self.add("update_chart_current", "fail", "Update chart missing current v0.9.1 state.", {"missing": missing})
             return
-        self.add("update_chart_current", "pass", "Update chart includes current v0.1.5 state.", {"required": required})
+        self.add("update_chart_current", "pass", "Update chart includes current v0.9.1 state.", {"required": required})
 
     def gate_cold_evidence_contracts(self) -> None:
         doc = self.root / "docs/evidence/COLD_EVIDENCE_ENGINE.md"
@@ -635,6 +641,65 @@ class NexusCompiler:
             "claim_boundary": packet.get("claim_boundary"),
         })
 
+
+
+
+    def gate_version_alignment_current_line(self) -> None:
+        checks = {
+            "README.md": ["v0.9.1"],
+            "ROADMAP.md": ["v0.9.1", "Status: current"],
+            "docs/versioning/NEXUS_CHANGELOG.md": ["v0.9.1", "Origin-aligned GITNEXUS impact bridge"],
+            "pyproject.toml": ["version = \"0.9.1\""],
+        }
+        failures = []
+        for rel, tokens in checks.items():
+            path = self.root / rel
+            text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
+            missing = [token for token in tokens if token not in text]
+            if missing:
+                failures.append({"path": rel, "missing": missing})
+        pyproject_text = (self.root / "pyproject.toml").read_text(encoding="utf-8", errors="ignore") if (self.root / "pyproject.toml").exists() else ""
+        if "v0.9.1" not in pyproject_text and "version = \"0.9.1\"" not in pyproject_text:
+            failures.append({"path": "pyproject.toml", "missing": ["v0.9.1 or version = 0.9.1"]})
+        if failures:
+            self.add("version_alignment_current_line", "fail", "v0.9.1 identity missing from required surfaces.", {"failures": failures})
+            return
+        self.add("version_alignment_current_line", "pass", "v0.9.1 identity is aligned across README, changelog, roadmap, and pyproject.", {"surfaces": sorted(checks)})
+
+    def gate_readme_encoding_clean(self) -> None:
+        path = self.root / "README.md"
+        text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
+        bad = ["Ãƒ", "Ã¢â‚¬", "Ã¢â‚¬â€"]
+        found = [token for token in bad if token in text]
+        if found:
+            self.add("readme_encoding_clean", "fail", "README contains encoding residue.", {"found": found})
+            return
+        self.add("readme_encoding_clean", "pass", "README encoding residue is clean.", {})
+
+
+    def gate_gitnexus_impact_visibility(self) -> None:
+        required = [
+            "docs/gitnexus/NEXUS_GITNEXUS_IMPACT_BRIDGE.md",
+            "state/gitnexus/gitnexus_impact_manifest.v0.9.1.json",
+            "nexus_gate/gitnexus/impact.py",
+            "tests/test_gitnexus_impact_bridge_v091.py",
+        ]
+        missing = [rel for rel in required if not (self.root / rel).exists()]
+        if missing:
+            self.add("gitnexus_impact_visibility", "fail", "GITNEXUS impact bridge surface missing.", {"missing": missing})
+            return
+        try:
+            from nexus_gate.gitnexus.impact import build_impact_packet
+            packet = build_impact_packet(self.root)
+        except Exception as exc:
+            self.add("gitnexus_impact_visibility", "fail", "GITNEXUS impact packet failed to build.", {"error": str(exc)})
+            return
+        boundary = packet.get("boundary", {})
+        if boundary.get("execution_enabled") is not False or boundary.get("repo_mutation_enabled") is not False or boundary.get("git_write_enabled") is not False:
+            self.add("gitnexus_impact_visibility", "fail", "GITNEXUS impact boundary drifted.", {"boundary": boundary})
+            return
+        self.add("gitnexus_impact_visibility", "pass", "GITNEXUS impact bridge is compiler-visible and read-only bounded.", {"mode": packet.get("mode"), "impact_count": packet.get("impact_counts", {})})
+
     def gate_python_compile(self) -> None:
         ok = compileall.compile_dir(str(self.root / "nexus_gate"), quiet=1)
         tests_ok = compileall.compile_dir(str(self.root / "tests"), quiet=1)
@@ -658,17 +723,28 @@ class NexusCompiler:
         self.add("route_contracts", "pass", "Core route contracts hold.", {"decisions": decisions})
 
     def gate_unit_tests(self) -> None:
-        cmd = [sys.executable, "-m", "unittest", "discover", "-s", "tests"]
-        try:
-            proc = subprocess.run(cmd, cwd=str(self.root), capture_output=True, text=True, timeout=60)
-        except subprocess.TimeoutExpired as exc:
-            self.add("unit_tests", "fail", "Unit tests timed out.", {"cmd": cmd, "timeout": 60, "error": str(exc)})
+        test_dir = self.root / "tests"
+        files = sorted(path.name for path in test_dir.glob("test_*.py") if path.is_file()) if test_dir.exists() else []
+        results = []
+        failures = []
+        for name in files:
+            cmd = [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", name]
+            try:
+                proc = subprocess.run(cmd, cwd=str(self.root), capture_output=True, text=True, timeout=90)
+            except subprocess.TimeoutExpired as exc:
+                failures.append({"file": name, "reason": "timeout", "error": str(exc)})
+                break
+            item = {"file": name, "returncode": proc.returncode, "stdout_tail": proc.stdout[-1000:], "stderr_tail": proc.stderr[-1000:]}
+            results.append(item)
+            if proc.returncode != 0:
+                failures.append(item)
+                break
+        evidence = {"mode": "bounded_per_file_unittest", "count": len(files), "results": results[-20:]}
+        if failures:
+            evidence["failures"] = failures
+            self.add("unit_tests", "fail", "Bounded per-file unit tests failed.", evidence)
             return
-        evidence = {"cmd": cmd, "returncode": proc.returncode, "stdout_tail": proc.stdout[-2000:], "stderr_tail": proc.stderr[-2000:]}
-        if proc.returncode == 0:
-            self.add("unit_tests", "pass", "Unit tests passed.", evidence)
-            return
-        self.add("unit_tests", "fail", "Unit tests failed.", evidence)
+        self.add("unit_tests", "pass", "Bounded per-file unit tests passed.", evidence)
 
     def gate_ledger_appendable(self) -> None:
         ledger_path = self.root / "ledger" / "nexus_gate_ledger.v0.1.0.jsonl"
@@ -695,6 +771,9 @@ class NexusCompiler:
         self.gate_forbidden_bypass_markers()
         self.gate_direct_compiler_calls()
         self.gate_compact_commands()
+        self.gate_version_alignment_current_line()
+        self.gate_readme_encoding_clean()
+        self.gate_gitnexus_impact_visibility()
         self.gate_nexus_cell_planner_visibility()
         self.gate_nexus_cell_context_bridge_visibility()
         self.gate_nexus_cell_core_bridge_visibility()
@@ -708,7 +787,7 @@ class NexusCompiler:
         status = "pass" if not failed else "fail"
         return CompileReport(
             system="NEXUS GATE",
-            version="0.1.5-strict-cold-evidence-compiler",
+            version="0.9.1-origin-gitnexus-impact-compiler",
             root=str(self.root),
             status=status,
             generated_at_utc=datetime.now(timezone.utc).isoformat(),

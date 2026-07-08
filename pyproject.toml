@@ -1,7 +1,7 @@
 [project]
 name = "nexus-gate"
-version = "0.1.3"
-description = "Governed Agentic Transfer Layer for Modular AI Frameworks"
+version = "0.9.1"
+description = "Reflective Intelligence Layer for AI Systems"
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{ name = "James Paul Jackson" }]
@@ -11,3 +11,4 @@ nexus = "nexus_gate.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["nexus_gate*"]
+# current-line: v0.9.1 origin-aligned GITNEXUS impact bridge

@@ -1,17 +1,17 @@
 {
   "system": "NEXUS GATE",
-  "version": "0.1.5-strict-cold-evidence-compiler",
+  "version": "0.9.1-origin-gitnexus-impact-compiler",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-04T01:09:14.256179+00:00",
-  "duration_ms": 5426,
+  "generated_at_utc": "2026-07-08T14:08:31.955417+00:00",
+  "duration_ms": 24018,
   "gates": [
     {
       "gate": "required_paths",
       "status": "pass",
       "message": "All required paths exist.",
       "evidence": {
-        "count": 55
+        "count": 84
       }
     },
     {
@@ -55,7 +55,7 @@
       "status": "pass",
       "message": "Schema, registry, state, context, and route JSON files parse.",
       "evidence": {
-        "count": 55
+        "count": 62
       }
     },
     {
@@ -99,12 +99,12 @@
     {
       "gate": "update_chart_current",
       "status": "pass",
-      "message": "Update chart includes current v0.1.5 state.",
+      "message": "Update chart includes current v0.9.1 state.",
       "evidence": {
         "required": [
           "v0.1.5",
-          "Strict compiler",
-          "Cold Evidence",
+          "v0.9.1",
+          "GITNEXUS Impact Bridge",
           "No version step without update chart entry"
         ]
       }
@@ -183,6 +183,124 @@
       }
     },
     {
+      "gate": "version_alignment_current_line",
+      "status": "pass",
+      "message": "v0.9.1 identity is aligned across README, changelog, roadmap, and pyproject.",
+      "evidence": {
+        "surfaces": [
+          "README.md",
+          "ROADMAP.md",
+          "docs/versioning/NEXUS_CHANGELOG.md",
+          "pyproject.toml"
+        ]
+      }
+    },
+    {
+      "gate": "readme_encoding_clean",
+      "status": "pass",
+      "message": "README encoding residue is clean.",
+      "evidence": {}
+    },
+    {
+      "gate": "gitnexus_impact_visibility",
+      "status": "pass",
+      "message": "GITNEXUS impact bridge is compiler-visible and read-only bounded.",
+      "evidence": {
+        "mode": "gitnexus_impact_bridge_read_only",
+        "impact_count": {
+          "impacted": 240,
+          "hot": 21
+        }
+      }
+    },
+    {
+      "gate": "nexus_cell_planner_visibility",
+      "status": "pass",
+      "message": "NexusCell planner is compiler-visible and read-only bounded.",
+      "evidence": {
+        "version": "v0.8.8",
+        "status": "full_core_runtime_visible_controlled",
+        "planner_mode": "read_only_planner_no_execution",
+        "authority_decision": "engage",
+        "risk_score": 0.05,
+        "visible_outputs": {
+          "latest_report_exists": false,
+          "latest_state_exists": false
+        },
+        "claim_boundary": "NexusCell planner scores intent and emits evidence only; it does not execute, sandbox, rollback, mutate git, expose secrets, or authorize itself."
+      }
+    },
+    {
+      "gate": "nexus_cell_context_bridge_visibility",
+      "status": "pass",
+      "message": "NexusCell context bridge is compiler-visible and read-only bounded.",
+      "evidence": {
+        "version": "v0.8.8",
+        "status": "full_core_runtime_visible_controlled",
+        "mode": "read_only_context_bridge_no_execution",
+        "context_ref_count": 6,
+        "claim_boundary": "Context bridge selects bounded evidence references for review; it does not execute, sandbox, read secrets, use network, mutate git, or claim rollback."
+      }
+    },
+    {
+      "gate": "nexus_cell_core_bridge_visibility",
+      "status": "pass",
+      "message": "NexusCell core bridge is compiler-visible and no-execution bounded.",
+      "evidence": {
+        "version": "v0.8.8",
+        "status": "full_core_runtime_visible_controlled",
+        "mode": "nexus_cell_core_bridge_no_execution",
+        "cell_phase": "read_only_ready",
+        "claim_boundary": "NexusCell bridge packet is a read-only governance handoff; it does not run commands, create containers, mount host paths, expose secrets, use network, mutate git, claim rollback, or self-authorize."
+      }
+    },
+    {
+      "gate": "nexus_cell_full_core_runtime_visibility",
+      "status": "pass",
+      "message": "NexusCell full core runtime is compiler-visible and controlled.",
+      "evidence": {
+        "version": "v0.8.8",
+        "status": "full_core_runtime_visible_controlled",
+        "mode": "nexus_cell_full_core_controlled_runner",
+        "lane": "cell-bridge",
+        "authority": {
+          "version": "0.8.8",
+          "may_build_packet": true,
+          "may_execute_controlled_lane": false,
+          "human_authorized": false,
+          "execute_requested": false,
+          "decision": "packet_only",
+          "reasons": [],
+          "boundary": "Authority applies only to controlled internal lanes. It is not arbitrary shell authority."
+        },
+        "receipt_id": "553cf4c38f1fb88b037508cc1a2aec42348eea1b2ea66dd474c98e5d0826ee45",
+        "claim_boundary": "NexusCell full core runs only named controlled internal lanes when explicitly human-authorized; it does not provide arbitrary shell execution, sandbox proof, host mounts, secrets, network, git mutation, rollback, or autonomous authority."
+      }
+    },
+    {
+      "gate": "nexus_shell_operator_visibility",
+      "status": "pass",
+      "message": "NexusShell operator is compiler-visible and no-execution bounded.",
+      "evidence": {
+        "version": "v0.8.6",
+        "status": "operator_shell_visible_no_execution",
+        "mode": "nexus_shell_operator_no_execution",
+        "available_commands": [
+          "status",
+          "rehydrate",
+          "compile",
+          "doctor",
+          "cell-plan",
+          "cell-context",
+          "cell-bridge",
+          "cell-run",
+          "handoff",
+          "help"
+        ],
+        "claim_boundary": "NexusShell routes and summarizes governed operator lanes only; it does not execute arbitrary commands, enable backends, expose secrets, use network, mutate git, claim rollback, or self-authorize."
+      }
+    },
+    {
       "gate": "python_compile",
       "status": "pass",
       "message": "Python source compiled.",
@@ -208,19 +326,132 @@
     {
       "gate": "unit_tests",
       "status": "pass",
-      "message": "Unit tests passed.",
+      "message": "Bounded per-file unit tests passed.",
       "evidence": {
-        "cmd": [
-          "C:\\Program Files\\Python312\\python.exe",
-          "-m",
-          "unittest",
-          "discover",
-          "-s",
-          "tests"
-        ],
-        "returncode": 0,
-        "stdout_tail": "",
-        "stderr_tail": "................................................................................................................................\n----------------------------------------------------------------------\nRan 128 tests in 4.979s\n\nOK\n"
+        "mode": "bounded_per_file_unittest",
+        "count": 97,
+        "results": [
+          {
+            "file": "test_powershell_operator_shell.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+          },
+          {
+            "file": "test_readme_freshness_v012.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.003s\n\nOK\n"
+          },
+          {
+            "file": "test_readme_rehydration_v082.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.003s\n\nOK\n"
+          },
+          {
+            "file": "test_receptor_registry.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
+          },
+          {
+            "file": "test_reflective_intelligence_loop.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.015s\n\nOK\n"
+          },
+          {
+            "file": "test_reflective_repair_loop_v082.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.002s\n\nOK\n"
+          },
+          {
+            "file": "test_rehydration_failure_update_charts.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+          },
+          {
+            "file": "test_rehydration_process_lineage.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n"
+          },
+          {
+            "file": "test_repo_native_learning.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+          },
+          {
+            "file": "test_rhp_nexus_surface.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
+          },
+          {
+            "file": "test_runtime_command_surface.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n"
+          },
+          {
+            "file": "test_runtime_router.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+          },
+          {
+            "file": "test_self_healing_feedback.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.064s\n\nOK\n"
+          },
+          {
+            "file": "test_spiral_core_portal_v012.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.010s\n\nOK\n"
+          },
+          {
+            "file": "test_spiral_gate_logo_v010.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.005s\n\nOK\n"
+          },
+          {
+            "file": "test_strict_compiler_surface.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n"
+          },
+          {
+            "file": "test_tesseract_neural_network_minimal.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 4.408s\n\nOK\n"
+          },
+          {
+            "file": "test_tui_electron_bridge.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+          },
+          {
+            "file": "test_tui_hud_operator_surface.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
+          },
+          {
+            "file": "test_ui_balanced_chat_layout.py",
+            "returncode": 0,
+            "stdout_tail": "",
+            "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n"
+          }
+        ]
       }
     },
     {
