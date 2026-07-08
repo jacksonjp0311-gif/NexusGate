@@ -55,3 +55,10 @@ The active conversation output bridge is now `v0.2.1f` only. Older bridge files
 may remain in the repository as history/compatibility artifacts, but they are
 not linked in `index.html`. This matches the v021f single-active-bridge test.
 GITNEXUS remains loaded from head with defer and is isolated from the body tail.
+
+## v0.3.3 exact-style mini mirror dock
+
+The mini GITNEXUS surface now uses a full mirror-HUD composition instead of a
+small graph card. It fills the left dock area with a scaled-down header,
+control row, explorer, graph field, recommendation block, selected-node block,
+bottom status strip, and a full-width OPEN GITNEXUS HUD button.
