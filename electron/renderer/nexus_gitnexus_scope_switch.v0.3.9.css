@@ -1,0 +1,47 @@
+/* GITNEXUS scope switch v0.3.9 */
+/* Default mode is ALL: nothing is hidden. */
+html[data-gitnexus-scope-mode="core"] [data-gitnexus-core-hidden="true"],
+body[data-gitnexus-scope-mode="core"] [data-gitnexus-core-hidden="true"] {
+  display: none !important;
+}
+
+html[data-gitnexus-scope-mode="all"] [data-gitnexus-core-hidden="true"],
+body[data-gitnexus-scope-mode="all"] [data-gitnexus-core-hidden="true"] {
+  display: revert !important;
+}
+
+.gitnexus-scope-switch-v039 {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgba(0, 235, 255, 0.30);
+  background: rgba(0, 10, 20, 0.78);
+  padding: 4px;
+  margin-left: 8px;
+  font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+}
+
+.gitnexus-scope-switch-v039 .gitnexus-scope-label {
+  color: #67eaff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 0 4px;
+}
+
+.gitnexus-scope-switch-v039 button {
+  border: 1px solid rgba(0, 235, 255, 0.35);
+  background: rgba(0, 20, 32, 0.80);
+  color: #bffcff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.gitnexus-scope-switch-v039 button[data-active="true"] {
+  border-color: rgba(125, 255, 77, 0.75);
+  color: #7dff4d;
+  background: rgba(0, 38, 14, 0.88);
+}

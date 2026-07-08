@@ -1,6 +1,6 @@
 {
   "version": "nexus.gitnexus_bridge.v0.1.0",
-  "generated_at": "2026-07-08T01:00:00.022328+00:00",
+  "generated_at": "2026-07-08T01:43:45.836783+00:00",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "boundary": {
     "evidence_only": true,
@@ -10,10 +10,10 @@
     "nexus_cell_policy_change": false
   },
   "counts": {
-    "files": 871,
-    "symbols": 1413,
-    "edges": 480,
-    "changed_files": 55
+    "files": 893,
+    "symbols": 1545,
+    "edges": 482,
+    "changed_files": 59
   },
   "files": {
     ".github/workflows/ci.yml": {
@@ -193,8 +193,8 @@
     "docs/feedback/FEEDBACK_LOG.md": {
       "path": "docs/feedback/FEEDBACK_LOG.md",
       "suffix": ".md",
-      "bytes": 123716,
-      "sha256": "b5ed00357760aadd78ab9cc3d77c187b95b96a29a91195742178ab8188cff59b"
+      "bytes": 127706,
+      "sha256": "8e71a673e538a1e22bf15a2cba6d51dd86dfbff42fcc32418fd208e3a6b145e4"
     },
     "docs/feedback/FEEDBACK_SYSTEM.md": {
       "path": "docs/feedback/FEEDBACK_SYSTEM.md",
@@ -223,8 +223,14 @@
     "docs/gitnexus/NEXUS_GITNEXUS_INTERACTIVE_HUD.md": {
       "path": "docs/gitnexus/NEXUS_GITNEXUS_INTERACTIVE_HUD.md",
       "suffix": ".md",
-      "bytes": 2274,
-      "sha256": "972af453cffee69e4d6245d5bb1480e32ba96555aa3cdd1deebe1e98abe8abb3"
+      "bytes": 3306,
+      "sha256": "3916769d64f5e4b0c2edd3feaf9ea02a94c670e8669daaf7761d1b5abda5216e"
+    },
+    "docs/gitnexus/NEXUS_GITNEXUS_SCOPE_HYGIENE.md": {
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_SCOPE_HYGIENE.md",
+      "suffix": ".md",
+      "bytes": 753,
+      "sha256": "027123c4587eaf5efa83e396b4d067cf9d41b3c8e0f82fe60986c519175f53c2"
     },
     "docs/goal/GOAL_LOCK.md": {
       "path": "docs/goal/GOAL_LOCK.md",
@@ -895,8 +901,8 @@
     "electron/renderer/index.html": {
       "path": "electron/renderer/index.html",
       "suffix": ".html",
-      "bytes": 40228,
-      "sha256": "d0132da72c61951820974246b2948c6a86f4d8aa19f2e3ab706cff22a2bd509c"
+      "bytes": 40718,
+      "sha256": "ff0aa23b7d75fcf69cde796f3a386912c8af406d1bf957e493c87b9609ebdb25"
     },
     "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js": {
       "path": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
@@ -1036,6 +1042,78 @@
       "bytes": 47352,
       "sha256": "2c5e3ddec67ae12b079c3fd7ef4097396a7251cad2025be0bb2d1459e32f8b01"
     },
+    "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.css": {
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.css",
+      "suffix": ".css",
+      "bytes": 17275,
+      "sha256": "8eab54bc707165915dc6206234ea50ea56bd1a02daba603a26cc167581304c90"
+    },
+    "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js": {
+      "path": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "suffix": ".js",
+      "bytes": 35293,
+      "sha256": "aa75bdf8983c4adbcbe3143133620e5b02b28367679ace7eeef6c7fe9924607f"
+    },
+    "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.css": {
+      "path": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.css",
+      "suffix": ".css",
+      "bytes": 1771,
+      "sha256": "414c120466cb6004c0f149e0d6afc572ed9dc52828004f814b82fae478acdd14"
+    },
+    "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js": {
+      "path": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "suffix": ".js",
+      "bytes": 7106,
+      "sha256": "671485bf298e9af92e2fa72e82593ec0d133c2e16096c6164244f79be62a7359"
+    },
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.css": {
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.css",
+      "suffix": ".css",
+      "bytes": 3164,
+      "sha256": "e3f9677480b7536fa4e6ed5c1c1d8fdce56799f245a735e86ef0eb2ce2cb8c81"
+    },
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js": {
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "suffix": ".js",
+      "bytes": 10000,
+      "sha256": "b3a610aff614e850ca41570561841e74829ca43ceb7a7f3a9450b9c0019968d8"
+    },
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.css": {
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.css",
+      "suffix": ".css",
+      "bytes": 3260,
+      "sha256": "163b25b024070cec0dda4f1129dd79687a0e5cfec4df2eab15ac90ea9c50f646"
+    },
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js": {
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "suffix": ".js",
+      "bytes": 11694,
+      "sha256": "8b420f5743c6160ab10176d4545262aea8f80508a13f58746bc589c72c1cd16b"
+    },
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.css": {
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.css",
+      "suffix": ".css",
+      "bytes": 3461,
+      "sha256": "c4c28300c418a3f2687823d85c70ce5fcd797da3657b57b50abd09ef7bed639a"
+    },
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js": {
+      "path": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "suffix": ".js",
+      "bytes": 11309,
+      "sha256": "9e1d5ed2b95865aafa7853ea954fc5baa91802ea9e5d26b82c80d1e29a6a9ceb"
+    },
+    "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.css": {
+      "path": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.css",
+      "suffix": ".css",
+      "bytes": 525,
+      "sha256": "613000c5f815a73670347f00bb0dace263110a750d503261e374212c4001d8bb"
+    },
+    "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js": {
+      "path": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js",
+      "suffix": ".js",
+      "bytes": 5896,
+      "sha256": "f5a7312f7b2fd7b6ed5e73d7486a0bb2971500a345a70e6babfabd704ac11f66"
+    },
     "electron/renderer/nexus_mode_role_truth_bridge.v0.2.0zw.js": {
       "path": "electron/renderer/nexus_mode_role_truth_bridge.v0.2.0zw.js",
       "suffix": ".js",
@@ -1123,20 +1201,20 @@
     "GITNEXUS/reports/gitnexus_report_latest.json": {
       "path": "GITNEXUS/reports/gitnexus_report_latest.json",
       "suffix": ".json",
-      "bytes": 633519,
-      "sha256": "f6666a32a7ee25eb9adeec42abdf63f4f7044cacbeb962f8bc97c3ea22fcc6cf"
+      "bytes": 581076,
+      "sha256": "12c2f641fc4fcd683be10910801546aab769dcd5b15bf7ace7e5e39287ac57eb"
     },
     "GITNEXUS/state/gitnexus_graph_latest.json": {
       "path": "GITNEXUS/state/gitnexus_graph_latest.json",
       "suffix": ".json",
-      "bytes": 633519,
-      "sha256": "f6666a32a7ee25eb9adeec42abdf63f4f7044cacbeb962f8bc97c3ea22fcc6cf"
+      "bytes": 581076,
+      "sha256": "12c2f641fc4fcd683be10910801546aab769dcd5b15bf7ace7e5e39287ac57eb"
     },
     "GITNEXUS/state/gitnexus_manifest.v0.1.0.json": {
       "path": "GITNEXUS/state/gitnexus_manifest.v0.1.0.json",
       "suffix": ".json",
       "bytes": 544,
-      "sha256": "3249c0f9dd374c30f77ca2f8c15bc76a2a16d8189c2bf0fba99bac3091ceb241"
+      "sha256": "48691661585d8d4e74a0002142af3964213372db360299301c66d62214399e85"
     },
     "labs/reflective_neural_assembly/assembly/__init__.py": {
       "path": "labs/reflective_neural_assembly/assembly/__init__.py",
@@ -2212,6 +2290,12 @@
       "bytes": 2368,
       "sha256": "a6d69b31f101bd4577dd7693ba93aa908437df44edfd556b8bd7786d6166dc08"
     },
+    "reports/compact_compile_logs/gitnexus_scope_hygiene_cleaner.py": {
+      "path": "reports/compact_compile_logs/gitnexus_scope_hygiene_cleaner.py",
+      "suffix": ".py",
+      "bytes": 4229,
+      "sha256": "915f02902d7ef95aceeac334078ce45f7dfa84a937e96f8a31b718f3bbf798c5"
+    },
     "reports/electron_ui_fix/nexus_electron_allowlist_regression_rescue_20260703_220153.json": {
       "path": "reports/electron_ui_fix/nexus_electron_allowlist_regression_rescue_20260703_220153.json",
       "suffix": ".json",
@@ -2239,8 +2323,8 @@
     "reports/gitnexus_report_latest.json": {
       "path": "reports/gitnexus_report_latest.json",
       "suffix": ".json",
-      "bytes": 633519,
-      "sha256": "f6666a32a7ee25eb9adeec42abdf63f4f7044cacbeb962f8bc97c3ea22fcc6cf"
+      "bytes": 581076,
+      "sha256": "12c2f641fc4fcd683be10910801546aab769dcd5b15bf7ace7e5e39287ac57eb"
     },
     "reports/handoff_queue/20260705074942/handoff_action.ps1": {
       "path": "reports/handoff_queue/20260705074942/handoff_action.ps1",
@@ -3178,6 +3262,54 @@
       "bytes": 5545,
       "sha256": "72b7d2e6a49aed13cbed377149dc038224a72905f8557284c571b2967ab01deb"
     },
+    "reports/human_surface/20260707_210018/14_electron_preflight.json": {
+      "path": "reports/human_surface/20260707_210018/14_electron_preflight.json",
+      "suffix": ".json",
+      "bytes": 5545,
+      "sha256": "0d9fd67c16b93cf640645edb82de5519e0c8f184f3e6b336b0512aeb549e8c72"
+    },
+    "reports/human_surface/20260707_212110/14_electron_preflight.json": {
+      "path": "reports/human_surface/20260707_212110/14_electron_preflight.json",
+      "suffix": ".json",
+      "bytes": 5545,
+      "sha256": "622dab2cba8cfb69746fbc80fe6711953436d33a75d136f901f6a94881b766f8"
+    },
+    "reports/human_surface/20260707_212518/14_electron_preflight.json": {
+      "path": "reports/human_surface/20260707_212518/14_electron_preflight.json",
+      "suffix": ".json",
+      "bytes": 5545,
+      "sha256": "09210f29a6461a29afa055a9e76f44cb67768104867188a6a60f35bacdb96b4a"
+    },
+    "reports/human_surface/20260707_212614/14_electron_preflight.json": {
+      "path": "reports/human_surface/20260707_212614/14_electron_preflight.json",
+      "suffix": ".json",
+      "bytes": 5545,
+      "sha256": "343f887172da3fe2e0cba7e55a798d21e97a208088d28e4246f41bdf9aa27dc4"
+    },
+    "reports/human_surface/20260707_212857/14_electron_preflight.json": {
+      "path": "reports/human_surface/20260707_212857/14_electron_preflight.json",
+      "suffix": ".json",
+      "bytes": 5545,
+      "sha256": "86cf1ff5eead777c51d7b5186ff592d5903da220e08ee3cc0967bc0a93a6265b"
+    },
+    "reports/human_surface/20260707_213427/14_electron_preflight.json": {
+      "path": "reports/human_surface/20260707_213427/14_electron_preflight.json",
+      "suffix": ".json",
+      "bytes": 5545,
+      "sha256": "d7eab5dce6524144f470b770617ac6805be36ef0da0afadeeaef901e015b2d06"
+    },
+    "reports/human_surface/20260707_213744/14_electron_preflight.json": {
+      "path": "reports/human_surface/20260707_213744/14_electron_preflight.json",
+      "suffix": ".json",
+      "bytes": 5545,
+      "sha256": "4562d3d31e9b3cb2c7c34fa5a1d8c78539375fe36a3184ed6cb28daa59e8b0a6"
+    },
+    "reports/human_surface/20260707_214133/14_electron_preflight.json": {
+      "path": "reports/human_surface/20260707_214133/14_electron_preflight.json",
+      "suffix": ".json",
+      "bytes": 5545,
+      "sha256": "e5d7aecb6645cb4ba320a2373a19b8af5d4a4852e9e9c05d08c7d52cc4a0e29a"
+    },
     "reports/nexus_adapter_compile_report_latest.json": {
       "path": "reports/nexus_adapter_compile_report_latest.json",
       "suffix": ".json",
@@ -3332,7 +3464,7 @@
       "path": "reports/nexus_bounded_runtime_report_latest.json",
       "suffix": ".json",
       "bytes": 6295,
-      "sha256": "7bdd0e94b7f3f3624554c3e8bcf70d6e42aaa8dcc9b5d4a04ec6ae7f84fe799e"
+      "sha256": "8f1231d3428c6db8e812d33d7143abfc051a7dd118dbff6638276aed8a41f6a6"
     },
     "reports/nexus_bridge_compile_report_latest.json": {
       "path": "reports/nexus_bridge_compile_report_latest.json",
@@ -3344,7 +3476,7 @@
       "path": "reports/nexus_cell/receipt_latest.json",
       "suffix": ".json",
       "bytes": 1722,
-      "sha256": "d26fa3ed0709b68e5a41cebe9a46bc0f95f9e823c88f1b025960da33c5a66435"
+      "sha256": "95427a23f1f42d5b100d2b5d260b33617d331e2b89cd26407e52c4c977b40872"
     },
     "reports/nexus_compile_report_20260703_020334.json": {
       "path": "reports/nexus_compile_report_20260703_020334.json",
@@ -3496,17 +3628,17 @@
       "bytes": 6607,
       "sha256": "cf17d77392bbcf1582a7fc338ba2b320f3cac25db6337711d89780417e6983c7"
     },
-    "reports/nexus_compile_report_20260708_005337.json": {
-      "path": "reports/nexus_compile_report_20260708_005337.json",
+    "reports/nexus_compile_report_20260708_014125.json": {
+      "path": "reports/nexus_compile_report_20260708_014125.json",
       "suffix": ".json",
-      "bytes": 11087,
-      "sha256": "bb1e1cc726c4928b833ea3fb45c85563b5623a348724100e489dffae2cc476dc"
+      "bytes": 11085,
+      "sha256": "e82658762ae55e5cad9b57089d437ccaeaae93fecead3ca5bd320e0c3c599ea5"
     },
     "reports/nexus_compile_report_latest.json": {
       "path": "reports/nexus_compile_report_latest.json",
       "suffix": ".json",
-      "bytes": 11087,
-      "sha256": "bb1e1cc726c4928b833ea3fb45c85563b5623a348724100e489dffae2cc476dc"
+      "bytes": 11085,
+      "sha256": "e82658762ae55e5cad9b57089d437ccaeaae93fecead3ca5bd320e0c3c599ea5"
     },
     "reports/nexus_conversation_output_bridge_v021g_failure_latest.md": {
       "path": "reports/nexus_conversation_output_bridge_v021g_failure_latest.md",
@@ -3518,7 +3650,7 @@
       "path": "reports/nexus_domain_intelligence_report_latest.json",
       "suffix": ".json",
       "bytes": 3633,
-      "sha256": "6d97cb3e90f269756c3369e414f97803b999d565a2e973801e6669ed2500fa68"
+      "sha256": "2714d2d54a22f20a302033050aabfdf5532144de90b1c248230d232124aa6842"
     },
     "reports/nexus_drift_reduction_scorecard_latest.json": {
       "path": "reports/nexus_drift_reduction_scorecard_latest.json",
@@ -3530,19 +3662,19 @@
       "path": "reports/nexus_electron_environment_report_latest.json",
       "suffix": ".json",
       "bytes": 1610,
-      "sha256": "4454f5364bb71de66fd2b7d0ce840b46414cce53b8508150344d341580556a61"
+      "sha256": "e76fdfb644192219da10840e34c8532fd0e0baa487ee6343d1c6cb750509d2db"
     },
     "reports/nexus_electron_preflight_report_latest.json": {
       "path": "reports/nexus_electron_preflight_report_latest.json",
       "suffix": ".json",
       "bytes": 5540,
-      "sha256": "5bce79edce2746af4826564072062ae9ac9f9a9c6935d914589ab489abbe220e"
+      "sha256": "01bffb3f68c2556e338c4edf3348bfc56c3548f19e4b1aa1fb31ccb7dd246974"
     },
     "reports/nexus_electron_smoke_report_latest.json": {
       "path": "reports/nexus_electron_smoke_report_latest.json",
       "suffix": ".json",
       "bytes": 1561,
-      "sha256": "3f6f1807837554260510d174525d3318031fee6a262a63e449595165c0a870ab"
+      "sha256": "2df18f08afb99071ef170051016e6a2c1298a720f04724dfca3f840d4d76f28f"
     },
     "reports/nexus_evidence_compaction_report_20260703_113822.json": {
       "path": "reports/nexus_evidence_compaction_report_20260703_113822.json",
@@ -3614,7 +3746,7 @@
       "path": "reports/nexus_evidence_compaction_report_latest.json",
       "suffix": ".json",
       "bytes": 627,
-      "sha256": "3edfcb7c572ed97d03dd07615a50fb060431701a3821699c08a1263a2ade9a30"
+      "sha256": "3d42ddad7b8b7fdf0b238b3a9d33f21e79f591247deea59135de0c2e2e63938e"
     },
     "reports/nexus_feedback_interface_report_20260703_120054.json": {
       "path": "reports/nexus_feedback_interface_report_20260703_120054.json",
@@ -3650,7 +3782,7 @@
       "path": "reports/nexus_feedback_interface_report_latest.json",
       "suffix": ".json",
       "bytes": 1479,
-      "sha256": "d6174d6738719c9769ebb4577a0cdceff1ca012ca93d561fb08caa31ac837a7a"
+      "sha256": "1a930f3eeb971b6e158cedc325378a4a2dceacb38fe10b91a149b4b8c01f1f25"
     },
     "reports/nexus_feedback_report_20260703_113822.json": {
       "path": "reports/nexus_feedback_report_20260703_113822.json",
@@ -3721,14 +3853,14 @@
     "reports/nexus_feedback_report_latest.json": {
       "path": "reports/nexus_feedback_report_latest.json",
       "suffix": ".json",
-      "bytes": 21556,
-      "sha256": "ffa709a9e690f64e1cacc9c526cd609a4fc7dde0fe0544461195e9288953e360"
+      "bytes": 21664,
+      "sha256": "24394b1e2da078f7ac55772127af1c338c5c790bb1b4544bc61ec3ac0a863264"
     },
     "reports/nexus_geometric_memory_packet_latest.json": {
       "path": "reports/nexus_geometric_memory_packet_latest.json",
       "suffix": ".json",
       "bytes": 1677,
-      "sha256": "bf262d8ba99c4e5beaf63a9e373f11cc8f29e64d1272dd424d8bf7db79c96d2e"
+      "sha256": "dc9f4d4076f6cdd4050206081c973e1b6701236fc3167e84faf895bb1acfbfb5"
     },
     "reports/nexus_interconnect_report_20260703_113822.json": {
       "path": "reports/nexus_interconnect_report_20260703_113822.json",
@@ -3800,7 +3932,7 @@
       "path": "reports/nexus_interconnect_report_latest.json",
       "suffix": ".json",
       "bytes": 15674,
-      "sha256": "334b70e77b5dd64ba362e20584eeeb0c91cd2303296f43edffb79cd92b48ae86"
+      "sha256": "ab1f0901f0158d3cdc8ca69a226253d2b78caf6ff326523b04a7e4b20fe41f90"
     },
     "reports/nexus_nn_router_report_latest.json": {
       "path": "reports/nexus_nn_router_report_latest.json",
@@ -3818,7 +3950,7 @@
       "path": "reports/nexus_reflective_loop_report_latest.json",
       "suffix": ".json",
       "bytes": 4057,
-      "sha256": "696f7b6c58df979080b818c9466b4f391de843a0d23b751bf24c15874fcc9a71"
+      "sha256": "f7065b1ba0855386cca64b4fd07f792d2c1593c13a28ca2de017a354fa9160f5"
     },
     "reports/nexus_runtime_compile_report_latest.json": {
       "path": "reports/nexus_runtime_compile_report_latest.json",
@@ -3886,17 +4018,17 @@
       "bytes": 2667,
       "sha256": "a33d4e0abae76ae8b52a1fc2554a2e90919064db1454c6b45b5008cd9d011e6b"
     },
-    "reports/nexus_self_healing_report_20260708_005333.json": {
-      "path": "reports/nexus_self_healing_report_20260708_005333.json",
+    "reports/nexus_self_healing_report_20260708_014120.json": {
+      "path": "reports/nexus_self_healing_report_20260708_014120.json",
       "suffix": ".json",
       "bytes": 2731,
-      "sha256": "a4de09caeef2f63ca7acdb4aa63d7cf23aa4127212fa339920fd0d70024f7acb"
+      "sha256": "7d1efe87c331e48e70367fc3302240d3127f70ba56e37f50295e32ae764ac5a8"
     },
     "reports/nexus_self_healing_report_latest.json": {
       "path": "reports/nexus_self_healing_report_latest.json",
       "suffix": ".json",
       "bytes": 2731,
-      "sha256": "a4de09caeef2f63ca7acdb4aa63d7cf23aa4127212fa339920fd0d70024f7acb"
+      "sha256": "7d1efe87c331e48e70367fc3302240d3127f70ba56e37f50295e32ae764ac5a8"
     },
     "reports/README.md": {
       "path": "reports/README.md",
@@ -4142,7 +4274,7 @@
       "path": "state/ai_feedback_context_latest.json",
       "suffix": ".json",
       "bytes": 2433,
-      "sha256": "06e5ba09846d3f32b4e7cb60cdedaa3360730e4739f5614dcfd102d39698a72e"
+      "sha256": "1ee7a95d3d5010d1c38fbb8c81984a6ba4b6b6e2354765b7a3e516d2936b937c"
     },
     "state/ai_feedback_interface_index.v0.2.3.json": {
       "path": "state/ai_feedback_interface_index.v0.2.3.json",
@@ -4243,14 +4375,14 @@
     "state/gitnexus/gitnexus_graph_latest.json": {
       "path": "state/gitnexus/gitnexus_graph_latest.json",
       "suffix": ".json",
-      "bytes": 633519,
-      "sha256": "f6666a32a7ee25eb9adeec42abdf63f4f7044cacbeb962f8bc97c3ea22fcc6cf"
+      "bytes": 581076,
+      "sha256": "12c2f641fc4fcd683be10910801546aab769dcd5b15bf7ace7e5e39287ac57eb"
     },
     "state/gitnexus/gitnexus_manifest.v0.1.0.json": {
       "path": "state/gitnexus/gitnexus_manifest.v0.1.0.json",
       "suffix": ".json",
       "bytes": 544,
-      "sha256": "3249c0f9dd374c30f77ca2f8c15bc76a2a16d8189c2bf0fba99bac3091ceb241"
+      "sha256": "48691661585d8d4e74a0002142af3964213372db360299301c66d62214399e85"
     },
     "state/goal_lock.v0.1.6.json": {
       "path": "state/goal_lock.v0.1.6.json",
@@ -4268,7 +4400,7 @@
       "path": "state/interconnect_graph.v0.2.2.json",
       "suffix": ".json",
       "bytes": 15674,
-      "sha256": "334b70e77b5dd64ba362e20584eeeb0c91cd2303296f43edffb79cd92b48ae86"
+      "sha256": "ab1f0901f0158d3cdc8ca69a226253d2b78caf6ff326523b04a7e4b20fe41f90"
     },
     "state/interface_adapter_contract_index.v0.3.7.json": {
       "path": "state/interface_adapter_contract_index.v0.3.7.json",
@@ -4340,7 +4472,7 @@
       "path": "state/nexus_geometric_memory_runtime_latest.json",
       "suffix": ".json",
       "bytes": 388,
-      "sha256": "a9b93332c9b12ac787c3c245d6eceb0349d23304da6285ffc06afc2c26fa475d"
+      "sha256": "6582271f5f383a3c4162e27ea1ef1616e2b5c673a5c59b2fe014a07f60619a72"
     },
     "state/nexus_lineage_manifest_latest.json": {
       "path": "state/nexus_lineage_manifest_latest.json",
@@ -4586,7 +4718,7 @@
       "path": "Tesseract Neural Network/memory/conversation_latest.json",
       "suffix": ".json",
       "bytes": 745,
-      "sha256": "3ebacde43d11b8f95db1d35271630845de8178bb15f6e0edb08373eb043e29dd"
+      "sha256": "c07c09ffe9fb3e776608ed959c85f01e7e54ac99abdf920828bbd2d71f82b1be"
     },
     "Tesseract Neural Network/portal_entry.json": {
       "path": "Tesseract Neural Network/portal_entry.json",
@@ -4628,7 +4760,7 @@
       "path": "Tesseract Neural Network/state/tnn_state_latest.json",
       "suffix": ".json",
       "bytes": 460,
-      "sha256": "ebb98db593057971c41db84790997323a0ab5f0bb1c8a6dcc1379ec2f577fd8f"
+      "sha256": "5efe3887cc84f36b4c555ff5bd649c54d9b3f6f90dcb1134a132cb1fc6b93b09"
     },
     "Tesseract Neural Network/tnn_surface.py": {
       "path": "Tesseract Neural Network/tnn_surface.py",
@@ -4897,8 +5029,8 @@
     "tests/test_gitnexus_hud_assets.py": {
       "path": "tests/test_gitnexus_hud_assets.py",
       "suffix": ".py",
-      "bytes": 3347,
-      "sha256": "be42ed65529bd49f69a8c16b3fcf41ab4f863a2afcc0bbcdaef703589d26667e"
+      "bytes": 2237,
+      "sha256": "fe9cd0468f274015f63c8b961dc252d6383c67a12037566042025a8302370856"
     },
     "tests/test_goal_lock_adapter_lane.py": {
       "path": "tests/test_goal_lock_adapter_lane.py",
@@ -5375,6 +5507,2892 @@
       "kind": "function",
       "file": "electron/main.js",
       "line": 523
+    },
+    {
+      "name": "$",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 11
+    },
+    {
+      "name": "selectedRole",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 15
+    },
+    {
+      "name": "isOperatorCommand",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 21
+    },
+    {
+      "name": "isSimpleHumanChat",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 30
+    },
+    {
+      "name": "currentHumanPrompt",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 39
+    },
+    {
+      "name": "roleLabel",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 45
+    },
+    {
+      "name": "looksLikeAuditCard",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 55
+    },
+    {
+      "name": "parseAuditCard",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 63
+    },
+    {
+      "name": "conversationalizeAudit",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 74
+    },
+    {
+      "name": "patchNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 93
+    },
+    {
+      "name": "patchOutput",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 109
+    },
+    {
+      "name": "suppressStaleSelectorEvents",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 113
+    },
+    {
+      "name": "annotatePromptIntent",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 130
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 149
+    },
+    {
+      "name": "observeWhenReady",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1a.js",
+      "line": 186
+    },
+    {
+      "name": "$",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 11
+    },
+    {
+      "name": "transcriptText",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 15
+    },
+    {
+      "name": "inferRoleFromTranscript",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 20
+    },
+    {
+      "name": "selectedRole",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 27
+    },
+    {
+      "name": "roleLabel",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 34
+    },
+    {
+      "name": "inferPromptFromTranscript",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 44
+    },
+    {
+      "name": "currentHumanPrompt",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 71
+    },
+    {
+      "name": "isOperatorCommand",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 79
+    },
+    {
+      "name": "isSimpleHumanChat",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 88
+    },
+    {
+      "name": "looksLikeAuditCard",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 98
+    },
+    {
+      "name": "looksLikeStaleEngineeringMove",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 107
+    },
+    {
+      "name": "naturalGreeting",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 116
+    },
+    {
+      "name": "patchNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 127
+    },
+    {
+      "name": "patchOutput",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 147
+    },
+    {
+      "name": "suppressMismatchedSelectorEvents",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 151
+    },
+    {
+      "name": "annotatePromptIntent",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 173
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 194
+    },
+    {
+      "name": "observeWhenReady",
+      "kind": "function",
+      "file": "electron/renderer/nexus_conversation_output_bridge.v0.2.1f.js",
+      "line": 234
+    },
+    {
+      "name": "mk",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.js",
+      "line": 1
+    },
+    {
+      "name": "overlay",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.js",
+      "line": 1
+    },
+    {
+      "name": "open",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.js",
+      "line": 1
+    },
+    {
+      "name": "report",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.js",
+      "line": 1
+    },
+    {
+      "name": "setMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.js",
+      "line": 1
+    },
+    {
+      "name": "mount",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.js",
+      "line": 1
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.0.js",
+      "line": 1
+    },
+    {
+      "name": "make",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 9
+    },
+    {
+      "name": "text",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 15
+    },
+    {
+      "name": "escapeXml",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 20
+    },
+    {
+      "name": "loadReport",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 27
+    },
+    {
+      "name": "stationAnchor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 37
+    },
+    {
+      "name": "setMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 53
+    },
+    {
+      "name": "rows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 65
+    },
+    {
+      "name": "buildGraphSvg",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 83
+    },
+    {
+      "name": "ensureProgram",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 128
+    },
+    {
+      "name": "fillProgram",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 179
+    },
+    {
+      "name": "openProgram",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 205
+    },
+    {
+      "name": "mountStation",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 212
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 248
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 89
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 99
+    },
+    {
+      "name": "q",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 180
+    },
+    {
+      "name": "set",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 181
+    },
+    {
+      "name": "changedRows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.js",
+      "line": 201
+    },
+    {
+      "name": "make",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 9
+    },
+    {
+      "name": "text",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 15
+    },
+    {
+      "name": "escapeXml",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 20
+    },
+    {
+      "name": "loadReport",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 27
+    },
+    {
+      "name": "findNeuralActivityBlock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 37
+    },
+    {
+      "name": "stationAnchor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 54
+    },
+    {
+      "name": "setMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 77
+    },
+    {
+      "name": "rows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 89
+    },
+    {
+      "name": "buildGraphSvg",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 107
+    },
+    {
+      "name": "ensureProgram",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 152
+    },
+    {
+      "name": "fillProgram",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 203
+    },
+    {
+      "name": "openProgram",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 229
+    },
+    {
+      "name": "mountStation",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 236
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 273
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 113
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 123
+    },
+    {
+      "name": "q",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 204
+    },
+    {
+      "name": "set",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 205
+    },
+    {
+      "name": "changedRows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.2.js",
+      "line": 225
+    },
+    {
+      "name": "make",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 9
+    },
+    {
+      "name": "text",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 15
+    },
+    {
+      "name": "escapeXml",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 20
+    },
+    {
+      "name": "loadReport",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 24
+    },
+    {
+      "name": "rectOk",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 34
+    },
+    {
+      "name": "findLeftRail",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 38
+    },
+    {
+      "name": "findNeuralActivityRect",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 60
+    },
+    {
+      "name": "findFooterTop",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 80
+    },
+    {
+      "name": "dockGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 91
+    },
+    {
+      "name": "positionDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 107
+    },
+    {
+      "name": "setMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 115
+    },
+    {
+      "name": "rows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 126
+    },
+    {
+      "name": "buildGraphSvg",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 137
+    },
+    {
+      "name": "ensureProgram",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 164
+    },
+    {
+      "name": "fillProgram",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 196
+    },
+    {
+      "name": "openProgram",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 220
+    },
+    {
+      "name": "ensureDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 227
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 257
+    },
+    {
+      "name": "aScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 72
+    },
+    {
+      "name": "bScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 73
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 143
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 147
+    },
+    {
+      "name": "q",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 197
+    },
+    {
+      "name": "set",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 198
+    },
+    {
+      "name": "changedRows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.1.3.js",
+      "line": 216
+    },
+    {
+      "name": "make",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 20
+    },
+    {
+      "name": "text",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 26
+    },
+    {
+      "name": "hash",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 31
+    },
+    {
+      "name": "colorFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 40
+    },
+    {
+      "name": "loadReport",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 50
+    },
+    {
+      "name": "rectOk",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 60
+    },
+    {
+      "name": "findLeftRail",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 64
+    },
+    {
+      "name": "findNeuralActivityRect",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 78
+    },
+    {
+      "name": "findFooterTop",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 96
+    },
+    {
+      "name": "dockGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 105
+    },
+    {
+      "name": "positionDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 118
+    },
+    {
+      "name": "setMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 126
+    },
+    {
+      "name": "buildModel",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 133
+    },
+    {
+      "name": "clusterFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 182
+    },
+    {
+      "name": "relax",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 193
+    },
+    {
+      "name": "viewTransform",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 239
+    },
+    {
+      "name": "draw",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 256
+    },
+    {
+      "name": "rows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 340
+    },
+    {
+      "name": "createBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 349
+    },
+    {
+      "name": "fillHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 374
+    },
+    {
+      "name": "nearestNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 395
+    },
+    {
+      "name": "openBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 412
+    },
+    {
+      "name": "ensureDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 455
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 485
+    },
+    {
+      "name": "aScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 89
+    },
+    {
+      "name": "bScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 90
+    },
+    {
+      "name": "top",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 135
+    },
+    {
+      "name": "changed",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 136
+    },
+    {
+      "name": "add",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 140
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 154
+    },
+    {
+      "name": "force",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 204
+    },
+    {
+      "name": "r",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 310
+    },
+    {
+      "name": "changed",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 382
+    },
+    {
+      "name": "mx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 398
+    },
+    {
+      "name": "my",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 399
+    },
+    {
+      "name": "d",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.2.0.js",
+      "line": 406
+    },
+    {
+      "name": "make",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 29
+    },
+    {
+      "name": "text",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 35
+    },
+    {
+      "name": "clamp",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 40
+    },
+    {
+      "name": "hash",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 44
+    },
+    {
+      "name": "safeName",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 54
+    },
+    {
+      "name": "colorFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 58
+    },
+    {
+      "name": "clusterFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 69
+    },
+    {
+      "name": "loadReport",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 81
+    },
+    {
+      "name": "rectOk",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 91
+    },
+    {
+      "name": "findLeftRail",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 95
+    },
+    {
+      "name": "findNeuralActivityRect",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 110
+    },
+    {
+      "name": "findFooterTop",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 129
+    },
+    {
+      "name": "dockGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 139
+    },
+    {
+      "name": "positionDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 152
+    },
+    {
+      "name": "addNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 160
+    },
+    {
+      "name": "buildModel",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 168
+    },
+    {
+      "name": "filteredNodes",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 272
+    },
+    {
+      "name": "relax",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 283
+    },
+    {
+      "name": "graphBounds",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 333
+    },
+    {
+      "name": "fitCanvas",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 345
+    },
+    {
+      "name": "worldToScreen",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 358
+    },
+    {
+      "name": "screenToWorld",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 373
+    },
+    {
+      "name": "visibleNodeSet",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 387
+    },
+    {
+      "name": "draw",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 392
+    },
+    {
+      "name": "nearestNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 486
+    },
+    {
+      "name": "selectNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 508
+    },
+    {
+      "name": "rows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 542
+    },
+    {
+      "name": "attachCanvasInteractions",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 551
+    },
+    {
+      "name": "fillHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 635
+    },
+    {
+      "name": "createBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 672
+    },
+    {
+      "name": "bindHudControls",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 707
+    },
+    {
+      "name": "openBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 754
+    },
+    {
+      "name": "drawMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 774
+    },
+    {
+      "name": "ensureDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 811
+    },
+    {
+      "name": "setMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 849
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 856
+    },
+    {
+      "name": "aScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 121
+    },
+    {
+      "name": "bScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 122
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 195
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 233
+    },
+    {
+      "name": "force",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 295
+    },
+    {
+      "name": "rx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 377
+    },
+    {
+      "name": "ry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 378
+    },
+    {
+      "name": "r",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 452
+    },
+    {
+      "name": "mx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 489
+    },
+    {
+      "name": "my",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 490
+    },
+    {
+      "name": "d",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 498
+    },
+    {
+      "name": "syms",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 537
+    },
+    {
+      "name": "changed",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 645
+    },
+    {
+      "name": "toggle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.0.js",
+      "line": 716
+    },
+    {
+      "name": "make",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 29
+    },
+    {
+      "name": "text",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 35
+    },
+    {
+      "name": "clamp",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 40
+    },
+    {
+      "name": "hash",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 44
+    },
+    {
+      "name": "safeName",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 54
+    },
+    {
+      "name": "colorFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 58
+    },
+    {
+      "name": "clusterFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 69
+    },
+    {
+      "name": "loadReport",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 81
+    },
+    {
+      "name": "rectOk",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 91
+    },
+    {
+      "name": "findLeftRail",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 95
+    },
+    {
+      "name": "findNeuralActivityRect",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 110
+    },
+    {
+      "name": "findFooterTop",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 129
+    },
+    {
+      "name": "dockGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 139
+    },
+    {
+      "name": "positionDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 152
+    },
+    {
+      "name": "addNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 160
+    },
+    {
+      "name": "buildModel",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 168
+    },
+    {
+      "name": "filteredNodes",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 272
+    },
+    {
+      "name": "relax",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 283
+    },
+    {
+      "name": "graphBounds",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 333
+    },
+    {
+      "name": "fitCanvas",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 345
+    },
+    {
+      "name": "worldToScreen",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 358
+    },
+    {
+      "name": "screenToWorld",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 373
+    },
+    {
+      "name": "visibleNodeSet",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 387
+    },
+    {
+      "name": "draw",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 392
+    },
+    {
+      "name": "nearestNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 486
+    },
+    {
+      "name": "selectNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 508
+    },
+    {
+      "name": "rows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 542
+    },
+    {
+      "name": "attachCanvasInteractions",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 551
+    },
+    {
+      "name": "fillHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 635
+    },
+    {
+      "name": "createBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 672
+    },
+    {
+      "name": "bindHudControls",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 707
+    },
+    {
+      "name": "openBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 754
+    },
+    {
+      "name": "drawMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 774
+    },
+    {
+      "name": "ensureDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 811
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 841
+    },
+    {
+      "name": "aScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 121
+    },
+    {
+      "name": "bScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 122
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 195
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 233
+    },
+    {
+      "name": "force",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 295
+    },
+    {
+      "name": "rx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 377
+    },
+    {
+      "name": "ry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 378
+    },
+    {
+      "name": "r",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 452
+    },
+    {
+      "name": "mx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 489
+    },
+    {
+      "name": "my",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 490
+    },
+    {
+      "name": "d",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 498
+    },
+    {
+      "name": "syms",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 537
+    },
+    {
+      "name": "changed",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 645
+    },
+    {
+      "name": "toggle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.1.js",
+      "line": 716
+    },
+    {
+      "name": "make",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 29
+    },
+    {
+      "name": "text",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 35
+    },
+    {
+      "name": "clamp",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 40
+    },
+    {
+      "name": "hash",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 44
+    },
+    {
+      "name": "safeName",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 54
+    },
+    {
+      "name": "colorFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 58
+    },
+    {
+      "name": "clusterFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 69
+    },
+    {
+      "name": "loadReport",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 81
+    },
+    {
+      "name": "rectOk",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 91
+    },
+    {
+      "name": "findLeftRail",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 95
+    },
+    {
+      "name": "findNeuralActivityRect",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 110
+    },
+    {
+      "name": "findFooterTop",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 129
+    },
+    {
+      "name": "dockGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 139
+    },
+    {
+      "name": "positionDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 152
+    },
+    {
+      "name": "addNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 160
+    },
+    {
+      "name": "buildModel",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 168
+    },
+    {
+      "name": "filteredNodes",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 272
+    },
+    {
+      "name": "relax",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 283
+    },
+    {
+      "name": "graphBounds",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 333
+    },
+    {
+      "name": "fitCanvas",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 345
+    },
+    {
+      "name": "worldToScreen",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 358
+    },
+    {
+      "name": "screenToWorld",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 373
+    },
+    {
+      "name": "visibleNodeSet",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 387
+    },
+    {
+      "name": "draw",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 392
+    },
+    {
+      "name": "nearestNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 486
+    },
+    {
+      "name": "selectNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 508
+    },
+    {
+      "name": "rows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 542
+    },
+    {
+      "name": "attachCanvasInteractions",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 551
+    },
+    {
+      "name": "fillHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 635
+    },
+    {
+      "name": "createBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 672
+    },
+    {
+      "name": "bindHudControls",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 707
+    },
+    {
+      "name": "openBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 756
+    },
+    {
+      "name": "drawMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 776
+    },
+    {
+      "name": "ensureDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 813
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 843
+    },
+    {
+      "name": "gitnexusHudWatchdog",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 852
+    },
+    {
+      "name": "aScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 121
+    },
+    {
+      "name": "bScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 122
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 195
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 233
+    },
+    {
+      "name": "force",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 295
+    },
+    {
+      "name": "rx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 377
+    },
+    {
+      "name": "ry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 378
+    },
+    {
+      "name": "r",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 452
+    },
+    {
+      "name": "mx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 489
+    },
+    {
+      "name": "my",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 490
+    },
+    {
+      "name": "d",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 498
+    },
+    {
+      "name": "syms",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 537
+    },
+    {
+      "name": "changed",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 645
+    },
+    {
+      "name": "toggle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js",
+      "line": 718
+    },
+    {
+      "name": "make",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 29
+    },
+    {
+      "name": "text",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 35
+    },
+    {
+      "name": "clamp",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 40
+    },
+    {
+      "name": "hash",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 44
+    },
+    {
+      "name": "safeName",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 54
+    },
+    {
+      "name": "colorFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 58
+    },
+    {
+      "name": "clusterFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 69
+    },
+    {
+      "name": "loadReport",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 81
+    },
+    {
+      "name": "rectOk",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 91
+    },
+    {
+      "name": "findLeftRail",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 95
+    },
+    {
+      "name": "findNeuralActivityRect",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 110
+    },
+    {
+      "name": "findFooterTop",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 129
+    },
+    {
+      "name": "dockGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 139
+    },
+    {
+      "name": "positionDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 152
+    },
+    {
+      "name": "addNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 160
+    },
+    {
+      "name": "buildModel",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 168
+    },
+    {
+      "name": "filteredNodes",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 272
+    },
+    {
+      "name": "relax",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 283
+    },
+    {
+      "name": "graphBounds",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 333
+    },
+    {
+      "name": "fitCanvas",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 345
+    },
+    {
+      "name": "worldToScreen",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 358
+    },
+    {
+      "name": "screenToWorld",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 373
+    },
+    {
+      "name": "visibleNodeSet",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 387
+    },
+    {
+      "name": "draw",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 392
+    },
+    {
+      "name": "nearestNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 486
+    },
+    {
+      "name": "selectNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 508
+    },
+    {
+      "name": "rows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 542
+    },
+    {
+      "name": "attachCanvasInteractions",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 551
+    },
+    {
+      "name": "fillHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 635
+    },
+    {
+      "name": "createBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 672
+    },
+    {
+      "name": "bindHudControls",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 707
+    },
+    {
+      "name": "openBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 756
+    },
+    {
+      "name": "drawMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 776
+    },
+    {
+      "name": "ensureDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 813
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 843
+    },
+    {
+      "name": "gitnexusHudWatchdog",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 852
+    },
+    {
+      "name": "$",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 892
+    },
+    {
+      "name": "$all",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 896
+    },
+    {
+      "name": "text",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 900
+    },
+    {
+      "name": "scanList",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 907
+    },
+    {
+      "name": "randomFactory",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 911
+    },
+    {
+      "name": "next",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 913
+    },
+    {
+      "name": "getStats",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 921
+    },
+    {
+      "name": "miniMarkup",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 944
+    },
+    {
+      "name": "drawMiniMirror",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 1031
+    },
+    {
+      "name": "hydrateMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 1128
+    },
+    {
+      "name": "openBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 1164
+    },
+    {
+      "name": "renderMiniMirror",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 1193
+    },
+    {
+      "name": "bootMiniMirror",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 1213
+    },
+    {
+      "name": "aScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 121
+    },
+    {
+      "name": "bScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 122
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 195
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 233
+    },
+    {
+      "name": "force",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 295
+    },
+    {
+      "name": "rx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 377
+    },
+    {
+      "name": "ry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 378
+    },
+    {
+      "name": "r",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 452
+    },
+    {
+      "name": "mx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 489
+    },
+    {
+      "name": "my",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 490
+    },
+    {
+      "name": "d",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 498
+    },
+    {
+      "name": "syms",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 537
+    },
+    {
+      "name": "changed",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 645
+    },
+    {
+      "name": "toggle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 718
+    },
+    {
+      "name": "a",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 1064
+    },
+    {
+      "name": "setText",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js",
+      "line": 1132
+    },
+    {
+      "name": "make",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 29
+    },
+    {
+      "name": "text",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 35
+    },
+    {
+      "name": "clamp",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 40
+    },
+    {
+      "name": "hash",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 44
+    },
+    {
+      "name": "safeName",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 54
+    },
+    {
+      "name": "colorFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 58
+    },
+    {
+      "name": "clusterFor",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 69
+    },
+    {
+      "name": "loadReport",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 81
+    },
+    {
+      "name": "rectOk",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 91
+    },
+    {
+      "name": "findLeftRail",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 95
+    },
+    {
+      "name": "findNeuralActivityRect",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 110
+    },
+    {
+      "name": "findFooterTop",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 129
+    },
+    {
+      "name": "dockGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 139
+    },
+    {
+      "name": "positionDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 152
+    },
+    {
+      "name": "addNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 160
+    },
+    {
+      "name": "buildModel",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 168
+    },
+    {
+      "name": "filteredNodes",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 272
+    },
+    {
+      "name": "relax",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 283
+    },
+    {
+      "name": "graphBounds",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 333
+    },
+    {
+      "name": "fitCanvas",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 345
+    },
+    {
+      "name": "worldToScreen",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 358
+    },
+    {
+      "name": "screenToWorld",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 373
+    },
+    {
+      "name": "visibleNodeSet",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 387
+    },
+    {
+      "name": "draw",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 392
+    },
+    {
+      "name": "nearestNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 486
+    },
+    {
+      "name": "selectNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 508
+    },
+    {
+      "name": "rows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 542
+    },
+    {
+      "name": "attachCanvasInteractions",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 551
+    },
+    {
+      "name": "fillHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 635
+    },
+    {
+      "name": "createBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 672
+    },
+    {
+      "name": "bindHudControls",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 707
+    },
+    {
+      "name": "openBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 756
+    },
+    {
+      "name": "drawMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 776
+    },
+    {
+      "name": "ensureDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 813
+    },
+    {
+      "name": "gitnexusHudWatchdog",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 818
+    },
+    {
+      "name": "sanitizeToolbarLabels",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 829
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 852
+    },
+    {
+      "name": "gitnexusHudWatchdog",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 861
+    },
+    {
+      "name": "aScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 121
+    },
+    {
+      "name": "bScore",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 122
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 195
+    },
+    {
+      "name": "angle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 233
+    },
+    {
+      "name": "force",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 295
+    },
+    {
+      "name": "rx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 377
+    },
+    {
+      "name": "ry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 378
+    },
+    {
+      "name": "r",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 452
+    },
+    {
+      "name": "mx",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 489
+    },
+    {
+      "name": "my",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 490
+    },
+    {
+      "name": "d",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 498
+    },
+    {
+      "name": "syms",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 537
+    },
+    {
+      "name": "changed",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 645
+    },
+    {
+      "name": "toggle",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js",
+      "line": 718
+    },
+    {
+      "name": "q",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 17
+    },
+    {
+      "name": "qa",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 18
+    },
+    {
+      "name": "hasNonAscii",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 20
+    },
+    {
+      "name": "normalizeTextNode",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 24
+    },
+    {
+      "name": "sanitizeToolbar",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 42
+    },
+    {
+      "name": "getBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 58
+    },
+    {
+      "name": "ensureBigHudReady",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 66
+    },
+    {
+      "name": "makeMiniWrapper",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 89
+    },
+    {
+      "name": "removeInteractiveNoise",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 123
+    },
+    {
+      "name": "scaleCloneToFit",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 139
+    },
+    {
+      "name": "mirrorBigHudIntoMini",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 159
+    },
+    {
+      "name": "hookRotateShortcuts",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 185
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js",
+      "line": 210
+    },
+    {
+      "name": "q",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 5
+    },
+    {
+      "name": "qa",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 6
+    },
+    {
+      "name": "cleanText",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 8
+    },
+    {
+      "name": "sanitizeToolbarLabels",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 12
+    },
+    {
+      "name": "getBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 45
+    },
+    {
+      "name": "openBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 52
+    },
+    {
+      "name": "dockGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 80
+    },
+    {
+      "name": "positionDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 108
+    },
+    {
+      "name": "ensureDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 121
+    },
+    {
+      "name": "getCounts",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 164
+    },
+    {
+      "name": "seededRandom",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 174
+    },
+    {
+      "name": "drawGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 184
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 292
+    },
+    {
+      "name": "base",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 226
+    },
+    {
+      "name": "jitter",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js",
+      "line": 228
+    },
+    {
+      "name": "q",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 6
+    },
+    {
+      "name": "qa",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 7
+    },
+    {
+      "name": "cleanAscii",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 17
+    },
+    {
+      "name": "sanitizeToolbarLabels",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 21
+    },
+    {
+      "name": "getBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 43
+    },
+    {
+      "name": "openBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 50
+    },
+    {
+      "name": "dockGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 78
+    },
+    {
+      "name": "removeDuplicateDocks",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 122
+    },
+    {
+      "name": "ensureDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 136
+    },
+    {
+      "name": "applyDockPosition",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 181
+    },
+    {
+      "name": "getCounts",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 198
+    },
+    {
+      "name": "seededRandom",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 208
+    },
+    {
+      "name": "fitCanvas",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 218
+    },
+    {
+      "name": "drawFrame",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 238
+    },
+    {
+      "name": "startAnimation",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 342
+    },
+    {
+      "name": "scheduleLayout",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 347
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 357
+    },
+    {
+      "name": "t",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 253
+    },
+    {
+      "name": "base",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 276
+    },
+    {
+      "name": "jitter",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js",
+      "line": 278
+    },
+    {
+      "name": "q",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 6
+    },
+    {
+      "name": "qa",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 7
+    },
+    {
+      "name": "cleanAscii",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 15
+    },
+    {
+      "name": "sanitizeToolbarLabels",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 19
+    },
+    {
+      "name": "getBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 41
+    },
+    {
+      "name": "openBigHud",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 48
+    },
+    {
+      "name": "dockGeometry",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 80
+    },
+    {
+      "name": "removeDuplicateDocks",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 117
+    },
+    {
+      "name": "ensureDock",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 127
+    },
+    {
+      "name": "applyDockPosition",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 170
+    },
+    {
+      "name": "getCounts",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 183
+    },
+    {
+      "name": "seededRandom",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 193
+    },
+    {
+      "name": "fitCanvas",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 203
+    },
+    {
+      "name": "drawFrame",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 223
+    },
+    {
+      "name": "startAnimation",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 327
+    },
+    {
+      "name": "scheduleLayout",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 332
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 340
+    },
+    {
+      "name": "t",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 238
+    },
+    {
+      "name": "base",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 261
+    },
+    {
+      "name": "jitter",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js",
+      "line": 263
+    },
+    {
+      "name": "q",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js",
+      "line": 38
+    },
+    {
+      "name": "qa",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js",
+      "line": 39
+    },
+    {
+      "name": "textOf",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js",
+      "line": 41
+    },
+    {
+      "name": "shouldHideText",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js",
+      "line": 45
+    },
+    {
+      "name": "addScopePill",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js",
+      "line": 49
+    },
+    {
+      "name": "hideNoisyRows",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js",
+      "line": 72
+    },
+    {
+      "name": "clickOffNoisyCategories",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js",
+      "line": 106
+    },
+    {
+      "name": "sanitizeToolbarLabels",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js",
+      "line": 148
+    },
+    {
+      "name": "boot",
+      "kind": "function",
+      "file": "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js",
+      "line": 170
     },
     {
       "name": "$",
@@ -8479,6 +11497,36 @@
       "line": 13
     },
     {
+      "name": "blob",
+      "kind": "function",
+      "file": "reports/compact_compile_logs/gitnexus_scope_hygiene_cleaner.py",
+      "line": 40
+    },
+    {
+      "name": "denied",
+      "kind": "function",
+      "file": "reports/compact_compile_logs/gitnexus_scope_hygiene_cleaner.py",
+      "line": 46
+    },
+    {
+      "name": "node_id",
+      "kind": "function",
+      "file": "reports/compact_compile_logs/gitnexus_scope_hygiene_cleaner.py",
+      "line": 50
+    },
+    {
+      "name": "edge_endpoints",
+      "kind": "function",
+      "file": "reports/compact_compile_logs/gitnexus_scope_hygiene_cleaner.py",
+      "line": 58
+    },
+    {
+      "name": "clean",
+      "kind": "function",
+      "file": "reports/compact_compile_logs/gitnexus_scope_hygiene_cleaner.py",
+      "line": 65
+    },
+    {
       "name": "Write-NEX",
       "kind": "function",
       "file": "reports/handoff_queue/20260705074942/handoff_action.ps1",
@@ -9847,6 +12895,60 @@
       "line": 43
     },
     {
+      "name": "TestGitNexusBridge",
+      "kind": "class",
+      "file": "tests/test_gitnexus_bridge.py",
+      "line": 11
+    },
+    {
+      "name": "test_compile_graph_extracts_python_dependency",
+      "kind": "function",
+      "file": "tests/test_gitnexus_bridge.py",
+      "line": 12
+    },
+    {
+      "name": "test_packet_is_json_serializable",
+      "kind": "function",
+      "file": "tests/test_gitnexus_bridge.py",
+      "line": 33
+    },
+    {
+      "name": "TestGitNexusHudAssets",
+      "kind": "class",
+      "file": "tests/test_gitnexus_hud_assets.py",
+      "line": 12
+    },
+    {
+      "name": "test_scope_hygiene_overlay_is_linked",
+      "kind": "function",
+      "file": "tests/test_gitnexus_hud_assets.py",
+      "line": 13
+    },
+    {
+      "name": "test_active_bridge_is_v021f_only",
+      "kind": "function",
+      "file": "tests/test_gitnexus_hud_assets.py",
+      "line": 18
+    },
+    {
+      "name": "test_scope_hygiene_denies_generated_artifacts",
+      "kind": "function",
+      "file": "tests/test_gitnexus_hud_assets.py",
+      "line": 23
+    },
+    {
+      "name": "test_single_owner_assets_are_still_linked",
+      "kind": "function",
+      "file": "tests/test_gitnexus_hud_assets.py",
+      "line": 39
+    },
+    {
+      "name": "test_no_gitnexus_in_metrics_body_tail",
+      "kind": "function",
+      "file": "tests/test_gitnexus_hud_assets.py",
+      "line": 46
+    },
+    {
       "name": "TestGoalLockAdapterLane",
       "kind": "class",
       "file": "tests/test_goal_lock_adapter_lane.py",
@@ -10421,6 +13523,96 @@
       "kind": "function",
       "file": "tests/test_nexus_cell_risk.py",
       "line": 8
+    },
+    {
+      "name": "TestNexusConversationOutputBridgeLegacySuperseded",
+      "kind": "class",
+      "file": "tests/test_nexus_conversation_output_bridge_v021a.py",
+      "line": 10
+    },
+    {
+      "name": "test_latest_conversation_bridge_is_linked",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021a.py",
+      "line": 11
+    },
+    {
+      "name": "test_latest_bridge_preserves_legacy_contract",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021a.py",
+      "line": 15
+    },
+    {
+      "name": "TestNexusConversationOutputBridgeLegacySuperseded",
+      "kind": "class",
+      "file": "tests/test_nexus_conversation_output_bridge_v021b.py",
+      "line": 10
+    },
+    {
+      "name": "test_latest_conversation_bridge_is_linked",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021b.py",
+      "line": 11
+    },
+    {
+      "name": "test_latest_bridge_preserves_legacy_contract",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021b.py",
+      "line": 15
+    },
+    {
+      "name": "TestNexusConversationOutputBridgeLegacySuperseded",
+      "kind": "class",
+      "file": "tests/test_nexus_conversation_output_bridge_v021c.py",
+      "line": 10
+    },
+    {
+      "name": "test_latest_conversation_bridge_is_linked",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021c.py",
+      "line": 11
+    },
+    {
+      "name": "test_latest_bridge_preserves_legacy_contract",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021c.py",
+      "line": 15
+    },
+    {
+      "name": "TestNexusConversationOutputBridgeLegacySuperseded",
+      "kind": "class",
+      "file": "tests/test_nexus_conversation_output_bridge_v021d.py",
+      "line": 10
+    },
+    {
+      "name": "test_latest_conversation_bridge_is_linked",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021d.py",
+      "line": 11
+    },
+    {
+      "name": "test_latest_bridge_preserves_legacy_contract",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021d.py",
+      "line": 15
+    },
+    {
+      "name": "TestNexusConversationOutputBridgeLegacySuperseded",
+      "kind": "class",
+      "file": "tests/test_nexus_conversation_output_bridge_v021e.py",
+      "line": 10
+    },
+    {
+      "name": "test_latest_conversation_bridge_is_linked",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021e.py",
+      "line": 11
+    },
+    {
+      "name": "test_latest_bridge_preserves_legacy_contract",
+      "kind": "function",
+      "file": "tests/test_nexus_conversation_output_bridge_v021e.py",
+      "line": 15
     },
     {
       "name": "TestNexusConversationOutputBridgeV021F",
@@ -13119,6 +16311,18 @@
       "evidence": "json"
     },
     {
+      "source": "reports/compact_compile_logs/gitnexus_scope_hygiene_cleaner.py",
+      "target": "docs/context/rcc_nexus_index.json",
+      "kind": "imports",
+      "evidence": "json"
+    },
+    {
+      "source": "reports/compact_compile_logs/gitnexus_scope_hygiene_cleaner.py",
+      "target": "nexus_gate/geometric_memory/score.py",
+      "kind": "imports",
+      "evidence": "re"
+    },
+    {
       "source": "Tesseract Neural Network/brain/memory_store.py",
       "target": "docs/context/rcc_nexus_index.json",
       "kind": "imports",
@@ -13573,6 +16777,30 @@
       "target": "docs/context/rcc_nexus_index.json",
       "kind": "imports",
       "evidence": "json"
+    },
+    {
+      "source": "tests/test_gitnexus_bridge.py",
+      "target": "docs/context/rcc_nexus_index.json",
+      "kind": "imports",
+      "evidence": "json"
+    },
+    {
+      "source": "tests/test_gitnexus_bridge.py",
+      "target": "nexus_gate/gitnexus_bridge/engine.py",
+      "kind": "imports",
+      "evidence": "nexus_gate.gitnexus_bridge.engine"
+    },
+    {
+      "source": "tests/test_gitnexus_bridge.py",
+      "target": "nexus_gate/__init__.py",
+      "kind": "imports",
+      "evidence": "nexus_gate.gitnexus_bridge.engine.compile_graph"
+    },
+    {
+      "source": "tests/test_gitnexus_hud_assets.py",
+      "target": "nexus_gate/geometric_memory/score.py",
+      "kind": "imports",
+      "evidence": "re"
     },
     {
       "source": "tests/test_goal_lock_adapter_lane.py",
@@ -14349,6 +17577,7 @@
     "docs/gitnexus/NEXUS_GITNEXUS_CORE_PORT.md": [],
     "docs/gitnexus/NEXUS_GITNEXUS_HUD_PLACEMENT.md": [],
     "docs/gitnexus/NEXUS_GITNEXUS_INTERACTIVE_HUD.md": [],
+    "docs/gitnexus/NEXUS_GITNEXUS_SCOPE_HYGIENE.md": [],
     "docs/goal/GOAL_LOCK.md": [],
     "docs/injections/rhp_nexus_ai_shell_v0_1_3.md": [],
     "docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md": [],
@@ -14493,6 +17722,18 @@
     "electron/renderer/nexus_gitnexus_core_hud.v0.3.2.js": [],
     "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.css": [],
     "electron/renderer/nexus_gitnexus_core_hud.v0.3.3.js": [],
+    "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.css": [],
+    "electron/renderer/nexus_gitnexus_core_hud.v0.3.7.js": [],
+    "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.css": [],
+    "electron/renderer/nexus_gitnexus_exact_mini_mirror.v0.3.4.js": [],
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.css": [],
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.5.js": [],
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.css": [],
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.6.js": [],
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.css": [],
+    "electron/renderer/nexus_gitnexus_geometric_mini.v0.3.7.js": [],
+    "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.css": [],
+    "electron/renderer/nexus_gitnexus_scope_hygiene.v0.3.8.js": [],
     "electron/renderer/nexus_mode_role_truth_bridge.v0.2.0zw.js": [],
     "electron/renderer/nexus_mode_selection_green.v0.2.0z.css": [],
     "electron/renderer/nexus_mode_selection_green.v0.2.0z.js": [],
@@ -15789,6 +19030,17 @@
     "registry/receptors.local_demo.v0.1.8.json": [],
     "reports/CHATGPT_HANDOFF_LATEST.md": [],
     "reports/CODEX_HANDOFF_LATEST.md": [],
+    "reports/compact_compile_logs/gitnexus_scope_hygiene_cleaner.py": [
+      "__future__",
+      "__future__.annotations",
+      "json",
+      "pathlib",
+      "pathlib.Path",
+      "re",
+      "shutil",
+      "typing",
+      "typing.Any"
+    ],
     "reports/electron_ui_fix/nexus_electron_allowlist_regression_rescue_20260703_220153.json": [],
     "reports/electron_ui_fix/nexus_electron_hud_layout_input_fix_20260703_213655.json": [],
     "reports/electron_ui_fix/nexus_electron_hud_polish_rescue_20260703_215952.json": [],
@@ -15950,6 +19202,14 @@
     "reports/human_surface/20260707_202358/14_electron_preflight.json": [],
     "reports/human_surface/20260707_202745/14_electron_preflight.json": [],
     "reports/human_surface/20260707_205510/14_electron_preflight.json": [],
+    "reports/human_surface/20260707_210018/14_electron_preflight.json": [],
+    "reports/human_surface/20260707_212110/14_electron_preflight.json": [],
+    "reports/human_surface/20260707_212518/14_electron_preflight.json": [],
+    "reports/human_surface/20260707_212614/14_electron_preflight.json": [],
+    "reports/human_surface/20260707_212857/14_electron_preflight.json": [],
+    "reports/human_surface/20260707_213427/14_electron_preflight.json": [],
+    "reports/human_surface/20260707_213744/14_electron_preflight.json": [],
+    "reports/human_surface/20260707_214133/14_electron_preflight.json": [],
     "reports/nexus_adapter_compile_report_latest.json": [],
     "reports/nexus_bounded_runtime_report_20260703_103439.json": [],
     "reports/nexus_bounded_runtime_report_20260703_103440.json": [],
@@ -16003,7 +19263,7 @@
     "reports/nexus_compile_report_20260703_114546.json": [],
     "reports/nexus_compile_report_20260703_120057.json": [],
     "reports/nexus_compile_report_20260703_120103.json": [],
-    "reports/nexus_compile_report_20260708_005337.json": [],
+    "reports/nexus_compile_report_20260708_014125.json": [],
     "reports/nexus_compile_report_latest.json": [],
     "reports/nexus_conversation_output_bridge_v021g_failure_latest.md": [],
     "reports/nexus_domain_intelligence_report_latest.json": [],
@@ -16068,7 +19328,7 @@
     "reports/nexus_self_healing_report_20260703_120059.json": [],
     "reports/nexus_self_healing_report_20260703_120101.json": [],
     "reports/nexus_self_healing_report_20260703_120103.json": [],
-    "reports/nexus_self_healing_report_20260708_005333.json": [],
+    "reports/nexus_self_healing_report_20260708_014120.json": [],
     "reports/nexus_self_healing_report_latest.json": [],
     "reports/README.md": [],
     "ROADMAP.md": [],
@@ -16825,23 +20085,63 @@
   },
   "impact": {
     "changed_files": [
+      "\"Tesseract Neural Network/memory/conversation_latest.json\"",
+      "\"Tesseract Neural Network/memory/tnn_memory.jsonl\"",
+      "\"Tesseract Neural Network/state/tnn_state_latest.json\"",
+      "GITNEXUS/ledger/gitnexus_ledger.jsonl",
+      "GITNEXUS/reports/gitnexus_report_latest.json.bak_scope_hygiene_x",
+      "GITNEXUS/state/gitnexus_graph_latest.json.bak_scope_hygiene_x",
+      "GITNEXUS/state/gitnexus_manifest.v0.1.0.json",
+      "NexusCell/ledger/nexus_cell_continuity.jsonl",
       "docs/feedback/FEEDBACK_LOG.md",
-      "docs/gitnexus/NEXUS_GITNEXUS_INTERACTIVE_HUD.md",
       "docs/runtime/NEXUS_CONVERSATION_OUTPUT_BRIDGE.md",
       "docs/runtime/NEXUS_METRICS_HUD.md",
-      "electron/renderer/index.html",
+      "electron/renderer/index.html.bak_scope_unlock_y_20260707_214342",
+      "electron/renderer/nexus_conversation_output_bridge.v0.2.1b.js",
+      "electron/renderer/nexus_conversation_output_bridge.v0.2.1c.js",
+      "electron/renderer/nexus_conversation_output_bridge.v0.2.1d.js",
+      "electron/renderer/nexus_gitnexus_core_hud.v0.1.1.css",
+      "electron/reports/",
+      "ledger/gitnexus/gitnexus_ledger.jsonl",
+      "ledger/nexus_cell/continuity.jsonl",
+      "ledger/nexus_gate_ledger.v0.1.0.jsonl",
       "reports/CHATGPT_HANDOFF_LATEST.md",
       "reports/CODEX_HANDOFF_LATEST.md",
+      "reports/compact_compile_logs/",
+      "reports/gitnexus_report_latest.json.bak_scope_hygiene_x",
+      "reports/nexus_bounded_runtime_report_latest.json",
       "reports/nexus_cell/",
-      "reports/nexus_compile_report_20260708_005337.json",
+      "reports/nexus_compile_report_20260708_014125.json",
+      "reports/nexus_compile_report_latest.json",
       "reports/nexus_conversation_output_bridge_v021g_failure_latest.md",
+      "reports/nexus_domain_intelligence_report_latest.json",
+      "reports/nexus_electron_environment_report_latest.json",
+      "reports/nexus_electron_preflight_report_latest.json",
+      "reports/nexus_electron_smoke_report_latest.json",
+      "reports/nexus_evidence_compaction_report_latest.json",
+      "reports/nexus_feedback_interface_report_latest.json",
+      "reports/nexus_feedback_report_latest.json",
+      "reports/nexus_geometric_memory_packet_latest.json",
+      "reports/nexus_interconnect_report_latest.json",
+      "reports/nexus_nn_router_report_latest.json",
       "reports/nexus_phi4_stale_hits_after_zac.txt",
-      "reports/nexus_self_healing_report_20260708_005333.json",
+      "reports/nexus_reflective_loop_report_latest.json",
+      "reports/nexus_self_healing_report_20260708_014120.json",
+      "reports/nexus_self_healing_report_latest.json",
       "reports/tui/",
+      "state/ai_feedback_context_latest.json",
+      "state/gitnexus/gitnexus_graph_latest.json.bak_scope_hygiene_x",
+      "state/gitnexus/gitnexus_manifest.v0.1.0.json",
       "state/interconnect_graph.v0.2.2.json",
+      "state/nexus_geometric_memory_runtime_latest.json",
       "state/nexus_nn_router_index.v0.6.4.json",
       "state/visual/nexus_metrics_hud_manifest.v0.1.0.json",
       "state/visual/nexus_mode_selection_green_hud_manifest.v0.2.0z.json",
+      "tests/test_nexus_conversation_output_bridge_v021a.py",
+      "tests/test_nexus_conversation_output_bridge_v021b.py",
+      "tests/test_nexus_conversation_output_bridge_v021c.py",
+      "tests/test_nexus_conversation_output_bridge_v021d.py",
+      "tests/test_nexus_conversation_output_bridge_v021e.py",
       "tests/test_nexus_conversation_output_bridge_v021f.py",
       "tests/test_nexus_metrics_hud_v010.py"
     ],
@@ -16854,7 +20154,7 @@
   "top_imported_files": [
     {
       "file": "docs/context/rcc_nexus_index.json",
-      "importer_count": 95
+      "importer_count": 96
     },
     {
       "file": "nexus_gate/__init__.py",
@@ -16862,7 +20162,7 @@
     },
     {
       "file": "nexus_gate/geometric_memory/score.py",
-      "importer_count": 10
+      "importer_count": 11
     },
     {
       "file": "nexus_gate/core/packets.py",
@@ -16937,9 +20237,9 @@
     "summary": "High codegraph impact pressure. Inspect affected files before durable mutation.",
     "next_action": "inspect_before_commit",
     "risk": "high",
-    "changed_count": 55,
+    "changed_count": 59,
     "affected_count": 0,
-    "edge_count": 480,
-    "symbol_count": 1413
+    "edge_count": 482,
+    "symbol_count": 1545
   }
 }
