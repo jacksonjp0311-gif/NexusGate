@@ -1,6 +1,6 @@
 [project]
 name = "nexus-gate"
-version = "0.9.2"
+version = "0.9.3"
 description = "Reflective Intelligence Layer for AI Systems"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -11,4 +11,4 @@ nexus = "nexus_gate.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["nexus_gate*"]
-# current-line: v0.9.1 origin-aligned GITNEXUS impact bridge
+# current-line: v0.9.3 AI Loop Toolkit Expansion

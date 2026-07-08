@@ -115,6 +115,10 @@ REQUIRED_PATHS = [
     "nexus_gate/loops/resume.py",
     "nexus_gate/loops/bounded_tests.py",
     "tests/test_ai_loop_fabric_v092.py",
+    "docs/runtime/NEXUS_AI_LOOP_TOOLKIT.md",
+    "nexus_gate/loops/toolkit.py",
+    "state/loops/nexus_loop_cards.v0.9.3.json",
+    "tests/test_ai_loop_toolkit_v093.py",
 ]
 
 MINI_README_DIRS = [
@@ -315,12 +319,12 @@ class NexusCompiler:
     def gate_update_chart_current(self) -> None:
         path = self.root / "docs/updates/UPDATE_CHART.md"
         text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
-        required = ["v0.9.2", "AI Loop Fabric", "No version step without update chart entry"]
+        required = ["v0.9.3", "AI Loop Toolkit Expansion", "No version step without update chart entry"]
         missing = [item for item in required if item not in text]
         if missing:
-            self.add("update_chart_current", "fail", "Update chart missing current v0.9.2 AI loop fabric state.", {"missing": missing})
+            self.add("update_chart_current", "fail", "Update chart missing current v0.9.3 AI loop toolkit state.", {"missing": missing})
             return
-        self.add("update_chart_current", "pass", "Update chart includes current v0.9.2 AI loop fabric state.", {"required": required})
+        self.add("update_chart_current", "pass", "Update chart includes current v0.9.3 AI loop toolkit state.", {"required": required})
 
     def gate_cold_evidence_contracts(self) -> None:
         doc = self.root / "docs/evidence/COLD_EVIDENCE_ENGINE.md"
@@ -657,16 +661,23 @@ class NexusCompiler:
 
 
     def gate_version_alignment_current_line(self) -> None:
-        checks = {"README.md": ["v0.9.2", "AI-callable local loop fabric"], "ROADMAP.md": ["v0.9.2", "Status: current"], "docs/versioning/NEXUS_CHANGELOG.md": ["v0.9.2", "AI-callable Local Loop Fabric"], "pyproject.toml": ["version = \"0.9.2\""]}
+        checks = {
+            "README.md": ["v0.9.3", "AI Loop Toolkit Expansion"],
+            "ROADMAP.md": ["v0.9.3", "Status: current"],
+            "docs/versioning/NEXUS_CHANGELOG.md": ["v0.9.3", "AI Loop Toolkit Expansion"],
+            "pyproject.toml": ["version = \"0.9.3\""],
+        }
         failures = []
         for rel, tokens in checks.items():
             path = self.root / rel
             text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
             missing = [token for token in tokens if token not in text]
-            if missing: failures.append({"path": rel, "missing": missing})
+            if missing:
+                failures.append({"path": rel, "missing": missing})
         if failures:
-            self.add("version_alignment_current_line", "fail", "v0.9.2 identity missing from required surfaces.", {"failures": failures}); return
-        self.add("version_alignment_current_line", "pass", "v0.9.2 identity is aligned across README, changelog, roadmap, and pyproject.", {"surfaces": sorted(checks)})
+            self.add("version_alignment_current_line", "fail", "v0.9.3 identity missing from required surfaces.", {"failures": failures})
+            return
+        self.add("version_alignment_current_line", "pass", "v0.9.3 identity is aligned across README, changelog, roadmap, and pyproject.", {"surfaces": sorted(checks)})
 
     def gate_readme_encoding_clean(self) -> None:
         path = self.root / "README.md"
@@ -697,6 +708,10 @@ class NexusCompiler:
     "nexus_gate/loops/resume.py",
     "nexus_gate/loops/bounded_tests.py",
     "tests/test_ai_loop_fabric_v092.py",
+    "docs/runtime/NEXUS_AI_LOOP_TOOLKIT.md",
+    "nexus_gate/loops/toolkit.py",
+    "state/loops/nexus_loop_cards.v0.9.3.json",
+    "tests/test_ai_loop_toolkit_v093.py",
         ]
         missing = [rel for rel in required if not (self.root / rel).exists()]
         if missing:
@@ -728,6 +743,10 @@ class NexusCompiler:
             "nexus_gate/loops/bounded_tests.py",
             "nexus_gate/loops/resume.py",
             "tests/test_ai_loop_fabric_v092.py",
+    "docs/runtime/NEXUS_AI_LOOP_TOOLKIT.md",
+    "nexus_gate/loops/toolkit.py",
+    "state/loops/nexus_loop_cards.v0.9.3.json",
+    "tests/test_ai_loop_toolkit_v093.py",
         ]
         missing_paths = [rel for rel in required_paths if not (self.root / rel).exists()]
         if missing_paths:
@@ -743,6 +762,18 @@ class NexusCompiler:
             "docs-doctrine-preflight",
             "hud-loop-sync",
             "release-seal",
+            "alignment-score",
+            "boundary-scan",
+            "claim-boundary-audit",
+            "dependency-preflight",
+            "evolution-radar",
+            "handoff-pack",
+            "next-action-router",
+            "release-brief",
+            "repo-radar",
+            "scope-hygiene",
+            "stale-surface-scan",
+            "surface-map",
         }
 
         try:
@@ -903,7 +934,7 @@ class NexusCompiler:
         status = "pass" if not failed else "fail"
         return CompileReport(
             system="NEXUS GATE",
-            version="0.9.2-ai-loop-fabric-compiler",
+            version="0.9.3-ai-loop-toolkit-compiler",
             root=str(self.root),
             status=status,
             generated_at_utc=datetime.now(timezone.utc).isoformat(),

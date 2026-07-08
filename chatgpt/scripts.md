@@ -167,3 +167,7 @@ python -m nexus_gate.loops.runner --root . --loop wound-indexed-resume --intent 
 python -m nexus_gate.loops.runner --root . --loop bounded-validation --intent "<validation>" --execute --human-authorized --json
 python -m nexus_gate.loops.runner --root . --loop release-seal --intent "<release>" --execute --human-authorized --json
 ```
+
+## AI Loop Toolkit v0.9.3
+
+Before inventing a new patch flow, prefer an existing local loop card. Use `repo-radar` for situational awareness, `scope-hygiene` before staging, `claim-boundary-audit` before public docs, `surface-map` before architecture work, `stale-surface-scan` after version bumps, `next-action-router` when the next move is uncertain, `handoff-pack` before switching sessions, `dependency-preflight` before environment work, `alignment-score` before release, `boundary-scan` before adding commands, `release-brief` before sealing, and `evolution-radar` when planning the next system upgrade.

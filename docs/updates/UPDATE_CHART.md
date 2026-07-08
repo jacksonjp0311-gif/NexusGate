@@ -103,3 +103,5 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.9.2 | AI-callable loop fabric + Wound-Indexed Resume Loop | Adds local meta-orchestrator loop cards, resume packets, bounded validation, impact-map, release-seal, and HUD loop sync. No autonomous authority; no git write authority without human-authorized outer closer. | No version step without update chart entry. |
 
 | v0.9.2 AI Loop Fabric | AI-callable local loop fabric; wound-indexed resume; bounded validation; HUD loop sync | No version step without update chart entry |
+
+| v0.9.3 | AI Loop Toolkit Expansion | Added creative AI-callable local loops and HUD-ready cards | No version step without update chart entry |

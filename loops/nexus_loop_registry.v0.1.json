@@ -89,6 +89,174 @@
       "description": "Emit loop cards.",
       "mutates": false
     },
+    "toolkit_alignment_score": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "alignment-score",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: alignment-score.",
+      "mutates": false
+    },
+    "toolkit_boundary_scan": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "boundary-scan",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: boundary-scan.",
+      "mutates": false
+    },
+    "toolkit_claim_audit": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "claim-boundary-audit",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: claim-boundary-audit.",
+      "mutates": false
+    },
+    "toolkit_dependency_preflight": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "dependency-preflight",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: dependency-preflight.",
+      "mutates": false
+    },
+    "toolkit_evolution_radar": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "evolution-radar",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: evolution-radar.",
+      "mutates": false
+    },
+    "toolkit_handoff_pack": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "handoff-pack",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: handoff-pack.",
+      "mutates": false
+    },
+    "toolkit_next_action": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "next-action-router",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: next-action-router.",
+      "mutates": false
+    },
+    "toolkit_release_brief": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "release-brief",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: release-brief.",
+      "mutates": false
+    },
+    "toolkit_repo_radar": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "repo-radar",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: repo-radar.",
+      "mutates": false
+    },
+    "toolkit_scope_hygiene": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "scope-hygiene",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: scope-hygiene.",
+      "mutates": false
+    },
+    "toolkit_stale_scan": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "stale-surface-scan",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: stale-surface-scan.",
+      "mutates": false
+    },
+    "toolkit_surface_map": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "surface-map",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: surface-map.",
+      "mutates": false
+    },
     "unit_tests": {
       "argv": [
         "python",
@@ -124,12 +292,17 @@
     "secrets_enabled": false,
     "self_authorization_enabled": false
   },
-  "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
-  "generated_for": "NEXUS_GATE_v0.9.2",
+  "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, tool packets, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
+  "generated_for": "NEXUS_GATE_v0.9.3",
   "loops": {
     "ai-orchestrator-preflight": {
+      "ai_callable": true,
       "description": "Prepare AI meta-orchestration context before choosing the next local loop.",
+      "display_group": "Meta Loops",
+      "function": "Prepare AI meta-orchestration context before choosing the next local loop.",
+      "local_only": true,
       "mutates": false,
+      "operator_use": "Use when this loop matches the active gate, wound, or validation need.",
       "requires_human_authorization": false,
       "stages": [
         {
@@ -157,11 +330,69 @@
           "type": "command"
         }
       ],
-      "stop_on_failure": false
+      "stop_on_failure": false,
+      "title": "Ai Orchestrator Preflight"
+    },
+    "alignment-score": {
+      "ai_callable": true,
+      "description": "Compute a transparent local alignment score from README, doctrine, loop cards, compiler, and boundary signals.",
+      "display_group": "Alignment",
+      "function": "Produces a lightweight score explaining what is aligned, weak, missing, or dirty.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use after major changes to decide whether the system is ready for release-seal.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_alignment_score",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_alignment_score_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Alignment Score"
+    },
+    "boundary-scan": {
+      "ai_callable": true,
+      "description": "Verify loop registry, cards, docs, and compiler language preserve non-authority boundaries.",
+      "display_group": "Safety",
+      "function": "Checks that new tools remain local, non-autonomous, non-network, non-secret, and non-git-write by default.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before adding any new command or loop.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_boundary_scan",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_boundary_scan_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Boundary Scan"
     },
     "bounded-validation": {
+      "ai_callable": true,
       "description": "Run compileall, bounded tests, and compiler.",
+      "display_group": "Meta Loops",
+      "function": "Run compileall, bounded tests, and compiler.",
+      "local_only": true,
       "mutates": false,
+      "operator_use": "Use when this loop matches the active gate, wound, or validation need.",
       "requires_human_authorization": true,
       "stages": [
         {
@@ -180,11 +411,43 @@
           "type": "command"
         }
       ],
-      "stop_on_failure": true
+      "stop_on_failure": true,
+      "title": "Bounded Validation"
+    },
+    "claim-boundary-audit": {
+      "ai_callable": true,
+      "description": "Scan docs for overclaim, authority, proof, safety, and autonomy language.",
+      "display_group": "Safety",
+      "function": "Keeps public claims aligned with NexusGate's non-authority and non-proof boundary.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before publishing README/docs or after large conceptual changes.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_claim_audit",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_claim_audit_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Claim Boundary Audit"
     },
     "compiler-wound-focus": {
+      "ai_callable": true,
       "description": "Run compiler and focus exact failed gates.",
+      "display_group": "Meta Loops",
+      "function": "Run compiler and focus exact failed gates.",
+      "local_only": true,
       "mutates": false,
+      "operator_use": "Use when this loop matches the active gate, wound, or validation need.",
       "requires_human_authorization": true,
       "stages": [
         {
@@ -198,11 +461,43 @@
           "type": "command"
         }
       ],
-      "stop_on_failure": false
+      "stop_on_failure": false,
+      "title": "Compiler Wound Focus"
+    },
+    "dependency-preflight": {
+      "ai_callable": true,
+      "description": "Check local tool availability for Python, git, Node, npm, PowerShell, and optional runtime surfaces.",
+      "display_group": "Environment",
+      "function": "Separates code wounds from environment wounds before patching.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when a command fails unexpectedly or before UI/Electron work.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_dependency_preflight",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_dependency_preflight_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Dependency Preflight"
     },
     "docs-doctrine-preflight": {
+      "ai_callable": true,
       "description": "Read README, doctrine, loop fabric, and cards docs before coding.",
+      "display_group": "Meta Loops",
+      "function": "Read README, doctrine, loop fabric, and cards docs before coding.",
+      "local_only": true,
       "mutates": false,
+      "operator_use": "Use when this loop matches the active gate, wound, or validation need.",
       "requires_human_authorization": false,
       "stages": [
         {
@@ -234,13 +529,41 @@
           "type": "read"
         }
       ],
-      "stop_on_failure": false
+      "stop_on_failure": false,
+      "title": "Docs Doctrine Preflight"
+    },
+    "evolution-radar": {
+      "ai_callable": true,
+      "description": "Generate creative but bounded next-evolution candidates for NexusGate.",
+      "display_group": "Evolution",
+      "function": "Keeps the system evolving by ranking next useful loops, HUD surfaces, tests, and compiler gates.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when asking what to build next without drifting away from alignment.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_evolution_radar",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_evolution_radar_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Evolution Radar"
     },
     "failure-intelligence": {
       "ai_callable": true,
       "description": "Read latest wound and failure surfaces so the next patch closes the exact wound instead of drifting.",
       "display_group": "Meta Loops",
       "function": "Read latest wound and failure surfaces so the next patch closes the exact wound instead of drifting.",
+      "local_only": true,
       "mutates": false,
       "operator_use": "Use when this named loop matches the active gate or wound.",
       "requires_human_authorization": false,
@@ -277,9 +600,40 @@
       "stop_on_failure": false,
       "title": "Failure Intelligence"
     },
-    "hud-loop-sync": {
-      "description": "Regenerate HUD-ready loop cards.",
+    "handoff-pack": {
+      "ai_callable": true,
+      "description": "Build a compact ChatGPT/Codex handoff packet from local evidence.",
+      "display_group": "Continuity",
+      "function": "Creates a portable context packet with HEAD, changed surfaces, loops, cards, wounds, and recommended next action.",
+      "local_only": true,
       "mutates": false,
+      "operator_use": "Use before switching sessions, models, or tools.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_handoff_pack",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_handoff_pack_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Handoff Pack"
+    },
+    "hud-loop-sync": {
+      "ai_callable": true,
+      "description": "Regenerate HUD-ready loop cards.",
+      "display_group": "Meta Loops",
+      "function": "Regenerate HUD-ready loop cards.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when this loop matches the active gate, wound, or validation need.",
       "requires_human_authorization": true,
       "stages": [
         {
@@ -295,11 +649,17 @@
           "type": "read"
         }
       ],
-      "stop_on_failure": true
+      "stop_on_failure": true,
+      "title": "Hud Loop Sync"
     },
     "impact-map": {
+      "ai_callable": true,
       "description": "Build read-only GITNEXUS impact evidence.",
+      "display_group": "Meta Loops",
+      "function": "Build read-only GITNEXUS impact evidence.",
+      "local_only": true,
       "mutates": false,
+      "operator_use": "Use when this loop matches the active gate, wound, or validation need.",
       "requires_human_authorization": true,
       "stages": [
         {
@@ -313,13 +673,41 @@
           "type": "command"
         }
       ],
-      "stop_on_failure": true
+      "stop_on_failure": true,
+      "title": "Impact Map"
+    },
+    "next-action-router": {
+      "ai_callable": true,
+      "description": "Recommend the next local loop from current git, compiler, cards, and wound state.",
+      "display_group": "Orchestration",
+      "function": "Turns local evidence into an AI-orchestratable next-loop recommendation.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when the AI is unsure whether to rehydrate, clean scope, focus compiler, validate, or seal.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_next_action",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_next_action_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Next Action Router"
     },
     "reflective-validation": {
       "ai_callable": true,
       "description": "Run compiler/test gates and convert failure into compact local intelligence.",
       "display_group": "Meta Loops",
       "function": "Run compiler/test gates and convert failure into compact local intelligence.",
+      "local_only": true,
       "mutates": false,
       "operator_use": "Use when this named loop matches the active gate or wound.",
       "requires_human_authorization": true,
@@ -343,9 +731,40 @@
       "stop_on_failure": true,
       "title": "Reflective Validation"
     },
-    "release-seal": {
-      "description": "Final local evidence before human-authorized commit/push.",
+    "release-brief": {
+      "ai_callable": true,
+      "description": "Compile a human-readable release brief from current cards, compiler status, git state, and docs.",
+      "display_group": "Promotion",
+      "function": "Gives the human a compact release summary before commit/push.",
+      "local_only": true,
       "mutates": false,
+      "operator_use": "Use immediately before release-seal or after a compiler pass.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_release_brief",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_release_brief_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Release Brief"
+    },
+    "release-seal": {
+      "ai_callable": true,
+      "description": "Final local evidence before human-authorized commit/push.",
+      "display_group": "Meta Loops",
+      "function": "Final local evidence before human-authorized commit/push.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when this loop matches the active gate, wound, or validation need.",
       "requires_human_authorization": true,
       "stages": [
         {
@@ -364,13 +783,41 @@
           "type": "command"
         }
       ],
-      "stop_on_failure": true
+      "stop_on_failure": true,
+      "title": "Release Seal"
+    },
+    "repo-radar": {
+      "ai_callable": true,
+      "description": "Build a compact local repo health radar for AI orchestration.",
+      "display_group": "Awareness",
+      "function": "Summarize HEAD, dirty state, loop/card counts, compiler status, and next visibility surfaces.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use first when the AI needs situational awareness before selecting the next local loop.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_repo_radar",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_repo_radar_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Repo Radar"
     },
     "rhp-core": {
       "ai_callable": true,
       "description": "Deep repository-origin rehydration before patching or compounding.",
       "display_group": "Meta Loops",
       "function": "Deep repository-origin rehydration before patching or compounding.",
+      "local_only": true,
       "mutates": false,
       "operator_use": "Use when this named loop matches the active gate or wound.",
       "requires_human_authorization": false,
@@ -449,11 +896,38 @@
       "stop_on_failure": false,
       "title": "Rhp Core"
     },
+    "scope-hygiene": {
+      "ai_callable": true,
+      "description": "Classify local changes into intended source/docs/tests versus residue/backups/runtime churn.",
+      "display_group": "Safety",
+      "function": "Prevents accidental staging by producing a scope-hygiene packet before commit or cleanup.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before staging, committing, or deciding what a closer is allowed to touch.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_scope_hygiene",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_scope_hygiene_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Scope Hygiene"
+    },
     "script-evolution": {
       "ai_callable": true,
       "description": "Plan and bound a generated script so the script triggers local intelligence instead of duplicating it.",
       "display_group": "Meta Loops",
       "function": "Plan and bound a generated script so the script triggers local intelligence instead of duplicating it.",
+      "local_only": true,
       "mutates": false,
       "operator_use": "Use when this named loop matches the active gate or wound.",
       "requires_human_authorization": false,
@@ -482,11 +956,64 @@
       "stop_on_failure": true,
       "title": "Script Evolution"
     },
+    "stale-surface-scan": {
+      "ai_callable": true,
+      "description": "Find likely stale version/current-line references without treating lineage references as failures.",
+      "display_group": "Maintenance",
+      "function": "Highlights places where docs or tests may still point at old current-state claims.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use after version bumps, README edits, or portal/HUD lineage updates.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_stale_scan",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_stale_surface_scan_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Stale Surface Scan"
+    },
+    "surface-map": {
+      "ai_callable": true,
+      "description": "Map source, docs, tests, state, reports, and loop surfaces into a compact topology packet.",
+      "display_group": "Architecture",
+      "function": "Gives the AI a repo topology map so future patches can target the correct organ.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when adding modules, docs, tests, or HUD surfaces.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_surface_map",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_surface_map_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Surface Map"
+    },
     "validate-promote": {
       "ai_callable": true,
       "description": "Verify candidate patch and stop before commit/push unless the human-authorized outer script performs it.",
       "display_group": "Meta Loops",
       "function": "Verify candidate patch and stop before commit/push unless the human-authorized outer script performs it.",
+      "local_only": true,
       "mutates": false,
       "operator_use": "Use when this named loop matches the active gate or wound.",
       "requires_human_authorization": true,
@@ -516,8 +1043,13 @@
       "title": "Validate Promote"
     },
     "wound-indexed-resume": {
+      "ai_callable": true,
       "description": "Emit active wound and resume recommendation.",
+      "display_group": "Meta Loops",
+      "function": "Emit active wound and resume recommendation.",
+      "local_only": true,
       "mutates": false,
+      "operator_use": "Use when this loop matches the active gate, wound, or validation need.",
       "requires_human_authorization": true,
       "stages": [
         {
@@ -531,10 +1063,11 @@
           "type": "command"
         }
       ],
-      "stop_on_failure": true
+      "stop_on_failure": true,
+      "title": "Wound Indexed Resume"
     }
   },
-  "registry_scope": "ai_callable_local_loop_fabric",
+  "registry_scope": "ai_callable_local_loop_toolkit_expansion",
   "system": "NEXUS_META_LOOP_REGISTRY",
-  "version": "0.2.0"
+  "version": "0.3.0"
 }

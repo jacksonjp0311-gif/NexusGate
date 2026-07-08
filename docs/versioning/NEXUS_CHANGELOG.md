@@ -256,3 +256,10 @@ Keeps no-arbitrary-shell/no-network/no-secrets/no-git-mutation/no-self-authoriza
 - Added wound-indexed resume packet surface.
 - Added bounded test runner that merges tracked and local filesystem tests.
 - Preserved authority boundary: AI recommends loops; local repo runs allowlisted loops; human authorizes durable mutation.
+
+## v0.9.3 - AI Loop Toolkit Expansion
+
+- Added AI-callable local toolkit loops for broader meta-orchestration.
+- Added `nexus_gate/loops/toolkit.py` packet emitter.
+- Regenerated v0.9.3 loop cards for HUD-ready loop rendering.
+- Preserved local-only authority boundaries: no autonomous authority, no git write, no network, no secrets.

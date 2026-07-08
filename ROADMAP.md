@@ -25,3 +25,9 @@ Status: current.
 Status: current
 
 NEXUS GATE now exposes local AI-callable loops. ChatGPT/Codex can recommend named loops; the repo runs them locally; packets report evidence; durable mutation remains human-authorized only.
+
+## v0.9.3 AI Loop Toolkit Expansion
+
+Status: current
+
+Adds creative AI-callable local loops for repo radar, scope hygiene, claim boundary audit, surface mapping, stale-surface scan, next-action routing, handoff packing, dependency preflight, alignment scoring, boundary scanning, release briefing, and evolution radar.
