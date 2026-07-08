@@ -69,3 +69,10 @@ The broken exact-mini-mirror overlay is removed. The mini GITNEXUS dock is now a
 simple geometric codegraph visual like the Neural Activity panel: header, OPEN
 button, and one large animated geometry canvas. The full popup remains the
 interactive graph surface. Toolbar labels are sanitized to ASCII at runtime.
+
+## v0.3.6 flicker fix
+
+The mini GITNEXUS dock now mounts as a singleton. Repeated remount loops and
+duplicate dock creation are removed. The mini dock uses one animation loop, one
+instance, duplicate cleanup, and resize debouncing to prevent flicker or triple
+box rendering.
