@@ -1,55 +1,106 @@
 # NEXUS Loop Cards
 
 NEXUS Loop Cards are HUD-ready JSON descriptions of the canonical local loop registry.
-They preserve the loop registry as data and present each loop as a human-readable card.
+v0.9.2 expands cards into AI-callable local loop fabric surfaces.
 
 Boundary: loop cards describe governed local loops. They do not grant autonomous authority, execution authority, git write authority, memory promotion, safety proof, security proof, or correctness proof.
 
 ## Card Surfaces
 
-- `state/loops/nexus_loop_cards.v0.9.1B.json`
+- `state/loops/nexus_loop_cards.v0.9.2.json`
 - `state/loops/nexus_loop_cards_latest.json`
 - `python -m nexus_gate.loops.cards --root . --json`
 - Spiral Core Portal option `[14] Nexus Loops / Cards`
 
 ## Cards
 
+### Ai Orchestrator Preflight
+
+- Loop: `ai-orchestrator-preflight`
+- Function: Give AI local context before selecting a loop.
+- Command: `python -m nexus_gate.loops.runner --root . --loop ai-orchestrator-preflight --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop ai-orchestrator-preflight --intent "<intent>" --execute --human-authorized --json`
+
+### Bounded Validation
+
+- Loop: `bounded-validation`
+- Function: Run compile, bounded tests, compiler.
+- Command: `python -m nexus_gate.loops.runner --root . --loop bounded-validation --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop bounded-validation --intent "<intent>" --execute --human-authorized --json`
+
+### Compiler Wound Focus
+
+- Loop: `compiler-wound-focus`
+- Function: Focus exact compiler failed gates.
+- Command: `python -m nexus_gate.loops.runner --root . --loop compiler-wound-focus --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop compiler-wound-focus --intent "<intent>" --execute --human-authorized --json`
+
+### Docs Doctrine Preflight
+
+- Loop: `docs-doctrine-preflight`
+- Function: Read README and script doctrine.
+- Command: `python -m nexus_gate.loops.runner --root . --loop docs-doctrine-preflight --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop docs-doctrine-preflight --intent "<intent>" --execute --human-authorized --json`
+
 ### Failure Intelligence
 
 - Loop: `failure-intelligence`
-- Function: Read failure surfaces so the next closer heals the active wound rather than drifting.
-- Operator use: Use after a failed gate to identify the next exact repair target.
+- Function: Read failure surfaces for next wound.
 - Command: `python -m nexus_gate.loops.runner --root . --loop failure-intelligence --intent "<intent>" --json`
-- Human authorization required: `false`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop failure-intelligence --intent "<intent>" --execute --human-authorized --json`
+
+### Hud Loop Sync
+
+- Loop: `hud-loop-sync`
+- Function: Regenerate loop cards.
+- Command: `python -m nexus_gate.loops.runner --root . --loop hud-loop-sync --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop hud-loop-sync --intent "<intent>" --execute --human-authorized --json`
+
+### Impact Map
+
+- Loop: `impact-map`
+- Function: Map patch impact through GITNEXUS.
+- Command: `python -m nexus_gate.loops.runner --root . --loop impact-map --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop impact-map --intent "<intent>" --execute --human-authorized --json`
 
 ### Reflective Validation
 
 - Loop: `reflective-validation`
-- Function: Run compile/test/compiler gates and convert failures into compact wound intelligence.
-- Operator use: Use after a patch when you need gate evidence and wound capture.
+- Function: Run compile/test/compiler gates.
 - Command: `python -m nexus_gate.loops.runner --root . --loop reflective-validation --intent "<intent>" --json`
-- Human authorization required: `true`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop reflective-validation --intent "<intent>" --execute --human-authorized --json`
+
+### Release Seal
+
+- Loop: `release-seal`
+- Function: Final evidence before commit/push.
+- Command: `python -m nexus_gate.loops.runner --root . --loop release-seal --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop release-seal --intent "<intent>" --execute --human-authorized --json`
 
 ### Rhp Core
 
 - Loop: `rhp-core`
-- Function: Rehydrate repository origin before patching, compounding, or agent continuation.
-- Operator use: Use first when resuming from chat, memory, or a dirty session.
+- Function: Rehydrate repository origin before patching.
 - Command: `python -m nexus_gate.loops.runner --root . --loop rhp-core --intent "<intent>" --json`
-- Human authorization required: `false`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop rhp-core --intent "<intent>" --execute --human-authorized --json`
 
 ### Script Evolution
 
 - Loop: `script-evolution`
-- Function: Shape generated scripts so ChatGPT/Codex work through local governed intelligence instead of loose patches.
-- Operator use: Use before generating a new All-One closer or code-changing script.
+- Function: Shape generated scripts through governed intelligence.
 - Command: `python -m nexus_gate.loops.runner --root . --loop script-evolution --intent "<intent>" --json`
-- Human authorization required: `false`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop script-evolution --intent "<intent>" --execute --human-authorized --json`
 
 ### Validate Promote
 
 - Loop: `validate-promote`
-- Function: Validate a candidate patch and stop before durable mutation unless a human-authorized outer script promotes it.
-- Operator use: Use as the final local validation loop before commit/push authority.
+- Function: Validate before promotion.
 - Command: `python -m nexus_gate.loops.runner --root . --loop validate-promote --intent "<intent>" --json`
-- Human authorization required: `true`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop validate-promote --intent "<intent>" --execute --human-authorized --json`
+
+### Wound Indexed Resume
+
+- Loop: `wound-indexed-resume`
+- Function: Emit active wound and resume recommendation.
+- Command: `python -m nexus_gate.loops.runner --root . --loop wound-indexed-resume --intent "<intent>" --json`
+- Execute: `python -m nexus_gate.loops.runner --root . --loop wound-indexed-resume --intent "<intent>" --execute --human-authorized --json`

@@ -99,3 +99,7 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.9.1 | Origin Alignment + GITNEXUS Impact Bridge | current | Aligns version surfaces, fixes README encoding, adds read-only GITNEXUS impact bridge, NexusCell lane, compiler guards, and tests. |
 | v0.9.1A | README Professionalization + ChatGPT Script Doctrine | stable | Adds read-before-coding doctrine, gate resume lessons, and compact README improvements without changing runtime authority. |
 | v0.9.1B | Loop Cards Portal | Loop registry preserved as HUD-ready JSON cards and exposed in Spiral Core Portal. | compiler + bounded tests | Loop cards are descriptive evidence surfaces, not execution authority. |
+
+| v0.9.2 | AI-callable loop fabric + Wound-Indexed Resume Loop | Adds local meta-orchestrator loop cards, resume packets, bounded validation, impact-map, release-seal, and HUD loop sync. No autonomous authority; no git write authority without human-authorized outer closer. | No version step without update chart entry. |
+
+| v0.9.2 AI Loop Fabric | AI-callable local loop fabric; wound-indexed resume; bounded validation; HUD loop sync | No version step without update chart entry |

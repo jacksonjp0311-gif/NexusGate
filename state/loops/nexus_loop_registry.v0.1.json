@@ -1,111 +1,540 @@
 {
-  "version": "0.1.0",
-  "system": "NEXUS_META_LOOP_REGISTRY",
-  "generated_for": "NEXUS_GATE_v0.9.0",
-  "registry_scope": "local_named_loop_orchestration",
-  "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
-  "authority_boundary": {
-    "autonomous_authority": false,
-    "arbitrary_command_execution": false,
-    "network_enabled": false,
-    "secrets_enabled": false,
-    "git_write_enabled": false,
-    "memory_promotion_enabled": false,
-    "self_authorization_enabled": false,
-    "human_authorization_required_for_command_execution": true
-  },
   "allowed_commands": {
-    "compileall": {
-      "argv": ["python", "-m", "compileall", "nexus_gate", "tests"],
-      "mutates": false,
-      "description": "Compile Python sources."
-    },
-    "unit_tests": {
-      "argv": ["python", "-m", "unittest", "discover", "-s", "tests"],
-      "mutates": false,
-      "description": "Run full unittest discovery."
-    },
-    "compiler": {
-      "argv": ["python", "-m", "nexus_gate.compiler", "--root", ".", "--json"],
-      "mutates": false,
-      "description": "Run NexusGate gated compiler."
+    "bounded_tests": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.bounded_tests",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "description": "Run bounded per-file tests.",
+      "mutates": false
     },
     "cell_doctor": {
-      "argv": ["python", "-m", "nexus_gate.nexus_cell.cli", "doctor", "--root", "."],
-      "mutates": false,
-      "description": "Run NexusCell doctor visibility."
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.nexus_cell.cli",
+        "doctor",
+        "--root",
+        "."
+      ],
+      "description": "NexusCell doctor visibility.",
+      "mutates": false
+    },
+    "compileall": {
+      "argv": [
+        "python",
+        "-m",
+        "compileall",
+        "nexus_gate",
+        "tests"
+      ],
+      "description": "Compile Python sources.",
+      "mutates": false
+    },
+    "compiler": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.compiler",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "description": "Run compiler.",
+      "mutates": false
+    },
+    "git_diff_name_only": {
+      "argv": [
+        "git",
+        "diff",
+        "--name-only"
+      ],
+      "description": "Show unstaged changed file names.",
+      "mutates": false
     },
     "git_status": {
-      "argv": ["git", "status", "--short"],
-      "mutates": false,
-      "description": "Show compact git status."
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "description": "Show git status.",
+      "mutates": false
+    },
+    "gitnexus_impact": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.gitnexus.impact",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "description": "Emit GITNEXUS impact packet.",
+      "mutates": false
+    },
+    "loop_cards": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.cards",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "description": "Emit loop cards.",
+      "mutates": false
+    },
+    "unit_tests": {
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "description": "Run unittest discovery.",
+      "mutates": false
+    },
+    "wound_resume": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.resume",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "description": "Emit resume packet.",
+      "mutates": false
     }
   },
+  "authority_boundary": {
+    "arbitrary_command_execution": false,
+    "autonomous_authority": false,
+    "git_write_enabled": false,
+    "human_authorization_required_for_command_execution": true,
+    "memory_promotion_enabled": false,
+    "network_enabled": false,
+    "secrets_enabled": false,
+    "self_authorization_enabled": false
+  },
+  "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
+  "generated_for": "NEXUS_GATE_v0.9.2",
   "loops": {
-    "rhp-core": {
-      "description": "Deep repository-origin rehydration before patching or compounding.",
+    "ai-orchestrator-preflight": {
+      "description": "Prepare AI meta-orchestration context before choosing the next local loop.",
       "mutates": false,
       "requires_human_authorization": false,
-      "stop_on_failure": false,
       "stages": [
-        {"name": "anchor_root_readme", "type": "read", "path": "README.md", "required": true, "max_preview_lines": 40},
-        {"name": "docs_index", "type": "read", "path": "docs/README.md", "required": true, "max_preview_lines": 40},
-        {"name": "entrypoints", "type": "read", "path": "docs/ENTRYPOINTS.md", "required": true, "max_preview_lines": 50},
-        {"name": "core_algorithms", "type": "read", "path": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md", "required": true, "max_preview_lines": 50},
-        {"name": "script_evolution_contract", "type": "read", "path": "docs/runtime/NEXUS_SCRIPT_EVOLUTION_RUN_CONTRACT.md", "required": true, "max_preview_lines": 50},
-        {"name": "reflective_local_loop", "type": "read", "path": "docs/runtime/NEXUS_REFLECTIVE_LOCAL_LOOP.md", "required": true, "max_preview_lines": 50},
-        {"name": "future_handoff", "type": "read", "path": "docs/runtime/NEXUS_FUTURE_SYSTEM_REHYDRATION_HANDOFF.md", "required": true, "max_preview_lines": 50},
-        {"name": "failure_chart", "type": "read", "path": "docs/failure_modes/FAILURE_MODE_CHART.md", "required": true, "max_preview_lines": 40},
-        {"name": "update_chart", "type": "read", "path": "docs/updates/UPDATE_CHART.md", "required": true, "max_preview_lines": 40},
-        {"name": "latest_compiler_report", "type": "read", "path": "reports/nexus_compile_report_latest.json", "required": false, "max_preview_lines": 30}
-      ]
+        {
+          "loop": "rhp-core",
+          "name": "rhp_core",
+          "type": "loop_ref"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "loop_cards_latest",
+          "path": "state/loops/nexus_loop_cards_latest.json",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 60,
+          "name": "resume_packet",
+          "path": "state/loops/wound_indexed_resume_latest.json",
+          "required": false,
+          "type": "read"
+        },
+        {
+          "command": "git_status",
+          "name": "git_status_visibility",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": false
     },
-    "script-evolution": {
-      "description": "Plan and bound a generated script so the script triggers local intelligence instead of duplicating it.",
-      "mutates": false,
-      "requires_human_authorization": false,
-      "stop_on_failure": true,
-      "stages": [
-        {"name": "rhp_core", "type": "loop_ref", "loop": "rhp-core"},
-        {"name": "cell_doctor_visibility", "type": "command", "command": "cell_doctor"},
-        {"name": "compiler_visibility", "type": "command", "command": "compiler"},
-        {"name": "git_status_visibility", "type": "command", "command": "git_status"}
-      ]
-    },
-    "reflective-validation": {
-      "description": "Run compiler/test gates and convert failure into compact local intelligence.",
+    "bounded-validation": {
+      "description": "Run compileall, bounded tests, and compiler.",
       "mutates": false,
       "requires_human_authorization": true,
-      "stop_on_failure": true,
       "stages": [
-        {"name": "compile_python", "type": "command", "command": "compileall"},
-        {"name": "unit_tests", "type": "command", "command": "unit_tests"},
-        {"name": "compiler_gate", "type": "command", "command": "compiler"}
-      ]
+        {
+          "command": "compileall",
+          "name": "compile_python",
+          "type": "command"
+        },
+        {
+          "command": "bounded_tests",
+          "name": "bounded_tests",
+          "type": "command"
+        },
+        {
+          "command": "compiler",
+          "name": "compiler_gate",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": true
+    },
+    "compiler-wound-focus": {
+      "description": "Run compiler and focus exact failed gates.",
+      "mutates": false,
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "compiler",
+          "name": "compiler_gate",
+          "type": "command"
+        },
+        {
+          "command": "wound_resume",
+          "name": "emit_resume_packet",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": false
+    },
+    "docs-doctrine-preflight": {
+      "description": "Read README, doctrine, loop fabric, and cards docs before coding.",
+      "mutates": false,
+      "requires_human_authorization": false,
+      "stages": [
+        {
+          "max_preview_lines": 60,
+          "name": "readme",
+          "path": "README.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "script_doctrine",
+          "path": "chatgpt/scripts.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "ai_loop_fabric_doc",
+          "path": "docs/runtime/NEXUS_AI_LOOP_FABRIC.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "loop_cards_doc",
+          "path": "docs/runtime/NEXUS_LOOP_CARDS.md",
+          "required": true,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": false
     },
     "failure-intelligence": {
+      "ai_callable": true,
       "description": "Read latest wound and failure surfaces so the next patch closes the exact wound instead of drifting.",
+      "display_group": "Meta Loops",
+      "function": "Read latest wound and failure surfaces so the next patch closes the exact wound instead of drifting.",
       "mutates": false,
+      "operator_use": "Use when this named loop matches the active gate or wound.",
       "requires_human_authorization": false,
-      "stop_on_failure": false,
       "stages": [
-        {"name": "compiled_failure_json", "type": "read", "path": "reports/nexus_compiled_failure_latest.json", "required": false, "max_preview_lines": 60},
-        {"name": "compiled_failure_md", "type": "read", "path": "reports/nexus_compiled_failure_latest.md", "required": false, "max_preview_lines": 80},
-        {"name": "failure_chart", "type": "read", "path": "docs/failure_modes/FAILURE_MODE_CHART.md", "required": true, "max_preview_lines": 50},
-        {"name": "update_chart", "type": "read", "path": "docs/updates/UPDATE_CHART.md", "required": true, "max_preview_lines": 50}
-      ]
+        {
+          "max_preview_lines": 60,
+          "name": "compiled_failure_json",
+          "path": "reports/nexus_compiled_failure_latest.json",
+          "required": false,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "compiled_failure_md",
+          "path": "reports/nexus_compiled_failure_latest.md",
+          "required": false,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 50,
+          "name": "failure_chart",
+          "path": "docs/failure_modes/FAILURE_MODE_CHART.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 50,
+          "name": "update_chart",
+          "path": "docs/updates/UPDATE_CHART.md",
+          "required": true,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": false,
+      "title": "Failure Intelligence"
     },
-    "validate-promote": {
-      "description": "Verify candidate patch and stop before commit/push unless the human-authorized outer script performs it.",
+    "hud-loop-sync": {
+      "description": "Regenerate HUD-ready loop cards.",
       "mutates": false,
       "requires_human_authorization": true,
-      "stop_on_failure": true,
       "stages": [
-        {"name": "compile_python", "type": "command", "command": "compileall"},
-        {"name": "unit_tests", "type": "command", "command": "unit_tests"},
-        {"name": "compiler_gate", "type": "command", "command": "compiler"},
-        {"name": "git_status_visibility", "type": "command", "command": "git_status"}
-      ]
+        {
+          "command": "loop_cards",
+          "name": "emit_loop_cards",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "loop_cards_latest",
+          "path": "state/loops/nexus_loop_cards_latest.json",
+          "required": true,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true
+    },
+    "impact-map": {
+      "description": "Build read-only GITNEXUS impact evidence.",
+      "mutates": false,
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "git_status",
+          "name": "git_status_visibility",
+          "type": "command"
+        },
+        {
+          "command": "gitnexus_impact",
+          "name": "gitnexus_impact_packet",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": true
+    },
+    "reflective-validation": {
+      "ai_callable": true,
+      "description": "Run compiler/test gates and convert failure into compact local intelligence.",
+      "display_group": "Meta Loops",
+      "function": "Run compiler/test gates and convert failure into compact local intelligence.",
+      "mutates": false,
+      "operator_use": "Use when this named loop matches the active gate or wound.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "compileall",
+          "name": "compile_python",
+          "type": "command"
+        },
+        {
+          "command": "unit_tests",
+          "name": "unit_tests",
+          "type": "command"
+        },
+        {
+          "command": "compiler",
+          "name": "compiler_gate",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Reflective Validation"
+    },
+    "release-seal": {
+      "description": "Final local evidence before human-authorized commit/push.",
+      "mutates": false,
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "loop": "bounded-validation",
+          "name": "bounded_validation",
+          "type": "loop_ref"
+        },
+        {
+          "loop": "impact-map",
+          "name": "impact_map",
+          "type": "loop_ref"
+        },
+        {
+          "command": "git_status",
+          "name": "git_status_visibility",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": true
+    },
+    "rhp-core": {
+      "ai_callable": true,
+      "description": "Deep repository-origin rehydration before patching or compounding.",
+      "display_group": "Meta Loops",
+      "function": "Deep repository-origin rehydration before patching or compounding.",
+      "mutates": false,
+      "operator_use": "Use when this named loop matches the active gate or wound.",
+      "requires_human_authorization": false,
+      "stages": [
+        {
+          "max_preview_lines": 40,
+          "name": "anchor_root_readme",
+          "path": "README.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 40,
+          "name": "docs_index",
+          "path": "docs/README.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 50,
+          "name": "entrypoints",
+          "path": "docs/ENTRYPOINTS.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 50,
+          "name": "core_algorithms",
+          "path": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 50,
+          "name": "script_evolution_contract",
+          "path": "docs/runtime/NEXUS_SCRIPT_EVOLUTION_RUN_CONTRACT.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 50,
+          "name": "reflective_local_loop",
+          "path": "docs/runtime/NEXUS_REFLECTIVE_LOCAL_LOOP.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 50,
+          "name": "future_handoff",
+          "path": "docs/runtime/NEXUS_FUTURE_SYSTEM_REHYDRATION_HANDOFF.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 40,
+          "name": "failure_chart",
+          "path": "docs/failure_modes/FAILURE_MODE_CHART.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 40,
+          "name": "update_chart",
+          "path": "docs/updates/UPDATE_CHART.md",
+          "required": true,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 30,
+          "name": "latest_compiler_report",
+          "path": "reports/nexus_compile_report_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": false,
+      "title": "Rhp Core"
+    },
+    "script-evolution": {
+      "ai_callable": true,
+      "description": "Plan and bound a generated script so the script triggers local intelligence instead of duplicating it.",
+      "display_group": "Meta Loops",
+      "function": "Plan and bound a generated script so the script triggers local intelligence instead of duplicating it.",
+      "mutates": false,
+      "operator_use": "Use when this named loop matches the active gate or wound.",
+      "requires_human_authorization": false,
+      "stages": [
+        {
+          "loop": "rhp-core",
+          "name": "rhp_core",
+          "type": "loop_ref"
+        },
+        {
+          "command": "cell_doctor",
+          "name": "cell_doctor_visibility",
+          "type": "command"
+        },
+        {
+          "command": "compiler",
+          "name": "compiler_visibility",
+          "type": "command"
+        },
+        {
+          "command": "git_status",
+          "name": "git_status_visibility",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Script Evolution"
+    },
+    "validate-promote": {
+      "ai_callable": true,
+      "description": "Verify candidate patch and stop before commit/push unless the human-authorized outer script performs it.",
+      "display_group": "Meta Loops",
+      "function": "Verify candidate patch and stop before commit/push unless the human-authorized outer script performs it.",
+      "mutates": false,
+      "operator_use": "Use when this named loop matches the active gate or wound.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "compileall",
+          "name": "compile_python",
+          "type": "command"
+        },
+        {
+          "command": "unit_tests",
+          "name": "unit_tests",
+          "type": "command"
+        },
+        {
+          "command": "compiler",
+          "name": "compiler_gate",
+          "type": "command"
+        },
+        {
+          "command": "git_status",
+          "name": "git_status_visibility",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Validate Promote"
+    },
+    "wound-indexed-resume": {
+      "description": "Emit active wound and resume recommendation.",
+      "mutates": false,
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "loop": "failure-intelligence",
+          "name": "failure_intelligence",
+          "type": "loop_ref"
+        },
+        {
+          "command": "wound_resume",
+          "name": "emit_resume_packet",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": true
     }
-  }
+  },
+  "registry_scope": "ai_callable_local_loop_fabric",
+  "system": "NEXUS_META_LOOP_REGISTRY",
+  "version": "0.2.0"
 }

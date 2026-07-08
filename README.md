@@ -160,6 +160,8 @@ python -m unittest discover -s tests python -m nexus_gate.compiler --root . --js
 | Neural Activity | `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` |
 | Spiral Core Portal | `docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md` |
 | GITNEXUS impact bridge | `docs/gitnexus/NEXUS_GITNEXUS_IMPACT_BRIDGE.md` |
+| AI Loop Fabric | `docs/runtime/NEXUS_AI_LOOP_FABRIC.md` |
+| Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |
 | AI loop fabric | `docs/runtime/NEXUS_AI_LOOP_FABRIC.md` |
 | Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |
 | NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |

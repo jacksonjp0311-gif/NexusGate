@@ -242,3 +242,17 @@ Keeps no-arbitrary-shell/no-network/no-secrets/no-git-mutation/no-self-authoriza
 - Surfaced `[14] Nexus Loops / Cards` in the Spiral Core Portal.
 - Recorded ChatGPT/script doctrine: loops are registry -> JSON card -> portal card -> future HUD surface.
 - Boundary: loop cards describe governed loops; they do not grant autonomous authority, shell authority, git write authority, memory promotion, network access, secret access, safety proof, security proof, or correctness proof.
+
+## v0.9.2 - AI-Callable Loop Fabric and Wound-Indexed Resume
+
+- Added local AI-callable loop fabric for meta-orchestration through named loops.
+- Added `wound-indexed-resume` loop and `nexus_gate.loops.resume` packet builder.
+- Added bounded per-file test command as a loop surface.
+- Expanded loop cards to v0.9.2 with execute surfaces, HUD grouping, and meta-orchestrator readiness.
+
+## v0.9.2 - AI-callable Local Loop Fabric
+
+- Added AI-callable local loop fabric for meta-orchestration.
+- Added wound-indexed resume packet surface.
+- Added bounded test runner that merges tracked and local filesystem tests.
+- Preserved authority boundary: AI recommends loops; local repo runs allowlisted loops; human authorizes durable mutation.

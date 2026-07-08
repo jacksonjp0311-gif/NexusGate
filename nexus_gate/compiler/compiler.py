@@ -103,6 +103,18 @@ REQUIRED_PATHS = [
     "nexus_gate/gitnexus/__main__.py",
     "nexus_gate/gitnexus/impact.py",
     "tests/test_gitnexus_impact_bridge_v091.py",
+    "chatgpt/scripts.md",
+    "loops/nexus_loop_registry.v0.1.json",
+    "state/loops/nexus_loop_registry.v0.1.json",
+    "state/loops/nexus_loop_cards_latest.json",
+    "state/loops/nexus_loop_cards.v0.9.2.json",
+    "docs/runtime/NEXUS_LOOP_CARDS.md",
+    "docs/runtime/NEXUS_AI_LOOP_FABRIC.md",
+    "docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md",
+    "nexus_gate/loops/cards.py",
+    "nexus_gate/loops/resume.py",
+    "nexus_gate/loops/bounded_tests.py",
+    "tests/test_ai_loop_fabric_v092.py",
 ]
 
 MINI_README_DIRS = [
@@ -303,12 +315,12 @@ class NexusCompiler:
     def gate_update_chart_current(self) -> None:
         path = self.root / "docs/updates/UPDATE_CHART.md"
         text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
-        required = ["v0.1.5", "v0.9.1", "GITNEXUS Impact Bridge", "No version step without update chart entry"]
+        required = ["v0.9.2", "AI Loop Fabric", "No version step without update chart entry"]
         missing = [item for item in required if item not in text]
         if missing:
-            self.add("update_chart_current", "fail", "Update chart missing current v0.9.1 state.", {"missing": missing})
+            self.add("update_chart_current", "fail", "Update chart missing current v0.9.2 AI loop fabric state.", {"missing": missing})
             return
-        self.add("update_chart_current", "pass", "Update chart includes current v0.9.1 state.", {"required": required})
+        self.add("update_chart_current", "pass", "Update chart includes current v0.9.2 AI loop fabric state.", {"required": required})
 
     def gate_cold_evidence_contracts(self) -> None:
         doc = self.root / "docs/evidence/COLD_EVIDENCE_ENGINE.md"
@@ -645,26 +657,16 @@ class NexusCompiler:
 
 
     def gate_version_alignment_current_line(self) -> None:
-        checks = {
-            "README.md": ["v0.9.1"],
-            "ROADMAP.md": ["v0.9.1", "Status: current"],
-            "docs/versioning/NEXUS_CHANGELOG.md": ["v0.9.1", "Origin-aligned GITNEXUS impact bridge"],
-            "pyproject.toml": ["version = \"0.9.1\""],
-        }
+        checks = {"README.md": ["v0.9.2", "AI-callable local loop fabric"], "ROADMAP.md": ["v0.9.2", "Status: current"], "docs/versioning/NEXUS_CHANGELOG.md": ["v0.9.2", "AI-callable Local Loop Fabric"], "pyproject.toml": ["version = \"0.9.2\""]}
         failures = []
         for rel, tokens in checks.items():
             path = self.root / rel
             text = path.read_text(encoding="utf-8", errors="ignore") if path.exists() else ""
             missing = [token for token in tokens if token not in text]
-            if missing:
-                failures.append({"path": rel, "missing": missing})
-        pyproject_text = (self.root / "pyproject.toml").read_text(encoding="utf-8", errors="ignore") if (self.root / "pyproject.toml").exists() else ""
-        if "v0.9.1" not in pyproject_text and "version = \"0.9.1\"" not in pyproject_text:
-            failures.append({"path": "pyproject.toml", "missing": ["v0.9.1 or version = 0.9.1"]})
+            if missing: failures.append({"path": rel, "missing": missing})
         if failures:
-            self.add("version_alignment_current_line", "fail", "v0.9.1 identity missing from required surfaces.", {"failures": failures})
-            return
-        self.add("version_alignment_current_line", "pass", "v0.9.1 identity is aligned across README, changelog, roadmap, and pyproject.", {"surfaces": sorted(checks)})
+            self.add("version_alignment_current_line", "fail", "v0.9.2 identity missing from required surfaces.", {"failures": failures}); return
+        self.add("version_alignment_current_line", "pass", "v0.9.2 identity is aligned across README, changelog, roadmap, and pyproject.", {"surfaces": sorted(checks)})
 
     def gate_readme_encoding_clean(self) -> None:
         path = self.root / "README.md"
@@ -683,6 +685,18 @@ class NexusCompiler:
             "state/gitnexus/gitnexus_impact_manifest.v0.9.1.json",
             "nexus_gate/gitnexus/impact.py",
             "tests/test_gitnexus_impact_bridge_v091.py",
+    "chatgpt/scripts.md",
+    "loops/nexus_loop_registry.v0.1.json",
+    "state/loops/nexus_loop_registry.v0.1.json",
+    "state/loops/nexus_loop_cards_latest.json",
+    "state/loops/nexus_loop_cards.v0.9.2.json",
+    "docs/runtime/NEXUS_LOOP_CARDS.md",
+    "docs/runtime/NEXUS_AI_LOOP_FABRIC.md",
+    "docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md",
+    "nexus_gate/loops/cards.py",
+    "nexus_gate/loops/resume.py",
+    "nexus_gate/loops/bounded_tests.py",
+    "tests/test_ai_loop_fabric_v092.py",
         ]
         missing = [rel for rel in required if not (self.root / rel).exists()]
         if missing:
@@ -699,6 +713,107 @@ class NexusCompiler:
             self.add("gitnexus_impact_visibility", "fail", "GITNEXUS impact boundary drifted.", {"boundary": boundary})
             return
         self.add("gitnexus_impact_visibility", "pass", "GITNEXUS impact bridge is compiler-visible and read-only bounded.", {"mode": packet.get("mode"), "impact_count": packet.get("impact_counts", {})})
+
+
+
+    def gate_ai_loop_fabric_visibility(self) -> None:
+        required_paths = [
+            "docs/runtime/NEXUS_AI_LOOP_FABRIC.md",
+            "docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md",
+            "docs/runtime/NEXUS_LOOP_CARDS.md",
+            "loops/nexus_loop_registry.v0.1.json",
+            "state/loops/nexus_loop_registry.v0.1.json",
+            "state/loops/nexus_loop_cards_latest.json",
+            "nexus_gate/loops/cards.py",
+            "nexus_gate/loops/bounded_tests.py",
+            "nexus_gate/loops/resume.py",
+            "tests/test_ai_loop_fabric_v092.py",
+        ]
+        missing_paths = [rel for rel in required_paths if not (self.root / rel).exists()]
+        if missing_paths:
+            self.add("ai_loop_fabric_visibility", "fail", "AI loop fabric required surface missing.", {"missing": missing_paths})
+            return
+
+        required_loops = {
+            "ai-orchestrator-preflight",
+            "wound-indexed-resume",
+            "impact-map",
+            "bounded-validation",
+            "compiler-wound-focus",
+            "docs-doctrine-preflight",
+            "hud-loop-sync",
+            "release-seal",
+        }
+
+        try:
+            registry = json.loads((self.root / "loops" / "nexus_loop_registry.v0.1.json").read_text(encoding="utf-8-sig"))
+        except Exception as exc:
+            self.add("ai_loop_fabric_visibility", "fail", "AI loop fabric registry failed to parse.", {"error": str(exc)})
+            return
+
+        loops = registry.get("loops", {})
+        missing_loops = sorted(required_loops - set(loops.keys()))
+        if missing_loops:
+            self.add("ai_loop_fabric_visibility", "fail", "AI-callable loop set is incomplete.", {"missing_loops": missing_loops})
+            return
+
+        boundary = registry.get("authority_boundary", {})
+        forbidden_true = [
+            "autonomous_authority",
+            "arbitrary_command_execution",
+            "network_enabled",
+            "secrets_enabled",
+            "git_write_enabled",
+            "memory_promotion_enabled",
+            "self_authorization_enabled",
+        ]
+        boundary_drift = {key: boundary.get(key) for key in forbidden_true if boundary.get(key) is not False}
+        if boundary_drift:
+            self.add("ai_loop_fabric_visibility", "fail", "AI loop fabric authority boundary drifted.", {"boundary_drift": boundary_drift})
+            return
+
+        try:
+            cards = json.loads((self.root / "state" / "loops" / "nexus_loop_cards_latest.json").read_text(encoding="utf-8-sig"))
+        except Exception as exc:
+            self.add("ai_loop_fabric_visibility", "fail", "AI loop card packet failed to parse.", {"error": str(exc)})
+            return
+
+        card_ids = {card.get("loop_id") for card in cards.get("cards", []) if isinstance(card, dict)}
+        missing_cards = sorted(required_loops - card_ids)
+        if missing_cards:
+            self.add("ai_loop_fabric_visibility", "fail", "AI loop cards missing required loops.", {"missing_cards": missing_cards})
+            return
+
+        resume_surfaces = [
+            self.root / "state" / "loops" / "wound_indexed_resume_latest.json",
+            self.root / "reports" / "nexus_resume_packet_latest.json",
+        ]
+        resume_visible = [str(path.relative_to(self.root)).replace("\\", "/") for path in resume_surfaces if path.exists()]
+        if not resume_visible:
+            self.add("ai_loop_fabric_visibility", "fail", "Wound-indexed resume packet is not visible.", {"expected_any": [str(path.relative_to(self.root)).replace("\\", "/") for path in resume_surfaces]})
+            return
+
+        try:
+            from nexus_gate.loops.cards import build_loop_cards
+            built = build_loop_cards(self.root)
+        except Exception as exc:
+            self.add("ai_loop_fabric_visibility", "fail", "Loop card builder failed during compiler visibility.", {"error": str(exc)})
+            return
+
+        built_ids = {card.get("loop_id") for card in built.get("cards", []) if isinstance(card, dict)}
+        missing_built = sorted(required_loops - built_ids)
+        if missing_built:
+            self.add("ai_loop_fabric_visibility", "fail", "Loop card builder output missing AI loops.", {"missing_built": missing_built})
+            return
+
+        self.add("ai_loop_fabric_visibility", "pass", "AI-callable loop fabric is compiler-visible, card-visible, and authority-bounded.", {
+            "required_loop_count": len(required_loops),
+            "registry_loop_count": len(loops),
+            "card_count": len(card_ids),
+            "resume_visible": resume_visible,
+            "authority_boundary": boundary,
+            "claim_boundary": registry.get("claim_boundary", ""),
+        })
 
     def gate_python_compile(self) -> None:
         ok = compileall.compile_dir(str(self.root / "nexus_gate"), quiet=1)
@@ -774,6 +889,7 @@ class NexusCompiler:
         self.gate_version_alignment_current_line()
         self.gate_readme_encoding_clean()
         self.gate_gitnexus_impact_visibility()
+        self.gate_ai_loop_fabric_visibility()
         self.gate_nexus_cell_planner_visibility()
         self.gate_nexus_cell_context_bridge_visibility()
         self.gate_nexus_cell_core_bridge_visibility()
@@ -787,7 +903,7 @@ class NexusCompiler:
         status = "pass" if not failed else "fail"
         return CompileReport(
             system="NEXUS GATE",
-            version="0.9.1-origin-gitnexus-impact-compiler",
+            version="0.9.2-ai-loop-fabric-compiler",
             root=str(self.root),
             status=status,
             generated_at_utc=datetime.now(timezone.utc).isoformat(),

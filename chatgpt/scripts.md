@@ -129,3 +129,41 @@ Every durable local loop must remain visible as data, not only prose. When a loo
 ```
 
 The Spiral Core Portal must expose the loop cards through a human-readable surface. Future HUDs should render `state/loops/nexus_loop_cards_latest.json` instead of scraping terminal text. Loops are preserved as registry -> JSON card -> portal card -> future HUD surface.
+
+## v0.9.2 AI-Callable Loop Fabric
+
+ChatGPT/Codex should prefer local named loops over hand-rolled repeated script logic. The AI acts as a meta-orchestrator; NexusGate remains the authority boundary.
+
+```json
+{
+  "loop_fabric": "v0.9.2",
+  "ai_role": "meta_orchestrator",
+  "local_execution": "through_named_allowlisted_loops",
+  "authority": "human_authorized_only",
+  "resume_rule": "passed_gates_are_certificates_do_not_backtrack_without_changed_inputs"
+}
+```
+
+Preferred local loop calls:
+
+```powershell
+python -m nexus_gate.loops.runner --root . --loop ai-orchestrator-preflight --intent "<intent>" --execute --human-authorized --json
+python -m nexus_gate.loops.runner --root . --loop wound-indexed-resume --intent "<failed gate>" --execute --human-authorized --json
+python -m nexus_gate.loops.runner --root . --loop impact-map --intent "<planned patch>" --execute --human-authorized --json
+python -m nexus_gate.loops.runner --root . --loop bounded-validation --intent "<validation>" --execute --human-authorized --json
+python -m nexus_gate.loops.runner --root . --loop release-seal --intent "<release>" --execute --human-authorized --json
+```
+
+Loop outputs must be compact JSON packets. The AI should read packets, name the active wound, patch the smallest surface, and only ask for durable mutation after compiler seal.
+
+## AI-Callable Local Loop Fabric
+
+v0.9.2 promotes ChatGPT/Codex into a meta-orchestrator over local Nexus loops. The AI may recommend a named loop; the local repository runs the loop through `python -m nexus_gate.loops.runner`; the loop emits a packet; the packet names status, active wound, resume point, and claim boundary. Durable mutation still requires explicit human authorization.
+
+Canonical calls:
+```powershell
+python -m nexus_gate.loops.runner --root . --loop ai-orchestrator-preflight --intent "<intent>" --json
+python -m nexus_gate.loops.runner --root . --loop wound-indexed-resume --intent "<failed gate>" --execute --human-authorized --json
+python -m nexus_gate.loops.runner --root . --loop bounded-validation --intent "<validation>" --execute --human-authorized --json
+python -m nexus_gate.loops.runner --root . --loop release-seal --intent "<release>" --execute --human-authorized --json
+```
