@@ -22,3 +22,14 @@ main NexusGate runtime.
 
 GITNEXUS remains evidence-only. It does not change NexusCell policy, execute
 shell commands, or grant autonomous mutation authority.
+
+## v0.4.1 AE finalizer
+
+AD failed before validation because PowerShell `-like` interpreted `[` in
+`*html[idx*` as a wildcard character class. AE replaces that self-check with
+`.Contains(...)`.
+
+The active bridge test now uses direct string counts:
+
+- active: `nexus_conversation_output_bridge.v0.2.1f.js`
+- inactive: `v0.2.1a` through `v0.2.1e`
