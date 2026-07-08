@@ -1,8 +1,17 @@
 # NEXUS GATE
-**Reflective Intelligence Layer for AI Systems** NEXUS GATE is a local-first reflective intelligence layer for AI systems. It gives AI systems a governed mirror: origin alignment, state routing, local model reflection, HANDOFF action boundaries, Failure Doctor diagnosis, compiler evidence, wound lessons, UI feedback, NexusCell + Neural Activity receipts, and GitHub durability through explicit gates. Runtime lineage seals: v0.8.1 UI cleanup line; v0.8.3F geo preflight cleanup and warning seal line; python -m nexus_gate.geometric_memory.router; geo-clean; `docs/runtime/NEXUS_NEURAL_ACTIVITY.md`; `docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md`; Failure Intelligence Distributor. It is not another agent framework and it is not just the entry portal. The Spiral Core Desktop Portal is the human doorway. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
+**Reflective Intelligence Layer for AI Systems**
+
+NEXUS GATE is a local-first reflective intelligence layer for AI systems. It turns agent work into a governed evidence loop: origin alignment, typed routing, authority gates, compiler-backed validation, wound-indexed recovery, NexusCell receipts, GITNEXUS impact packets, and human-authorized durable mutation.
+
+It is built for people designing serious agent systems who need AI assistance without surrendering control. The Spiral Core Desktop Portal is the human doorway. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
+
+Runtime lineage seals: v0.8.1 UI cleanup line; v0.8.3F geo preflight cleanup and warning seal line; v0.9.0 Meta Loop Registry; v0.9.1 origin-aligned GITNEXUS impact bridge; python -m nexus_gate.geometric_memory.router; geo-clean; `docs/runtime/NEXUS_NEURAL_ACTIVITY.md`; `docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md`; Failure Intelligence Distributor.
+
 ```text
 human intent -> origin alignment -> route/authority gate -> evidence -> human-authorized durable mutation
 ```
+
+NEXUS GATE is not another agent framework. It is a reflective operating layer for building, testing, diagnosing, and safely compounding AI-assisted systems through evidence instead of guesswork.
 ## Start Here
 ### Windows PowerShell / Desktop Portal
 ```powershell
@@ -33,8 +42,26 @@ Open GitHub repository Open GitHub README Open docs/ENTRYPOINTS.md Open docs/ver
 ```text
 Spiral Core Portal = gateway face. NEXUS GATE = reflective intelligence layer for AI systems. Electron = presentation/operator HUD. Doctor = diagnosis / safe-clean / retry cockpit. HANDOFF = human-authorized action bridge. NexusCell = execution-governance organ. Neural Activity = visual organ. Evidence decides what may compound.
 ```
+
 ## Human Director Box
-NEXUS GATE is currently at the v0.9.1 origin-aligned GITNEXUS impact bridge line while preserving the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub / README / Docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, GITNEXUS impact evidence, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, GITNEXUS impact packets, and durable GitHub compounding under human authority.
+NEXUS GATE is currently at the v0.9.1 origin-aligned GITNEXUS impact bridge line with the v0.9.1A README and ChatGPT script-doctrine addendum while preserving the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub / README / Docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, GITNEXUS impact evidence, ChatGPT/script gate doctrine, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, GITNEXUS impact packets, and durable GitHub compounding under human authority.
+
+## Lessons From the v0.9.1 Seal
+```text
+Gates are certificates.
+Do not rerun passed gates unless their inputs changed.
+Only heal the active wound.
+Patch the smallest surface that can close the wound.
+Compile before trust.
+Targeted tests prove the wound closed.
+Full bounded tests prove no known contract regressed.
+The Nexus compiler is the final local seal.
+Stage intended files only.
+Commit and push only after the seal.
+```
+
+The v0.9.1 GITNEXUS impact bridge seal established the working ChatGPT/script pattern for this repository: use compact machine state, name the active wound, resume from the failed gate, preserve prior green gates, write receipts, and never convert model output into autonomous authority. Before any future generated script changes this repo, read `chatgpt/scripts.md`.
+
 ## Geometric Memory Router
 NEXUS Geometric Memory Router is the next rehydration layer. It does not train or mutate model weights. It maps every request through four typed axes before repair or compounding:
 ```text
@@ -112,6 +139,7 @@ python -m unittest discover -s tests python -m nexus_gate.compiler --root . --js
 | Extended README archive | `docs/readme/NEXUS_README_EXTENDED_REFERENCE.md` |
 | Runtime commands | `docs/runtime/` |
 | NexusCell | `docs/nexus_cell/NEXUS_CELL.md` |
+| ChatGPT scripting doctrine | `chatgpt/scripts.md` |
 | Script run contract | `docs/runtime/NEXUS_SCRIPT_EVOLUTION_RUN_CONTRACT.md` |
 | Reflective local loop | `docs/runtime/NEXUS_REFLECTIVE_LOCAL_LOOP.md` |
 | Failure intelligence | `docs/runtime/NEXUS_FAILURE_INTELLIGENCE_DISTRIBUTOR.md` |

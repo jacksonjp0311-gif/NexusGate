@@ -18,6 +18,7 @@ v0.8.1E Mode Selection fixed pop-out HUD
 v0.8.2D README/doc rehydration and documentation compression
 v0.9.0 Meta Loop Registry
 v0.9.1 Origin-aligned GITNEXUS impact bridge
+v0.9.1A README professionalization and ChatGPT script doctrine
 ```
 
 ## Selected Historical Anchors## Selected Historical Anchors## Selected Historical Anchors
@@ -225,3 +226,10 @@ Keeps no-arbitrary-shell/no-network/no-secrets/no-git-mutation/no-self-authoriza
 - Adds NexusCell `gitnexus-impact` controlled lane as evidence only.
 - Adds compiler visibility for version alignment, README encoding cleanliness, and GITNEXUS impact bridge surfaces.
 - Boundary: no execution authority, no git write authority from model output, no autonomous mutation.
+
+## v0.9.1A - README Professionalization and ChatGPT Script Doctrine
+
+- Refines the root README opening so new users can understand the reflective intelligence layer quickly.
+- Records v0.9.1 seal lessons: gates are certificates, do not backtrack without changed inputs, heal only the active wound, and stage intended files only.
+- Adds `chatgpt/scripts.md` as the required read-before-coding doctrine for ChatGPT/script generated patches.
+- Keeps human authorization, compiler visibility, and no-autonomous-authority boundaries unchanged.
