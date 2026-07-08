@@ -62,3 +62,10 @@ The mini GITNEXUS surface now uses a full mirror-HUD composition instead of a
 small graph card. It fills the left dock area with a scaled-down header,
 control row, explorer, graph field, recommendation block, selected-node block,
 bottom status strip, and a full-width OPEN GITNEXUS HUD button.
+
+## v0.3.5 geometric mini dock
+
+The broken exact-mini-mirror overlay is removed. The mini GITNEXUS dock is now a
+simple geometric codegraph visual like the Neural Activity panel: header, OPEN
+button, and one large animated geometry canvas. The full popup remains the
+interactive graph surface. Toolbar labels are sanitized to ASCII at runtime.
