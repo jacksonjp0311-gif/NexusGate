@@ -41,3 +41,17 @@ mode-selection assets. The dock still mounts after DOM parsing.
 The conversation output bridge lineage remains linked as `v0.2.1a`, `v0.2.1b`,
 and `v0.2.1c`. GITNEXUS does not own or collapse that lineage. GITNEXUS is
 loaded from head with `defer` and does not pollute the metrics/body tail.
+
+## v0.3.2P hard bridge lineage repair
+
+v0.3.2P creates missing compatibility bridge lineage files when absent and
+restores ordered bridge links `a -> b -> c -> d`. GITNEXUS remains loaded from
+head with defer and the runtime watchdog remounts the mini graph dock if later
+renderer scripts reshape the HUD.
+
+## v0.3.2Q active conversation bridge contract
+
+The active conversation output bridge is now `v0.2.1f` only. Older bridge files
+may remain in the repository as history/compatibility artifacts, but they are
+not linked in `index.html`. This matches the v021f single-active-bridge test.
+GITNEXUS remains loaded from head with defer and is isolated from the body tail.
