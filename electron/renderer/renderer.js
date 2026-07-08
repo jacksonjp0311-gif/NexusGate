@@ -24,6 +24,7 @@ const systemErrorClose = document.getElementById("system-error-close");
 
 let allowlistedCommands = [];
 let nexBusy = false;
+let ollamaReady = null; // null=unknown, true=ready, false=offline
 let nexStopRequested = false;
 let telemetryLoopHandle = null;
 let modelSelectorHudBound = false;
@@ -288,9 +289,11 @@ async function ensureLocalOllamaBackend() {
     const label = result.ok ? `ollama ${result.status}` : `ollama ${result.status || "blocked"}`;
     setTelemetryText("hud-ollama", label);
     setTelemetryText("telemetry-status", result.ok ? "backend online" : "backend blocked");
+    ollamaReady = Boolean(result.ok);
     return result;
   } catch (error) {
     setTelemetryText("telemetry-status", "backend blocked");
+    ollamaReady = false;
     return { ok: false, error: error.message };
   }
 }
@@ -874,6 +877,13 @@ async function sendNexMessage(prompt) {
 
   try {
     setBuffer(42, "routing");
+    // Offline graceful degradation: if the local model endpoint is blocked, keep chat responsive
+    // and route without calling a model (evidence-forward, recommendation-only).
+    const ollama = await ensureLocalOllamaBackend();
+    const canCallModel = (role !== "HANDOFF") && (ollama?.ok !== false);
+    if (!canCallModel && role !== "HANDOFF") {
+      pushConsole("WARN", "Local model endpoint is blocked; routing without --call-model.");
+    }
     if (!window.nexus.askNex) {
       throw new Error("NEX chat bridge is not exposed by preload.");
     }
@@ -881,7 +891,7 @@ async function sendNexMessage(prompt) {
     const result = await window.nexus.askNex({
       prompt,
       role,
-      callModel: role !== "HANDOFF"
+      callModel: canCallModel
     });
 
     setBuffer(78, "reasoning");

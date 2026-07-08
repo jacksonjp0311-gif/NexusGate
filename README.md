@@ -5,8 +5,17 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems. It tur
 
 It is built for people designing serious agent systems who need AI assistance without surrendering control. The Spiral Core Desktop Portal is the human doorway. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
 
-Runtime lineage seals: v0.8.1 UI cleanup line; v0.8.3F geo preflight cleanup and warning seal line; v0.9.0 Meta Loop Registry; v0.9.1 origin-aligned GITNEXUS impact bridge; python -m nexus_gate.geometric_memory.router; geo-clean; `docs/runtime/NEXUS_NEURAL_ACTIVITY.md`; `docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md`; Failure Intelligence Distributor.
+Runtime lineage seals:
 
+- v0.8.1 UI cleanup line
+- v0.8.3F geo preflight cleanup and warning seal line
+- v0.9.0 Meta Loop Registry
+- v0.9.1 origin-aligned GITNEXUS impact bridge
+- python -m nexus_gate.geometric_memory.router
+- geo-clean
+- docs/runtime/NEXUS_NEURAL_ACTIVITY.md
+- docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md
+- Failure Intelligence Distributor
 ```text
 human intent -> origin alignment -> route/authority gate -> evidence -> human-authorized durable mutation
 ```
@@ -45,7 +54,7 @@ Spiral Core Portal = gateway face. NEXUS GATE = reflective intelligence layer fo
 ```
 
 ## Human Director Box
-NEXUS GATE is currently at the v0.9.1 origin-aligned GITNEXUS impact bridge line with the v0.9.1A README and ChatGPT script-doctrine addendum while preserving the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub / README / Docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, GITNEXUS impact evidence, ChatGPT/script gate doctrine, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, GITNEXUS impact packets, and durable GitHub compounding under human authority.
+NEXUS GATE is currently at the v0.9.2 AI-callable loop fabric and wound-indexed resume line with the v0.9.1A README and ChatGPT script-doctrine addendum while preserving the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub / README / Docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, GITNEXUS impact evidence, ChatGPT/script gate doctrine, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, GITNEXUS impact packets, AI-callable local loop cards, wound-indexed resume packets, and durable GitHub compounding under human authority. v0.9.2 AI-callable local loop fabric lets ChatGPT/Codex act as a meta-orchestrator by selecting named local loops while the repository keeps authority, evidence, gates, and human authorization boundaries.
 
 ## Lessons From the v0.9.1 Seal
 ```text
@@ -151,9 +160,15 @@ python -m unittest discover -s tests python -m nexus_gate.compiler --root . --js
 | Neural Activity | `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` |
 | Spiral Core Portal | `docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md` |
 | GITNEXUS impact bridge | `docs/gitnexus/NEXUS_GITNEXUS_IMPACT_BRIDGE.md` |
+| AI loop fabric | `docs/runtime/NEXUS_AI_LOOP_FABRIC.md` |
+| Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |
 | NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |
 | Geometric memory router | `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md` |
 | Geometry manifest | `state/nexus_geometric_memory_manifest.v0.8.3.json` |
+## Wound-Indexed Resume Loop
+```text
+Passed gates are certificates. Later failures become active wounds. Resume from the failed gate unless a passed gate input changed.
+```
 ## What this is not
 Not production validated. Not a safety proof. Not a security proof. Not a correctness proof. Not autonomous authority. Not write authority. Not memory write authority. Not provider authority. Not a replacement for human authorization. Not a claim that routing proves alignment. Not a claim that RHP proves truth. Not a claim that Nexus geometry proves code correctness. Not a claim that NexusCell is a perfect sandbox or full rollback proof.
 ## Compact Law
