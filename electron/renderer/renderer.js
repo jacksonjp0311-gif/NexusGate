@@ -24,12 +24,16 @@ const systemErrorHud = document.getElementById("system-error-hud");
 const systemErrorClose = document.getElementById("system-error-close");
 const petriOpen = document.getElementById("petri-open");
 const petriMiniBody = document.getElementById("petri-mini-body");
+const petriMiniCanvas = document.getElementById("petri-mini-canvas");
 
 let allowlistedCommands = [];
 let nexBusy = false;
 let ollamaReady = null; // null=unknown, true=ready, false=offline
 let nexStopRequested = false;
 let telemetryLoopHandle = null;
+let petriLoopHandle = null;
+let petriAnimationStarted = false;
+let latestPetriState = null;
 let modelSelectorHudBound = false;
 const SELECTOR_UI_ONLY_BOUNDARY = "Selector changes UI planning context only. It does not call models, execute shell, mutate repo files, or grant authority.";
 const NEX_MODEL_RESPONSE_STAGE_MARKER = 'stage: "nex_model_response"';
@@ -453,6 +457,105 @@ async function openPetriDishPro() {
   } catch (error) {
     setTelemetryText("petri-status", "blocked");
     appendChat("ai", `PetriDishPro launch failed: ${error.message}`, "NEX / PetriDishPro");
+  }
+}
+
+function drawPetriPreview() {
+  if (!petriMiniCanvas) return;
+  const rect = petriMiniCanvas.getBoundingClientRect();
+  const width = Math.max(1, Math.floor(rect.width));
+  const height = Math.max(1, Math.floor(rect.height));
+  if (petriMiniCanvas.width !== width || petriMiniCanvas.height !== height) {
+    petriMiniCanvas.width = width;
+    petriMiniCanvas.height = height;
+  }
+  const ctx = petriMiniCanvas.getContext("2d");
+  if (!ctx) return;
+  const t = Date.now() / 1000;
+  ctx.clearRect(0, 0, width, height);
+  const cx = width / 2;
+  const cy = height / 2;
+  const radius = Math.min(width, height) * 0.42;
+
+  ctx.save();
+  ctx.globalAlpha = 0.82;
+  ctx.strokeStyle = "rgba(34, 211, 238, 0.42)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, radius * 1.18, radius * 0.76, Math.sin(t * 0.18) * 0.2, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.strokeStyle = "rgba(45, 212, 191, 0.62)";
+  ctx.stroke();
+
+  const particles = latestPetriState?.particles || [];
+  ctx.fillStyle = "rgba(125, 211, 252, 0.32)";
+  particles.forEach((particle, index) => {
+    if (index % 2 !== 0) return;
+    const x = cx + (particle.x || 0) * radius * 0.56 + Math.sin(t + index) * 0.8;
+    const y = cy + (particle.y || 0) * radius * 0.56 + Math.cos(t * 0.8 + index) * 0.8;
+    ctx.globalAlpha = 0.16 + Math.min(0.38, Number(particle.z || 0) * 0.28);
+    ctx.beginPath();
+    ctx.arc(x, y, 1.15, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  const cells = latestPetriState?.cells || [];
+  ctx.globalAlpha = 0.94;
+  cells.forEach((cell, index) => {
+    const x = cx + (cell.x || 0) * radius * 0.72 + Math.sin(t * 0.7 + index) * 0.55;
+    const y = cy + (cell.y || 0) * radius * 0.72 + Math.cos(t * 0.6 + index) * 0.55;
+    const color = cell.color || "#27f4ff";
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate((cell.angle || 0) + Math.sin(t + index) * 0.08);
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 8;
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    if (cell.morphology === "yeast" || cell.morphology === "amoeboid") {
+      ctx.beginPath();
+      ctx.arc(0, 0, 3.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,.72)";
+      ctx.stroke();
+    } else {
+      ctx.lineWidth = 2.2;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(-4, 0);
+      ctx.lineTo(4, 0);
+      ctx.stroke();
+    }
+    ctx.restore();
+  });
+
+  ctx.restore();
+  requestAnimationFrame(drawPetriPreview);
+}
+
+async function refreshPetriPreview() {
+  if (!window.nexus.getPetriDishProState) return;
+  try {
+    latestPetriState = await window.nexus.getPetriDishProState();
+    const counts = latestPetriState.counts || {};
+    setTelemetryText("petri-status", latestPetriState.exists ? "live" : "missing");
+    setTelemetryText("petri-counts", `cells ${counts.cells ?? 0} / particles ${counts.particles ?? 0}`);
+  } catch (error) {
+    setTelemetryText("petri-status", "blocked");
+    setTelemetryText("petri-counts", "preview unavailable");
+  }
+}
+
+function startPetriPreviewLoop() {
+  if (!petriLoopHandle) {
+    refreshPetriPreview();
+    petriLoopHandle = setInterval(refreshPetriPreview, 3000);
+  }
+  if (!petriAnimationStarted) {
+    petriAnimationStarted = true;
+    requestAnimationFrame(drawPetriPreview);
   }
 }
 
@@ -1088,6 +1191,7 @@ async function loadSurfaceState() {
   setInterval(setClock, 1000);
   ensureLocalOllamaBackend();
   startTelemetryLoop();
+  startPetriPreviewLoop();
   setBuffer(10, "hydrate");
   toggleTelemetryHud(false);
   toggleMetaOrchestratorHud(false);

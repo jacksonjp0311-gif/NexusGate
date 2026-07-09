@@ -131,7 +131,7 @@ No adapter, no bridge. No schema, no route. No authority verification, no mutati
 ```
 
 ## GitHub / README / Docs
-The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current operator surfaces include Spiral Core Desktop Portal, Electron HUD, PowerShell TUI, Dev Mode / HANDOFF, Failure Doctor, Mode Selection HUD, NexusCell, Neural Activity, Nexus Loops / Cards, Personal Coding Paradise, AI Toolbelt Console, and Toolbelt Cockpit.
+The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current operator surfaces include Spiral Core Desktop Portal, Electron HUD, PowerShell TUI, Dev Mode / HANDOFF, Failure Doctor, Mode Selection HUD, NexusCell, Neural Activity, Nexus Loops / Cards, PetriDishPortal, Personal Coding Paradise, AI Toolbelt Console, and Toolbelt Cockpit.
 
 ## Phi Wound Ollama Adapter
 v1.0.1 routes `phi-wound-gpu` through the non-interactive Ollama JSON adapter instead of the Orange human launcher.
@@ -153,6 +153,7 @@ v1.0.1 routes `phi-wound-gpu` through the non-interactive Ollama JSON adapter in
 | Preflight Optimizer | `docs/runtime/NEXUS_PREFLIGHT_OPTIMIZER.md` |
 | Meta-Orchestrator Gate | `docs/runtime/NEXUS_META_ORCHESTRATOR_GATE.md` |
 | NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |
+| PetriDishPortal | `docs/runtime/NEXUS_PETRIDISH_PORTAL.md` |
 | Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |
 | NexusCell | `docs/nexus_cell/NEXUS_CELL.md` |
 | GITNEXUS impact bridge | `docs/gitnexus/NEXUS_GITNEXUS_IMPACT_BRIDGE.md` |

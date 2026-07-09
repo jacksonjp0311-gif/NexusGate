@@ -1,0 +1,36 @@
+{
+  "system": "NEXUS GATE",
+  "bridge": "PetriDishPro",
+  "version": "0.1.0",
+  "external_root": "C:\\Users\\jacks\\OneDrive\\Desktop\\PetriDishPro",
+  "nexus_root": "PetriDishPro",
+  "surface_type": "external_organism_gate_bridge",
+  "electron_launcher": {
+    "enabled": true,
+    "nexus_ipc": "nexus:openPetriDishPro",
+    "petri_renderer": "electron/renderer/index.html",
+    "mode": "separate_maximized_window"
+  },
+  "mini_preview": {
+    "enabled": true,
+    "nexus_ipc": "nexus:getPetriDishProState",
+    "read_surfaces": [
+      "reports/bio/petri_particle_state_latest.json",
+      "artifacts/bio/runs/<run_id>/cells.json",
+      "artifacts/bio/runs/<run_id>/particles.json"
+    ]
+  },
+  "portal": {
+    "enabled": true,
+    "menu_entry": "[15] PetriDishPortal"
+  },
+  "blocked_actions": [
+    "arbitrary_shell_commands",
+    "clinical_authority",
+    "wet_lab_instruction_authority",
+    "species_identification_claim",
+    "autonomous_repo_mutation",
+    "simulation_as_empirical_proof"
+  ],
+  "claim_boundary": "PetriDishPro previews are deterministic simulation evidence only. They are not microscopy evidence, clinical evidence, treatment guidance, species identification, biosafety evidence, or proof of biological truth."
+}

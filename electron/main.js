@@ -466,6 +466,60 @@ function listPetriRuns() {
     .slice(0, 12);
 }
 
+function readPetriRunFile(index, key) {
+  const fileName = index?.files?.[key];
+  const runDir = index?.run_dir;
+  if (!fileName || !runDir) return null;
+  const resolvedRunDir = path.resolve(runDir);
+  const resolvedRoot = path.resolve(petriDishProRoot);
+  if (!resolvedRunDir.startsWith(resolvedRoot + path.sep)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(path.join(resolvedRunDir, fileName), "utf8"));
+  } catch (_error) {
+    return null;
+  }
+}
+
+function buildPetriPreviewState() {
+  const index = readPetriJsonIfPresent("reports/bio/petri_particle_state_latest.json", {}) || {};
+  const cellsPacket = readPetriRunFile(index, "cells") || {};
+  const particlesPacket = readPetriRunFile(index, "particles") || {};
+  const cells = Array.isArray(cellsPacket.cells) ? cellsPacket.cells : [];
+  const particles = Array.isArray(particlesPacket.particles) ? particlesPacket.particles : [];
+  return {
+    system: "NEXUS GATE",
+    surface: "petridishpro_mini_preview",
+    source_root: petriDishProRoot,
+    exists: fs.existsSync(petriDishProRoot),
+    run_id: index.run_id || "unknown",
+    generated_utc: index.generated_utc || null,
+    counts: index.counts || {
+      cells: cells.length,
+      particles: particles.length,
+      interactions: 0
+    },
+    cells: cells.slice(0, 160).map((cell) => ({
+      id: cell.id,
+      organism_id: cell.organism_id,
+      morphology: cell.morphology,
+      color: cell.color,
+      x: Number(cell.x || 0),
+      y: Number(cell.y || 0),
+      angle: Number(cell.angle || 0),
+      radius: Number(cell.radius || 0.012)
+    })),
+    particles: particles.slice(0, 180).map((particle) => ({
+      id: particle.id,
+      type: particle.type,
+      x: Number(particle.x || 0),
+      y: Number(particle.y || 0),
+      z: Number(particle.z || 0)
+    })),
+    claim_boundary: index.claim_boundary || "PetriDishPro preview is deterministic simulation evidence only; it is not microscopy, clinical, species-identification, treatment, or biosafety evidence.",
+    boundary: "Read-only PetriDishPro preview packet. NEXUS mini UI may reflect it; it may not self-authorize wet-lab, medical, or arbitrary shell actions."
+  };
+}
+
 function registerPetriIpc() {
   if (petriIpcRegistered) return;
   petriIpcRegistered = true;
@@ -831,6 +885,7 @@ ipcMain.handle("nexus:stopNex", async () => {
 });
 
 ipcMain.handle("nexus:openPetriDishPro", async () => openPetriDishProWindow());
+ipcMain.handle("nexus:getPetriDishProState", async () => buildPetriPreviewState());
 
 ipcMain.handle("nexus:getTelemetry", async () => {
   const totalMem = os.totalmem();

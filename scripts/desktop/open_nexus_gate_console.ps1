@@ -883,6 +883,85 @@ function Invoke-NexusNeuralActivity {
     Read-Host "Press Enter to return to NEXUS menu"
 }
 
+function Invoke-NexusPetriDishPortal {
+    $petriRoot = Join-Path (Split-Path -Parent $RepoRoot) "PetriDishPro"
+    $petriElectron = Join-Path $petriRoot "electron"
+
+    while ($true) {
+        Write-Host ""
+        Write-Host "========================================"
+        Write-Host " ORGANISM GATE | PETRI DISH PRO"
+        Write-Host "========================================"
+        Write-Host "models simulate -> humans validate -> receipts govern claims"
+        Write-Host ""
+        Write-Host "[1] Open Electron Microscope HUD"
+        Write-Host "[2] Run Microbial Competition"
+        Write-Host "[3] Run Antibiotic Selection"
+        Write-Host "[4] Run Cellular Tissue Interaction"
+        Write-Host "[5] Validation Tests"
+        Write-Host "[6] Latest Run Receipt"
+        Write-Host "[7] Open Artifact Folder"
+        Write-Host "[8] Roadmap"
+        Write-Host "[B] Back to NEXUS"
+        Write-Host ""
+        Write-Host "Boundary: deterministic simulation evidence only; no medical, wet-lab, or species-identification authority."
+        Write-Host ""
+
+        $petriChoice = Read-Host "PetriDishPortal"
+
+        if ($petriChoice -eq "1") {
+            if (-not (Test-Path -LiteralPath (Join-Path $petriElectron "package.json") -PathType Leaf)) {
+                Write-FAIL ("Petri Electron package missing: {0}" -f $petriElectron)
+                Read-Host "Press Enter to return to PetriDishPortal"
+                continue
+            }
+            Push-Location $petriElectron
+            try { npm start }
+            finally { Pop-Location }
+            Read-Host "Press Enter to return to PetriDishPortal"
+        }
+        elseif ($petriChoice -eq "2" -or $petriChoice -eq "3" -or $petriChoice -eq "4") {
+            $preset = "microbial_competition"
+            if ($petriChoice -eq "3") { $preset = "antibiotic_selection" }
+            if ($petriChoice -eq "4") { $preset = "cellular_tissue_interaction" }
+            Push-Location $petriRoot
+            try {
+                python -m petri_lab.cli --root . --preset $preset --steps 120 --grid 64 --json
+            }
+            finally { Pop-Location }
+            Read-Host "Press Enter to return to PetriDishPortal"
+        }
+        elseif ($petriChoice -eq "5") {
+            Push-Location $petriRoot
+            try { python -m unittest discover -s tests }
+            finally { Pop-Location }
+            Read-Host "Press Enter to return to PetriDishPortal"
+        }
+        elseif ($petriChoice -eq "6") {
+            $receipt = Join-Path $petriRoot "reports\bio\petri_particle_state_latest.json"
+            if (Test-Path -LiteralPath $receipt -PathType Leaf) {
+                Get-Content -LiteralPath $receipt -Raw | Write-Host
+            }
+            else {
+                Write-NG "No Petri receipt found yet."
+            }
+            Read-Host "Press Enter to return to PetriDishPortal"
+        }
+        elseif ($petriChoice -eq "7") {
+            explorer.exe (Join-Path $petriRoot "artifacts\bio\runs") | Out-Null
+        }
+        elseif ($petriChoice -eq "8") {
+            explorer.exe (Join-Path $petriRoot "ROADMAP.md") | Out-Null
+        }
+        elseif ($petriChoice -eq "B" -or $petriChoice -eq "b") {
+            return
+        }
+        else {
+            Write-NG "Unknown PetriDishPortal choice."
+        }
+    }
+}
+
 function Invoke-NexusOpenUrl {
     param([string]$Url)
     Write-NG ("Opening: {0}" -f $Url)
@@ -1073,6 +1152,7 @@ function Show-Menu {
     Write-Portal "  [12] NexusCell - Containment Cell / Gate    -> containment execution gate" "Blue"
     Write-Portal "  [13] Neural Activity / Cathedral            -> bioelectric popout HUD" "Cyan"
     Write-Portal "  [14] Nexus Loops / Cards                   -> JSON loop cards / HUD-ready registry" "Blue"
+    Write-Portal "  [15] PetriDishPortal                       -> organism gate / microscope HUD" "Cyan"
     Write-Portal "  [Q]  Quit" "Blue"
     Write-Host ""
     Write-Portal "========================================================================================================================" "Cyan"
@@ -1099,6 +1179,7 @@ function Show-Menu {
     # Write-Host "[12] NexusCell - Containment Cell / Execution Gate"
     # Write-Host "[13] Neural Activity / Cathedral"
     # Write-Host "[14] Nexus Loops / Cards"
+    # Write-Host "[15] PetriDishPortal"
     # Write-Host "Gateway style: cyber ice-blue / green / yellow portal."
 }
 
@@ -1153,6 +1234,9 @@ while ($true) {
     }
     elseif ($choice -eq "14") {
         Invoke-NexusLoopCardsConsole
+    }
+    elseif ($choice -eq "15") {
+        Invoke-NexusPetriDishPortal
     }
     elseif ($choice -eq "Q" -or $choice -eq "q") {
         Write-OK "closing NEXUS Gate launcher"

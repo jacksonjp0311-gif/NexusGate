@@ -406,6 +406,7 @@
       repeating-radial-gradient(circle at 50% 50%, rgba(52, 211, 153, .16) 0 1px, transparent 1px 16px),
       rgba(2, 6, 23, .66);
     overflow: hidden;
+    cursor: pointer;
   }
 
   .petri-mini-body::before,
@@ -421,6 +422,14 @@
   .petri-mini-body::after {
     inset: 28% 18%;
     transform: rotate(-34deg);
+  }
+
+  #petri-mini-canvas {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   .petri-mini-foot {
@@ -938,10 +947,12 @@
       </div>
       <button class="petri-mini-open" type="button" id="petri-open">OPEN</button>
     </div>
-    <button class="petri-mini-body" type="button" id="petri-mini-body" title="Open PetriDishPro full UI"></button>
+    <button class="petri-mini-body" type="button" id="petri-mini-body" title="Open PetriDishPro full UI">
+      <canvas id="petri-mini-canvas" aria-label="Live PetriDishPro preview"></canvas>
+    </button>
     <div class="petri-mini-foot">
       <span id="petri-status">ready</span>
-      <span>full ui</span>
+      <span id="petri-counts">cells -- / particles --</span>
     </div>
   </section>
   <section class="hud-frame nexus-metrics-hud" aria-label="NEXUS Metrics">
