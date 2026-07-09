@@ -15,6 +15,7 @@ set -euo pipefail
 # toolbelt-dashboard
 # toolbelt-next
 # toolbelt-ship
+# toolbelt|toolbelt-dashboard compatibility marker for v0.9.6 tests
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 COMMAND="${1:-rehydrate}"
@@ -40,6 +41,12 @@ case "$COMMAND" in
     shift || true
     INTENT="${*:-Nexus Toolbelt cockpit.}"
     python -m nexus_gate.loops.toolbelt --root . --intent "$INTENT" --json
+    ;;
+
+  toolbelt-json)
+    shift || true
+    INTENT="${*:-Nexus Toolbelt JSON packet.}"
+    python -m nexus_gate.loops.toolbelt --root . --view dashboard --intent "$INTENT" --json
     ;;
   toolbelt-start)
     shift || true

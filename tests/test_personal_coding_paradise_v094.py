@@ -11,7 +11,7 @@ class TestPersonalCodingParadiseV094(unittest.TestCase):
     def test_toolkit_packets_build_for_paradise_tools(self):
         from nexus_gate.loops.toolkit import build_toolkit_packet
         for tool in ["idea-forge","patch-plan","debug-lens","command-palette","local-oracle","continuity-seal"]:
-            packet=build_toolkit_packet(ROOT,tool,"unit"); self.assertEqual(packet["mode"],"nexus_ai_loop_toolkit"); self.assertEqual(packet["version"],"0.9.4"); self.assertEqual(packet["status"],"pass"); self.assertFalse(packet["boundary"]["git_push_enabled"]); self.assertFalse(packet["boundary"]["autonomous_authority"]); self.assertIn("data",packet)
+            packet=build_toolkit_packet(ROOT,tool,"unit"); self.assertEqual(packet["mode"],"nexus_ai_loop_toolkit"); self.assertIn(packet["version"], {"0.9.4", "0.9.5", "0.9.6", "0.9.7"}); self.assertEqual(packet["status"],"pass"); self.assertFalse(packet["boundary"]["git_push_enabled"]); self.assertFalse(packet["boundary"]["autonomous_authority"]); self.assertIn("data",packet)
     def test_loop_cards_include_paradise_cards(self):
         from nexus_gate.loops.cards import build_loop_cards
         packet=build_loop_cards(ROOT); self.assertIn(packet["schema"], {"NEXUS_LOOP_CARD_SET.v0.9.2", "NEXUS_LOOP_CARD_SET.v0.9.3", "NEXUS_LOOP_CARD_SET.v0.9.4", "NEXUS_LOOP_CARD_SET.v0.9.5", "NEXUS_LOOP_CARD_SET.v0.9.6", "NEXUS_LOOP_CARD_SET.v0.9.7"}); cards={card["loop_id"]:card for card in packet["cards"]}; self.assertTrue(PARADISE_LOOPS.issubset(cards))

@@ -1,20 +1,15 @@
 {
-    "version":  "v0.1.2-close-e",
-    "name":  "Nexus README Freshness Audit",
-    "status":  "root_readme_freshened_and_compact",
-    "previous_head":  "5db524d",
-    "close_e_reason":  "Close D parser wound fixed; Close C freshness preserved while compacting README below strict \u003c220 line gate",
-    "finding":  "README was mostly healthy but stale in operator surfaces, Human Director line, and docs map",
-    "updated_topics":  [
-                           "Spiral Core Desktop Portal",
-                           "Neural Activity v0.1.1",
-                           "Spiral Core Portal v0.1.2",
-                           "Documentation Map",
-                           "Strict compactness"
-                       ],
-    "strict_line_ceiling_exclusive":  220,
-    "actual_line_count":  219,
-    "no_authority_change":  true,
-    "no_execution_change":  true,
-    "encoding_lock":  "utf-8-no-bom"
+  "actual_line_count": 178,
+  "generated_utc": "2026-07-09T12:49:01.491531+00:00",
+  "no_authority_change": true,
+  "no_execution_change": true,
+  "strict_line_ceiling_exclusive": 220,
+  "updated_topics": [
+    "Strict compactness",
+    "Neural Activity",
+    "Spiral Core",
+    "README freshness",
+    "Toolbelt Cockpit Output"
+  ],
+  "version": "v0.1.2-close-e"
 }

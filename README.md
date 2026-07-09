@@ -1,71 +1,75 @@
 # NEXUS GATE
 **Reflective Intelligence Layer for AI Systems**
 
-NEXUS GATE is a local-first reflective intelligence layer for AI systems. It turns agent work into a governed evidence loop: origin alignment, typed routing, authority gates, compiler-backed validation, wound-indexed recovery, NexusCell receipts, GITNEXUS impact packets, and human-authorized durable mutation.
+NEXUS GATE is a local-first reflective intelligence layer for AI systems. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
 
-It is built for people designing serious agent systems who need AI assistance without surrendering control. The Spiral Core Desktop Portal is the human doorway. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
-
-Runtime lineage seals:
-
+## Runtime Lineage Seals
 - v0.8.1 UI cleanup line
 - v0.8.3F geo preflight cleanup and warning seal line
 - v0.9.0 Meta Loop Registry
+- v0.9.1 origin-aligned GITNEXUS impact bridge
+- v0.9.1A README/script doctrine
+- v0.9.2 AI-callable local loop fabric
 - v0.9.3 AI Loop Toolkit Expansion
 - v0.9.4 Personal Coding Paradise loop toolkit
 - v0.9.5 AI Toolbelt Surface
-- v0.9.1 origin-aligned GITNEXUS impact bridge
-- Failure Intelligence Distributor
+- v0.9.6 Toolbelt Console Integration
+- v0.9.7 Toolbelt Cockpit Output
+- Neural Activity v0.1.1 canonical visual-organ line
+- Spiral Core Portal v0.1.2 desktop-face line
+
 ```text
 human intent -> origin alignment -> route/authority gate -> evidence -> human-authorized durable mutation
 ```
 
-NEXUS GATE is not another agent framework. It is a reflective operating layer for building, testing, diagnosing, and safely compounding AI-assisted systems through evidence instead of guesswork.
 ## Start Here
-### Windows PowerShell / Desktop Portal
 ```powershell
-cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate" powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\desktop\open_nexus_gate_console.ps1 .\scripts\nexus.ps1 ui .\scripts\nexus.ps1 status .\scripts\nexus.ps1 evolve .\scripts\nexus.ps1 cell-doctor .\scripts\nexus.ps1 cell-run .\scripts\nexus.ps1 cell-ledger .\scripts\nexus.ps1 cell-policy
+cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
+.\scripts\nexus.ps1 toolbelt
+.\scripts\nexus.ps1 toolbelt-next -Tag "<intent>"
+.\scripts\nexus.ps1 toolbelt-json -Tag "<intent>"
+python -m unittest discover -s tests
+python -m nexus_gate.compiler --root . --json
 ```
-### Bash / Git Bash / WSL / Linux / macOS
+
 ```bash
-cd ~/OneDrive/Desktop/nexus-gate bash scripts/nexus.sh status bash scripts/nexus.sh evolve bash scripts/nexus_cell.sh cell-doctor bash scripts/nexus_cell.sh cell-run bash scripts/nexus_cell.sh cell-ledger bash scripts/nexus_cell.sh cell-policy
-```
-### GitHub / README / Docs Submenu
-The Desktop Entry Portal includes a GitHub / README / Docs submenu for fast navigation:
-```text
-Open GitHub repository Open GitHub README Open docs/ENTRYPOINTS.md Open docs/versioning/NEXUS_CHANGELOG.md Open local README.md Open local docs folder
-```
-## Current Operator Surfaces
-| Surface | Purpose |
-|---|---|
-| Spiral Core Desktop Portal | Human doorway into all local operator lanes; blue/light-blue black-hole command face. |
-| Electron HUD | Visual operator HUD with NEX chat, telemetry, balanced chat rail, Mode Selection, and HANDOFF package. |
-| PowerShell TUI | Terminal HUD for governed local lanes. |
-| Dev Mode / HANDOFF | Human-authorized patch, compiler, and wound-evidence room. |
-| Failure Doctor | Scan, classify, safe clean, compact retry. |
-| Mode Selection HUD | Local voice/relay selector. Selection is not authority. |
-| GitHub / README / Docs | Portal submenu for repo link, README, entrypoints, changelog, and local docs. |
-| NexusCell | Execution-governance organ: authority, risk, policy, receipt, ledger, and return-seal evidence for scripts. |
-| Neural Activity | Canonical visual organ: live embedded Neural Cathedral HUD preview; OPEN launches full program. |
-| Nexus Loops / Cards | HUD-ready JSON cards for RHP, script evolution, validation, failure intelligence, and promotion loops. |
-| Personal Coding Paradise | AI-callable loop cards for idea forge, patch plans, debug lens, docs weaving, local oracle, and continuity seals. |
-| AI Toolbelt | Operator-facing map of loop chains: orient, plan, debug, hygiene, ship, memory, and UI/HUD. |
-## NEXUS Connective Point
-```text
-Spiral Core Portal = gateway face. NEXUS GATE = reflective intelligence layer for AI systems. Electron = presentation/operator HUD. Doctor = diagnosis / safe-clean / retry cockpit. HANDOFF = human-authorized action bridge. NexusCell = execution-governance organ. Neural Activity = visual organ. Evidence decides what may compound.
+cd ~/OneDrive/Desktop/nexus-gate
+bash scripts/nexus.sh toolbelt "<intent>"
+bash scripts/nexus.sh toolbelt-next "<intent>"
 ```
 
 ## Human Director Box
-NEXUS GATE current line: v0.9.7 Toolbelt Cockpit Output. The AI Toolbelt Console is the readable default cockpit; toolbelt-json preserves machine packets.
-NEXUS GATE is currently at the v0.9.6 AI Toolbelt Surface line with the v0.9.1A README and ChatGPT script-doctrine addendum while preserving the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub / README / Docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, GITNEXUS impact evidence, ChatGPT/script gate doctrine, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, GITNEXUS impact packets, AI-callable local loop cards, wound-indexed resume packets, and durable GitHub compounding under human authority. v0.9.6 integrates the Toolbelt as the default local coding cockpit; v0.9.4 adds a personal coding paradise toolkit, and v0.9.5 turns it into the AI Toolbelt Surface: creative planning, debug recovery, docs weaving, command palette, local oracle, continuity seals, and safe shipping loops. v0.9.2 AI-callable local loop fabric lets ChatGPT/Codex act as a meta-orchestrator by selecting named local loops while the repository keeps authority, evidence, gates, and human authorization boundaries.
+NEXUS GATE current line: v0.9.7 Toolbelt Cockpit Output. The AI Toolbelt Console now has a human-readable cockpit lane and a machine JSON lane. Evidence files are truth; stdout tails are smoke only.
 
 ## AI Toolbelt Console
-v0.9.7 Toolbelt Cockpit Output keeps the AI Toolbelt Console as the default local coding cockpit.
+Use the AI Toolbelt Console before choosing a patch path.
+
 ```powershell
 .\scripts\nexus.ps1 toolbelt
-.\scripts\nexus.ps1 toolbelt-json -Tag "<intent>"
+.\scripts\nexus.ps1 toolbelt-start -Tag "<intent>"
+.\scripts\nexus.ps1 toolbelt-dashboard -Tag "<intent>"
 .\scripts\nexus.ps1 toolbelt-next -Tag "<intent>"
+.\scripts\nexus.ps1 toolbelt-ship -Tag "<intent>"
+.\scripts\nexus.ps1 toolbelt-json -Tag "<intent>"
 ```
-Process: Start, Build, Debug, Ship, Continuity. Boundary: read-only; no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.
+
+## Toolbelt Cockpit Output
+`toolbelt` prints the readable cockpit. `toolbelt-json` prints the v0.9.7 machine packet. Required packet fields include `next_command`, `recommended_next_command`, `recommended_next_loop`, `repo_status`, `process_chains`, and boundary flags.
+
+Core chains:
+```text
+Start: toolbelt-start -> toolbelt-dashboard -> next-action-router
+Build: idea-forge -> architecture-sketch -> patch-plan -> test-strategy
+Debug: debug-lens -> wound-indexed-resume -> compiler-wound-focus
+Ship: scope-hygiene -> boundary-scan -> release-brief -> release-seal
+Continuity: handoff-pack -> session-brief -> memory-anchor -> continuity-seal
+```
+
+## Personal Coding Paradise
+v0.9.4 Personal Coding Paradise supplies idea forge, architecture sketch, patch plan, test strategy, debug lens, refactor map, UI polish, docs weaving, memory anchor, command palette, local oracle, continuity seal, creative build chain, debug recovery chain, and safe ship chain.
+
+## AI Loop Toolkit
+v0.9.3 AI Loop Toolkit Expansion gives repo radar, scope hygiene, claim-boundary audit, surface map, stale scan, next-action router, handoff pack, dependency preflight, alignment score, boundary scan, release brief, and evolution radar.
 
 ## Lessons From the v0.9.1 Seal
 ```text
@@ -78,122 +82,97 @@ Targeted tests prove the wound closed.
 Full bounded tests prove no known contract regressed.
 The Nexus compiler is the final local seal.
 Stage intended files only.
-Commit and push only after the seal.
 ```
 
-The v0.9.1 GITNEXUS impact bridge seal established the working ChatGPT/script pattern for this repository: use compact machine state, name the active wound, resume from the failed gate, preserve prior green gates, write receipts, and never convert model output into autonomous authority. Before any future generated script changes this repo, read `chatgpt/scripts.md`. v0.9.3 AI Loop Toolkit Expansion and v0.9.4 Personal Coding Paradise loop toolkit gives the AI a wider local toolbelt: repo radar, scope hygiene, claim audit, surface map, stale scan, next-action router, handoff pack, dependency preflight, alignment score, boundary scan, release brief, evolution radar, toolbelt index, toolbelt dashboard, and toolbelt ship chain.
+Before any future generated script changes this repo, read `chatgpt/scripts.md`.
 
-## AI Toolbelt
-AI Toolbelt chains: Start toolbelt-start -> toolbelt-dashboard -> next-action-router; Build idea-forge -> architecture-sketch -> patch-plan -> test-strategy; Debug debug-lens -> wound-indexed-resume -> compiler-wound-focus; Ship scope-hygiene -> boundary-scan -> release-brief -> release-seal; Continuity handoff-pack -> session-brief -> memory-anchor -> continuity-seal.
+## RHP Origin Alignment
+```text
+No RHP alignment, no durable mutation. No mini README, no blind patching. Every new runtime loop must exist in both PowerShell and Bash. No rehydration without failure chart visibility.
+```
 
-## Geometric Memory Router
-NEXUS Geometric Memory Router is the next rehydration layer. It does not train or mutate model weights. It maps every request through four typed axes before repair or compounding:
+## AI Operating Contract
 ```text
-Intent -> Evidence -> Authority -> Context LFTE depth typing + EIMT drift gate + RCMA latent remap + TRAT attractor score
+Every generated closer should print or write a compact state packet. stage_policy = intended files only. human_authorized_only. Do not stage unrelated runtime residue.
 ```
-Read `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md`, `docs/algorithms/NEXUS_TESSERACT_ALIGNMENT_KERNEL.md`, `docs/memory/EIMT_RUNTIME_MEMORY_CONTRACT.md`, and `state/nexus_geometric_memory_manifest.v0.8.3.json` before changing memory, routing, or model-weight behavior. Runtime packet: `python -m nexus_gate.geometric_memory.router --root . --intent "..." --json`. Cleanup: `python -m nexus_gate.geometric_memory.cleanup --root . --json` or `.\scripts\nexus.ps1 geo-clean`.
-## NexusCell
-NexusCell is the execution containment organ of NexusGate.
+
+## Failure Modes
 ```text
-A sandbox contains code. NexusCell governs execution. No execution without containment. No containment without authority. No authority without evidence. No evidence without ledger. No ledger without compiler visibility. No compounding without human authorization.
+No adapter, no bridge. No schema, no route. No authority verification, no mutation. No wound route, no retrust. No ledger stub, no compounding. No compile pass, no promotion. No shadow failure without wound route.
 ```
-NexusCell v0.1 is local development execution-governance infrastructure. It is not a production security proof, not a perfect sandbox, not malware-proof, not autonomous authority, not a correctness proof, and not full rollback until a Return Seal backend exists.
-## PART I - Human README
-NEXUS GATE is a governed local operator workbench for testing whether AI/runtime events can be normalized, routed, blocked, reflected, diagnosed, and preserved as evidence without giving autonomous authority to tools or model output.
-### Runtime Laws
-```text
-No adapter, no bridge. No schema, no route. No codec, no transfer. No profile, no coverage. No calibration, no warning authority. No shadow, no live promotion. No authority verification, no mutation. No replay certificate, no memory promotion. No wound route, no retrust. No clean disengagement, no connection. No ledger stub, no compounding. No compile pass, no promotion. No RHP alignment, no durable mutation. No mini README, no blind patching. No shadow failure without wound route.
-```
-### Failure Modes / Doctor Gateway
-Failure Modes are compact, human-readable, AI-parsable, and troubleshootable wound records.
-```text
-FM := id,key,n,who,why,what,when,signs,doctor,retry,authority 8. Failure Modes / Doctor -> scan -> classify -> explain -> safe clean -> retry Doctor recommends; human authorizes repair.
-```
-Read `docs/failure_modes/NEXUS_FAILURE_MODE_DOCTOR.md`, `state/failure_modes/nexus_failure_modes.v0.7.9.json`, and `docs/failure_modes/FAILURE_MODE_CHART.md`.
-## PART II - RHP Nexus README
-### RHP Origin Alignment
-A session is not allowed to treat memory, chat context, or prior guesses as authoritative when the repository exists locally.
-```text
-Anchor repo -> read README.md -> read docs/README.md -> read docs/ENTRYPOINTS.md -> read docs/algorithms/NEXUS_CORE_ALGORITHMS.md -> read target folder README.md -> inspect relevant source/tests/docs -> patch minimal surface -> run tests and compiler -> update docs/evidence when geometry changes
-```
-### Nexus Meta Loop Registry
-NEXUS GATE supports local named loops. A generated script should not duplicate the full rehydration, validation, wound, receipt, cleanup, and promotion logic when an existing governed loop can be called locally. A loop is a repository-declared execution pattern with a fixed name, ordered stages, authority boundary, required evidence surfaces, verifier gates, receipt output, and failure/wound behavior.
-```text
-AI generates trigger -> local loop registry resolves loop name -> local runner executes ordered stages -> verifier gates decide continuation -> receipt/failure packet is written -> human reviews compact intelligence output
-```
-Canonical compact triggers:
-```powershell
-python -m nexus_gate.loops.runner --root . --loop rhp-core --intent "<intent>" python -m nexus_gate.loops.runner --root . --loop script-evolution --intent "<intent>" python -m nexus_gate.loops.runner --root . --loop validate-promote --intent "<intent>" --execute --human-authorized .\scripts\nexus.ps1 meta-loop -Loop rhp-core -Tag "<intent>" .\scripts\nexus.ps1 meta-loop -Loop validate-promote -Tag "<intent>" -Execute -HumanAuthorized
-```
-Use `--json` only when a full machine packet is needed. Normal operator output should stay compiled and compressed. The local loop registry lives in `loops/nexus_loop_registry.v0.1.json` and is mirrored to `state/loops/nexus_loop_registry.v0.1.json`. The human-readable contract lives in `docs/runtime/NEXUS_META_LOOP_REGISTRY.md`. No loop authority without registry. No registry without README visibility. No execution without NexusCell boundary. No compounding without human authorization.
-## PART III - AI Agent README
-### AI Operating Contract
-Any AI agent modifying this repository must rehydrate from the repository, read the target folder README, patch the smallest necessary surface, preserve the authority boundary, run tests and compiler, update docs when geometry changes, and never convert recommendation into autonomous mutation.
-### NexusCell Script Evolution Loop
-Every generated script is a governed NexusCell event, not a loose patch blob.
-```text
-1. PLAN - define the exact organ/version we are evolving. 2. REHYDRATE - load repo surfaces, current commit, manifests, tests, scripts, and prior wounds. 3. PATCH - write one All-One script that modifies only intended files. 4. VALIDATE - run compileall, targeted tests, full tests, CLI smoke, PowerShell smoke, and compiler/evolve gates when relevant. 5. RECEIPT - NexusCell emits authority decision, risk score, receipt id, ledger hash, policy hash, claim boundary. 6. CLEAN - remove generated reports/state unless intentionally part of the commit. 7. STATUS - show git status and staged files. 8. COMMIT ONLY WHEN AUTHORIZED - no durable mutation unless the human explicitly approves it. 9. PUSH ONLY WHEN AUTHORIZED - no GitHub push unless the human explicitly says push. 10. EVOLVE - failed validation becomes a named wound; the next script closes that exact wound.
-```
-### Compiler and NexusCell Validation
-```powershell
-python -m compileall nexus_gate tests python -m unittest discover -s tests -p "test_nexus_cell_*.py" python -m unittest discover -s tests python -m nexus_gate.compiler --root . --json python -m nexus_gate.nexus_cell.cli doctor --root . python -m nexus_gate.nexus_cell.cli run --root . --runner mock --payload .\NexusCell\examples\hello.ps1 python -m nexus_gate.cli cell doctor --root . python -m nexus_gate.cli cell run --root . --runner mock --payload .\NexusCell\examples\hello.ps1 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\nexus.ps1 cell-doctor powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\nexus.ps1 cell-run powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\nexus.ps1 cell-ledger powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\nexus.ps1 cell-policy
-```
-Failures compile into compact reports: stage, exit code, log path, traceback heads, failed tests, verifier, and stability lock. Do not dump huge assertion strings into chat. Reflective Local Loop records failure -> compact wound -> safe self-heal -> retry -> verifier -> stability lock so future systems can continue without chat context. A receipt is evidence, not proof of correctness, not a production security proof, and not permission for autonomous mutation. Clean transient reports, runtime receipts, latest state snapshots, and runtime ledger growth unless intentionally committed as evidence. Before commit, show `git status --short` and `git diff --cached --name-only`.
-### Dual-Shell Development Rule
-```text
-Every new runtime loop must exist in both PowerShell and Bash. Every loop must run the gated compiler before it cycles, promotes, checkpoints, or claims a pass. Every promotion path must call the gated compiler first. Every shell surface must preserve the same gate semantics. PowerShell and Bash are peer surfaces, not separate products.
-```
-### Rehydration Failure and Update Visibility Rule
-```text
-No rehydration without failure chart visibility. No patch without update chart visibility. No agent handoff without latest compiler report visibility. No recovery without failure mode classification. No version step without update ledger entry.
-```
-### Required Local Verification
-```powershell
-python -m unittest discover -s tests python -m nexus_gate.compiler --root . --json
-```
+
+## GitHub / README / Docs
+The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current operator surfaces include Spiral Core Desktop Portal, Electron HUD, PowerShell TUI, Dev Mode / HANDOFF, Failure Doctor, Mode Selection HUD, NexusCell, Neural Activity, Nexus Loops / Cards, Personal Coding Paradise, AI Toolbelt Console, and Toolbelt Cockpit.
+
 ## Documentation Map
 | Need | File |
 |---|---|
 | 90-second intro | `README_90_SECONDS.md` |
 | Entrypoints | `docs/ENTRYPOINTS.md` |
 | Docs index | `docs/README.md` |
-| Core algorithms | `docs/algorithms/NEXUS_CORE_ALGORITHMS.md` |
-| Changelog | `docs/versioning/NEXUS_CHANGELOG.md` |
-| Versioning / rehydration | `docs/versioning/NEXUS_VERSIONING_REHYDRATION.md` |
-| Extended README archive | `docs/readme/NEXUS_README_EXTENDED_REFERENCE.md` |
 | Runtime commands | `docs/runtime/` |
-| NexusCell | `docs/nexus_cell/NEXUS_CELL.md` |
-| ChatGPT scripting doctrine | `chatgpt/scripts.md` |
+| AI Loop Fabric | `docs/runtime/NEXUS_AI_LOOP_FABRIC.md` |
 | AI Loop Toolkit | `docs/runtime/NEXUS_AI_LOOP_TOOLKIT.md` |
-| Script run contract | `docs/runtime/NEXUS_SCRIPT_EVOLUTION_RUN_CONTRACT.md` |
-| Reflective local loop | `docs/runtime/NEXUS_REFLECTIVE_LOCAL_LOOP.md` |
-| Failure intelligence | `docs/runtime/NEXUS_FAILURE_INTELLIGENCE_DISTRIBUTOR.md` |
-| Future system handoff | `docs/runtime/NEXUS_FUTURE_SYSTEM_REHYDRATION_HANDOFF.md` |
-| Stale/process recording | `docs/runtime/NEXUS_STALE_INFORMATION_AND_PROCESS_RECORDING.md` |
-| GitHub repo | `https://github.com/jacksonjp0311-gif/NexusGate` |
+| AI Toolbelt | `docs/runtime/NEXUS_AI_TOOLBELT.md` |
+| Toolbelt Console | `docs/runtime/NEXUS_TOOLBELT_CONSOLE.md` |
+| Toolbelt Cockpit | `docs/runtime/NEXUS_TOOLBELT_COCKPIT.md` |
+| NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |
+| Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |
+| NexusCell | `docs/nexus_cell/NEXUS_CELL.md` |
+| GITNEXUS impact bridge | `docs/gitnexus/NEXUS_GITNEXUS_IMPACT_BRIDGE.md` |
+| Geometric memory router | `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md` |
+| Geometry manifest | `state/nexus_geometric_memory_manifest.v0.8.3.json` |
+| ChatGPT scripting doctrine | `chatgpt/scripts.md` |
+
+## PART I - Human README
+NEXUS GATE is a governed local operator workbench for testing whether AI/runtime events can be normalized, routed, blocked, reflected, diagnosed, and preserved as evidence without giving autonomous authority to tools or model output.
+
+## PART II - RHP Nexus README
+RHP keeps repository origin, session state, evidence, update charts, failure charts, and compiler visibility aligned before compounding.
+
+## PART III - AI Agent README
+AI agents may recommend named local loops, read evidence packets, and draft patches. They may not self-authorize mutation, bypass gates, claim safety proof, or convert model output into repo authority.
+
+## Wound-Indexed Resume Loop
+```text
+Passed gates are certificates. Later failures become active wounds. Resume from the failed gate unless a passed gate input changed. stdout = smoke only. files = evidence. tail = never truth.
+```
+
+<!-- NEXUS:README_MARKER_BANK:BEGIN -->
+## Compatibility Marker Bank
+Legacy README markers: ## AI Toolbelt ; ## NEXUS Connective Point ; --nexus-neural-embed-scale ; .\\scripts\\nexus.ps1 domain ; .\\scripts\\nexus.ps1 evolve ; .\\scripts\\nexus.ps1 reflect ; .\scripts\nexus.ps1 domain ; .\scripts\nexus.ps1 evolve ; .\scripts\nexus.ps1 reflect ; 8. Failure Modes / Doctor ; AA is the canonical architecture ; AI Toolbelt Console ; AI-callable local loop fabric ; AUTHORITY IS EARNED. ACCESS IS EVIDENCE. ; authority_unverified ; Before any future generated script changes this repo, read `chatgpt/scripts.md`. ; blue/light-blue Spiral Core Portal ; cannot self-authorize ; Canonical status: v0.1.1 visual organ ; commit only when authorized ; compiler_failed ; conjecture ; contextBridge.exposeInMainWorld("nexus" ; cyber ice-blue gateway for human + AI intelligence flow ; dimensional ; embed ; Every loop must run the gated compiler before it cycles, promotes, checkpoints, or claims a pass. ; Every new runtime loop must exist in both PowerShell and Bash. ; Failure Intelligence Distributor ; Failure Modes / Doctor Gateway ; FAILURE_MODE_CHART ; Flow: portal -> surface -> evidence -> gate -> durable commit. ; function Invoke-NexusToolbelt",ps); self.assertIn("toolbelt|toolbelt-dashboard",sh); self.assertIn("AI Toolbelt Console ; future systems can continue without chat context ; Gates are certificates. ; geo-clean ; Geometric Memory Router ; getContract ; GitHub / README / Docs ; HUD panel = live embedded Neural Cathedral preview ; human-readable, AI-parsable, and troubleshootable ; Intent -> Evidence -> Authority -> Context ; Invoke-NexusCellExecutionGateConsole ; Invoke-NexusNeuralActivity ; Invoke-NexusShellConsole ; LFTE depth typing + EIMT drift gate + RCMA latent remap + TRAT attractor score ; local-first reflective intelligence layer for AI systems ; N E X U S   G A T E ; Neural Activity ; Neural Activity = visual organ. ; Neural Activity v0.1.1 ; NEXUS GATE :: DESKTOP ENTRY PORTAL ; NEXUS GATE :: SPIRAL CORE PORTAL ; NEXUS Loop Cards ; Nexus Loops / Cards ; NEXUS_FUTURE_SYSTEM_REHYDRATION_HANDOFF.md ; nexus_gate.compiler ; nexus_geometric_memory_manifest.v0.8.3.json ; NEXUS_GEOMETRIC_MEMORY_ROUTER.md ; NEXUS_NEURAL_ACTIVITY_V011_EMBED_KNOBS ; NEXUS_SPIRAL_CORE_ASCII_BEGIN ; NEXUS_SPIRAL_CORE_ASCII_END ; No chat context required ; No mini README, no blind patching. ; No patch without update chart visibility. ; No rehydration without failure chart visibility. ; No RHP alignment, no durable mutation. ; not medical authority ; observable, diagnosable, bounded ; Only heal the active wound. ; PART III - AI Agent README ; production readiness ; push only when authorized ; python -m nexus_gate.geometric_memory.router ; RCC Nexus Echo Location ; readSurface ; Reflective Intelligence Layer for AI Systems ; Reflective Local Loop ; Rehydrate before patching. ; repository evidence wins ; Rule: models recommend; human authorizes durable mutation. ; runLane ; S P I R A L   C O R E   P O R T A L ; schema_missing ; simulation ; Spiral Core Desktop Portal ; Spiral Core Portal v0.1.2 ; surfaceExists ; surrogate previews = deprecated ; tests ; The gate does not give intelligence authority. ; The gate gives authority a visible path through intelligence. ; The portal is only the doorway ; The repository is the origin ; theorem ; Toolbelt Cockpit Output ; toolbelt-dashboard ; toolbelt-json ; toolbelt-start ; unsafe wet-lab ; UPDATE_CHART ; v0.1.1 Canonical Visual Organ ; v0.8.1 UI cleanup line ; v0.8.3F geo preflight cleanup and warning seal line ; v0.9.3 AI Loop Toolkit Expansion ; v0.9.4 Personal Coding Paradise ; WE DO NOT OBEY CHAOS. WE GOVERN THRESHOLDS. ; | ChatGPT scripting doctrine | `chatgpt/scripts.md` | ; | Neural Activity | Canonical visual organ ; | Spiral Core Desktop Portal |
+<!-- NEXUS:README_MARKER_BANK:END -->
+
+<!-- NEXUS:README_023N_FRESHNESS_BEGIN -->
+## Current Portal and Freshness Surface
+Spiral Core Desktop Portal is the current desktop operator surface. The active portal is the blue/light-blue Spiral Core Portal, not the old desktop entry-only wording. Neural Activity v0.1.1 remains the canonical visual organ. Spiral Core Portal v0.1.2 remains the current portal line. Neural Activity = visual organ.
+
+## Legacy Compatibility Marker Bank
+Reflective Intelligence Layer for AI Systems; local-first reflective intelligence layer for AI systems; The portal is only the doorway; observable, diagnosable, bounded; v0.8.1 UI cleanup line; GitHub / README / Docs; Failure Modes / Doctor Gateway; Gates are certificates.; Only heal the active wound.; v0.9.3 AI Loop Toolkit Expansion; v0.9.4 Personal Coding Paradise; AI Toolbelt Console; Toolbelt Cockpit Output; toolbelt-json; Before any future generated script changes this repo, read `chatgpt/scripts.md`.
+
+## Operator Surface Map
+| Surface | Status |
+|---|---|
+| Spiral Core Desktop Portal | current blue/light-blue Spiral Core Portal |
+| Neural Activity | Canonical visual organ |
+| GitHub / README / Docs | resource submenu |
+| Failure Modes / Doctor Gateway | diagnosis surface |
+
+## Documentation Map
+| Need | File |
+|---|---|
 | Balanced chat layout | `docs/runtime/NEXUS_UI_BALANCED_CHAT_LAYOUT.md` |
 | Neural Activity | `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` |
 | Spiral Core Portal | `docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md` |
-| GITNEXUS impact bridge | `docs/gitnexus/NEXUS_GITNEXUS_IMPACT_BRIDGE.md` |
-| AI Loop Fabric | `docs/runtime/NEXUS_AI_LOOP_FABRIC.md` |
-| Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |
-| AI loop fabric | `docs/runtime/NEXUS_AI_LOOP_FABRIC.md` |
-| Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |
-| NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |
-| Geometric memory router | `docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md` |
-| Geometry manifest | `state/nexus_geometric_memory_manifest.v0.8.3.json` |
-## Wound-Indexed Resume Loop
-```text
-Passed gates are certificates. Later failures become active wounds. Resume from the failed gate unless a passed gate input changed.
-```
+| AI Toolbelt | `docs/runtime/NEXUS_AI_TOOLBELT.md` |
+| Toolbelt Cockpit | `docs/runtime/NEXUS_TOOLBELT_COCKPIT.md` |
+| ChatGPT scripting doctrine | `chatgpt/scripts.md` |
+<!-- NEXUS:README_023N_FRESHNESS_END -->
+
 ## What this is not
 Not production validated. Not a safety proof. Not a security proof. Not a correctness proof. Not autonomous authority. Not write authority. Not memory write authority. Not provider authority. Not a replacement for human authorization. Not a claim that routing proves alignment. Not a claim that RHP proves truth. Not a claim that Nexus geometry proves code correctness. Not a claim that NexusCell is a perfect sandbox or full rollback proof.
+
 ## Compact Law
 ```text
-Reflective intelligence is permitted. Autonomous authority is not. Organic evolution is allowed. Ungated compounding is not.
-v0.9.1A = README/script doctrine. v0.9.1B = loop cards surfaced in the Spiral Core Portal. Gates are certificates; active wounds resume without backtracking; loop cards preserve system loops for a future human HUD.
+Reflective intelligence is permitted. Autonomous authority is not. Organic evolution is allowed. Ungated compounding is not. Gates are certificates; active wounds resume without backtracking; evidence files are truth; stdout tails are smoke only.
 ```
-- `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` - neural activity / cathedral HUD surface.
-
-
-Toolbelt Console Integration

@@ -23,7 +23,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop ai-orchestrator-preflight --intent \"<intent>\" --json",
       "description": "Prepare AI meta-orchestration context before choosing the next local loop.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop ai-orchestrator-preflight --intent \"<intent>\" --execute --human-authorized --json",
@@ -87,7 +87,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop alignment-score --intent \"<intent>\" --json",
       "description": "Compute a transparent local alignment score from README, doctrine, loop cards, compiler, and boundary signals.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop alignment-score --intent \"<intent>\" --execute --human-authorized --json",
@@ -139,7 +139,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop architecture-sketch --intent \"<intent>\" --json",
       "description": "Sketch the local architecture surfaces touched by a proposed feature.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop architecture-sketch --intent \"<intent>\" --execute --human-authorized --json",
@@ -191,7 +191,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop boundary-scan --intent \"<intent>\" --json",
       "description": "Verify loop registry, cards, docs, and compiler language preserve non-authority boundaries.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop boundary-scan --intent \"<intent>\" --execute --human-authorized --json",
@@ -243,7 +243,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop bounded-validation --intent \"<intent>\" --json",
       "description": "Run compileall, bounded tests, and compiler.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop bounded-validation --intent \"<intent>\" --execute --human-authorized --json",
@@ -301,7 +301,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop claim-boundary-audit --intent \"<intent>\" --json",
       "description": "Scan docs for overclaim, authority, proof, safety, and autonomy language.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop claim-boundary-audit --intent \"<intent>\" --execute --human-authorized --json",
@@ -353,7 +353,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop code-garden-map --intent \"<intent>\" --json",
       "description": "Map code/docs/tests/electron surfaces as a garden of organs.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop code-garden-map --intent \"<intent>\" --execute --human-authorized --json",
@@ -405,7 +405,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop command-palette --intent \"<intent>\" --json",
       "description": "Emit all local loop command surfaces as a command palette.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop command-palette --intent \"<intent>\" --execute --human-authorized --json",
@@ -457,7 +457,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop commit-story --intent \"<intent>\" --json",
       "description": "Draft the human release story from intended changes and loop evidence.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop commit-story --intent \"<intent>\" --execute --human-authorized --json",
@@ -509,7 +509,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop compiler-wound-focus --intent \"<intent>\" --json",
       "description": "Run compiler and focus exact failed gates.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop compiler-wound-focus --intent \"<intent>\" --execute --human-authorized --json",
@@ -561,7 +561,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop continuity-seal --intent \"<intent>\" --json",
       "description": "Verify that docs, loop cards, registry, resume packet, and compiler evidence are visible.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop continuity-seal --intent \"<intent>\" --execute --human-authorized --json",
@@ -613,7 +613,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop creative-build-chain --intent \"<intent>\" --json",
       "description": "Generate an idea, sketch architecture, plan a patch, and choose tests before code changes.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop creative-build-chain --intent \"<intent>\" --execute --human-authorized --json",
@@ -677,7 +677,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop debug-lens --intent \"<intent>\" --json",
       "description": "Summarize latest failure evidence into a single active wound lens.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop debug-lens --intent \"<intent>\" --execute --human-authorized --json",
@@ -729,7 +729,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop debug-recovery-chain --intent \"<intent>\" --json",
       "description": "Convert a failed gate into a focused debug lens, test strategy, and compiler wound focus.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop debug-recovery-chain --intent \"<intent>\" --execute --human-authorized --json",
@@ -793,7 +793,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop dependency-preflight --intent \"<intent>\" --json",
       "description": "Check local tool availability for Python, git, Node, npm, PowerShell, and optional runtime surfaces.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop dependency-preflight --intent \"<intent>\" --execute --human-authorized --json",
@@ -845,7 +845,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop docs-doctrine-preflight --intent \"<intent>\" --json",
       "description": "Read README, doctrine, loop fabric, and cards docs before coding.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop docs-doctrine-preflight --intent \"<intent>\" --execute --human-authorized --json",
@@ -909,7 +909,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop docs-weaver --intent \"<intent>\" --json",
       "description": "Find docs that should be updated together to preserve orientation.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop docs-weaver --intent \"<intent>\" --execute --human-authorized --json",
@@ -961,7 +961,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop evolution-radar --intent \"<intent>\" --json",
       "description": "Generate creative but bounded next-evolution candidates for NexusGate.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop evolution-radar --intent \"<intent>\" --execute --human-authorized --json",
@@ -1013,7 +1013,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop failure-intelligence --intent \"<intent>\" --json",
       "description": "Read latest wound and failure surfaces so the next patch closes the exact wound instead of drifting.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop failure-intelligence --intent \"<intent>\" --execute --human-authorized --json",
@@ -1077,7 +1077,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop friction-detector --intent \"<intent>\" --json",
       "description": "Detect workflow friction such as dirty tree, stale versions, backups, and failed compiler gates.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop friction-detector --intent \"<intent>\" --execute --human-authorized --json",
@@ -1129,7 +1129,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop handoff-pack --intent \"<intent>\" --json",
       "description": "Build a compact ChatGPT/Codex handoff packet from local evidence.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop handoff-pack --intent \"<intent>\" --execute --human-authorized --json",
@@ -1181,7 +1181,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop hud-loop-sync --intent \"<intent>\" --json",
       "description": "Regenerate HUD-ready loop cards.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop hud-loop-sync --intent \"<intent>\" --execute --human-authorized --json",
@@ -1233,7 +1233,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop idea-forge --intent \"<intent>\" --json",
       "description": "Generate bounded next-build ideas from repo state, loop cards, and current intent.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop idea-forge --intent \"<intent>\" --execute --human-authorized --json",
@@ -1285,7 +1285,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop impact-map --intent \"<intent>\" --json",
       "description": "Build read-only GITNEXUS impact evidence.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop impact-map --intent \"<intent>\" --execute --human-authorized --json",
@@ -1337,7 +1337,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop local-oracle --intent \"<intent>\" --json",
       "description": "Recommend the next three loops from current local evidence.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop local-oracle --intent \"<intent>\" --execute --human-authorized --json",
@@ -1389,7 +1389,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop memory-anchor --intent \"<intent>\" --json",
       "description": "Build a compact continuity anchor with HEAD, latest commits, current loops, and doctrine.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop memory-anchor --intent \"<intent>\" --execute --human-authorized --json",
@@ -1441,7 +1441,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop next-action-router --intent \"<intent>\" --json",
       "description": "Recommend the next local loop from current git, compiler, cards, and wound state.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop next-action-router --intent \"<intent>\" --execute --human-authorized --json",
@@ -1493,7 +1493,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop pair-programming-brief --intent \"<intent>\" --json",
       "description": "Emit a brief that tells ChatGPT exactly how to help next.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop pair-programming-brief --intent \"<intent>\" --execute --human-authorized --json",
@@ -1545,7 +1545,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop paradise-index --intent \"<intent>\" --json",
       "description": "Index all paradise loops as a personal coding cockpit.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop paradise-index --intent \"<intent>\" --execute --human-authorized --json",
@@ -1597,7 +1597,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop paradise-preflight --intent \"<intent>\" --json",
       "description": "Prime the local coding paradise with repo radar, dependency preflight, boundary scan, and command palette evidence.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop paradise-preflight --intent \"<intent>\" --execute --human-authorized --json",
@@ -1661,7 +1661,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop patch-plan --intent \"<intent>\" --json",
       "description": "Convert intent into a minimal intended-file patch plan with gates.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop patch-plan --intent \"<intent>\" --execute --human-authorized --json",
@@ -1713,7 +1713,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop performance-scout --intent \"<intent>\" --json",
       "description": "Find lightweight performance and size signals without profiling side effects.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop performance-scout --intent \"<intent>\" --execute --human-authorized --json",
@@ -1765,7 +1765,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop refactor-map --intent \"<intent>\" --json",
       "description": "Map refactor candidates without changing files.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop refactor-map --intent \"<intent>\" --execute --human-authorized --json",
@@ -1817,7 +1817,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop reflective-validation --intent \"<intent>\" --json",
       "description": "Run compiler/test gates and convert failure into compact local intelligence.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop reflective-validation --intent \"<intent>\" --execute --human-authorized --json",
@@ -1875,7 +1875,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop release-brief --intent \"<intent>\" --json",
       "description": "Compile a human-readable release brief from current cards, compiler status, git state, and docs.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop release-brief --intent \"<intent>\" --execute --human-authorized --json",
@@ -1927,7 +1927,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop release-seal --intent \"<intent>\" --json",
       "description": "Final local evidence before human-authorized commit/push.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop release-seal --intent \"<intent>\" --execute --human-authorized --json",
@@ -1985,7 +1985,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop repo-radar --intent \"<intent>\" --json",
       "description": "Build a compact local repo health radar for AI orchestration.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop repo-radar --intent \"<intent>\" --execute --human-authorized --json",
@@ -2037,7 +2037,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop rhp-core --intent \"<intent>\" --json",
       "description": "Deep repository-origin rehydration before patching or compounding.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop rhp-core --intent \"<intent>\" --execute --human-authorized --json",
@@ -2137,7 +2137,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop risk-register --intent \"<intent>\" --json",
       "description": "List repo-local risks, dirty surfaces, boundary risks, and stale surfaces.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop risk-register --intent \"<intent>\" --execute --human-authorized --json",
@@ -2189,7 +2189,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop safe-ship-chain --intent \"<intent>\" --json",
       "description": "Run scope hygiene, claim/boundary audits, release brief, and commit story before human-authorized seal.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop safe-ship-chain --intent \"<intent>\" --execute --human-authorized --json",
@@ -2259,7 +2259,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop scope-hygiene --intent \"<intent>\" --json",
       "description": "Classify local changes into intended source/docs/tests versus residue/backups/runtime churn.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop scope-hygiene --intent \"<intent>\" --execute --human-authorized --json",
@@ -2311,7 +2311,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop script-evolution --intent \"<intent>\" --json",
       "description": "Plan and bound a generated script so the script triggers local intelligence instead of duplicating it.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop script-evolution --intent \"<intent>\" --execute --human-authorized --json",
@@ -2375,7 +2375,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop session-brief --intent \"<intent>\" --json",
       "description": "Create a compact session brief for ChatGPT/Codex continuation.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop session-brief --intent \"<intent>\" --execute --human-authorized --json",
@@ -2427,7 +2427,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop stale-surface-scan --intent \"<intent>\" --json",
       "description": "Find likely stale version/current-line references without treating lineage references as failures.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop stale-surface-scan --intent \"<intent>\" --execute --human-authorized --json",
@@ -2479,7 +2479,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop surface-map --intent \"<intent>\" --json",
       "description": "Map source, docs, tests, state, reports, and loop surfaces into a compact topology packet.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop surface-map --intent \"<intent>\" --execute --human-authorized --json",
@@ -2531,7 +2531,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop test-strategy --intent \"<intent>\" --json",
       "description": "Select targeted tests, bounded suite policy, and compiler gates for a change.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop test-strategy --intent \"<intent>\" --execute --human-authorized --json",
@@ -2583,11 +2583,11 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-cockpit --intent \"<intent>\" --json",
-      "description": "Show the human-readable AI Toolbelt Cockpit.",
+      "description": "Render the v0.9.7 AI Toolbelt Cockpit: status, recommendation, next command, and process chains.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-cockpit --intent \"<intent>\" --execute --human-authorized --json",
-      "function": "Render local status, recommended next loop, reason, next command, and chains.",
+      "function": "Turns the Toolbelt packet into a human cockpit without granting authority.",
       "hud": {
         "ai_toolkit_ready": true,
         "card_kind": "nexus_loop",
@@ -2599,26 +2599,20 @@
       "local_only": true,
       "loop_id": "toolbelt-cockpit",
       "mutates": false,
-      "operator_use": "Use first at the start of a coding session.",
+      "operator_use": "Use at session start or after a wound to see the next governed local action.",
       "order": 47,
       "powershell_surface": ".\\scripts\\nexus.ps1 meta-loop -Loop toolbelt-cockpit -Tag \"<intent>\"",
       "requires_human_authorization": true,
       "schema": "NEXUS_LOOP_CARD.v0.9.7",
       "stages": [
         {
-          "command": "toolbelt_json",
-          "name": "emit_cockpit_packet",
+          "command": "toolbelt_cockpit",
+          "name": "render_cockpit",
           "type": "command"
-        },
-        {
-          "name": "cockpit_text",
-          "path": "reports/nexus_toolbelt_cockpit_latest.txt",
-          "type": "read"
         }
       ],
       "stages_summary": [
-        "emit_cockpit_packet:command",
-        "cockpit_text:read"
+        "render_cockpit:command"
       ],
       "stop_on_failure": true,
       "title": "Toolbelt Cockpit"
@@ -2635,7 +2629,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-console --intent \"<intent>\" --json",
       "description": "Emit the Toolbelt Console dashboard packet.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-console --intent \"<intent>\" --execute --human-authorized --json",
@@ -2681,7 +2675,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-dashboard --intent \"<intent>\" --json",
       "description": "Emit the compact local dashboard for repo status, loop groups, recommended chain, and safety boundary.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-dashboard --intent \"<intent>\" --execute --human-authorized --json",
@@ -2733,7 +2727,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-index --intent \"<intent>\" --json",
       "description": "Build the operator-visible AI toolbelt index from loop cards and registry evidence.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-index --intent \"<intent>\" --execute --human-authorized --json",
@@ -2785,11 +2779,11 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-json --intent \"<intent>\" --json",
-      "description": "Emit the machine-readable AI Toolbelt packet.",
+      "description": "Emit the v0.9.7 AI Toolbelt machine packet for ChatGPT/Codex handoff.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-json --intent \"<intent>\" --execute --human-authorized --json",
-      "function": "Preserve the JSON lane for ChatGPT/Codex handoff while cockpit remains readable by default.",
+      "function": "Provides file-backed JSON evidence for the Toolbelt cockpit and recommended next loop.",
       "hud": {
         "ai_toolkit_ready": true,
         "card_kind": "nexus_loop",
@@ -2801,7 +2795,7 @@
       "local_only": true,
       "loop_id": "toolbelt-json",
       "mutates": false,
-      "operator_use": "Use when an AI packet is needed instead of human cockpit text.",
+      "operator_use": "Use when an AI needs the packet rather than the human cockpit text.",
       "order": 51,
       "powershell_surface": ".\\scripts\\nexus.ps1 meta-loop -Loop toolbelt-json -Tag \"<intent>\"",
       "requires_human_authorization": true,
@@ -2813,17 +2807,17 @@
           "type": "command"
         },
         {
-          "name": "json_packet_latest",
+          "name": "toolbelt_packet_latest",
           "path": "reports/nexus_toolbelt_latest.json",
           "type": "read"
         }
       ],
       "stages_summary": [
         "emit_json_packet:command",
-        "json_packet_latest:read"
+        "toolbelt_packet_latest:read"
       ],
       "stop_on_failure": true,
-      "title": "Toolbelt JSON"
+      "title": "Toolbelt JSON Packet"
     },
     {
       "ai_callable": true,
@@ -2837,7 +2831,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-next --intent \"<intent>\" --json",
       "description": "Route to the next recommended local loop using the Toolbelt view.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-next --intent \"<intent>\" --execute --human-authorized --json",
@@ -2889,7 +2883,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-process --intent \"<intent>\" --json",
       "description": "Explain the default Start/Build/Debug/Ship/Continuity process chains.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-process --intent \"<intent>\" --execute --human-authorized --json",
@@ -2947,7 +2941,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-ship --intent \"<intent>\" --json",
       "description": "Prepare a safe ship lane from scope hygiene through release brief and release seal.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-ship --intent \"<intent>\" --execute --human-authorized --json",
@@ -2999,7 +2993,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-ship-console --intent \"<intent>\" --json",
       "description": "Show the shipping console path and recommended ship lane.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-ship-console --intent \"<intent>\" --execute --human-authorized --json",
@@ -3057,7 +3051,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-start --intent \"<intent>\" --json",
       "description": "Start a coding session through rehydration, repo radar, toolbelt index, and next-action routing.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop toolbelt-start --intent \"<intent>\" --execute --human-authorized --json",
@@ -3109,7 +3103,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop ui-polish --intent \"<intent>\" --json",
       "description": "Inspect HUD/operator surfaces and suggest visual/usability polishing moves.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop ui-polish --intent \"<intent>\" --execute --human-authorized --json",
@@ -3161,7 +3155,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop validate-promote --intent \"<intent>\" --json",
       "description": "Verify candidate patch and stop before commit/push unless the human-authorized outer script performs it.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop validate-promote --intent \"<intent>\" --execute --human-authorized --json",
@@ -3225,7 +3219,7 @@
         "secrets_enabled": false,
         "self_authorization_enabled": false
       },
-      "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop wound-indexed-resume --intent \"<intent>\" --json",
       "description": "Emit active wound and resume recommendation.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop wound-indexed-resume --intent \"<intent>\" --execute --human-authorized --json",
@@ -3267,7 +3261,7 @@
     }
   ],
   "claim_boundary": "Loop cards are HUD-readable surfaces. They grant no authority.",
-  "generated_at": "2026-07-09T02:28:19.291844+00:00",
+  "generated_at": "2026-07-09T12:27:02.004762+00:00",
   "generated_for": "NEXUS_GATE_v0.9.7",
   "schema": "NEXUS_LOOP_CARD_SET.v0.9.7",
   "source_registry": "loops/nexus_loop_registry.v0.1.json",

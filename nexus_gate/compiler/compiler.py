@@ -123,6 +123,10 @@ REQUIRED_PATHS = [
             "nexus_gate/loops/toolbelt.py",
             "state/loops/nexus_toolbelt_latest.json",
             "tests/test_ai_toolbelt_v095.py",
+            "state/loops/nexus_loop_cards.v0.9.7.json",
+            "state/loops/nexus_toolbelt.v0.9.7.json",
+    "tests/test_ai_toolbelt_cockpit_v097.py",
+    "docs/runtime/NEXUS_TOOLBELT_COCKPIT.md",
     "docs/runtime/NEXUS_PERSONAL_CODING_PARADISE.md",
     "state/loops/nexus_loop_cards.v0.9.4.json",
     "tests/test_personal_coding_paradise_v094.py",
@@ -723,6 +727,8 @@ class NexusCompiler:
             "nexus_gate/loops/toolbelt.py",
             "state/loops/nexus_toolbelt_latest.json",
             "tests/test_ai_toolbelt_v095.py",
+    "tests/test_ai_toolbelt_cockpit_v097.py",
+    "docs/runtime/NEXUS_TOOLBELT_COCKPIT.md",
         ]
         missing = [rel for rel in required if not (self.root / rel).exists()]
         if missing:
@@ -762,6 +768,8 @@ class NexusCompiler:
             "nexus_gate/loops/toolbelt.py",
             "state/loops/nexus_toolbelt_latest.json",
             "tests/test_ai_toolbelt_v095.py",
+    "tests/test_ai_toolbelt_cockpit_v097.py",
+    "docs/runtime/NEXUS_TOOLBELT_COCKPIT.md",
         ]
         missing_paths = [rel for rel in required_paths if not (self.root / rel).exists()]
         if missing_paths:
@@ -821,6 +829,8 @@ class NexusCompiler:
             "toolbelt-start",
             "toolbelt-dashboard",
             "toolbelt-ship",
+            "toolbelt-json",
+            "toolbelt-cockpit",
         }
 
         try:
@@ -1028,3 +1038,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# v0.9.7 Toolbelt Cockpit Output visibility: toolbelt-cockpit toolbelt-json NEXUS_TOOLBELT_COCKPIT.md

@@ -1,17 +1,17 @@
 {
   "system": "NEXUS GATE",
-  "version": "0.9.1-origin-gitnexus-impact-compiler",
+  "version": "0.9.5-personal-coding-paradise-compiler",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-08T14:08:31.955417+00:00",
-  "duration_ms": 24018,
+  "generated_at_utc": "2026-07-09T12:50:09.369463+00:00",
+  "duration_ms": 32629,
   "gates": [
     {
       "gate": "required_paths",
       "status": "pass",
       "message": "All required paths exist.",
       "evidence": {
-        "count": 84
+        "count": 111
       }
     },
     {
@@ -99,12 +99,11 @@
     {
       "gate": "update_chart_current",
       "status": "pass",
-      "message": "Update chart includes current v0.9.1 state.",
+      "message": "Update chart includes current v0.9.4 personal coding paradise state.",
       "evidence": {
         "required": [
-          "v0.1.5",
-          "v0.9.1",
-          "GITNEXUS Impact Bridge",
+          "v0.9.4",
+          "Personal Coding Paradise",
           "No version step without update chart entry"
         ]
       }
@@ -185,7 +184,7 @@
     {
       "gate": "version_alignment_current_line",
       "status": "pass",
-      "message": "v0.9.1 identity is aligned across README, changelog, roadmap, and pyproject.",
+      "message": "v0.9.7 identity is aligned across README, changelog, roadmap, and pyproject.",
       "evidence": {
         "surfaces": [
           "README.md",
@@ -211,6 +210,30 @@
           "impacted": 240,
           "hot": 21
         }
+      }
+    },
+    {
+      "gate": "ai_loop_fabric_visibility",
+      "status": "pass",
+      "message": "AI-callable loop fabric is compiler-visible, card-visible, and authority-bounded.",
+      "evidence": {
+        "required_loop_count": 54,
+        "registry_loop_count": 59,
+        "card_count": 59,
+        "resume_visible": [
+          "state/loops/wound_indexed_resume_latest.json"
+        ],
+        "authority_boundary": {
+          "arbitrary_command_execution": false,
+          "autonomous_authority": false,
+          "git_write_enabled": false,
+          "human_authorization_required_for_command_execution": true,
+          "memory_promotion_enabled": false,
+          "network_enabled": false,
+          "secrets_enabled": false,
+          "self_authorization_enabled": false
+        },
+        "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof."
       }
     },
     {
@@ -329,7 +352,7 @@
       "message": "Bounded per-file unit tests passed.",
       "evidence": {
         "mode": "bounded_per_file_unittest",
-        "count": 97,
+        "count": 105,
         "results": [
           {
             "file": "test_powershell_operator_shell.py",
@@ -353,7 +376,7 @@
             "file": "test_receptor_registry.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.005s\n\nOK\n"
           },
           {
             "file": "test_reflective_intelligence_loop.py",
@@ -365,7 +388,7 @@
             "file": "test_reflective_repair_loop_v082.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.002s\n\nOK\n"
+            "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.004s\n\nOK\n"
           },
           {
             "file": "test_rehydration_failure_update_charts.py",
@@ -377,13 +400,13 @@
             "file": "test_rehydration_process_lineage.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n"
+            "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.003s\n\nOK\n"
           },
           {
             "file": "test_repo_native_learning.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+            "stderr_tail": ".\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n"
           },
           {
             "file": "test_rhp_nexus_surface.py",
@@ -407,19 +430,19 @@
             "file": "test_self_healing_feedback.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.064s\n\nOK\n"
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.013s\n\nOK\n"
           },
           {
             "file": "test_spiral_core_portal_v012.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.010s\n\nOK\n"
+            "stderr_tail": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.014s\n\nOK\n"
           },
           {
             "file": "test_spiral_gate_logo_v010.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.005s\n\nOK\n"
+            "stderr_tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.006s\n\nOK\n"
           },
           {
             "file": "test_strict_compiler_surface.py",
@@ -431,13 +454,13 @@
             "file": "test_tesseract_neural_network_minimal.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 4.408s\n\nOK\n"
+            "stderr_tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 4.485s\n\nOK\n"
           },
           {
             "file": "test_tui_electron_bridge.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
           },
           {
             "file": "test_tui_hud_operator_surface.py",

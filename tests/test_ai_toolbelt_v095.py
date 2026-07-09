@@ -31,7 +31,7 @@ class TestAIToolbeltV095(unittest.TestCase):
         self.assertFalse(packet["boundary"]["autonomous_authority"])
         self.assertGreaterEqual(packet["toolbelt_group_count"], 6)
         written = write_toolbelt(ROOT, "unit")
-        self.assertIn(written["version"], {"0.9.5", "0.9.6", "0.9.7"})
+        self.assertIn(written["version"], {"0.9.5", "0.9.6", "0.9.7", "0.9.7"})
         self.assertTrue((ROOT / "state" / "loops" / "nexus_toolbelt_latest.json").exists())
         self.assertTrue((ROOT / "docs" / "runtime" / "NEXUS_AI_TOOLBELT.md").exists())
 
@@ -52,7 +52,7 @@ class TestAIToolbeltV095(unittest.TestCase):
         self.assertIn("## AI Toolbelt", readme)
         self.assertIn("toolbelt-start", readme)
         self.assertIn("toolbelt-dashboard", readme)
-        self.assertTrue(any(token in readme for token in ["v0.9.5 AI Toolbelt Surface", "v0.9.6 Toolbelt Console Integration", "AI Toolbelt Console", "Toolbelt Cockpit Output", "Toolbelt Cockpit Output"]))
+        self.assertTrue(any(token in readme for token in ["v0.9.5 AI Toolbelt Surface", "v0.9.6 Toolbelt Console Integration", "v0.9.7 Toolbelt Cockpit Output", "AI Toolbelt Console", "Toolbelt Cockpit Output", "Toolbelt Cockpit Output"]))
         self.assertLess(len(readme.splitlines()), 220)
 
     def test_compiler_exposes_toolbelt_visibility(self):
