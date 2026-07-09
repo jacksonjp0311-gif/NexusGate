@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld("nexus", {
   askNex: (packet) => ipcRenderer.invoke("nexus:askNex", packet),
   stopNex: () => ipcRenderer.invoke("nexus:stopNex"),
   getTelemetry: () => ipcRenderer.invoke("nexus:getTelemetry"),
+  openPetriDishPro: () => ipcRenderer.invoke("nexus:openPetriDishPro"),
   ensureOllama: () => ipcRenderer.invoke("nexus:ensureOllama"),
   getContract: () => ipcRenderer.invoke("nexus:getContract")
 });

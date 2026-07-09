@@ -22,6 +22,8 @@ const telemetryHud = document.getElementById("telemetry-hud");
 const metaOrchestratorHud = document.getElementById("meta-orchestrator-hud");
 const systemErrorHud = document.getElementById("system-error-hud");
 const systemErrorClose = document.getElementById("system-error-close");
+const petriOpen = document.getElementById("petri-open");
+const petriMiniBody = document.getElementById("petri-mini-body");
 
 let allowlistedCommands = [];
 let nexBusy = false;
@@ -435,6 +437,23 @@ function formatBytes(value) {
 function setTelemetryText(id, value) {
   const node = document.getElementById(id);
   if (node) node.textContent = value;
+}
+
+async function openPetriDishPro() {
+  setTelemetryText("petri-status", "opening");
+  try {
+    if (!window.nexus.openPetriDishPro) {
+      throw new Error("PetriDishPro bridge is not exposed.");
+    }
+    const result = await window.nexus.openPetriDishPro();
+    setTelemetryText("petri-status", result.ok ? result.status || "open" : result.status || "blocked");
+    if (!result.ok) {
+      appendChat("ai", `PetriDishPro launch blocked: ${result.path || "unknown path"}`, "NEX / PetriDishPro");
+    }
+  } catch (error) {
+    setTelemetryText("petri-status", "blocked");
+    appendChat("ai", `PetriDishPro launch failed: ${error.message}`, "NEX / PetriDishPro");
+  }
 }
 
 async function refreshTelemetry() {
@@ -1127,6 +1146,8 @@ document.getElementById("telemetry-popout")?.addEventListener("click", () => tog
 document.getElementById("telemetry-close")?.addEventListener("click", () => toggleTelemetryHud(false));
 document.getElementById("meta-orchestrator-popout")?.addEventListener("click", () => toggleMetaOrchestratorHud());
 document.getElementById("meta-orchestrator-close")?.addEventListener("click", () => toggleMetaOrchestratorHud(false));
+petriOpen?.addEventListener("click", openPetriDishPro);
+petriMiniBody?.addEventListener("click", openPetriDishPro);
 systemErrorClose?.addEventListener("click", () => clearSystemErrorHud());
 
 stopButton?.addEventListener("click", async () => {

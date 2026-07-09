@@ -277,7 +277,7 @@
 
   .nexus-metrics-zone {
     display: grid;
-    grid-template-columns: 314px minmax(0, 1fr) 390px;
+    grid-template-columns: 314px 260px minmax(0, 1fr);
     gap: 10px;
     min-height: 198px;
     overflow: hidden;
@@ -289,7 +289,7 @@
   }
 
   .nexus-metrics-hud {
-    grid-column: 2 / 4;
+    grid-column: 3 / 4;
     padding: 10px 12px 9px;
     display: grid;
     grid-template-rows: 24px minmax(0, 1fr) 34px;
@@ -342,9 +342,94 @@
   .nexus-metrics-grid {
     min-height: 0;
     display: grid;
-    grid-template-columns: minmax(160px, .88fr) minmax(190px, 1.15fr) minmax(230px, 1.35fr) minmax(170px, .9fr) minmax(210px, 1fr);
+    grid-template-columns: minmax(150px, .9fr) minmax(190px, 1.05fr) minmax(210px, 1.18fr) minmax(160px, .82fr);
     gap: 8px;
     overflow: hidden;
+  }
+
+  .nexus-metric-card:nth-child(5) {
+    display: none;
+  }
+
+  .petri-dish-mini {
+    grid-column: 2 / 3;
+    min-height: 0;
+    padding: 9px;
+    display: grid;
+    grid-template-rows: 38px minmax(0, 1fr) 28px;
+    gap: 8px;
+    border-color: rgba(52, 211, 153, .42);
+    background:
+      radial-gradient(circle at 50% 48%, rgba(52, 211, 153, .18), transparent 36%),
+      linear-gradient(180deg, rgba(3, 40, 34, .92), rgba(2, 8, 18, .88));
+  }
+
+  .petri-mini-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 64px;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .petri-mini-title {
+    color: #a7f3d0;
+    font: 900 13px/1 Consolas, monospace;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+  }
+
+  .petri-mini-sub {
+    display: block;
+    margin-top: 3px;
+    color: rgba(167, 243, 208, .64);
+    font: 9px/1 Consolas, monospace;
+    text-transform: uppercase;
+  }
+
+  .petri-mini-open {
+    height: 30px;
+    color: #d9f99d;
+    background: rgba(6, 78, 59, .82);
+    border: 1px solid rgba(52, 211, 153, .52);
+    box-shadow: 0 0 16px rgba(52, 211, 153, .16);
+    font: 800 11px Consolas, monospace;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .petri-mini-body {
+    position: relative;
+    min-height: 0;
+    border: 1px solid rgba(52, 211, 153, .20);
+    background:
+      radial-gradient(circle at 50% 50%, rgba(134, 239, 172, .32) 0 8px, rgba(6, 78, 59, .18) 9px 44px, transparent 45px),
+      repeating-radial-gradient(circle at 50% 50%, rgba(52, 211, 153, .16) 0 1px, transparent 1px 16px),
+      rgba(2, 6, 23, .66);
+    overflow: hidden;
+  }
+
+  .petri-mini-body::before,
+  .petri-mini-body::after {
+    content: "";
+    position: absolute;
+    inset: 18% 26%;
+    border: 1px solid rgba(125, 249, 198, .28);
+    border-radius: 999px;
+    transform: rotate(24deg);
+  }
+
+  .petri-mini-body::after {
+    inset: 28% 18%;
+    transform: rotate(-34deg);
+  }
+
+  .petri-mini-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: #86efac;
+    font: 10px Consolas, monospace;
+    text-transform: uppercase;
   }
 
   .nexus-metric-card {
@@ -559,7 +644,7 @@
 
   @media (max-width: 1280px) {
     .nexus-metrics-zone {
-      grid-template-columns: 286px minmax(0, 1fr) 330px;
+      grid-template-columns: 286px minmax(210px, 250px) minmax(0, 1fr);
       min-height: 250px;
     }
 
@@ -724,7 +809,6 @@
           <div class="metric-row"><span>Evidence Pressure</span><strong id="pressure">unknown</strong></div>
           <div class="metric-row"><span>Dominant Pressure Source</span><strong id="dominant">unknown</strong></div>
           <div class="metric-row"><span>Trend</span><strong id="trend">stable</strong></div>
-          <div class="metric-row metric-next"><span>Next Action</span><strong id="next">Run evolve</strong></div>
           <section class="system-monitor-station" aria-label="Local system monitor">
             <button class="telemetry-popout-button" type="button" id="telemetry-popout">
               <span>System Monitor</span>
@@ -846,6 +930,20 @@
     <section class="nexus-metrics-zone" aria-label="NEXUS consolidated metrics zone">
   <!-- NEXUS_METRICS_HUD_V010_COMPAT_MARKERS: AI Handoff Package; Human Feedback; visible AI Handoff Package box removed; six bottom metric boxes consolidated. -->
   <div class="nexus-metrics-left-reserve" aria-hidden="true"></div>
+  <section class="hud-frame petri-dish-mini" aria-label="PetriDishPro mini launcher">
+    <div class="petri-mini-head">
+      <div>
+        <strong class="petri-mini-title">PETRIDISHPRO</strong>
+        <span class="petri-mini-sub">organism gate</span>
+      </div>
+      <button class="petri-mini-open" type="button" id="petri-open">OPEN</button>
+    </div>
+    <button class="petri-mini-body" type="button" id="petri-mini-body" title="Open PetriDishPro full UI"></button>
+    <div class="petri-mini-foot">
+      <span id="petri-status">ready</span>
+      <span>full ui</span>
+    </div>
+  </section>
   <section class="hud-frame nexus-metrics-hud" aria-label="NEXUS Metrics">
     <div class="nexus-metrics-head">
       <strong class="nexus-metrics-title">NEXUS METRICS</strong>

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, shell } = require("electron");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
@@ -8,11 +8,15 @@ const { spawn } = require("child_process");
 const repoRoot = path.resolve(__dirname, "..");
 const appIconPath = path.join(repoRoot, 'electron', 'assets', 'icons', 'nexus_gate.ico');
 const isSmoke = process.argv.includes("--smoke");
-const gotSingleInstanceLock = app.requestSingleInstanceLock();
+const gotSingleInstanceLock = isSmoke || app.requestSingleInstanceLock();
 if (!gotSingleInstanceLock) {
   app.quit();
 }
 let mainWindow = null;
+let petriWindow = null;
+let petriIpcRegistered = false;
+const petriDishProRoot = path.join(os.homedir(), "OneDrive", "Desktop", "PetriDishPro");
+const petriElectronRoot = path.join(petriDishProRoot, "electron");
 
 app.on("second-instance", () => {
   if (mainWindow && !mainWindow.isDestroyed()) {
@@ -25,6 +29,7 @@ const smokeReportPath = path.join(repoRoot, "reports", "nexus_electron_smoke_rep
 let smokeReportWritten = false;
 
 if (isSmoke) {
+  app.setPath("userData", path.join(os.tmpdir(), `nexus-gate-electron-smoke-${process.pid}`));
   app.disableHardwareAcceleration();
 }
 
@@ -430,6 +435,145 @@ function readJsonIfPresent(filePath) {
   }
 }
 
+function readPetriJsonIfPresent(relPath, fallback = null) {
+  try {
+    const target = path.join(petriDishProRoot, relPath);
+    if (!fs.existsSync(target)) return fallback;
+    return JSON.parse(fs.readFileSync(target, "utf8"));
+  } catch (_error) {
+    return fallback;
+  }
+}
+
+function listPetriRuns() {
+  const runsDir = path.join(petriDishProRoot, "artifacts", "bio", "runs");
+  if (!fs.existsSync(runsDir)) return [];
+  return fs.readdirSync(runsDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => {
+      const runId = entry.name;
+      const runDir = path.join(runsDir, runId);
+      const payload = readPetriJsonIfPresent(path.join("artifacts", "bio", "runs", runId, "run.json"), {}) || {};
+      return {
+        run_id: runId,
+        preset: payload.preset || payload.experiment?.preset || "unknown",
+        status: payload.validation?.status || payload.validation_status || "unknown",
+        dominant: payload.dominant || payload.metrics?.dominant || payload.metrics?.dominant_name || "unknown",
+        modified: fs.statSync(runDir).mtimeMs
+      };
+    })
+    .sort((a, b) => b.modified - a.modified)
+    .slice(0, 12);
+}
+
+function registerPetriIpc() {
+  if (petriIpcRegistered) return;
+  petriIpcRegistered = true;
+  ipcMain.handle("petri:readConfig", async () => readPetriJsonIfPresent("config/petri_science_config.v0.4c.json", {}));
+  ipcMain.handle("petri:readOrganisms", async () => readPetriJsonIfPresent("config/organisms.json", {}));
+  ipcMain.handle("petri:readFieldProfiles", async () => readPetriJsonIfPresent("config/field_profiles.json", {}));
+  ipcMain.handle("petri:readLatest", async () => readPetriJsonIfPresent("reports/bio/petri_run_latest.json", {}));
+  ipcMain.handle("petri:listRuns", async () => listPetriRuns());
+  ipcMain.handle("petri:openArtifacts", async () => {
+    const target = path.join(petriDishProRoot, "artifacts", "bio", "runs");
+    fs.mkdirSync(target, { recursive: true });
+    await shell.openPath(target);
+    return { opened: target };
+  });
+  ipcMain.handle("petri:readPresetCards", async () => readPetriJsonIfPresent("config/preset_cards.json", {}));
+  ipcMain.handle("petri:readMetricCards", async () => readPetriJsonIfPresent("config/metric_cards.json", {}));
+  ipcMain.handle("petri:readParticleState", async () => {
+    const index = readPetriJsonIfPresent("reports/bio/petri_particle_state_latest.json", {}) || {};
+    const readMaybe = (value) => {
+      if (!value) return null;
+      const full = path.isAbsolute(value) ? value : path.join(petriDishProRoot, value);
+      try {
+        return JSON.parse(fs.readFileSync(full, "utf8"));
+      } catch (_error) {
+        return null;
+      }
+    };
+    return {
+      index,
+      cells: readMaybe(index.cells_path || index.cells || index.cell_path),
+      particles: readMaybe(index.particles_path || index.particles || index.particle_path),
+      interactions: readMaybe(index.interactions_path || index.interactions),
+      fields: readMaybe(index.fields_path || index.fields)
+    };
+  });
+  ipcMain.handle("petri:run", async (_event, args = {}) => {
+    const preset = String(args.preset || "microbial_competition").replace(/[^a-z0-9_\-]/gi, "");
+    const steps = Math.max(1, Math.min(600, Number(args.steps || 120)));
+    const grid = Math.max(16, Math.min(160, Number(args.grid || 64)));
+    const pyArgs = ["-m", "petri_lab.cli", "--root", ".", "--preset", preset, "--steps", String(steps), "--grid", String(grid), "--json"];
+    return new Promise((resolve) => {
+      const child = spawn("python", pyArgs, {
+        cwd: petriDishProRoot,
+        shell: false,
+        windowsHide: true,
+        env: { ...process.env, PYTHONUTF8: "1" }
+      });
+      let stdout = "";
+      let stderr = "";
+      child.stdout.on("data", (chunk) => { stdout += chunk.toString(); });
+      child.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
+      child.on("close", (code) => {
+        let parsed = null;
+        try {
+          parsed = JSON.parse(stdout.trim().split(/\r?\n/).filter(Boolean).pop() || "{}");
+        } catch (_error) {}
+        resolve({
+          code,
+          stdout,
+          stderr,
+          result: parsed,
+          latest: readPetriJsonIfPresent("reports/bio/petri_run_latest.json", {}),
+          boundary: "PetriDishPro runs inside its own bounded science workbench surface; NEXUS does not grant arbitrary shell authority."
+        });
+      });
+    });
+  });
+}
+
+function openPetriDishProWindow() {
+  if (!fs.existsSync(path.join(petriElectronRoot, "renderer", "index.html"))) {
+    return { ok: false, status: "missing", path: petriDishProRoot };
+  }
+  registerPetriIpc();
+  if (petriWindow && !petriWindow.isDestroyed()) {
+    petriWindow.show();
+    petriWindow.maximize();
+    petriWindow.focus();
+    return { ok: true, status: "focused", path: petriDishProRoot };
+  }
+  petriWindow = new BrowserWindow({
+    width: 1800,
+    height: 1000,
+    minWidth: 1220,
+    minHeight: 760,
+    title: "PetriDishPro",
+    backgroundColor: "#02070b",
+    webPreferences: {
+      preload: path.join(petriElectronRoot, "preload.js"),
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: false
+    }
+  });
+  petriWindow.on("closed", () => { petriWindow = null; });
+  petriWindow.loadFile(path.join(petriElectronRoot, "renderer", "index.html"));
+  petriWindow.once("ready-to-show", () => {
+    if (petriWindow && !petriWindow.isDestroyed()) petriWindow.maximize();
+  });
+  petriWindow.maximize();
+  return {
+    ok: true,
+    status: "opened",
+    path: petriDishProRoot,
+    boundary: "Fixed PetriDishPro window launcher only; no NEXUS lane authority is delegated."
+  };
+}
+
 function runNexPython(args) {
   return new Promise((resolve) => {
     const child = spawn("python", args, {
@@ -685,6 +829,8 @@ ipcMain.handle("nexus:stopNex", async () => {
     return { stopped: false, pid, error: error.message };
   }
 });
+
+ipcMain.handle("nexus:openPetriDishPro", async () => openPetriDishProWindow());
 
 ipcMain.handle("nexus:getTelemetry", async () => {
   const totalMem = os.totalmem();
