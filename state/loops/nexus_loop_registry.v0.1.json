@@ -89,6 +89,41 @@
       "description": "Emit loop cards.",
       "mutates": false
     },
+    "phi_loop_auto": {
+      "authority": "bounded_readonly_autonomy_no_git_write",
+      "command": ".\\scripts\\nexus.ps1 phi-loop-auto",
+      "description": "Run allowlisted read-only gates before local Phi microdose advice.",
+      "mutates": false
+    },
+    "phi_microdose_loop": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.phi_microdose_loop",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "description": "Emit v1.1.0 Phi Microdose Loop packet without repo mutation.",
+      "local_only": true,
+      "mutates": false,
+      "requires_human_authorization": false
+    },
+    "phi_microdose_loop_auto": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.phi_microdose_loop",
+        "--root",
+        ".",
+        "--auto",
+        "--json"
+      ],
+      "description": "Run bounded v1.1.0 Phi Microdose Loop auto-steering packet without repo mutation.",
+      "local_only": true,
+      "mutates": false,
+      "requires_human_authorization": false
+    },
     "phi_wound_advisor": {
       "argv": [
         "python",
@@ -1703,6 +1738,72 @@
       "stop_on_failure": true,
       "title": "Performance Scout"
     },
+    "phi-loop-auto": {
+      "ai_callable": true,
+      "authority": "allowlisted_readonly_gate_execution_only",
+      "command": ".\\scripts\\nexus.ps1 phi-loop-auto -Tag \"compress compile advise\"",
+      "description": "Autonomous read-only compress/compile/local-Phi gate selection lane.",
+      "display_group": "AI Microdose",
+      "function": "Bounded loop steering with local Phi; no mutation authority.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use after compile/wound evidence exists and you want a local model to choose the next read-only lane.",
+      "requires_human_authorization": false,
+      "stages": [
+        {
+          "command": "phi_microdose_loop_auto",
+          "name": "microdose_loop",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "microdose_latest",
+          "path": "reports/nexus_phi_microdose_loop_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Phi Loop Auto"
+    },
+    "phi-microdose-loop": {
+      "ai_callable": true,
+      "authority": "read_only_evidence_and_model_advice",
+      "command": ".\\scripts\\nexus.ps1 phi-loop -Tag \"microdose\"",
+      "description": "Local Phi microdose advisory loop with bounded autonomy.",
+      "display_group": "AI Microdose",
+      "function": "Small local AI reasoning dose over file-backed Nexus evidence.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when an active wound needs local AI steering but no autonomous mutation.",
+      "requires_human_authorization": false,
+      "stages": [
+        {
+          "command": "wound_compress",
+          "name": "wound_packet",
+          "type": "command"
+        },
+        {
+          "command": "preflight_json",
+          "name": "preflight_packet",
+          "type": "command"
+        },
+        {
+          "command": "phi_microdose_loop",
+          "name": "microdose_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "microdose_latest",
+          "path": "reports/nexus_phi_microdose_loop_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Phi Microdose Loop"
+    },
     "phi-wound-advisor": {
       "ai_callable": true,
       "description": "Micro-dose local Phi-4 Mini on compact wound packets and return advisory repair JSON.",
@@ -1733,7 +1834,8 @@
           "type": "command"
         }
       ],
-      "stop_on_failure": false
+      "stop_on_failure": false,
+      "title": "Phi Wound Advisor"
     },
     "phi-wound-gpu-gate": {
       "ai_callable": true,
@@ -1758,7 +1860,8 @@
           "type": "command"
         }
       ],
-      "stop_on_failure": true
+      "stop_on_failure": true,
+      "title": "Phi Wound GPU Gate"
     },
     "preflight-optimizer": {
       "ai_callable": true,

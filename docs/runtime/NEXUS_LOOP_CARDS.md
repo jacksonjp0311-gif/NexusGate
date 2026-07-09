@@ -237,6 +237,34 @@ Boundary: cards describe governed local loops. They do not grant autonomous auth
 - Function: Find lightweight performance and size signals without profiling side effects.
 - Command: `python -m nexus_gate.loops.runner --root . --loop performance-scout --intent "<intent>" --json`
 
+### Phi Loop Auto
+
+- Loop: `phi-loop-auto`
+- Group: `AI Microdose`
+- Function: Bounded loop steering with local Phi; no mutation authority.
+- Command: `python -m nexus_gate.loops.runner --root . --loop phi-loop-auto --intent "<intent>" --json`
+
+### Phi Microdose Loop
+
+- Loop: `phi-microdose-loop`
+- Group: `AI Microdose`
+- Function: Small local AI reasoning dose over file-backed Nexus evidence.
+- Command: `python -m nexus_gate.loops.runner --root . --loop phi-microdose-loop --intent "<intent>" --json`
+
+### Phi Wound Advisor
+
+- Loop: `phi-wound-advisor`
+- Group: `Wound Intelligence`
+- Function: Ask local Phi-4 Mini to diagnose the active wound without giving it repo, shell, git, network, or secret authority.
+- Command: `python -m nexus_gate.loops.runner --root . --loop phi-wound-advisor --intent "<intent>" --json`
+
+### Phi Wound GPU Gate
+
+- Loop: `phi-wound-gpu-gate`
+- Group: `Wound Intelligence`
+- Function: Separate model gate for local Phi-4 Mini base model advisory analysis.
+- Command: `python -m nexus_gate.loops.runner --root . --loop phi-wound-gpu-gate --intent "<intent>" --json`
+
 ### Preflight Optimizer
 
 - Loop: `preflight-optimizer`

@@ -45,7 +45,7 @@ bash scripts/nexus.sh toolbelt-next "<intent>"
 ```
 
 ## Human Director Box
-NEXUS GATE current line: v1.0.1 Phi Ollama Adapter. Toolbelt, Wound Compression, Preflight, Phi Wound Advisor, and Ollama adapter form a governed local wound-intelligence lane. Evidence files are truth; stdout tails are smoke only.
+NEXUS GATE current line: v1.1.0 Phi Microdose Loop
 
 ## AI Toolbelt Console
 Use the AI Toolbelt Console before choosing a patch path.
@@ -211,8 +211,8 @@ v1.0.1 routes the Phi Wound Advisor through a non-interactive Ollama adapter so 
 
 ## What this is not
 Not production validated. Not a safety proof. Not a security proof. Not a correctness proof. Not autonomous authority. Not write authority. Not memory write authority. Not provider authority. Not a replacement for human authorization. Not a claim that routing proves alignment. Not a claim that RHP proves truth. Not a claim that Nexus geometry proves code correctness. Not a claim that NexusCell is a perfect sandbox or full rollback proof.
-
 ## Compact Law
 ```text
 Reflective intelligence is permitted. Autonomous authority is not. Organic evolution is allowed. Ungated compounding is not. Gates are certificates; active wounds resume without backtracking; evidence files are truth; stdout tails are smoke only.
 ```
+Operator command: `.\scripts\nexus.ps1 phi-loop-auto -Tag "microdose"`.

@@ -189,7 +189,16 @@ case "$COMMAND" in
     test -f reports/nexus_toolbelt_console_latest.json && cat reports/nexus_toolbelt_console_latest.json || true
     test -f reports/nexus_feedback_interface_report_latest.json && cat reports/nexus_feedback_interface_report_latest.json || true
     ;;
-  rehydrate|*)
+  rehydrate|
+  phi-loop)
+    export NEXUS_PHI4_MINI_COMMAND='python -m nexus_gate.loops.phi4_ollama_adapter --prompt-file "{prompt_file}"'
+    python -m nexus_gate.loops.phi_microdose_loop --root . --intent "${2:-Run bounded Phi microdose loop.}" --call-model
+    ;;
+  phi-loop-auto)
+    export NEXUS_PHI4_MINI_COMMAND='python -m nexus_gate.loops.phi4_ollama_adapter --prompt-file "{prompt_file}"'
+    python -m nexus_gate.loops.phi_microdose_loop --root . --intent "${2:-Run bounded Phi microdose loop.}" --call-model --run-gates
+    ;;
+*)
     python -m nexus_gate.compiler --root . --json
     ;;
 esac
