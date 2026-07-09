@@ -9,7 +9,7 @@ TOOLBELT_LOOPS = {"toolbelt-index", "toolbelt-start", "toolbelt-dashboard", "too
 class TestAIToolbeltV095(unittest.TestCase):
     def test_registry_contains_toolbelt_loops_and_command(self):
         registry = json.loads((ROOT / "loops" / "nexus_loop_registry.v0.1.json").read_text(encoding="utf-8"))
-        self.assertEqual(registry["generated_for"], "NEXUS_GATE_v0.9.5")
+        self.assertIn(registry["generated_for"], {"NEXUS_GATE_v0.9.5", "NEXUS_GATE_v0.9.6"})
         self.assertTrue(TOOLBELT_LOOPS.issubset(set(registry["loops"])))
         self.assertIn("toolbelt_index", registry["allowed_commands"])
         self.assertFalse(registry["allowed_commands"]["toolbelt_index"]["mutates"])
@@ -25,25 +25,25 @@ class TestAIToolbeltV095(unittest.TestCase):
     def test_toolbelt_packet_builds_and_writes_surfaces(self):
         from nexus_gate.loops.toolbelt import build_toolbelt_packet, write_toolbelt
         packet = build_toolbelt_packet(ROOT, "unit")
-        self.assertEqual(packet["schema"], "NEXUS_AI_TOOLBELT.v0.9.5")
+        self.assertIn(packet["schema"], {"NEXUS_AI_TOOLBELT.v0.9.5", "NEXUS_AI_TOOLBELT.v0.9.6"})
         self.assertEqual(packet["mode"], "nexus_ai_toolbelt")
         self.assertFalse(packet["boundary"]["git_push_enabled"])
         self.assertFalse(packet["boundary"]["autonomous_authority"])
         self.assertGreaterEqual(packet["toolbelt_group_count"], 6)
         written = write_toolbelt(ROOT, "unit")
-        self.assertEqual(written["version"], "0.9.5")
+        self.assertIn(written["version"], {"0.9.5", "0.9.6"})
         self.assertTrue((ROOT / "state" / "loops" / "nexus_toolbelt_latest.json").exists())
         self.assertTrue((ROOT / "docs" / "runtime" / "NEXUS_AI_TOOLBELT.md").exists())
 
     def test_loop_cards_include_toolbelt_cards(self):
         from nexus_gate.loops.cards import build_loop_cards
         packet = build_loop_cards(ROOT)
-        self.assertEqual(packet["schema"], "NEXUS_LOOP_CARD_SET.v0.9.5")
+        self.assertIn(packet["schema"], {"NEXUS_LOOP_CARD_SET.v0.9.5", "NEXUS_LOOP_CARD_SET.v0.9.6"})
         cards = {card["loop_id"]: card for card in packet["cards"]}
         self.assertTrue(TOOLBELT_LOOPS.issubset(cards))
         for loop_id in TOOLBELT_LOOPS:
             card = cards[loop_id]
-            self.assertEqual(card["schema"], "NEXUS_LOOP_CARD.v0.9.5")
+            self.assertIn(card["schema"], {"NEXUS_LOOP_CARD.v0.9.5", "NEXUS_LOOP_CARD.v0.9.6"})
             self.assertTrue(card["hud"]["human_card_ready"])
             self.assertIn("--execute --human-authorized", card["execute_surface"])
 
@@ -52,12 +52,12 @@ class TestAIToolbeltV095(unittest.TestCase):
         self.assertIn("## AI Toolbelt", readme)
         self.assertIn("toolbelt-start", readme)
         self.assertIn("toolbelt-dashboard", readme)
-        self.assertIn("v0.9.5 AI Toolbelt Surface", readme)
+        self.assertTrue(any(token in readme for token in ["v0.9.5 AI Toolbelt Surface", "v0.9.6 Toolbelt Console Integration", "AI Toolbelt Console"]))
         self.assertLess(len(readme.splitlines()), 220)
 
     def test_compiler_exposes_toolbelt_visibility(self):
         compiler = (ROOT / "nexus_gate" / "compiler" / "compiler.py").read_text(encoding="utf-8")
-        self.assertIn("v0.9.5", compiler)
+        self.assertTrue(any(token in compiler for token in ["v0.9.5", "v0.9.6"]))
         self.assertIn("NEXUS_AI_TOOLBELT.md", compiler)
         self.assertIn("toolbelt-index", compiler)
 

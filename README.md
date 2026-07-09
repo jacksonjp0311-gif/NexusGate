@@ -14,10 +14,6 @@ Runtime lineage seals:
 - v0.9.4 Personal Coding Paradise loop toolkit
 - v0.9.5 AI Toolbelt Surface
 - v0.9.1 origin-aligned GITNEXUS impact bridge
-- python -m nexus_gate.geometric_memory.router
-- geo-clean
-- docs/runtime/NEXUS_NEURAL_ACTIVITY.md
-- docs/runtime/NEXUS_SPIRAL_CORE_PORTAL.md
 - Failure Intelligence Distributor
 ```text
 human intent -> origin alignment -> route/authority gate -> evidence -> human-authorized durable mutation
@@ -59,7 +55,18 @@ Spiral Core Portal = gateway face. NEXUS GATE = reflective intelligence layer fo
 ```
 
 ## Human Director Box
-NEXUS GATE is currently at the v0.9.5 AI Toolbelt Surface line with the v0.9.1A README and ChatGPT script-doctrine addendum while preserving the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub / README / Docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, GITNEXUS impact evidence, ChatGPT/script gate doctrine, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, GITNEXUS impact packets, AI-callable local loop cards, wound-indexed resume packets, and durable GitHub compounding under human authority. v0.9.4 adds a personal coding paradise toolkit, and v0.9.5 turns it into the AI Toolbelt Surface: creative planning, debug recovery, docs weaving, command palette, local oracle, continuity seals, and safe shipping loops. v0.9.2 AI-callable local loop fabric lets ChatGPT/Codex act as a meta-orchestrator by selecting named local loops while the repository keeps authority, evidence, gates, and human authorization boundaries.
+NEXUS GATE current line: v0.9.6 Toolbelt Console Integration, exposing the AI Toolbelt Console as the default local coding cockpit.
+NEXUS GATE is currently at the v0.9.6 AI Toolbelt Surface line with the v0.9.1A README and ChatGPT script-doctrine addendum while preserving the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub / README / Docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, GITNEXUS impact evidence, ChatGPT/script gate doctrine, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, GITNEXUS impact packets, AI-callable local loop cards, wound-indexed resume packets, and durable GitHub compounding under human authority. v0.9.6 integrates the Toolbelt as the default local coding cockpit; v0.9.4 adds a personal coding paradise toolkit, and v0.9.5 turns it into the AI Toolbelt Surface: creative planning, debug recovery, docs weaving, command palette, local oracle, continuity seals, and safe shipping loops. v0.9.2 AI-callable local loop fabric lets ChatGPT/Codex act as a meta-orchestrator by selecting named local loops while the repository keeps authority, evidence, gates, and human authorization boundaries.
+
+## AI Toolbelt Console
+Use the Toolbelt as the default coding cockpit before choosing a patch path.
+```powershell
+.\scripts\nexus.ps1 toolbelt
+.\scripts\nexus.ps1 toolbelt-next -Tag "<intent>"
+.\scripts\nexus.ps1 toolbelt-start -Tag "<intent>"
+.\scripts\nexus.ps1 toolbelt-ship -Tag "<intent>"
+```
+Process chains: Start, Build, Debug, Ship, Continuity. Toolbelt output is local JSON evidence; it grants no autonomous authority.
 
 ## Lessons From the v0.9.1 Seal
 ```text
@@ -207,7 +214,6 @@ Not production validated. Not a safety proof. Not a security proof. Not a correc
 ## Compact Law
 ```text
 Reflective intelligence is permitted. Autonomous authority is not. Organic evolution is allowed. Ungated compounding is not.
-
 v0.9.1A = README/script doctrine. v0.9.1B = loop cards surfaced in the Spiral Core Portal. Gates are certificates; active wounds resume without backtracking; loop cards preserve system loops for a future human HUD.
 ```
 - `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` - neural activity / cathedral HUD surface.

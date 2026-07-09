@@ -189,3 +189,8 @@ python -m nexus_gate.loops.runner --root . --loop toolbelt-dashboard --intent "<
 ```
 
 Toolbelt output is evidence, not authority. It may recommend a loop, chain, or repair path, but durable mutation still requires compiler seal and human authorization.
+
+
+## v0.9.6 Toolbelt Console Integration
+
+Use the Toolbelt as the default local process cockpit before generating a patch: `toolbelt`, `toolbelt-next`, `toolbelt-start`, or `toolbelt-ship`. The Toolbelt emits local JSON evidence and never grants autonomous authority.

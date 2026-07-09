@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "loops", "loop-registry")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "loops", "loop-registry", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -225,7 +225,22 @@ function Invoke-NexusCellPolicyCli {
     if ($LASTEXITCODE -ne 0) { throw "NexusCell policy failed." }
 }
 
+
+function Invoke-NexusToolbelt {
+    param([string]$View = "dashboard", [string]$Intent = "NEXUS AI Toolbelt cockpit.")
+    if ([string]::IsNullOrWhiteSpace($View)) { $View = "dashboard" }
+    if ([string]::IsNullOrWhiteSpace($Intent)) { $Intent = "NEXUS AI Toolbelt cockpit." }
+    python -m nexus_gate.loops.toolbelt --root . --view $View --intent $Intent --json
+    if ($LASTEXITCODE -ne 0) { throw "NEXUS AI Toolbelt failed." }
+}
+
 switch ($Command) {
+    "toolbelt" { Invoke-NexusToolbelt -View "dashboard" -Intent $Tag }
+    "toolbelt-start" { Invoke-NexusToolbelt -View "start" -Intent $Tag }
+    "toolbelt-dashboard" { Invoke-NexusToolbelt -View "dashboard" -Intent $Tag }
+    "toolbelt-next" { Invoke-NexusToolbelt -View "next" -Intent $Tag }
+    "toolbelt-ship" { Invoke-NexusToolbelt -View "ship" -Intent $Tag }
+
     "loop-registry" { Show-NexusLoopRegistry }
     "loops" { python -m nexus_gate.loops.runner --root . --list; if ($LASTEXITCODE -ne 0) { throw "NEXUS loop list failed." } }
     "meta-loop" { Invoke-NexusMetaLoop -LoopName $Loop -Intent $Tag -Run:$Execute -Authorized:$HumanAuthorized }

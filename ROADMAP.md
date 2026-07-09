@@ -1,5 +1,11 @@
-## v0.9.4 Personal Coding Paradise Loop Toolkit
+## v0.9.6 - Toolbelt Console Integration
 Status: current
+- Integrates the AI Toolbelt into PowerShell and Bash operator command surfaces.
+- Adds Toolbelt Console loops and a default process cockpit.
+- Preserves human authorization, compiler seal, and no-autonomous-authority boundaries.
+
+## v0.9.4 Personal Coding Paradise Loop Toolkit
+Status: prior
 
 Adds creative planning, debug recovery, docs weaving, local oracle, command palette, continuity seal, and safe shipping loops as AI-callable local JSON packet tools.
 

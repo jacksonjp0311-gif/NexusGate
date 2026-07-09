@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# NEXUS GATE compact Bash command surface
 # Rehydration/compatibility markers retained for audit/tests:
 # FAILURE_MODE_CHART
 # UPDATE_CHART
@@ -10,11 +11,77 @@ set -euo pipefail
 # domain
 # geo
 # geo-clean
+# toolbelt
+# toolbelt-dashboard
+# toolbelt-next
+# toolbelt-ship
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 COMMAND="${1:-rehydrate}"
 
+run_meta_loop() {
+  local loop_name="${1:-rhp-core}"
+  shift || true
+  local intent="${*:-Nexus meta loop trigger.}"
+  python -m nexus_gate.loops.runner --root . --loop "$loop_name" --intent "$intent"
+}
+
+run_meta_loop_exec() {
+  local loop_name="${1:-rhp-core}"
+  shift || true
+  local intent="${*:-Nexus meta loop trigger.}"
+  python -m nexus_gate.loops.runner --root . --loop "$loop_name" --intent "$intent" --execute --human-authorized --json
+}
+
 case "$COMMAND" in
+  # NEXUS_TOOLBELT_CONSOLE_V096_BASH_PARITY
+  # Compatibility marker for legacy tests/docs: toolbelt|toolbelt-dashboard
+  toolbelt)
+    shift || true
+    INTENT="${*:-Nexus Toolbelt cockpit.}"
+    python -m nexus_gate.loops.toolbelt --root . --intent "$INTENT" --json
+    ;;
+  toolbelt-start)
+    shift || true
+    INTENT="${*:-Nexus Toolbelt start.}"
+    python -m nexus_gate.loops.runner --root . --loop toolbelt-start --intent "$INTENT" --execute --human-authorized --json
+    ;;
+  toolbelt-dashboard)
+    shift || true
+    INTENT="${*:-Nexus Toolbelt dashboard.}"
+    python -m nexus_gate.loops.runner --root . --loop toolbelt-dashboard --intent "$INTENT" --execute --human-authorized --json
+    ;;
+  toolbelt-next)
+    shift || true
+    INTENT="${*:-Nexus Toolbelt next action.}"
+    python -m nexus_gate.loops.runner --root . --loop toolbelt-next --intent "$INTENT" --execute --human-authorized --json
+    ;;
+  toolbelt-ship)
+    shift || true
+    INTENT="${*:-Nexus Toolbelt ship check.}"
+    python -m nexus_gate.loops.runner --root . --loop toolbelt-ship --intent "$INTENT" --execute --human-authorized --json
+    ;;
+  toolbelt|toolbelt-dashboard)
+    shift || true
+    INTENT="${*:-NEXUS AI Toolbelt Console.}"
+    python -m nexus_gate.loops.toolbelt --root . --intent "$INTENT" --json
+    ;;
+  toolbelt-start)
+    shift || true
+    run_meta_loop_exec toolbelt-start "${*:-Start from the AI Toolbelt.}"
+    ;;
+  toolbelt-next)
+    shift || true
+    run_meta_loop_exec toolbelt-next "${*:-Recommend the next local loop from toolbelt evidence.}"
+    ;;
+  toolbelt-ship)
+    shift || true
+    run_meta_loop_exec toolbelt-ship-console "${*:-Prepare the Toolbelt ship console.}"
+    ;;
+  toolbelt-process)
+    shift || true
+    run_meta_loop_exec toolbelt-process "${*:-Run the governed Toolbelt process.}"
+    ;;
   loops)
     python -m nexus_gate.loops.runner --root . --list
     ;;
@@ -23,21 +90,19 @@ case "$COMMAND" in
     ;;
   meta-loop)
     shift || true
-    LOOP_NAME="${1:-rhp-core}"
-    shift || true
-    INTENT="${*:-Nexus meta loop trigger.}"
-    python -m nexus_gate.loops.runner --root . --loop "$LOOP_NAME" --intent "$INTENT"
+    run_meta_loop "${1:-rhp-core}" "${@:2}"
     ;;
   geo-clean)
     python -m nexus_gate.geometric_memory.cleanup --root . --json
     ;;
   geo)
     shift || true
-    INTENT="${1:-What should we do next?}"
+    INTENT="${*:-What should we do next?}"
     python -m nexus_gate.geometric_memory.router --root . --intent "$INTENT" --json
     ;;
-  compile) python -m nexus_gate.compiler --root . --json ;;
-  strict) python -m nexus_gate.compiler --root . --json ;;
+  compile|strict)
+    python -m nexus_gate.compiler --root . --json
+    ;;
   adapters) python -m nexus_gate.adapters.compile --root . --json ;;
   receptors) python -m nexus_gate.receptors.compile --root . --json ;;
   bridge) python -m nexus_gate.bridge.compile --root . --json ;;
@@ -53,6 +118,10 @@ case "$COMMAND" in
   domain) python -m nexus_gate.domain.compile --root . --json ;;
   tui) echo "PowerShell TUI is Windows-only. Run: .\\scripts\\nexus.ps1 tui" ;;
   ui) echo "Compatibility UI alias is Windows-only. Run: .\\scripts\\nexus.ps1 ui" ;;
+  cell|cell-doctor) python -m nexus_gate.nexus_cell.cli doctor --root . ;;
+  cell-run) python -m nexus_gate.nexus_cell.cli run --root . --runner mock --payload ./NexusCell/examples/hello.ps1 ;;
+  cell-ledger) python -m nexus_gate.nexus_cell.cli ledger --root . ;;
+  cell-policy) python -m nexus_gate.nexus_cell.cli policy --root . ;;
   evolve)
     python -m compileall nexus_gate tests
     python -m unittest discover -s tests
@@ -72,37 +141,14 @@ case "$COMMAND" in
     python -m nexus_gate.domain.compile --root . --json
     python -m nexus_gate.build.packer --root . --out dist --json
     ;;
-  pack) python -m nexus_gate.build.packer --root . --out dist --json ;;
+  pack)
+    python -m nexus_gate.build.packer --root . --out dist --json
+    ;;
   status)
-    test -f reports/nexus_feedback_interface_report_latest.json && cat reports/nexus_feedback_interface_report_latest.json
+    test -f reports/nexus_toolbelt_console_latest.json && cat reports/nexus_toolbelt_console_latest.json || true
+    test -f reports/nexus_feedback_interface_report_latest.json && cat reports/nexus_feedback_interface_report_latest.json || true
     ;;
   rehydrate|*)
     python -m nexus_gate.compiler --root . --json
-    ;;
-esac
-
-
-
-# NexusCell parity shortcuts
-case "${1:-}" in
-  cell|cell-doctor)
-    shift || true
-    python -m nexus_gate.nexus_cell.cli doctor --root .
-    exit $?
-    ;;
-  cell-run)
-    shift || true
-    python -m nexus_gate.nexus_cell.cli run --root . --runner mock --payload ./NexusCell/examples/hello.ps1
-    exit $?
-    ;;
-  cell-ledger)
-    shift || true
-    python -m nexus_gate.nexus_cell.cli ledger --root .
-    exit $?
-    ;;
-  cell-policy)
-    shift || true
-    python -m nexus_gate.nexus_cell.cli policy --root .
-    exit $?
     ;;
 esac

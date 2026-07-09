@@ -23,7 +23,7 @@ NEW_LOOPS = {
 class TestAILoopToolkitV093(unittest.TestCase):
     def test_registry_contains_toolkit_loops_and_commands(self):
         registry = json.loads((ROOT / "loops" / "nexus_loop_registry.v0.1.json").read_text(encoding="utf-8"))
-        self.assertIn(registry["generated_for"], {"NEXUS_GATE_v0.9.3", "NEXUS_GATE_v0.9.4", "NEXUS_GATE_v0.9.5"})
+        self.assertIn(registry["generated_for"], {"NEXUS_GATE_v0.9.3", "NEXUS_GATE_v0.9.4", "NEXUS_GATE_v0.9.5", "NEXUS_GATE_v0.9.6"})
         self.assertTrue(NEW_LOOPS.issubset(set(registry["loops"])))
         for loop_id in NEW_LOOPS:
             loop = registry["loops"][loop_id]
@@ -50,12 +50,12 @@ class TestAILoopToolkitV093(unittest.TestCase):
     def test_loop_cards_include_toolkit_cards(self):
         from nexus_gate.loops.cards import build_loop_cards
         packet = build_loop_cards(ROOT)
-        self.assertIn(packet["schema"], {"NEXUS_LOOP_CARD_SET.v0.9.3", "NEXUS_LOOP_CARD_SET.v0.9.4","NEXUS_LOOP_CARD_SET.v0.9.5"})
+        self.assertIn(packet["schema"], {"NEXUS_LOOP_CARD_SET.v0.9.3", "NEXUS_LOOP_CARD_SET.v0.9.4","NEXUS_LOOP_CARD_SET.v0.9.5", "NEXUS_LOOP_CARD_SET.v0.9.6"})
         cards = {card["loop_id"]: card for card in packet["cards"]}
         self.assertTrue(NEW_LOOPS.issubset(cards))
         for loop_id in NEW_LOOPS:
             card = cards[loop_id]
-            self.assertIn(card["schema"], {"NEXUS_LOOP_CARD.v0.9.3", "NEXUS_LOOP_CARD.v0.9.4","NEXUS_LOOP_CARD.v0.9.5"})
+            self.assertIn(card["schema"], {"NEXUS_LOOP_CARD.v0.9.3", "NEXUS_LOOP_CARD.v0.9.4","NEXUS_LOOP_CARD.v0.9.5", "NEXUS_LOOP_CARD.v0.9.6"})
             self.assertTrue(card["hud"]["human_card_ready"])
             self.assertTrue(card["hud"]["ai_toolkit_ready"])
             self.assertIn("--execute --human-authorized", card["execute_surface"])

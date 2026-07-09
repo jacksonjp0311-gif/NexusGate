@@ -109,3 +109,4 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 ## v0.9.5 - AI Toolbelt Surface
 
 No version step without update chart entry. Adds operator-visible toolbelt index and README Toolbelt section.
+| v0.9.6 | Toolbelt Console Integration | Adds `scripts/nexus.ps1 toolbelt`, Bash parity, Toolbelt Console loops, and default Start/Build/Debug/Ship/Continuity process visibility. | No version step without update chart entry |

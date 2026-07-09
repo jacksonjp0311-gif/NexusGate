@@ -1,3 +1,8 @@
+## v0.9.6 - Toolbelt Console Integration
+- Integrated AI Toolbelt into `scripts/nexus.ps1` and `scripts/nexus.sh`.
+- Added Toolbelt Console loops, docs, tests, and state packets.
+- Preserved local-only, no-autonomous-authority, human-authorized compounding boundary.
+
 ## v0.9.4 - Personal Coding Paradise Loop Toolkit
 
 - Added personal coding paradise loops as AI-callable local toolkit cards.
