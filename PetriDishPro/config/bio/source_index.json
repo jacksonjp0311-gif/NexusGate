@@ -1,0 +1,44 @@
+{
+  "schema": "PETRI_SOURCE_INDEX.v0.5i",
+  "sources": [
+    {
+      "id": "ecocyc",
+      "label": "EcoCyc / BioCyc",
+      "use_for": [
+        "E. coli K-12",
+        "pathways",
+        "bacterial context",
+        "BioCyc family references"
+      ],
+      "note": "Curated E. coli K-12 knowledgebase with BioCyc family cross-organism context."
+    },
+    {
+      "id": "sgd",
+      "label": "Saccharomyces Genome Database",
+      "use_for": [
+        "Saccharomyces cerevisiae",
+        "yeast pathway context"
+      ],
+      "note": "Integrated biological information resource for budding yeast."
+    },
+    {
+      "id": "fda_bad_bug_book",
+      "label": "FDA Bad Bug Book",
+      "use_for": [
+        "foodborne pathogen context",
+        "Salmonella",
+        "Listeria"
+      ],
+      "note": "FDA foodborne pathogen handbook for educational summaries."
+    },
+    {
+      "id": "ncbi_med_micro",
+      "label": "NCBI Medical Microbiology",
+      "use_for": [
+        "Staphylococcus and medical microbiology context"
+      ],
+      "note": "Primary-source educational reference for organism structure and habitat context."
+    }
+  ],
+  "claim_boundary": "These are grounding references for card metadata, not direct experimental calibration files."
+}

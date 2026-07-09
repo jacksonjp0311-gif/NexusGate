@@ -1,0 +1,8 @@
+{
+  "name": "petri-dish-pro-organism-gate",
+  "version": "0.3.0",
+  "description": "Electron microscope HUD for Petri Dish Pro organism simulations.",
+  "main": "main.js",
+  "scripts": { "start": "electron .", "smoke": "electron . --smoke" },
+  "devDependencies": { "electron": "^31.0.0" }
+}

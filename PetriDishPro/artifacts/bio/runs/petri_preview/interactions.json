@@ -1,0 +1,60 @@
+{
+  "interactions": [
+    {
+      "distance": 0.276753,
+      "source": "acanthamoeba_castellanii_proxy_0000",
+      "target": "ecoli_k12_proxy_0013",
+      "type": "predator_prey_proximity"
+    },
+    {
+      "distance": 0.008994,
+      "source": "acanthamoeba_castellanii_proxy_0001",
+      "target": "ecoli_k12_proxy_0083",
+      "type": "predator_prey_proximity"
+    },
+    {
+      "distance": 0.043621,
+      "source": "acanthamoeba_castellanii_proxy_0002",
+      "target": "ecoli_k12_proxy_0073",
+      "type": "predator_prey_proximity"
+    },
+    {
+      "distance": 0.331845,
+      "source": "acanthamoeba_castellanii_proxy_0003",
+      "target": "ecoli_k12_proxy_0083",
+      "type": "predator_prey_proximity"
+    },
+    {
+      "distance": 0.059779,
+      "source": "acanthamoeba_castellanii_proxy_0004",
+      "target": "ecoli_k12_proxy_0013",
+      "type": "predator_prey_proximity"
+    },
+    {
+      "distance": 0.021098,
+      "source": "acanthamoeba_castellanii_proxy_0005",
+      "target": "ecoli_k12_proxy_0040",
+      "type": "predator_prey_proximity"
+    },
+    {
+      "distance": 0.054993,
+      "source": "acanthamoeba_castellanii_proxy_0006",
+      "target": "ecoli_k12_proxy_0083",
+      "type": "predator_prey_proximity"
+    },
+    {
+      "distance": 0.055597,
+      "source": "acanthamoeba_castellanii_proxy_0007",
+      "target": "ecoli_k12_proxy_0013",
+      "type": "predator_prey_proximity"
+    },
+    {
+      "distance": 0.240471,
+      "source": "acanthamoeba_castellanii_proxy_0008",
+      "target": "ecoli_k12_proxy_0013",
+      "type": "predator_prey_proximity"
+    }
+  ],
+  "run_id": "petri_preview",
+  "schema": "PETRI_PARTICLE_STATE.v0.4m"
+}

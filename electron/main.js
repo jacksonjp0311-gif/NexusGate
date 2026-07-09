@@ -15,7 +15,7 @@ if (!gotSingleInstanceLock) {
 let mainWindow = null;
 let petriWindow = null;
 let petriIpcRegistered = false;
-const petriDishProRoot = path.join(os.homedir(), "OneDrive", "Desktop", "PetriDishPro");
+const petriDishProRoot = path.join(repoRoot, "PetriDishPro");
 const petriElectronRoot = path.join(petriDishProRoot, "electron");
 
 app.on("second-instance", () => {

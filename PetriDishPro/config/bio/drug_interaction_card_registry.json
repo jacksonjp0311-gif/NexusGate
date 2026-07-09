@@ -1,0 +1,19 @@
+﻿{
+  "schema": "PETRI_DRUG_INTERACTION_CARD_REGISTRY.v0.5o",
+  "content_version": "005O",
+  "claim_boundary": "Educational drug interaction cards only; not medical advice, dosing, susceptibility, diagnosis, or treatment guidance.",
+  "cards": {
+    "ampicillin": {"label":"Ampicillin","class":"beta-lactam","target":"PBP / cell wall synthesis"},
+    "ciprofloxacin": {"label":"Ciprofloxacin","class":"fluoroquinolone","target":"DNA gyrase / topoisomerase"},
+    "gentamicin": {"label":"Gentamicin","class":"aminoglycoside","target":"30S ribosome"},
+    "tobramycin": {"label":"Tobramycin","class":"aminoglycoside","target":"30S ribosome"},
+    "vancomycin": {"label":"Vancomycin","class":"glycopeptide","target":"Gram-positive cell wall"},
+    "tetracycline": {"label":"Tetracycline","class":"tetracycline","target":"30S ribosome"},
+    "erythromycin": {"label":"Erythromycin","class":"macrolide","target":"50S ribosome"},
+    "rifampicin": {"label":"Rifampicin","class":"rifamycin","target":"RNA polymerase"},
+    "fluconazole": {"label":"Fluconazole","class":"azole antifungal","target":"ergosterol pathway"},
+    "amphotericin_b": {"label":"Amphotericin B","class":"polyene antifungal","target":"ergosterol membrane"},
+    "anti_lps_igg": {"label":"anti-LPS IgG proxy","class":"antibody panel","target":"outer membrane LPS cue"},
+    "anti_beta_glucan": {"label":"anti-beta-glucan mAb proxy","class":"antibody panel","target":"fungal wall beta-glucan cue"}
+  }
+}

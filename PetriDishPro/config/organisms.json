@@ -1,0 +1,618 @@
+{
+  "claim_boundary": "All cards are source-gated educational proxies. Real-data imports must carry dataset, record id, date, unit, assay context, and claim boundary before quantitative drug/antibody claims are allowed.",
+  "organisms": [
+    {
+      "baseline_population": 180,
+      "behavior": {
+        "biofilm_bias": 0.35,
+        "budding": 0.0,
+        "chemotaxis": 0.9,
+        "encystment": 0.0,
+        "growth_rate": 1.12,
+        "motility": 0.9,
+        "predation": 0.0,
+        "sporulation": 0.0,
+        "stress_tolerance": 0.45,
+        "tumble_rate": 0.7
+      },
+      "card_notes": [
+        "Fast rod-shaped bacterial proxy.",
+        "Moves by biased run-tumble style motion in nutrient gradients.",
+        "Binary fission; colonies expand quickly when resources are available."
+      ],
+      "color": "#27f4ff",
+      "dataset": {
+        "class": "bacterium",
+        "confidence": "broad morphology/behavior proxy",
+        "primary": "EcoCyc",
+        "secondary": "BacDive",
+        "strain": "K-12 / MG1655-style educational proxy"
+      },
+      "enabled": true,
+      "environment": {
+        "habitat": "intestinal, lab media, water/soil contexts depending on strain",
+        "nutrient_preference": "rich media / nutrient gradients",
+        "oxygen": "facultative anaerobe",
+        "temperature_c": [
+          20,
+          42
+        ]
+      },
+      "id": "ecoli_k12_proxy",
+      "label": "E. coli-like K-12 proxy",
+      "legacy_slugs": [
+        "ecoli_like",
+        "E. coli-like fast grower"
+      ],
+      "morphology": {
+        "cell_shape": "short rod",
+        "community": "surface communities/biofilms possible",
+        "division": "binary fission",
+        "motility": "run-tumble flagellar swimming",
+        "render_type": "rod",
+        "size_um": "about 1-3 um long, sub-micron width"
+      },
+      "short_label": "E. coli"
+    },
+    {
+      "baseline_population": 115,
+      "behavior": {
+        "biofilm_bias": 0.82,
+        "budding": 0.0,
+        "chemotaxis": 0.55,
+        "encystment": 0.0,
+        "growth_rate": 0.82,
+        "motility": 0.45,
+        "predation": 0.0,
+        "sporulation": 0.92,
+        "stress_tolerance": 0.88,
+        "tumble_rate": 0.25
+      },
+      "card_notes": [
+        "Rod-shaped spore-former proxy.",
+        "Clusters under stress and shows bright spore bodies.",
+        "Designed to survive toxin/nutrient stress better than fast growers."
+      ],
+      "color": "#ffd268",
+      "dataset": {
+        "class": "bacterium",
+        "confidence": "sporulation/biofilm qualitative proxy",
+        "primary": "BsubCyc",
+        "secondary": "BacDive",
+        "strain": "B. subtilis educational proxy"
+      },
+      "enabled": true,
+      "environment": {
+        "habitat": "soil, plant surfaces, lab media",
+        "nutrient_preference": "soil/plant-associated nutrient patches",
+        "oxygen": "aerobic/facultative-like educational proxy",
+        "temperature_c": [
+          20,
+          45
+        ]
+      },
+      "id": "bacillus_subtilis_proxy",
+      "label": "Bacillus subtilis-like spore former",
+      "legacy_slugs": [
+        "bacillus_like",
+        "Bacillus-like spore former"
+      ],
+      "morphology": {
+        "cell_shape": "rod with occasional endospore-like bright body",
+        "community": "biofilm/matrix-forming behavior represented as clustering",
+        "division": "binary fission; stress-linked endospore formation",
+        "motility": "motile rods in favorable conditions; sessile/biofilm tendency under stress",
+        "render_type": "rod_spore",
+        "size_um": "rod-shaped bacterium, micrometer scale"
+      },
+      "short_label": "B. subtilis"
+    },
+    {
+      "baseline_population": 72,
+      "behavior": {
+        "biofilm_bias": 0.22,
+        "budding": 0.96,
+        "chemotaxis": 0.1,
+        "encystment": 0.0,
+        "growth_rate": 0.48,
+        "motility": 0.05,
+        "predation": 0.0,
+        "sporulation": 0.12,
+        "stress_tolerance": 0.56,
+        "tumble_rate": 0.0
+      },
+      "card_notes": [
+        "Larger budding eukaryotic cell proxy.",
+        "Daughter buds appear attached to mother cells.",
+        "Slow growth; local colony expansion rather than active swimming."
+      ],
+      "color": "#ff63f7",
+      "dataset": {
+        "class": "fungal eukaryote",
+        "confidence": "budding morphology proxy",
+        "primary": "Saccharomyces Genome Database",
+        "secondary": "YeastCyc",
+        "strain": "S. cerevisiae educational proxy"
+      },
+      "enabled": true,
+      "environment": {
+        "habitat": "fruit, fermentation, lab culture, environmental surfaces",
+        "nutrient_preference": "sugars / fermentable carbon",
+        "oxygen": "facultative fermenter educational proxy",
+        "temperature_c": [
+          20,
+          37
+        ]
+      },
+      "id": "saccharomyces_cerevisiae_proxy",
+      "label": "Saccharomyces cerevisiae-like budding yeast",
+      "legacy_slugs": [
+        "yeast_like",
+        "Yeast-like slow grower"
+      ],
+      "morphology": {
+        "cell_shape": "round to ellipsoid budding cells",
+        "community": "colonies; pseudohyphae not modeled here",
+        "division": "asymmetric budding",
+        "motility": "non-motile; local growth/drift in visualization",
+        "render_type": "budding_yeast",
+        "size_um": "roughly several micrometers; larger than most bacteria here"
+      },
+      "short_label": "Yeast"
+    },
+    {
+      "baseline_population": 16,
+      "behavior": {
+        "biofilm_bias": 0.15,
+        "budding": 0.0,
+        "chemotaxis": 0.35,
+        "encystment": 0.75,
+        "growth_rate": 0.2,
+        "motility": 0.62,
+        "predation": 0.92,
+        "sporulation": 0.0,
+        "stress_tolerance": 0.78,
+        "tumble_rate": 0.0
+      },
+      "card_notes": [
+        "Large amoeboid predator/grazer proxy.",
+        "Moves toward dense bacterial clusters.",
+        "Can visually shift toward cyst-like form under stress."
+      ],
+      "color": "#ff3040",
+      "dataset": {
+        "class": "free-living ameba / eukaryote",
+        "confidence": "habitat/life-stage qualitative proxy",
+        "primary": "CDC Acanthamoeba",
+        "secondary": "NCBI / public literature proxy",
+        "strain": "Acanthamoeba castellanii-style educational proxy"
+      },
+      "enabled": true,
+      "environment": {
+        "habitat": "water, soil, dust, built-water systems",
+        "nutrient_preference": "bacteria/organic particles",
+        "oxygen": "aerobic environmental protist proxy",
+        "temperature_c": [
+          15,
+          35
+        ]
+      },
+      "id": "acanthamoeba_castellanii_proxy",
+      "label": "Acanthamoeba-like predator",
+      "legacy_slugs": [
+        "predator_microbe",
+        "Predator-like microbe"
+      ],
+      "morphology": {
+        "cell_shape": "larger irregular amoeboid cell",
+        "community": "modeled as predator/grazer near bacterial clusters",
+        "division": "mitotic division in trophozoite state; cyst state under stress",
+        "motility": "amoeboid crawling/shape change",
+        "render_type": "amoeboid",
+        "size_um": "larger than bacteria; variable pseudopod-like outline"
+      },
+      "short_label": "Amoeba"
+    },
+    {
+      "baseline_population": 95,
+      "behavior": {
+        "biofilm_bias": 0.92,
+        "chemotaxis": 0.62,
+        "drug_resistance_bias": 0.78,
+        "growth_rate": 0.78,
+        "motility": 0.82,
+        "predation": 0.0,
+        "stress_tolerance": 0.86
+      },
+      "card_notes": [
+        "Biofilm-heavy rod proxy.",
+        "Useful for antibiotic-selection and surface-colony stress tests.",
+        "Quantitative AST requires imported EUCAST/CLSI/assay records."
+      ],
+      "color": "#00d9ff",
+      "dataset": {
+        "class": "bacterium",
+        "data_gate": "strain-level morphology/physiology required before quantitative drug claims",
+        "primary": "BacDive",
+        "secondary": "BioCyc/Pseudomonas resources"
+      },
+      "enabled": false,
+      "environment": {
+        "habitat": "soil, water, surfaces, clinical/environmental contexts depending on strain",
+        "nutrient_preference": "diverse substrates",
+        "oxygen": "aerobic/facultative educational proxy"
+      },
+      "id": "pseudomonas_aeruginosa_proxy",
+      "label": "Pseudomonas aeruginosa-like biofilm former",
+      "legacy_slugs": [
+        "pseudomonas_like"
+      ],
+      "morphology": {
+        "cell_shape": "slender rod",
+        "community": "strong biofilm tendency",
+        "division": "binary fission",
+        "motility": "flagellar swimming and surface-associated motility proxy",
+        "render_type": "rod"
+      },
+      "short_label": "Pseudomonas"
+    },
+    {
+      "baseline_population": 90,
+      "behavior": {
+        "biofilm_bias": 0.74,
+        "chemotaxis": 0.1,
+        "drug_resistance_bias": 0.7,
+        "growth_rate": 0.7,
+        "motility": 0.05,
+        "predation": 0.0,
+        "stress_tolerance": 0.8
+      },
+      "card_notes": [
+        "Coccus cluster proxy.",
+        "Good for drug-pressure and biofilm persistence cards.",
+        "No clinical inference without standards-backed records."
+      ],
+      "color": "#ffb347",
+      "dataset": {
+        "class": "bacterium",
+        "data_gate": "strain and resistance marker provenance required before drug-response claims",
+        "primary": "BacDive",
+        "secondary": "BioCyc/NCBI context"
+      },
+      "enabled": false,
+      "environment": {
+        "habitat": "skin/mucosal/environmental surfaces depending on strain",
+        "nutrient_preference": "rich media",
+        "oxygen": "facultative anaerobe proxy"
+      },
+      "id": "staphylococcus_aureus_proxy",
+      "label": "Staphylococcus aureus-like coccus cluster",
+      "legacy_slugs": [
+        "staph_like"
+      ],
+      "morphology": {
+        "cell_shape": "round cocci in grape-like clusters",
+        "community": "cluster/biofilm surface tendency",
+        "division": "binary fission in multiple planes",
+        "motility": "non-motile proxy",
+        "render_type": "coccus_cluster"
+      },
+      "short_label": "Staph"
+    },
+    {
+      "baseline_population": 82,
+      "behavior": {
+        "biofilm_bias": 0.38,
+        "chemotaxis": 0.82,
+        "drug_resistance_bias": 0.42,
+        "growth_rate": 0.84,
+        "motility": 0.88,
+        "predation": 0.0,
+        "stress_tolerance": 0.56
+      },
+      "card_notes": [
+        "Motile rod proxy.",
+        "Useful for chemotaxis and competition cards.",
+        "Serovar-specific behavior needs imported records."
+      ],
+      "color": "#38ff8f",
+      "dataset": {
+        "class": "bacterium",
+        "data_gate": "serovar/strain provenance required",
+        "primary": "BacDive",
+        "secondary": "BioCyc/NCBI context"
+      },
+      "enabled": false,
+      "environment": {
+        "habitat": "intestinal/environmental contexts depending on strain",
+        "nutrient_preference": "rich media and gradients",
+        "oxygen": "facultative anaerobe proxy"
+      },
+      "id": "salmonella_enterica_proxy",
+      "label": "Salmonella enterica-like motile rod",
+      "legacy_slugs": [
+        "salmonella_like"
+      ],
+      "morphology": {
+        "cell_shape": "motile rod",
+        "community": "dispersed motile population",
+        "division": "binary fission",
+        "motility": "flagellar swimming proxy",
+        "render_type": "rod"
+      },
+      "short_label": "Salmonella"
+    },
+    {
+      "baseline_population": 70,
+      "behavior": {
+        "biofilm_bias": 0.5,
+        "chemotaxis": 0.78,
+        "drug_resistance_bias": 0.36,
+        "growth_rate": 0.76,
+        "motility": 0.92,
+        "predation": 0.0,
+        "stress_tolerance": 0.58
+      },
+      "card_notes": [
+        "Curved motile rod proxy.",
+        "Good for flow/gradient experiments.",
+        "Virulence is not modeled."
+      ],
+      "color": "#7fffd4",
+      "dataset": {
+        "class": "bacterium",
+        "data_gate": "environment and strain provenance required",
+        "primary": "BacDive",
+        "secondary": "BioCyc/NCBI context"
+      },
+      "enabled": false,
+      "environment": {
+        "habitat": "aquatic and host-associated contexts depending on strain",
+        "nutrient_preference": "aquatic organic gradients",
+        "oxygen": "facultative anaerobe proxy"
+      },
+      "id": "vibrio_cholerae_proxy",
+      "label": "Vibrio cholerae-like curved rod",
+      "legacy_slugs": [
+        "vibrio_like"
+      ],
+      "morphology": {
+        "cell_shape": "curved/comma-shaped rod proxy",
+        "community": "aquatic motile population",
+        "division": "binary fission",
+        "motility": "polar flagellar swimming proxy",
+        "render_type": "curved_rod"
+      },
+      "short_label": "Vibrio"
+    },
+    {
+      "baseline_population": 58,
+      "behavior": {
+        "biofilm_bias": 0.48,
+        "chemotaxis": 0.35,
+        "drug_resistance_bias": 0.3,
+        "growth_rate": 0.5,
+        "motility": 0.48,
+        "predation": 0.0,
+        "stress_tolerance": 0.72
+      },
+      "card_notes": [
+        "Short rod persistence proxy.",
+        "Good for stress and low-temperature persistence cards.",
+        "No food-safety or clinical claims."
+      ],
+      "color": "#b8ff6a",
+      "dataset": {
+        "class": "bacterium",
+        "data_gate": "temperature and strain provenance required",
+        "primary": "BacDive",
+        "secondary": "BioCyc/NCBI context"
+      },
+      "enabled": false,
+      "environment": {
+        "habitat": "soil/food/environmental contexts depending on strain",
+        "nutrient_preference": "rich media",
+        "oxygen": "facultative anaerobe proxy"
+      },
+      "id": "listeria_monocytogenes_proxy",
+      "label": "Listeria monocytogenes-like short rod",
+      "legacy_slugs": [
+        "listeria_like"
+      ],
+      "morphology": {
+        "cell_shape": "short rod",
+        "community": "surface persistence proxy",
+        "division": "binary fission",
+        "motility": "tumbling motility proxy under permissive conditions",
+        "render_type": "short_rod"
+      },
+      "short_label": "Listeria"
+    },
+    {
+      "baseline_population": 35,
+      "behavior": {
+        "biofilm_bias": 0.62,
+        "chemotaxis": 0.05,
+        "drug_resistance_bias": 0.62,
+        "growth_rate": 0.22,
+        "motility": 0.02,
+        "predation": 0.0,
+        "stress_tolerance": 0.9
+      },
+      "card_notes": [
+        "Slow acid-fast rod proxy.",
+        "Used to test slow-growth artifact/charts.",
+        "Nonpathogenic educational proxy only."
+      ],
+      "color": "#ff8bd1",
+      "dataset": {
+        "class": "bacterium",
+        "data_gate": "nonpathogenic proxy; do not infer M. tuberculosis behavior",
+        "primary": "BacDive",
+        "secondary": "NCBI/context resources"
+      },
+      "enabled": false,
+      "environment": {
+        "habitat": "soil/water/lab proxy contexts",
+        "nutrient_preference": "slow growth media proxy",
+        "oxygen": "aerobic proxy"
+      },
+      "id": "mycobacterium_smegmatis_proxy",
+      "label": "Mycobacterium smegmatis-like acid-fast rod",
+      "legacy_slugs": [
+        "mycobacterium_like"
+      ],
+      "morphology": {
+        "cell_shape": "slender acid-fast-like rod proxy",
+        "community": "clumping/biofilm-like persistence proxy",
+        "division": "slow binary fission",
+        "motility": "non-motile proxy",
+        "render_type": "slow_rod"
+      },
+      "short_label": "Myco"
+    },
+    {
+      "baseline_population": 68,
+      "behavior": {
+        "acidification": 0.86,
+        "biofilm_bias": 0.42,
+        "chemotaxis": 0.18,
+        "drug_resistance_bias": 0.24,
+        "growth_rate": 0.6,
+        "motility": 0.05,
+        "stress_tolerance": 0.6
+      },
+      "card_notes": [
+        "Fermenter proxy.",
+        "Adds acidification/waste-field pressure.",
+        "Species-specific probiotics claims are blocked."
+      ],
+      "color": "#a6ffcb",
+      "dataset": {
+        "class": "bacterium",
+        "data_gate": "species/strain-specific fermentation records required",
+        "primary": "BacDive",
+        "secondary": "NCBI/context resources"
+      },
+      "enabled": false,
+      "environment": {
+        "habitat": "fermentation, mucosal, food contexts depending on species",
+        "nutrient_preference": "sugars",
+        "oxygen": "microaerophilic/facultative proxy"
+      },
+      "id": "lactobacillus_proxy",
+      "label": "Lactobacillus-like fermenter",
+      "legacy_slugs": [
+        "lactobacillus_like"
+      ],
+      "morphology": {
+        "cell_shape": "rods/chains proxy",
+        "community": "fermenter/acidifying cluster proxy",
+        "division": "binary fission with chain tendency",
+        "motility": "mostly non-motile proxy",
+        "render_type": "rod_chain"
+      },
+      "short_label": "Lacto"
+    },
+    {
+      "baseline_population": 42,
+      "behavior": {
+        "biofilm_bias": 0.56,
+        "chemotaxis": 0.12,
+        "drug_resistance_bias": 0.18,
+        "growth_rate": 0.28,
+        "motility": 0.18,
+        "phototaxis": 0.82,
+        "stress_tolerance": 0.64
+      },
+      "card_notes": [
+        "Phototroph proxy.",
+        "Requires a future light-field card.",
+        "No environmental monitoring claims."
+      ],
+      "color": "#4bd8ff",
+      "dataset": {
+        "class": "photosynthetic bacterium proxy",
+        "data_gate": "light, media, and strain records required",
+        "primary": "BacDive/NCBI context",
+        "secondary": "phototroph literature slot"
+      },
+      "enabled": false,
+      "environment": {
+        "habitat": "freshwater, marine, soil crust depending on strain",
+        "nutrient_preference": "light plus inorganic nutrients",
+        "oxygen": "oxygenic photosynthesis proxy"
+      },
+      "id": "cyanobacteria_proxy",
+      "label": "Cyanobacteria-like phototroph",
+      "legacy_slugs": [
+        "cyanobacteria_like"
+      ],
+      "morphology": {
+        "cell_shape": "filament or chain proxy",
+        "community": "light-dependent surface population",
+        "division": "vegetative division proxy",
+        "motility": "gliding/low motility proxy",
+        "render_type": "filament"
+      },
+      "short_label": "Cyano"
+    },
+    {
+      "baseline_population": 8,
+      "behavior": {
+        "biofilm_bias": 0.05,
+        "chemotaxis": 0.35,
+        "drug_resistance_bias": 0.05,
+        "growth_rate": 0.12,
+        "motility": 0.92,
+        "predation": 0.84,
+        "stress_tolerance": 0.5
+      },
+      "card_notes": [
+        "Large ciliate grazer proxy.",
+        "Useful for predator-prey visualization.",
+        "Not a calibrated ecology model."
+      ],
+      "color": "#cba6ff",
+      "dataset": {
+        "class": "ciliate eukaryote proxy",
+        "data_gate": "species-specific ciliate data required",
+        "primary": "NCBI/context literature slot",
+        "secondary": "microscopy education proxy"
+      },
+      "enabled": false,
+      "environment": {
+        "habitat": "freshwater and culture contexts depending on species",
+        "nutrient_preference": "bacteria/organic particles",
+        "oxygen": "aerobic aquatic protist proxy"
+      },
+      "id": "paramecium_proxy",
+      "label": "Paramecium-like ciliate grazer",
+      "legacy_slugs": [
+        "paramecium_like"
+      ],
+      "morphology": {
+        "cell_shape": "large oval ciliate proxy",
+        "community": "grazer/predator near bacteria",
+        "division": "binary fission proxy",
+        "motility": "cilia-driven swimming proxy",
+        "render_type": "ciliate"
+      },
+      "short_label": "Ciliate"
+    }
+  ],
+  "schema": "PETRI_ORGANISM_REGISTRY.v0.4k",
+  "sources": {
+    "BacDive": "standardized bacterial/archaeal strain metadata: morphology, physiology, environment, taxonomy",
+    "BsubCyc": "Bacillus subtilis regulation, metabolism and network context",
+    "CDC Acanthamoeba": "free-living one-celled ameba habitat and public-health context",
+    "CDC_Acanthamoeba": "official habitat/public-health framing for Acanthamoeba; not a simulation calibration source",
+    "CLSI": "laboratory standards and method/quality framework for future AST provenance",
+    "ChEMBL": "curated bioactive molecule and drug-like activity records for future drug-response cards",
+    "EUCAST": "breakpoints, MIC/zone distributions and AST interpretation structures for future antibiotic cards",
+    "EcoCyc": "E. coli genes, metabolism, regulation, omics, media and strain database context",
+    "RCSB_PDB": "macromolecular structure records for future antibody/antigen binding cards",
+    "SGD": "Saccharomyces cerevisiae genes, phenotypes, pathways, expression and interaction resources"
+  },
+  "version": "004P"
+}

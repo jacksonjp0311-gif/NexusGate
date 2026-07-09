@@ -1,0 +1,72 @@
+﻿/*
+PETRI DISH PRO v0.6I
+Dashboard readability polish.
+*/
+
+:root[data-petri-006i="ready"] .petri-006i-panel {
+  overflow: hidden !important;
+}
+
+.petri-006i-metric-panel,
+.petri-006i-emergent-panel {
+  min-width: 0 !important;
+}
+
+.petri-006i-metric-panel .petri-006i-card,
+.petri-006i-emergent-panel .petri-006i-card {
+  min-width: 112px !important;
+  min-height: 82px !important;
+  padding: 12px 10px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  border-radius: 10px !important;
+  box-sizing: border-box !important;
+}
+
+.petri-006i-metric-panel .petri-006i-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+}
+
+.petri-006i-emergent-panel .petri-006i-card {
+  display: grid !important;
+  align-content: center !important;
+  gap: 6px !important;
+  white-space: normal !important;
+  word-break: normal !important;
+}
+
+.petri-006i-metric-panel .petri-006i-card svg,
+.petri-006i-metric-panel .petri-006i-card canvas {
+  max-width: 100% !important;
+  min-height: 28px !important;
+}
+
+.petri-006i-metric-panel .petri-006i-card *,
+.petri-006i-emergent-panel .petri-006i-card * {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.petri-006i-emergent-panel .petri-006i-card:hover,
+.petri-006i-metric-panel .petri-006i-card:hover {
+  overflow: visible !important;
+  filter: brightness(1.12);
+}
+
+.petri-006i-empty-state {
+  min-height: 72px;
+  padding: 12px;
+  border: 1px dashed rgba(0, 240, 255, 0.35);
+  border-radius: 12px;
+  color: rgba(218, 247, 255, 0.78);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+select[data-petri-006i-drug-select="true"] option {
+  white-space: normal;
+}

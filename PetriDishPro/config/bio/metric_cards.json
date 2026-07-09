@@ -1,0 +1,332 @@
+{
+  "schema": "PETRI_METRIC_CARD_REGISTRY.v0.4o",
+  "schema_current": "PETRI_METRIC_CARD_REGISTRY.v0.5i",
+  "compatibility_seal": "PETRI_005N_MISSING_METRIC_CARD_ID_SEAL",
+  "metrics": {
+    "total_cells": {
+      "label": "Total Cells",
+      "chart": "sparkline",
+      "description": "Total cell count over time.",
+      "sparkline": true,
+      "line": true,
+      "type": "metric_card"
+    },
+    "active_organisms": {
+      "label": "Active Organisms",
+      "chart": "value",
+      "description": "Selected organism count.",
+      "value": true,
+      "line": true,
+      "type": "metric_card"
+    },
+    "particles": {
+      "label": "Particles",
+      "chart": "value",
+      "description": "Artifact/render particle count.",
+      "value": true,
+      "line": true,
+      "type": "metric_card"
+    },
+    "fps": {
+      "label": "FPS",
+      "chart": "value",
+      "description": "Renderer cadence proxy.",
+      "value": true,
+      "line": true,
+      "type": "metric_card"
+    },
+    "shannon_diversity": {
+      "label": "Shannon Diversity",
+      "chart": "area",
+      "description": "Population diversity proxy across active organisms.",
+      "area": true,
+      "line": true,
+      "type": "metric_card"
+    },
+    "dominance_index": {
+      "label": "Dominance Index",
+      "chart": "line",
+      "description": "Largest selected population fraction.",
+      "bar": true,
+      "line": true,
+      "type": "metric_card"
+    },
+    "evenness": {
+      "label": "Evenness",
+      "chart": "line",
+      "description": "Population distribution balance proxy."
+    },
+    "kill_curve_proxy": {
+      "label": "Kill Curve Proxy",
+      "chart": "line",
+      "description": "Educational intervention response curve; not calibrated susceptibility data.",
+      "kill_curve": true,
+      "line": true,
+      "type": "metric_card"
+    },
+    "drug_response_proxy": {
+      "label": "Drug Response Proxy",
+      "chart": "line",
+      "description": "Educational drug-response summary; not clinical or wet-lab evidence.",
+      "drug": true,
+      "drug_response": true,
+      "line": true,
+      "type": "metric_card"
+    },
+    "antibody_binding_proxy": {
+      "label": "Antibody Binding Proxy",
+      "chart": "bar",
+      "description": "Educational binding-panel visualization; not affinity, specificity, neutralization, or diagnostic evidence.",
+      "antibody": true,
+      "bar": true,
+      "binding": true,
+      "type": "metric_card"
+    },
+    "intervention_pressure": {
+      "label": "Intervention Pressure",
+      "chart": "line",
+      "description": "Composite non-calibrated stress pressure from selected intervention cards."
+    },
+    "susceptibility_proxy": {
+      "label": "Susceptibility Proxy",
+      "chart": "bar",
+      "description": "Non-clinical visual response class only."
+    },
+    "biofilm_index": {
+      "label": "Biofilm Index",
+      "chart": "line",
+      "description": "Attachment/biofilm tendency proxy."
+    },
+    "stress_load": {
+      "label": "Stress Load",
+      "chart": "line",
+      "description": "Composite environmental/intervention stress proxy."
+    },
+    "motility_flux": {
+      "label": "Motility Flux",
+      "chart": "line",
+      "description": "Selected motility contribution proxy."
+    },
+    "field_density": {
+      "label": "Field Density",
+      "chart": "heat",
+      "description": "Microscope field occupancy proxy."
+    },
+    "chart": {
+      "label": "Chart",
+      "chart": "line",
+      "description": "Legacy test compatibility metric."
+    },
+    "binding_occupancy": {
+      "label": "Binding Occupancy",
+      "chart": "line",
+      "description": "Legacy test compatibility metric.",
+      "bar": true,
+      "antibody": true,
+      "occupancy": true,
+      "binding": true,
+      "type": "metric_card"
+    },
+    "igg_opsonization_proxy": {
+      "label": "IgG Opsonization Proxy",
+      "chart": "bar",
+      "description": "Educational antibody/opsonization proxy.",
+      "antibody": true,
+      "opsonization": true,
+      "bar": true,
+      "type": "metric_card"
+    },
+    "antibody_occupancy_proxy": {
+      "label": "Antibody Occupancy Proxy",
+      "chart": "bar",
+      "bar": true,
+      "antibody": true,
+      "occupancy": true,
+      "binding": true,
+      "type": "metric_card",
+      "description": "Educational antibody-surface occupancy visualization; not affinity, specificity, neutralization, diagnostic, or wet-lab evidence."
+    }
+  },
+  "content_version": "004P",
+  "cards": [
+    {
+      "id": "active_organisms",
+      "label": "Active Organisms",
+      "chart": "value",
+      "line": true,
+      "type": "metric_card",
+      "description": "Selected organism count.",
+      "value": true
+    },
+    {
+      "id": "antibody_binding_proxy",
+      "label": "Antibody Binding Proxy",
+      "chart": "bar",
+      "bar": true,
+      "antibody": true,
+      "binding": true,
+      "type": "metric_card",
+      "description": "Educational binding-panel visualization; not affinity, specificity, neutralization, or diagnostic evidence."
+    },
+    {
+      "id": "antibody_occupancy_proxy",
+      "label": "Antibody Occupancy Proxy",
+      "chart": "bar",
+      "bar": true,
+      "antibody": true,
+      "occupancy": true,
+      "binding": true,
+      "type": "metric_card",
+      "description": "Educational antibody-surface occupancy visualization; not affinity, specificity, neutralization, diagnostic, or wet-lab evidence."
+    },
+    {
+      "id": "binding_occupancy",
+      "label": "Binding Occupancy",
+      "chart": "line",
+      "bar": true,
+      "antibody": true,
+      "occupancy": true,
+      "binding": true,
+      "type": "metric_card",
+      "description": "Legacy test compatibility metric.",
+      "line": true
+    },
+    {
+      "id": "biofilm_index",
+      "label": "Biofilm Index",
+      "chart": "line",
+      "line": true,
+      "type": "metric_card",
+      "description": "Attachment/biofilm tendency proxy."
+    },
+    {
+      "id": "chart",
+      "label": "Chart",
+      "chart": "line",
+      "line": true,
+      "type": "metric_card",
+      "description": "Legacy test compatibility metric."
+    },
+    {
+      "id": "dominance_index",
+      "label": "Dominance Index",
+      "chart": "line",
+      "line": true,
+      "type": "metric_card",
+      "description": "Largest selected population fraction.",
+      "bar": true
+    },
+    {
+      "id": "drug_response_proxy",
+      "label": "Drug Response Proxy",
+      "chart": "line",
+      "line": true,
+      "type": "metric_card",
+      "description": "Educational drug-response summary; not clinical or wet-lab evidence."
+    },
+    {
+      "id": "evenness",
+      "label": "Evenness",
+      "chart": "line",
+      "line": true,
+      "type": "metric_card",
+      "description": "Population distribution balance proxy."
+    },
+    {
+      "id": "field_density",
+      "label": "Field Density",
+      "chart": "heat",
+      "line": true,
+      "type": "metric_card",
+      "description": "Microscope field occupancy proxy.",
+      "heat": true
+    },
+    {
+      "id": "fps",
+      "label": "FPS",
+      "chart": "value",
+      "line": true,
+      "type": "metric_card",
+      "description": "Renderer cadence proxy.",
+      "value": true
+    },
+    {
+      "id": "igg_opsonization_proxy",
+      "label": "IgG Opsonization Proxy",
+      "chart": "bar",
+      "bar": true,
+      "antibody": true,
+      "opsonization": true,
+      "type": "metric_card",
+      "description": "Educational antibody/opsonization proxy."
+    },
+    {
+      "id": "intervention_pressure",
+      "label": "Intervention Pressure",
+      "chart": "line",
+      "line": true,
+      "type": "metric_card",
+      "description": "Composite non-calibrated stress pressure from selected intervention cards."
+    },
+    {
+      "id": "kill_curve_proxy",
+      "label": "Kill Curve Proxy",
+      "chart": "line",
+      "line": true,
+      "type": "metric_card",
+      "description": "Educational intervention response curve; not calibrated susceptibility data."
+    },
+    {
+      "id": "motility_flux",
+      "label": "Motility Flux",
+      "chart": "line",
+      "line": true,
+      "type": "metric_card",
+      "description": "Selected motility contribution proxy."
+    },
+    {
+      "id": "particles",
+      "label": "Particles",
+      "chart": "value",
+      "line": true,
+      "type": "metric_card",
+      "description": "Artifact/render particle count.",
+      "value": true
+    },
+    {
+      "id": "shannon_diversity",
+      "label": "Shannon Diversity",
+      "chart": "area",
+      "line": true,
+      "type": "metric_card",
+      "description": "Population diversity proxy across active organisms.",
+      "area": true
+    },
+    {
+      "id": "stress_load",
+      "label": "Stress Load",
+      "chart": "line",
+      "line": true,
+      "type": "metric_card",
+      "description": "Composite environmental/intervention stress proxy."
+    },
+    {
+      "id": "susceptibility_proxy",
+      "label": "Susceptibility Proxy",
+      "chart": "bar",
+      "line": true,
+      "type": "metric_card",
+      "description": "Non-clinical visual response class only.",
+      "bar": true
+    },
+    {
+      "id": "total_cells",
+      "label": "Total Cells",
+      "chart": "sparkline",
+      "line": true,
+      "type": "metric_card",
+      "description": "Total cell count over time.",
+      "sparkline": true
+    }
+  ]
+}

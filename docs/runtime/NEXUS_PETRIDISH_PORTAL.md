@@ -1,14 +1,8 @@
 # NEXUS PetriDishPortal
 
-PetriDishPortal interlinks NEXUS GATE with the external PetriDishPro organism-gate workbench.
+PetriDishPortal interlinks NEXUS GATE with the embedded PetriDishPro organism-gate workbench.
 
-External root:
-
-```text
-C:\Users\jacks\OneDrive\Desktop\PetriDishPro
-```
-
-NEXUS root bridge:
+Embedded root:
 
 ```text
 PetriDishPro/
@@ -22,7 +16,7 @@ PetriDishPro/
 
 ## Boundary
 
-PetriDishPro remains its own organism-gate app. NEXUS may reflect Petri state and open fixed Petri surfaces. NEXUS may not turn Petri into arbitrary shell authority, clinical authority, wet-lab authority, species-identification authority, or autonomous repo mutation authority.
+PetriDishPro remains its own organism-gate app inside the NEXUS repository. NEXUS may reflect Petri state and open fixed Petri surfaces. NEXUS may not turn Petri into arbitrary shell authority, clinical authority, wet-lab authority, species-identification authority, or autonomous repo mutation authority.
 
 ## Claim Boundary
 

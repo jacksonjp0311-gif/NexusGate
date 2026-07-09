@@ -1,0 +1,131 @@
+{
+  "default_cell_density": 1.0,
+  "default_cell_scale": 1.0,
+  "default_field_opacity": 0.3,
+  "default_view": "organisms",
+  "dish": {
+    "avoid": "square full-field overlays unless explicitly debugging raw matrix",
+    "background": "dark phase-contrast style",
+    "rim": "cyan microscope stage rim",
+    "shape": "circle"
+  },
+  "fields": {
+    "density": {
+      "color": "#17f1ff",
+      "label": "Total Density",
+      "opacity": 0.2,
+      "scientific_note": "aggregate simulated biomass/population density"
+    },
+    "nutrient": {
+      "color": "#22ff99",
+      "label": "Nutrient",
+      "opacity": 0.22,
+      "scientific_note": "available growth substrate / media resource"
+    },
+    "oxygen": {
+      "color": "#70b7ff",
+      "label": "Oxygen",
+      "opacity": 0.22,
+      "scientific_note": "diffusive oxygen-like field"
+    },
+    "toxin": {
+      "color": "#b44cff",
+      "label": "Toxin / Antibiotic",
+      "opacity": 0.28,
+      "scientific_note": "stress or antibiotic-like pressure field"
+    },
+    "waste": {
+      "color": "#ffaa2b",
+      "label": "Waste",
+      "opacity": 0.2,
+      "scientific_note": "metabolic byproduct accumulation proxy"
+    }
+  },
+  "organisms": {
+    "bacillus_like": {
+      "behavior_visual": "rod clusters with occasional bright spore bodies",
+      "category": "rod/spore-former proxy",
+      "cell_count_scale": 0.95,
+      "claim_boundary": "not a validated Bacillus model",
+      "color": "#ffe24a",
+      "display": "Bacillus-like spore former",
+      "length_px": [
+        10,
+        22
+      ],
+      "morphology": "rod_spore",
+      "width_px": [
+        3,
+        6
+      ]
+    },
+    "ecoli_like": {
+      "behavior_visual": "expanding microcolonies near nutrient-rich zones",
+      "category": "rod bacterium proxy",
+      "cell_count_scale": 1.15,
+      "claim_boundary": "morphology-inspired cartoon proxy, not species-identification imagery",
+      "color": "#24f7ff",
+      "display": "E. coli-like fast grower",
+      "length_px": [
+        9,
+        18
+      ],
+      "morphology": "rod",
+      "width_px": [
+        3,
+        6
+      ]
+    },
+    "predator_microbe": {
+      "behavior_visual": "sparse larger amoeboid cells near prey clusters",
+      "category": "amoeboid predator proxy",
+      "cell_count_scale": 0.42,
+      "claim_boundary": "predation visual is qualitative",
+      "color": "#ff3030",
+      "display": "Predator-like microbe",
+      "morphology": "amoeboid",
+      "radius_px": [
+        5,
+        10
+      ]
+    },
+    "resistant_variant": {
+      "behavior_visual": "small cocci surviving toxin/antibiotic pressure",
+      "category": "resistant coccus/proxy clone",
+      "cell_count_scale": 0.8,
+      "claim_boundary": "resistance behavior is simulated and exploratory",
+      "color": "#42ff62",
+      "display": "Resistant variant",
+      "morphology": "coccus",
+      "radius_px": [
+        3,
+        6
+      ]
+    },
+    "yeast_like": {
+      "behavior_visual": "round budding cells and small daughter cells",
+      "category": "budding yeast proxy",
+      "cell_count_scale": 0.75,
+      "claim_boundary": "not a calibrated yeast model",
+      "color": "#ff7bff",
+      "display": "Yeast-like slow grower",
+      "morphology": "budding_yeast",
+      "radius_px": [
+        4,
+        8
+      ]
+    }
+  },
+  "schema": "PETRI_SCIENCE_VISUAL_CONFIG.v0.4c",
+  "title": "Configured Science Microscope",
+  "validation": {
+    "claim_level": "exploratory_simulation_only",
+    "visual_contract": [
+      "organisms are rendered as discrete morphology proxies",
+      "fields are clipped to circular dish geometry",
+      "field overlays cannot hide organism layer by default",
+      "config values drive labels, colors, morphology, and claim text"
+    ]
+  },
+  "version": "004C"
+}

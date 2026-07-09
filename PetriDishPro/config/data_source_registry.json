@@ -1,0 +1,32 @@
+{
+  "blocked_claims_without_import": [
+    "clinical susceptibility",
+    "treatment recommendation",
+    "diagnosis",
+    "species identification",
+    "wet-lab proof",
+    "biosafety conclusion"
+  ],
+  "required_fields": [
+    "source",
+    "record_id",
+    "retrieved_date",
+    "units",
+    "assay_or_method",
+    "claim_boundary"
+  ],
+  "rule": "Only source-gated cards may claim real-data backing. Missing provenance downgrades the card to educational proxy.",
+  "schema": "PETRI_DATA_SOURCE_REGISTRY.v0.4p",
+  "sources": {
+    "BacDive": "standardized bacterial/archaeal strain metadata: morphology, physiology, environment, taxonomy",
+    "BsubCyc": "Bacillus subtilis regulation, metabolism and network context",
+    "CDC Acanthamoeba": "free-living one-celled ameba habitat and public-health context",
+    "CDC_Acanthamoeba": "official habitat/public-health framing for Acanthamoeba; not a simulation calibration source",
+    "CLSI": "laboratory standards and method/quality framework for future AST provenance",
+    "ChEMBL": "curated bioactive molecule and drug-like activity records for future drug-response cards",
+    "EUCAST": "breakpoints, MIC/zone distributions and AST interpretation structures for future antibiotic cards",
+    "EcoCyc": "E. coli genes, metabolism, regulation, omics, media and strain database context",
+    "RCSB_PDB": "macromolecular structure records for future antibody/antigen binding cards",
+    "SGD": "Saccharomyces cerevisiae genes, phenotypes, pathways, expression and interaction resources"
+  }
+}

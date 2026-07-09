@@ -1,0 +1,10 @@
+﻿{
+  "schema": "PETRI_ORGANISM_BEHAVIOR_CARD_REGISTRY.v0.5o",
+  "content_version": "005O",
+  "claim_boundary": "Educational proxy metadata only.",
+  "behavior_model": {
+    "movement": "rule-based motility proxy",
+    "adaptation": "stress/biofilm/resistance proxy",
+    "interaction": "selected organism pressure and drug-target overlap proxy"
+  }
+}

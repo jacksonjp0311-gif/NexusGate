@@ -1,0 +1,36 @@
+﻿__pycache__/
+*.pyc
+.venv/
+node_modules/
+artifacts/runs/*
+!artifacts/runs/.gitkeep
+reports/*.json
+reports/*.md
+.DS_Store
+npm-debug.log*
+
+# PetriDishPro local/generated files
+_backup/
+dist/
+build/
+venv/
+.pytest_cache/
+*.pyo
+*.log
+.env
+.env.*
+!/.env.example
+reports/bio/unit_stdout*.txt
+reports/bio/unit_stderr*.txt
+reports/bio/failure_digest_latest.*
+reports/bio/unit_digest_*.json
+Thumbs.db
+.petri_backups/
+backups/
+artifacts/bio/runs/
+reports/bio/
+reports/latest_density_preview.svg
+*.bak
+# Public repo hygiene
+# Public smoke outputs
+reports/public/

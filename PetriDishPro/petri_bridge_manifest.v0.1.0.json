@@ -2,9 +2,9 @@
   "system": "NEXUS GATE",
   "bridge": "PetriDishPro",
   "version": "0.1.0",
-  "external_root": "C:\\Users\\jacks\\OneDrive\\Desktop\\PetriDishPro",
-  "nexus_root": "PetriDishPro",
-  "surface_type": "external_organism_gate_bridge",
+  "embedded_root": "PetriDishPro",
+  "source_mode": "repo_embedded",
+  "surface_type": "embedded_organism_gate_bridge",
   "electron_launcher": {
     "enabled": true,
     "nexus_ipc": "nexus:openPetriDishPro",

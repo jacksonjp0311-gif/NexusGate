@@ -1,0 +1,38 @@
+﻿<!doctype html>
+<!-- PETRI 004L STATIC COMPATIBILITY SEAL
+PETRI 004K REAL SCIENCE ORGANISM REGISTRY
+PETRI 004H COMPACT LIVE MICROSCOPE DESIGN
+LIVE SIM
+Organism Cards
+Run Archive
+Open Artifacts
+registry-driven live microscope
+organism_cell_overlay.js
+-->
+<html lang="en"><head><meta charset="utf-8"/><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"><title>Organism Gate // Registry Microscope</title><link rel="stylesheet" href="./styles.css"/>  <!-- PETRI_006I_DASHBOARD_POLISH_CSS -->
+  <link rel="stylesheet" href="dashboardPolish006I.css">
+  <!-- PETRI_006J_DASHBOARD_READABILITY_CSS -->
+  <link rel="stylesheet" href="dashboardReadability006J.css">
+  <!-- PETRI_006J2_HARD_DASHBOARD_CSS -->
+  <link rel="stylesheet" href="dashboardHardOverride006J2.css">
+</head><body><!-- PETRI 004K REAL SCIENCE ORGANISM REGISTRY --><!-- PETRI 004H COMPACT LIVE MICROSCOPE DESIGN --><!-- PETRI 004A/004B/004C COMPATIBILITY MARKERS: Electron Microscope Workbench Electron Microscope HUD ORGANISM GATE // PETRI DISH PRO // 004A schema adapter circular microscope dish stronger glow field rendering zoom pan reset optional grid overlay metrics chips organism population cards real population curve legend run archive panel open artifacts button Organism Cards Run Archive Open Artifacts organism_cell_overlay.js --><div class="app-shell"><header class="topbar"><section class="brand-card"><div class="mark"><span></span></div><div><h1>ORGANISM GATE</h1><p>registry-driven live microscope</p></div></section><section class="live-card"><div><span class="live-dot"></span><b>LIVE SIM</b></div><small id="runClock">00:00:00</small></section><section class="action-card"><button id="captureBtn">Capture</button><button id="pauseBtn">Pause</button><button id="resetViewBtn">Reset</button><button id="stateBtn">State</button></section></header><aside class="panel left-panel"><div class="panel-head"><span>EXPERIMENT</span><b id="validationChip">receipt</b></div><label>Preset</label><select id="preset"><option value="microbial_competition">Microbial Competition</option><option value="antibiotic_selection">Antibiotic Selection</option><option value="cellular_tissue_interaction">Cellular Tissue Interaction</option>
+        <option value="drug_response_screen">Drug Response Screen</option>
+        <option value="antibody_binding_screen">Antibody Binding Screen</option></select><div class="two"><div><label>Steps</label><input id="steps" type="number" min="1" max="600" value="120"></div><div><label>Grid</label><input id="grid" type="number" min="16" max="160" value="64"></div></div><div class="button-row"><button id="runBtn" class="primary">Run</button><button id="reloadBtn">Reload</button><button id="artifactBtn">Artifacts</button></div><label>Microscope view</label><div class="segmented"><button class="seg active" data-view="organisms">Cells</button><button class="seg" data-view="field">Field</button><button class="seg" data-view="both">Both</button><button class="seg" data-view="clean">Clean</button></div><label>Field layer</label><select id="fieldSelect"><option value="density">Density</option><option value="nutrient">Nutrient</option><option value="oxygen">Oxygen</option><option value="toxin">Toxin / Antibiotic</option><option value="waste">Waste</option></select><div class="slider"><span>Zoom</span><input id="zoom" type="range" min="0.65" max="3.25" step="0.05" value="1.15"><b id="zoomVal">1.15x</b></div><div class="slider"><span>Cells</span><input id="cellDensity" type="range" min="0.35" max="2.7" step="0.05" value="1.35"><b id="cellVal">1.35x</b></div><div class="slider"><span>Scale</span><input id="cellScale" type="range" min="0.55" max="2.1" step="0.05" value="1.0"><b id="scaleVal">1.00x</b></div><div class="slider"><span>Flow</span><input id="flow" type="range" min="0" max="2.8" step="0.05" value="1.0"><b id="flowVal">1.00x</b></div><div class="slider"><span>Field</span><input id="fieldOpacity" type="range" min="0" max="0.82" step="0.04" value="0.24"><b id="fieldVal">24%</b></div><div class="toggles"><label><input id="labelsToggle" type="checkbox" checked> Labels</label><label><input id="trackingToggle" type="checkbox" checked> Tracking</label><label><input id="gridOverlay" type="checkbox"> Grid</label></div><div class="boundary">Exploratory visualization only. Cards are source-grounded proxies, not wet-lab evidence or species identification.</div></aside><main class="scope-panel"><canvas id="scopeCanvas"></canvas><div class="hud-layer"><div class="mag-box"><small>MAG</small><b id="magDisplay">11500x</b></div><div class="scale-bar"><span>2 um</span></div><div class="compass"><b>N</b></div><div class="status-note" id="statusBox">Live registry render active. Toggle organism cards to add/remove populations.</div></div></main><aside class="panel right-panel"><div class="panel-head"><span>ORGANISM REGISTRY</span><b id="dominantChip">dominant</b></div><section><h2>Population Curves</h2><canvas id="curveCanvas"></canvas><div id="curveLegend" class="legend"></div></section><section><h2>Organism Cards</h2><div id="organismCards" class="cards"></div></section><section><h2>Run Archive</h2><div id="runArchive" class="archive"></div></section></aside><footer class="bottom-strip"><section class="mini-panel"><h3>Metrics</h3><div class="metrics" id="metricChips"></div></section><section class="mini-panel"><h3>Density Map</h3><canvas id="densityCanvas"></canvas></section><section class="mini-panel"><h3>Particle State / Registry Receipt</h3><div id="scienceConfig" class="human-receipt"></div></section></footer></div><script src="./organism_cell_overlay.js"></script><script src="./app.js"></script>
+  <script src="./dashboardCards.js"></script>  <script src="./bottomSingleLayerSeal.js"></script>
+  <script src="./drugInjectionSafeRecovery005Q.js"></script>
+  <script src="./topRightControlPod005R.js"></script>
+  <script src="./topRightControlPod005S.js"></script>
+  <script src="./drugRedHud005S.js"></script>
+  <script src="./stableMenusNoPulse005U.js"></script>
+  <!-- PETRI_006G_REGISTRY_EVENT_BUS -->
+  <script src="petriEventBus006G.js"></script>
+  <script src="registrySelectors006G.js"></script>
+  <!-- PETRI_006H_EVENT_BUS_UI_WIRING -->
+  <script src="eventBusWiring006H.js"></script>
+  <!-- PETRI_006I_DRUG_DEDUPE_DASHBOARD_POLISH -->
+  <script src="registryDedupeDashboard006I.js"></script>
+  <!-- PETRI_006J_DASHBOARD_READABILITY -->
+  <script src="dashboardReadability006J.js"></script>
+  <!-- PETRI_006J2_HARD_DASHBOARD_OVERRIDE -->
+  <script src="dashboardHardOverride006J2.js"></script>
+</body></html>

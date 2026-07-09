@@ -1,0 +1,36 @@
+{
+  "claim_boundary": "Fields are simulation proxies, not calibrated physical concentration maps.",
+  "fields": {
+    "density": {
+      "color": "#27f4ff",
+      "label": "Density",
+      "meaning": "aggregate simulated biomass",
+      "opacity": 0.22
+    },
+    "nutrient": {
+      "color": "#30ffda",
+      "label": "Nutrient",
+      "meaning": "diffusive growth substrate proxy",
+      "opacity": 0.25
+    },
+    "oxygen": {
+      "color": "#70b7ff",
+      "label": "Oxygen",
+      "meaning": "oxygen-like environmental resource",
+      "opacity": 0.2
+    },
+    "toxin": {
+      "color": "#b665ff",
+      "label": "Toxin / antibiotic",
+      "meaning": "stress or antibiotic-like pressure",
+      "opacity": 0.3
+    },
+    "waste": {
+      "color": "#ffd268",
+      "label": "Waste",
+      "meaning": "metabolic byproduct accumulation proxy",
+      "opacity": 0.18
+    }
+  },
+  "schema": "PETRI_FIELD_PROFILES.v0.4k"
+}

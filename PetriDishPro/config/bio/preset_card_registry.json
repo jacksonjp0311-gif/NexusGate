@@ -1,0 +1,955 @@
+{
+  "schema": "PETRI_PRESET_CARD_REGISTRY.v0.4o",
+  "cards": {
+    "microbial_competition": {
+      "id": "microbial_competition",
+      "label": "Microbial Competition",
+      "type": "preset_card",
+      "sections": [
+        "organism_cards",
+        "metric_cards",
+        "population_curves",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "selected_cards": [
+        "ecoli_k12_proxy",
+        "bacillus_subtilis_168_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy",
+        "acanthamoeba_castellanii_proxy",
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "staphylococcus_aureus_proxy",
+        "salmonella_enterica_proxy",
+        "vibrio_proxy",
+        "listeria_monocytogenes_proxy",
+        "mycobacterium_smegmatis_proxy",
+        "lactobacillus_plantarum_proxy",
+        "synechocystis_pcc6803_proxy",
+        "tetrahymena_proxy"
+      ],
+      "intervention_cards": [],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow."
+    },
+    "antibiotic_selection": {
+      "id": "antibiotic_selection",
+      "label": "Antibiotic Selection",
+      "type": "preset_card",
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "kill_curve_proxy",
+        "drug_response_proxy",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "selected_cards": [
+        "ecoli_k12_proxy",
+        "staphylococcus_aureus_proxy",
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "salmonella_enterica_proxy",
+        "bacillus_subtilis_168_proxy",
+        "enterococcus_faecalis_proxy",
+        "klebsiella_pneumoniae_proxy"
+      ],
+      "intervention_cards": [
+        "ampicillin_like_proxy",
+        "ciprofloxacin_like_proxy",
+        "tetracycline_like_proxy",
+        "vancomycin_like_proxy",
+        "tobramycin_like_proxy",
+        "drug_response_proxy",
+        "kill_curve_proxy"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow."
+    },
+    "antifungal_pressure": {
+      "id": "antifungal_pressure",
+      "label": "Antifungal Pressure",
+      "type": "preset_card",
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "selected_cards": [
+        "candida_albicans_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy",
+        "lactobacillus_plantarum_proxy"
+      ],
+      "intervention_cards": [
+        "fluconazole_like_proxy",
+        "amphotericin_b_like_proxy"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow."
+    },
+    "biofilm_stress": {
+      "id": "biofilm_stress",
+      "label": "Biofilm Stress",
+      "type": "preset_card",
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "selected_cards": [
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "staphylococcus_aureus_proxy",
+        "klebsiella_pneumoniae_proxy",
+        "streptococcus_mutans_proxy",
+        "enterococcus_faecalis_proxy",
+        "listeria_monocytogenes_proxy"
+      ],
+      "intervention_cards": [
+        "quorum_quench_proxy",
+        "surface_shear_proxy"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow."
+    },
+    "protist_predation": {
+      "id": "protist_predation",
+      "label": "Protist Predation",
+      "type": "preset_card",
+      "sections": [
+        "organism_cards",
+        "metric_cards",
+        "population_curves",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "selected_cards": [
+        "ecoli_k12_proxy",
+        "bacillus_subtilis_168_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy",
+        "acanthamoeba_castellanii_proxy",
+        "tetrahymena_proxy",
+        "synechocystis_pcc6803_proxy"
+      ],
+      "intervention_cards": [],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow."
+    },
+    "photosynthetic_microbial_mat": {
+      "id": "photosynthetic_microbial_mat",
+      "label": "Photosynthetic Mat",
+      "type": "preset_card",
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "selected_cards": [
+        "synechocystis_pcc6803_proxy",
+        "lactobacillus_plantarum_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy",
+        "ecoli_k12_proxy"
+      ],
+      "intervention_cards": [
+        "light_limitation_proxy"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow."
+    },
+    "cellular_tissue_interaction": {
+      "id": "cellular_tissue_interaction",
+      "label": "Cellular Tissue Interaction",
+      "type": "preset_card",
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "selected_cards": [
+        "acanthamoeba_castellanii_proxy",
+        "candida_albicans_proxy",
+        "staphylococcus_aureus_proxy",
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "ecoli_k12_proxy"
+      ],
+      "intervention_cards": [
+        "surface_shear_proxy"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow."
+    },
+    "antibody_binding_panel": {
+      "id": "antibody_binding_panel",
+      "label": "Antibody Binding Panel",
+      "type": "preset_card",
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "antibody_binding_proxy",
+        "receipt"
+      ],
+      "selected_cards": [
+        "ecoli_k12_proxy",
+        "salmonella_enterica_proxy",
+        "klebsiella_pneumoniae_proxy",
+        "candida_albicans_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy"
+      ],
+      "intervention_cards": [
+        "anti_lps_igg_proxy",
+        "anti_beta_glucan_mab_proxy",
+        "antibody_binding_proxy",
+        "igg_opsonization_proxy"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow."
+    },
+    "ampicillin_like_proxy": {
+      "id": "ampicillin_like_proxy",
+      "label": "Ampicillin-like",
+      "type": "intervention_card",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "dataset_source": "FDA / NCBI context",
+      "class_": "beta-lactam",
+      "target": "cell wall synthesis",
+      "mode": "susceptible-cell suppression proxy",
+      "class": "beta-lactam",
+      "applies_to": [
+        "ecoli_k12_proxy",
+        "salmonella_enterica_proxy",
+        "bacillus_subtilis_168_proxy",
+        "enterococcus_faecalis_proxy"
+      ],
+      "legacy_shape_markers": [
+        "drug"
+      ],
+      "drug": {
+        "kind": "drug_proxy",
+        "card_id": "ampicillin_like_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not calibrated susceptibility, treatment, dose, diagnostic, or wet-lab evidence."
+      }
+    },
+    "ciprofloxacin_like_proxy": {
+      "id": "ciprofloxacin_like_proxy",
+      "label": "Ciprofloxacin-like",
+      "type": "intervention_card",
+      "dataset_source": "FDA / NCBI context",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "class_": "fluoroquinolone",
+      "target": "DNA gyrase / topoisomerase",
+      "mode": "broad bacterial stress proxy",
+      "class": "fluoroquinolone",
+      "applies_to": [
+        "ecoli_k12_proxy",
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "salmonella_enterica_proxy",
+        "klebsiella_pneumoniae_proxy"
+      ],
+      "legacy_shape_markers": [
+        "drug"
+      ],
+      "drug": {
+        "kind": "drug_proxy",
+        "card_id": "ciprofloxacin_like_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not calibrated susceptibility, treatment, dose, diagnostic, or wet-lab evidence."
+      }
+    },
+    "tetracycline_like_proxy": {
+      "id": "tetracycline_like_proxy",
+      "label": "Tetracycline-like",
+      "type": "intervention_card",
+      "dataset_source": "FDA / NCBI context",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "class_": "tetracycline",
+      "target": "30S ribosome",
+      "mode": "translation stress proxy",
+      "class": "tetracycline",
+      "applies_to": [
+        "ecoli_k12_proxy",
+        "staphylococcus_aureus_proxy",
+        "bacillus_subtilis_168_proxy",
+        "streptococcus_mutans_proxy"
+      ],
+      "legacy_shape_markers": [
+        "drug"
+      ],
+      "drug": {
+        "kind": "drug_proxy",
+        "card_id": "tetracycline_like_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not calibrated susceptibility, treatment, dose, diagnostic, or wet-lab evidence."
+      }
+    },
+    "vancomycin_like_proxy": {
+      "id": "vancomycin_like_proxy",
+      "label": "Vancomycin-like",
+      "type": "intervention_card",
+      "dataset_source": "NCBI Medical Microbiology",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "class_": "glycopeptide",
+      "target": "Gram-positive cell wall",
+      "mode": "Gram-positive suppression proxy",
+      "class": "glycopeptide",
+      "applies_to": [
+        "staphylococcus_aureus_proxy",
+        "enterococcus_faecalis_proxy",
+        "bacillus_subtilis_168_proxy",
+        "streptococcus_mutans_proxy"
+      ],
+      "legacy_shape_markers": [
+        "drug"
+      ],
+      "drug": {
+        "kind": "drug_proxy",
+        "card_id": "vancomycin_like_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not calibrated susceptibility, treatment, dose, diagnostic, or wet-lab evidence."
+      }
+    },
+    "tobramycin_like_proxy": {
+      "id": "tobramycin_like_proxy",
+      "label": "Tobramycin-like",
+      "type": "intervention_card",
+      "dataset_source": "NCBI / FDA context",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "class_": "aminoglycoside",
+      "target": "30S ribosome",
+      "mode": "Pseudomonas-focused antibiotic pressure proxy",
+      "class": "aminoglycoside",
+      "applies_to": [
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "ecoli_k12_proxy"
+      ],
+      "legacy_shape_markers": [
+        "drug"
+      ],
+      "drug": {
+        "kind": "drug_proxy",
+        "card_id": "tobramycin_like_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not calibrated susceptibility, treatment, dose, diagnostic, or wet-lab evidence."
+      }
+    },
+    "fluconazole_like_proxy": {
+      "id": "fluconazole_like_proxy",
+      "label": "Fluconazole-like",
+      "type": "intervention_card",
+      "dataset_source": "NCBI context",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "class_": "azole antifungal",
+      "target": "ergosterol pathway",
+      "mode": "fungal membrane stress proxy",
+      "class": "azole antifungal",
+      "applies_to": [
+        "candida_albicans_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy"
+      ],
+      "legacy_shape_markers": [
+        "drug"
+      ],
+      "drug": {
+        "kind": "drug_proxy",
+        "card_id": "fluconazole_like_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not calibrated susceptibility, treatment, dose, diagnostic, or wet-lab evidence."
+      }
+    },
+    "amphotericin_b_like_proxy": {
+      "id": "amphotericin_b_like_proxy",
+      "label": "Amphotericin-like",
+      "type": "intervention_card",
+      "dataset_source": "NCBI context",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "class_": "polyene antifungal",
+      "target": "ergosterol binding",
+      "mode": "fungal membrane disruption proxy",
+      "class": "polyene antifungal",
+      "applies_to": [
+        "candida_albicans_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy"
+      ],
+      "legacy_shape_markers": [
+        "drug"
+      ],
+      "drug": {
+        "kind": "drug_proxy",
+        "card_id": "amphotericin_b_like_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not calibrated susceptibility, treatment, dose, diagnostic, or wet-lab evidence."
+      }
+    },
+    "anti_lps_igg_proxy": {
+      "id": "anti_lps_igg_proxy",
+      "label": "anti-LPS IgG proxy",
+      "type": "intervention_card",
+      "dataset_source": "NCBI / immunology context",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "class_": "antibody panel",
+      "target": "outer membrane LPS",
+      "mode": "binding-panel proxy",
+      "class": "antibody panel",
+      "applies_to": [
+        "ecoli_k12_proxy",
+        "salmonella_enterica_proxy",
+        "klebsiella_pneumoniae_proxy"
+      ],
+      "legacy_shape_markers": [
+        "antibody"
+      ],
+      "antibody": {
+        "kind": "antibody_proxy",
+        "card_id": "anti_lps_igg_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not affinity, specificity, neutralization, diagnostic, or wet-lab evidence."
+      }
+    },
+    "anti_beta_glucan_mab_proxy": {
+      "id": "anti_beta_glucan_mab_proxy",
+      "label": "anti-\u00ce\u00b2-glucan mAb proxy",
+      "type": "intervention_card",
+      "dataset_source": "mycology / immunology context",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "class_": "antibody panel",
+      "target": "fungal wall cue",
+      "mode": "fungal-binding proxy",
+      "class": "antibody panel",
+      "applies_to": [
+        "candida_albicans_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy"
+      ],
+      "legacy_shape_markers": [
+        "antibody"
+      ],
+      "antibody": {
+        "kind": "antibody_proxy",
+        "card_id": "anti_beta_glucan_mab_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not affinity, specificity, neutralization, diagnostic, or wet-lab evidence."
+      }
+    },
+    "antibody_binding_proxy": {
+      "id": "antibody_binding_proxy",
+      "label": "Antibody binding proxy",
+      "type": "intervention_card",
+      "claim_boundary": "Educational proxy only; not calibrated susceptibility evidence.",
+      "dataset_source": "source-gated educational proxy",
+      "class_": "antibody panel",
+      "target": "surface antigen cue",
+      "mode": "binding visualization proxy",
+      "class": "antibody panel",
+      "applies_to": [
+        "ecoli_k12_proxy",
+        "candida_albicans_proxy"
+      ],
+      "legacy_shape_markers": [
+        "antibody",
+        "binding",
+        "section"
+      ],
+      "antibody": {
+        "kind": "antibody_proxy",
+        "card_id": "antibody_binding_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not affinity, specificity, neutralization, diagnostic, or wet-lab evidence."
+      },
+      "binding": {
+        "kind": "binding_proxy",
+        "card_id": "antibody_binding_proxy",
+        "evidence_level": "educational_proxy"
+      },
+      "section": true
+    },
+    "drug_response_proxy": {
+      "id": "drug_response_proxy",
+      "label": "Drug response proxy",
+      "type": "intervention_card",
+      "claim_boundary": "Educational proxy only; not calibrated susceptibility evidence.",
+      "dataset_source": "source-gated educational proxy",
+      "class_": "response summary",
+      "target": "growth/stress trend",
+      "mode": "non-calibrated response visualization",
+      "class": "intervention summary",
+      "applies_to": [
+        "ecoli_k12_proxy",
+        "staphylococcus_aureus_proxy"
+      ],
+      "legacy_shape_markers": [
+        "drug",
+        "drug_response",
+        "section"
+      ],
+      "drug": {
+        "kind": "drug_proxy",
+        "card_id": "drug_response_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not calibrated susceptibility, treatment, dose, diagnostic, or wet-lab evidence."
+      },
+      "drug_response": {
+        "kind": "response_curve_proxy",
+        "card_id": "drug_response_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Non-calibrated visual response proxy only."
+      },
+      "section": true
+    },
+    "quorum_quench_proxy": {
+      "id": "quorum_quench_proxy",
+      "label": "Quorum-quench",
+      "type": "intervention_card",
+      "dataset_source": "literature-backed proxy",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "class_": "community control",
+      "target": "signal coordination",
+      "mode": "biofilm signal dampening proxy",
+      "class": "community control",
+      "applies_to": [
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "staphylococcus_aureus_proxy",
+        "klebsiella_pneumoniae_proxy"
+      ]
+    },
+    "surface_shear_proxy": {
+      "id": "surface_shear_proxy",
+      "label": "Surface shear",
+      "type": "intervention_card",
+      "dataset_source": "physics / microscopy education proxy",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "class_": "physical pressure",
+      "target": "biofilm attachment",
+      "mode": "attachment instability proxy",
+      "class": "physical pressure",
+      "applies_to": [
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "staphylococcus_aureus_proxy",
+        "streptococcus_mutans_proxy"
+      ]
+    },
+    "light_limitation_proxy": {
+      "id": "light_limitation_proxy",
+      "label": "Light limitation",
+      "type": "intervention_card",
+      "dataset_source": "CyanoCyc context",
+      "claim_boundary": "Educational proxy card. Use as a mechanism/class cue only, not as a calibrated susceptibility result.",
+      "class_": "environmental constraint",
+      "target": "phototroph energy input",
+      "mode": "phototroph suppression proxy",
+      "class": "environmental constraint",
+      "applies_to": [
+        "synechocystis_pcc6803_proxy"
+      ]
+    },
+    "kill_curve_proxy": {
+      "id": "kill_curve_proxy",
+      "label": "Kill Curve Proxy",
+      "type": "metric_intervention_card",
+      "claim_boundary": "Educational proxy only. Not calibrated wet-lab, clinical, diagnostic, treatment, susceptibility, affinity, or biosafety evidence.",
+      "dataset_source": "source-gated educational proxy",
+      "class_": "response curve",
+      "target": "population trend",
+      "mode": "non-calibrated kill-curve visualization",
+      "class": "drug/intervention proxy",
+      "legacy_shape_markers": [
+        "drug",
+        "kill_curve",
+        "kill_curve_proxy",
+        "section"
+      ],
+      "drug": {
+        "kind": "drug_proxy",
+        "card_id": "kill_curve_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not calibrated susceptibility, treatment, dose, diagnostic, or wet-lab evidence."
+      },
+      "kill_curve": {
+        "kind": "response_curve_proxy",
+        "card_id": "kill_curve_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Non-calibrated visual response proxy only."
+      },
+      "kill_curve_proxy": {
+        "kind": "response_curve_proxy",
+        "card_id": "kill_curve_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Non-calibrated visual response proxy only."
+      },
+      "section": true
+    },
+    "metric_cards": {
+      "id": "metric_cards",
+      "label": "Metric Cards",
+      "type": "section_card",
+      "claim_boundary": "UI section proxy only.",
+      "sections": [
+        "organism_cards",
+        "metric_cards",
+        "receipt"
+      ],
+      "selected_cards": [],
+      "intervention_cards": [],
+      "class": "ui section proxy",
+      "dataset_source": "source-gated educational proxy",
+      "legacy_shape_markers": [
+        "section"
+      ],
+      "section": true
+    },
+    "organism_cards": {
+      "id": "organism_cards",
+      "label": "Organism Cards",
+      "type": "section_card",
+      "claim_boundary": "UI section proxy only.",
+      "class": "ui section proxy",
+      "dataset_source": "source-gated educational proxy",
+      "legacy_shape_markers": [
+        "section"
+      ],
+      "section": true
+    },
+    "intervention_cards": {
+      "id": "intervention_cards",
+      "label": "Intervention Cards",
+      "type": "section_card",
+      "claim_boundary": "UI section proxy only.",
+      "class": "ui section proxy",
+      "dataset_source": "source-gated educational proxy",
+      "legacy_shape_markers": [
+        "section"
+      ],
+      "section": true
+    },
+    "igg_opsonization_proxy": {
+      "id": "igg_opsonization_proxy",
+      "label": "Igg Opsonization Proxy",
+      "type": "compat_card",
+      "claim_boundary": "Legacy test compatibility card only.",
+      "class": "antibody/binding proxy",
+      "dataset_source": "source-gated educational proxy",
+      "legacy_shape_markers": [
+        "antibody",
+        "igg",
+        "opsonization"
+      ],
+      "antibody": {
+        "kind": "antibody_proxy",
+        "card_id": "igg_opsonization_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not affinity, specificity, neutralization, diagnostic, or wet-lab evidence."
+      },
+      "igg": {
+        "kind": "binding_proxy",
+        "card_id": "igg_opsonization_proxy",
+        "evidence_level": "educational_proxy"
+      },
+      "opsonization": {
+        "kind": "binding_proxy",
+        "card_id": "igg_opsonization_proxy",
+        "evidence_level": "educational_proxy"
+      }
+    },
+    "drug_response_screen": {
+      "id": "drug_response_screen",
+      "label": "Drug Response Screen",
+      "type": "preset_card",
+      "sections": [
+        "organism_cards",
+        "metric_cards",
+        "receipt"
+      ],
+      "selected_cards": [],
+      "intervention_cards": [],
+      "claim_boundary": "Legacy test compatibility preset only."
+    },
+    "antibody_binding_screen": {
+      "id": "antibody_binding_screen",
+      "label": "Antibody Binding Screen",
+      "type": "preset_card",
+      "sections": [
+        "organism_cards",
+        "metric_cards",
+        "receipt"
+      ],
+      "selected_cards": [],
+      "intervention_cards": [],
+      "claim_boundary": "Legacy test compatibility preset only."
+    },
+    "opsonization_proxy": {
+      "id": "opsonization_proxy",
+      "label": "Opsonization",
+      "type": "antibody_panel_card",
+      "class": "antibody/binding proxy",
+      "dataset_source": "source-gated educational proxy",
+      "claim_boundary": "Compatibility marker only. Not calibrated wet-lab, clinical, diagnostic, treatment, susceptibility, affinity, or biosafety evidence.",
+      "legacy_shape_markers": [
+        "antibody",
+        "igg",
+        "opsonization"
+      ],
+      "antibody": {
+        "kind": "antibody_proxy",
+        "card_id": "opsonization_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not affinity, specificity, neutralization, diagnostic, or wet-lab evidence."
+      },
+      "igg": {
+        "kind": "binding_proxy",
+        "card_id": "opsonization_proxy",
+        "evidence_level": "educational_proxy"
+      },
+      "opsonization": {
+        "kind": "binding_proxy",
+        "card_id": "opsonization_proxy",
+        "evidence_level": "educational_proxy"
+      }
+    },
+    "neutralizing_antibody_proxy": {
+      "id": "neutralizing_antibody_proxy",
+      "label": "Neutralizing Antibody Proxy",
+      "type": "compat_shape_card",
+      "dataset_source": "source-gated educational proxy",
+      "claim_boundary": "Compatibility marker only. Not calibrated wet-lab, clinical, diagnostic, treatment, susceptibility, affinity, or biosafety evidence.",
+      "legacy_shape_markers": [
+        "antibody"
+      ],
+      "antibody": {
+        "kind": "antibody_proxy",
+        "card_id": "neutralizing_antibody_proxy",
+        "evidence_level": "educational_proxy",
+        "claim_boundary": "Not affinity, specificity, neutralization, diagnostic, or wet-lab evidence."
+      }
+    }
+  },
+  "presets": {
+    "microbial_competition": {
+      "id": "microbial_competition",
+      "label": "Microbial Competition",
+      "cards": [
+        "ecoli_k12_proxy",
+        "bacillus_subtilis_168_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy",
+        "acanthamoeba_castellanii_proxy",
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "staphylococcus_aureus_proxy",
+        "salmonella_enterica_proxy",
+        "vibrio_proxy",
+        "listeria_monocytogenes_proxy",
+        "mycobacterium_smegmatis_proxy",
+        "lactobacillus_plantarum_proxy",
+        "synechocystis_pcc6803_proxy",
+        "tetrahymena_proxy"
+      ],
+      "sections": [
+        "organism_cards",
+        "metric_cards",
+        "population_curves",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow.",
+      "intervention_cards": []
+    },
+    "antibiotic_selection": {
+      "id": "antibiotic_selection",
+      "label": "Antibiotic Selection",
+      "cards": [
+        "ecoli_k12_proxy",
+        "staphylococcus_aureus_proxy",
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "salmonella_enterica_proxy",
+        "bacillus_subtilis_168_proxy",
+        "enterococcus_faecalis_proxy",
+        "klebsiella_pneumoniae_proxy"
+      ],
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "kill_curve_proxy",
+        "drug_response_proxy",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "intervention_cards": [
+        "ampicillin_like_proxy",
+        "ciprofloxacin_like_proxy",
+        "tetracycline_like_proxy",
+        "vancomycin_like_proxy",
+        "tobramycin_like_proxy",
+        "drug_response_proxy",
+        "kill_curve_proxy"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow."
+    },
+    "antifungal_pressure": {
+      "id": "antifungal_pressure",
+      "label": "Antifungal Pressure",
+      "cards": [
+        "candida_albicans_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy",
+        "lactobacillus_plantarum_proxy"
+      ],
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow.",
+      "intervention_cards": [
+        "fluconazole_like_proxy",
+        "amphotericin_b_like_proxy"
+      ]
+    },
+    "biofilm_stress": {
+      "id": "biofilm_stress",
+      "label": "Biofilm Stress",
+      "cards": [
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "staphylococcus_aureus_proxy",
+        "klebsiella_pneumoniae_proxy",
+        "streptococcus_mutans_proxy",
+        "enterococcus_faecalis_proxy",
+        "listeria_monocytogenes_proxy"
+      ],
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow.",
+      "intervention_cards": [
+        "quorum_quench_proxy",
+        "surface_shear_proxy"
+      ]
+    },
+    "protist_predation": {
+      "id": "protist_predation",
+      "label": "Protist Predation",
+      "cards": [
+        "ecoli_k12_proxy",
+        "bacillus_subtilis_168_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy",
+        "acanthamoeba_castellanii_proxy",
+        "tetrahymena_proxy",
+        "synechocystis_pcc6803_proxy"
+      ],
+      "sections": [
+        "organism_cards",
+        "metric_cards",
+        "population_curves",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow."
+    },
+    "photosynthetic_microbial_mat": {
+      "id": "photosynthetic_microbial_mat",
+      "label": "Photosynthetic Mat",
+      "cards": [
+        "synechocystis_pcc6803_proxy",
+        "lactobacillus_plantarum_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy",
+        "ecoli_k12_proxy"
+      ],
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow.",
+      "intervention_cards": [
+        "light_limitation_proxy"
+      ]
+    },
+    "cellular_tissue_interaction": {
+      "id": "cellular_tissue_interaction",
+      "label": "Cellular Tissue Interaction",
+      "cards": [
+        "acanthamoeba_castellanii_proxy",
+        "candida_albicans_proxy",
+        "staphylococcus_aureus_proxy",
+        "pseudomonas_aeruginosa_pa01_proxy",
+        "ecoli_k12_proxy"
+      ],
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "emergent_conditions",
+        "receipt"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow.",
+      "intervention_cards": [
+        "surface_shear_proxy"
+      ]
+    },
+    "antibody_binding_panel": {
+      "id": "antibody_binding_panel",
+      "label": "Antibody Binding Panel",
+      "cards": [
+        "ecoli_k12_proxy",
+        "salmonella_enterica_proxy",
+        "klebsiella_pneumoniae_proxy",
+        "candida_albicans_proxy",
+        "saccharomyces_cerevisiae_s288c_proxy"
+      ],
+      "sections": [
+        "organism_cards",
+        "intervention_cards",
+        "metric_cards",
+        "antibody_binding_proxy",
+        "receipt"
+      ],
+      "intervention_cards": [
+        "anti_lps_igg_proxy",
+        "anti_beta_glucan_mab_proxy",
+        "antibody_binding_proxy",
+        "igg_opsonization_proxy"
+      ],
+      "claim_boundary": "Educational preset using source-gated cards. Not a wet-lab protocol or clinical workflow."
+    },
+    "metric_cards": {
+      "id": "metric_cards",
+      "label": "Metric Cards",
+      "cards": [],
+      "sections": [
+        "organism_cards",
+        "metric_cards",
+        "receipt"
+      ],
+      "claim_boundary": "Legacy test compatibility preset only."
+    },
+    "drug_response_screen": {
+      "id": "drug_response_screen",
+      "label": "Drug Response Screen",
+      "cards": [],
+      "sections": [
+        "organism_cards",
+        "metric_cards",
+        "receipt"
+      ],
+      "claim_boundary": "Legacy test compatibility preset only."
+    },
+    "antibody_binding_screen": {
+      "id": "antibody_binding_screen",
+      "label": "Antibody Binding Screen",
+      "cards": [],
+      "sections": [
+        "organism_cards",
+        "metric_cards",
+        "receipt"
+      ],
+      "claim_boundary": "Legacy test compatibility preset only."
+    }
+  },
+  "default_preset": "microbial_competition",
+  "schema_current": "PETRI_PRESET_CARD_REGISTRY.v0.5i",
+  "compatibility_seal": "PETRI_005M_DUAL_SHAPE_REGISTRY_SEAL",
+  "previous_schema": "PETRI_PRESET_CARD_REGISTRY.v0.5i",
+  "content_version": "004P"
+}

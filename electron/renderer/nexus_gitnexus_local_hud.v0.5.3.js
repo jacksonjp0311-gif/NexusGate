@@ -136,10 +136,12 @@
   function dockGeometry() {
     const rail = findLeftRailRect();
     const footerTop = findFooterTop();
+    const petri = document.querySelector(".petri-dish-mini")?.getBoundingClientRect();
     const left = Math.max(4, rail.left);
     const width = Math.max(260, Math.min(405, rail.width || (rail.right - rail.left)));
-    const top = Math.min((rail.bottom || 360) + 10, footerTop - 235);
-    const height = Math.max(215, footerTop - top - 10);
+    const petriAligned = petri && petri.top > window.innerHeight * 0.38 && petri.height > 180;
+    const top = petriAligned ? petri.top : Math.min((rail.bottom || 360) + 10, footerTop - 235);
+    const height = petriAligned ? petri.height : Math.max(215, footerTop - top - 10);
     return {
       left: Math.round(left),
       top: Math.round(top),

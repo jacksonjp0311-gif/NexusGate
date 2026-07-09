@@ -1,0 +1,25 @@
+{
+  "claim_boundary": "Deterministic simulated spatial state. Not microscopy evidence, clinical evidence, species identification, treatment guidance, or biosafety evidence.",
+  "counts": {
+    "cells": 225,
+    "interactions": 9,
+    "particles": 320
+  },
+  "files": {
+    "cells": "cells.json",
+    "fields": "fields.json",
+    "interactions": "interactions.json",
+    "particles": "particles.json"
+  },
+  "generated_utc": "2026-07-09T15:51:22.808979Z",
+  "run_dir": "C:\\Users\\jacks\\OneDrive\\Desktop\\PetriDishPro\\artifacts\\bio\\runs\\petri_preview",
+  "run_id": "petri_preview",
+  "schema": "PETRI_PARTICLE_STATE.v0.4m",
+  "seed": 4136855258,
+  "selected_default": [
+    "ecoli_k12_proxy",
+    "bacillus_subtilis_proxy",
+    "saccharomyces_cerevisiae_proxy",
+    "acanthamoeba_castellanii_proxy"
+  ]
+}

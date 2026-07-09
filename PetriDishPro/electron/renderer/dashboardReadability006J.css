@@ -1,0 +1,225 @@
+/*
+PETRI DISH PRO v0.6J
+Dashboard Readability Upgrade.
+*/
+
+:root[data-petri-006j="ready"] [data-petri-006j-panel] {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.petri-006j-shell {
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  padding: 10px 11px;
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(0, 240, 255, 0.075), rgba(255, 220, 82, 0.045)),
+    rgba(3, 14, 25, 0.78);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+}
+
+.petri-006j-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 20px;
+  color: #24f7ff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.petri-006j-badge {
+  flex: 0 0 auto;
+  max-width: 42%;
+  color: rgba(236, 247, 255, 0.82);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  padding: 3px 7px;
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(0, 240, 255, 0.08);
+}
+
+.petri-006j-metric-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+  min-width: 0;
+}
+
+.petri-006j-metric-row {
+  display: grid;
+  grid-template-columns: minmax(70px, 0.8fr) minmax(95px, 1.2fr) minmax(42px, auto);
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 7px 8px;
+  border: 1px solid rgba(0, 240, 255, 0.16);
+  border-radius: 10px;
+  background: rgba(0, 7, 15, 0.62);
+  overflow: hidden;
+}
+
+.petri-006j-metric-copy {
+  min-width: 0;
+}
+
+.petri-006j-metric-label {
+  color: rgba(245, 252, 255, 0.96);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.05;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.petri-006j-metric-sub {
+  margin-top: 3px;
+  color: rgba(162, 202, 220, 0.78);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.petri-006j-metric-value {
+  color: rgba(255, 231, 126, 0.98);
+  font-size: 15px;
+  font-weight: 950;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.petri-006j-spark {
+  width: 100%;
+  height: 34px;
+  min-width: 72px;
+  overflow: visible;
+}
+
+.petri-006j-gridline {
+  fill: none;
+  stroke: rgba(180, 230, 255, 0.11);
+  stroke-width: 1;
+}
+
+.petri-006j-line {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.petri-006j-line-cyan,
+.petri-006j-dot-cyan {
+  stroke: #22f7ff;
+  fill: #22f7ff;
+}
+
+.petri-006j-line-gold,
+.petri-006j-dot-gold {
+  stroke: #ffd95a;
+  fill: #ffd95a;
+}
+
+.petri-006j-line-magenta,
+.petri-006j-dot-magenta {
+  stroke: #ff4fd8;
+  fill: #ff4fd8;
+}
+
+.petri-006j-line-green,
+.petri-006j-dot-green {
+  stroke: #7cff5a;
+  fill: #7cff5a;
+}
+
+.petri-006j-condition-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.petri-006j-condition-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(48px, auto);
+  gap: 8px;
+  align-items: center;
+  min-height: 35px;
+  padding: 7px 8px 7px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 82, 0.22);
+  background: rgba(10, 10, 8, 0.72);
+  border-left-width: 4px;
+  overflow: hidden;
+}
+
+.petri-006j-status-good {
+  border-left-color: #2efcff;
+}
+
+.petri-006j-status-watch {
+  border-left-color: #ffd95a;
+}
+
+.petri-006j-status-info {
+  border-left-color: #9c7cff;
+}
+
+.petri-006j-status-safe {
+  border-left-color: #56ffad;
+}
+
+.petri-006j-condition-main {
+  min-width: 0;
+}
+
+.petri-006j-condition-title {
+  color: rgba(255, 244, 168, 0.98);
+  font-size: 12px;
+  font-weight: 950;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.petri-006j-condition-detail {
+  margin-top: 2px;
+  color: rgba(224, 242, 255, 0.75);
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.18;
+  white-space: normal;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.petri-006j-condition-value {
+  color: rgba(255, 238, 116, 0.98);
+  font-size: 13px;
+  font-weight: 950;
+  text-align: right;
+  white-space: nowrap;
+  max-width: 92px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,9 @@
+[project]
+name = "petri-dish-pro"
+version = "0.1.0"
+description = "Standalone scientific microscope simulator with Python engine and Electron UI."
+authors = [{name = "James Jackson"}]
+requires-python = ">=3.10"
+
+[tool.petri]
+claim_boundary = "educational/exploratory only"

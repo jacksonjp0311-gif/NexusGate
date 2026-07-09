@@ -1,0 +1,7 @@
+# Core engine intentionally uses only Python standard library.
+# Optional future scientific stack:
+# numpy
+# scipy
+# pandas
+# matplotlib
+# pydantic

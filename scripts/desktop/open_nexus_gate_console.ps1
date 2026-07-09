@@ -884,7 +884,7 @@ function Invoke-NexusNeuralActivity {
 }
 
 function Invoke-NexusPetriDishPortal {
-    $petriRoot = Join-Path (Split-Path -Parent $RepoRoot) "PetriDishPro"
+    $petriRoot = Join-Path $RepoRoot "PetriDishPro"
     $petriElectron = Join-Path $petriRoot "electron"
 
     while ($true) {

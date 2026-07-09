@@ -1,0 +1,71 @@
+{
+  "id": "custom_microbial_competition_example",
+  "name": "Custom Microbial Competition Example",
+  "description": "Example experiment JSON matching the built-in microbial competition preset.",
+  "preset": "custom",
+  "grid_size": 72,
+  "steps": 160,
+  "sample_every": 1,
+  "seed": 9001,
+  "carrying_capacity": 30.0,
+  "diffusion_rate": 0.075,
+  "nutrient_diffusion": 0.035,
+  "toxin_diffusion": 0.028,
+  "organisms": [
+    {
+      "id": "fast_microbe",
+      "label": "Fast Microbe",
+      "kind": "microbe",
+      "initial_cells": 42,
+      "growth_rate": 0.092,
+      "death_rate": 0.004,
+      "motility": 0.075,
+      "nutrient_affinity": 0.32,
+      "oxygen_affinity": 0.30,
+      "toxin_sensitivity": 0.55,
+      "waste_sensitivity": 0.08,
+      "resistance": 0.05,
+      "carrying_capacity_share": 1.0,
+      "produces_toxin": 0.0,
+      "consumes_prey": false,
+      "prey_ids": [],
+      "predation_rate": 0.0,
+      "color": "#00f0ff",
+      "notes": "Fast nutrient-responsive bacterial-like population; exploratory only."
+    },
+    {
+      "id": "resistant_variant",
+      "label": "Resistant Variant",
+      "kind": "microbe",
+      "initial_cells": 18,
+      "growth_rate": 0.047,
+      "death_rate": 0.004,
+      "motility": 0.052,
+      "nutrient_affinity": 0.45,
+      "oxygen_affinity": 0.26,
+      "toxin_sensitivity": 0.12,
+      "waste_sensitivity": 0.07,
+      "resistance": 0.82,
+      "carrying_capacity_share": 1.0,
+      "produces_toxin": 0.0015,
+      "consumes_prey": false,
+      "prey_ids": [],
+      "predation_rate": 0.0,
+      "color": "#59ff6b",
+      "notes": "Antibiotic-resistant style clone; simplified selection dynamics only."
+    }
+  ],
+  "fields": {
+    "nutrient_level": 1.0,
+    "oxygen_level": 0.9,
+    "toxin_level": 0.08,
+    "waste_level": 0.0,
+    "nutrient_hotspots": 4,
+    "toxin_spots": 3,
+    "edge_antibiotic_gradient": true
+  },
+  "metadata": {
+    "claim_level": "educational_exploratory",
+    "engine": "spatial_agent_grid_v0_1"
+  }
+}
