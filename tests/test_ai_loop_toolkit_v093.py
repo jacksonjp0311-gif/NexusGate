@@ -23,7 +23,7 @@ NEW_LOOPS = {
 class TestAILoopToolkitV093(unittest.TestCase):
     def test_registry_contains_toolkit_loops_and_commands(self):
         registry = json.loads((ROOT / "loops" / "nexus_loop_registry.v0.1.json").read_text(encoding="utf-8"))
-        self.assertIn(registry["generated_for"], {"NEXUS_GATE_v0.9.3", "NEXUS_GATE_v0.9.4", "NEXUS_GATE_v0.9.5", "NEXUS_GATE_v0.9.6", "NEXUS_GATE_v0.9.7", "NEXUS_GATE_v0.9.8"})
+        self.assertIn(registry["generated_for"], {"NEXUS_GATE_v0.9.3", "NEXUS_GATE_v0.9.4", "NEXUS_GATE_v0.9.5", "NEXUS_GATE_v0.9.6", "NEXUS_GATE_v0.9.7", "NEXUS_GATE_v0.9.8", "NEXUS_GATE_v0.9.9"})
         self.assertTrue(NEW_LOOPS.issubset(set(registry["loops"])))
         for loop_id in NEW_LOOPS:
             loop = registry["loops"][loop_id]

@@ -14,6 +14,8 @@ set -euo pipefail
 # toolbelt
 # toolbelt-dashboard
 # toolbelt-next
+# preflight
+# preflight-json
 # toolbelt-ship
 # toolbelt|toolbelt-dashboard compatibility marker for v0.9.6 tests
 # wound-compress
@@ -36,6 +38,16 @@ run_meta_loop_exec() {
 }
 
 case "$COMMAND" in
+  preflight)
+    shift || true
+    INTENT="${*:-Preflight next Nexus mutation surface.}"
+    python -m nexus_gate.loops.preflight_optimizer --root . --intent "$INTENT"
+    ;;
+  preflight-json)
+    shift || true
+    INTENT="${*:-Preflight next Nexus mutation surface.}"
+    python -m nexus_gate.loops.preflight_optimizer --root . --intent "$INTENT" --json
+    ;;
   wound-compress)
     shift || true
     INTENT="${*:-Compress active Nexus wound.}"

@@ -1,0 +1,11 @@
+{
+  "failed_preflight_gates": [],
+  "generated_utc": "2026-07-09T14:01:15.461956+00:00",
+  "recommended_next_loop": "scope-hygiene",
+  "schema": "NEXUS_PREFLIGHT_OPTIMIZER.v0.9.9",
+  "status": "warn",
+  "version": "0.9.9",
+  "warning_preflight_gates": [
+    "ignored_stage_risk"
+  ]
+}

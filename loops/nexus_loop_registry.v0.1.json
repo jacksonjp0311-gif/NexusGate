@@ -89,6 +89,32 @@
       "description": "Emit loop cards.",
       "mutates": false
     },
+    "preflight_json": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.preflight_optimizer",
+        "--root",
+        ".",
+        "--intent",
+        "<intent>",
+        "--json"
+      ],
+      "description": "Run the read-only v0.9.9 Preflight Optimizer packet with intent.",
+      "mutates": false
+    },
+    "preflight_optimizer": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.preflight_optimizer",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "description": "Run the read-only v0.9.9 Preflight Optimizer packet.",
+      "mutates": false
+    },
     "toolbelt_cockpit": {
       "argv": [
         "python",
@@ -746,7 +772,7 @@
     "self_authorization_enabled": false
   },
   "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
-  "generated_for": "NEXUS_GATE_v0.9.8",
+  "generated_for": "NEXUS_GATE_v0.9.9",
   "loops": {
     "ai-orchestrator-preflight": {
       "ai_callable": true,
@@ -1646,6 +1672,36 @@
       ],
       "stop_on_failure": true,
       "title": "Performance Scout"
+    },
+    "preflight-optimizer": {
+      "ai_callable": true,
+      "description": "Preflight the next mutation surface before a generated closer runs.",
+      "display_group": "Operator Tools",
+      "function": "Check command parity, packet contracts, README freshness, bounded report shape, and ignored staging risk before mutation.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before writing or running a closer script, especially after wound compression.",
+      "requires_human_authorization": false,
+      "stages": [
+        {
+          "command": "wound_compress",
+          "name": "wound_compression",
+          "type": "command_ref"
+        },
+        {
+          "command": "preflight_optimizer",
+          "name": "preflight_optimizer",
+          "type": "command_ref"
+        },
+        {
+          "name": "preflight_packet",
+          "path": "reports/nexus_preflight_optimizer_latest.json",
+          "required": true,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": false,
+      "title": "Preflight Optimizer"
     },
     "refactor-map": {
       "ai_callable": true,

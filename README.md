@@ -16,6 +16,7 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems. The po
 - v0.9.6 Toolbelt Console Integration
 - v0.9.7 Toolbelt Cockpit Output
 - v0.9.8 Wound Compression Engine
+- v0.9.9 Preflight Optimizer
 - Neural Activity v0.1.1 canonical visual-organ line
 - Spiral Core Portal v0.1.2 desktop-face line
 
@@ -30,6 +31,7 @@ cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
 .\scripts\nexus.ps1 toolbelt-next -Tag "<intent>"
 .\scripts\nexus.ps1 toolbelt-json -Tag "<intent>"
 .\scripts\nexus.ps1 wound-compress -Tag "<failed gate>"
+.\scripts\nexus.ps1 preflight -Tag "<intent>"
 python -m unittest discover -s tests
 python -m nexus_gate.compiler --root . --json
 ```
@@ -41,7 +43,7 @@ bash scripts/nexus.sh toolbelt-next "<intent>"
 ```
 
 ## Human Director Box
-NEXUS GATE current line: v0.9.7 Toolbelt Cockpit Output. The AI Toolbelt Console now has a human-readable cockpit lane and a machine JSON lane. Evidence files are truth; stdout tails are smoke only.
+NEXUS GATE current line: v0.9.9 Preflight Optimizer. Toolbelt Cockpit gives the operator view, Wound Compression reduces failures to one repair target, and Preflight Optimizer checks the next mutation surface before it runs. Evidence files are truth; stdout tails are smoke only.
 
 ## AI Toolbelt Console
 Use the AI Toolbelt Console before choosing a patch path.
@@ -87,6 +89,14 @@ active wound = one repair target
 
 ```powershell
 .\scripts\nexus.ps1 wound-compress -Tag "<failed gate>"
+```
+
+## Preflight Optimizer
+v0.9.9 checks the next mutation surface before a closer runs: command parity, packet contracts, README current-line freshness, bounded-report shape, and ignored-file staging risk.
+
+```powershell
+.\scripts\nexus.ps1 preflight -Tag "<intent>"
+.\scripts\nexus.ps1 preflight-json -Tag "<intent>"
 ```
 
 ## Lessons From the v0.9.1 Seal
@@ -135,6 +145,7 @@ The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current oper
 | Toolbelt Console | `docs/runtime/NEXUS_TOOLBELT_CONSOLE.md` |
 | Toolbelt Cockpit | `docs/runtime/NEXUS_TOOLBELT_COCKPIT.md` |
 | Wound Compression Engine | `docs/runtime/NEXUS_WOUND_COMPRESSION_ENGINE.md` |
+| Preflight Optimizer | `docs/runtime/NEXUS_PREFLIGHT_OPTIMIZER.md` |
 | NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |
 | Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |
 | NexusCell | `docs/nexus_cell/NEXUS_CELL.md` |

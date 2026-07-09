@@ -9,7 +9,7 @@ TOOLBELT_LOOPS = {"toolbelt-index", "toolbelt-start", "toolbelt-dashboard", "too
 class TestAIToolbeltV095(unittest.TestCase):
     def test_registry_contains_toolbelt_loops_and_command(self):
         registry = json.loads((ROOT / "loops" / "nexus_loop_registry.v0.1.json").read_text(encoding="utf-8"))
-        self.assertIn(registry["generated_for"], {"NEXUS_GATE_v0.9.5", "NEXUS_GATE_v0.9.6", "NEXUS_GATE_v0.9.7"})
+        self.assertIn(registry["generated_for"], {"NEXUS_GATE_v0.9.5", "NEXUS_GATE_v0.9.6", "NEXUS_GATE_v0.9.7", "NEXUS_GATE_v0.9.8", "NEXUS_GATE_v0.9.9"})
         self.assertTrue(TOOLBELT_LOOPS.issubset(set(registry["loops"])))
         self.assertIn("toolbelt_index", registry["allowed_commands"])
         self.assertFalse(registry["allowed_commands"]["toolbelt_index"]["mutates"])

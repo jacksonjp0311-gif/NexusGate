@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "loops", "loop-registry", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "loops", "loop-registry", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -227,6 +227,16 @@ function Invoke-NexusCellPolicyCli {
 
 
 
+
+function Invoke-NexusPreflightOptimizer {
+    param([string]$Intent = "Preflight next Nexus mutation surface.", [switch]$Json)
+    if ([string]::IsNullOrWhiteSpace($Intent)) { $Intent = "Preflight next Nexus mutation surface." }
+    $args = @("-m", "nexus_gate.loops.preflight_optimizer", "--root", ".", "--intent", $Intent)
+    if ($Json.IsPresent) { $args += "--json" }
+    python @args
+    if ($LASTEXITCODE -ne 0) { throw "NEXUS preflight optimizer failed." }
+}
+
 function Invoke-NexusWoundCompression {
     param([string]$Intent = "Compress active Nexus wound.")
     if ([string]::IsNullOrWhiteSpace($Intent)) { $Intent = "Compress active Nexus wound." }
@@ -249,6 +259,8 @@ function Invoke-NexusToolbelt {
 }
 
 switch ($Command) {
+    "preflight" { Invoke-NexusPreflightOptimizer -Intent $Tag }
+    "preflight-json" { Invoke-NexusPreflightOptimizer -Intent $Tag -Json }
     "wound-compress" { Invoke-NexusWoundCompression -Intent $Tag }
     "toolbelt" { Invoke-NexusToolbelt -View "dashboard" -Intent $Tag }
     "toolbelt-json" { Invoke-NexusToolbelt -View "dashboard" -Intent $Tag -Json }

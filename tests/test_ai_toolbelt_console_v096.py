@@ -3,7 +3,7 @@ ROOT=pathlib.Path(__file__).resolve().parents[1]
 NEW={"toolbelt-console","toolbelt-next","toolbelt-process","toolbelt-ship-console"}
 class TestAIToolbeltConsoleV096(unittest.TestCase):
  def test_registry_commands(self):
-  r=json.loads((ROOT/"loops"/"nexus_loop_registry.v0.1.json").read_text(encoding="utf-8-sig")); self.assertIn(r["generated_for"], {"NEXUS_GATE_v0.9.6","NEXUS_GATE_v0.9.7"}); self.assertTrue(NEW.issubset(set(r["loops"])))
+  r=json.loads((ROOT/"loops"/"nexus_loop_registry.v0.1.json").read_text(encoding="utf-8-sig")); self.assertIn(r["generated_for"], {"NEXUS_GATE_v0.9.6","NEXUS_GATE_v0.9.7", "NEXUS_GATE_v0.9.8", "NEXUS_GATE_v0.9.9"}); self.assertTrue(NEW.issubset(set(r["loops"])))
   for c in ["toolbelt_console","toolbelt_next","toolbelt_start","toolbelt_ship"]: self.assertIn(c,r["allowed_commands"]); self.assertFalse(r["allowed_commands"][c]["mutates"])
   for l in NEW: self.assertTrue(r["loops"][l]["ai_callable"]); self.assertFalse(r["loops"][l]["mutates"]); self.assertTrue(r["loops"][l]["local_only"])
  def test_packet(self):

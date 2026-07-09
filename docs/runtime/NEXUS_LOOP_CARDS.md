@@ -237,6 +237,13 @@ Boundary: cards describe governed local loops. They do not grant autonomous auth
 - Function: Find lightweight performance and size signals without profiling side effects.
 - Command: `python -m nexus_gate.loops.runner --root . --loop performance-scout --intent "<intent>" --json`
 
+### Preflight Optimizer
+
+- Loop: `preflight-optimizer`
+- Group: `Operator Tools`
+- Function: Check command parity, packet contracts, README freshness, bounded report shape, and ignored staging risk before mutation.
+- Command: `python -m nexus_gate.loops.runner --root . --loop preflight-optimizer --intent "<intent>" --json`
+
 ### Refactor Map
 
 - Loop: `refactor-map`

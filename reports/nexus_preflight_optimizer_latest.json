@@ -1,0 +1,93 @@
+{
+  "boundary": {
+    "arbitrary_command_execution": false,
+    "autonomous_authority": false,
+    "git_commit_enabled": false,
+    "git_push_enabled": false,
+    "git_stage_enabled": false,
+    "network_enabled": false,
+    "repo_mutation_enabled": false,
+    "secrets_enabled": false
+  },
+  "claim_boundary": "Preflight Optimizer is a read-only mutation-surface predictor. It grants no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
+  "failed_preflight_gates": [],
+  "gates": {
+    "bounded_report_shape": {
+      "evidence": {
+        "accepted_shapes": [
+          "full_bounded_packet",
+          "compact_passing_bounded_packet"
+        ],
+        "exists": true,
+        "has_failures_list": false,
+        "has_results_tail": false,
+        "notes": [],
+        "status": "pass",
+        "test_count": null
+      },
+      "status": "pass"
+    },
+    "command_surface_parity": {
+      "evidence": {
+        "duplicate_bash_cases": [],
+        "missing_bash": [],
+        "missing_powershell": []
+      },
+      "status": "pass"
+    },
+    "ignored_stage_risk": {
+      "evidence": {
+        "force_add_required": [
+          "state/loops/nexus_preflight_optimizer_latest.json"
+        ],
+        "ignored_intended": [
+          {
+            "path": "state/loops/nexus_preflight_optimizer_latest.json",
+            "rule": ".gitignore:29:state/loops/*_latest.json\tstate/loops/nexus_preflight_optimizer_latest.json"
+          },
+          {
+            "path": "reports/nexus_preflight_optimizer_latest.json",
+            "rule": ".gitignore:22:reports/**/*.json\treports/nexus_preflight_optimizer_latest.json"
+          }
+        ]
+      },
+      "status": "warn"
+    },
+    "packet_contracts": {
+      "evidence": {
+        "toolbelt_missing": [],
+        "toolbelt_schema": "NEXUS_AI_TOOLBELT.v0.9.7",
+        "toolbelt_version": "0.9.7",
+        "wound_missing": [],
+        "wound_schema": "NEXUS_WOUND_COMPRESSION.v0.9.8",
+        "wound_version": "0.9.8"
+      },
+      "status": "pass"
+    },
+    "readme_current_line": {
+      "evidence": {
+        "current_line": "v0.9.9 Preflight Optimizer. Toolbelt Cockpit gives the operator view, Wound Compression reduces failures to one repair target, and Preflight Optimizer checks the next mutation surface before it runs. Evidence files are truth; stdout tails are smoke only.",
+        "expected_latest": "v0.9.9",
+        "line_count": 208
+      },
+      "status": "pass"
+    }
+  },
+  "generated_utc": "2026-07-09T14:01:15.461956+00:00",
+  "intent": "024D target runner repair",
+  "mode": "nexus_preflight_optimizer",
+  "recommended_next_command": ".\\scripts\\nexus.ps1 meta-loop -Loop scope-hygiene -Tag \"024D target runner repair\"",
+  "recommended_next_loop": "scope-hygiene",
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "schema": "NEXUS_PREFLIGHT_OPTIMIZER.v0.9.9",
+  "status": "warn",
+  "truth_rule": {
+    "file_packets": "truth",
+    "stdout": "smoke_only",
+    "tail": "never_truth"
+  },
+  "version": "0.9.9",
+  "warning_preflight_gates": [
+    "ignored_stage_risk"
+  ]
+}
