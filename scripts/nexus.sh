@@ -16,6 +16,7 @@ set -euo pipefail
 # toolbelt-next
 # toolbelt-ship
 # toolbelt|toolbelt-dashboard compatibility marker for v0.9.6 tests
+# wound-compress
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 COMMAND="${1:-rehydrate}"
@@ -35,6 +36,11 @@ run_meta_loop_exec() {
 }
 
 case "$COMMAND" in
+  wound-compress)
+    shift || true
+    INTENT="${*:-Compress active Nexus wound.}"
+    python -m nexus_gate.loops.wound_compression --root . --intent "$INTENT" --json
+    ;;
   # NEXUS_TOOLBELT_CONSOLE_V096_BASH_PARITY
   # Compatibility marker for legacy tests/docs: toolbelt|toolbelt-dashboard
   toolbelt)

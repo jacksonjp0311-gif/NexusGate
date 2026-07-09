@@ -710,6 +710,18 @@
       "description": "Run unittest discovery.",
       "mutates": false
     },
+    "wound_compress": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.wound_compression",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "description": "Compress active bounded/compiler/git wounds into one read-only repair packet.",
+      "mutates": false
+    },
     "wound_resume": {
       "argv": [
         "python",
@@ -734,7 +746,7 @@
     "self_authorization_enabled": false
   },
   "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
-  "generated_for": "NEXUS_GATE_v0.9.7",
+  "generated_for": "NEXUS_GATE_v0.9.8",
   "loops": {
     "ai-orchestrator-preflight": {
       "ai_callable": true,
@@ -2400,6 +2412,41 @@
       ],
       "stop_on_failure": true,
       "title": "Validate Promote"
+    },
+    "wound-compression-engine": {
+      "ai_callable": true,
+      "description": "Read bounded/compiler/toolbelt/git evidence and compress the active wound into one repair target.",
+      "display_group": "Wound Intelligence",
+      "function": "Compress active wound evidence without granting mutation authority.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use after any failed gate before writing a new closer.",
+      "requires_human_authorization": false,
+      "stages": [
+        {
+          "name": "bounded_report",
+          "path": "reports/nexus_bounded_runtime_report_latest.json",
+          "required": false,
+          "type": "read"
+        },
+        {
+          "name": "compiler_report",
+          "path": "reports/nexus_compile_report_latest.json",
+          "required": false,
+          "type": "read"
+        },
+        {
+          "name": "toolbelt_report",
+          "path": "reports/nexus_toolbelt_latest.json",
+          "required": false,
+          "type": "read"
+        },
+        {
+          "command": "wound_compress",
+          "name": "emit_wound_compression",
+          "type": "command"
+        }
+      ]
     },
     "wound-indexed-resume": {
       "ai_callable": true,

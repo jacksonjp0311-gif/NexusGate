@@ -15,6 +15,7 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems. The po
 - v0.9.5 AI Toolbelt Surface
 - v0.9.6 Toolbelt Console Integration
 - v0.9.7 Toolbelt Cockpit Output
+- v0.9.8 Wound Compression Engine
 - Neural Activity v0.1.1 canonical visual-organ line
 - Spiral Core Portal v0.1.2 desktop-face line
 
@@ -28,6 +29,7 @@ cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
 .\scripts\nexus.ps1 toolbelt
 .\scripts\nexus.ps1 toolbelt-next -Tag "<intent>"
 .\scripts\nexus.ps1 toolbelt-json -Tag "<intent>"
+.\scripts\nexus.ps1 wound-compress -Tag "<failed gate>"
 python -m unittest discover -s tests
 python -m nexus_gate.compiler --root . --json
 ```
@@ -70,6 +72,22 @@ v0.9.4 Personal Coding Paradise supplies idea forge, architecture sketch, patch 
 
 ## AI Loop Toolkit
 v0.9.3 AI Loop Toolkit Expansion gives repo radar, scope hygiene, claim-boundary audit, surface map, stale scan, next-action router, handoff pack, dependency preflight, alignment score, boundary scan, release brief, and evolution radar.
+
+
+## Wound Compression Engine
+v0.9.8 compresses bounded-test, compiler, Toolbelt, and git-status evidence into one active-wound packet before the next closer is written.
+
+```text
+stdout = smoke only
+files = evidence
+tail = never truth
+passed gates = certificates
+active wound = one repair target
+```
+
+```powershell
+.\scripts\nexus.ps1 wound-compress -Tag "<failed gate>"
+```
 
 ## Lessons From the v0.9.1 Seal
 ```text
@@ -116,6 +134,7 @@ The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current oper
 | AI Toolbelt | `docs/runtime/NEXUS_AI_TOOLBELT.md` |
 | Toolbelt Console | `docs/runtime/NEXUS_TOOLBELT_CONSOLE.md` |
 | Toolbelt Cockpit | `docs/runtime/NEXUS_TOOLBELT_COCKPIT.md` |
+| Wound Compression Engine | `docs/runtime/NEXUS_WOUND_COMPRESSION_ENGINE.md` |
 | NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |
 | Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |
 | NexusCell | `docs/nexus_cell/NEXUS_CELL.md` |

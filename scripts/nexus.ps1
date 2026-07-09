@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "loops", "loop-registry", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "loops", "loop-registry", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -226,6 +226,14 @@ function Invoke-NexusCellPolicyCli {
 }
 
 
+
+function Invoke-NexusWoundCompression {
+    param([string]$Intent = "Compress active Nexus wound.")
+    if ([string]::IsNullOrWhiteSpace($Intent)) { $Intent = "Compress active Nexus wound." }
+    python -m nexus_gate.loops.wound_compression --root . --intent $Intent --json
+    if ($LASTEXITCODE -ne 0) { throw "NEXUS wound compression failed." }
+}
+
 function Invoke-NexusToolbelt {
     param(
         [string]$View = "dashboard",
@@ -241,6 +249,7 @@ function Invoke-NexusToolbelt {
 }
 
 switch ($Command) {
+    "wound-compress" { Invoke-NexusWoundCompression -Intent $Tag }
     "toolbelt" { Invoke-NexusToolbelt -View "dashboard" -Intent $Tag }
     "toolbelt-json" { Invoke-NexusToolbelt -View "dashboard" -Intent $Tag -Json }
     "toolbelt-start" { Invoke-NexusToolbelt -View "start" -Intent $Tag }

@@ -9,7 +9,7 @@
     "secrets_enabled": false,
     "self_authorization_enabled": false
   },
-  "card_count": 59,
+  "card_count": 60,
   "cards": [
     {
       "ai_callable": true,
@@ -3220,6 +3220,70 @@
         "self_authorization_enabled": false
       },
       "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
+      "command_surface": "python -m nexus_gate.loops.runner --root . --loop wound-compression-engine --intent \"<intent>\" --json",
+      "description": "Read bounded/compiler/toolbelt/git evidence and compress the active wound into one repair target.",
+      "execute_surface": "python -m nexus_gate.loops.runner --root . --loop wound-compression-engine --intent \"<intent>\" --execute --human-authorized --json",
+      "function": "Compress active wound evidence without granting mutation authority.",
+      "hud": {
+        "ai_toolkit_ready": true,
+        "card_kind": "nexus_loop",
+        "coding_paradise_ready": false,
+        "display_group": "Wound Intelligence",
+        "human_card_ready": true,
+        "primary_action": "inspect_or_run_through_governed_loop_runner"
+      },
+      "local_only": true,
+      "loop_id": "wound-compression-engine",
+      "mutates": false,
+      "operator_use": "Use after any failed gate before writing a new closer.",
+      "order": 59,
+      "powershell_surface": ".\\scripts\\nexus.ps1 meta-loop -Loop wound-compression-engine -Tag \"<intent>\"",
+      "requires_human_authorization": false,
+      "schema": "NEXUS_LOOP_CARD.v0.9.7",
+      "stages": [
+        {
+          "name": "bounded_report",
+          "path": "reports/nexus_bounded_runtime_report_latest.json",
+          "type": "read"
+        },
+        {
+          "name": "compiler_report",
+          "path": "reports/nexus_compile_report_latest.json",
+          "type": "read"
+        },
+        {
+          "name": "toolbelt_report",
+          "path": "reports/nexus_toolbelt_latest.json",
+          "type": "read"
+        },
+        {
+          "command": "wound_compress",
+          "name": "emit_wound_compression",
+          "type": "command"
+        }
+      ],
+      "stages_summary": [
+        "bounded_report:read",
+        "compiler_report:read",
+        "toolbelt_report:read",
+        "emit_wound_compression:command"
+      ],
+      "stop_on_failure": false,
+      "title": "Wound Compression Engine"
+    },
+    {
+      "ai_callable": true,
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_command_execution": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false,
+        "self_authorization_enabled": false
+      },
+      "claim_boundary": "Nexus loops are local read-only operator evidence surfaces. They grant no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.",
       "command_surface": "python -m nexus_gate.loops.runner --root . --loop wound-indexed-resume --intent \"<intent>\" --json",
       "description": "Emit active wound and resume recommendation.",
       "execute_surface": "python -m nexus_gate.loops.runner --root . --loop wound-indexed-resume --intent \"<intent>\" --execute --human-authorized --json",
@@ -3236,7 +3300,7 @@
       "loop_id": "wound-indexed-resume",
       "mutates": false,
       "operator_use": "Use when this loop matches the active gate, wound, or validation need.",
-      "order": 59,
+      "order": 60,
       "powershell_surface": ".\\scripts\\nexus.ps1 meta-loop -Loop wound-indexed-resume -Tag \"<intent>\"",
       "requires_human_authorization": true,
       "schema": "NEXUS_LOOP_CARD.v0.9.7",
@@ -3261,7 +3325,7 @@
     }
   ],
   "claim_boundary": "Loop cards are HUD-readable surfaces. They grant no authority.",
-  "generated_at": "2026-07-09T12:27:02.004762+00:00",
+  "generated_at": "2026-07-09T13:11:01.408518+00:00",
   "generated_for": "NEXUS_GATE_v0.9.7",
   "schema": "NEXUS_LOOP_CARD_SET.v0.9.7",
   "source_registry": "loops/nexus_loop_registry.v0.1.json",

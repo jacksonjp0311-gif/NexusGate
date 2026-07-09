@@ -419,6 +419,13 @@ Boundary: cards describe governed local loops. They do not grant autonomous auth
 - Function: Verify candidate patch and stop before commit/push unless the human-authorized outer script performs it.
 - Command: `python -m nexus_gate.loops.runner --root . --loop validate-promote --intent "<intent>" --json`
 
+### Wound Compression Engine
+
+- Loop: `wound-compression-engine`
+- Group: `Wound Intelligence`
+- Function: Compress active wound evidence without granting mutation authority.
+- Command: `python -m nexus_gate.loops.runner --root . --loop wound-compression-engine --intent "<intent>" --json`
+
 ### Wound Indexed Resume
 
 - Loop: `wound-indexed-resume`
