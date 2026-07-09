@@ -29,9 +29,19 @@ reports/**/*.ps1
 state/loops/*_latest.json
 state/loops/toolkit_*.json
 state/loops/nexus_*_state.json
+state/loops/nexus_toolbelt.v*.json
+state/nexus_geometric_memory_runtime_latest.json
 state/visual/
 state/wounds/
 state/nexus_cell/
+
+# draft HUD docs/assets (not yet promoted)
+docs/runtime/NEXUS_TOOLBELT_*.md
+docs/runtime/NEXUS_METRICS_HUD.md
+docs/gitnexus/NEXUS_GITNEXUS_STANDALONE_HUD.md
+electron/renderer/nexus_conversation_output_bridge.v0.2.*.js
+electron/renderer/nexus_gitnexus_*standalone*
+electron/renderer/nexus_gitnexus_core_hud.*
 
 # tesseract neural network runtime outputs
 reports/tesseract_neural_network/*.json
