@@ -11,7 +11,7 @@ class TestWoundCompressionEngineV098(unittest.TestCase):
         from nexus_gate.loops.wound_compression import build_wound_compression_packet
         packet = build_wound_compression_packet(ROOT, "unit")
         self.assertEqual(packet["schema"], "NEXUS_WOUND_COMPRESSION.v0.9.8")
-        self.assertEqual(packet["version"], "0.9.8")
+        self.assertEqual(packet["version"], "0.9.8", "0.9.9")
         self.assertIn(packet["status"], {"pass", "wound"})
         self.assertIn("active_wound", packet)
         self.assertIn("active_wound_key", packet)
@@ -24,7 +24,7 @@ class TestWoundCompressionEngineV098(unittest.TestCase):
 
     def test_registry_scripts_and_docs_expose_wound_compression(self):
         registry = json.loads((ROOT / "loops" / "nexus_loop_registry.v0.1.json").read_text(encoding="utf-8"))
-        self.assertIn(registry["generated_for"], {"NEXUS_GATE_v0.9.8"})
+        self.assertIn(registry["generated_for"], {"NEXUS_GATE_v0.9.8", "NEXUS_GATE_v0.9.9"})
         self.assertIn("wound_compress", registry["allowed_commands"])
         self.assertFalse(registry["allowed_commands"]["wound_compress"]["mutates"])
         self.assertIn("wound-compression-engine", registry["loops"])
