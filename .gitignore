@@ -13,6 +13,26 @@ reports/script_runs/
 reports/tui/
 electron/reports/
 
+# common generated reports (keep canonical tracked ones; ignore new exhaust)
+reports/*.json
+reports/*.jsonl
+reports/*.md
+reports/*.txt
+reports/*.ps1
+reports/**/*.json
+reports/**/*.jsonl
+reports/**/*.md
+reports/**/*.txt
+reports/**/*.ps1
+
+# generated state exhaust (loop/toolkit packets, seals, wounds)
+state/loops/*_latest.json
+state/loops/toolkit_*.json
+state/loops/nexus_*_state.json
+state/visual/
+state/wounds/
+state/nexus_cell/
+
 # tesseract neural network runtime outputs
 reports/tesseract_neural_network/*.json
 reports/tesseract_neural_network/*.jsonl
@@ -25,5 +45,7 @@ README.md.bak_*
 
 # local automation scratch (chat session)
 annie_*.bat
+PYTHON_ANALYSIS.py
+NEXUS_CHAT_FIX.md
 
 electron/node_modules/
