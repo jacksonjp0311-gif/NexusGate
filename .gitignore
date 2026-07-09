@@ -43,6 +43,10 @@ electron/renderer/nexus_conversation_output_bridge.v0.2.*.js
 electron/renderer/nexus_gitnexus_*standalone*
 electron/renderer/nexus_gitnexus_core_hud.*
 
+# local-only drafts
+enhanced_chat_interface_governance.md
+tests/test_ai_toolbelt_cockpit_v097.py
+
 # tesseract neural network runtime outputs
 reports/tesseract_neural_network/*.json
 reports/tesseract_neural_network/*.jsonl
