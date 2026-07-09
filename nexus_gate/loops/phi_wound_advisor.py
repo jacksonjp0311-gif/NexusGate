@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import subprocess
+import sys
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -91,19 +92,21 @@ def _extract_json(text: str) -> dict[str, Any] | None:
         return None
 
 
+def _ollama_adapter_command() -> str:
+    return f'"{sys.executable}" -m nexus_gate.loops.phi4_ollama_adapter --prompt-file "{{prompt_file}}"'
+
+
+def _normalize_phi_command(command: str) -> str:
+    command = (command or "").strip()
+    lowered = command.lower()
+    if "launch-phi4minicli.cmd" in lowered or "start-phi4minicli.ps1" in lowered:
+        return _ollama_adapter_command()
+    return command
+
+
 def _default_phi_command() -> str:
     env = os.environ.get("NEXUS_PHI4_MINI_COMMAND") or os.environ.get("NEXUS_PHI4_MINI_CMD")
-    if env:
-        return env
-    home = Path.home()
-    candidates = [
-        home / "OneDrive" / "Desktop" / "Phi4Mini-OrangeCLI" / "Launch-Phi4MiniCLI.cmd",
-        home / "Desktop" / "Phi4Mini-OrangeCLI" / "Launch-Phi4MiniCLI.cmd",
-    ]
-    for path in candidates:
-        if path.exists():
-            return f'"{path}"'
-    return ""
+    return _normalize_phi_command(env or "")
 
 
 def _deterministic_advice(wound_packet: dict[str, Any], preflight_packet: dict[str, Any], intent: str) -> dict[str, Any]:
@@ -146,6 +149,7 @@ def _build_prompt(packet: dict[str, Any]) -> str:
 
 
 def _call_phi(command: str, prompt: str, timeout: int = 90) -> dict[str, Any]:
+    command = _normalize_phi_command(command)
     if not command:
         return {"ok": False, "status": "not_configured", "error": "Set NEXUS_PHI4_MINI_COMMAND to a local Phi-4 Mini command.", "raw_preview": ""}
     prompt_file = None

@@ -76,6 +76,7 @@ def check_command_surface(root: Path) -> dict[str, Any]:
     return _gate(status, {"missing_powershell": missing_ps, "missing_bash": missing_sh, "duplicate_bash_cases": duplicate_case_tokens})
 
 
+
 def check_readme_current_line(root: Path) -> dict[str, Any]:
     text = _read(root / "README.md")
     semantic_versions = []
@@ -85,20 +86,29 @@ def check_readme_current_line(root: Path) -> dict[str, Any]:
     expected = f"v{latest[0]}.{latest[1]}.{latest[2]}"
     current_line_match = re.search(r"NEXUS GATE current line:\s*([^\n]+)", text)
     current_line = current_line_match.group(1).strip() if current_line_match else "missing"
-    needs = ["Preflight Optimizer", "NEXUS_PREFLIGHT_OPTIMIZER.md"]
+
+    required_concepts = ["Preflight Optimizer"]
+    required_docs = ["docs/runtime/NEXUS_PREFLIGHT_OPTIMIZER.md"]
     if latest >= (1, 0, 0):
-        needs += ["Phi Wound Advisor", "NEXUS_PHI_WOUND_ADVISOR.md"]
-    missing = [item for item in needs if item not in text]
-    ok = expected in current_line and not missing
+        required_concepts.append("Phi Wound Advisor")
+        required_docs.append("docs/runtime/NEXUS_PHI_WOUND_ADVISOR.md")
+    if latest >= (1, 0, 1):
+        required_concepts.append("Ollama")
+        required_docs.append("docs/runtime/NEXUS_PHI_WOUND_OLLAMA_ADAPTER.md")
+
+    missing_concepts = [item for item in required_concepts if item not in text]
+    missing_docs = [rel for rel in required_docs if not (root / rel).exists()]
+    ok = expected in current_line and not missing_concepts and not missing_docs
     return _gate("pass" if ok else "fail", {
         "expected_latest": expected,
         "latest_tuple": list(latest),
         "current_line": current_line,
         "line_count": len(text.splitlines()),
-        "missing": missing,
-        "accepted_current_line_versions": ["v0.9.9", "v1.0.0+"],
+        "missing_concepts": missing_concepts,
+        "missing_docs": missing_docs,
+        "docs_evidence_mode": "file_presence_not_readme_filename_string",
+        "accepted_current_line_versions": ["v0.9.9", "v1.0.0+", "v1.0.1+"],
     })
-
 
 def check_packet_contracts(root: Path) -> dict[str, Any]:
     evidence: dict[str, Any] = {}

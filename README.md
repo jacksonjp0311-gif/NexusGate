@@ -18,6 +18,7 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems. The po
 - v0.9.8 Wound Compression Engine
 - v0.9.9 Preflight Optimizer
 - v1.0.0 Phi Wound Advisor
+- v1.0.1 Phi Ollama Adapter
 - Neural Activity v0.1.1 canonical visual-organ line
 - Spiral Core Portal v0.1.2 desktop-face line
 
@@ -44,7 +45,7 @@ bash scripts/nexus.sh toolbelt-next "<intent>"
 ```
 
 ## Human Director Box
-NEXUS GATE current line: v1.0.0 Phi Wound Advisor. Toolbelt shows the operator state, Wound Compression reduces failures, Preflight predicts mutation risk, and local Phi-4 Mini can advise on compact wound packets. Evidence files are truth; stdout tails are smoke only.
+NEXUS GATE current line: v1.0.1 Phi Ollama Adapter. Toolbelt, Wound Compression, Preflight, Phi Wound Advisor, and Ollama adapter form a governed local wound-intelligence lane. Evidence files are truth; stdout tails are smoke only.
 
 ## AI Toolbelt Console
 Use the AI Toolbelt Console before choosing a patch path.
@@ -76,7 +77,6 @@ v0.9.4 Personal Coding Paradise supplies idea forge, architecture sketch, patch 
 ## AI Loop Toolkit
 v0.9.3 AI Loop Toolkit Expansion gives repo radar, scope hygiene, claim-boundary audit, surface map, stale scan, next-action router, handoff pack, dependency preflight, alignment score, boundary scan, release brief, and evolution radar.
 
-
 ## Wound Compression Engine
 v0.9.8 compresses bounded-test, compiler, Toolbelt, and git-status evidence into one active-wound packet before the next closer is written.
 
@@ -101,12 +101,7 @@ v0.9.9 checks the next mutation surface before a closer runs: command parity, pa
 ```
 
 ## Phi Wound Advisor
-v1.0.0 adds `phi-wound` and `phi-wound-gpu`: local Phi-4 Mini receives only compact wound packets and returns advisory repair JSON. Phi recommends; NexusGate verifies; human authorizes durable mutation.
-
-```powershell
-.\scripts\nexus.ps1 phi-wound -Tag "<failed gate>"
-```
-
+v1.0.0 Phi Wound Advisor adds `phi-wound` and `phi-wound-gpu`: Phi recommends, NexusGate verifies, human authorizes durable mutation.
 ## Lessons From the v0.9.1 Seal
 ```text
 Gates are certificates.
@@ -140,6 +135,8 @@ No adapter, no bridge. No schema, no route. No authority verification, no mutati
 ## GitHub / README / Docs
 The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current operator surfaces include Spiral Core Desktop Portal, Electron HUD, PowerShell TUI, Dev Mode / HANDOFF, Failure Doctor, Mode Selection HUD, NexusCell, Neural Activity, Nexus Loops / Cards, Personal Coding Paradise, AI Toolbelt Console, and Toolbelt Cockpit.
 
+## Phi Wound Ollama Adapter
+v1.0.1 routes `phi-wound-gpu` through the non-interactive Ollama JSON adapter instead of the Orange human launcher.
 ## Documentation Map
 | Need | File |
 |---|---|
@@ -154,6 +151,7 @@ The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current oper
 | Toolbelt Cockpit | `docs/runtime/NEXUS_TOOLBELT_COCKPIT.md` |
 | Wound Compression Engine | `docs/runtime/NEXUS_WOUND_COMPRESSION_ENGINE.md` |
 | Phi Wound Advisor | `docs/runtime/NEXUS_PHI_WOUND_ADVISOR.md` |
+| Phi Ollama Adapter | `docs/runtime/NEXUS_PHI_WOUND_OLLAMA_ADAPTER.md` |
 | Preflight Optimizer | `docs/runtime/NEXUS_PREFLIGHT_OPTIMIZER.md` |
 | NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |
 | Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |
@@ -196,6 +194,9 @@ Reflective Intelligence Layer for AI Systems; local-first reflective intelligenc
 | Neural Activity | Canonical visual organ |
 | GitHub / README / Docs | resource submenu |
 | Failure Modes / Doctor Gateway | diagnosis surface |
+
+## Phi Wound Ollama Adapter
+v1.0.1 routes the Phi Wound Advisor through a non-interactive Ollama adapter so NexusGate can receive JSON stdout instead of opening the human Orange CLI window.
 
 ## Documentation Map
 | Need | File |
