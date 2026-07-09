@@ -1,5 +1,5 @@
 ## v0.9.6 - Toolbelt Console Integration
-Status: current
+Status: prior
 - Integrates the AI Toolbelt into PowerShell and Bash operator command surfaces.
 - Adds Toolbelt Console loops and a default process cockpit.
 - Preserves human authorization, compiler seal, and no-autonomous-authority boundaries.
@@ -17,6 +17,11 @@ Status: historical
 - Add wound-indexed resume packets so green gates are treated as continuation certificates.
 
 # NEXUS GATE Roadmap
+
+## v0.9.7 - Toolbelt Console Integration
+Status: current
+- Normalize Toolbelt meta-loop registry entries so loop stages and allowed command argv are compiler/test valid.
+- Close the v0.9.6 -> v0.9.7 identity alignment wound (README/ROADMAP/CHANGELOG/pyproject).
 
 ## v0.9.1 - Origin-Aligned GITNEXUS Impact Bridge
 

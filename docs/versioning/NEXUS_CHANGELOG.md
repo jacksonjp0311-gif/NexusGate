@@ -1,3 +1,9 @@
+## v0.9.7 - Toolbelt Console Integration
+Status: current
+- Normalizes Toolbelt Console/Next/Process/Ship Console loops to satisfy meta-loop runner stage contracts.
+- Adds missing allowed-command argv entries for Toolbelt command stages.
+- Aligns version identity across README, ROADMAP, changelog, and pyproject.
+
 ## v0.9.6 - Toolbelt Console Integration
 - Integrated AI Toolbelt into `scripts/nexus.ps1` and `scripts/nexus.sh`.
 - Added Toolbelt Console loops, docs, tests, and state packets.

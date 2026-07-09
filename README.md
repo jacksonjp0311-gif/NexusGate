@@ -55,18 +55,17 @@ Spiral Core Portal = gateway face. NEXUS GATE = reflective intelligence layer fo
 ```
 
 ## Human Director Box
-NEXUS GATE current line: v0.9.6 Toolbelt Console Integration, exposing the AI Toolbelt Console as the default local coding cockpit.
+NEXUS GATE current line: v0.9.7 Toolbelt Cockpit Output. The AI Toolbelt Console is the readable default cockpit; toolbelt-json preserves machine packets.
 NEXUS GATE is currently at the v0.9.6 AI Toolbelt Surface line with the v0.9.1A README and ChatGPT script-doctrine addendum while preserving the v0.8.1 UI cleanup line, v0.8.3F geo preflight/warning seal line, NexusCell v0.1 execution-governance line, Neural Activity v0.1.1 canonical visual-organ line, and Spiral Core Portal v0.1.2 desktop-face line: compact root README, blue/light-blue Spiral Core Portal, GitHub / README / Docs submenu, reflective repair loop, Failure Doctor, HANDOFF bridge, Dev Mode, Geometric Memory Router, NexusShell, NexusCell receipts, GITNEXUS impact evidence, ChatGPT/script gate doctrine, and live Neural Cathedral preview evidence. Current strategic direction: reflective intelligence for AI systems through local reasoning surfaces, bounded action bridges, failure diagnosis, compiler evidence, failure intelligence packets, reflective self-heal logs, NexusCell receipts, Neural Activity visual telemetry, GITNEXUS impact packets, AI-callable local loop cards, wound-indexed resume packets, and durable GitHub compounding under human authority. v0.9.6 integrates the Toolbelt as the default local coding cockpit; v0.9.4 adds a personal coding paradise toolkit, and v0.9.5 turns it into the AI Toolbelt Surface: creative planning, debug recovery, docs weaving, command palette, local oracle, continuity seals, and safe shipping loops. v0.9.2 AI-callable local loop fabric lets ChatGPT/Codex act as a meta-orchestrator by selecting named local loops while the repository keeps authority, evidence, gates, and human authorization boundaries.
 
 ## AI Toolbelt Console
-Use the Toolbelt as the default coding cockpit before choosing a patch path.
+v0.9.7 Toolbelt Cockpit Output keeps the AI Toolbelt Console as the default local coding cockpit.
 ```powershell
 .\scripts\nexus.ps1 toolbelt
+.\scripts\nexus.ps1 toolbelt-json -Tag "<intent>"
 .\scripts\nexus.ps1 toolbelt-next -Tag "<intent>"
-.\scripts\nexus.ps1 toolbelt-start -Tag "<intent>"
-.\scripts\nexus.ps1 toolbelt-ship -Tag "<intent>"
 ```
-Process chains: Start, Build, Debug, Ship, Continuity. Toolbelt output is local JSON evidence; it grants no autonomous authority.
+Process: Start, Build, Debug, Ship, Continuity. Boundary: read-only; no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.
 
 ## Lessons From the v0.9.1 Seal
 ```text
@@ -85,29 +84,7 @@ Commit and push only after the seal.
 The v0.9.1 GITNEXUS impact bridge seal established the working ChatGPT/script pattern for this repository: use compact machine state, name the active wound, resume from the failed gate, preserve prior green gates, write receipts, and never convert model output into autonomous authority. Before any future generated script changes this repo, read `chatgpt/scripts.md`. v0.9.3 AI Loop Toolkit Expansion and v0.9.4 Personal Coding Paradise loop toolkit gives the AI a wider local toolbelt: repo radar, scope hygiene, claim audit, surface map, stale scan, next-action router, handoff pack, dependency preflight, alignment score, boundary scan, release brief, evolution radar, toolbelt index, toolbelt dashboard, and toolbelt ship chain.
 
 ## AI Toolbelt
-The AI Toolbelt is the practical command map for the personal coding paradise. It turns the loop registry into an operator-facing toolbelt so ChatGPT/Codex can recommend a local loop, the repo can run that loop, and the human can review the packet before any durable mutation.
-
-```text
-Orient -> Plan -> Debug -> Hygiene -> Ship -> Memory -> UI/HUD
-```
-
-Core toolbelt chains:
-```text
-Start: toolbelt-start -> toolbelt-dashboard -> next-action-router
-Build: idea-forge -> architecture-sketch -> patch-plan -> test-strategy
-Debug: debug-lens -> wound-indexed-resume -> compiler-wound-focus
-Ship: scope-hygiene -> boundary-scan -> release-brief -> release-seal
-Continuity: handoff-pack -> session-brief -> memory-anchor -> continuity-seal
-```
-
-Local command:
-```powershell
-python -m nexus_gate.loops.toolbelt --root . --json
-python -m nexus_gate.loops.runner --root . --loop toolbelt-start --intent "<intent>" --execute --human-authorized --json
-python -m nexus_gate.loops.runner --root . --loop toolbelt-dashboard --intent "<intent>" --execute --human-authorized --json
-```
-
-Boundary: the toolbelt is a local read-only operator index. It grants no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.
+AI Toolbelt chains: Start toolbelt-start -> toolbelt-dashboard -> next-action-router; Build idea-forge -> architecture-sketch -> patch-plan -> test-strategy; Debug debug-lens -> wound-indexed-resume -> compiler-wound-focus; Ship scope-hygiene -> boundary-scan -> release-brief -> release-seal; Continuity handoff-pack -> session-brief -> memory-anchor -> continuity-seal.
 
 ## Geometric Memory Router
 NEXUS Geometric Memory Router is the next rehydration layer. It does not train or mutate model weights. It maps every request through four typed axes before repair or compounding:
@@ -217,3 +194,6 @@ Reflective intelligence is permitted. Autonomous authority is not. Organic evolu
 v0.9.1A = README/script doctrine. v0.9.1B = loop cards surfaced in the Spiral Core Portal. Gates are certificates; active wounds resume without backtracking; loop cards preserve system loops for a future human HUD.
 ```
 - `docs/runtime/NEXUS_NEURAL_ACTIVITY.md` - neural activity / cathedral HUD surface.
+
+
+Toolbelt Console Integration

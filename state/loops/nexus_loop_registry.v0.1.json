@@ -89,7 +89,7 @@
       "description": "Emit loop cards.",
       "mutates": false
     },
-    "toolbelt_console": {
+    "toolbelt_cockpit": {
       "argv": [
         "python",
         "-m",
@@ -97,11 +97,25 @@
         "--root",
         ".",
         "--view",
-        "dashboard",
-        "--json"
+        "dashboard"
       ],
-      "description": "Emit read-only AI Toolbelt Console packet: dashboard.",
+      "description": "Emit human-readable AI Toolbelt Cockpit output.",
       "mutates": false
+    },
+    "toolbelt_console": {
+      "local_only": true,
+      "mutates": false,
+      "requires_human_authorization": true,
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolbelt",
+        "--root",
+        ".",
+        "--view",
+        "dashboard"
+      ],
+      "description": "Emit Toolbelt console dashboard (human-readable cockpit)."
     },
     "toolbelt_dashboard": {
       "argv": [
@@ -118,6 +132,9 @@
       "mutates": false
     },
     "toolbelt_index": {
+      "local_only": true,
+      "mutates": false,
+      "requires_human_authorization": true,
       "argv": [
         "python",
         "-m",
@@ -128,10 +145,26 @@
         "index",
         "--json"
       ],
-      "description": "Emit read-only AI Toolbelt Console packet: index.",
+      "description": "Emit Toolbelt index view (JSON packet)."
+    },
+    "toolbelt_json": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolbelt",
+        "--root",
+        ".",
+        "--view",
+        "dashboard",
+        "--json"
+      ],
+      "description": "Emit machine-readable AI Toolbelt JSON packet.",
       "mutates": false
     },
     "toolbelt_next": {
+      "local_only": true,
+      "mutates": false,
+      "requires_human_authorization": true,
       "argv": [
         "python",
         "-m",
@@ -142,10 +175,12 @@
         "next",
         "--json"
       ],
-      "description": "Emit read-only AI Toolbelt Console packet: next.",
-      "mutates": false
+      "description": "Emit Toolbelt next-action routing view (JSON packet)."
     },
     "toolbelt_ship": {
+      "local_only": true,
+      "mutates": false,
+      "requires_human_authorization": true,
       "argv": [
         "python",
         "-m",
@@ -156,10 +191,12 @@
         "ship",
         "--json"
       ],
-      "description": "Emit read-only AI Toolbelt Console packet: ship.",
-      "mutates": false
+      "description": "Emit Toolbelt ship view (release routing packet)."
     },
     "toolbelt_start": {
+      "local_only": true,
+      "mutates": false,
+      "requires_human_authorization": true,
       "argv": [
         "python",
         "-m",
@@ -167,11 +204,9 @@
         "--root",
         ".",
         "--view",
-        "start",
-        "--json"
+        "start"
       ],
-      "description": "Emit read-only AI Toolbelt Console packet: start.",
-      "mutates": false
+      "description": "Emit Toolbelt start view (repo-radar routing)."
     },
     "toolkit_alignment_score": {
       "argv": [
@@ -698,8 +733,8 @@
     "secrets_enabled": false,
     "self_authorization_enabled": false
   },
-  "claim_boundary": "Named loops orchestrate local rehydration, validation, failure intelligence, toolbelt console packets, and receipts. They do not grant autonomous authority, arbitrary shell execution, network access, secret access, git write authority, rollback proof, security proof, safety proof, or correctness proof.",
-  "generated_for": "NEXUS_GATE_v0.9.6",
+  "claim_boundary": "AI-callable local loops are read-only/operator-bounded surfaces. They grant no autonomous authority, network access, secrets access, git write authority, safety proof, security proof, or correctness proof.",
+  "generated_for": "NEXUS_GATE_v0.9.7",
   "loops": {
     "ai-orchestrator-preflight": {
       "ai_callable": true,
@@ -2049,27 +2084,46 @@
       "stop_on_failure": true,
       "title": "Test Strategy"
     },
-    "toolbelt-console": {
+    "toolbelt-cockpit": {
       "ai_callable": true,
-      "description": "Open the local AI Toolbelt cockpit with status, recommended next loop, and process chains.",
-      "display_group": "Toolbelt",
-      "function": "Open the local AI Toolbelt cockpit with status, recommended next loop, and process chains.",
+      "description": "Show the human-readable AI Toolbelt Cockpit.",
+      "display_group": "Operator Tools",
+      "function": "Render local status, recommended next loop, reason, next command, and chains.",
       "local_only": true,
       "mutates": false,
-      "operator_use": "Use as the default first command when entering a coding session.",
+      "operator_use": "Use first at the start of a coding session.",
       "requires_human_authorization": true,
       "stages": [
         {
-          "command": "toolbelt_console",
-          "name": "emit_toolbelt_packet",
+          "command": "toolbelt_json",
+          "name": "emit_cockpit_packet",
           "type": "command"
         },
         {
           "max_preview_lines": 80,
-          "name": "toolbelt_latest",
-          "path": "state/loops/nexus_toolbelt_latest.json",
+          "name": "cockpit_text",
+          "path": "reports/nexus_toolbelt_cockpit_latest.txt",
           "required": false,
           "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Toolbelt Cockpit"
+    },
+    "toolbelt-console": {
+      "ai_callable": true,
+      "description": "Emit the Toolbelt Console dashboard packet.",
+      "display_group": "Operator Tools",
+      "function": "Emit the Toolbelt Console dashboard packet.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use for v0.9.6 console compatibility.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolbelt_console",
+          "name": "emit_toolbelt_cockpit",
+          "type": "command"
         }
       ],
       "stop_on_failure": true,
@@ -2127,60 +2181,88 @@
       "stop_on_failure": true,
       "title": "Toolbelt Index"
     },
-    "toolbelt-next": {
+    "toolbelt-json": {
       "ai_callable": true,
-      "description": "Emit the next-action Toolbelt view that recommends the next loop from local evidence.",
-      "display_group": "Toolbelt",
-      "function": "Emit the next-action Toolbelt view that recommends the next loop from local evidence.",
+      "description": "Emit the machine-readable AI Toolbelt packet.",
+      "display_group": "Operator Tools",
+      "function": "Preserve the JSON lane for ChatGPT/Codex handoff while cockpit remains readable by default.",
       "local_only": true,
       "mutates": false,
-      "operator_use": "Use after any patch, failure, or rehydration packet.",
+      "operator_use": "Use when an AI packet is needed instead of human cockpit text.",
       "requires_human_authorization": true,
       "stages": [
         {
-          "command": "toolbelt_next",
-          "name": "emit_toolbelt_packet",
+          "command": "toolbelt_json",
+          "name": "emit_json_packet",
           "type": "command"
         },
         {
           "max_preview_lines": 80,
-          "name": "toolbelt_latest",
-          "path": "state/loops/nexus_toolbelt_latest.json",
+          "name": "json_packet_latest",
+          "path": "reports/nexus_toolbelt_latest.json",
           "required": false,
           "type": "read"
         }
       ],
       "stop_on_failure": true,
-      "title": "Toolbelt Next"
+      "title": "Toolbelt JSON"
+    },
+    "toolbelt-next": {
+      "ai_callable": true,
+      "function": "toolbelt_next",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Route to the next recommended local loop.",
+      "title": "Toolbelt Next",
+      "description": "Route to the next recommended local loop using the Toolbelt view.",
+      "requires_human_authorization": true,
+      "stop_on_failure": true,
+      "stages": [
+        {
+          "name": "emit_toolbelt_next",
+          "type": "command",
+          "command": "toolbelt_next"
+        },
+        {
+          "name": "toolbelt_latest",
+          "type": "read",
+          "path": "state/loops/nexus_toolbelt_latest.json",
+          "required": false,
+          "max_preview_lines": 80
+        }
+      ]
     },
     "toolbelt-process": {
       "ai_callable": true,
-      "description": "Run the default Toolbelt process chain: start, dashboard, then next-action router.",
-      "display_group": "Toolbelt",
-      "function": "Turns the Toolbelt into the default local process cockpit for AI-assisted coding.",
+      "function": "toolbelt_process",
       "local_only": true,
       "mutates": false,
-      "operator_use": "Use when starting a new work block or after rehydrating.",
+      "operator_use": "Explain the default Start/Build/Debug/Ship/Continuity process.",
+      "title": "Toolbelt Process",
+      "description": "Explain the default Start/Build/Debug/Ship/Continuity process chains.",
       "requires_human_authorization": true,
+      "stop_on_failure": true,
       "stages": [
         {
-          "loop": "toolbelt-start",
-          "name": "toolbelt_start",
-          "type": "loop_ref"
+          "name": "emit_toolbelt_cockpit",
+          "type": "command",
+          "command": "toolbelt_cockpit"
         },
         {
-          "loop": "toolbelt-dashboard",
-          "name": "toolbelt_dashboard",
-          "type": "loop_ref"
+          "name": "toolbelt_doc",
+          "type": "read",
+          "path": "docs/runtime/NEXUS_AI_TOOLBELT.md",
+          "required": false,
+          "max_preview_lines": 120
         },
         {
-          "loop": "next-action-router",
-          "name": "next_action_router",
-          "type": "loop_ref"
+          "name": "toolbelt_cockpit_text",
+          "type": "read",
+          "path": "reports/nexus_toolbelt_cockpit_latest.txt",
+          "required": false,
+          "max_preview_lines": 120
         }
-      ],
-      "stop_on_failure": true,
-      "title": "Toolbelt Process"
+      ]
     },
     "toolbelt-ship": {
       "ai_callable": true,
@@ -2210,32 +2292,35 @@
     },
     "toolbelt-ship-console": {
       "ai_callable": true,
-      "description": "Run the Toolbelt ship view, release brief, and release seal evidence chain.",
-      "display_group": "Toolbelt",
-      "function": "Prepares the human-visible shipping path without granting commit or push authority.",
+      "function": "toolbelt_ship",
       "local_only": true,
       "mutates": false,
-      "operator_use": "Use before a human-authorized seal/commit/push script.",
+      "operator_use": "Show the shipping console path.",
+      "title": "Toolbelt Ship Console",
+      "description": "Show the shipping console path and recommended ship lane.",
       "requires_human_authorization": true,
+      "stop_on_failure": true,
       "stages": [
         {
-          "command": "toolbelt_ship",
-          "name": "toolbelt_ship",
-          "type": "command"
+          "name": "emit_toolbelt_ship",
+          "type": "command",
+          "command": "toolbelt_ship"
         },
         {
-          "loop": "release-brief",
-          "name": "release_brief",
-          "type": "loop_ref"
+          "name": "toolbelt_latest",
+          "type": "read",
+          "path": "state/loops/nexus_toolbelt_latest.json",
+          "required": false,
+          "max_preview_lines": 80
         },
         {
-          "loop": "release-seal",
-          "name": "release_seal",
-          "type": "loop_ref"
+          "name": "toolbelt_cockpit_text",
+          "type": "read",
+          "path": "reports/nexus_toolbelt_cockpit_latest.txt",
+          "required": false,
+          "max_preview_lines": 120
         }
-      ],
-      "stop_on_failure": true,
-      "title": "Toolbelt Ship Console"
+      ]
     },
     "toolbelt-start": {
       "ai_callable": true,
@@ -2348,7 +2433,7 @@
       "title": "Wound Indexed Resume"
     }
   },
-  "registry_scope": "ai_toolbelt_local_loop_fabric",
+  "registry_scope": "ai_toolbelt_cockpit_output",
   "system": "NEXUS_META_LOOP_REGISTRY",
-  "version": "0.6.0"
+  "version": "0.9.7"
 }
