@@ -131,16 +131,25 @@
 
     const prompt = currentHumanPrompt();
     const simple = isSimpleHumanChat(prompt);
-    const staleEngineering = looksLikeStaleEngineeringMove(before);
     const audit = looksLikeAuditCard(before);
 
-    if (!simple && !staleEngineering) return;
-    if (!audit && !staleEngineering) return;
+    // If the user is chatting normally, don't let audit-card formatting leak through.
+    if (simple && audit) {
+      const after = conversationalizeAudit(before, prompt);
+      if (after && after.trim() && after.trim() !== before.trim()) {
+        node.textContent = after;
+        node.dataset.nexusConversationBridge = CHAT_BRIDGE_VERSION;
+      }
+      return;
+    }
 
-    const after = naturalGreeting(prompt || "you there");
-    if (after && after !== before) {
-      node.textContent = after;
-      node.dataset.nexusConversationBridge = CHAT_BRIDGE_VERSION;
+    // For truly stale canned engineering moves in response to simple chat, replace with a greeting.
+    if (simple && looksLikeStaleEngineeringMove(before)) {
+      const after = naturalGreeting(prompt || "you there");
+      if (after && after !== before) {
+        node.textContent = after;
+        node.dataset.nexusConversationBridge = CHAT_BRIDGE_VERSION;
+      }
     }
   }
 
@@ -204,6 +213,45 @@
     isSimpleHumanChat: isSimpleHumanChat,
     isOperatorCommand: isOperatorCommand,
     looksLikeAuditCard: looksLikeAuditCard,
+    looksLikeStaleEngineeringMove: looksLikeStaleEngineeringMove,
+    patchOutput: patchOutput,
+    suppressMismatchedSelectorEvents: suppressMismatchedSelectorEvents
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+
+  document.addEventListener("nexus:message-rendered", function () {
+    window.setTimeout(function () {
+      suppressMismatchedSelectorEvents();
+      patchOutput();
+    }, 0);
+  }, true);
+
+  document.addEventListener("click", function () {
+    window.setTimeout(boot, 0);
+  }, true);
+
+  const observer = new MutationObserver(function () {
+    suppressMismatchedSelectorEvents();
+    patchOutput();
+  });
+
+  function observeWhenReady() {
+    const target = $("console-stream") || document.body;
+    if (target) observer.observe(target, { childList: true, subtree: true, characterData: true });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", observeWhenReady);
+  } else {
+    observeWhenReady();
+  }
+})();
+,
     looksLikeStaleEngineeringMove: looksLikeStaleEngineeringMove,
     patchOutput: patchOutput,
     suppressMismatchedSelectorEvents: suppressMismatchedSelectorEvents

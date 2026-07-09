@@ -28,7 +28,7 @@ def read_system_prompt() -> str:
     return SYSTEM_PROMPT_PATH.read_text(encoding="utf-8-sig")
 
 
-def tighten(text: str, max_lines: int = 6) -> str:
+def tighten(text: str, max_lines: int = 9) -> str:
     lines = [line.rstrip() for line in text.strip().splitlines()]
     lines = [line for line in lines if line.strip()]
     if not lines:

@@ -69,7 +69,10 @@ def build_context(intent: str) -> str:
         f"missing_optional: {', '.join(missing) if missing else 'none'}",
         "boundary: recommendation-only; no shell, no mutation, no live pulls.",
         "forbidden: targets, attack strategy, exploitation, entry points, credential access, evasion, persistence.",
-        "answer: max 5 short lines. give the next safe repo/build move first.",
+        "answer: max 6 short lines.",
+        "line1: direct human answer.",
+        "line2: Why: one sentence explaining the reasoning (no hidden chain-of-thought).",
+        "then: next safe repo/build move.",
     ]
 
     memory = recent_memory()
