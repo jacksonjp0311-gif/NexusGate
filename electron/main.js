@@ -22,6 +22,7 @@ app.on("second-instance", () => {
 });
 
 const smokeReportPath = path.join(repoRoot, "reports", "nexus_electron_smoke_report_latest.json");
+let smokeReportWritten = false;
 
 if (isSmoke) {
   app.disableHardwareAcceleration();
@@ -34,6 +35,7 @@ const READ_SURFACES = new Set([
   "reports/nexus_self_healing_report_latest.json",
   "reports/nexus_reflective_loop_report_latest.json",
   "reports/nexus_domain_intelligence_report_latest.json",
+  "reports/nexus_meta_orchestrator_gate_latest.json",
   "state/nexus_lineage_manifest_latest.json",
   "state/interface_adapter_contract_index.v0.3.7.json",
   "state/domain_intelligence_index.v0.4.0.json",
@@ -483,6 +485,8 @@ function resolveRepoPath(relativePath) {
 }
 
 function writeSmokeReport(status, extra = {}) {
+  if (smokeReportWritten) return;
+  smokeReportWritten = true;
   fs.mkdirSync(path.dirname(smokeReportPath), { recursive: true });
   fs.writeFileSync(smokeReportPath, JSON.stringify({
     system: "NEXUS GATE",
@@ -543,6 +547,12 @@ function createWindow() {
   });
 
   if (isSmoke) {
+    setTimeout(() => {
+      if (!smokeReportWritten) {
+        writeSmokeReport("fail", { error: "renderer smoke timed out", code: "timeout" });
+        app.quit();
+      }
+    }, 10000);
     win.webContents.once("did-finish-load", async () => {
       try {
         const title = await win.webContents.executeJavaScript("document.title");
@@ -555,6 +565,7 @@ function createWindow() {
       }
     });
     win.webContents.once("did-fail-load", (_event, code, description) => {
+      if (code === -3) return;
       writeSmokeReport("fail", { error: description, code });
       app.quit();
     });

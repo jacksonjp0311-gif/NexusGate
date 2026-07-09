@@ -18,6 +18,7 @@ set -euo pipefail
 # toolbelt-next
 # preflight
 # preflight-json
+# meta-orchestrator
 # toolbelt-ship
 # toolbelt|toolbelt-dashboard compatibility marker for v0.9.6 tests
 # wound-compress
@@ -51,6 +52,11 @@ case "$COMMAND" in
     ;;
   phi-gate-compile)
     python -m nexus_gate.loops.phi_gate_supervisor_compile --root . --json
+    ;;
+  meta-orchestrator)
+    shift || true
+    INTENT="${*:-Compile the NEXUS meta-orchestrator gate.}"
+    python -m nexus_gate.loops.meta_orchestrator_gate --root . --intent "$INTENT" --json
     ;;
 
   phi-wound)
@@ -192,6 +198,7 @@ case "$COMMAND" in
     python -m nexus_gate.ui.electron_preflight_compile --root . --json
     python -m nexus_gate.reflection.compile --root . --json
     python -m nexus_gate.domain.compile --root . --json
+    python -m nexus_gate.loops.meta_orchestrator_gate --root . --intent "evolve chain meta-orchestrator seal" --json
     python -m nexus_gate.build.packer --root . --out dist --json
     ;;
   pack)

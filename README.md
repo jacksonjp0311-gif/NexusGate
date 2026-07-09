@@ -16,7 +16,7 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems. The po
 - v0.9.7 Toolbelt Cockpit Output
 - v0.9.8 Wound Compression Engine
 - v0.9.9 Preflight Optimizer
-- v1.0.0 Phi Wound Advisor / v1.0.1 Phi Ollama Adapter / v1.1.0 Phi Microdose Loop / v1.1.2 Phi Gate Supervisor Compiler Seal
+- v1.0.0 Phi Wound Advisor / v1.0.1 Phi Ollama Adapter / v1.1.0 Phi Microdose Loop / v1.1.2 Phi Gate Supervisor Compiler Seal / v1.1.3 Meta-Orchestrator Gate
 - Neural Activity v0.1.1 canonical visual-organ line
 - Spiral Core Portal v0.1.2 desktop-face line
 
@@ -43,7 +43,7 @@ bash scripts/nexus.sh toolbelt-next "<intent>"
 ```
 
 ## Human Director Box
-NEXUS GATE current line: v1.1.2 Phi Gate Supervisor Compiler Seal. Preflight, Phi Wound Advisor, Ollama, and Phi Gate Supervisor route failed gates into bounded local AI microdoses; the supervisor compiler keeps command surfaces, allowlisted repairs, and authority boundaries aligned.
+NEXUS GATE current line: v1.1.3 Meta-Orchestrator Gate. Toolbelt, Preflight, Wound Compression, and Phi Gate Supervisor now compile into one recommendation-only route panel for Codex/chat/Electron HUD rehydration; authority remains human-bound.
 
 ## AI Toolbelt Console
 Use the AI Toolbelt Console before choosing a patch path.
@@ -151,6 +151,7 @@ v1.0.1 routes `phi-wound-gpu` through the non-interactive Ollama JSON adapter in
 | Phi Wound Advisor | `docs/runtime/NEXUS_PHI_WOUND_ADVISOR.md` |
 | Phi Ollama Adapter | `docs/runtime/NEXUS_PHI_WOUND_OLLAMA_ADAPTER.md` |
 | Preflight Optimizer | `docs/runtime/NEXUS_PREFLIGHT_OPTIMIZER.md` |
+| Meta-Orchestrator Gate | `docs/runtime/NEXUS_META_ORCHESTRATOR_GATE.md` |
 | NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |
 | Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |
 | NexusCell | `docs/nexus_cell/NEXUS_CELL.md` |

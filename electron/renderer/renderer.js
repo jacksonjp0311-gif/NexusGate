@@ -19,6 +19,7 @@ const nexAiCard = document.getElementById("nex-ai-card");
 const sendButton = document.getElementById("nex-send-button");
 const stopButton = document.getElementById("nex-stop-button");
 const telemetryHud = document.getElementById("telemetry-hud");
+const metaOrchestratorHud = document.getElementById("meta-orchestrator-hud");
 const systemErrorHud = document.getElementById("system-error-hud");
 const systemErrorClose = document.getElementById("system-error-close");
 
@@ -36,6 +37,7 @@ const NEX_CHAT_APPEND_ONLY_BOUNDARY = "append-only chat: NEX responses appear on
 const NEX_SHELL_RELAY_MODE_BOUNDARY = "Shell relay mode runs only allowlisted NEXUS lanes through the hidden PowerShell bridge; no arbitrary shell.";
 const NEX_ARBITRARY_POWERSHELL_BLOCK_MARKER = "arbitrary PowerShell is blocked";
 const NEX_HANDOFF_ACTION_SHELL_BOUNDARY = "HANDOFF selection can run human-authorized ChatGPT/Codex action scripts through the hidden PowerShell bridge; never from autonomous model output.";
+const META_ORCHESTRATOR_SURFACE = "reports/nexus_meta_orchestrator_gate_latest.json";
 
 const laneIcons = {
   evolve: "EV",
@@ -473,6 +475,70 @@ function toggleTelemetryHud(force) {
   telemetryHud.toggleAttribute("hidden", !next);
   telemetryHud.style.display = next ? "" : "none";
   if (next) refreshTelemetry();
+}
+
+function renderMetaOrchestratorPanels(panels) {
+  const root = document.getElementById("meta-orchestrator-panels");
+  if (!root) return;
+  root.innerHTML = "";
+  (Array.isArray(panels) ? panels : []).forEach((panel, index) => {
+    const details = document.createElement("details");
+    details.open = index === 0;
+    const summary = document.createElement("summary");
+    const label = document.createElement("span");
+    label.textContent = panel.title || panel.panel_id || "Panel";
+    const status = document.createElement("strong");
+    status.textContent = panel.status || "unknown";
+    summary.appendChild(label);
+    summary.appendChild(status);
+    const body = document.createElement("pre");
+    body.textContent = JSON.stringify({
+      summary: panel.summary,
+      details: panel.details
+    }, null, 2);
+    details.appendChild(summary);
+    details.appendChild(body);
+    root.appendChild(details);
+  });
+}
+
+async function refreshMetaOrchestratorHud() {
+  try {
+    const exists = window.nexus.surfaceExists ? await window.nexus.surfaceExists(META_ORCHESTRATOR_SURFACE) : true;
+    if (!exists) {
+      throw new Error("Run .\\scripts\\nexus.ps1 meta-orchestrator to generate this surface.");
+    }
+    const packet = JSON.parse(await window.nexus.readSurface(META_ORCHESTRATOR_SURFACE));
+    setTelemetryText("meta-orchestrator-status", packet.status || "unknown");
+    setTelemetryText("meta-orchestrator-loop", packet.recommended_next_loop || "unknown");
+    setTelemetryText("hud-meta-status", packet.status || "unknown");
+    setTelemetryText("hud-meta-loop", packet.recommended_next_loop || "unknown");
+    setTelemetryText("hud-meta-command", packet.recommended_next_command || "No command declared.");
+    setTelemetryText("hud-meta-raw", JSON.stringify(packet, null, 2));
+    renderMetaOrchestratorPanels(packet.panels || []);
+  } catch (error) {
+    setTelemetryText("meta-orchestrator-status", "missing");
+    setTelemetryText("meta-orchestrator-loop", "generate");
+    setTelemetryText("hud-meta-status", "missing");
+    setTelemetryText("hud-meta-loop", "meta-orchestrator");
+    setTelemetryText("hud-meta-command", ".\\scripts\\nexus.ps1 meta-orchestrator");
+    setTelemetryText("hud-meta-raw", `Meta-orchestrator report unavailable: ${error.message}`);
+    renderMetaOrchestratorPanels([{
+      title: "Generate Surface",
+      status: "blocked",
+      summary: "The HUD is read-only and needs the report surface first.",
+      details: { command: ".\\scripts\\nexus.ps1 meta-orchestrator" }
+    }]);
+  }
+}
+
+function toggleMetaOrchestratorHud(force) {
+  if (!metaOrchestratorHud) return;
+  const next = typeof force === "boolean" ? force : !metaOrchestratorHud.classList.contains("is-expanded");
+  metaOrchestratorHud.classList.toggle("is-expanded", next);
+  metaOrchestratorHud.toggleAttribute("hidden", !next);
+  metaOrchestratorHud.style.display = next ? "" : "none";
+  if (next) refreshMetaOrchestratorHud();
 }
 function toggleModelSelectorHud(force) {
   if (!modelSelectorHud) return;
@@ -1005,6 +1071,7 @@ async function loadSurfaceState() {
   startTelemetryLoop();
   setBuffer(10, "hydrate");
   toggleTelemetryHud(false);
+  toggleMetaOrchestratorHud(false);
   clearSystemErrorHud();
   bindModelSelectorHud();
 
@@ -1058,6 +1125,8 @@ document.getElementById("refresh")?.addEventListener("click", () => {
 
 document.getElementById("telemetry-popout")?.addEventListener("click", () => toggleTelemetryHud());
 document.getElementById("telemetry-close")?.addEventListener("click", () => toggleTelemetryHud(false));
+document.getElementById("meta-orchestrator-popout")?.addEventListener("click", () => toggleMetaOrchestratorHud());
+document.getElementById("meta-orchestrator-close")?.addEventListener("click", () => toggleMetaOrchestratorHud(false));
 systemErrorClose?.addEventListener("click", () => clearSystemErrorHud());
 
 stopButton?.addEventListener("click", async () => {

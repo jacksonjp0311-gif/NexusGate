@@ -736,6 +736,16 @@
               <span>GPU <strong id="tm-gpu">--</strong></span>
             </div>
           </section>
+          <section class="meta-orchestrator-station" aria-label="Meta-orchestrator gate">
+            <button class="meta-orchestrator-button" type="button" id="meta-orchestrator-popout">
+              <span>Meta-Orchestrator</span>
+              <strong id="meta-orchestrator-status">standby</strong>
+            </button>
+            <div class="meta-orchestrator-mini">
+              <span>Loop <strong id="meta-orchestrator-loop">unknown</strong></span>
+              <span>Gate <strong>read-only</strong></span>
+            </div>
+          </section>
           <section class="model-selector-station" aria-label="Mode Selection HUD">
             <button class="model-selector-button mode-selection-button" type="button" id="model-selector-toggle" aria-expanded="false" aria-controls="model-selector-hud">
               <span class="mode-selection-glyph" aria-hidden="true">
@@ -794,6 +804,26 @@
               <article><span>Ollama</span><strong id="hud-ollama">unknown</strong></article>
             </div>
             <pre id="hud-telemetry-raw">Waiting for local telemetry...</pre>
+          </section>
+          <section class="telemetry-hud meta-orchestrator-hud" id="meta-orchestrator-hud" hidden aria-label="Expanded meta-orchestrator HUD">
+            <div class="telemetry-hud-head">
+              <div>
+                <span>NEXUS Gate</span>
+                <strong>Meta-Orchestrator Station</strong>
+              </div>
+              <button type="button" id="meta-orchestrator-close">close</button>
+            </div>
+            <div class="telemetry-hud-grid meta-orchestrator-grid">
+              <article><span>Status</span><strong id="hud-meta-status">unknown</strong></article>
+              <article><span>Next Loop</span><strong id="hud-meta-loop">unknown</strong></article>
+              <article><span>Authority</span><strong>recommendation-only</strong></article>
+            </div>
+            <div class="meta-orchestrator-command">
+              <span>Next command</span>
+              <strong id="hud-meta-command">Waiting for report...</strong>
+            </div>
+            <div class="meta-orchestrator-panels" id="meta-orchestrator-panels"></div>
+            <pre id="hud-meta-raw">Waiting for meta-orchestrator gate report...</pre>
           </section>
           <section class="system-error-hud" id="system-error-hud" hidden aria-label="System error report HUD">
             <div class="system-error-head">
