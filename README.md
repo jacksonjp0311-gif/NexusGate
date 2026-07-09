@@ -1,6 +1,5 @@
 # NEXUS GATE
 **Reflective Intelligence Layer for AI Systems**
-
 NEXUS GATE is a local-first reflective intelligence layer for AI systems. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
 
 ## Runtime Lineage Seals
@@ -17,8 +16,7 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems. The po
 - v0.9.7 Toolbelt Cockpit Output
 - v0.9.8 Wound Compression Engine
 - v0.9.9 Preflight Optimizer
-- v1.0.0 Phi Wound Advisor
-- v1.0.1 Phi Ollama Adapter
+- v1.0.0 Phi Wound Advisor / v1.0.1 Phi Ollama Adapter / v1.1.0 Phi Microdose Loop / v1.1.2 Phi Gate Supervisor Compiler Seal
 - Neural Activity v0.1.1 canonical visual-organ line
 - Spiral Core Portal v0.1.2 desktop-face line
 
@@ -45,7 +43,7 @@ bash scripts/nexus.sh toolbelt-next "<intent>"
 ```
 
 ## Human Director Box
-NEXUS GATE current line: v1.1.0 Phi Microdose Loop
+NEXUS GATE current line: v1.1.2 Phi Gate Supervisor Compiler Seal. Preflight, Phi Wound Advisor, Ollama, and Phi Gate Supervisor route failed gates into bounded local AI microdoses; the supervisor compiler keeps command surfaces, allowlisted repairs, and authority boundaries aligned.
 
 ## AI Toolbelt Console
 Use the AI Toolbelt Console before choosing a patch path.
@@ -182,11 +180,9 @@ Legacy README markers: ## AI Toolbelt ; ## NEXUS Connective Point ; --nexus-neur
 
 <!-- NEXUS:README_023N_FRESHNESS_BEGIN -->
 ## Current Portal and Freshness Surface
-Spiral Core Desktop Portal is the current desktop operator surface. The active portal is the blue/light-blue Spiral Core Portal, not the old desktop entry-only wording. Neural Activity v0.1.1 remains the canonical visual organ. Spiral Core Portal v0.1.2 remains the current portal line. Neural Activity = visual organ.
-
+Spiral Core Desktop Portal is the current desktop operator surface. The active portal is the blue/light-blue Spiral Core Portal. Neural Activity v0.1.1 remains the canonical visual organ. Spiral Core Portal v0.1.2 remains the current portal line. Neural Activity = visual organ.
 ## Legacy Compatibility Marker Bank
 Reflective Intelligence Layer for AI Systems; local-first reflective intelligence layer for AI systems; The portal is only the doorway; observable, diagnosable, bounded; v0.8.1 UI cleanup line; GitHub / README / Docs; Failure Modes / Doctor Gateway; Gates are certificates.; Only heal the active wound.; v0.9.3 AI Loop Toolkit Expansion; v0.9.4 Personal Coding Paradise; AI Toolbelt Console; Toolbelt Cockpit Output; toolbelt-json; Before any future generated script changes this repo, read `chatgpt/scripts.md`.
-
 ## Operator Surface Map
 | Surface | Status |
 |---|---|
@@ -194,10 +190,6 @@ Reflective Intelligence Layer for AI Systems; local-first reflective intelligenc
 | Neural Activity | Canonical visual organ |
 | GitHub / README / Docs | resource submenu |
 | Failure Modes / Doctor Gateway | diagnosis surface |
-
-## Phi Wound Ollama Adapter
-v1.0.1 routes the Phi Wound Advisor through a non-interactive Ollama adapter so NexusGate can receive JSON stdout instead of opening the human Orange CLI window.
-
 ## Documentation Map
 | Need | File |
 |---|---|
@@ -209,6 +201,12 @@ v1.0.1 routes the Phi Wound Advisor through a non-interactive Ollama adapter so 
 | ChatGPT scripting doctrine | `chatgpt/scripts.md` |
 <!-- NEXUS:README_023N_FRESHNESS_END -->
 
+## AI Toolbelt
+AI Toolbelt Console and Toolbelt Cockpit Output are exposed through `toolbelt-start`, `toolbelt-dashboard`, and `toolbelt-json`.
+
+## Nexus Loops / Cards
+NEXUS Loop Cards preserve the HUD/portal surface at `state/loops/nexus_loop_cards_latest.json` and `docs/runtime/NEXUS_LOOP_CARDS.md`.
+
 ## What this is not
 Not production validated. Not a safety proof. Not a security proof. Not a correctness proof. Not autonomous authority. Not write authority. Not memory write authority. Not provider authority. Not a replacement for human authorization. Not a claim that routing proves alignment. Not a claim that RHP proves truth. Not a claim that Nexus geometry proves code correctness. Not a claim that NexusCell is a perfect sandbox or full rollback proof.
 ## Compact Law
@@ -216,3 +214,4 @@ Not production validated. Not a safety proof. Not a security proof. Not a correc
 Reflective intelligence is permitted. Autonomous authority is not. Organic evolution is allowed. Ungated compounding is not. Gates are certificates; active wounds resume without backtracking; evidence files are truth; stdout tails are smoke only.
 ```
 Operator command: `.\scripts\nexus.ps1 phi-loop-auto -Tag "microdose"`.
+Operator command: `.\scripts\nexus.ps1 phi-gate-auto -Gate ci-core -Tag "supervise"`.

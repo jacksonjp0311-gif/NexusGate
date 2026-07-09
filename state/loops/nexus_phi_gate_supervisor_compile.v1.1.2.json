@@ -1,0 +1,40 @@
+{
+  "system": "NEXUS Phi Gate Supervisor Compiler",
+  "version": "1.1.2",
+  "active_phase": "phi_gate_supervisor_compiler_seal",
+  "command_surfaces": {
+    "powershell": ".\\scripts\\nexus.ps1 phi-gate-compile",
+    "bash": "bash scripts/nexus.sh phi-gate-compile",
+    "python": "python -m nexus_gate.loops.phi_gate_supervisor_compile --root . --json"
+  },
+  "supervisor_surfaces": {
+    "powershell": ".\\scripts\\nexus.ps1 phi-gate -Gate ci-core",
+    "powershell_auto": ".\\scripts\\nexus.ps1 phi-gate-auto -Gate ci-core",
+    "bash": "bash scripts/nexus.sh phi-gate",
+    "bash_auto": "bash scripts/nexus.sh phi-gate-auto"
+  },
+  "required_flags": [
+    "--call-model",
+    "--auto-repair"
+  ],
+  "blocked_legacy_flags": [
+    "--call-phi",
+    "--self-heal"
+  ],
+  "allowed_repair_policy": "deterministic_allowlisted_repairs_only",
+  "authority_boundary": {
+    "arbitrary_command_execution": false,
+    "autonomous_authority": false,
+    "git_stage_enabled": false,
+    "git_commit_enabled": false,
+    "git_push_enabled": false,
+    "network_enabled": false,
+    "secrets_enabled": false,
+    "repo_mutation_enabled_without_human_authorization": false
+  },
+  "reports": [
+    "reports/nexus_phi_gate_supervisor_report_latest.json",
+    "reports/nexus_phi_gate_supervisor_report.v1.1.2.json"
+  ],
+  "claim_boundary": "Phi Gate Supervisor compilation is local development evidence only. It does not prove correctness, safety, security, production readiness, model understanding, or autonomous authority."
+}

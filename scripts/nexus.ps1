@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "loops", "loop-registry", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -20,6 +20,7 @@ param(
     [switch]$NoCommit,
     [switch]$CallModel,
     [string]$Loop = "rhp-core",
+    [string]$Gate = "ci-core",
     [switch]$Execute,
     [switch]$HumanAuthorized
 )
@@ -246,6 +247,30 @@ function Invoke-NexusWoundCompression {
 
 
 
+
+function Invoke-NexusPhiGateSupervisor {
+    param(
+        [string]$Intent = "Run Phi Gate Supervisor.",
+        [string]$GateName = "ci-core",
+        [switch]$Auto
+    )
+    if ([string]::IsNullOrWhiteSpace($Intent)) { $Intent = "Run Phi Gate Supervisor." }
+    if ([string]::IsNullOrWhiteSpace($GateName)) { $GateName = "ci-core" }
+    $env:NEXUS_PHI4_MINI_COMMAND = 'python -m nexus_gate.loops.phi4_ollama_adapter --prompt-file "{prompt_file}"'
+    $args = @("-m", "nexus_gate.loops.phi_gate_supervisor", "--root", ".", "--intent", $Intent, "--gate", $GateName, "--call-model")
+    if ($Auto.IsPresent) {
+        $args += "--auto-repair"
+        $args += "--human-authorized"
+    }
+    python @args
+    if ($LASTEXITCODE -ne 0) { throw "NEXUS Phi Gate Supervisor failed." }
+}
+
+function Invoke-NexusPhiGateCompile {
+    python -m nexus_gate.loops.phi_gate_supervisor_compile --root . --json
+    if ($LASTEXITCODE -ne 0) { throw "NEXUS Phi Gate Supervisor compiler failed." }
+}
+
 function Invoke-NexusPhiMicrodoseLoop {
     param(
         [string]$Intent = "Run bounded Phi microdose loop.",
@@ -288,6 +313,9 @@ function Invoke-NexusToolbelt {
 }
 
 switch ($Command) {
+    "phi-gate-auto" { Invoke-NexusPhiGateSupervisor -Intent $Tag -GateName $Gate -Auto }
+    "phi-gate" { Invoke-NexusPhiGateSupervisor -Intent $Tag -GateName $Gate }
+    "phi-gate-compile" { Invoke-NexusPhiGateCompile }
     "phi-loop-auto" { Invoke-NexusPhiMicrodoseLoop -Intent $Tag -Auto }
     "phi-loop" { Invoke-NexusPhiMicrodoseLoop -Intent $Tag }
     "phi-wound-gpu" { Invoke-NexusPhiWoundAdvisor -Intent $Tag -UsePhi -RequirePhi }

@@ -89,6 +89,41 @@
       "description": "Emit loop cards.",
       "mutates": false
     },
+    "phi_gate_supervisor": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.phi_gate_supervisor",
+        "--root",
+        ".",
+        "--gate",
+        "ci-core",
+        "--json"
+      ],
+      "description": "Run Phi Gate Supervisor failure-boundary microdose packet.",
+      "local_only": true,
+      "mutates": false,
+      "requires_human_authorization": false
+    },
+    "phi_gate_supervisor_auto": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.phi_gate_supervisor",
+        "--root",
+        ".",
+        "--gate",
+        "ci-core",
+        "--call-model",
+        "--auto-repair",
+        "--human-authorized",
+        "--json"
+      ],
+      "description": "Run Phi Gate Supervisor with local Phi microdose and human-authorized deterministic repair lanes.",
+      "local_only": true,
+      "mutates": true,
+      "requires_human_authorization": true
+    },
     "phi_loop_auto": {
       "authority": "bounded_readonly_autonomy_no_git_write",
       "command": ".\\scripts\\nexus.ps1 phi-loop-auto",
@@ -1737,6 +1772,63 @@
       ],
       "stop_on_failure": true,
       "title": "Performance Scout"
+    },
+    "phi-gate-auto": {
+      "ai_callable": true,
+      "description": "Run Phi Gate Supervisor with human-authorized allowlisted deterministic repair lanes.",
+      "display_group": "Phi Microdose",
+      "function": "Bounded recovery autonomy for known deterministic wounds only; no arbitrary patching or git authority.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use after confirming human authorization for allowlisted repair and rerun behavior.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "wound_compress",
+          "name": "wound_compression",
+          "type": "command"
+        },
+        {
+          "command": "phi_gate_supervisor",
+          "name": "supervise_ci_core",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "supervisor_report",
+          "path": "reports/nexus_phi_gate_supervisor_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Phi Gate Auto Repair"
+    },
+    "phi-gate-supervisor": {
+      "ai_callable": true,
+      "description": "Supervise a deterministic gate and call local Phi only when the gate fails.",
+      "display_group": "Phi Microdose",
+      "function": "Failure-boundary microdose: pass continues; fail compresses, calls Phi, selects allowlisted repair, and reruns only when authorized.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when a Nexus gate should be supervised by local Phi without granting broad autonomy.",
+      "requires_human_authorization": false,
+      "stages": [
+        {
+          "command": "phi_gate_supervisor",
+          "name": "supervise_ci_core",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "supervisor_report",
+          "path": "reports/nexus_phi_gate_supervisor_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Phi Gate Supervisor"
     },
     "phi-loop-auto": {
       "ai_callable": true,

@@ -237,6 +237,20 @@ Boundary: cards describe governed local loops. They do not grant autonomous auth
 - Function: Find lightweight performance and size signals without profiling side effects.
 - Command: `python -m nexus_gate.loops.runner --root . --loop performance-scout --intent "<intent>" --json`
 
+### Phi Gate Auto Repair
+
+- Loop: `phi-gate-auto`
+- Group: `Phi Microdose`
+- Function: Bounded recovery autonomy for known deterministic wounds only; no arbitrary patching or git authority.
+- Command: `python -m nexus_gate.loops.runner --root . --loop phi-gate-auto --intent "<intent>" --json`
+
+### Phi Gate Supervisor
+
+- Loop: `phi-gate-supervisor`
+- Group: `Phi Microdose`
+- Function: Failure-boundary microdose: pass continues; fail compresses, calls Phi, selects allowlisted repair, and reruns only when authorized.
+- Command: `python -m nexus_gate.loops.runner --root . --loop phi-gate-supervisor --intent "<intent>" --json`
+
 ### Phi Loop Auto
 
 - Loop: `phi-loop-auto`

@@ -41,6 +41,18 @@ run_meta_loop_exec() {
 
 case "$COMMAND" in
 
+  phi-gate)
+    export NEXUS_PHI4_MINI_COMMAND='python -m nexus_gate.loops.phi4_ollama_adapter --prompt-file "{prompt_file}"'
+    python -m nexus_gate.loops.phi_gate_supervisor --root . --intent "${TAG:-Run Phi Gate Supervisor.}" --gate "${GATE:-ci-core}" --call-model
+    ;;
+  phi-gate-auto)
+    export NEXUS_PHI4_MINI_COMMAND='python -m nexus_gate.loops.phi4_ollama_adapter --prompt-file "{prompt_file}"'
+    python -m nexus_gate.loops.phi_gate_supervisor --root . --intent "${TAG:-Run Phi Gate Supervisor.}" --gate "${GATE:-ci-core}" --call-model --auto-repair --human-authorized
+    ;;
+  phi-gate-compile)
+    python -m nexus_gate.loops.phi_gate_supervisor_compile --root . --json
+    ;;
+
   phi-wound)
     shift || true
     CALL_MODEL=""

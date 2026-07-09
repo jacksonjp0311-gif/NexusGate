@@ -503,3 +503,31 @@ No neural lab may mutate the parent repo.
 No neural lab may write external APIs.
 No compressed handoff is proof of correctness, safety, security, production readiness, or truth.
 ```
+
+## NEXUS v1.1.2 Phi Gate Supervisor Compiler Seal
+
+Before evolving Phi gate supervision or model-assisted repair lanes, inspect:
+
+```text
+docs/runtime/NEXUS_PHI_GATE_SUPERVISOR.md
+nexus_gate/loops/phi_gate_supervisor.py
+nexus_gate/loops/phi_gate_supervisor_compile.py
+state/loops/nexus_phi_gate_supervisor.v1.1.1.json
+reports/nexus_phi_gate_supervisor_report_latest.json
+```
+
+Use:
+
+```powershell
+.\scripts\nexus.ps1 phi-gate-compile
+.\scripts\nexus.ps1 phi-gate -Gate ci-core
+```
+
+Hard rules:
+
+```text
+Phi may advise; Nexus verifies; human authorizes durable mutation.
+Command surfaces must use --call-model and --auto-repair.
+Legacy --call-phi and --self-heal flags are contract failures.
+No supervisor path may grant arbitrary shell, git push, network, secret, or autonomous mutation authority.
+```

@@ -1,0 +1,184 @@
+{
+  "allowed_repair_lanes": {
+    "empty_loop_stages": "repair_empty_loop_stages_then_regenerate_cards",
+    "ignored_report_staged": "unstage_ignored_reports_only",
+    "loop_registry_card_packet_drift": "regenerate_loop_cards",
+    "preflight_docs_contract_drift": "report_only",
+    "readme_compactness_regression": "compact_readme_without_removing_required_markers"
+  },
+  "authority_boundary": {
+    "arbitrary_command_execution": false,
+    "autonomous_authority": false,
+    "deterministic_allowlisted_repairs_only": true,
+    "git_commit_enabled": false,
+    "git_push_enabled": false,
+    "git_stage_enabled": false,
+    "network_enabled": false,
+    "repo_mutation_enabled_without_human_authorization": false,
+    "secrets_enabled": false
+  },
+  "checks": [
+    {
+      "name": "path:docs/runtime/NEXUS_PHI_GATE_SUPERVISOR.md",
+      "status": "pass"
+    },
+    {
+      "name": "path:nexus_gate/loops/phi_gate_supervisor.py",
+      "status": "pass"
+    },
+    {
+      "name": "path:tests/test_phi_gate_supervisor_v111.py",
+      "status": "pass"
+    },
+    {
+      "name": "path:state/loops/nexus_phi_gate_supervisor.v1.1.1.json",
+      "status": "pass"
+    },
+    {
+      "name": "path:state/loops/nexus_phi_gate_supervisor_compile.v1.1.2.json",
+      "status": "pass"
+    },
+    {
+      "name": "path:loops/nexus_loop_registry.v0.1.json",
+      "status": "pass"
+    },
+    {
+      "name": "path:state/loops/nexus_loop_registry.v0.1.json",
+      "status": "pass"
+    },
+    {
+      "marker": "phi-gate-compile",
+      "name": "powershell exposes phi-gate-compile",
+      "path": "scripts/nexus.ps1",
+      "status": "pass"
+    },
+    {
+      "marker": "phi-gate-compile",
+      "name": "bash exposes phi-gate-compile",
+      "path": "scripts/nexus.sh",
+      "status": "pass"
+    },
+    {
+      "marker": "--auto-repair",
+      "name": "powershell uses auto-repair",
+      "path": "scripts/nexus.ps1",
+      "status": "pass"
+    },
+    {
+      "marker": "--auto-repair",
+      "name": "bash uses auto-repair",
+      "path": "scripts/nexus.sh",
+      "status": "pass"
+    },
+    {
+      "marker": "--auto-repair",
+      "name": "loop registry uses auto-repair",
+      "path": "loops/nexus_loop_registry.v0.1.json",
+      "status": "pass"
+    },
+    {
+      "marker": "--auto-repair",
+      "name": "state loop registry uses auto-repair",
+      "path": "state/loops/nexus_loop_registry.v0.1.json",
+      "status": "pass"
+    },
+    {
+      "marker": "--call-model",
+      "name": "powershell uses call-model",
+      "path": "scripts/nexus.ps1",
+      "status": "pass"
+    },
+    {
+      "marker": "--call-model",
+      "name": "bash uses call-model",
+      "path": "scripts/nexus.sh",
+      "status": "pass"
+    },
+    {
+      "marker": "--call-model",
+      "name": "loop registry uses call-model",
+      "path": "loops/nexus_loop_registry.v0.1.json",
+      "status": "pass"
+    },
+    {
+      "marker": "--call-model",
+      "name": "state loop registry uses call-model",
+      "path": "state/loops/nexus_loop_registry.v0.1.json",
+      "status": "pass"
+    },
+    {
+      "matches": [],
+      "name": "legacy self-heal flag removed from supervisor command surfaces",
+      "status": "pass"
+    },
+    {
+      "matches": [],
+      "name": "legacy call-phi flag removed from supervisor command surfaces",
+      "status": "pass"
+    },
+    {
+      "name": "authority boundary:arbitrary_command_execution",
+      "status": "pass"
+    },
+    {
+      "name": "authority boundary:autonomous_authority",
+      "status": "pass"
+    },
+    {
+      "name": "authority boundary:git_push_enabled",
+      "status": "pass"
+    },
+    {
+      "name": "authority boundary:secrets_enabled",
+      "status": "pass"
+    },
+    {
+      "name": "authority boundary:repo_mutation_enabled_without_human_authorization",
+      "status": "pass"
+    },
+    {
+      "name": "deterministic allowlisted repairs only",
+      "status": "pass"
+    },
+    {
+      "lanes": [
+        "empty_loop_stages",
+        "ignored_report_staged",
+        "loop_registry_card_packet_drift",
+        "preflight_docs_contract_drift",
+        "readme_compactness_regression"
+      ],
+      "name": "allowed repair lanes declared",
+      "status": "pass"
+    },
+    {
+      "marker": "The human authorizes durable mutation",
+      "name": "docs preserve human authorization boundary",
+      "path": "docs/runtime/NEXUS_PHI_GATE_SUPERVISOR.md",
+      "status": "pass"
+    }
+  ],
+  "claim_boundary": "Phi Gate Supervisor compilation is local development evidence only. It does not prove correctness, safety, security, production readiness, model understanding, or autonomous authority.",
+  "failed_checks": [],
+  "generated_utc": "2026-07-09T17:23:15.527669+00:00",
+  "next_action": "Run .\\scripts\\nexus.ps1 phi-gate -Gate ci-core, then .\\scripts\\nexus.ps1 evolve.",
+  "read_surfaces": [
+    "docs/runtime/NEXUS_PHI_GATE_SUPERVISOR.md",
+    "nexus_gate/loops/phi_gate_supervisor.py",
+    "tests/test_phi_gate_supervisor_v111.py",
+    "state/loops/nexus_phi_gate_supervisor.v1.1.1.json",
+    "state/loops/nexus_phi_gate_supervisor_compile.v1.1.2.json",
+    "loops/nexus_loop_registry.v0.1.json",
+    "state/loops/nexus_loop_registry.v0.1.json"
+  ],
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "schema": "NEXUS_PHI_GATE_SUPERVISOR_COMPILE.v1.1.2",
+  "status": "pass",
+  "version": "1.1.2",
+  "write_surfaces": [
+    "reports/nexus_phi_gate_supervisor_report_latest.json",
+    "reports/nexus_phi_gate_supervisor_report.v1.1.2.json",
+    "reports/nexus_phi_gate_supervisor_latest.json",
+    "reports/nexus_phi_gate_supervisor.v1.1.1.json"
+  ]
+}

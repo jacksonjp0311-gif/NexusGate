@@ -1,0 +1,84 @@
+{
+  "allowed_repair_lanes": {
+    "empty_loop_stages": "repair_empty_loop_stages_then_regenerate_cards",
+    "ignored_report_staged": "unstage_ignored_reports_only",
+    "loop_registry_card_packet_drift": "regenerate_loop_cards",
+    "preflight_docs_contract_drift": "report_only",
+    "readme_compactness_regression": "compact_readme_without_removing_required_markers"
+  },
+  "authority_boundary": {
+    "arbitrary_command_execution": false,
+    "autonomous_authority": false,
+    "deterministic_allowlisted_repairs_only": true,
+    "git_commit_enabled": false,
+    "git_push_enabled": false,
+    "git_stage_enabled": false,
+    "network_enabled": false,
+    "repo_mutation_enabled_without_human_authorization": false,
+    "secrets_enabled": false
+  },
+  "auto_repair_requested": false,
+  "claim_boundary": "Phi may advise and select allowlisted deterministic repair lanes. Nexus verifies. Human authorization is required for durable mutation.",
+  "detected_wound": {
+    "repair_lane": "compact_readme_without_removing_required_markers",
+    "wound_key": "readme_compactness_regression"
+  },
+  "first_gate": {
+    "commands": [
+      {
+        "argv": [
+          "C:\\Program Files\\Python312\\python.exe",
+          "-m",
+          "nexus_gate.compiler",
+          "--root",
+          ".",
+          "--json"
+        ],
+        "ok": false,
+        "returncode": 1,
+        "stderr_tail": "",
+        "stdout_tail": "e\": \"nexus_cell_full_core_controlled_runner\",\n        \"lane\": \"cell-bridge\",\n        \"authority\": {\n          \"version\": \"0.8.8\",\n          \"may_build_packet\": true,\n          \"may_execute_controlled_lane\": false,\n          \"human_authorized\": false,\n          \"execute_requested\": false,\n          \"decision\": \"packet_only\",\n          \"reasons\": [],\n          \"boundary\": \"Authority applies only to controlled internal lanes. It is not arbitrary shell authority.\"\n        },\n        \"receipt_id\": \"553cf4c38f1fb88b037508cc1a2aec42348eea1b2ea66dd474c98e5d0826ee45\",\n        \"claim_boundary\": \"NexusCell full core runs only named controlled internal lanes when explicitly human-authorized; it does not provide arbitrary shell execution, sandbox proof, host mounts, secrets, network, git mutation, rollback, or autonomous authority.\"\n      }\n    },\n    {\n      \"gate\": \"nexus_shell_operator_visibility\",\n      \"status\": \"pass\",\n      \"message\": \"NexusShell operator is compiler-visible and no-execution bounded.\",\n      \"evidence\": {\n        \"version\": \"v0.8.6\",\n        \"status\": \"operator_shell_visible_no_execution\",\n        \"mode\": \"nexus_shell_operator_no_execution\",\n        \"available_commands\": [\n          \"status\",\n          \"rehydrate\",\n          \"compile\",\n          \"doctor\",\n          \"cell-plan\",\n          \"cell-context\",\n          \"cell-bridge\",\n          \"cell-run\",\n          \"handoff\",\n          \"help\"\n        ],\n        \"claim_boundary\": \"NexusShell routes and summarizes governed operator lanes only; it does not execute arbitrary commands, enable backends, expose secrets, use network, mutate git, claim rollback, or self-authorize.\"\n      }\n    },\n    {\n      \"gate\": \"python_compile\",\n      \"status\": \"pass\",\n      \"message\": \"Python source compiled.\",\n      \"evidence\": {\n        \"paths\": [\n          \"nexus_gate\",\n          \"tests\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"route_contracts\",\n      \"status\": \"pass\",\n      \"message\": \"Core route contracts hold.\",\n      \"evidence\": {\n        \"decisions\": {\n          \"missing_schema\": \"reject\",\n          \"no_authority_tool\": \"shadow\",\n          \"read_only\": \"engage\"\n        }\n      }\n    },\n    {\n      \"gate\": \"unit_tests\",\n      \"status\": \"fail\",\n      \"message\": \"Bounded per-file unit tests failed.\",\n      \"evidence\": {\n        \"mode\": \"bounded_per_file_unittest\",\n        \"count\": 111,\n        \"results\": [\n          {\n            \"file\": \"test_adapter_receptor_bridge_path.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \".\\n----------------------------------------------------------------------\\nRan 1 test in 0.003s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_adapter_registry.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"....\\n----------------------------------------------------------------------\\nRan 4 tests in 0.006s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_ai_feedback_interface.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"....\\n----------------------------------------------------------------------\\nRan 4 tests in 0.041s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_ai_loop_fabric_v092.py\",\n            \"returncode\": 1,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"bric_v092.TestAILoopFabricV092.test_docs_and_doctrine_expose_ai_loop_fabric)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"C:\\\\Users\\\\jacks\\\\OneDrive\\\\Desktop\\\\nexus-gate\\\\tests\\\\test_ai_loop_fabric_v092.py\\\", line 20, in test_docs_and_doctrine_expose_ai_loop_fabric\\n    self.assertIn(\\\"AI-callable local loop fabric\\\",readme); self.assertIn(\\\"v0.9.3 AI Loop Toolkit Expansion\\\",readme); self.assertIn(\\\"AI-Callable Local Loop Fabric\\\",doctrine); self.assertIn(\\\"meta-orchestrator\\\",doc); self.assertLess(len(readme.splitlines()),220)\\n                                                                                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nAssertionError: 220 not less than 220\\n\\n----------------------------------------------------------------------\\nRan 5 tests in 0.322s\\n\\nFAILED (failures=1)\\n\"\n          }\n        ],\n        \"failures\": [\n          {\n            \"file\": \"test_ai_loop_fabric_v092.py\",\n            \"returncode\": 1,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"bric_v092.TestAILoopFabricV092.test_docs_and_doctrine_expose_ai_loop_fabric)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"C:\\\\Users\\\\jacks\\\\OneDrive\\\\Desktop\\\\nexus-gate\\\\tests\\\\test_ai_loop_fabric_v092.py\\\", line 20, in test_docs_and_doctrine_expose_ai_loop_fabric\\n    self.assertIn(\\\"AI-callable local loop fabric\\\",readme); self.assertIn(\\\"v0.9.3 AI Loop Toolkit Expansion\\\",readme); self.assertIn(\\\"AI-Callable Local Loop Fabric\\\",doctrine); self.assertIn(\\\"meta-orchestrator\\\",doc); self.assertLess(len(readme.splitlines()),220)\\n                                                                                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nAssertionError: 220 not less than 220\\n\\n----------------------------------------------------------------------\\nRan 5 tests in 0.322s\\n\\nFAILED (failures=1)\\n\"\n          }\n        ]\n      }\n    },\n    {\n      \"gate\": \"ledger_appendable\",\n      \"status\": \"pass\",\n      \"message\": \"Ledger is appendable.\",\n      \"evidence\": {\n        \"path\": \"ledger\\\\nexus_gate_ledger.v0.1.0.jsonl\"\n      }\n    }\n  ],\n  \"claim_boundary\": \"Local development gate only. Not a production validation, safety proof, security proof, or correctness proof.\"\n}\n"
+      }
+    ],
+    "failed_command": [
+      "C:\\Program Files\\Python312\\python.exe",
+      "-m",
+      "nexus_gate.compiler",
+      "--root",
+      ".",
+      "--json"
+    ],
+    "failure_text": "e\": \"nexus_cell_full_core_controlled_runner\",\n        \"lane\": \"cell-bridge\",\n        \"authority\": {\n          \"version\": \"0.8.8\",\n          \"may_build_packet\": true,\n          \"may_execute_controlled_lane\": false,\n          \"human_authorized\": false,\n          \"execute_requested\": false,\n          \"decision\": \"packet_only\",\n          \"reasons\": [],\n          \"boundary\": \"Authority applies only to controlled internal lanes. It is not arbitrary shell authority.\"\n        },\n        \"receipt_id\": \"553cf4c38f1fb88b037508cc1a2aec42348eea1b2ea66dd474c98e5d0826ee45\",\n        \"claim_boundary\": \"NexusCell full core runs only named controlled internal lanes when explicitly human-authorized; it does not provide arbitrary shell execution, sandbox proof, host mounts, secrets, network, git mutation, rollback, or autonomous authority.\"\n      }\n    },\n    {\n      \"gate\": \"nexus_shell_operator_visibility\",\n      \"status\": \"pass\",\n      \"message\": \"NexusShell operator is compiler-visible and no-execution bounded.\",\n      \"evidence\": {\n        \"version\": \"v0.8.6\",\n        \"status\": \"operator_shell_visible_no_execution\",\n        \"mode\": \"nexus_shell_operator_no_execution\",\n        \"available_commands\": [\n          \"status\",\n          \"rehydrate\",\n          \"compile\",\n          \"doctor\",\n          \"cell-plan\",\n          \"cell-context\",\n          \"cell-bridge\",\n          \"cell-run\",\n          \"handoff\",\n          \"help\"\n        ],\n        \"claim_boundary\": \"NexusShell routes and summarizes governed operator lanes only; it does not execute arbitrary commands, enable backends, expose secrets, use network, mutate git, claim rollback, or self-authorize.\"\n      }\n    },\n    {\n      \"gate\": \"python_compile\",\n      \"status\": \"pass\",\n      \"message\": \"Python source compiled.\",\n      \"evidence\": {\n        \"paths\": [\n          \"nexus_gate\",\n          \"tests\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"route_contracts\",\n      \"status\": \"pass\",\n      \"message\": \"Core route contracts hold.\",\n      \"evidence\": {\n        \"decisions\": {\n          \"missing_schema\": \"reject\",\n          \"no_authority_tool\": \"shadow\",\n          \"read_only\": \"engage\"\n        }\n      }\n    },\n    {\n      \"gate\": \"unit_tests\",\n      \"status\": \"fail\",\n      \"message\": \"Bounded per-file unit tests failed.\",\n      \"evidence\": {\n        \"mode\": \"bounded_per_file_unittest\",\n        \"count\": 111,\n        \"results\": [\n          {\n            \"file\": \"test_adapter_receptor_bridge_path.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \".\\n----------------------------------------------------------------------\\nRan 1 test in 0.003s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_adapter_registry.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"....\\n----------------------------------------------------------------------\\nRan 4 tests in 0.006s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_ai_feedback_interface.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"....\\n----------------------------------------------------------------------\\nRan 4 tests in 0.041s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_ai_loop_fabric_v092.py\",\n            \"returncode\": 1,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"bric_v092.TestAILoopFabricV092.test_docs_and_doctrine_expose_ai_loop_fabric)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"C:\\\\Users\\\\jacks\\\\OneDrive\\\\Desktop\\\\nexus-gate\\\\tests\\\\test_ai_loop_fabric_v092.py\\\", line 20, in test_docs_and_doctrine_expose_ai_loop_fabric\\n    self.assertIn(\\\"AI-callable local loop fabric\\\",readme); self.assertIn(\\\"v0.9.3 AI Loop Toolkit Expansion\\\",readme); self.assertIn(\\\"AI-Callable Local Loop Fabric\\\",doctrine); self.assertIn(\\\"meta-orchestrator\\\",doc); self.assertLess(len(readme.splitlines()),220)\\n                                                                                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nAssertionError: 220 not less than 220\\n\\n----------------------------------------------------------------------\\nRan 5 tests in 0.322s\\n\\nFAILED (failures=1)\\n\"\n          }\n        ],\n        \"failures\": [\n          {\n            \"file\": \"test_ai_loop_fabric_v092.py\",\n            \"returncode\": 1,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"bric_v092.TestAILoopFabricV092.test_docs_and_doctrine_expose_ai_loop_fabric)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"C:\\\\Users\\\\jacks\\\\OneDrive\\\\Desktop\\\\nexus-gate\\\\tests\\\\test_ai_loop_fabric_v092.py\\\", line 20, in test_docs_and_doctrine_expose_ai_loop_fabric\\n    self.assertIn(\\\"AI-callable local loop fabric\\\",readme); self.assertIn(\\\"v0.9.3 AI Loop Toolkit Expansion\\\",readme); self.assertIn(\\\"AI-Callable Local Loop Fabric\\\",doctrine); self.assertIn(\\\"meta-orchestrator\\\",doc); self.assertLess(len(readme.splitlines()),220)\\n                                                                                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nAssertionError: 220 not less than 220\\n\\n----------------------------------------------------------------------\\nRan 5 tests in 0.322s\\n\\nFAILED (failures=1)\\n\"\n          }\n        ]\n      }\n    },\n    {\n      \"gate\": \"ledger_appendable\",\n      \"status\": \"pass\",\n      \"message\": \"Ledger is appendable.\",\n      \"evidence\": {\n        \"path\": \"ledger\\\\nexus_gate_ledger.v0.1.0.jsonl\"\n      }\n    }\n  ],\n  \"claim_boundary\": \"Local development gate only. Not a production validation, safety proof, security proof, or correctness proof.\"\n}",
+    "gate": "compiler",
+    "status": "fail"
+  },
+  "gate": "compiler",
+  "generated_utc": "2026-07-09T17:22:34.545078+00:00",
+  "human_authorized": false,
+  "intent": "seal phi gate supervisor compiler",
+  "mode": "phi_gate_supervisor_failure_boundary_microdose",
+  "phi_microdose": {
+    "boundary": "Phi advice is advisory only; Nexus verifies; human authorizes durable mutation.",
+    "payload": {
+      "confidence": 0.9,
+      "diagnosis": "Ollama adapter could not reach http://localhost:11434/api/generate: HTTP Error 500: Internal Server Error.",
+      "patch_intent": "Start Ollama and ensure phi4-mini is installed: ollama serve; ollama pull phi4-mini.",
+      "repair_surface": "local_ollama_service",
+      "repair_type": "start_or_install_model",
+      "requires_human_authorization": true,
+      "rerun_gate": ".\\scripts\\nexus.ps1 phi-wound-gpu -Tag \"adapter live test\""
+    },
+    "returncode": 2,
+    "status": "model_unavailable",
+    "stderr_tail": "",
+    "stdout_tail": "{\n  \"confidence\": 0.9,\n  \"diagnosis\": \"Ollama adapter could not reach http://localhost:11434/api/generate: HTTP Error 500: Internal Server Error.\",\n  \"patch_intent\": \"Start Ollama and ensure phi4-mini is installed: ollama serve; ollama pull phi4-mini.\",\n  \"repair_surface\": \"local_ollama_service\",\n  \"repair_type\": \"start_or_install_model\",\n  \"requires_human_authorization\": true,\n  \"rerun_gate\": \".\\\\scripts\\\\nexus.ps1 phi-wound-gpu -Tag \\\"adapter live test\\\"\"\n}\n"
+  },
+  "repair": {
+    "reason": "auto_repair_and_human_authorized_required",
+    "status": "not_applied"
+  },
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "schema": "NEXUS_PHI_GATE_SUPERVISOR.v1.1.1",
+  "status": "wound",
+  "version": "1.1.1"
+}

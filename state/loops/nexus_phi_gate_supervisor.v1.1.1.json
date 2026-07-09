@@ -1,0 +1,61 @@
+{
+  "allowed_repairs": {
+    "empty_loop_stages": "insert_read_only_phi_loop_stages_then_regenerate_cards",
+    "ignored_report_staged": "unstage_ignored_reports_only",
+    "loop_registry_card_packet_drift": "regenerate_loop_cards_from_registry",
+    "preflight_docs_contract_drift": "verify_docs_as_file_evidence_only",
+    "readme_compactness_regression": "compact_blank_lines_only"
+  },
+  "authority_boundary": {
+    "arbitrary_command_execution": false,
+    "autonomous_authority": false,
+    "deterministic_repair_requires_human_authorization": true,
+    "git_commit_enabled": false,
+    "git_push_enabled": false,
+    "git_stage_enabled": false,
+    "network_enabled": false,
+    "patch_apply_enabled": false,
+    "repo_mutation_enabled": false,
+    "secrets_enabled": false
+  },
+  "claim_boundary": "Phi Gate Supervisor is bounded recovery autonomy: Phi advises and selects allowlisted repair lanes; Nexus verifies; human authorizes durable mutation.",
+  "events": [
+    {
+      "first_run": {
+        "finished_utc": "2026-07-09T16:46:22.481077+00:00",
+        "gate": "wound-compress",
+        "ok": true,
+        "results": [
+          {
+            "argv": [
+              "C:\\Program Files\\Python312\\python.exe",
+              "-m",
+              "nexus_gate.loops.wound_compression",
+              "--root",
+              ".",
+              "--json"
+            ],
+            "finished_utc": "2026-07-09T16:46:22.481077+00:00",
+            "name": "gate:wound-compress:1",
+            "ok": true,
+            "returncode": 0,
+            "stderr_tail": "",
+            "stdout_tail": "ops/nexus_loop_cards.v0.9.7.json\\n M state/loops/nexus_loop_cards_latest.json\\n M state/loops/nexus_loop_registry.v0.1.json\\n M state/loops/nexus_phi_wound_advisor.v1.0.0.json\\n M state/loops/nexus_preflight_optimizer_latest.json\\n M state/loops/nexus_toolbelt.v0.9.7.json\\n M state/loops/nexus_toolbelt_latest.json\\n M state/loops/nexus_wound_compression_latest.json\\n M state/nexus_nn_router_index.v0.6.4.json\\n?? docs/runtime/NEXUS_PHI_GATE_SUPERVISOR.md\\n?? nexus_gate/loops/phi_gate_supervisor.py\\n?? state/loops/nexus_023m_failure.json\\n?? state/loops/nexus_phi_gate_supervisor.v1.1.1.json\\n?? tests/test_phi_gate_supervisor_v111.py\",\n    \"failed_files\": [],\n    \"next_repair_surface\": \"scope_hygiene_or_stage_policy\",\n    \"source\": \"git_status\",\n    \"wound_class\": \"local_change_surface\",\n    \"wound_key\": \"git:dirty_worktree\"\n  },\n  \"active_wound_class\": \"local_change_surface\",\n  \"active_wound_key\": \"git:dirty_worktree\",\n  \"boundary\": {\n    \"arbitrary_command_execution\": false,\n    \"autonomous_authority\": false,\n    \"git_commit_enabled\": false,\n    \"git_push_enabled\": false,\n    \"git_stage_enabled\": false,\n    \"network_enabled\": false,\n    \"repo_mutation_enabled\": false,\n    \"secrets_enabled\": false\n  },\n  \"claim_boundary\": \"Wound Compression is a read-only evidence reducer. It grants no autonomous authority, shell authority, network access, secret access, git write authority, safety proof, security proof, or correctness proof.\",\n  \"generated_utc\": \"2026-07-09T16:46:22.470290+00:00\",\n  \"intent\": \"\",\n  \"mode\": \"nexus_wound_compression_engine\",\n  \"preserve_green_gates\": true,\n  \"recommended_next_command\": \".\\\\scripts\\\\nexus.ps1 meta-loop -Loop wound-indexed-resume -Tag \\\"git:dirty_worktree\\\"\",\n  \"recommended_next_loop\": \"wound-indexed-resume\",\n  \"repair_strategy\": \"resume_from_active_wound_only; preserve_green_gates; use_file_packets_as_truth\",\n  \"repo_status\": {\n    \"changed_count\": 44,\n    \"dirty\": true,\n    \"head\": \"d6e40fe\",\n    \"status_preview\": [\n      \" M NexusCell/ledger/nexus_cell_continuity.jsonl\",\n      \" M README.md\",\n      \" M \\\"Tesseract Neural Network/memory/conversation_latest.json\\\"\",\n      \" M \\\"Tesseract Neural Network/memory/tnn_memory.jsonl\\\"\",\n      \" M \\\"Tesseract Neural Network/state/tnn_state_latest.json\\\"\",\n      \" M docs/feedback/FEEDBACK_LOG.md\",\n      \" M docs/runtime/NEXUS_LOOP_CARDS.md\",\n      \" M docs/runtime/NEXUS_TOOLBELT_CONSOLE.md\",\n      \" M ledger/nexus_cell/continuity.jsonl\",\n      \" M ledger/nexus_gate_ledger.v0.1.0.jsonl\",\n      \" M loops/nexus_loop_registry.v0.1.json\",\n      \" M reports/CHATGPT_HANDOFF_LATEST.md\",\n      \" M reports/CODEX_HANDOFF_LATEST.md\",\n      \" M reports/nexus_bounded_runtime_report_latest.json\",\n      \" M reports/nexus_compile_report_latest.json\",\n      \" M reports/nexus_domain_intelligence_report_latest.json\",\n      \" M reports/nexus_electron_environment_report_latest.json\",\n      \" M reports/nexus_electron_preflight_report_latest.json\",\n      \" M reports/nexus_evidence_compaction_report_latest.json\",\n      \" M reports/nexus_feedback_interface_report_latest.json\",\n      \" M reports/nexus_feedback_report_latest.json\",\n      \" M reports/nexus_interconnect_report_latest.json\",\n      \" M reports/nexus_nn_router_report_latest.json\",\n      \" M reports/nexus_preflight_optimizer_latest.json\",\n      \" M reports/nexus_reflective_loop_report_latest.json\",\n      \" M reports/nexus_self_healing_report_latest.json\",\n      \" M scripts/nexus.ps1\",\n      \" M scripts/nexus.sh\",\n      \" M state/ai_feedback_context_latest.json\",\n      \" M state/interconnect_graph.v0.2.2.json\",\n      \" M state/loops/nexus_loop_cards.v0.9.7.json\",\n      \" M state/loops/nexus_loop_cards_latest.json\",\n      \" M state/loops/nexus_loop_registry.v0.1.json\",\n      \" M state/loops/nexus_phi_wound_advisor.v1.0.0.json\",\n      \" M state/loops/nexus_preflight_optimizer_latest.json\",\n      \" M state/loops/nexus_toolbelt.v0.9.7.json\",\n      \" M state/loops/nexus_toolbelt_latest.json\",\n      \" M state/loops/nexus_wound_compression_latest.json\",\n      \" M state/nexus_nn_router_index.v0.6.4.json\",\n      \"?? docs/runtime/NEXUS_PHI_GATE_SUPERVISOR.md\",\n      \"?? nexus_gate/loops/phi_gate_supervisor.py\",\n      \"?? state/loops/nexus_023m_failure.json\",\n      \"?? state/loops/nexus_phi_gate_supervisor.v1.1.1.json\",\n      \"?? tests/test_phi_gate_supervisor_v111.py\"\n    ]\n  },\n  \"root\": \"C:\\\\Users\\\\jacks\\\\OneDrive\\\\Desktop\\\\nexus-gate\",\n  \"schema\": \"NEXUS_WOUND_COMPRESSION.v0.9.8\",\n  \"status\": \"wound\",\n  \"truth_rule\": {\n    \"bounded_report\": \"reports/nexus_bounded_runtime_report_latest.json\",\n    \"compiler_report\": \"reports/nexus_compile_report_latest.json\",\n    \"file_packets\": \"truth\",\n    \"stdout\": \"smoke_only\",\n    \"tail\": \"never_truth\"\n  },\n  \"truth_sources\": {\n    \"bounded_report_exists\": true,\n    \"compiler_report_exists\": true,\n    \"toolbelt_report_exists\": true\n  },\n  \"upstream_toolbelt\": {\n    \"schema\": \"NEXUS_AI_TOOLBELT.v0.9.7\",\n    \"status\": \"pass\",\n    \"version\": \"0.9.7\"\n  },\n  \"version\": \"0.9.8\"\n}\n"
+          }
+        ]
+      },
+      "gate": "wound-compress",
+      "started_utc": "2026-07-09T16:46:22.257019+00:00",
+      "status": "pass"
+    }
+  ],
+  "generated_utc": "2026-07-09T16:46:22.481077+00:00",
+  "intent": "install optional microdose",
+  "mode": "nexus_phi_gate_supervisor",
+  "schema": "NEXUS_PHI_GATE_SUPERVISOR.v1.1.1",
+  "sequence": [
+    "wound-compress"
+  ],
+  "status": "pass",
+  "version": "1.1.1"
+}
