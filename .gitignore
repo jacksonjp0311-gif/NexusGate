@@ -36,7 +36,6 @@ state/wounds/
 state/nexus_cell/
 
 # draft HUD docs/assets (not yet promoted)
-docs/runtime/NEXUS_TOOLBELT_*.md
 docs/runtime/NEXUS_METRICS_HUD.md
 docs/gitnexus/NEXUS_GITNEXUS_STANDALONE_HUD.md
 electron/renderer/nexus_conversation_output_bridge.v0.2.*.js
@@ -63,3 +62,4 @@ PYTHON_ANALYSIS.py
 NEXUS_CHAT_FIX.md
 
 electron/node_modules/
+

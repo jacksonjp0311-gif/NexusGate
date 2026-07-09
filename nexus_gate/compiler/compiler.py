@@ -669,10 +669,10 @@ class NexusCompiler:
 
     def gate_version_alignment_current_line(self) -> None:
         checks = {
-            "README.md": ["v0.9.6", "Toolbelt Console Integration"],
-            "ROADMAP.md": ["v0.9.6", "Status: current"],
-            "docs/versioning/NEXUS_CHANGELOG.md": ["v0.9.6", "Toolbelt Console Integration"],
-            "pyproject.toml": ["version = \"0.9.6\""],
+            "README.md": ["v0.9.7", "Toolbelt Console Integration"],
+            "ROADMAP.md": ["v0.9.7", "Status: current"],
+            "docs/versioning/NEXUS_CHANGELOG.md": ["v0.9.7", "Toolbelt Console Integration"],
+            "pyproject.toml": ["version = \"0.9.7\""],
         }
         failures = []
         for rel, tokens in checks.items():
@@ -682,9 +682,9 @@ class NexusCompiler:
             if missing:
                 failures.append({"path": rel, "missing": missing})
         if failures:
-            self.add("version_alignment_current_line", "fail", "v0.9.6 identity missing from required surfaces.", {"failures": failures})
+            self.add("version_alignment_current_line", "fail", "v0.9.7 identity missing from required surfaces.", {"failures": failures})
             return
-        self.add("version_alignment_current_line", "pass", "v0.9.6 identity is aligned across README, changelog, roadmap, and pyproject.", {"surfaces": sorted(checks)})
+        self.add("version_alignment_current_line", "pass", "v0.9.7 identity is aligned across README, changelog, roadmap, and pyproject.", {"surfaces": sorted(checks)})
 
     def gate_readme_encoding_clean(self) -> None:
         path = self.root / "README.md"
