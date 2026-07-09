@@ -4,8 +4,26 @@ __pycache__/
 .env
 .DS_Store
 Thumbs.db
+
+# logs / reports (local runtime exhaust)
 logs/*.log
 reports/tmp/
-electron/node_modules/
+reports/compact_compile_logs/
+reports/script_runs/
+reports/tui/
+electron/reports/
+
+# tesseract neural network runtime outputs
 reports/tesseract_neural_network/*.json
 reports/tesseract_neural_network/*.jsonl
+
+# backups / scratch artifacts
+*.bak
+*.bak_*
+**/*.bak_*
+README.md.bak_*
+
+# local automation scratch (chat session)
+annie_*.bat
+
+electron/node_modules/
