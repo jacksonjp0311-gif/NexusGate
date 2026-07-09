@@ -17,6 +17,7 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems. The po
 - v0.9.7 Toolbelt Cockpit Output
 - v0.9.8 Wound Compression Engine
 - v0.9.9 Preflight Optimizer
+- v1.0.0 Phi Wound Advisor
 - Neural Activity v0.1.1 canonical visual-organ line
 - Spiral Core Portal v0.1.2 desktop-face line
 
@@ -43,7 +44,7 @@ bash scripts/nexus.sh toolbelt-next "<intent>"
 ```
 
 ## Human Director Box
-NEXUS GATE current line: v0.9.9 Preflight Optimizer. Toolbelt Cockpit gives the operator view, Wound Compression reduces failures to one repair target, and Preflight Optimizer checks the next mutation surface before it runs. Evidence files are truth; stdout tails are smoke only.
+NEXUS GATE current line: v1.0.0 Phi Wound Advisor. Toolbelt shows the operator state, Wound Compression reduces failures, Preflight predicts mutation risk, and local Phi-4 Mini can advise on compact wound packets. Evidence files are truth; stdout tails are smoke only.
 
 ## AI Toolbelt Console
 Use the AI Toolbelt Console before choosing a patch path.
@@ -99,6 +100,13 @@ v0.9.9 checks the next mutation surface before a closer runs: command parity, pa
 .\scripts\nexus.ps1 preflight-json -Tag "<intent>"
 ```
 
+## Phi Wound Advisor
+v1.0.0 adds `phi-wound` and `phi-wound-gpu`: local Phi-4 Mini receives only compact wound packets and returns advisory repair JSON. Phi recommends; NexusGate verifies; human authorizes durable mutation.
+
+```powershell
+.\scripts\nexus.ps1 phi-wound -Tag "<failed gate>"
+```
+
 ## Lessons From the v0.9.1 Seal
 ```text
 Gates are certificates.
@@ -145,6 +153,7 @@ The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current oper
 | Toolbelt Console | `docs/runtime/NEXUS_TOOLBELT_CONSOLE.md` |
 | Toolbelt Cockpit | `docs/runtime/NEXUS_TOOLBELT_COCKPIT.md` |
 | Wound Compression Engine | `docs/runtime/NEXUS_WOUND_COMPRESSION_ENGINE.md` |
+| Phi Wound Advisor | `docs/runtime/NEXUS_PHI_WOUND_ADVISOR.md` |
 | Preflight Optimizer | `docs/runtime/NEXUS_PREFLIGHT_OPTIMIZER.md` |
 | NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |
 | Wound-indexed resume loop | `docs/runtime/NEXUS_WOUND_INDEXED_RESUME_LOOP.md` |

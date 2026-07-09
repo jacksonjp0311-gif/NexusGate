@@ -1,0 +1,145 @@
+{
+  "active_wound": {
+    "evidence_preview": "/nexus_compile_report_latest.json\n M reports/nexus_domain_intelligence_report_latest.json\n M reports/nexus_electron_environment_report_latest.json\n M reports/nexus_electron_preflight_report_latest.json\n M reports/nexus_evidence_compaction_report_latest.json\n M reports/nexus_feedback_interface_report_latest.json\n M reports/nexus_feedback_report_latest.json\n M reports/nexus_interconnect_report_latest.json\n M reports/nexus_nn_router_report_latest.json\n M reports/nexus_reflective_loop_report_latest.json\n M reports/nexus_self_healing_report_latest.json\n M scripts/nexus.ps1\n M scripts/nexus.sh\n M state/ai_feedback_context_latest.json\n M state/interconnect_graph.v0.2.2.json\n M state/loops/nexus_loop_cards.v0.9.7.json\n M state/loops/nexus_loop_cards_latest.json\n M state/loops/nexus_loop_registry.v0.1.json\n M state/loops/nexus_toolbelt.v0.9.7.json\n M state/loops/nexus_toolbelt_latest.json\n M state/loops/nexus_wound_compression_latest.json\n M state/nexus_nn_router_index.v0.6.4.json\n?? docs/runtime/NEXUS_PHI_WOUND_ADVISOR.md\n?? nexus_gate/loops/phi_wound_advisor.py\n?? state/loops/nexus_023m_failure.json\n?? state/loops/nexus_phi_wound_advisor.v1.0.0.json\n?? tests/test_phi_wound_advisor_v100.py",
+    "failed_files": [],
+    "next_repair_surface": "scope_hygiene_or_stage_policy",
+    "source": "git_status",
+    "wound_class": "local_change_surface",
+    "wound_key": "git:dirty_worktree"
+  },
+  "active_wound_class": "local_change_surface",
+  "active_wound_key": "git:dirty_worktree",
+  "advice": {
+    "confidence": 0.55,
+    "diagnosis": "Active wound class: local_change_surface; key: git:dirty_worktree.",
+    "intent": "025B advisor gate",
+    "patch_intent": "Patch the smallest file surface named by file-backed evidence, then rerun the failed gate.",
+    "repair_surface": "scope_hygiene_or_stage_policy",
+    "repair_type": "bounded_patch_plan_only",
+    "requires_human_authorization": true,
+    "rerun_gate": "python -m unittest discover -s tests",
+    "source": "deterministic_fallback"
+  },
+  "allowed_actions": [
+    "diagnose_wound",
+    "recommend_patch_surface",
+    "emit_patch_plan",
+    "emit_next_gate"
+  ],
+  "boundary": {
+    "arbitrary_command_execution": false,
+    "autonomous_authority": false,
+    "git_commit_enabled": false,
+    "git_push_enabled": false,
+    "git_stage_enabled": false,
+    "network_enabled": false,
+    "patch_apply_enabled": false,
+    "repo_mutation_enabled": false,
+    "secrets_enabled": false
+  },
+  "claim_boundary": "Phi Wound Advisor is a local read-only advisory lane. Phi recommends; NexusGate verifies; human authorizes durable mutation; compiler decides trust.",
+  "forbidden_actions": [
+    "run_shell",
+    "stage_git",
+    "commit",
+    "push",
+    "access_network",
+    "read_secrets",
+    "apply_patch_without_human_authorization"
+  ],
+  "generated_utc": "2026-07-09T14:46:16.908943+00:00",
+  "intent": "025B advisor gate",
+  "mode": "nexus_phi_wound_advisor",
+  "model_channel": {
+    "call_requested": false,
+    "command_env": "NEXUS_PHI4_MINI_COMMAND",
+    "microdose": true,
+    "model": "Phi-4 Mini base local/GPU if configured",
+    "model_status": "not_requested",
+    "require_model": false,
+    "separate_from_chat": true
+  },
+  "phi_result": {
+    "ok": false,
+    "raw_preview": "",
+    "status": "not_requested"
+  },
+  "preflight_failed_gates": [],
+  "recommended_next_command": "python -m unittest discover -s tests",
+  "recommended_next_loop": "wound-indexed-resume",
+  "repo_status": {
+    "changed_count": 44,
+    "dirty": true,
+    "head": "afbd003",
+    "status_preview": [
+      " M NexusCell/ledger/nexus_cell_continuity.jsonl",
+      " M README.md",
+      " M \"Tesseract Neural Network/memory/conversation_latest.json\"",
+      " M \"Tesseract Neural Network/memory/tnn_memory.jsonl\"",
+      " M \"Tesseract Neural Network/state/tnn_state_latest.json\"",
+      " M docs/feedback/FEEDBACK_LOG.md",
+      " M docs/runtime/NEXUS_LOOP_CARDS.md",
+      " M docs/runtime/NEXUS_TOOLBELT_CONSOLE.md",
+      " M ledger/nexus_cell/continuity.jsonl",
+      " M ledger/nexus_gate_ledger.v0.1.0.jsonl",
+      " M loops/nexus_loop_registry.v0.1.json",
+      " M nexus_gate/loops/preflight_optimizer.py",
+      " M reports/CHATGPT_HANDOFF_LATEST.md",
+      " M reports/CODEX_HANDOFF_LATEST.md",
+      " M reports/nexus_bounded_runtime_report_latest.json",
+      " M reports/nexus_compile_report_latest.json",
+      " M reports/nexus_domain_intelligence_report_latest.json",
+      " M reports/nexus_electron_environment_report_latest.json",
+      " M reports/nexus_electron_preflight_report_latest.json",
+      " M reports/nexus_evidence_compaction_report_latest.json",
+      " M reports/nexus_feedback_interface_report_latest.json",
+      " M reports/nexus_feedback_report_latest.json",
+      " M reports/nexus_interconnect_report_latest.json",
+      " M reports/nexus_nn_router_report_latest.json",
+      " M reports/nexus_preflight_optimizer_latest.json",
+      " M reports/nexus_reflective_loop_report_latest.json",
+      " M reports/nexus_self_healing_report_latest.json",
+      " M scripts/nexus.ps1",
+      " M scripts/nexus.sh",
+      " M state/ai_feedback_context_latest.json",
+      " M state/interconnect_graph.v0.2.2.json",
+      " M state/loops/nexus_loop_cards.v0.9.7.json",
+      " M state/loops/nexus_loop_cards_latest.json",
+      " M state/loops/nexus_loop_registry.v0.1.json",
+      " M state/loops/nexus_preflight_optimizer_latest.json",
+      " M state/loops/nexus_toolbelt.v0.9.7.json",
+      " M state/loops/nexus_toolbelt_latest.json",
+      " M state/loops/nexus_wound_compression_latest.json",
+      " M state/nexus_nn_router_index.v0.6.4.json",
+      "?? docs/runtime/NEXUS_PHI_WOUND_ADVISOR.md"
+    ]
+  },
+  "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
+  "schema": "NEXUS_PHI_WOUND_ADVISOR.v1.0.0",
+  "self_heal_policy": {
+    "current_mode": "advisor_only",
+    "deterministic_controller_must_verify": true,
+    "future_modes": [
+      "patch_plan",
+      "human_authorized_self_heal"
+    ],
+    "human_authorization_required": true,
+    "patch_apply_enabled": false
+  },
+  "status": "advice",
+  "truth_rule": {
+    "file_packets": "truth",
+    "model_output": "advisory_only",
+    "stdout": "smoke_only",
+    "tail": "never_truth"
+  },
+  "truth_sources": {
+    "bounded_report_exists": true,
+    "bounded_status": "pass",
+    "compiler_report_exists": true,
+    "compiler_status": "pass",
+    "preflight_report_exists": true,
+    "wound_report_exists": true
+  },
+  "version": "1.0.0"
+}

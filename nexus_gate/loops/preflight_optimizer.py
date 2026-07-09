@@ -78,13 +78,26 @@ def check_command_surface(root: Path) -> dict[str, Any]:
 
 def check_readme_current_line(root: Path) -> dict[str, Any]:
     text = _read(root / "README.md")
-    lineage = re.findall(r"v0\.9\.(\d+)", text)
-    max_minor = max([int(x) for x in lineage], default=0)
-    expected = f"v0.9.{max_minor}"
+    semantic_versions = []
+    for major, minor, patch in re.findall(r"v(\d+)\.(\d+)\.(\d+)", text):
+        semantic_versions.append((int(major), int(minor), int(patch)))
+    latest = max(semantic_versions, default=(0, 9, 0))
+    expected = f"v{latest[0]}.{latest[1]}.{latest[2]}"
     current_line_match = re.search(r"NEXUS GATE current line:\s*([^\n]+)", text)
     current_line = current_line_match.group(1).strip() if current_line_match else "missing"
-    ok = expected in current_line and "Preflight Optimizer" in text and "NEXUS_PREFLIGHT_OPTIMIZER.md" in text
-    return _gate("pass" if ok else "fail", {"expected_latest": expected, "current_line": current_line, "line_count": len(text.splitlines())})
+    needs = ["Preflight Optimizer", "NEXUS_PREFLIGHT_OPTIMIZER.md"]
+    if latest >= (1, 0, 0):
+        needs += ["Phi Wound Advisor", "NEXUS_PHI_WOUND_ADVISOR.md"]
+    missing = [item for item in needs if item not in text]
+    ok = expected in current_line and not missing
+    return _gate("pass" if ok else "fail", {
+        "expected_latest": expected,
+        "latest_tuple": list(latest),
+        "current_line": current_line,
+        "line_count": len(text.splitlines()),
+        "missing": missing,
+        "accepted_current_line_versions": ["v0.9.9", "v1.0.0+"],
+    })
 
 
 def check_packet_contracts(root: Path) -> dict[str, Any]:

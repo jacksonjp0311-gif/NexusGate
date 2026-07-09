@@ -11,6 +11,8 @@ set -euo pipefail
 # domain
 # geo
 # geo-clean
+# phi-wound
+# phi-wound-gpu
 # toolbelt
 # toolbelt-dashboard
 # toolbelt-next
@@ -38,6 +40,20 @@ run_meta_loop_exec() {
 }
 
 case "$COMMAND" in
+
+  phi-wound)
+    shift || true
+    CALL_MODEL=""
+    if [ "${1:-}" = "--call-model" ]; then CALL_MODEL="--call-model"; shift || true; fi
+    INTENT="${*:-Ask local Phi-4 Mini to advise on the active Nexus wound.}"
+    python -m nexus_gate.loops.phi_wound_advisor --root . --intent "$INTENT" $CALL_MODEL --json
+    ;;
+  phi-wound-gpu)
+    shift || true
+    INTENT="${*:-Ask local GPU Phi-4 Mini to advise on the active Nexus wound.}"
+    python -m nexus_gate.loops.phi_wound_advisor --root . --intent "$INTENT" --call-model --require-model --json
+    ;;
+
   preflight)
     shift || true
     INTENT="${*:-Preflight next Nexus mutation surface.}"

@@ -89,6 +89,36 @@
       "description": "Emit loop cards.",
       "mutates": false
     },
+    "phi_wound_advisor": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.phi_wound_advisor",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "description": "Emit local Phi-4 Mini wound-advice packet without calling the model by default.",
+      "local_only": true,
+      "mutates": false,
+      "requires_human_authorization": false
+    },
+    "phi_wound_gpu": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.phi_wound_advisor",
+        "--root",
+        ".",
+        "--call-model",
+        "--require-model",
+        "--json"
+      ],
+      "description": "Call configured local GPU Phi-4 Mini as a separate wound-advice gate.",
+      "local_only": true,
+      "mutates": false,
+      "requires_human_authorization": false
+    },
     "preflight_json": {
       "argv": [
         "python",
@@ -1672,6 +1702,63 @@
       ],
       "stop_on_failure": true,
       "title": "Performance Scout"
+    },
+    "phi-wound-advisor": {
+      "ai_callable": true,
+      "description": "Micro-dose local Phi-4 Mini on compact wound packets and return advisory repair JSON.",
+      "display_group": "Wound Intelligence",
+      "function": "Ask local Phi-4 Mini to diagnose the active wound without giving it repo, shell, git, network, or secret authority.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use immediately after wound-compress or preflight failure to get an advisory repair plan.",
+      "requires_human_authorization": false,
+      "stages": [
+        {
+          "max_preview_lines": 80,
+          "name": "wound_compression_latest",
+          "path": "reports/nexus_wound_compression_latest.json",
+          "required": false,
+          "type": "read"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "preflight_latest",
+          "path": "reports/nexus_preflight_optimizer_latest.json",
+          "required": false,
+          "type": "read"
+        },
+        {
+          "command": "phi_wound_advisor",
+          "name": "phi_wound_advisor",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": false
+    },
+    "phi-wound-gpu-gate": {
+      "ai_callable": true,
+      "description": "Require configured local GPU Phi-4 Mini to return a wound-advice packet.",
+      "display_group": "Wound Intelligence",
+      "function": "Separate model gate for local Phi-4 Mini base model advisory analysis.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use when the operator wants the actual local Phi-4 Mini model called, not only deterministic fallback.",
+      "requires_human_authorization": false,
+      "stages": [
+        {
+          "max_preview_lines": 80,
+          "name": "wound_compression_latest",
+          "path": "reports/nexus_wound_compression_latest.json",
+          "required": false,
+          "type": "read"
+        },
+        {
+          "command": "phi_wound_gpu",
+          "name": "phi_wound_gpu",
+          "type": "command"
+        }
+      ],
+      "stop_on_failure": true
     },
     "preflight-optimizer": {
       "ai_callable": true,

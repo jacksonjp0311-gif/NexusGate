@@ -12,7 +12,7 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "loops", "loop-registry", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "loops", "loop-registry", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -244,6 +244,21 @@ function Invoke-NexusWoundCompression {
     if ($LASTEXITCODE -ne 0) { throw "NEXUS wound compression failed." }
 }
 
+
+function Invoke-NexusPhiWoundAdvisor {
+    param(
+        [string]$Intent = "Ask local Phi-4 Mini to advise on the active Nexus wound.",
+        [switch]$UsePhi,
+        [switch]$RequirePhi
+    )
+    if ([string]::IsNullOrWhiteSpace($Intent)) { $Intent = "Ask local Phi-4 Mini to advise on the active Nexus wound." }
+    $args = @("-m", "nexus_gate.loops.phi_wound_advisor", "--root", ".", "--intent", $Intent, "--json")
+    if ($UsePhi.IsPresent) { $args += "--call-model" }
+    if ($RequirePhi.IsPresent) { $args += "--require-model" }
+    python @args
+    if ($LASTEXITCODE -ne 0) { throw "NEXUS Phi Wound Advisor failed." }
+}
+
 function Invoke-NexusToolbelt {
     param(
         [string]$View = "dashboard",
@@ -259,6 +274,8 @@ function Invoke-NexusToolbelt {
 }
 
 switch ($Command) {
+    "phi-wound-gpu" { Invoke-NexusPhiWoundAdvisor -Intent $Tag -UsePhi -RequirePhi }
+    "phi-wound" { Invoke-NexusPhiWoundAdvisor -Intent $Tag -UsePhi:$CallModel }
     "preflight" { Invoke-NexusPreflightOptimizer -Intent $Tag }
     "preflight-json" { Invoke-NexusPreflightOptimizer -Intent $Tag -Json }
     "wound-compress" { Invoke-NexusWoundCompression -Intent $Tag }
