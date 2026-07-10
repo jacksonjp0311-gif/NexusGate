@@ -899,9 +899,6 @@
               <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
             </div>
           </div>
-          <div class="metric-row"><span>Evidence Pressure</span><strong id="pressure">unknown</strong></div>
-          <div class="metric-row"><span>Dominant Pressure Source</span><strong id="dominant">unknown</strong></div>
-          <div class="metric-row"><span>Trend</span><strong id="trend">stable</strong></div>
           <section class="system-monitor-station" aria-label="Local system monitor">
             <button class="telemetry-popout-button" type="button" id="telemetry-popout">
               <span>System Monitor</span>
@@ -923,18 +920,10 @@
               <span>Gate <strong>read-only</strong></span>
             </div>
           </section>
-          <section class="tempest-station" aria-label="T3MP3ST gateway">
-            <button class="tempest-button" type="button" id="tempest-popout" aria-expanded="false" aria-controls="tempest-hud">
-              <span class="tempest-glyph" aria-hidden="true">T</span>
-              <span class="tempest-copy">
-                <span>T3MP3ST</span>
-                <strong id="tempest-status">authorized only</strong>
-              </span>
-            </button>
-          </section>
-          <section class="model-selector-station compat-hidden-mode-selector" aria-label="Mode Selection HUD">
+          <section class="model-selector-station" aria-label="AI Mode HUD">
             <button class="model-selector-button mode-selection-button" type="button" id="model-selector-toggle" aria-expanded="false" aria-controls="model-selector-hud">
-              <span class="mode-selection-glyph" aria-hidden="true">
+              <span class="mode-selection-compat" aria-hidden="true">
+                Mode Selection
                 <span class="selector-switch mode-selector-switch" id="selector-switch" data-role="DEEP">
                   <span class="selector-knot" id="selector-knot">
                     <span class="knot-triangle"></span>
@@ -945,16 +934,17 @@
                   </span>
                 </span>
               </span>
-              <span class="mode-selection-copy">
-                <span class="mode-selection-title">Mode Selection</span>
+              <span class="tempest-glyph ai-mode-glyph" aria-hidden="true">AI</span>
+              <span class="tempest-copy ai-mode-copy">
+                <span>AI MODE</span>
                 <strong id="selector-hud-status">DEEP / Mistral</strong>
               </span>
             </button>
-            <section class="model-selector-hud" id="model-selector-hud" hidden aria-label="Expanded mode selection HUD">
+            <section class="model-selector-hud" id="model-selector-hud" hidden aria-label="Expanded AI mode HUD">
               <div class="model-selector-head">
                 <div>
-                  <span>Mode Selection</span>
-                  <strong>Local Voice / Relay</strong>
+                  <span>NEXUS Green HUD</span>
+                  <strong>AI MODE</strong>
                 </div>
                 <button type="button" id="model-selector-close">close</button>
               </div>
@@ -972,6 +962,15 @@
               </div>
               <button class="ghost-button selector-copy-button" type="button" id="copy-role-command">Copy command</button>
             </section>
+          </section>
+          <section class="tempest-station" aria-label="T3MP3ST gateway">
+            <button class="tempest-button" type="button" id="tempest-popout" aria-expanded="false" aria-controls="tempest-hud">
+              <span class="tempest-glyph" aria-hidden="true">T</span>
+              <span class="tempest-copy">
+                <span>T3MP3ST</span>
+                <strong id="tempest-status">authorized only</strong>
+              </span>
+            </button>
           </section>
           <section class="telemetry-hud tempest-hud" id="tempest-hud" hidden aria-label="Expanded T3MP3ST HUD">
             <div class="telemetry-hud-head tempest-hud-head" id="tempest-drag-handle">

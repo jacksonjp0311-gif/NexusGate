@@ -918,20 +918,43 @@ function bindMovableHud(panel, handle) {
   handle.addEventListener("pointerdown", (event) => {
     if (event.target?.closest?.("button")) return;
     const rect = panel.getBoundingClientRect();
-    dragging = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+    dragging = {
+      pointerId: event.pointerId,
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+      width: rect.width,
+      height: rect.height
+    };
+    panel.style.left = `${rect.left}px`;
+    panel.style.top = `${rect.top}px`;
+    panel.style.right = "auto";
+    panel.style.bottom = "auto";
+    panel.classList.add("is-dragging");
     handle.setPointerCapture?.(event.pointerId);
+    event.preventDefault();
   });
-  handle.addEventListener("pointermove", (event) => {
+  const moveDrag = (event) => {
     if (!dragging) return;
-    const nextLeft = Math.max(8, Math.min(window.innerWidth - 180, event.clientX - dragging.x));
-    const nextTop = Math.max(8, Math.min(window.innerHeight - 120, event.clientY - dragging.y));
+    const maxLeft = Math.max(8, window.innerWidth - Math.min(dragging.width, window.innerWidth - 16));
+    const maxTop = Math.max(8, window.innerHeight - Math.min(dragging.height, window.innerHeight - 16));
+    const nextLeft = Math.max(8, Math.min(maxLeft, event.clientX - dragging.x));
+    const nextTop = Math.max(8, Math.min(maxTop, event.clientY - dragging.y));
     panel.style.left = `${nextLeft}px`;
     panel.style.top = `${nextTop}px`;
     panel.style.right = "auto";
-  });
-  const stopDrag = () => { dragging = null; };
-  handle.addEventListener("pointerup", stopDrag);
-  handle.addEventListener("pointercancel", stopDrag);
+    panel.style.bottom = "auto";
+  };
+  const stopDrag = (event) => {
+    if (!dragging) return;
+    if (event?.pointerId !== undefined && event.pointerId !== dragging.pointerId) return;
+    panel.classList.remove("is-dragging");
+    try { handle.releasePointerCapture?.(dragging.pointerId); } catch (_) {}
+    dragging = null;
+  };
+  handle.addEventListener("pointermove", moveDrag);
+  document.addEventListener("pointermove", moveDrag);
+  document.addEventListener("pointerup", stopDrag);
+  document.addEventListener("pointercancel", stopDrag);
 }
 
 function toggleModelSelectorHud(force) {
