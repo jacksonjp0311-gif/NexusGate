@@ -460,6 +460,13 @@ async function openPetriDishPro() {
   }
 }
 
+function wrapPetriCoordinate(value, limit) {
+  const span = limit * 2;
+  let wrapped = ((value + limit) % span + span) % span - limit;
+  if (!Number.isFinite(wrapped)) wrapped = 0;
+  return wrapped;
+}
+
 function drawPetriPreview() {
   if (!petriMiniCanvas) return;
   const rect = petriMiniCanvas.getBoundingClientRect();
@@ -494,8 +501,10 @@ function drawPetriPreview() {
 
   const particles = latestPetriState?.particles || [];
   particles.forEach((particle, index) => {
-    const x = cx + (Number(particle.x || 0) * radius * 0.7) + Math.sin(t * 0.45 + index) * 0.55;
-    const y = cy + (Number(particle.y || 0) * radius * 0.7) + Math.cos(t * 0.38 + index) * 0.55;
+    const wx = wrapPetriCoordinate(Number(particle.x || 0) + Number(particle.vx || 0) * t * 5.4, 1.35);
+    const wy = wrapPetriCoordinate(Number(particle.y || 0) + Number(particle.vy || 0) * t * 5.4, 0.82);
+    const x = cx + wx * radius * 0.7;
+    const y = cy + wy * radius * 0.7;
     if ((x - cx) ** 2 + (y - cy) ** 2 > (radius * 0.96) ** 2) return;
     ctx.globalAlpha = 0.14 + Math.min(0.38, Number(particle.z || 0) * 0.26);
     ctx.fillStyle = "rgba(180, 230, 255, 0.48)";
@@ -506,15 +515,20 @@ function drawPetriPreview() {
 
   const cells = latestPetriState?.cells || [];
   cells.forEach((cell, index) => {
-    const x = cx + (Number(cell.x || 0) * radius * 0.78) + Math.sin(t * 0.72 + index) * 0.48;
-    const y = cy + (Number(cell.y || 0) * radius * 0.78) + Math.cos(t * 0.66 + index) * 0.48;
+    const behavior = cell.behavior || {};
+    const phase = Number(cell.phase || index * 0.37);
+    const motility = Number(behavior.motility ?? 0.65);
+    const wx = wrapPetriCoordinate(Number(cell.x || 0) + Number(cell.vx || 0) * t * 4.8 * motility + Math.sin(t * 0.22 + phase) * 0.012, 1.25);
+    const wy = wrapPetriCoordinate(Number(cell.y || 0) + Number(cell.vy || 0) * t * 4.8 * motility + Math.cos(t * 0.2 + phase) * 0.008, 0.76);
+    const x = cx + wx * radius * 0.78;
+    const y = cy + wy * radius * 0.78;
     if ((x - cx) ** 2 + (y - cy) ** 2 > (radius * 0.95) ** 2) return;
     const color = cell.color || "#27f4ff";
     const morph = cell.morphology || "rod";
     const size = Math.max(2.3, Number(cell.radius || 0.014) * radius * 4.1);
     ctx.save();
     ctx.translate(x, y);
-    ctx.rotate((Number(cell.angle || 0)) + Math.sin(t + index) * 0.08);
+    ctx.rotate((Number(cell.angle || 0)) + Math.sin(t + phase) * 0.18);
     ctx.shadowColor = color;
     ctx.shadowBlur = 8;
     ctx.globalAlpha = 0.78;
@@ -530,10 +544,25 @@ function drawPetriPreview() {
       ctx.fill();
       ctx.stroke();
     } else if (morph === "coccus" || morph === "amoeboid") {
-      ctx.beginPath();
-      ctx.arc(0, 0, size, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
+      if (morph === "amoeboid") {
+        ctx.beginPath();
+        for (let i = 0; i < 9; i += 1) {
+          const a = (i * Math.PI * 2 / 9) + phase * 0.18;
+          const rr = size * (0.85 + Math.sin(phase + t + i) * 0.24);
+          const px = Math.cos(a) * rr;
+          const py = Math.sin(a) * rr;
+          if (i === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      }
     } else {
       ctx.lineWidth = Math.max(1, size * 0.18);
       ctx.lineCap = "round";

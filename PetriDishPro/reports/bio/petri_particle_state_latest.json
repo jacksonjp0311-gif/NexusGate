@@ -12,7 +12,7 @@
     "particles": "particles.json"
   },
   "generated_utc": "2026-07-09T15:51:22.808979Z",
-  "run_dir": "C:\\Users\\jacks\\OneDrive\\Desktop\\PetriDishPro\\artifacts\\bio\\runs\\petri_preview",
+  "run_dir": "artifacts/bio/runs/petri_preview",
   "run_id": "petri_preview",
   "schema": "PETRI_PARTICLE_STATE.v0.4m",
   "seed": 4136855258,

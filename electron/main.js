@@ -468,10 +468,14 @@ function listPetriRuns() {
 
 function readPetriRunFile(index, key) {
   const fileName = index?.files?.[key];
-  const runDir = index?.run_dir;
+  const runDir = index?.run_dir || path.join("artifacts", "bio", "runs", index?.run_id || "petri_preview");
   if (!fileName || !runDir) return null;
-  const resolvedRunDir = path.resolve(runDir);
+  const runDirCandidate = path.isAbsolute(runDir) ? runDir : path.join(petriDishProRoot, runDir);
+  let resolvedRunDir = path.resolve(runDirCandidate);
   const resolvedRoot = path.resolve(petriDishProRoot);
+  if (!resolvedRunDir.startsWith(resolvedRoot + path.sep)) {
+    resolvedRunDir = path.join(resolvedRoot, "artifacts", "bio", "runs", index?.run_id || "petri_preview");
+  }
   if (!resolvedRunDir.startsWith(resolvedRoot + path.sep)) return null;
   try {
     return JSON.parse(fs.readFileSync(path.join(resolvedRunDir, fileName), "utf8"));
@@ -501,18 +505,25 @@ function buildPetriPreviewState() {
     cells: cells.slice(0, 160).map((cell) => ({
       id: cell.id,
       organism_id: cell.organism_id,
+      label: cell.label,
       morphology: cell.morphology,
+      behavior: cell.behavior || {},
       color: cell.color,
       x: Number(cell.x || 0),
       y: Number(cell.y || 0),
+      vx: Number(cell.vx || 0),
+      vy: Number(cell.vy || 0),
       angle: Number(cell.angle || 0),
-      radius: Number(cell.radius || 0.012)
+      phase: Number(cell.phase || 0),
+      radius: Number(cell.radius || cell.size || 0.012)
     })),
     particles: particles.slice(0, 180).map((particle) => ({
       id: particle.id,
       type: particle.type,
       x: Number(particle.x || 0),
       y: Number(particle.y || 0),
+      vx: Number(particle.vx || 0),
+      vy: Number(particle.vy || 0),
       z: Number(particle.z || 0)
     })),
     claim_boundary: index.claim_boundary || "PetriDishPro preview is deterministic simulation evidence only; it is not microscopy, clinical, species-identification, treatment, or biosafety evidence.",

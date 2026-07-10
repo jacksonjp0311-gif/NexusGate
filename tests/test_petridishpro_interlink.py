@@ -30,6 +30,11 @@ class PetriDishProInterlinkTests(unittest.TestCase):
         gitnexus = (ROOT / "electron" / "renderer" / "nexus_gitnexus_local_hud.v0.5.3.js").read_text(encoding="utf-8-sig")
         self.assertIn('path.join(repoRoot, "PetriDishPro")', main)
         self.assertNotIn('path.join(os.homedir(), "OneDrive", "Desktop", "PetriDishPro")', main)
+        self.assertIn("path.isAbsolute(runDir)", main)
+        self.assertIn('"artifacts", "bio", "runs"', main)
+        self.assertIn("behavior: cell.behavior", main)
+        self.assertIn("vx: Number(cell.vx", main)
+        self.assertIn("phase: Number(cell.phase", main)
         self.assertIn("buildPetriPreviewState", main)
         self.assertIn("nexus:getPetriDishProState", main)
         self.assertIn("getPetriDishProState", preload)
@@ -37,6 +42,8 @@ class PetriDishProInterlinkTests(unittest.TestCase):
         self.assertIn("NEXUS_PETRIDISH_MINI_LAYOUT_REPAIR_V011", html)
         self.assertIn("drawPetriPreview", renderer)
         self.assertIn("2 um", renderer)
+        self.assertIn("wrapPetriCoordinate", renderer)
+        self.assertIn("behavior.motility", renderer)
         self.assertIn("refreshPetriPreview", renderer)
         self.assertIn('document.querySelector(".petri-dish-mini")', gitnexus)
         self.assertIn("petriAligned", gitnexus)
@@ -71,6 +78,12 @@ class PetriDishProInterlinkTests(unittest.TestCase):
         for rel_path in expected:
             with self.subTest(rel_path=rel_path):
                 self.assertTrue((ROOT / "PetriDishPro" / rel_path).exists())
+
+    def test_embedded_preview_receipt_uses_relative_run_dir(self) -> None:
+        receipt = json.loads((ROOT / "PetriDishPro" / "reports" / "bio" / "petri_particle_state_latest.json").read_text(encoding="utf-8-sig"))
+        self.assertEqual(receipt["run_dir"], "artifacts/bio/runs/petri_preview")
+        self.assertEqual(receipt["counts"]["cells"], 225)
+        self.assertEqual(receipt["counts"]["particles"], 320)
 
 
 if __name__ == "__main__":
