@@ -386,6 +386,13 @@ $ErrorActionPreference = "SilentlyContinue"
 $gpu = Get-CimInstance Win32_VideoController | Select-Object -First 1 Name,AdapterRAM,DriverVersion
 $disk = Get-PSDrive -Name C | Select-Object -First 1 Used,Free
 $ollama = @(Get-Process ollama,llama-server -ErrorAction SilentlyContinue | Select-Object ProcessName,Id,CPU,WorkingSet64)
+$topCpu = @(Get-Process | Sort-Object CPU -Descending | Select-Object -First 5 ProcessName,Id,CPU,WorkingSet64)
+$topMemory = @(Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 5 ProcessName,Id,CPU,WorkingSet64)
+$logicalDisks = @(Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3" | Select-Object DeviceID,Size,FreeSpace,VolumeName)
+$netAdapters = @(Get-NetAdapter -ErrorAction SilentlyContinue | Where-Object Status -eq "Up" | Select-Object -First 5 Name,InterfaceDescription,Status,LinkSpeed,MacAddress)
+$netStats = @(Get-NetAdapterStatistics -ErrorAction SilentlyContinue | Select-Object -First 8 Name,ReceivedBytes,SentBytes,ReceivedUnicastPackets,SentUnicastPackets)
+$battery = Get-CimInstance Win32_Battery | Select-Object -First 1 EstimatedChargeRemaining,BatteryStatus
+$processCount = @(Get-Process).Count
 $gpuLoad = $null
 try {
   $samples = Get-Counter '\\GPU Engine(*)\\Utilization Percentage' -ErrorAction Stop
@@ -399,6 +406,13 @@ try {
   disk_c_free = $disk.Free
   disk_c_used = $disk.Used
   ollama_processes = $ollama
+  top_cpu_processes = $topCpu
+  top_memory_processes = $topMemory
+  logical_disks = $logicalDisks
+  network_adapters = $netAdapters
+  network_stats = $netStats
+  battery = $battery
+  process_count = $processCount
 } | ConvertTo-Json -Depth 5
 `;
   const result = await runFixedPowerShell(script, 2200);
@@ -1011,19 +1025,69 @@ ipcMain.handle("nexus:openPetriDishPro", async () => openPetriDishProWindow());
 ipcMain.handle("nexus:getPetriDishProState", async () => buildPetriPreviewState());
 ipcMain.handle("nexus:getNeuralRepoGraph", async () => buildNeuralRepoGraph());
 
+function buildTelemetryAnalysis(packet) {
+  const cpu = Number(packet.cpu?.load_percent || 0);
+  const ram = Number(packet.memory?.used_percent || 0);
+  const gpuRaw = packet.windows?.gpu_load_percent;
+  const gpu = gpuRaw === null || gpuRaw === undefined ? null : Number(gpuRaw);
+  const diskFree = Number(packet.windows?.disk_c_free || 0);
+  const totalMem = Number(packet.memory?.total_bytes || 0);
+  const freeMem = Number(packet.memory?.free_bytes || 0);
+  const recommendations = [];
+  const pressure = [];
+
+  if (cpu >= 90) {
+    pressure.push("cpu");
+    recommendations.push("CPU pressure is high. Close nonessential local workloads before model or smoke runs.");
+  }
+  if (ram >= 88) {
+    pressure.push("memory");
+    recommendations.push("RAM pressure is high. Prefer FAST/Phi-4-mini or defer Electron smoke until pressure drops.");
+  }
+  if (gpu !== null && gpu >= 85) {
+    pressure.push("gpu");
+    recommendations.push("GPU pressure is high. Keep NEX model calls recommendation-only or CPU-fallback until available.");
+  }
+  if (diskFree > 0 && diskFree < 20 * 1024 * 1024 * 1024) {
+    pressure.push("disk");
+    recommendations.push("Disk C free space is low. Run scope-hygiene and remove stale bundles before compounding.");
+  }
+  if (!packet.windows?.ollama_processes || (Array.isArray(packet.windows.ollama_processes) && packet.windows.ollama_processes.length === 0)) {
+    recommendations.push("Ollama is not detected. Local model chat can still use bounded fallback, but model-backed voice is unavailable.");
+  }
+  if (recommendations.length === 0) {
+    recommendations.push("No immediate local telemetry pressure detected. Continue governed evolve or targeted UI work.");
+  }
+
+  const status = pressure.length ? "watch" : "stable";
+  return {
+    status,
+    pressure,
+    recommendations,
+    options: [
+      "Run .\\scripts\\nexus.ps1 orchestrate for next loop routing.",
+      "Run .\\scripts\\nexus.ps1 evolve before commit/push.",
+      "Use System Monitor before model-heavy lanes when CPU/RAM pressure is high."
+    ],
+    summary: `CPU ${cpu.toFixed(1)}% / RAM ${ram.toFixed(1)}% / free memory ${freeMem && totalMem ? Math.round((freeMem / totalMem) * 100) : 0}%`,
+    boundary: "Telemetry analysis is advisory only. It cannot self-authorize repairs, execute commands, certify cybersecurity posture, or mutate the repo."
+  };
+}
+
 ipcMain.handle("nexus:getTelemetry", async () => {
   const totalMem = os.totalmem();
   const freeMem = os.freemem();
   const cpuPercent = readCpuPercent();
   const windowsTelemetry = await readWindowsTelemetry();
-  return {
+  const packet = {
     system: "NEXUS GATE",
-    version: "0.6.6-local-telemetry-hud",
+    version: "0.9.8-system-monitor-hud",
     generated_at_utc: new Date().toISOString(),
     cpu: {
       cores: os.cpus().length,
       model: os.cpus()[0]?.model || "unknown",
-      load_percent: Number(cpuPercent.toFixed(1))
+      load_percent: Number(cpuPercent.toFixed(1)),
+      load_average: os.loadavg()
     },
     memory: {
       total_bytes: totalMem,
@@ -1036,8 +1100,16 @@ ipcMain.handle("nexus:getTelemetry", async () => {
       uptime_seconds: Math.round(os.uptime())
     },
     windows: windowsTelemetry,
+    monitor_tabs: ["overview", "processes", "storage_network", "recommendations", "cyber_security_tempest"],
+    cyber_security_tempest: {
+      status: "reserved",
+      entries: [],
+      boundary: "Reserved empty hook. No TEMPEST telemetry, cybersecurity finding, RF/EMSEC claim, or security certification is generated."
+    },
     boundary: "Read-only local telemetry. NEX may observe CPU/RAM/GPU/process pressure but may not self-authorize repair or mutation."
   };
+  packet.analysis = buildTelemetryAnalysis(packet);
+  return packet;
 });
 ipcMain.handle("nexus:ensureOllama", async () => ensureOllamaBackend());
 ipcMain.handle("nexus:getContract", async () => ({

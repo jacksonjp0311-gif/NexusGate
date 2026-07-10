@@ -377,6 +377,13 @@ Boundary: cards describe governed local loops. They do not grant autonomous auth
 - Function: Gives the AI a repo topology map so future patches can target the correct organ.
 - Command: `python -m nexus_gate.loops.runner --root . --loop surface-map --intent "<intent>" --json`
 
+### System Monitor Scout
+
+- Loop: `system-monitor-scout`
+- Group: `Performance`
+- Function: Route system monitor evolution through a named read-only loop before UI or telemetry patches.
+- Command: `python -m nexus_gate.loops.runner --root . --loop system-monitor-scout --intent "<intent>" --json`
+
 ### Test Strategy
 
 - Loop: `test-strategy`

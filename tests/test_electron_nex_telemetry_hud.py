@@ -12,7 +12,10 @@ class TestElectronNexTelemetryHud(unittest.TestCase):
         self.assertIn("Stop<br>Transmission", html)
         self.assertIn('id="telemetry-popout"', html)
         self.assertIn('id="telemetry-hud"', html)
-        self.assertIn("Local Telemetry Station", html)
+        self.assertIn("System Monitor Station", html)
+        self.assertIn("Cyber Security - TEMPEST", html)
+        self.assertIn('data-telemetry-tab="tempest"', html)
+        self.assertNotIn('id="hud-telemetry-raw"', html)
 
     def test_preload_exposes_bounded_telemetry_and_stop(self):
         preload = (ROOT / "electron" / "preload.js").read_text(encoding="utf-8-sig")
@@ -29,6 +32,10 @@ class TestElectronNexTelemetryHud(unittest.TestCase):
         self.assertIn("CUDA_VISIBLE_DEVICES", main)
         self.assertIn("NEXUS_OLLAMA_NUM_GPU", main)
         self.assertIn("Read-only local telemetry", main)
+        self.assertIn("top_cpu_processes", main)
+        self.assertIn("network_adapters", main)
+        self.assertIn("buildTelemetryAnalysis", main)
+        self.assertIn("cyber_security_tempest", main)
         self.assertNotIn("exec(", main)
         self.assertNotIn("execFile(", main)
 
@@ -39,14 +46,21 @@ class TestElectronNexTelemetryHud(unittest.TestCase):
         self.assertIn("Transmission stop requested", renderer)
         self.assertIn("window.nexus.stopNex", renderer)
         self.assertIn("window.nexus.getTelemetry", renderer)
+        self.assertIn("activateTelemetryTab", renderer)
+        self.assertIn("renderTelemetryRows", renderer)
+        self.assertNotIn("hud-telemetry-raw", renderer)
 
     def test_styles_have_cyberpunk_controls(self):
         css = (ROOT / "electron" / "renderer" / "styles.css").read_text(encoding="utf-8-sig")
         self.assertIn(".stop-transmission", css)
         self.assertIn(".telemetry-hud", css)
+        self.assertIn("NEXUS v0.9.8: expanded System Monitor HUD", css)
+        self.assertIn(".telemetry-tabs", css)
+        self.assertIn(".tempest-panel", css)
         self.assertIn(".transmission-actions", css)
         self.assertIn("max-height: 230px", css)
         self.assertIn("rgba(250, 204, 21", css)
+        self.assertNotIn("#hud-telemetry-raw", css)
 
     def test_ollama_client_defaults_to_cpu_gpu_zero(self):
         client = (ROOT / "nexus_gate" / "nn_router" / "ollama_client.py").read_text(encoding="utf-8-sig")

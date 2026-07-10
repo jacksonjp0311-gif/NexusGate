@@ -1378,18 +1378,6 @@ body.nex-processing .nex-interface-symbol {
   overflow-wrap: anywhere;
 }
 
-#hud-telemetry-raw {
-  margin: 10px 0 0;
-  max-height: 180px;
-  overflow: auto;
-  white-space: pre-wrap;
-  color: #fde68a;
-  background: rgba(2, 6, 23, .72);
-  border: 1px solid rgba(250, 204, 21, .16);
-  padding: 10px;
-  font: 11px/1.35 Consolas, monospace;
-}
-
 .meta-orchestrator-hud {
   color: #ecfccb;
   background:
@@ -2355,4 +2343,174 @@ body.system-error-active .chat-viewport {
 
 .chat-message .message-body header strong + small::before {
   content: "";
+}
+
+/* NEXUS v0.9.8: expanded System Monitor HUD with tabbed read-only telemetry. */
+.telemetry-hud {
+  width: min(980px, calc(100vw - 56px)) !important;
+  max-height: calc(100vh - 92px) !important;
+  top: 46px !important;
+  color: #d9f99d !important;
+  background:
+    linear-gradient(135deg, rgba(2, 44, 34, .94), rgba(2, 6, 23, .86)),
+    radial-gradient(circle at 78% 18%, rgba(34, 197, 94, .22), transparent 34%) !important;
+  border-color: rgba(34, 197, 94, .64) !important;
+  box-shadow: 0 0 44px rgba(34, 197, 94, .28), inset 0 0 30px rgba(34, 197, 94, .08) !important;
+}
+
+.telemetry-hud-head {
+  border-bottom-color: rgba(34, 197, 94, .30) !important;
+}
+
+.telemetry-hud-head span,
+.telemetry-hud-grid span {
+  color: #86efac !important;
+}
+
+.telemetry-hud-head strong,
+.telemetry-hud-grid strong {
+  color: #f0fdf4 !important;
+}
+
+.telemetry-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+  margin: 10px 0;
+}
+
+.telemetry-tab {
+  min-height: 34px;
+  padding: 6px 8px;
+  color: #86efac;
+  background: rgba(2, 6, 23, .70);
+  border: 1px solid rgba(34, 197, 94, .24);
+  cursor: pointer;
+  font: 800 10px/1.2 Consolas, monospace;
+  text-transform: uppercase;
+}
+
+.telemetry-tab.is-active {
+  color: #ecfccb;
+  background: linear-gradient(180deg, rgba(20, 83, 45, .78), rgba(2, 6, 23, .86));
+  border-color: rgba(132, 204, 22, .62);
+  box-shadow: 0 0 18px rgba(34, 197, 94, .22);
+}
+
+.telemetry-tab-panels {
+  margin-top: 10px;
+  min-height: 280px;
+  border: 1px solid rgba(34, 197, 94, .18);
+  background: rgba(2, 6, 23, .50);
+  overflow: auto;
+}
+
+.telemetry-tab-panel {
+  display: none;
+  padding: 10px;
+}
+
+.telemetry-tab-panel.is-active {
+  display: block;
+}
+
+.telemetry-analysis-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.telemetry-analysis-strip span,
+.telemetry-recommendation-card,
+.telemetry-row,
+.telemetry-empty-hook {
+  display: block;
+  padding: 10px;
+  color: #a7f3d0;
+  background: rgba(2, 6, 23, .66);
+  border: 1px solid rgba(34, 197, 94, .20);
+  font: 11px/1.35 Consolas, monospace;
+  text-transform: uppercase;
+}
+
+.telemetry-analysis-strip strong,
+.telemetry-recommendation-card strong,
+.telemetry-row strong,
+.telemetry-empty-hook strong {
+  display: block;
+  margin-top: 5px;
+  color: #f0fdf4;
+  font-size: 14px;
+  text-transform: none;
+  overflow-wrap: anywhere;
+}
+
+.telemetry-recommendation-card {
+  margin-top: 8px;
+  min-height: 86px;
+}
+
+.telemetry-list {
+  display: grid;
+  gap: 7px;
+}
+
+.telemetry-list + .telemetry-list {
+  margin-top: 10px;
+}
+
+.telemetry-subhead {
+  margin-top: 2px;
+  color: #67e8f9;
+  font: 900 11px Consolas, monospace;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.telemetry-row {
+  display: grid;
+  grid-template-columns: minmax(110px, .8fr) minmax(160px, 1fr) minmax(120px, .8fr);
+  gap: 10px;
+  align-items: center;
+  text-transform: none;
+}
+
+.telemetry-row span {
+  color: #f0fdf4;
+  overflow-wrap: anywhere;
+}
+
+.telemetry-row em {
+  color: #67e8f9;
+  font-style: normal;
+  overflow-wrap: anywhere;
+}
+
+.telemetry-row.muted {
+  display: block;
+  color: #86efac;
+  opacity: .72;
+}
+
+.tempest-panel {
+  min-height: 260px;
+}
+
+.telemetry-empty-hook {
+  min-height: 180px;
+  border-style: dashed;
+  background:
+    linear-gradient(180deg, rgba(2, 6, 23, .72), rgba(2, 44, 34, .52)),
+    repeating-linear-gradient(90deg, transparent 0 17px, rgba(34, 197, 94, .035) 18px 19px);
+}
+
+@media (max-width: 900px) {
+  .telemetry-tabs,
+  .telemetry-analysis-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .telemetry-row {
+    grid-template-columns: 1fr;
+  }
 }

@@ -902,9 +902,16 @@
             <div class="telemetry-hud-head">
               <div>
                 <span>NEXUS Green HUD</span>
-                <strong>Local Telemetry Station</strong>
+                <strong>System Monitor Station</strong>
               </div>
               <button type="button" id="telemetry-close">close</button>
+            </div>
+            <div class="telemetry-tabs" role="tablist" aria-label="System monitor telemetry tabs">
+              <button class="telemetry-tab is-active" type="button" data-telemetry-tab="overview">Overview</button>
+              <button class="telemetry-tab" type="button" data-telemetry-tab="processes">Processes</button>
+              <button class="telemetry-tab" type="button" data-telemetry-tab="storage">Storage / Network</button>
+              <button class="telemetry-tab" type="button" data-telemetry-tab="recommendations">Recommendations</button>
+              <button class="telemetry-tab" type="button" data-telemetry-tab="tempest">Cyber Security - TEMPEST</button>
             </div>
             <div class="telemetry-hud-grid">
               <article><span>CPU Load</span><strong id="hud-cpu">--%</strong></article>
@@ -914,7 +921,36 @@
               <article><span>Disk C Free</span><strong id="hud-disk">--</strong></article>
               <article><span>Ollama</span><strong id="hud-ollama">unknown</strong></article>
             </div>
-            <pre id="hud-telemetry-raw">Waiting for local telemetry...</pre>
+            <div class="telemetry-tab-panels">
+              <section class="telemetry-tab-panel is-active" id="telemetry-panel-overview" data-telemetry-panel="overview">
+                <div class="telemetry-analysis-strip">
+                  <span>Monitor State <strong id="hud-monitor-state">hydrating</strong></span>
+                  <span>Process Count <strong id="hud-process-count">--</strong></span>
+                  <span>Uptime <strong id="hud-uptime">--</strong></span>
+                </div>
+                <div class="telemetry-recommendation-card">
+                  <span>Analysis Summary</span>
+                  <strong id="hud-analysis-summary">Waiting for local telemetry...</strong>
+                </div>
+              </section>
+              <section class="telemetry-tab-panel" id="telemetry-panel-processes" data-telemetry-panel="processes">
+                <div class="telemetry-list" id="hud-process-list">Waiting for process telemetry...</div>
+              </section>
+              <section class="telemetry-tab-panel" id="telemetry-panel-storage" data-telemetry-panel="storage">
+                <div class="telemetry-list" id="hud-storage-list">Waiting for storage telemetry...</div>
+                <div class="telemetry-list" id="hud-network-list">Waiting for network telemetry...</div>
+              </section>
+              <section class="telemetry-tab-panel" id="telemetry-panel-recommendations" data-telemetry-panel="recommendations">
+                <div class="telemetry-list" id="hud-recommendations-list">Waiting for recommendations...</div>
+                <div class="telemetry-list" id="hud-options-list">Waiting for analysis options...</div>
+              </section>
+              <section class="telemetry-tab-panel tempest-panel" id="telemetry-panel-tempest" data-telemetry-panel="tempest">
+                <div class="telemetry-empty-hook">
+                  <span>Cyber Security - TEMPEST</span>
+                  <strong>Reserved hook. Empty until governed integration.</strong>
+                </div>
+              </section>
+            </div>
           </section>
           <section class="telemetry-hud meta-orchestrator-hud" id="meta-orchestrator-hud" hidden aria-label="Expanded meta-orchestrator HUD">
             <div class="telemetry-hud-head">

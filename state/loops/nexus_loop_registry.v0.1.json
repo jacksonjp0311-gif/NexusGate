@@ -670,6 +670,20 @@
       "description": "Emit read-only AI loop toolkit packet: performance-scout.",
       "mutates": false
     },
+    "toolkit_system_monitor_scout": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.toolkit",
+        "--root",
+        ".",
+        "--tool",
+        "system-monitor-scout",
+        "--json"
+      ],
+      "description": "Emit read-only AI loop toolkit packet: system-monitor-scout.",
+      "mutates": false
+    },
     "toolkit_refactor_map": {
       "argv": [
         "python",
@@ -1772,6 +1786,32 @@
       ],
       "stop_on_failure": true,
       "title": "Performance Scout"
+    },
+    "system-monitor-scout": {
+      "ai_callable": true,
+      "description": "Inspect the Electron System Monitor HUD, telemetry contract, and read-only recommendation surfaces.",
+      "display_group": "Performance",
+      "function": "Route system monitor evolution through a named read-only loop before UI or telemetry patches.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before expanding local telemetry, dashboard monitor panels, or cybersecurity placeholder tabs.",
+      "requires_human_authorization": true,
+      "stages": [
+        {
+          "command": "toolkit_system_monitor_scout",
+          "name": "emit_toolkit_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "toolkit_packet_latest",
+          "path": "reports/nexus_loop_toolkit_system_monitor_scout_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "System Monitor Scout"
     },
     "phi-gate-auto": {
       "ai_callable": true,

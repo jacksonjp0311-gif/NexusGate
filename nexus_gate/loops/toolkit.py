@@ -2,7 +2,7 @@ from __future__ import annotations
 import argparse,datetime as dt,json,platform,shutil,subprocess,sys
 from pathlib import Path
 VERSION='0.9.4'; MODE='nexus_ai_loop_toolkit'
-TOOLS='repo-radar scope-hygiene claim-boundary-audit surface-map stale-surface-scan next-action-router handoff-pack dependency-preflight alignment-score boundary-scan release-brief evolution-radar idea-forge architecture-sketch patch-plan test-strategy debug-lens refactor-map ui-polish performance-scout docs-weaver memory-anchor command-palette session-brief commit-story risk-register paradise-index code-garden-map friction-detector local-oracle pair-programming-brief continuity-seal'.split()
+TOOLS='repo-radar scope-hygiene claim-boundary-audit surface-map stale-surface-scan next-action-router handoff-pack dependency-preflight alignment-score boundary-scan release-brief evolution-radar idea-forge architecture-sketch patch-plan test-strategy debug-lens refactor-map ui-polish performance-scout system-monitor-scout docs-weaver memory-anchor command-palette session-brief commit-story risk-register paradise-index code-garden-map friction-detector local-oracle pair-programming-brief continuity-seal'.split()
 BOUNDARY={'repo_mutation_enabled':False,'git_stage_enabled':False,'git_commit_enabled':False,'git_push_enabled':False,'network_enabled':False,'secrets_enabled':False,'autonomous_authority':False,'arbitrary_command_execution':False}
 def _run(root,argv,timeout=30):
  try:
@@ -27,6 +27,10 @@ def _data(root,tool,intent):
  if tool=='idea-forge': common['ideas']=[{'id':'loop-hud-cards','start_loop':'ui-polish'},{'id':'wound-timeline','start_loop':'debug-recovery-chain'},{'id':'agent-command-palette','start_loop':'command-palette'}]
  if tool=='patch-plan': common['steps']=['rehydrate','patch intended files only','emit JSON packet','targeted tests','bounded tests','compiler','stage intended only']
  if tool=='test-strategy': common['tests']=sorted(p.name for p in (root/'tests').glob('test_*.py'))[:80] if (root/'tests').exists() else []
+ if tool=='system-monitor-scout':
+  common['monitor_surfaces']=['electron/renderer/index.html','electron/renderer/renderer.js','electron/renderer/styles.css','electron/main.js','electron/preload.js']
+  common['telemetry_contract']={'read_only':True,'raw_code_box':False,'tabs':['overview','processes','storage_network','recommendations','cyber_security_tempest'],'tempest_status':'reserved_empty_hook'}
+  common['recommendations']=['Keep System Monitor as presentation-only HUD','Route telemetry through nexus:getTelemetry','Use TEMPEST tab only after a governed cybersecurity contract exists','Run Electron smoke and evolve after monitor changes']
  if tool=='continuity-seal': common['visible']={p:(root/p).exists() for p in ['README.md','chatgpt/scripts.md','loops/nexus_loop_registry.v0.1.json','state/loops/nexus_loop_cards_latest.json','docs/runtime/NEXUS_PERSONAL_CODING_PARADISE.md','reports/nexus_compile_report_latest.json']}
  return common
 def build_toolkit_packet(root,tool,intent=''):

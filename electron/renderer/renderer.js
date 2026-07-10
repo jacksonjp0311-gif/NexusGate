@@ -445,6 +445,40 @@ function setTelemetryText(id, value) {
   if (node) node.textContent = value;
 }
 
+function setTelemetryHtml(id, html) {
+  const node = document.getElementById(id);
+  if (node) node.innerHTML = html;
+}
+
+function normalizeArray(value) {
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+function renderTelemetryRows(rows, empty = "No telemetry entries.") {
+  const normalized = normalizeArray(rows).filter(Boolean);
+  if (!normalized.length) return `<div class="telemetry-row muted">${safeText(empty)}</div>`;
+  return normalized.map((row) => {
+    const name = row.ProcessName || row.Name || row.DeviceID || row.InterfaceDescription || "unknown";
+    const primary = row.WorkingSet64 !== undefined ? formatBytes(row.WorkingSet64)
+      : row.FreeSpace !== undefined ? `${formatBytes(row.FreeSpace)} free`
+      : row.LinkSpeed || row.Status || "";
+    const secondary = row.CPU !== undefined ? `cpu ${Number(row.CPU || 0).toFixed(1)}`
+      : row.Size !== undefined ? `${formatBytes(row.Size)} total`
+      : row.SentBytes !== undefined ? `sent ${formatBytes(row.SentBytes)} / recv ${formatBytes(row.ReceivedBytes)}`
+      : row.MacAddress || "";
+    return `<div class="telemetry-row"><strong>${safeText(name)}</strong><span>${safeText(primary)}</span><em>${safeText(secondary)}</em></div>`;
+  }).join("");
+}
+
+function renderTelemetryTextList(items, empty = "No recommendations.") {
+  const normalized = normalizeArray(items).filter(Boolean);
+  if (!normalized.length) return `<div class="telemetry-row muted">${safeText(empty)}</div>`;
+  return normalized.map((item, index) => (
+    `<div class="telemetry-row"><strong>${String(index + 1).padStart(2, "0")}</strong><span>${safeText(item)}</span></div>`
+  )).join("");
+}
+
 async function openPetriDishPro() {
   setTelemetryText("petri-status", "opening");
   try {
@@ -687,11 +721,31 @@ async function refreshTelemetry() {
     setTelemetryText("hud-gpu-name", gpuName);
     setTelemetryText("hud-disk", diskFree);
     setTelemetryText("hud-ollama", ollamaCount > 0 ? `online / ${ollamaCount}` : "not detected");
+    setTelemetryText("hud-monitor-state", telemetry.analysis?.status || "stable");
+    setTelemetryText("hud-process-count", telemetry.windows?.process_count ?? "--");
+    setTelemetryText("hud-uptime", `${Math.round((telemetry.platform?.uptime_seconds || 0) / 60)} min`);
+    setTelemetryText("hud-analysis-summary", telemetry.analysis?.summary || "Telemetry analysis unavailable.");
+    setTelemetryHtml("hud-process-list", [
+      `<div class="telemetry-subhead">Top CPU</div>`,
+      renderTelemetryRows(telemetry.windows?.top_cpu_processes, "No CPU process telemetry."),
+      `<div class="telemetry-subhead">Top Memory</div>`,
+      renderTelemetryRows(telemetry.windows?.top_memory_processes, "No memory process telemetry.")
+    ].join(""));
+    setTelemetryHtml("hud-storage-list", renderTelemetryRows(telemetry.windows?.logical_disks, "No local disk telemetry."));
+    setTelemetryHtml("hud-network-list", [
+      `<div class="telemetry-subhead">Adapters</div>`,
+      renderTelemetryRows(telemetry.windows?.network_adapters, "No active network adapters."),
+      `<div class="telemetry-subhead">Counters</div>`,
+      renderTelemetryRows(telemetry.windows?.network_stats, "No network counters.")
+    ].join(""));
+    setTelemetryHtml("hud-recommendations-list", renderTelemetryTextList(telemetry.analysis?.recommendations, "No recommendations."));
+    setTelemetryHtml("hud-options-list", renderTelemetryTextList(telemetry.analysis?.options, "No analysis options."));
     setTelemetryText("telemetry-status", "live");
-    setTelemetryText("hud-telemetry-raw", JSON.stringify(telemetry, null, 2));
   } catch (error) {
     setTelemetryText("telemetry-status", "blocked");
-    setTelemetryText("hud-telemetry-raw", `Telemetry unavailable: ${error.message}`);
+    setTelemetryText("hud-monitor-state", "blocked");
+    setTelemetryText("hud-analysis-summary", `Telemetry unavailable: ${error.message}`);
+    setTelemetryHtml("hud-recommendations-list", renderTelemetryTextList([`Telemetry unavailable: ${error.message}`]));
   }
 }
 
@@ -702,6 +756,15 @@ function toggleTelemetryHud(force) {
   telemetryHud.toggleAttribute("hidden", !next);
   telemetryHud.style.display = next ? "" : "none";
   if (next) refreshTelemetry();
+}
+
+function activateTelemetryTab(tabName) {
+  document.querySelectorAll("[data-telemetry-tab]").forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.telemetryTab === tabName);
+  });
+  document.querySelectorAll("[data-telemetry-panel]").forEach((panel) => {
+    panel.classList.toggle("is-active", panel.dataset.telemetryPanel === tabName);
+  });
 }
 
 function renderMetaOrchestratorPanels(panels) {
@@ -1389,6 +1452,9 @@ document.getElementById("refresh")?.addEventListener("click", () => {
 
 document.getElementById("telemetry-popout")?.addEventListener("click", () => toggleTelemetryHud());
 document.getElementById("telemetry-close")?.addEventListener("click", () => toggleTelemetryHud(false));
+document.querySelectorAll("[data-telemetry-tab]").forEach((button) => {
+  button.addEventListener("click", () => activateTelemetryTab(button.dataset.telemetryTab));
+});
 document.getElementById("meta-orchestrator-popout")?.addEventListener("click", () => toggleMetaOrchestratorHud());
 document.getElementById("meta-orchestrator-close")?.addEventListener("click", () => toggleMetaOrchestratorHud(false));
 petriOpen?.addEventListener("click", openPetriDishPro);
