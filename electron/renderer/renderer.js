@@ -33,6 +33,7 @@ let nexStopRequested = false;
 let telemetryLoopHandle = null;
 let petriLoopHandle = null;
 let petriAnimationStarted = false;
+let petriPreviewStartMs = Date.now();
 let latestPetriState = null;
 let modelSelectorHudBound = false;
 const SELECTOR_UI_ONLY_BOUNDARY = "Selector changes UI planning context only. It does not call models, execute shell, mutate repo files, or grant authority.";
@@ -467,6 +468,44 @@ function wrapPetriCoordinate(value, limit) {
   return wrapped;
 }
 
+function drawPetriMiniLensBackground(ctx, cx, cy, radius, t) {
+  ctx.save();
+  ctx.globalAlpha = 0.56;
+  ctx.strokeStyle = "rgba(39, 244, 255, 0.055)";
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 26; i += 1) {
+    const y = cy - radius + (i * radius * 2 / 26);
+    ctx.beginPath();
+    ctx.moveTo(cx - radius, y + Math.sin(i + t * 0.18) * 8);
+    ctx.bezierCurveTo(cx - radius * 0.26, y - 12, cx + radius * 0.26, y + 14, cx + radius, y + Math.cos(i) * 8);
+    ctx.stroke();
+  }
+  const vignette = ctx.createRadialGradient(cx, cy, radius * 0.25, cx, cy, radius);
+  vignette.addColorStop(0.1, "rgba(255,255,255,0.035)");
+  vignette.addColorStop(0.78, "rgba(0,0,0,0.03)");
+  vignette.addColorStop(1, "rgba(0,0,0,0.74)");
+  ctx.fillStyle = vignette;
+  ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
+  ctx.restore();
+}
+
+function drawPetriMiniRod(ctx, size, color, phase, t) {
+  const length = size * 3.4;
+  const bend = Math.sin(t * 1.1 + phase) * size * 0.42;
+  ctx.lineWidth = Math.max(1.6, size * 0.7);
+  ctx.lineCap = "round";
+  ctx.strokeStyle = color;
+  ctx.globalAlpha = 0.72;
+  ctx.beginPath();
+  ctx.moveTo(-length * 0.5, bend * 0.22);
+  ctx.quadraticCurveTo(0, bend, length * 0.5, -bend * 0.22);
+  ctx.stroke();
+  ctx.globalAlpha = 0.48;
+  ctx.strokeStyle = "rgba(234, 255, 255, 0.78)";
+  ctx.lineWidth = 0.85;
+  ctx.stroke();
+}
+
 function drawPetriPreview() {
   if (!petriMiniCanvas) return;
   const rect = petriMiniCanvas.getBoundingClientRect();
@@ -478,7 +517,7 @@ function drawPetriPreview() {
   }
   const ctx = petriMiniCanvas.getContext("2d");
   if (!ctx) return;
-  const t = Date.now() / 1000;
+  const t = (Date.now() - petriPreviewStartMs) / 1000;
   ctx.clearRect(0, 0, width, height);
   const cx = width / 2;
   const cy = height * 0.52;
@@ -498,6 +537,7 @@ function drawPetriPreview() {
   ctx.clip();
   ctx.fillStyle = "rgba(2, 8, 20, 0.98)";
   ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
+  drawPetriMiniLensBackground(ctx, cx, cy, radius, t);
 
   const particles = latestPetriState?.particles || [];
   particles.forEach((particle, index) => {
@@ -564,16 +604,7 @@ function drawPetriPreview() {
         ctx.stroke();
       }
     } else {
-      ctx.lineWidth = Math.max(1, size * 0.18);
-      ctx.lineCap = "round";
-      ctx.beginPath();
-      ctx.moveTo(-size * 1.8, 0);
-      ctx.lineTo(size * 1.8, 0);
-      ctx.strokeStyle = color;
-      ctx.stroke();
-      ctx.strokeStyle = "rgba(234, 255, 255, 0.72)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
+      drawPetriMiniRod(ctx, size, color, phase, t);
     }
     ctx.restore();
   });
