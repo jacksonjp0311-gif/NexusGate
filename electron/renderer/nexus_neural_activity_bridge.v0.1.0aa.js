@@ -51,6 +51,12 @@
     targetWindow.postMessage({ type: "NEXUS_NEURAL_REPO_GRAPH", graph }, "*");
   }
 
+  async function refreshNeuralFrame(frame, reason) {
+    if (!frame || !frame.contentWindow) return;
+    await pushRepoGraph(frame.contentWindow);
+    frame.contentWindow.postMessage({ type: "NEXUS_NEURAL_REFRESH", reason: reason || "mini-refresh" }, "*");
+  }
+
   function fireNeuralImpulse(targetWindow, reason) {
     if (!targetWindow || targetWindow.closed) return;
     targetWindow.postMessage({ type: "NEXUS_NEURAL_TRIGGER_IMPULSE", reason: reason || "nexus-bridge" }, "*");
@@ -82,7 +88,7 @@
     imp(host, "background", "linear-gradient(180deg, rgba(0,240,255,0.08), rgba(0,0,0,0.10))");
   }
 
-  function headerStyle(header, titleRow, light, title, button) {
+  function headerStyle(header, titleRow, light, title, button, refreshButton) {
     block(header);
     imp(header, "position", "absolute");
     imp(header, "top", "8px");
@@ -90,7 +96,7 @@
     imp(header, "right", "8px");
     imp(header, "height", "30px");
     imp(header, "display", "grid");
-    imp(header, "grid-template-columns", "minmax(0, 1fr) 58px");
+    imp(header, "grid-template-columns", "minmax(0, 1fr) 58px 58px");
     imp(header, "align-items", "center");
     imp(header, "gap", "8px");
     imp(header, "z-index", "1000");
@@ -125,17 +131,19 @@
     imp(title, "overflow", "hidden");
     imp(title, "text-overflow", "ellipsis");
 
-    block(button);
-    imp(button, "height", "30px");
-    imp(button, "width", "58px");
-    imp(button, "padding", "0");
-    imp(button, "border", "1px solid rgba(0,240,255,0.62)");
-    imp(button, "background", "linear-gradient(135deg, rgba(0,240,255,0.22), rgba(0,0,0,0.20))");
-    imp(button, "color", "#00f0ff");
-    imp(button, "text-transform", "uppercase");
-    imp(button, "letter-spacing", "1px");
-    imp(button, "font-size", "9px");
-    imp(button, "cursor", "pointer");
+    [refreshButton, button].filter(Boolean).forEach((target) => {
+      block(target);
+      imp(target, "height", "30px");
+      imp(target, "width", "58px");
+      imp(target, "padding", "0");
+      imp(target, "border", "1px solid rgba(0,240,255,0.62)");
+      imp(target, "background", "linear-gradient(135deg, rgba(0,240,255,0.22), rgba(0,0,0,0.20))");
+      imp(target, "color", "#00f0ff");
+      imp(target, "text-transform", "uppercase");
+      imp(target, "letter-spacing", "1px");
+      imp(target, "font-size", "9px");
+      imp(target, "cursor", "pointer");
+    });
   }
 
   function bodyStyle(body) {
@@ -189,6 +197,11 @@
     button.textContent = "OPEN";
     button.addEventListener("click", openNeuralActivity);
 
+    const refreshButton = make("button", "neural-activity-refresh");
+    refreshButton.type = "button";
+    refreshButton.textContent = "SYNC";
+    refreshButton.title = "Refresh repo neural pathways";
+
     const body = make("div", "neural-activity-body");
     bodyStyle(body);
 
@@ -200,7 +213,7 @@
     frame.setAttribute("allow", "fullscreen");
     frame.addEventListener("load", () => setLight(light, true));
     frame.addEventListener("load", () => {
-      pushRepoGraph(frame.contentWindow);
+      refreshNeuralFrame(frame, "mini-load");
       fireNeuralImpulse(frame.contentWindow, "mini-load");
     });
     frame.addEventListener("error", () => setLight(light, false));
@@ -209,15 +222,23 @@
     titleRow.appendChild(light);
     titleRow.appendChild(title);
     header.appendChild(titleRow);
+    header.appendChild(refreshButton);
     header.appendChild(button);
     body.appendChild(frame);
     host.replaceChildren(header, body);
+    refreshButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      refreshButton.textContent = "PULSE";
+      refreshNeuralFrame(frame, "mini-button").finally(() => {
+        setTimeout(() => { refreshButton.textContent = "SYNC"; }, 700);
+      });
+    });
     body.addEventListener("pointerdown", () => {
-      pushRepoGraph(frame.contentWindow);
+      refreshNeuralFrame(frame, "mini-pointer");
       fireNeuralImpulse(frame.contentWindow, "mini-pointer");
     });
 
-    headerStyle(header, titleRow, light, title, button);
+    headerStyle(header, titleRow, light, title, button, refreshButton);
     bodyStyle(body);
     frameStyle(frame);
   }

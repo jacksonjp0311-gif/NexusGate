@@ -95,6 +95,14 @@ h1 {
 }
 .btn-trigger:hover { background: rgba(0,240,255,0.15); box-shadow: 0 0 20px rgba(0,240,255,0.4); }
 .btn-trigger.disabled { border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.3); background: transparent; box-shadow: none; cursor: not-allowed; }
+.hud-actions {
+  display: grid;
+  grid-template-columns: 1fr 0.72fr;
+  gap: 8px;
+}
+.hud-actions .btn-trigger {
+  letter-spacing: 1.3px;
+}
 #instructions {
   position:absolute;
   bottom: clamp(14px, 4vw, 40px); left:50%;
@@ -158,6 +166,7 @@ html.embed #loader h1 { font-size:8px !important; letter-spacing:1.1px; }
   h1 { font-size:9px; letter-spacing:1.5px; margin-bottom:0; }
   .subtitle { font-size:6px; letter-spacing:0.7px; text-align:right; }
   .hud-row { gap:10px; margin-bottom:4px; font-size:7px; letter-spacing:0.55px; }
+  .hud-actions { gap: 5px; }
   .btn-trigger { margin-top:6px; padding:6px 8px; font-size:7px; letter-spacing:1.2px; }
   #instructions { bottom:max(16px, env(safe-area-inset-bottom)); font-size:8px; letter-spacing:1.1px; }
   #cursor { display:none; }
@@ -281,7 +290,10 @@ html.nexus-neural-embed-aa .spinner {
   <div class="hud-row"><span class="hud-label">Axon Load</span><span class="hud-value" id="val-axon">02%</span></div>
   <div class="hud-row"><span class="hud-label">Signal Phase</span><span class="hud-value" id="val-state">RESTING</span></div>
   <div class="hud-row"><span class="hud-label">Synaptic Coh</span><span class="hud-value" id="val-sync">24%</span></div>
-  <button class="btn-trigger" id="btn-fire">Manual Override</button>
+  <div class="hud-actions">
+    <button class="btn-trigger" id="btn-fire">Manual Override</button>
+    <button class="btn-trigger" id="btn-refresh" data-neural-refresh="repo">Refresh</button>
+  </div>
 </div>
 <div id="hud-right" class="hud-panel">
   <div class="hud-row"><span class="hud-label">Cam X</span><span class="hud-value" id="val-cam-x">0.00</span></div>
@@ -351,6 +363,10 @@ controls.maxDistance = 140;
 
 const networkGroup = new THREE.Group();
 scene.add(networkGroup);
+const repoBranchGroup = new THREE.Group();
+const repoSignalGroup = new THREE.Group();
+networkGroup.add(repoBranchGroup);
+networkGroup.add(repoSignalGroup);
 
 const somaMaterial = new THREE.MeshBasicMaterial({ color: CONFIG.colors.cyan, transparent: true, opacity: 0.38, blending: THREE.AdditiveBlending });
 const somaWire = new THREE.MeshBasicMaterial({ color: CONFIG.colors.gold, transparent: true, opacity: 0.35, wireframe: true, blending: THREE.AdditiveBlending });
@@ -359,6 +375,9 @@ networkGroup.add(new THREE.Mesh(new THREE.IcosahedronGeometry(CONFIG.somaRadius 
 
 const branchMat = new THREE.MeshBasicMaterial({ color: CONFIG.colors.cyan, transparent: true, opacity: 0.62, blending: THREE.AdditiveBlending, depthWrite: false });
 const axonMat = new THREE.MeshBasicMaterial({ color: CONFIG.colors.gold, transparent: true, opacity: 0.78, blending: THREE.AdditiveBlending, depthWrite: false });
+const repoBranchMat = new THREE.MeshBasicMaterial({ color: CONFIG.colors.cyan, transparent: true, opacity: 0.78, blending: THREE.AdditiveBlending, depthWrite: false });
+const repoAxonMat = new THREE.MeshBasicMaterial({ color: CONFIG.colors.gold, transparent: true, opacity: 0.82, blending: THREE.AdditiveBlending, depthWrite: false });
+const repoPulseMat = new THREE.MeshBasicMaterial({ color: 0xff2038, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false });
 const synapsePositions = [];
 function addSynapse(pos) { synapsePositions.push(pos.x, pos.y, pos.z); }
 
@@ -421,6 +440,11 @@ const repoNeuralProfile = {
   rotationBias: 1,
   impulse: 0
 };
+let repoGraphCache = null;
+let repoNeuralModel = null;
+let repoSignalCurves = [];
+let repoPulseEvents = [];
+const repoPulseGeometry = new THREE.SphereGeometry(EMBED ? 0.16 : 0.26, 10, 10);
 
 function repoHash(value) {
   let h = 2166136261;
@@ -431,8 +455,129 @@ function repoHash(value) {
   return h >>> 0;
 }
 
+function seededUnit(seed, salt) {
+  let h = repoHash(`${seed}:${salt}`);
+  h ^= h << 13;
+  h ^= h >>> 17;
+  h ^= h << 5;
+  return ((h >>> 0) % 10000) / 10000;
+}
+
+function repoRootFor(path) {
+  const normalized = String(path || "").replace(/\\/g, "/");
+  if (!normalized || normalized === ".") return "nexus-gate";
+  return normalized.split("/")[0] || "nexus-gate";
+}
+
+function classifyRepoNode(node) {
+  const path = String(node.path || node.name || "").toLowerCase();
+  const type = String(node.type || "").toLowerCase();
+  if (path.includes("ai") || path.includes("model") || path.includes("nn_router") || path.includes("ollama") || path.includes("api") || path.includes("tesseract") || path.includes("tempe") || path.includes("neural")) return "axon";
+  if (type === "interface" || path.startsWith("electron") || path.includes("chatgpt") || path.includes("codex")) return "axon";
+  return "dendrite";
+}
+
+function buildRepoNeuralModel(graph) {
+  const nodes = Array.isArray(graph && graph.nodes) ? graph.nodes : [];
+  const folders = nodes.filter((node) => node.type === "folder" && node.depth <= 2);
+  const rootNames = [...new Set(nodes.map((node) => repoRootFor(node.path)).filter(Boolean))]
+    .filter((name) => name !== "nexus-gate")
+    .slice(0, EMBED ? 14 : 24);
+  const model = { roots: [], hotPaths: [] };
+  const latestModified = Math.max(...nodes.map((node) => Number(node.modified || 0)).filter(Boolean), 0);
+
+  rootNames.forEach((rootName, index) => {
+    const rootNodes = nodes.filter((node) => repoRootFor(node.path) === rootName);
+    const rootWeight = rootNodes.reduce((total, node) => total + Number(node.weight || 1), 0);
+    const hasAxon = rootNodes.some((node) => classifyRepoNode(node) === "axon");
+    const angle = (index / Math.max(rootNames.length, 1)) * Math.PI * 2 + seededUnit(rootName, "angle") * 0.34;
+    const elevation = (seededUnit(rootName, "elevation") - 0.5) * (EMBED ? 14 : 22);
+    const length = (EMBED ? 13 : 20) + Math.min(18, Math.log(rootWeight + 1) * 3.6);
+    const dir = new THREE.Vector3(Math.cos(angle), Math.sin(angle) * 0.62, Math.sin(angle * 0.7) + elevation * 0.025).normalize();
+    const branchNodes = rootNodes
+      .filter((node) => node.depth > 1)
+      .sort((a, b) => Number(b.modified || 0) - Number(a.modified || 0))
+      .slice(0, EMBED ? 5 : 9);
+    model.roots.push({ rootName, rootNodes, branchNodes, hasAxon, dir, length, index });
+    rootNodes
+      .filter((node) => latestModified && Number(node.modified || 0) >= latestModified - 86400000 * 3)
+      .slice(0, 5)
+      .forEach((node) => model.hotPaths.push({ rootName, path: node.path, modified: node.modified }));
+  });
+
+  if (!model.hotPaths.length) {
+    model.hotPaths = nodes
+      .slice()
+      .sort((a, b) => Number(b.modified || 0) - Number(a.modified || 0))
+      .slice(0, 12)
+      .map((node) => ({ rootName: repoRootFor(node.path), path: node.path, modified: node.modified }));
+  }
+  return model;
+}
+
+function clearRepoBranches() {
+  while (repoBranchGroup.children.length) {
+    const child = repoBranchGroup.children.pop();
+    if (child.geometry) child.geometry.dispose();
+  }
+  while (repoSignalGroup.children.length) {
+    const child = repoSignalGroup.children.pop();
+    if (child.geometry && child.geometry !== repoPulseGeometry) child.geometry.dispose();
+  }
+  repoSignalCurves = [];
+  repoPulseEvents = [];
+}
+
+function repoCurveFromRoot(root, salt, branchIndex) {
+  const start = root.dir.clone().multiplyScalar(CONFIG.somaRadius * 0.82);
+  const points = [start];
+  let cur = start.clone();
+  const mainBend = new THREE.Vector3(
+    seededUnit(root.rootName, `${salt}:x`) - 0.5,
+    seededUnit(root.rootName, `${salt}:y`) - 0.5,
+    seededUnit(root.rootName, `${salt}:z`) - 0.5
+  ).multiplyScalar(root.hasAxon ? 2.2 : 4.8);
+  const length = root.length * (branchIndex ? 0.42 + seededUnit(salt, "child-length") * 0.35 : 1);
+  const dir = branchIndex
+    ? root.dir.clone().add(mainBend.clone().normalize().multiplyScalar(0.85 + seededUnit(salt, "spread"))).normalize()
+    : root.dir.clone();
+  for (let i = 1; i <= 7; i++) {
+    const t = i / 7;
+    const wiggle = new THREE.Vector3(
+      Math.sin(t * Math.PI * 2 + seededUnit(salt, "wx") * 6) * (root.hasAxon ? 0.8 : 1.6),
+      Math.cos(t * Math.PI * 1.7 + seededUnit(salt, "wy") * 6) * (root.hasAxon ? 0.6 : 1.2),
+      Math.sin(t * Math.PI * 1.3 + seededUnit(salt, "wz") * 6) * (root.hasAxon ? 0.7 : 1.3)
+    );
+    cur = start.clone().add(dir.clone().multiplyScalar(length * t)).add(mainBend.clone().multiplyScalar(Math.sin(t * Math.PI) * 0.55)).add(wiggle);
+    points.push(cur.clone());
+  }
+  return new THREE.CatmullRomCurve3(points);
+}
+
+function renderRepoNeuralNetwork(model) {
+  clearRepoBranches();
+  if (!model || !Array.isArray(model.roots)) return;
+  model.roots.forEach((root) => {
+    const mainCurve = repoCurveFromRoot(root, root.rootName, 0);
+    const mainRadius = EMBED ? (root.hasAxon ? 0.36 : 0.22) : (root.hasAxon ? 0.54 : 0.34);
+    repoBranchGroup.add(new THREE.Mesh(new THREE.TubeGeometry(mainCurve, 42, mainRadius, 7, false), root.hasAxon ? repoAxonMat : repoBranchMat));
+    repoSignalCurves.push({ curve: mainCurve, kind: root.hasAxon ? "axon" : "dendrite", path: root.rootName });
+    root.branchNodes.forEach((node, idx) => {
+      const branchCurve = repoCurveFromRoot(root, `${node.path}:${idx}`, idx + 1);
+      const isAxon = classifyRepoNode(node) === "axon";
+      repoBranchGroup.add(new THREE.Mesh(new THREE.TubeGeometry(branchCurve, 26, EMBED ? 0.08 : 0.13, 5, false), isAxon ? repoAxonMat : repoBranchMat));
+      repoSignalCurves.push({ curve: branchCurve, kind: isAxon ? "axon" : "dendrite", path: node.path });
+      const end = branchCurve.getPoint(1);
+      const syn = new THREE.Mesh(new THREE.BoxGeometry(EMBED ? 0.34 : 0.46, EMBED ? 0.34 : 0.46, EMBED ? 0.34 : 0.46), isAxon ? repoAxonMat : repoBranchMat);
+      syn.position.copy(end);
+      repoBranchGroup.add(syn);
+    });
+  });
+}
+
 function applyRepoNeuralGraph(graph) {
   if (!graph || !Array.isArray(graph.nodes) || !Array.isArray(graph.edges)) return;
+  repoGraphCache = graph;
   const nodes = graph.nodes;
   const total = Math.max(1, nodes.length);
   const counts = nodes.reduce((acc, node) => {
@@ -453,6 +598,9 @@ function applyRepoNeuralGraph(graph) {
   repoNeuralProfile.impulse = 1;
   branchMat.opacity = 0.58 + Math.min(0.18, repoNeuralProfile.codeRatio * 0.7);
   axonMat.opacity = 0.74 + Math.min(0.16, repoNeuralProfile.interfaceRatio * 0.9);
+  repoNeuralModel = buildRepoNeuralModel(graph);
+  renderRepoNeuralNetwork(repoNeuralModel);
+  triggerRepoPulse("repo-refresh");
 }
 
 async function loadRepoGraphFallback() {
@@ -463,20 +611,43 @@ async function loadRepoGraphFallback() {
 }
 
 const btnFire = document.getElementById("btn-fire");
+const btnRefresh = document.getElementById("btn-refresh");
+function triggerRepoPulse(reason) {
+  const selected = repoSignalCurves
+    .filter((entry) => !repoNeuralModel || !repoNeuralModel.hotPaths.length || repoNeuralModel.hotPaths.some((hot) => String(entry.path || "").startsWith(repoRootFor(hot.path))))
+    .slice(0, EMBED ? 12 : 24);
+  const curves = selected.length ? selected : repoSignalCurves.slice(0, EMBED ? 12 : 24);
+  curves.forEach((entry, index) => {
+    const dot = new THREE.Mesh(repoPulseGeometry, repoPulseMat.clone());
+    dot.userData.reason = reason || "manual";
+    dot.position.copy(entry.curve.getPoint(0));
+    repoSignalGroup.add(dot);
+    repoPulseEvents.push({ mesh: dot, curve: entry.curve, offset: index * 0.035, speed: 0.72 + (index % 5) * 0.08, age: 0, life: 1.35 + (index % 4) * 0.12 });
+  });
+  repoNeuralProfile.impulse = 1;
+}
+
 function triggerImpulse(e) {
   if (e && e.target && e.target.closest && e.target.closest(".hud-panel") && e.target !== btnFire) return;
   if (STATE.isAnimating) return;
   STATE.isAnimating = true;
   STATE.phase = 1;
   STATE.progress = 0;
+  triggerRepoPulse("manual-impulse");
   if (btnFire) { btnFire.classList.add("disabled"); btnFire.innerText = "FIRING SEQUENCE..."; }
 }
 window.addEventListener("pointerdown", triggerImpulse);
 if (btnFire) btnFire.addEventListener("click", triggerImpulse);
+if (btnRefresh) btnRefresh.addEventListener("click", (event) => {
+  event.stopPropagation();
+  btnRefresh.innerText = "Sync";
+  loadRepoGraphFallback().finally(() => setTimeout(() => { btnRefresh.innerText = "Refresh"; }, 700));
+});
 window.addEventListener("message", (event) => {
   const data = event.data || {};
   if (data.type === "NEXUS_NEURAL_REPO_GRAPH") applyRepoNeuralGraph(data.graph);
   if (data.type === "NEXUS_NEURAL_TRIGGER_IMPULSE") triggerImpulse({ target: null });
+  if (data.type === "NEXUS_NEURAL_REFRESH" || data.type === "nexus-neural-refresh") loadRepoGraphFallback().then(() => triggerRepoPulse("bridge-refresh"));
 });
 setTimeout(loadRepoGraphFallback, EMBED ? 500 : 900);
 setInterval(loadRepoGraphFallback, EMBED ? 7000 : 12000);
@@ -547,6 +718,21 @@ function animate() {
     networkGroup.scale.lerp(new THREE.Vector3(1 + repoPulse * 0.025, 1 + repoPulse * 0.025, 1 + repoPulse * 0.025), 0.14);
     bloomPass.strength += (((EMBED ? 1.15 : 1.8) * repoNeuralProfile.synapticGlow + repoPulse * 0.45) - bloomPass.strength) * 0.05;
   }
+  repoPulseEvents = repoPulseEvents.filter((pulse) => {
+    pulse.age += dt * pulse.speed;
+    const t = pulse.age - pulse.offset;
+    if (t < 0) return true;
+    const normalized = Math.min(1, t / pulse.life);
+    pulse.mesh.position.copy(pulse.curve.getPoint(normalized));
+    pulse.mesh.scale.setScalar(0.7 + Math.sin(normalized * Math.PI) * 2.2);
+    pulse.mesh.material.opacity = Math.max(0, 0.95 * (1 - normalized));
+    if (normalized >= 1) {
+      repoSignalGroup.remove(pulse.mesh);
+      pulse.mesh.material.dispose();
+      return false;
+    }
+    return true;
+  });
   updateUI(time);
   composer.render();
 }
