@@ -474,62 +474,106 @@ function drawPetriPreview() {
   const t = Date.now() / 1000;
   ctx.clearRect(0, 0, width, height);
   const cx = width / 2;
-  const cy = height / 2;
-  const radius = Math.min(width, height) * 0.42;
+  const cy = height * 0.52;
+  const radius = Math.min(width, height) * 0.46;
 
   ctx.save();
-  ctx.globalAlpha = 0.82;
-  ctx.strokeStyle = "rgba(34, 211, 238, 0.42)";
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.ellipse(cx, cy, radius * 1.18, radius * 0.76, Math.sin(t * 0.18) * 0.2, 0, Math.PI * 2);
-  ctx.stroke();
+  const bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 1.65);
+  bg.addColorStop(0, "rgba(9, 32, 42, 0.94)");
+  bg.addColorStop(0.58, "rgba(2, 14, 28, 0.96)");
+  bg.addColorStop(1, "rgba(1, 7, 18, 1)");
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, width, height);
+
+  ctx.save();
   ctx.beginPath();
   ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-  ctx.strokeStyle = "rgba(45, 212, 191, 0.62)";
-  ctx.stroke();
+  ctx.clip();
+  ctx.fillStyle = "rgba(2, 8, 20, 0.98)";
+  ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
 
   const particles = latestPetriState?.particles || [];
-  ctx.fillStyle = "rgba(125, 211, 252, 0.32)";
   particles.forEach((particle, index) => {
-    if (index % 2 !== 0) return;
-    const x = cx + (particle.x || 0) * radius * 0.56 + Math.sin(t + index) * 0.8;
-    const y = cy + (particle.y || 0) * radius * 0.56 + Math.cos(t * 0.8 + index) * 0.8;
-    ctx.globalAlpha = 0.16 + Math.min(0.38, Number(particle.z || 0) * 0.28);
+    const x = cx + (Number(particle.x || 0) * radius * 0.7) + Math.sin(t * 0.45 + index) * 0.55;
+    const y = cy + (Number(particle.y || 0) * radius * 0.7) + Math.cos(t * 0.38 + index) * 0.55;
+    if ((x - cx) ** 2 + (y - cy) ** 2 > (radius * 0.96) ** 2) return;
+    ctx.globalAlpha = 0.14 + Math.min(0.38, Number(particle.z || 0) * 0.26);
+    ctx.fillStyle = "rgba(180, 230, 255, 0.48)";
     ctx.beginPath();
-    ctx.arc(x, y, 1.15, 0, Math.PI * 2);
+    ctx.arc(x, y, Math.max(0.6, Number(particle.z || 0) * 1.8), 0, Math.PI * 2);
     ctx.fill();
   });
 
   const cells = latestPetriState?.cells || [];
-  ctx.globalAlpha = 0.94;
   cells.forEach((cell, index) => {
-    const x = cx + (cell.x || 0) * radius * 0.72 + Math.sin(t * 0.7 + index) * 0.55;
-    const y = cy + (cell.y || 0) * radius * 0.72 + Math.cos(t * 0.6 + index) * 0.55;
+    const x = cx + (Number(cell.x || 0) * radius * 0.78) + Math.sin(t * 0.72 + index) * 0.48;
+    const y = cy + (Number(cell.y || 0) * radius * 0.78) + Math.cos(t * 0.66 + index) * 0.48;
+    if ((x - cx) ** 2 + (y - cy) ** 2 > (radius * 0.95) ** 2) return;
     const color = cell.color || "#27f4ff";
+    const morph = cell.morphology || "rod";
+    const size = Math.max(2.3, Number(cell.radius || 0.014) * radius * 4.1);
     ctx.save();
     ctx.translate(x, y);
-    ctx.rotate((cell.angle || 0) + Math.sin(t + index) * 0.08);
+    ctx.rotate((Number(cell.angle || 0)) + Math.sin(t + index) * 0.08);
     ctx.shadowColor = color;
     ctx.shadowBlur = 8;
-    ctx.strokeStyle = color;
+    ctx.globalAlpha = 0.78;
     ctx.fillStyle = color;
-    if (cell.morphology === "yeast" || cell.morphology === "amoeboid") {
+    ctx.strokeStyle = "rgba(234, 255, 255, 0.92)";
+    if (morph === "yeast" || morph === "budding_yeast") {
       ctx.beginPath();
-      ctx.arc(0, 0, 3.2, 0, Math.PI * 2);
+      ctx.arc(0, 0, size * 0.95, 0, Math.PI * 2);
       ctx.fill();
-      ctx.strokeStyle = "rgba(255,255,255,.72)";
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(size * 0.72, -size * 0.22, size * 0.52, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+    } else if (morph === "coccus" || morph === "amoeboid") {
+      ctx.beginPath();
+      ctx.arc(0, 0, size, 0, Math.PI * 2);
+      ctx.fill();
       ctx.stroke();
     } else {
-      ctx.lineWidth = 2.2;
+      ctx.lineWidth = Math.max(1, size * 0.18);
       ctx.lineCap = "round";
       ctx.beginPath();
-      ctx.moveTo(-4, 0);
-      ctx.lineTo(4, 0);
+      ctx.moveTo(-size * 1.8, 0);
+      ctx.lineTo(size * 1.8, 0);
+      ctx.strokeStyle = color;
+      ctx.stroke();
+      ctx.strokeStyle = "rgba(234, 255, 255, 0.72)";
+      ctx.lineWidth = 1;
       ctx.stroke();
     }
     ctx.restore();
   });
+  ctx.restore();
+
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = "rgba(39, 244, 255, 0.88)";
+  ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.globalAlpha = 0.26;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, radius * 1.08, radius * 0.74, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.globalAlpha = 0.92;
+  ctx.fillStyle = "rgba(234, 252, 255, 0.92)";
+  ctx.font = "700 10px Consolas, monospace";
+  ctx.textAlign = "center";
+  ctx.fillText("2 um", cx, Math.max(14, cy - radius + 16));
+  ctx.strokeStyle = "rgba(234, 252, 255, 0.78)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(cx - 48, Math.max(10, cy - radius + 10));
+  ctx.lineTo(cx - 16, Math.max(10, cy - radius + 10));
+  ctx.moveTo(cx + 16, Math.max(10, cy - radius + 10));
+  ctx.lineTo(cx + 48, Math.max(10, cy - radius + 10));
+  ctx.stroke();
 
   ctx.restore();
   requestAnimationFrame(drawPetriPreview);
