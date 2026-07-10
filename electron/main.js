@@ -61,6 +61,25 @@ const HANDOFF_SCRIPT_MAX_CHARS = 180000;
 let activeNexChild = null;
 let managedOllamaProcess = null;
 let lastCpuSample = null;
+let lastWindowsTelemetry = null;
+let lastWindowsTelemetryAt = 0;
+let windowsTelemetryInFlight = null;
+let lastProcessCpuSampleAt = 0;
+let lastProcessCpuSample = new Map();
+
+const PROTECTED_PROCESS_NAMES = new Set([
+  "idle",
+  "system",
+  "registry",
+  "smss",
+  "csrss",
+  "wininit",
+  "services",
+  "lsass",
+  "winlogon",
+  "fontdrvhost",
+  "memory compression"
+]);
 
 function ollamaTagsReady(timeoutMs = 900) {
   return new Promise((resolve) => {
@@ -381,28 +400,30 @@ function runHandoffPowerShell(scriptText, packet = {}) {
   });
 }
 async function readWindowsTelemetry() {
+  const now = Date.now();
+  if (lastWindowsTelemetry && now - lastWindowsTelemetryAt < 2400) {
+    return lastWindowsTelemetry;
+  }
+  if (windowsTelemetryInFlight) {
+    return lastWindowsTelemetry || await windowsTelemetryInFlight;
+  }
   const script = `
 $ErrorActionPreference = "SilentlyContinue"
 $gpu = Get-CimInstance Win32_VideoController | Select-Object -First 1 Name,AdapterRAM,DriverVersion
 $disk = Get-PSDrive -Name C | Select-Object -First 1 Used,Free
 $ollama = @(Get-Process ollama,llama-server -ErrorAction SilentlyContinue | Select-Object ProcessName,Id,CPU,WorkingSet64)
-$topCpu = @(Get-Process | Sort-Object CPU -Descending | Select-Object -First 5 ProcessName,Id,CPU,WorkingSet64)
-$topMemory = @(Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 5 ProcessName,Id,CPU,WorkingSet64)
+$topCpu = @(Get-Process | Sort-Object CPU -Descending | Select-Object -First 12 ProcessName,Id,CPU,WorkingSet64,Path)
+$topMemory = @(Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 12 ProcessName,Id,CPU,WorkingSet64,Path)
 $logicalDisks = @(Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3" | Select-Object DeviceID,Size,FreeSpace,VolumeName)
 $netAdapters = @(Get-NetAdapter -ErrorAction SilentlyContinue | Where-Object Status -eq "Up" | Select-Object -First 5 Name,InterfaceDescription,Status,LinkSpeed,MacAddress)
 $netStats = @(Get-NetAdapterStatistics -ErrorAction SilentlyContinue | Select-Object -First 8 Name,ReceivedBytes,SentBytes,ReceivedUnicastPackets,SentUnicastPackets)
 $battery = Get-CimInstance Win32_Battery | Select-Object -First 1 EstimatedChargeRemaining,BatteryStatus
 $processCount = @(Get-Process).Count
-$gpuLoad = $null
-try {
-  $samples = Get-Counter '\\GPU Engine(*)\\Utilization Percentage' -ErrorAction Stop
-  $gpuLoad = [Math]::Round((($samples.CounterSamples | Measure-Object CookedValue -Sum).Sum), 1)
-} catch { $gpuLoad = $null }
 [pscustomobject]@{
   gpu_name = $gpu.Name
   gpu_adapter_ram = $gpu.AdapterRAM
   gpu_driver = $gpu.DriverVersion
-  gpu_load_percent = $gpuLoad
+  gpu_load_percent = $null
   disk_c_free = $disk.Free
   disk_c_used = $disk.Used
   ollama_processes = $ollama
@@ -415,15 +436,126 @@ try {
   process_count = $processCount
 } | ConvertTo-Json -Depth 5
 `;
-  const result = await runFixedPowerShell(script, 2200);
-  if (!result.ok) {
-    return { ok: false, error: result.stderr || "windows telemetry unavailable" };
-  }
+  windowsTelemetryInFlight = (async () => {
+    const result = await runFixedPowerShell(script, 5200);
+    if (!result.ok) {
+      return { ok: false, error: result.stderr || "windows telemetry unavailable" };
+    }
+    try {
+      return { ok: true, ...JSON.parse(result.stdout || "{}") };
+    } catch (error) {
+      return { ok: false, error: error.message, raw: result.stdout };
+    }
+  })();
   try {
-    return { ok: true, ...JSON.parse(result.stdout || "{}") };
-  } catch (error) {
-    return { ok: false, error: error.message, raw: result.stdout };
+    lastWindowsTelemetry = await windowsTelemetryInFlight;
+    lastWindowsTelemetryAt = Date.now();
+    return lastWindowsTelemetry;
+  } finally {
+    windowsTelemetryInFlight = null;
   }
+}
+
+function normalizeTelemetryArray(value) {
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+function isProtectedProcess(pid, name = "") {
+  const numericPid = Number(pid);
+  const normalizedName = String(name || "").trim().toLowerCase();
+  if (!Number.isFinite(numericPid) || numericPid <= 4) return true;
+  if (numericPid === process.pid) return true;
+  if (managedOllamaProcess?.pid && numericPid === managedOllamaProcess.pid) return true;
+  return PROTECTED_PROCESS_NAMES.has(normalizedName);
+}
+
+function enrichProcessTelemetry(windowsTelemetry) {
+  const now = Date.now();
+  const elapsedSeconds = lastProcessCpuSampleAt ? Math.max((now - lastProcessCpuSampleAt) / 1000, 0.25) : 1;
+  const cpuCores = Math.max(os.cpus().length, 1);
+  const byPid = new Map();
+
+  for (const item of [
+    ...normalizeTelemetryArray(windowsTelemetry?.top_cpu_processes),
+    ...normalizeTelemetryArray(windowsTelemetry?.top_memory_processes)
+  ]) {
+    const pid = Number(item.Id);
+    if (!Number.isFinite(pid)) continue;
+    byPid.set(pid, { ...byPid.get(pid), ...item, Id: pid });
+  }
+
+  const nextSample = new Map();
+  const rows = Array.from(byPid.values()).map((item) => {
+    const pid = Number(item.Id);
+    const cpuSeconds = Number(item.CPU || 0);
+    const previous = lastProcessCpuSample.get(pid);
+    const delta = previous === undefined ? 0 : Math.max(cpuSeconds - previous, 0);
+    const cpuPercent = Number(Math.min(100, (delta / elapsedSeconds / cpuCores) * 100).toFixed(1));
+    const workingSet = Number(item.WorkingSet64 || 0);
+    nextSample.set(pid, cpuSeconds);
+    return {
+      pid,
+      name: String(item.ProcessName || "unknown"),
+      cpu_seconds: Number(cpuSeconds.toFixed(1)),
+      cpu_percent: cpuPercent,
+      memory_bytes: workingSet,
+      memory_percent: Number(((workingSet / Math.max(os.totalmem(), 1)) * 100).toFixed(1)),
+      path: item.Path || "",
+      protected: isProtectedProcess(pid, item.ProcessName),
+      terminate_allowed: !isProtectedProcess(pid, item.ProcessName)
+    };
+  }).sort((a, b) => (b.cpu_percent - a.cpu_percent) || (b.memory_bytes - a.memory_bytes)).slice(0, 18);
+
+  lastProcessCpuSample = nextSample;
+  lastProcessCpuSampleAt = now;
+  return rows;
+}
+
+function terminateFixedProcess(pid, name = "") {
+  return new Promise((resolve) => {
+    const numericPid = Number(pid);
+    if (!Number.isInteger(numericPid) || numericPid <= 0) {
+      resolve({ ok: false, status: "blocked", pid, error: "Invalid PID.", boundary: "Only numeric PIDs are accepted." });
+      return;
+    }
+    if (isProtectedProcess(numericPid, name)) {
+      resolve({
+        ok: false,
+        status: "blocked",
+        pid: numericPid,
+        name,
+        error: "Protected or self process cannot be terminated from NEXUS.",
+        boundary: "Task manager actions are human-clicked and block protected/self processes."
+      });
+      return;
+    }
+
+    const child = spawn("taskkill.exe", ["/PID", String(numericPid), "/T", "/F"], {
+      cwd: repoRoot,
+      shell: false,
+      windowsHide: true
+    });
+    let stdout = "";
+    let stderr = "";
+    child.stdout.on("data", (chunk) => { stdout += chunk.toString(); });
+    child.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
+    child.on("error", (error) => {
+      resolve({ ok: false, status: "blocked", pid: numericPid, name, error: error.message, boundary: "Fixed taskkill launch failed; no arbitrary shell was used." });
+    });
+    child.on("close", (code) => {
+      resolve({
+        ok: code === 0,
+        status: code === 0 ? "terminated" : "blocked",
+        code,
+        pid: numericPid,
+        name,
+        stdout,
+        stderr,
+        boundary: "Human-clicked fixed PID termination. No arbitrary shell, model authority, or repo mutation."
+      });
+    });
+  });
 }
 function sanitizeNexPrompt(value) {
   const text = String(value || "").replace(/\0/g, "").trim();
@@ -1079,6 +1211,7 @@ ipcMain.handle("nexus:getTelemetry", async () => {
   const freeMem = os.freemem();
   const cpuPercent = readCpuPercent();
   const windowsTelemetry = await readWindowsTelemetry();
+  windowsTelemetry.task_manager_processes = enrichProcessTelemetry(windowsTelemetry);
   const packet = {
     system: "NEXUS GATE",
     version: "0.9.8-system-monitor-hud",
@@ -1110,6 +1243,9 @@ ipcMain.handle("nexus:getTelemetry", async () => {
   };
   packet.analysis = buildTelemetryAnalysis(packet);
   return packet;
+});
+ipcMain.handle("nexus:terminateProcess", async (_event, packet = {}) => {
+  return terminateFixedProcess(packet.pid, packet.name);
 });
 ipcMain.handle("nexus:ensureOllama", async () => ensureOllamaBackend());
 ipcMain.handle("nexus:getContract", async () => ({

@@ -29,7 +29,7 @@ def _data(root,tool,intent):
  if tool=='test-strategy': common['tests']=sorted(p.name for p in (root/'tests').glob('test_*.py'))[:80] if (root/'tests').exists() else []
  if tool=='system-monitor-scout':
   common['monitor_surfaces']=['electron/renderer/index.html','electron/renderer/renderer.js','electron/renderer/styles.css','electron/main.js','electron/preload.js']
-  common['telemetry_contract']={'read_only':True,'raw_code_box':False,'tabs':['overview','processes','storage_network','recommendations','cyber_security_tempest'],'tempest_status':'reserved_empty_hook'}
+  common['telemetry_contract']={'read_only':True,'raw_code_box':False,'tabs':['overview','processes','storage_network','recommendations','cyber_security_tempest'],'tempest_status':'reserved_empty_hook','task_manager':'human_clicked_pid_only','protected_process_blocking':True,'arbitrary_shell':False}
   common['recommendations']=['Keep System Monitor as presentation-only HUD','Route telemetry through nexus:getTelemetry','Use TEMPEST tab only after a governed cybersecurity contract exists','Run Electron smoke and evolve after monitor changes']
  if tool=='continuity-seal': common['visible']={p:(root/p).exists() for p in ['README.md','chatgpt/scripts.md','loops/nexus_loop_registry.v0.1.json','state/loops/nexus_loop_cards_latest.json','docs/runtime/NEXUS_PERSONAL_CODING_PARADISE.md','reports/nexus_compile_report_latest.json']}
  return common

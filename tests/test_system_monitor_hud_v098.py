@@ -28,6 +28,9 @@ class TestSystemMonitorHudV098(unittest.TestCase):
         self.assertFalse(contract["raw_code_box"])
         self.assertIn("cyber_security_tempest", contract["tabs"])
         self.assertEqual(contract["tempest_status"], "reserved_empty_hook")
+        self.assertEqual(contract["task_manager"], "human_clicked_pid_only")
+        self.assertTrue(contract["protected_process_blocking"])
+        self.assertFalse(contract["arbitrary_shell"])
 
     def test_loop_cards_include_system_monitor_scout(self):
         cards = json.loads((ROOT / "state" / "loops" / "nexus_loop_cards_latest.json").read_text(encoding="utf-8-sig"))

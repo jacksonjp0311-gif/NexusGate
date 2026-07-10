@@ -471,6 +471,29 @@ function renderTelemetryRows(rows, empty = "No telemetry entries.") {
   }).join("");
 }
 
+function renderProcessManagerRows(rows) {
+  const normalized = normalizeArray(rows).filter(Boolean);
+  if (!normalized.length) return `<div class="telemetry-row muted">No process telemetry.</div>`;
+  return [
+    `<div class="process-manager-head"><span>PID</span><span>Process</span><span>CPU</span><span>Memory</span><span>Action</span></div>`,
+    ...normalized.map((row) => {
+      const allowed = row.terminate_allowed === true;
+      const button = allowed
+        ? `<button class="terminate-process-button" type="button" data-terminate-pid="${safeText(row.pid)}" data-terminate-name="${safeText(row.name)}">End</button>`
+        : `<span class="protected-process-badge">Guarded</span>`;
+      return [
+        `<div class="process-manager-row">`,
+        `<span>${safeText(row.pid)}</span>`,
+        `<strong>${safeText(row.name || "unknown")}</strong>`,
+        `<span>${Number(row.cpu_percent || 0).toFixed(1)}%</span>`,
+        `<span>${formatBytes(row.memory_bytes)} / ${Number(row.memory_percent || 0).toFixed(1)}%</span>`,
+        button,
+        `</div>`
+      ].join("");
+    })
+  ].join("");
+}
+
 function renderTelemetryTextList(items, empty = "No recommendations.") {
   const normalized = normalizeArray(items).filter(Boolean);
   if (!normalized.length) return `<div class="telemetry-row muted">${safeText(empty)}</div>`;
@@ -725,12 +748,7 @@ async function refreshTelemetry() {
     setTelemetryText("hud-process-count", telemetry.windows?.process_count ?? "--");
     setTelemetryText("hud-uptime", `${Math.round((telemetry.platform?.uptime_seconds || 0) / 60)} min`);
     setTelemetryText("hud-analysis-summary", telemetry.analysis?.summary || "Telemetry analysis unavailable.");
-    setTelemetryHtml("hud-process-list", [
-      `<div class="telemetry-subhead">Top CPU</div>`,
-      renderTelemetryRows(telemetry.windows?.top_cpu_processes, "No CPU process telemetry."),
-      `<div class="telemetry-subhead">Top Memory</div>`,
-      renderTelemetryRows(telemetry.windows?.top_memory_processes, "No memory process telemetry.")
-    ].join(""));
+    setTelemetryHtml("hud-process-list", renderProcessManagerRows(telemetry.windows?.task_manager_processes));
     setTelemetryHtml("hud-storage-list", renderTelemetryRows(telemetry.windows?.logical_disks, "No local disk telemetry."));
     setTelemetryHtml("hud-network-list", [
       `<div class="telemetry-subhead">Adapters</div>`,
@@ -765,6 +783,23 @@ function activateTelemetryTab(tabName) {
   document.querySelectorAll("[data-telemetry-panel]").forEach((panel) => {
     panel.classList.toggle("is-active", panel.dataset.telemetryPanel === tabName);
   });
+}
+
+async function requestTerminateProcess(pid, name) {
+  const numericPid = Number(pid);
+  if (!Number.isInteger(numericPid) || numericPid <= 0) return;
+  const label = name || `PID ${numericPid}`;
+  const confirmed = window.confirm(`End process ${label} (${numericPid})?\n\nNEXUS will block protected/self processes.`);
+  if (!confirmed) return;
+  setTelemetryText("hud-process-action-status", `terminating ${label} / ${numericPid}`);
+  try {
+    const result = await window.nexus.terminateProcess({ pid: numericPid, name });
+    setTelemetryText("hud-process-action-status", result.ok ? `terminated ${label} / ${numericPid}` : `blocked ${label}: ${result.error || result.stderr || "unknown"}`);
+    appendChat("ai", JSON.stringify(result, null, 2), "NEX / task-manager / human-clicked");
+    refreshTelemetry();
+  } catch (error) {
+    setTelemetryText("hud-process-action-status", `terminate failed: ${error.message}`);
+  }
 }
 
 function renderMetaOrchestratorPanels(panels) {
@@ -1454,6 +1489,11 @@ document.getElementById("telemetry-popout")?.addEventListener("click", () => tog
 document.getElementById("telemetry-close")?.addEventListener("click", () => toggleTelemetryHud(false));
 document.querySelectorAll("[data-telemetry-tab]").forEach((button) => {
   button.addEventListener("click", () => activateTelemetryTab(button.dataset.telemetryTab));
+});
+telemetryHud?.addEventListener("click", (event) => {
+  const button = event.target?.closest?.("[data-terminate-pid]");
+  if (!button) return;
+  requestTerminateProcess(button.dataset.terminatePid, button.dataset.terminateName || "");
 });
 document.getElementById("meta-orchestrator-popout")?.addEventListener("click", () => toggleMetaOrchestratorHud());
 document.getElementById("meta-orchestrator-close")?.addEventListener("click", () => toggleMetaOrchestratorHud(false));
