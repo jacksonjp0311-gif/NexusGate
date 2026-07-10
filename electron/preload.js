@@ -12,6 +12,9 @@ contextBridge.exposeInMainWorld("nexus", {
   openPetriDishPro: () => ipcRenderer.invoke("nexus:openPetriDishPro"),
   getPetriDishProState: () => ipcRenderer.invoke("nexus:getPetriDishProState"),
   getNeuralRepoGraph: () => ipcRenderer.invoke("nexus:getNeuralRepoGraph"),
+  getTempestState: () => ipcRenderer.invoke("nexus:getTempestState"),
+  openTempestFolder: () => ipcRenderer.invoke("nexus:openTempestFolder"),
+  openTempestFullUi: () => ipcRenderer.invoke("nexus:openTempestFullUi"),
   ensureOllama: () => ipcRenderer.invoke("nexus:ensureOllama"),
   getContract: () => ipcRenderer.invoke("nexus:getContract")
 });

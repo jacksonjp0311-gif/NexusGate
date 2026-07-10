@@ -962,6 +962,81 @@ function Invoke-NexusPetriDishPortal {
     }
 }
 
+function Invoke-NexusT3mp3stPortal {
+    $tempestRoot = Join-Path $RepoRoot "T3MP3ST"
+
+    while ($true) {
+        Write-Host ""
+        Write-Host "========================================"
+        Write-Host " T3MP3ST | AUTHORIZED SECURITY LAB"
+        Write-Host "========================================"
+        Write-Host "models recommend -> humans scope -> receipts govern claims"
+        Write-Host ""
+        Write-Host "[1] Open Full UI / War Room"
+        Write-Host "[2] Install dependencies"
+        Write-Host "[3] Doctor"
+        Write-Host "[4] Smoke"
+        Write-Host "[5] Verify Claims"
+        Write-Host "[6] Open Artifact Folder"
+        Write-Host "[7] Open README"
+        Write-Host "[B] Back to NEXUS"
+        Write-Host ""
+        Write-Host "Boundary: authorized targets only; no autonomous offensive action, secret exfiltration, or arbitrary shell."
+        Write-Host ""
+
+        $tempestChoice = Read-Host "T3MP3ST"
+
+        if (-not (Test-Path -LiteralPath (Join-Path $tempestRoot "package.json") -PathType Leaf)) {
+            Write-FAIL ("T3MP3ST package missing: {0}" -f $tempestRoot)
+            Read-Host "Press Enter to return to NEXUS menu"
+            return
+        }
+
+        if ($tempestChoice -eq "1") {
+            $cmd = "Set-Location -LiteralPath '$tempestRoot'; npm run server"
+            Start-Process powershell -ArgumentList "-NoExit", "-ExecutionPolicy", "Bypass", "-Command", $cmd | Out-Null
+            Start-Sleep -Seconds 2
+            Start-Process "http://127.0.0.1:3333/ui/" | Out-Null
+        }
+        elseif ($tempestChoice -eq "2") {
+            Push-Location $tempestRoot
+            try { npm install }
+            finally { Pop-Location }
+            Read-Host "Press Enter to return to T3MP3ST"
+        }
+        elseif ($tempestChoice -eq "3") {
+            Push-Location $tempestRoot
+            try { npm run doctor }
+            finally { Pop-Location }
+            Read-Host "Press Enter to return to T3MP3ST"
+        }
+        elseif ($tempestChoice -eq "4") {
+            Push-Location $tempestRoot
+            try { npm run smoke }
+            finally { Pop-Location }
+            Read-Host "Press Enter to return to T3MP3ST"
+        }
+        elseif ($tempestChoice -eq "5") {
+            Push-Location $tempestRoot
+            try { npm run verify-claims }
+            finally { Pop-Location }
+            Read-Host "Press Enter to return to T3MP3ST"
+        }
+        elseif ($tempestChoice -eq "6") {
+            explorer.exe $tempestRoot | Out-Null
+        }
+        elseif ($tempestChoice -eq "7") {
+            explorer.exe (Join-Path $tempestRoot "README.md") | Out-Null
+        }
+        elseif ($tempestChoice -eq "B" -or $tempestChoice -eq "b") {
+            return
+        }
+        else {
+            Write-NG "Unknown T3MP3ST choice."
+        }
+    }
+}
+
 function Invoke-NexusOpenUrl {
     param([string]$Url)
     Write-NG ("Opening: {0}" -f $Url)
@@ -1153,6 +1228,7 @@ function Show-Menu {
     Write-Portal "  [13] Neural Activity / Cathedral            -> bioelectric popout HUD" "Cyan"
     Write-Portal "  [14] Nexus Loops / Cards                   -> JSON loop cards / HUD-ready registry" "Blue"
     Write-Portal "  [15] PetriDishPortal                       -> organism gate / microscope HUD" "Cyan"
+    Write-Portal "  [16] T3MP3ST                               -> authorized security lab / War Room" "Blue"
     Write-Portal "  [Q]  Quit" "Blue"
     Write-Host ""
     Write-Portal "========================================================================================================================" "Cyan"
@@ -1180,6 +1256,7 @@ function Show-Menu {
     # Write-Host "[13] Neural Activity / Cathedral"
     # Write-Host "[14] Nexus Loops / Cards"
     # Write-Host "[15] PetriDishPortal"
+    # Write-Host "[16] T3MP3ST"
     # Write-Host "Gateway style: cyber ice-blue / green / yellow portal."
 }
 
@@ -1237,6 +1314,9 @@ while ($true) {
     }
     elseif ($choice -eq "15") {
         Invoke-NexusPetriDishPortal
+    }
+    elseif ($choice -eq "16") {
+        Invoke-NexusT3mp3stPortal
     }
     elseif ($choice -eq "Q" -or $choice -eq "q") {
         Write-OK "closing NEXUS Gate launcher"

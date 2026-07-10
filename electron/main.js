@@ -15,8 +15,11 @@ if (!gotSingleInstanceLock) {
 let mainWindow = null;
 let petriWindow = null;
 let petriIpcRegistered = false;
+let tempestWindow = null;
+let tempestServerProcess = null;
 const petriDishProRoot = path.join(repoRoot, "PetriDishPro");
 const petriElectronRoot = path.join(petriDishProRoot, "electron");
+const tempestRoot = path.join(repoRoot, "T3MP3ST");
 const neuralRepoGraphPath = path.join(repoRoot, "state", "neural_activity", "repo_neural_graph_latest.json");
 
 app.on("second-instance", () => {
@@ -52,7 +55,9 @@ const READ_SURFACES = new Set([
   "reports/tui/nexus_tui_ai_handoff_latest.txt",
   "reports/tui/nexus_tui_snapshot_latest.html",
   "reports/tui/nexus_tui_surface_latest.json",
-  "state/neural_activity/repo_neural_graph_latest.json"
+  "state/neural_activity/repo_neural_graph_latest.json",
+  "T3MP3ST/package.json",
+  "T3MP3ST/README.md"
 ]);
 
 const NEX_CHAT_ROLES = new Set(["FAST", "BALANCED", "DEEP", "TNN", "HANDOFF"]);
@@ -897,6 +902,148 @@ function openPetriDishProWindow() {
   };
 }
 
+function readTempestPackage() {
+  const packagePath = path.join(tempestRoot, "package.json");
+  if (!fs.existsSync(packagePath)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(packagePath, "utf8"));
+  } catch (_error) {
+    return null;
+  }
+}
+
+function buildTempestState() {
+  const pkg = readTempestPackage();
+  const readmePath = path.join(tempestRoot, "README.md");
+  const hasReadme = fs.existsSync(readmePath);
+  const hasNodeModules = fs.existsSync(path.join(tempestRoot, "node_modules"));
+  const scripts = pkg?.scripts || {};
+  return {
+    system: "NEXUS GATE",
+    surface: "T3MP3ST",
+    version: "0.1.0-nexus-tempest-portal",
+    generated_at_utc: new Date().toISOString(),
+    exists: fs.existsSync(tempestRoot),
+    root: "T3MP3ST",
+    package_name: pkg?.name || "missing",
+    package_version: pkg?.version || "unknown",
+    has_readme: hasReadme,
+    dependencies_installed: hasNodeModules,
+    full_ui: {
+      command: "cd T3MP3ST && npm run server",
+      url: "http://127.0.0.1:3333/ui/",
+      enabled: Boolean(pkg && scripts.server),
+      requires_install: !hasNodeModules
+    },
+    capabilities: [
+      "authorized security testing workbench",
+      "local War Room UI",
+      "claim verification receipts",
+      "bench and smoke scripts",
+      "NEXUS read-only operator reflection"
+    ],
+    blocked_actions: [
+      "unauthorized_targeting",
+      "autonomous_offensive_action",
+      "arbitrary_shell_commands",
+      "secret_exfiltration",
+      "credential_storage",
+      "external_api_write_without_operator_scope",
+      "bypass_evolve"
+    ],
+    next_action: hasNodeModules ? "Open Full UI from the fixed T3MP3ST launcher." : "Run npm install in T3MP3ST before launching the full UI.",
+    claim_boundary: "T3MP3ST is exposed as a governed local security-lab surface. NEXUS may reflect and launch the fixed local UI; it may not authorize offensive activity, select targets, bypass scope, or execute arbitrary commands."
+  };
+}
+
+function waitForHttpReady(url, timeoutMs = 8000) {
+  const started = Date.now();
+  return new Promise((resolve) => {
+    const attempt = () => {
+      const request = http.get(url, { timeout: 900 }, (response) => {
+        response.resume();
+        resolve(response.statusCode >= 200 && response.statusCode < 500);
+      });
+      request.on("timeout", () => {
+        request.destroy();
+        if (Date.now() - started >= timeoutMs) resolve(false);
+        else setTimeout(attempt, 350);
+      });
+      request.on("error", () => {
+        if (Date.now() - started >= timeoutMs) resolve(false);
+        else setTimeout(attempt, 350);
+      });
+    };
+    attempt();
+  });
+}
+
+async function ensureTempestServer() {
+  const state = buildTempestState();
+  if (!state.exists || !state.full_ui.enabled) {
+    return { ok: false, status: "missing", state };
+  }
+  if (!state.dependencies_installed) {
+    return { ok: false, status: "dependencies_missing", state };
+  }
+  if (await waitForHttpReady(state.full_ui.url, 1200)) {
+    return { ok: true, status: "already_running", state };
+  }
+  if (!tempestServerProcess || tempestServerProcess.killed) {
+    const npmBinary = process.platform === "win32" ? "npm.cmd" : "npm";
+    tempestServerProcess = spawn(npmBinary, ["run", "server"], {
+      cwd: tempestRoot,
+      shell: false,
+      windowsHide: true,
+      stdio: "ignore",
+      env: { ...process.env }
+    });
+    tempestServerProcess.unref();
+  }
+  const ready = await waitForHttpReady(state.full_ui.url, 8000);
+  return {
+    ok: ready,
+    status: ready ? "started" : "not_ready_after_start",
+    pid: tempestServerProcess?.pid,
+    state,
+    boundary: "Fixed T3MP3ST server launcher only. No arbitrary shell, target selection, or autonomous offensive action is delegated."
+  };
+}
+
+async function openTempestFullUi() {
+  const server = await ensureTempestServer();
+  if (!server.ok) return server;
+  if (tempestWindow && !tempestWindow.isDestroyed()) {
+    tempestWindow.show();
+    tempestWindow.maximize();
+    tempestWindow.focus();
+    return { ok: true, status: "focused", url: server.state.full_ui.url, server };
+  }
+  tempestWindow = new BrowserWindow({
+    width: 1600,
+    height: 940,
+    minWidth: 1100,
+    minHeight: 720,
+    title: "T3MP3ST",
+    backgroundColor: "#02070b",
+    webPreferences: {
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: true
+    }
+  });
+  tempestWindow.on("closed", () => { tempestWindow = null; });
+  await tempestWindow.loadURL(server.state.full_ui.url);
+  tempestWindow.maximize();
+  return {
+    ok: true,
+    status: "opened",
+    url: server.state.full_ui.url,
+    server,
+    boundary: "T3MP3ST full UI is opened as a fixed local surface only; NEXUS does not grant target, exploit, or shell authority."
+  };
+}
+
 function runNexPython(args) {
   return new Promise((resolve) => {
     const child = spawn("python", args, {
@@ -1156,6 +1303,13 @@ ipcMain.handle("nexus:stopNex", async () => {
 ipcMain.handle("nexus:openPetriDishPro", async () => openPetriDishProWindow());
 ipcMain.handle("nexus:getPetriDishProState", async () => buildPetriPreviewState());
 ipcMain.handle("nexus:getNeuralRepoGraph", async () => buildNeuralRepoGraph());
+ipcMain.handle("nexus:getTempestState", async () => buildTempestState());
+ipcMain.handle("nexus:openTempestFolder", async () => {
+  if (!fs.existsSync(tempestRoot)) return { ok: false, status: "missing", path: "T3MP3ST" };
+  await shell.openPath(tempestRoot);
+  return { ok: true, status: "opened", path: "T3MP3ST", boundary: "Fixed T3MP3ST folder open only; no command authority granted." };
+});
+ipcMain.handle("nexus:openTempestFullUi", async () => openTempestFullUi());
 
 function buildTelemetryAnalysis(packet) {
   const cpu = Number(packet.cpu?.load_percent || 0);

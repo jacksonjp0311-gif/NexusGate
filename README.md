@@ -121,7 +121,7 @@ No adapter, no bridge. No schema, no route. No authority verification, no mutati
 ```
 
 ## GitHub / README / Docs
-The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current operator surfaces include Spiral Core Desktop Portal, Electron HUD, PowerShell TUI, Dev Mode / HANDOFF, Failure Doctor, Mode Selection HUD, NexusCell, Neural Activity, Nexus Loops / Cards, PetriDishPortal, Personal Coding Paradise, AI Toolbelt Console, and Toolbelt Cockpit.
+The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current operator surfaces include Spiral Core Desktop Portal, Electron HUD, PowerShell TUI, Dev Mode / HANDOFF, Failure Doctor, T3MP3ST, Mode Selection HUD, NexusCell, Neural Activity, Nexus Loops / Cards, PetriDishPortal, Personal Coding Paradise, AI Toolbelt Console, and Toolbelt Cockpit.
 
 ## Phi Wound Ollama Adapter
 v1.0.1 routes `phi-wound-gpu` through the non-interactive Ollama JSON adapter instead of the Orange human launcher.

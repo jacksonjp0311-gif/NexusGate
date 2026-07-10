@@ -20,6 +20,7 @@ const sendButton = document.getElementById("nex-send-button");
 const stopButton = document.getElementById("nex-stop-button");
 const telemetryHud = document.getElementById("telemetry-hud");
 const metaOrchestratorHud = document.getElementById("meta-orchestrator-hud");
+const tempestHud = document.getElementById("tempest-hud");
 const systemErrorHud = document.getElementById("system-error-hud");
 const systemErrorClose = document.getElementById("system-error-close");
 const petriOpen = document.getElementById("petri-open");
@@ -45,6 +46,17 @@ const NEX_SHELL_RELAY_MODE_BOUNDARY = "Shell relay mode runs only allowlisted NE
 const NEX_ARBITRARY_POWERSHELL_BLOCK_MARKER = "arbitrary PowerShell is blocked";
 const NEX_HANDOFF_ACTION_SHELL_BOUNDARY = "HANDOFF selection can run human-authorized ChatGPT/Codex action scripts through the hidden PowerShell bridge; never from autonomous model output.";
 const META_ORCHESTRATOR_SURFACE = "reports/nexus_meta_orchestrator_gate_latest.json";
+
+function renderTempestList(id, values) {
+  const root = document.getElementById(id);
+  if (!root) return;
+  root.innerHTML = "";
+  (Array.isArray(values) ? values : []).forEach((value) => {
+    const item = document.createElement("li");
+    item.textContent = value;
+    root.appendChild(item);
+  });
+}
 
 const laneIcons = {
   evolve: "EV",
@@ -865,6 +877,63 @@ function toggleMetaOrchestratorHud(force) {
   metaOrchestratorHud.style.display = next ? "" : "none";
   if (next) refreshMetaOrchestratorHud();
 }
+
+async function refreshTempestHud() {
+  try {
+    const packet = await window.nexus.getTempestState();
+    setTelemetryText("tempest-status", packet.exists ? "ready" : "missing");
+    setTelemetryText("tempest-root", packet.root || "T3MP3ST");
+    setTelemetryText("tempest-gate", packet.dependencies_installed ? "ui-ready" : "install-needed");
+    setTelemetryText("tempest-contract", packet.claim_boundary || "T3MP3ST boundary unavailable.");
+    renderTempestList("tempest-capabilities", packet.capabilities || []);
+    renderTempestList("tempest-blocked", packet.blocked_actions || []);
+    setTelemetryText("tempest-launch", JSON.stringify({
+      package: packet.package_name,
+      version: packet.package_version,
+      command: packet.full_ui?.command,
+      url: packet.full_ui?.url,
+      next_action: packet.next_action,
+      boundary: packet.claim_boundary
+    }, null, 2));
+  } catch (error) {
+    setTelemetryText("tempest-status", "blocked");
+    setTelemetryText("tempest-contract", `T3MP3ST unavailable: ${error.message}`);
+    setTelemetryText("tempest-launch", error.message);
+  }
+}
+
+function toggleTempestHud(force) {
+  if (!tempestHud) return;
+  const next = typeof force === "boolean" ? force : !tempestHud.classList.contains("is-expanded");
+  tempestHud.classList.toggle("is-expanded", next);
+  tempestHud.toggleAttribute("hidden", !next);
+  tempestHud.style.display = next ? "" : "none";
+  document.getElementById("tempest-popout")?.setAttribute("aria-expanded", String(next));
+  if (next) refreshTempestHud();
+}
+
+function bindMovableHud(panel, handle) {
+  if (!panel || !handle) return;
+  let dragging = null;
+  handle.addEventListener("pointerdown", (event) => {
+    if (event.target?.closest?.("button")) return;
+    const rect = panel.getBoundingClientRect();
+    dragging = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+    handle.setPointerCapture?.(event.pointerId);
+  });
+  handle.addEventListener("pointermove", (event) => {
+    if (!dragging) return;
+    const nextLeft = Math.max(8, Math.min(window.innerWidth - 180, event.clientX - dragging.x));
+    const nextTop = Math.max(8, Math.min(window.innerHeight - 120, event.clientY - dragging.y));
+    panel.style.left = `${nextLeft}px`;
+    panel.style.top = `${nextTop}px`;
+    panel.style.right = "auto";
+  });
+  const stopDrag = () => { dragging = null; };
+  handle.addEventListener("pointerup", stopDrag);
+  handle.addEventListener("pointercancel", stopDrag);
+}
+
 function toggleModelSelectorHud(force) {
   if (!modelSelectorHud) return;
   const next = typeof force === "boolean" ? force : !modelSelectorHud.classList.contains("is-expanded");
@@ -1497,6 +1566,20 @@ telemetryHud?.addEventListener("click", (event) => {
 });
 document.getElementById("meta-orchestrator-popout")?.addEventListener("click", () => toggleMetaOrchestratorHud());
 document.getElementById("meta-orchestrator-close")?.addEventListener("click", () => toggleMetaOrchestratorHud(false));
+document.getElementById("tempest-popout")?.addEventListener("click", () => toggleTempestHud());
+document.getElementById("tempest-close")?.addEventListener("click", () => toggleTempestHud(false));
+document.getElementById("tempest-refresh")?.addEventListener("click", refreshTempestHud);
+document.getElementById("tempest-open-folder")?.addEventListener("click", async () => {
+  const result = await window.nexus.openTempestFolder();
+  appendChat("ai", JSON.stringify(result, null, 2), "NEX / T3MP3ST / folder");
+});
+document.getElementById("tempest-open-ui")?.addEventListener("click", async () => {
+  setTelemetryText("tempest-launch", "Opening fixed T3MP3ST full UI...");
+  const result = await window.nexus.openTempestFullUi();
+  setTelemetryText("tempest-launch", JSON.stringify(result, null, 2));
+  appendChat("ai", JSON.stringify(result, null, 2), "NEX / T3MP3ST / full-ui");
+});
+bindMovableHud(tempestHud, document.getElementById("tempest-drag-handle"));
 petriOpen?.addEventListener("click", openPetriDishPro);
 petriMiniBody?.addEventListener("click", openPetriDishPro);
 systemErrorClose?.addEventListener("click", () => clearSystemErrorHud());

@@ -923,7 +923,16 @@
               <span>Gate <strong>read-only</strong></span>
             </div>
           </section>
-          <section class="model-selector-station" aria-label="Mode Selection HUD">
+          <section class="tempest-station" aria-label="T3MP3ST gateway">
+            <button class="tempest-button" type="button" id="tempest-popout" aria-expanded="false" aria-controls="tempest-hud">
+              <span class="tempest-glyph" aria-hidden="true">T</span>
+              <span class="tempest-copy">
+                <span>T3MP3ST</span>
+                <strong id="tempest-status">authorized only</strong>
+              </span>
+            </button>
+          </section>
+          <section class="model-selector-station compat-hidden-mode-selector" aria-label="Mode Selection HUD">
             <button class="model-selector-button mode-selection-button" type="button" id="model-selector-toggle" aria-expanded="false" aria-controls="model-selector-hud">
               <span class="mode-selection-glyph" aria-hidden="true">
                 <span class="selector-switch mode-selector-switch" id="selector-switch" data-role="DEEP">
@@ -963,6 +972,43 @@
               </div>
               <button class="ghost-button selector-copy-button" type="button" id="copy-role-command">Copy command</button>
             </section>
+          </section>
+          <section class="telemetry-hud tempest-hud" id="tempest-hud" hidden aria-label="Expanded T3MP3ST HUD">
+            <div class="telemetry-hud-head tempest-hud-head" id="tempest-drag-handle">
+              <div>
+                <span>NEXUS Green HUD</span>
+                <strong>T3MP3ST</strong>
+              </div>
+              <button type="button" id="tempest-close">close</button>
+            </div>
+            <div class="tempest-hud-grid">
+              <article><span>Mode</span><strong>Authorized Security Lab</strong></article>
+              <article><span>Root</span><strong id="tempest-root">T3MP3ST</strong></article>
+              <article><span>Gate</span><strong id="tempest-gate">read-only</strong></article>
+            </div>
+            <div class="tempest-actions">
+              <button type="button" id="tempest-open-ui">Open Full UI</button>
+              <button type="button" id="tempest-open-folder">Open Folder</button>
+              <button type="button" id="tempest-refresh">Refresh</button>
+            </div>
+            <div class="tempest-panel-grid">
+              <section>
+                <h3>Contract</h3>
+                <p id="tempest-contract">Loading T3MP3ST contract...</p>
+              </section>
+              <section>
+                <h3>Capabilities</h3>
+                <ul id="tempest-capabilities"></ul>
+              </section>
+              <section>
+                <h3>Blocked Actions</h3>
+                <ul id="tempest-blocked"></ul>
+              </section>
+              <section>
+                <h3>Launch</h3>
+                <pre id="tempest-launch">Waiting for T3MP3ST state...</pre>
+              </section>
+            </div>
           </section>
           <section class="telemetry-hud" id="telemetry-hud" hidden aria-label="Expanded local telemetry HUD">
             <div class="telemetry-hud-head">
