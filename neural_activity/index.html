@@ -351,8 +351,6 @@ controls.maxDistance = 140;
 
 const networkGroup = new THREE.Group();
 scene.add(networkGroup);
-const repoGraphGroup = new THREE.Group();
-scene.add(repoGraphGroup);
 
 const somaMaterial = new THREE.MeshBasicMaterial({ color: CONFIG.colors.cyan, transparent: true, opacity: 0.38, blending: THREE.AdditiveBlending });
 const somaWire = new THREE.MeshBasicMaterial({ color: CONFIG.colors.gold, transparent: true, opacity: 0.35, wireframe: true, blending: THREE.AdditiveBlending });
@@ -411,7 +409,19 @@ dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPos, 3));
 const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ color: CONFIG.colors.cyan, size: EMBED ? 0.13 : 0.2, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending, depthWrite: false }));
 scene.add(dust);
 
-let repoGraphPulse = 0;
+const repoNeuralProfile = {
+  nodeCount: 0,
+  edgeCount: 0,
+  codeRatio: 0,
+  interfaceRatio: 0,
+  stateRatio: 0,
+  doctrineRatio: 0,
+  branchEnergy: 1,
+  synapticGlow: 1,
+  rotationBias: 1,
+  impulse: 0
+};
+
 function repoHash(value) {
   let h = 2166136261;
   for (const ch of String(value || "")) {
@@ -421,81 +431,28 @@ function repoHash(value) {
   return h >>> 0;
 }
 
-function repoNodeColor(type) {
-  if (type === "root") return CONFIG.colors.gold;
-  if (type === "folder") return CONFIG.colors.cyan;
-  if (type === "interface") return CONFIG.colors.magenta;
-  if (type === "state") return CONFIG.colors.violet;
-  if (type === "operator_lane") return CONFIG.colors.orange;
-  return CONFIG.colors.blue;
-}
-
-function clearRepoGraphGroup() {
-  while (repoGraphGroup.children.length) {
-    const child = repoGraphGroup.children.pop();
-    if (child.geometry) child.geometry.dispose();
-    if (child.material) child.material.dispose();
-  }
-}
-
 function applyRepoNeuralGraph(graph) {
   if (!graph || !Array.isArray(graph.nodes) || !Array.isArray(graph.edges)) return;
-  clearRepoGraphGroup();
-  const maxNodes = EMBED ? 180 : 320;
-  const nodes = graph.nodes.slice(0, maxNodes);
-  const nodeById = new Map(nodes.map((node) => [node.id, node]));
-  const posById = new Map();
-  const rootPos = new THREE.Vector3(0, 0, 0);
-  nodes.forEach((node, index) => {
-    if (node.type === "root") {
-      posById.set(node.id, rootPos.clone());
-      return;
-    }
-    const h = repoHash(node.path || node.id);
-    const depth = Math.max(1, Number(node.depth || 1));
-    const angle = ((h % 10000) / 10000) * Math.PI * 2;
-    const ring = CONFIG.somaRadius + 2.2 + depth * (EMBED ? 2.4 : 3.0);
-    const z = (((h >>> 8) % 2000) / 2000 - 0.5) * (EMBED ? 9 : 14);
-    const wobble = (((h >>> 17) % 1000) / 1000 - 0.5) * 2.2;
-    posById.set(node.id, new THREE.Vector3(Math.cos(angle) * (ring + wobble), Math.sin(angle) * (ring * 0.72 + wobble), z));
-  });
-
-  graph.edges.slice(0, maxNodes * 1.4).forEach((edge) => {
-    if (!nodeById.has(edge.from) || !nodeById.has(edge.to)) return;
-    const a = posById.get(edge.from);
-    const b = posById.get(edge.to);
-    if (!a || !b) return;
-    const mid = a.clone().lerp(b, 0.5);
-    mid.z += Math.sin(repoHash(edge.to) % 6) * 0.9;
-    const curve = new THREE.CatmullRomCurve3([a, mid, b]);
-    const isFile = edge.type === "file_synapse";
-    const material = new THREE.MeshBasicMaterial({
-      color: isFile ? CONFIG.colors.gold : CONFIG.colors.cyan,
-      transparent: true,
-      opacity: isFile ? 0.28 : 0.46,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-    repoGraphGroup.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 8, isFile ? 0.045 : 0.075, 5, false), material));
-  });
-
-  nodes.forEach((node) => {
-    const pos = posById.get(node.id);
-    if (!pos) return;
-    const size = node.type === "root" ? 0.55 : Math.max(0.1, Math.min(0.38, Number(node.weight || 1) * 0.07));
-    const material = new THREE.MeshBasicMaterial({
-      color: repoNodeColor(node.type),
-      transparent: true,
-      opacity: node.type === "folder" ? 0.72 : 0.58,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-    const mesh = new THREE.Mesh(new THREE.IcosahedronGeometry(size, node.type === "root" ? 2 : 1), material);
-    mesh.position.copy(pos);
-    repoGraphGroup.add(mesh);
-  });
-  repoGraphGroup.userData.source = graph.generated_at_utc || "repo";
-  repoGraphPulse = 1;
+  const nodes = graph.nodes;
+  const total = Math.max(1, nodes.length);
+  const counts = nodes.reduce((acc, node) => {
+    const type = node.type || "artifact";
+    acc[type] = (acc[type] || 0) + 1;
+    return acc;
+  }, {});
+  const repoSeed = repoHash(`${graph.generated_at_utc || ""}:${graph.node_count || total}:${graph.edge_count || graph.edges.length}`);
+  repoNeuralProfile.nodeCount = total;
+  repoNeuralProfile.edgeCount = graph.edges.length;
+  repoNeuralProfile.codeRatio = ((counts.python || 0) + (counts.javascript || 0)) / total;
+  repoNeuralProfile.interfaceRatio = (counts.interface || 0) / total;
+  repoNeuralProfile.stateRatio = (counts.state || 0) / total;
+  repoNeuralProfile.doctrineRatio = (counts.doctrine || 0) / total;
+  repoNeuralProfile.branchEnergy = 1 + Math.min(0.34, Math.log10(total + 1) * 0.08);
+  repoNeuralProfile.synapticGlow = 1 + Math.min(0.45, graph.edges.length / Math.max(total, 1) * 0.28);
+  repoNeuralProfile.rotationBias = 0.88 + ((repoSeed % 240) / 1000);
+  repoNeuralProfile.impulse = 1;
+  branchMat.opacity = 0.58 + Math.min(0.18, repoNeuralProfile.codeRatio * 0.7);
+  axonMat.opacity = 0.74 + Math.min(0.16, repoNeuralProfile.interfaceRatio * 0.9);
 }
 
 async function loadRepoGraphFallback() {
@@ -565,22 +522,17 @@ function animate() {
   controls.update();
   dust.rotation.y = time * 0.02;
   dust.rotation.x = Math.sin(time * 0.01) * 0.05;
-  networkGroup.rotation.y += dt * (EMBED ? 0.07 : 0.035);
-  repoGraphGroup.rotation.y += dt * (EMBED ? 0.055 : 0.028);
-  if (repoGraphPulse > 0) {
-    repoGraphPulse = Math.max(0, repoGraphPulse - dt * 1.8);
-    repoGraphGroup.scale.setScalar(1 + Math.sin(repoGraphPulse * Math.PI) * 0.12);
-  } else {
-    repoGraphGroup.scale.lerp(new THREE.Vector3(1, 1, 1), 0.08);
-  }
+  networkGroup.rotation.y += dt * (EMBED ? 0.07 : 0.035) * repoNeuralProfile.rotationBias;
+  const repoPulse = repoNeuralProfile.impulse > 0 ? Math.sin(repoNeuralProfile.impulse * Math.PI) : 0;
+  repoNeuralProfile.impulse = Math.max(0, repoNeuralProfile.impulse - dt * 1.45);
   if (STATE.isAnimating) {
     let speed = 1;
     if (STATE.phase === 2) speed = 2.4;
     if (STATE.phase === 4) speed = 0.55;
     STATE.progress += dt * speed;
     const pulse = Math.sin(Math.min(1, STATE.progress) * Math.PI);
-    networkGroup.scale.setScalar(1 + pulse * 0.04);
-    bloomPass.strength = (EMBED ? 1.15 : 1.8) + pulse * 1.1;
+    networkGroup.scale.setScalar(1 + pulse * 0.04 + repoPulse * 0.018);
+    bloomPass.strength = (EMBED ? 1.15 : 1.8) + pulse * 1.1 + repoPulse * 0.35;
     if (STATE.progress >= 1) {
       STATE.progress = 0;
       STATE.phase += 1;
@@ -592,7 +544,8 @@ function animate() {
       }
     }
   } else {
-    bloomPass.strength += ((EMBED ? 1.15 : 1.8) - bloomPass.strength) * 0.05;
+    networkGroup.scale.lerp(new THREE.Vector3(1 + repoPulse * 0.025, 1 + repoPulse * 0.025, 1 + repoPulse * 0.025), 0.14);
+    bloomPass.strength += (((EMBED ? 1.15 : 1.8) * repoNeuralProfile.synapticGlow + repoPulse * 0.45) - bloomPass.strength) * 0.05;
   }
   updateUI(time);
   composer.render();

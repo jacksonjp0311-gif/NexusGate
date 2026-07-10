@@ -55,10 +55,11 @@ class TestNeuralActivityIntegration(unittest.TestCase):
         self.assertIn("nexus-neural-embed-aa", text)
         self.assertIn("Neural Cathedral", text)
         self.assertIn("three", text)
-        self.assertIn("repoGraphGroup", text)
+        self.assertIn("repoNeuralProfile", text)
         self.assertIn("applyRepoNeuralGraph", text)
         self.assertIn("NEXUS_NEURAL_REPO_GRAPH", text)
         self.assertIn("NEXUS_NEURAL_TRIGGER_IMPULSE", text)
+        self.assertNotIn("repoGraphGroup", text)
         trigger_section = text.split("function triggerImpulse", 1)[1].split("window.addEventListener(\"pointerdown\"", 1)[0]
         self.assertNotIn("if (EMBED) return;", trigger_section)
 
