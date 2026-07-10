@@ -67,6 +67,8 @@ class TestNeuralActivityIntegration(unittest.TestCase):
         self.assertIn("prunedCount", text)
         self.assertIn("maxPrimary", text)
         self.assertIn("maxAxonPrimary", text)
+        self.assertIn("repoPulseHaloGeometry", text)
+        self.assertIn("repoRenderableMeshes", text)
         self.assertIn("data-neural-refresh", text)
         self.assertIn("repo_neural_graph_latest.json", text)
         self.assertIn("NEXUS_NEURAL_REFRESH", text)

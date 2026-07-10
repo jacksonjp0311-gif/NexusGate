@@ -444,7 +444,9 @@ let repoGraphCache = null;
 let repoNeuralModel = null;
 let repoSignalCurves = [];
 let repoPulseEvents = [];
-const repoPulseGeometry = new THREE.SphereGeometry(EMBED ? 0.34 : 0.56, 14, 14);
+let repoRenderableMeshes = [];
+const repoPulseGeometry = new THREE.SphereGeometry(EMBED ? 0.24 : 0.42, 14, 14);
+const repoPulseHaloGeometry = new THREE.SphereGeometry(EMBED ? 0.58 : 0.94, 16, 16);
 
 function repoHash(value) {
   let h = 2166136261;
@@ -559,14 +561,38 @@ function clearRepoBranches() {
   while (repoBranchGroup.children.length) {
     const child = repoBranchGroup.children.pop();
     if (child.geometry) child.geometry.dispose();
+    if (child.material && child.material !== repoBranchMat && child.material !== repoAxonMat) child.material.dispose();
   }
   while (repoSignalGroup.children.length) {
     const child = repoSignalGroup.children.pop();
-    if (child.geometry && child.geometry !== repoPulseGeometry) child.geometry.dispose();
+    if (child.geometry && child.geometry !== repoPulseGeometry && child.geometry !== repoPulseHaloGeometry) child.geometry.dispose();
     if (child.material) child.material.dispose();
   }
   repoSignalCurves = [];
   repoPulseEvents = [];
+  repoRenderableMeshes = [];
+}
+
+function makeRepoMaterial(isAxon, opacity, depth) {
+  const base = isAxon ? repoAxonMat : repoBranchMat;
+  const material = base.clone();
+  material.opacity = opacity;
+  material.depthWrite = false;
+  material.userData.baseOpacity = opacity;
+  material.userData.depth = depth || 0;
+  return material;
+}
+
+function addRepoMesh(mesh, meta) {
+  mesh.userData.repoMeta = {
+    phase: seededUnit(meta.path || meta.kind || "repo", "breath") * Math.PI * 2,
+    sway: 0.004 + seededUnit(meta.path || meta.kind || "repo", "sway") * 0.014,
+    baseScale: 1,
+    kind: meta.kind || "dendrite"
+  };
+  repoRenderableMeshes.push(mesh);
+  repoBranchGroup.add(mesh);
+  return mesh;
 }
 
 function repoCurveFromRoot(root, salt, branchIndex, startPoint, baseDir, lengthScale) {
@@ -600,8 +626,11 @@ function renderRepoNeuralNetwork(model) {
   if (!model || !Array.isArray(model.roots)) return;
   model.roots.forEach((root) => {
     const mainCurve = repoCurveFromRoot(root, root.rootName, 0);
-    const mainRadius = EMBED ? (root.hasAxon ? 0.22 : 0.16) : (root.hasAxon ? 0.38 : 0.26);
-    repoBranchGroup.add(new THREE.Mesh(new THREE.TubeGeometry(mainCurve, 42, mainRadius, 7, false), root.hasAxon ? repoAxonMat : repoBranchMat));
+    const mainRadius = EMBED ? (root.hasAxon ? 0.16 : 0.13) : (root.hasAxon ? 0.28 : 0.21);
+    addRepoMesh(
+      new THREE.Mesh(new THREE.TubeGeometry(mainCurve, 48, mainRadius, 7, false), makeRepoMaterial(root.hasAxon, root.hasAxon ? 0.52 : 0.58, 0)),
+      { kind: root.hasAxon ? "axon" : "dendrite", path: root.rootName }
+    );
     repoSignalCurves.push({ curve: mainCurve, kind: root.hasAxon ? "axon" : "dendrite", path: root.rootName, hot: false });
     root.fractalChildren.forEach((child, idx) => {
       const anchorT = 0.36 + (idx / Math.max(root.fractalChildren.length, 1)) * 0.42;
@@ -614,7 +643,10 @@ function renderRepoNeuralNetwork(model) {
       const childDir = root.dir.clone().multiplyScalar(0.62).add(side.multiplyScalar(0.82)).normalize();
       const childCurve = repoCurveFromRoot(root, `${root.rootName}/${child.subName}`, idx + 1, anchor, childDir, 0.32 + seededUnit(child.subName, "len") * 0.2);
       const childIsAxon = child.hasAxon || root.hasAxon;
-      repoBranchGroup.add(new THREE.Mesh(new THREE.TubeGeometry(childCurve, 24, EMBED ? 0.07 : 0.1, 5, false), childIsAxon ? repoAxonMat : repoBranchMat));
+      addRepoMesh(
+        new THREE.Mesh(new THREE.TubeGeometry(childCurve, 28, EMBED ? 0.045 : 0.074, 5, false), makeRepoMaterial(childIsAxon, childIsAxon ? 0.34 : 0.42, 1)),
+        { kind: childIsAxon ? "axon" : "dendrite", path: `${root.rootName}/${child.subName}` }
+      );
       repoSignalCurves.push({ curve: childCurve, kind: childIsAxon ? "axon" : "dendrite", path: `${root.rootName}/${child.subName}`, hot: child.modified });
       child.terminals.forEach((node, terminalIndex) => {
         const terminalAnchor = childCurve.getPoint(0.58 + terminalIndex * 0.12);
@@ -625,13 +657,19 @@ function renderRepoNeuralNetwork(model) {
         ).multiplyScalar(0.95)).normalize();
         const terminalCurve = repoCurveFromRoot(root, `${node.path}:${terminalIndex}`, terminalIndex + 10, terminalAnchor, terminalDir, 0.16 + seededUnit(node.path, "flen") * 0.12);
         const isAxon = classifyRepoNode(node) === "axon";
-        repoBranchGroup.add(new THREE.Mesh(new THREE.TubeGeometry(terminalCurve, 16, EMBED ? 0.035 : 0.055, 4, false), isAxon ? repoAxonMat : repoBranchMat));
+        addRepoMesh(
+          new THREE.Mesh(new THREE.TubeGeometry(terminalCurve, 18, EMBED ? 0.018 : 0.032, 4, false), makeRepoMaterial(isAxon, isAxon ? 0.22 : 0.28, 2)),
+          { kind: isAxon ? "axon" : "dendrite", path: node.path }
+        );
         repoSignalCurves.push({ curve: terminalCurve, kind: isAxon ? "axon" : "dendrite", path: node.path, hot: node.modified });
       });
       const end = childCurve.getPoint(1);
-      const syn = new THREE.Mesh(new THREE.BoxGeometry(EMBED ? 0.24 : 0.34, EMBED ? 0.24 : 0.34, EMBED ? 0.24 : 0.34), childIsAxon ? repoAxonMat : repoBranchMat);
+      const syn = new THREE.Mesh(
+        new THREE.BoxGeometry(EMBED ? 0.18 : 0.26, EMBED ? 0.18 : 0.26, EMBED ? 0.18 : 0.26),
+        makeRepoMaterial(childIsAxon, childIsAxon ? 0.44 : 0.52, 2)
+      );
       syn.position.copy(end);
-      repoBranchGroup.add(syn);
+      addRepoMesh(syn, { kind: "synapse", path: `${root.rootName}/${child.subName}` });
     });
   });
 }
@@ -681,13 +719,29 @@ function triggerRepoPulse(reason) {
     .slice(0, EMBED ? 10 : 18);
   const curves = selected.length ? selected : repoSignalCurves.slice(0, EMBED ? 10 : 18);
   curves.forEach((entry, index) => {
-    const material = repoPulseMat.clone();
-    material.opacity = 1;
-    const dot = new THREE.Mesh(repoPulseGeometry, material);
-    dot.userData.reason = reason || "manual";
-    dot.position.copy(entry.curve.getPoint(0));
-    repoSignalGroup.add(dot);
-    repoPulseEvents.push({ mesh: dot, curve: entry.curve, offset: index * 0.055, speed: 0.92 + (index % 5) * 0.11, age: 0, life: 1.05 + (index % 4) * 0.11 });
+    const headMaterial = repoPulseMat.clone();
+    const haloMaterial = repoPulseMat.clone();
+    headMaterial.depthTest = false;
+    haloMaterial.depthTest = false;
+    haloMaterial.opacity = 0.26;
+    const head = new THREE.Mesh(repoPulseGeometry, headMaterial);
+    const halo = new THREE.Mesh(repoPulseHaloGeometry, haloMaterial);
+    const start = entry.curve.getPoint(0);
+    head.position.copy(start);
+    halo.position.copy(start);
+    repoSignalGroup.add(halo);
+    repoSignalGroup.add(head);
+    repoPulseEvents.push({
+      head,
+      halo,
+      curve: entry.curve,
+      offset: index * 0.075,
+      speed: 0.62 + (index % 5) * 0.07,
+      age: 0,
+      life: 1.85 + (index % 4) * 0.18,
+      kind: entry.kind,
+      reason: reason || "manual"
+    });
   });
   repoNeuralProfile.impulse = 1;
 }
@@ -758,9 +812,20 @@ function animate() {
   controls.update();
   dust.rotation.y = time * 0.02;
   dust.rotation.x = Math.sin(time * 0.01) * 0.05;
-  networkGroup.rotation.y += dt * (EMBED ? 0.07 : 0.035) * repoNeuralProfile.rotationBias;
+  networkGroup.rotation.y += dt * (EMBED ? 0.04 : 0.025) * repoNeuralProfile.rotationBias;
+  repoBranchGroup.rotation.z = Math.sin(time * 0.19) * 0.018;
+  repoBranchGroup.rotation.x = Math.cos(time * 0.13) * 0.012;
   const repoPulse = repoNeuralProfile.impulse > 0 ? Math.sin(repoNeuralProfile.impulse * Math.PI) : 0;
   repoNeuralProfile.impulse = Math.max(0, repoNeuralProfile.impulse - dt * 1.45);
+  repoRenderableMeshes.forEach((mesh) => {
+    const meta = mesh.userData.repoMeta || {};
+    const breath = Math.sin(time * 1.15 + (meta.phase || 0)) * (meta.sway || 0.006);
+    mesh.scale.setScalar((meta.baseScale || 1) + breath + repoPulse * 0.01);
+    if (mesh.material && mesh.material.userData) {
+      const depthFade = 1 - Math.min(0.22, (mesh.material.userData.depth || 0) * 0.08);
+      mesh.material.opacity += (((mesh.material.userData.baseOpacity || 0.4) * depthFade + repoPulse * 0.08) - mesh.material.opacity) * 0.08;
+    }
+  });
   if (STATE.isAnimating) {
     let speed = 1;
     if (STATE.phase === 2) speed = 2.4;
@@ -788,12 +853,19 @@ function animate() {
     const t = pulse.age - pulse.offset;
     if (t < 0) return true;
     const normalized = Math.min(1, t / pulse.life);
-    pulse.mesh.position.copy(pulse.curve.getPoint(normalized));
-    pulse.mesh.scale.setScalar(0.7 + Math.sin(normalized * Math.PI) * 2.2);
-    pulse.mesh.material.opacity = Math.max(0, 0.95 * (1 - normalized));
+    const pos = pulse.curve.getPoint(normalized);
+    pulse.head.position.copy(pos);
+    pulse.halo.position.copy(pos);
+    const swell = Math.sin(normalized * Math.PI);
+    pulse.head.scale.setScalar(0.64 + swell * 1.25);
+    pulse.halo.scale.setScalar(0.5 + swell * 2.9);
+    pulse.head.material.opacity = Math.max(0, 1.0 * (1 - normalized * 0.78));
+    pulse.halo.material.opacity = Math.max(0, 0.28 * (1 - normalized));
     if (normalized >= 1) {
-      repoSignalGroup.remove(pulse.mesh);
-      pulse.mesh.material.dispose();
+      repoSignalGroup.remove(pulse.head);
+      repoSignalGroup.remove(pulse.halo);
+      pulse.head.material.dispose();
+      pulse.halo.material.dispose();
       return false;
     }
     return true;

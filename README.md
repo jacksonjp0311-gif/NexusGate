@@ -35,6 +35,9 @@ bash scripts/nexus.sh toolbelt-next "<intent>"
 ## Human Director Box
 NEXUS GATE current line: v1.1.3 Meta-Orchestrator Gate. Toolbelt, Preflight, Wound Compression, and Phi Gate Supervisor now compile into one recommendation-only route panel for Codex/chat/Electron HUD rehydration; authority remains human-bound.
 
+## Priority Discovery: Predictive Gate Timing
+Predictive Gate Timing / Runtime Pressure Model is a priority. Timeout history is not intelligence by itself, but recorded lane duration, timeout budget, pass/fail state, artifact churn, and repo size can become bounded expectation: baseline -> drift -> anomaly -> recommended next timeout. The model may predict runtime pressure and recommend gate budgets; it may not bypass gates, hide failures, or self-authorize mutation.
+
 ## AI Toolbelt Console
 Use the AI Toolbelt Console before choosing a patch path.
 
