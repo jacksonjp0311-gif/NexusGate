@@ -60,8 +60,44 @@ class TestGitNexusHudAssets(unittest.TestCase):
             "MODE CORE",
             "labelAllowed",
             "selected-node focus path",
+            "buildDiagnostics",
+            "Centrality",
+            "Blast Radius",
+            "Dead Islands",
+            "Bridge Risk",
+            "Change Priority",
+            "countVisibleForMode",
+            "activeCategories",
+            "data-category",
+            "data-category-files",
         ]:
             self.assertIn(token, js)
+
+    def test_mode_all_and_category_filters_are_bounded(self):
+        js = (ROOT / "electron" / "renderer" / "nexus_gitnexus_local_hud.v0.5.3.js").read_text(
+            encoding="utf-8", errors="ignore"
+        )
+        self.assertIn('setFilterMode("all"', js)
+        self.assertIn("if (!nodes.length)", js)
+        self.assertIn("state.search = \"\"", js)
+        self.assertIn("state.activeCategories[category]", js)
+        self.assertIn("visibleFileNodes", js)
+
+    def test_gitnexus_layout_compacts_search_and_right_top_files(self):
+        css = (ROOT / "electron" / "renderer" / "nexus_gitnexus_local_hud.v0.5.3.css").read_text(
+            encoding="utf-8", errors="ignore"
+        )
+        for token in [
+            "grid-template-columns: 270px minmax(320px, 0.72fr) minmax(520px, 1fr)",
+            ".gnx-local-controls",
+            ".gnx-category-filter",
+            ".gnx-category-files",
+            ".gnx-geometry-summary",
+            ".gnx-diagnostics",
+            "[data-top-files-right]",
+            "max-height: 150px",
+        ]:
+            self.assertIn(token, css)
 
     def test_geometry_css_exists(self):
         css = (ROOT / "electron" / "renderer" / "nexus_gitnexus_local_hud.v0.5.3.css").read_text(

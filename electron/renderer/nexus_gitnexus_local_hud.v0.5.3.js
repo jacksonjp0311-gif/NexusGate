@@ -23,6 +23,7 @@
     showEdges: true,
     showLabels: true,
     coreOnly: false,
+    activeCategories: { core: true, ui: true, test: true, state: true, doc: true },
     miniRot: 0,
     camera: { x: 0, y: 0, zoom: 1, rot: 0 },
     target: { x: 0, y: 0, zoom: 1, rot: 0 },
@@ -38,6 +39,7 @@
     violet: "#a855f7",
     blue: "#5b7cff",
     red: "#ff5f7f",
+    changed: "#ffb6c6",
     dim: "rgba(85,247,255,0.18)",
     text: "#dffcff",
     smoke: "rgba(160, 190, 200, 0.72)"
@@ -58,6 +60,17 @@
   };
 
   const CORE_TYPES = new Set(["core", "py", "js", "test"]);
+  const CATEGORY_DEFS = [
+    { id: "core", label: "Python/Core", kinds: ["core", "py"], color: COLORS.cyan },
+    { id: "ui", label: "Electron/UI", kinds: ["js", "ts", "tsx", "jsx"], color: COLORS.amber },
+    { id: "test", label: "Tests", kinds: ["test"], color: COLORS.violet },
+    { id: "state", label: "State/Reports", kinds: ["state", "report"], color: COLORS.green },
+    { id: "doc", label: "Docs", kinds: ["doc"], color: COLORS.blue }
+  ];
+  const KIND_CATEGORY = new Map(CATEGORY_DEFS.flatMap((category) => category.kinds.map((kind) => [kind, category.id])));
+  CATEGORY_DEFS.forEach((category) => {
+    if (!Object.prototype.hasOwnProperty.call(state.activeCategories, category.id)) state.activeCategories[category.id] = true;
+  });
   const SPEED_PROFILES = {
     fast: { label: "FAST", fps: 60, physics: 1.0, ease: 0.18 },
     slow: { label: "SLOW", fps: 30, physics: 0.52, ease: 0.11 }
@@ -415,7 +428,11 @@
 
   function visibleNode(n) {
     if (!n) return false;
-        if (state.filterMode === "hot" && !n.hot) return false;
+    if (!n.folder) {
+      const category = KIND_CATEGORY.get(n.kind) || "other";
+      if (Object.prototype.hasOwnProperty.call(state.activeCategories, category) && state.activeCategories[category] === false) return false;
+    }
+    if (state.filterMode === "hot" && !n.hot) return false;
     if (state.filterMode === "changed" && !n.changed) return false;
     if (state.filterMode === "core" && !CORE_TYPES.has(n.kind)) return false;
     if (state.coreOnly && !CORE_TYPES.has(n.kind)) return false;
@@ -424,10 +441,40 @@
     return true;
   }
 
+  function visibleNodes(graph = state.graph) {
+    return (graph?.nodes || []).filter(visibleNode);
+  }
+
+  function visibleFileNodes(graph = state.graph) {
+    return visibleNodes(graph).filter((n) => !n.folder && n.id !== "nexus-gate");
+  }
+
+  function countVisibleForMode(mode) {
+    const previous = state.filterMode;
+    const previousCore = state.coreOnly;
+    state.filterMode = mode;
+    state.coreOnly = mode === "core";
+    const count = visibleFileNodes().length;
+    state.filterMode = previous;
+    state.coreOnly = previousCore;
+    return count;
+  }
+
+  function setFilterMode(mode, button) {
+    const nextMode = FILTER_LABELS[mode] ? mode : "all";
+    state.filterMode = countVisibleForMode(nextMode) > 0 ? nextMode : "all";
+    state.coreOnly = state.filterMode === "core";
+    if (button) button.textContent = FILTER_LABELS[state.filterMode];
+    updateTopFiles();
+    updateAnalyzerPanel();
+    fitFull();
+  }
+
   // selected-node focus path highlighting + geometry analyzer
   function analyzeGeometry(graph) {
-    const nodes = (graph?.nodes || []).filter((n) => !n.folder);
-    const edges = graph?.edges || [];
+    const nodes = visibleFileNodes(graph);
+    const visibleIds = new Set(visibleNodes(graph).map((n) => n.id));
+    const edges = (graph?.edges || []).filter((edge) => visibleIds.has(edge.a) && visibleIds.has(edge.b));
     const count = Math.max(1, nodes.length);
     const edgeCount = edges.length;
     const degrees = nodes.map((n) => n.degree || 0);
@@ -494,7 +541,61 @@
     if (pattern === "change-pressure bloom") recommendation = "Changed files are distributed. Use MODE CHANGED before commit.";
     if (pattern === "single-domain dominance") recommendation = "One category dominates. Toggle labels and MODE HOT/CORE to reduce bias.";
 
-    return { pattern, recommendation, nodeCount: count, edgeCount, density, hubs, changed, hot, radius, anisotropy, bridgePressure, balance };
+    const diagnostics = buildDiagnostics(graph, nodes, edges);
+    const summary = buildGeometrySummary({ pattern, nodeCount: count, edgeCount, density, hubs, changed, hot, radius, anisotropy, bridgePressure, balance }, diagnostics);
+
+    return { pattern, recommendation, summary, diagnostics, nodeCount: count, edgeCount, density, hubs, changed, hot, radius, anisotropy, bridgePressure, balance };
+  }
+
+  function scoreNode(n) {
+    return Math.round((n.degree || 0) * 1.8 + (n.weight || 1) + (n.hot ? 8 : 0) + (n.changed ? 10 : 0));
+  }
+
+  function buildDiagnostics(graph, nodes, edges) {
+    const visibleIds = new Set(nodes.map((n) => n.id));
+    const adjacency = new Map(nodes.map((n) => [n.id, new Set()]));
+    const inbound = new Map(nodes.map((n) => [n.id, 0]));
+    const outbound = new Map(nodes.map((n) => [n.id, 0]));
+    edges.forEach((edge) => {
+      if (!visibleIds.has(edge.a) || !visibleIds.has(edge.b)) return;
+      adjacency.get(edge.a)?.add(edge.b);
+      adjacency.get(edge.b)?.add(edge.a);
+      outbound.set(edge.a, (outbound.get(edge.a) || 0) + 1);
+      inbound.set(edge.b, (inbound.get(edge.b) || 0) + 1);
+    });
+
+    const centrality = nodes
+      .map((n) => ({ node: n, score: scoreNode(n), inbound: inbound.get(n.id) || 0, outbound: outbound.get(n.id) || 0 }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 20);
+    const deadIslands = nodes
+      .filter((n) => (inbound.get(n.id) || 0) + (outbound.get(n.id) || 0) <= 1)
+      .sort((a, b) => scoreNode(a) - scoreNode(b))
+      .slice(0, 12)
+      .map((node) => ({ node, score: scoreNode(node) }));
+    const bridgeRisk = centrality
+      .filter((item) => item.inbound > 0 && item.outbound > 0)
+      .map((item) => ({ ...item, score: item.score + Math.min(item.inbound, item.outbound) * 3 }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 12);
+    const changePriority = nodes
+      .filter((n) => n.changed || n.hot || (n.degree || 0) >= 5)
+      .map((node) => ({ node, score: scoreNode(node) + (node.changed ? 20 : 0) }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 12);
+    const blastRadius = (state.selected && graph?.byId?.get(state.selected))
+      ? [...(adjacency.get(state.selected) || [])].map((id) => graph.byId.get(id)).filter(Boolean).slice(0, 12)
+      : centrality.slice(0, 8).map((item) => item.node);
+
+    return { centrality, deadIslands, bridgeRisk, changePriority, blastRadius };
+  }
+
+  function buildGeometrySummary(a, diagnostics) {
+    const lead = `${a.nodeCount} visible files are forming a ${a.pattern} with ${a.hubs} load-bearing hubs and ${Math.round(a.bridgePressure * 100)}% cross-domain bridge pressure.`;
+    const central = diagnostics.centrality[0]?.node?.path || "no central file";
+    const change = diagnostics.changePriority[0]?.node?.path || "no changed or hot file";
+    const islandCount = diagnostics.deadIslands.length;
+    return `${lead} Highest centrality: ${central}. Highest patch priority: ${change}. Dead-island candidates: ${islandCount}. Use category toggles to isolate domains before mutation.`;
   }
 
   function updateAnalyzerPanel() {
@@ -510,7 +611,41 @@
     set("balance", Math.round(a.balance * 100) + "%");
     set("anisotropy", a.anisotropy.toFixed(2));
     set("recommendation", a.recommendation);
+    set("summary", a.summary || a.recommendation);
+    updateDiagnosticPanel(a.diagnostics);
     qa("[data-mini-caption]").forEach((n) => { n.textContent = a.pattern.toUpperCase().slice(0, 28); });
+  }
+
+  function diagnosticRow(item, i) {
+    const node = item?.node || item;
+    if (!node) return "";
+    const score = item?.score ?? scoreNode(node);
+    return `<li data-node-id="${encodeURIComponent(node.id)}"><span>${String(i + 1).padStart(2, "0")}</span><b>${safeText(node.path).slice(0, 48)}</b><em>${Math.round(score)}</em></li>`;
+  }
+
+  function updateDiagnosticPanel(diagnostics) {
+    const panel = q("[data-diagnostics]");
+    if (!panel || !diagnostics) return;
+    const sections = [
+      ["Centrality", diagnostics.centrality, "top 20 load-bearing files"],
+      ["Blast Radius", diagnostics.blastRadius, "selected or central neighbors"],
+      ["Dead Islands", diagnostics.deadIslands, "low-link refactor candidates"],
+      ["Bridge Risk", diagnostics.bridgeRisk, "files linking clusters"],
+      ["Change Priority", diagnostics.changePriority, "patch-risk ranking"]
+    ];
+    panel.innerHTML = sections.map(([title, rows, note]) => `
+      <section>
+        <h4>${title}<span>${note}</span></h4>
+        <ol>${(rows || []).slice(0, title === "Centrality" ? 20 : 10).map(diagnosticRow).join("") || "<li><span>--</span><b>No evidence in current filter.</b><em>0</em></li>"}</ol>
+      </section>
+    `).join("");
+    qa("li[data-node-id]", panel).forEach((li) => {
+      li.addEventListener("click", () => {
+        const id = decodeURIComponent(li.getAttribute("data-node-id") || "");
+        const node = state.graph?.byId?.get(id);
+        if (node) focusNode(node, true);
+      });
+    });
   }
 
   function labelAllowed(box, placed) {
@@ -792,6 +927,7 @@
           </div>
         </div>
         <input class="gnx-local-search" type="search" placeholder="Search nodes, files, symbols... Ctrl+K" />
+        <div class="gnx-local-controls">
         <button class="gnx-local-btn" data-fit>FIT</button>
         <button class="gnx-local-btn" data-zoom-in>+</button>
         <button class="gnx-local-btn" data-zoom-out>-</button>
@@ -803,6 +939,7 @@
         <button class="gnx-local-btn is-on" data-speed>FAST</button>
         <button class="gnx-local-btn" data-refresh>REFRESH</button>
         <button class="gnx-local-btn gnx-local-close" data-close>CLOSE</button>
+        </div>
       </div>
       <main class="gnx-local-main">
         <aside class="gnx-local-left">
@@ -813,13 +950,14 @@
             <div><span>EDGES</span><b data-gnx-count="edges">--</b></div>
             <div><span>SOURCE</span><b data-gnx-source>local</b></div>
           </div>
-          <div class="gnx-local-legend">
-            <span><i style="background:#55f7ff"></i>Python/Core</span>
-            <span><i style="background:#ffaa00"></i>Electron/UI</span>
-            <span><i style="background:#a855f7"></i>Tests</span>
-            <span><i style="background:#7dff4d"></i>State/Reports</span>
-            <span><i style="background:#5b7cff"></i>Docs</span>
+          <div class="gnx-local-legend" data-category-filters>
+            ${CATEGORY_DEFS.map((category) => `
+              <button type="button" class="gnx-category-filter is-on" data-category="${category.id}">
+                <i style="background:${category.color}"></i><span>${category.label}</span><b data-category-count="${category.id}">--</b>
+              </button>
+            `).join("")}
           </div>
+          <div class="gnx-category-files" data-category-files></div>
           <ol class="gnx-local-top-files" data-top-files></ol>
         </aside>
         <section class="gnx-local-canvas-shell">
@@ -831,8 +969,11 @@
           <h3>GEOMETRY ANALYZER</h3>
           <div class="gnx-geometry-panel" data-geometry-panel><div><span>PATTERN</span><b data-geo="pattern">--</b></div><div><span>DENSITY</span><b data-geo="density">--</b></div><div><span>HUBS</span><b data-geo="hubs">--</b></div><div><span>BRIDGE</span><b data-geo="bridge">--</b></div><div><span>BALANCE</span><b data-geo="balance">--</b></div><div><span>ANISOTROPY</span><b data-geo="anisotropy">--</b></div></div>
           <div class="gnx-local-recommend" data-geo="recommendation">Reading local geometry.</div>
+          <div class="gnx-geometry-summary" data-geo="summary">Waiting for geometry summary.</div>
           <h3>TOP FILES</h3>
           <ol class="gnx-local-top-files" data-top-files-right></ol>
+          <h3>DIAGNOSTIC REPORTS</h3>
+          <div class="gnx-diagnostics" data-diagnostics></div>
           <h3>SELECTED NODE</h3>
           <div class="gnx-local-selected" data-selected>No node selected.</div>
         </aside>
@@ -865,10 +1006,32 @@
     });
     q("[data-filter-mode]", hud).addEventListener("click", (e) => {
       const order = ["all", "hot", "changed", "core"];
-      state.filterMode = order[(order.indexOf(state.filterMode) + 1) % order.length];
-      state.coreOnly = state.filterMode === "core";
-      e.currentTarget.textContent = FILTER_LABELS[state.filterMode];
-      fitFull();
+      const start = order.indexOf(state.filterMode);
+      for (let offset = 1; offset <= order.length; offset++) {
+        const candidate = order[(start + offset + order.length) % order.length];
+        if (candidate === "all" || countVisibleForMode(candidate) > 0) {
+          setFilterMode(candidate, e.currentTarget);
+          return;
+        }
+      }
+      setFilterMode("all", e.currentTarget);
+    });
+    qa("[data-category]", hud).forEach((button) => {
+      button.addEventListener("click", () => {
+        const category = button.getAttribute("data-category");
+        if (!category) return;
+        const currentlyOn = state.activeCategories[category] !== false;
+        const onCount = Object.values(state.activeCategories).filter(Boolean).length;
+        if (currentlyOn && onCount <= 1) return;
+        state.activeCategories[category] = !currentlyOn;
+        button.classList.toggle("is-on", state.activeCategories[category] !== false);
+        if (countVisibleForMode(state.filterMode) === 0) setFilterMode("all", q("[data-filter-mode]", hud));
+        updateCategoryPanel();
+        updateTopFiles();
+        state.analyzer = analyzeGeometry(state.graph);
+        updateAnalyzerPanel();
+        fitFull();
+      });
     });
     q("[data-layout]", hud).addEventListener("click", (e) => {
       state.layoutMode = state.layoutMode === "force" ? "orbit" : state.layoutMode === "orbit" ? "circle" : "force";
@@ -957,8 +1120,7 @@
   function updateTopFiles() {
     const graph = state.graph;
     if (!graph) return;
-    const files = graph.nodes
-      .filter((n) => !n.id.startsWith("folder:") && n.id !== "nexus-gate")
+    const files = visibleFileNodes(graph)
       .sort((a, b) => (b.degree + b.weight) - (a.degree + a.weight))
       .slice(0, 28);
 
@@ -978,6 +1140,41 @@
     }
     fill("[data-top-files]");
     fill("[data-top-files-right]");
+    updateCategoryPanel();
+  }
+
+  function updateCategoryPanel() {
+    const graph = state.graph;
+    if (!graph) return;
+    const allFiles = (graph.nodes || []).filter((n) => !n.folder && n.id !== "nexus-gate");
+    CATEGORY_DEFS.forEach((category) => {
+      const count = allFiles.filter((n) => KIND_CATEGORY.get(n.kind) === category.id).length;
+      qa(`[data-category-count='${category.id}']`).forEach((node) => { node.textContent = String(count); });
+      qa(`[data-category='${category.id}']`).forEach((button) => {
+        button.classList.toggle("is-on", state.activeCategories[category.id] !== false);
+      });
+    });
+    const panel = q("[data-category-files]");
+    if (!panel) return;
+    panel.innerHTML = CATEGORY_DEFS.map((category) => {
+      const files = allFiles
+        .filter((n) => KIND_CATEGORY.get(n.kind) === category.id)
+        .sort((a, b) => scoreNode(b) - scoreNode(a))
+        .slice(0, 18);
+      return `
+        <section data-category-file-section="${category.id}" class="${state.activeCategories[category.id] === false ? "is-off" : ""}">
+          <h4><i style="background:${category.color}"></i>${category.label}<span>${files.length}</span></h4>
+          <ol>${files.map((node, i) => diagnosticRow({ node, score: scoreNode(node) }, i)).join("")}</ol>
+        </section>
+      `;
+    }).join("");
+    qa("li[data-node-id]", panel).forEach((li) => {
+      li.addEventListener("click", () => {
+        const id = decodeURIComponent(li.getAttribute("data-node-id") || "");
+        const node = state.graph?.byId?.get(id);
+        if (node) focusNode(node, true);
+      });
+    });
   }
 
   function fitFull() {
@@ -988,12 +1185,32 @@
     if (!fit) return;
 
     let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    graph.nodes.filter(visibleNode).forEach((n) => {
+    const nodes = visibleNodes(graph);
+    if (!nodes.length) {
+      state.search = "";
+      const search = q(".gnx-local-search");
+      if (search) search.value = "";
+      state.filterMode = "all";
+      state.coreOnly = false;
+      const filterButton = q("[data-filter-mode]");
+      if (filterButton) filterButton.textContent = FILTER_LABELS.all;
+      graph.nodes.forEach((n) => {
+        minX = Math.min(minX, n.x);
+        maxX = Math.max(maxX, n.x);
+        minY = Math.min(minY, n.y);
+        maxY = Math.max(maxY, n.y);
+      });
+    } else {
+      nodes.forEach((n) => {
       minX = Math.min(minX, n.x);
       maxX = Math.max(maxX, n.x);
       minY = Math.min(minY, n.y);
       maxY = Math.max(maxY, n.y);
-    });
+      });
+    }
+    if (!Number.isFinite(minX) || !Number.isFinite(maxX) || !Number.isFinite(minY) || !Number.isFinite(maxY)) {
+      minX = -220; maxX = 220; minY = -180; maxY = 180;
+    }
     const bw = Math.max(1, maxX - minX);
     const bh = Math.max(1, maxY - minY);
     state.target.zoom = clamp(Math.min(fit.w / bw, fit.h / bh) * 0.78, 0.08, 4);
@@ -1052,12 +1269,16 @@
       const status = q("[data-status]");
       if (sel) sel.textContent = text;
       if (status) status.textContent = "Selected: " + text;
+      state.analyzer = analyzeGeometry(state.graph);
+      updateAnalyzerPanel();
     } else {
       state.selected = null;
       const sel = q("[data-selected]");
       const status = q("[data-status]");
       if (sel) sel.textContent = "No node selected.";
       if (status) status.textContent = "No node selected.";
+      state.analyzer = analyzeGeometry(state.graph);
+      updateAnalyzerPanel();
     }
     return node;
   }
@@ -1072,6 +1293,8 @@
     const status = q("[data-status]");
     if (sel) sel.textContent = text;
     if (status) status.textContent = "Focused: " + text;
+    state.analyzer = analyzeGeometry(state.graph);
+    updateAnalyzerPanel();
   }
 
   function firstSearchHit() {
