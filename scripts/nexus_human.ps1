@@ -12,6 +12,16 @@ $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
 $env:PYTHONUTF8 = "1"
+$StepTimeoutSeconds = 180
+if ($env:NEXUS_HUMAN_STEP_TIMEOUT_SECONDS) {
+    try {
+        $parsedTimeout = [int]$env:NEXUS_HUMAN_STEP_TIMEOUT_SECONDS
+        if ($parsedTimeout -gt 0) { $StepTimeoutSeconds = $parsedTimeout }
+    }
+    catch {
+        $StepTimeoutSeconds = 180
+    }
+}
 
 $Stamp = Get-Date -Format "yyyyMMdd_HHmmss"
 $HumanDir = Join-Path $Root "reports\human_surface\$Stamp"
@@ -41,14 +51,49 @@ function Invoke-Step {
         [string]$Name,
         [string]$LogName,
         [scriptblock]$Block,
-        [switch]$AllowWarn
+        [switch]$AllowWarn,
+        [int]$TimeoutSeconds = $StepTimeoutSeconds
     )
-    Say "$Name..."
-    $old = $ErrorActionPreference
-    $ErrorActionPreference = "Continue"
-    $output = & $Block 2>&1
-    $code = $LASTEXITCODE
-    $ErrorActionPreference = $old
+    Say "$Name... timeout=${TimeoutSeconds}s"
+    $encodedBlock = $Block.ToString()
+    $job = Start-Job -ScriptBlock {
+        param([string]$JobRoot, [string]$JobBlock)
+        Set-Location $JobRoot
+        $env:PYTHONUTF8 = "1"
+        $ErrorActionPreference = "Continue"
+        $global:LASTEXITCODE = 0
+        try {
+            $script = [scriptblock]::Create($JobBlock)
+            & $script 2>&1
+            $code = if ($null -ne $LASTEXITCODE) { [int]$LASTEXITCODE } else { 0 }
+        }
+        catch {
+            Write-Output $_
+            $code = 1
+        }
+        Write-Output ("[[NEXUS_EXIT_CODE:{0}]]" -f $code)
+    } -ArgumentList $Root, $encodedBlock
+
+    $completed = Wait-Job -Job $job -Timeout $TimeoutSeconds
+    if (-not $completed) {
+        Stop-Job -Job $job -Force | Out-Null
+        $output = @("NEXUS step timeout after ${TimeoutSeconds}s.")
+        $code = 124
+        Remove-Job -Job $job -Force | Out-Null
+    }
+    else {
+        $rawOutput = @(Receive-Job -Job $job 2>&1)
+        Remove-Job -Job $job -Force | Out-Null
+        $marker = $rawOutput | Where-Object { [string]$_ -match '^\[\[NEXUS_EXIT_CODE:\d+\]\]$' } | Select-Object -Last 1
+        if ($marker) {
+            $code = [int](([string]$marker) -replace '^\[\[NEXUS_EXIT_CODE:(\d+)\]\]$', '$1')
+            $output = @($rawOutput | Where-Object { [string]$_ -notmatch '^\[\[NEXUS_EXIT_CODE:\d+\]\]$' })
+        }
+        else {
+            $code = 1
+            $output = @($rawOutput + "NEXUS step did not emit an exit-code marker.")
+        }
+    }
     $logPath = Write-Log -Name $LogName -Lines ($output | ForEach-Object { [string]$_ })
 
     if ($code -ne 0 -and -not $AllowWarn) {

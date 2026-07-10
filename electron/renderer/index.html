@@ -17,6 +17,8 @@
     --nexus-gate-cyan: #55f7ff;
     --nexus-gate-blue: #1788ff;
     --nexus-gate-violet: #8d5cff;
+    --nexus-gate-bronze: #c9a66b;
+    --nexus-gate-copper: #7c4a24;
   }
 
   .brand-block h1 {
@@ -37,7 +39,7 @@
     z-index: 9990;
     top: 23px;
     left: 18px;
-    width: 390px;
+    width: 380px;
     height: 84px;
     pointer-events: none;
     isolation: isolate;
@@ -53,68 +55,89 @@
 
   #nexus-spgw-v010 .nexus-gate-logo-shell {
     position: absolute;
-    left: 4px;
-    top: -1px;
-    width: 80px;
-    height: 80px;
+    left: 6px;
+    top: 3px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     background:
-      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.18) 0 14%, transparent 15%),
-      conic-gradient(from 10deg, rgba(85,247,255,0.92), rgba(19,136,255,0.72), rgba(141,92,255,0.92), rgba(85,247,255,0.9));
+      radial-gradient(circle at 50% 50%, rgba(0,255,255,0.28) 0 12%, transparent 13%),
+      radial-gradient(circle at 50% 50%, rgba(0,0,0,0.92) 0 38%, rgba(5,20,36,0.98) 39% 62%, transparent 63%),
+      conic-gradient(from 12deg, var(--nexus-gate-bronze), #f4d39a, var(--nexus-gate-copper), #2b2b3d, var(--nexus-gate-bronze));
     box-shadow:
-      0 0 10px rgba(85,247,255,0.9),
-      0 0 26px rgba(19,136,255,0.72),
-      0 0 44px rgba(141,92,255,0.36);
+      inset 0 0 18px rgba(0,0,0,0.92),
+      0 0 10px rgba(201,166,107,0.82),
+      0 0 26px rgba(85,247,255,0.70),
+      0 0 42px rgba(19,136,255,0.38);
     animation: nexusGateFrameSpinV010 18s linear infinite;
   }
 
   #nexus-spgw-v010 .nexus-gate-logo-shell::before {
     content: "";
     position: absolute;
-    inset: -7px;
+    inset: -6px;
     border-radius: 50%;
     background:
       repeating-conic-gradient(from 2deg,
-        rgba(230, 252, 255, 0.98) 0deg 4deg,
-        rgba(57, 154, 255, 0.82) 4deg 9deg,
-        transparent 9deg 16deg);
-    -webkit-mask: radial-gradient(circle, transparent 0 41px, #000 42px 52px, transparent 53px);
-    mask: radial-gradient(circle, transparent 0 41px, #000 42px 52px, transparent 53px);
-    filter: drop-shadow(0 0 5px rgba(85,247,255,0.82));
+        rgba(244, 211, 154, 0.98) 0deg 4deg,
+        rgba(85,247,255,0.74) 4deg 7deg,
+        rgba(124,74,36,0.66) 7deg 11deg,
+        transparent 11deg 16deg);
+    -webkit-mask: radial-gradient(circle, transparent 0 37px, #000 38px 47px, transparent 48px);
+    mask: radial-gradient(circle, transparent 0 37px, #000 38px 47px, transparent 48px);
+    filter: drop-shadow(0 0 5px rgba(201,166,107,0.84));
     animation: nexusGateGearSpinV010 10s linear infinite;
   }
 
   #nexus-spgw-v010 .nexus-gate-logo-shell::after {
     content: "";
     position: absolute;
-    inset: 11px;
+    inset: 10px;
     border-radius: 50%;
     background:
       repeating-conic-gradient(from 0deg,
-        rgba(141,92,255,0.72) 0deg 6deg,
-        transparent 6deg 15deg,
-        rgba(85,247,255,0.68) 15deg 18deg,
+        rgba(201,166,107,0.72) 0deg 5deg,
+        transparent 5deg 13deg,
+        rgba(85,247,255,0.74) 13deg 16deg,
         transparent 18deg 30deg);
-    -webkit-mask: radial-gradient(circle, transparent 0 23px, #000 24px 31px, transparent 32px);
-    mask: radial-gradient(circle, transparent 0 23px, #000 24px 31px, transparent 32px);
+    -webkit-mask: radial-gradient(circle, transparent 0 20px, #000 21px 28px, transparent 29px);
+    mask: radial-gradient(circle, transparent 0 20px, #000 21px 28px, transparent 29px);
     opacity: 0.78;
     animation: nexusGateGearSpinV010 6.5s linear infinite reverse;
   }
 
   #nexus-spgw-v010 .nexus-gate-logo-svg {
     position: absolute;
-    inset: 7px;
-    width: 66px;
-    height: 66px;
+    inset: 6px;
+    width: 60px;
+    height: 60px;
     overflow: visible;
     border-radius: 50%;
     animation: nexusGateCounterHoldV010 18s linear infinite reverse;
   }
 
   #nexus-spgw-v010 .nexus-gate-disk {
-    fill: #020712;
-    stroke: rgba(85,247,255,0.42);
+    fill: #02050d;
+    stroke: rgba(201,166,107,0.64);
     stroke-width: 1.4;
+  }
+
+  #nexus-spgw-v010 .nexus-gate-bronze-ring {
+    fill: none;
+    stroke: url(#nexusGateBronzeGradV010);
+    stroke-width: 8.2;
+    filter: url(#nexusGateBronzeGlowV010);
+  }
+
+  #nexus-spgw-v010 .nexus-gate-rune-track {
+    fill: none;
+    stroke: rgba(137,255,255,0.86);
+    stroke-width: 3.1;
+    stroke-linecap: round;
+    stroke-dasharray: 2.4 7.2;
+    transform-origin: 80px 80px;
+    animation: nexusGateGearSpinV010 25s linear infinite reverse;
+    filter: url(#nexusGateGlowV010);
   }
 
   #nexus-spgw-v010 .nexus-gate-ring {
@@ -128,6 +151,12 @@
     transform-origin: 80px 80px;
     animation: nexusGateVortexSpinV010 3.25s linear infinite;
     filter: url(#nexusGateGlowV010);
+  }
+
+  #nexus-spgw-v010 .nexus-gate-vortex-wake {
+    transform-origin: 80px 80px;
+    animation: nexusGateVortexSpinV010 4s linear infinite;
+    opacity: 0.48;
   }
 
   #nexus-spgw-v010 .nexus-gate-swirl-fast {
@@ -149,6 +178,13 @@
     opacity: 0.8;
   }
 
+  #nexus-spgw-v010 .nexus-rune-tick {
+    stroke: rgba(244,211,154,0.9);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    filter: url(#nexusGateBronzeGlowV010);
+  }
+
   #nexus-spgw-v010 .nexus-gate-hole {
     fill: #00040b;
     stroke: rgba(85,247,255,0.74);
@@ -160,7 +196,7 @@
 
   #nexus-spgw-v010 .nexus-gate-title {
     position: absolute;
-    left: 96px;
+    left: 92px;
     top: 9px;
     font-family: "Orbitron", "Rajdhani", "Segoe UI", Arial, sans-serif;
     font-size: 34px;
@@ -177,7 +213,7 @@
 
   #nexus-spgw-v010 .nexus-gate-subtitle {
     position: absolute;
-    left: 99px;
+    left: 95px;
     top: 48px;
     font-family: "Rajdhani", "Segoe UI", Arial, sans-serif;
     font-size: 9px;
@@ -190,8 +226,8 @@
 
   #nexus-spgw-v010 .nexus-gate-local-pulse {
     position: absolute;
-    left: 36px;
-    top: 38px;
+    left: 39px;
+    top: 39px;
     width: 1px;
     height: 1px;
     border-radius: 50%;
@@ -708,6 +744,11 @@
           <stop offset="58%" stop-color="#1788ff"/>
           <stop offset="100%" stop-color="#8d5cff"/>
         </linearGradient>
+        <linearGradient id="nexusGateBronzeGradV010" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f4d39a"/>
+          <stop offset="42%" stop-color="#c9a66b"/>
+          <stop offset="100%" stop-color="#7c4a24"/>
+        </linearGradient>
         <filter id="nexusGateGlowV010" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="3.6" result="glow"/>
           <feMerge>
@@ -715,8 +756,17 @@
             <feMergeNode in="SourceGraphic"/>
           </feMerge>
         </filter>
+        <filter id="nexusGateBronzeGlowV010" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.4" result="bronzeGlow"/>
+          <feMerge>
+            <feMergeNode in="bronzeGlow"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
       </defs>
       <circle class="nexus-gate-disk" cx="80" cy="80" r="66"/>
+      <circle class="nexus-gate-bronze-ring" cx="80" cy="80" r="62"/>
+      <circle class="nexus-gate-rune-track" cx="80" cy="80" r="47"/>
       <circle class="nexus-gate-ring" cx="80" cy="80" r="58"/>
       <g class="nexus-gate-micro-teeth" stroke="#bdfbff" stroke-width="2.2" stroke-linecap="round" opacity="0.82">
         <path d="M80 12 L80 22"/>
@@ -727,6 +777,22 @@
         <path d="M128 32 L121 39"/>
         <path d="M32 128 L39 121"/>
         <path d="M128 128 L121 121"/>
+      </g>
+      <g class="nexus-rune-band">
+        <path class="nexus-rune-tick" d="M80 29 L80 36"/>
+        <path class="nexus-rune-tick" d="M109 41 L104 47"/>
+        <path class="nexus-rune-tick" d="M122 80 L115 80"/>
+        <path class="nexus-rune-tick" d="M109 119 L104 113"/>
+        <path class="nexus-rune-tick" d="M80 131 L80 124"/>
+        <path class="nexus-rune-tick" d="M51 119 L56 113"/>
+        <path class="nexus-rune-tick" d="M38 80 L45 80"/>
+        <path class="nexus-rune-tick" d="M51 41 L56 47"/>
+      </g>
+      <g class="nexus-gate-vortex-wake" fill="none" stroke-width="2.4" stroke-linecap="round">
+        <path stroke="#55f7ff" d="M80 80 C55 58 69 30 101 31"/>
+        <path stroke="#9efbff" d="M80 80 C103 56 129 71 126 101"/>
+        <path stroke="#55f7ff" d="M80 80 C104 105 89 130 58 126"/>
+        <path stroke="#9efbff" d="M80 80 C58 104 32 88 35 58"/>
       </g>
       <g class="nexus-gate-swirl">
         <path class="nexus-swirl-arm" stroke="#55f7ff" d="M80 80 C61 67 58 44 79 30 C56 36 40 55 42 80 C45 111 73 130 108 118 C84 115 68 102 69 84 C70 74 76 70 80 80"/>

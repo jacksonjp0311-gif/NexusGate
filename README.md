@@ -1,24 +1,14 @@
 # NEXUS GATE
 **Reflective Intelligence Layer for AI Systems**
-NEXUS GATE is a local-first reflective intelligence layer for AI systems. The portal is only the doorway; NEXUS GATE is the reflective intelligence system behind that doorway, keeping AI systems observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority.
+NEXUS GATE is a local-first reflective intelligence layer for AI systems: a governed transfer boundary where model output, local tools, repo evidence, runtime reports, and human authorization meet. The portal is only the doorway; NEXUS GATE is the reflective system behind it, keeping AI work observable, diagnosable, bounded, oriented, and evidence-governed without granting autonomous authority. It turns reasoning into durable artifacts, gates those artifacts, and rehydrates the next human/AI session from the evidence that survived.
 
-## Runtime Lineage Seals
-- v0.8.1 UI cleanup line
-- v0.8.3F geo preflight cleanup and warning seal line
-- v0.9.0 Meta Loop Registry
-- v0.9.1 origin-aligned GITNEXUS impact bridge
-- v0.9.1A README/script doctrine
-- v0.9.2 AI-callable local loop fabric
-- v0.9.3 AI Loop Toolkit Expansion
-- v0.9.4 Personal Coding Paradise loop toolkit
-- v0.9.5 AI Toolbelt Surface
-- v0.9.6 Toolbelt Console Integration
-- v0.9.7 Toolbelt Cockpit Output
-- v0.9.8 Wound Compression Engine
-- v0.9.9 Preflight Optimizer
-- v1.0.0 Phi Wound Advisor / v1.0.1 Phi Ollama Adapter / v1.1.0 Phi Microdose Loop / v1.1.2 Phi Gate Supervisor Compiler Seal / v1.1.3 Meta-Orchestrator Gate
-- Neural Activity v0.1.1 canonical visual-organ line
-- Spiral Core Portal v0.1.2 desktop-face line
+## Capability Surface
+- Operator HUDs: Electron, PowerShell TUI, Spiral Core Portal, Dev Mode / HANDOFF, Mode Selection, and System Monitor.
+- Governed lanes: `status`, `evolve`, `reflect`, `domain`, `toolbelt`, `preflight`, `wound-compress`, `phi-wound`, `phi-loop-auto`, and `phi-gate-auto`.
+- Intelligence loops: AI-callable local loop fabric, v0.9.3 AI Loop Toolkit Expansion, v0.9.4 Personal Coding Paradise, Toolbelt Console Integration, v0.9.8 Wound Compression Engine, v0.9.9 Preflight Optimizer, v1.1.0 Phi Microdose Loop, AI Toolbelt Console, Toolbelt Cockpit Output, and Meta-Orchestrator Gate.
+- Evidence organs: Neural Activity visual organ, GITNEXUS local codegraph, PetriDishPortal, NexusCell containment, feedback ledger, handoff packets, and compiler reports.
+- Guardrails: human-authorized mutation only, no autonomous authority, no bypassing gates, no production/safety/security proof claims from local passes.
+- Lineage is preserved in docs/versioning, docs/runtime, reports, and the compatibility marker bank below instead of a bulky README seal list.
 
 ```text
 human intent -> origin alignment -> route/authority gate -> evidence -> human-authorized durable mutation

@@ -2349,6 +2349,7 @@ body.system-error-active .chat-viewport {
 .telemetry-hud {
   width: min(980px, calc(100vw - 56px)) !important;
   max-height: calc(100vh - 92px) !important;
+  overflow: hidden !important;
   top: 46px !important;
   color: #d9f99d !important;
   background:
@@ -2400,14 +2401,20 @@ body.system-error-active .chat-viewport {
 .telemetry-tab-panels {
   margin-top: 10px;
   min-height: 280px;
+  max-height: calc(100vh - 350px);
   border: 1px solid rgba(34, 197, 94, .18);
   background: rgba(2, 6, 23, .50);
-  overflow: auto;
+  overflow: hidden;
 }
 
 .telemetry-tab-panel {
   display: none;
   padding: 10px;
+  max-height: calc(100vh - 372px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(132, 204, 22, .70) rgba(2, 6, 23, .90);
 }
 
 .telemetry-tab-panel.is-active {
@@ -2511,6 +2518,9 @@ body.system-error-active .chat-viewport {
 }
 
 .process-manager-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   padding: 8px 10px;
   color: #67e8f9;
   background: rgba(2, 6, 23, .72);
