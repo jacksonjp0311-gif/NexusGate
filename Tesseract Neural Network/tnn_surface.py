@@ -6,14 +6,17 @@ TNN v0.2.0 is a local neural chat brain backed by Mistral/Ollama.
 from __future__ import annotations
 
 import argparse
+import contextlib
+import io
 import importlib.util
 import json
 import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-TNN_VERSION = "nexus.tesseract_neural_network.v0.2.0Y"
-TNN_MODEL_NAME = "Tesseract Neural Network/mistral-chat-brain"
+TNN_VERSION = "nexus.tesseract_neural_network.v0.2.0Z"
+TNN_MODEL_NAME = "Tesseract Neural Network/phi4-mini-hot-brain"
+TNN_BACKEND_MODEL = "tnn-phi4-mini:latest"
 
 TNN_ROOT = Path(__file__).resolve().parent
 RECEIPTS_DIR = TNN_ROOT / "receipts"
@@ -74,16 +77,26 @@ def load_local_bundle() -> Dict[str, Any]:
 
 def build_model_response(intent: str) -> Dict[str, Any]:
     bundle = load_local_bundle()
-    chat_engine = _load_module("tnn_chat_engine", TNN_ROOT / "brain" / "chat_engine.py")
-    chat = chat_engine.chat(intent)
+    stream_chat = _load_module("tnn_stream_chat", TNN_ROOT / "brain" / "stream_chat.py")
+    capture = io.StringIO()
+    with contextlib.redirect_stdout(capture):
+        chat = stream_chat.stream_generate(
+            intent=intent,
+            model=TNN_BACKEND_MODEL,
+            timeout=8,
+            scaffold=True,
+            deep=False,
+        )
     response = {
         "role": "TNN",
         "model": TNN_MODEL_NAME,
         "backend_model": chat.get("model"),
+        "model_label": chat.get("model_label", TNN_MODEL_NAME),
         "ok": bool(chat.get("ok")),
         "response": chat.get("response", ""),
         "chat_response": chat.get("response", ""),
         "chat_packet": chat,
+        "captured_stream": capture.getvalue()[-4000:],
         "tnn_version": TNN_VERSION,
         "self_contained": True,
         "neuralforge_required": False,
@@ -94,6 +107,7 @@ def build_model_response(intent: str) -> Dict[str, Any]:
         "role": response["role"],
         "model": response["model"],
         "backend_model": response["backend_model"],
+        "model_label": response["model_label"],
         "tnn_version": TNN_VERSION,
         "self_contained": True,
         "neuralforge_required": False,

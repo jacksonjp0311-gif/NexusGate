@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [switch]$NoGit
 )
@@ -119,6 +119,7 @@ function Run-Feedback {
     Invoke-Step "Reflective loop compiler" "15_reflective_loop.json" { python -m nexus_gate.reflection.compile --root . --json }
     Invoke-Step "Domain intelligence compiler" "16_domain_intelligence.json" { python -m nexus_gate.domain.compile --root . --json }
     Invoke-Step "Meta-orchestrator gate" "16b_meta_orchestrator_gate.json" { python -m nexus_gate.loops.meta_orchestrator_gate --root . --intent "evolve chain meta-orchestrator seal" --json }
+    Invoke-Step "Loop orchestrator" "16c_loop_orchestrator.json" { python -m nexus_gate.loops.orchestrator --root . --intent "evolve chain loop orchestration plan" --json }
     Say "Feedback/self-healing/interface lanes passed." "OK"
     Show-FeedbackSummary
 }
@@ -155,6 +156,7 @@ function Show-Status {
         ".\reports\nexus_reflective_loop_report_latest.json",
         ".\reports\nexus_domain_intelligence_report_latest.json",
         ".\reports\nexus_meta_orchestrator_gate_latest.json",
+        ".\reports\nexus_loop_orchestration_report_latest.json",
         ".\state\nexus_lineage_manifest_latest.json",
         ".\state\interface_adapter_contract_index.v0.3.7.json",
         ".\state\domain_intelligence_index.v0.4.0.json",
@@ -260,6 +262,12 @@ if ($Command -eq "domain") {
 if ($Command -eq "meta-orchestrator") {
     Invoke-Step "Meta-orchestrator gate" "16b_meta_orchestrator_gate.json" { python -m nexus_gate.loops.meta_orchestrator_gate --root . --intent "human surface meta-orchestrator gate" --json }
     Say "Meta-orchestrator report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "orchestrate") {
+    Invoke-Step "Loop orchestrator" "16c_loop_orchestrator.json" { python -m nexus_gate.loops.orchestrator --root . --intent "human surface loop orchestration plan" --json }
+    Say "Loop orchestration report written." "OK"
     exit 0
 }
 
