@@ -1,9 +1,11 @@
 import json
+import os
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
-from nexus_gate.build.packer import CRITICAL_GOAL_LANES, build_bundle
+from nexus_gate.build.packer import CRITICAL_GOAL_LANES, build_bundle, run_command
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,6 +34,21 @@ class TestPackagingGoalLock(unittest.TestCase):
         self.assertIn("pack", ps)
         self.assertIn("pack", sh)
         self.assertIn("nexus_gate.build.packer", ps + sh)
+
+    def test_packer_timeout_is_structured(self):
+        old_timeout = os.environ.get("NEXUS_PACK_CHECK_TIMEOUT_SECONDS")
+        os.environ["NEXUS_PACK_CHECK_TIMEOUT_SECONDS"] = "1"
+        try:
+            result = run_command(ROOT, [sys.executable, "-c", "import time; time.sleep(3)"])
+        finally:
+            if old_timeout is None:
+                os.environ.pop("NEXUS_PACK_CHECK_TIMEOUT_SECONDS", None)
+            else:
+                os.environ["NEXUS_PACK_CHECK_TIMEOUT_SECONDS"] = old_timeout
+        self.assertEqual(result["returncode"], 124)
+        self.assertTrue(result["timed_out"])
+        self.assertEqual(result["timeout_seconds"], 1)
+        self.assertIn("timed out", result["stderr_tail"])
 
 
 if __name__ == "__main__":

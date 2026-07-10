@@ -4,6 +4,7 @@ import argparse
 import fnmatch
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import tarfile
@@ -121,16 +122,29 @@ def file_entry(root: Path, path: Path) -> FileEntry:
 
 
 def run_command(root: Path, cmd: list[str]) -> dict:
-    proc = subprocess.run(
-        cmd,
-        cwd=str(root),
-        capture_output=True,
-        text=True,
-        timeout=120,
-    )
+    timeout = int(os.environ.get("NEXUS_PACK_CHECK_TIMEOUT_SECONDS", "240"))
+    try:
+        proc = subprocess.run(
+            cmd,
+            cwd=str(root),
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
+    except subprocess.TimeoutExpired as exc:
+        return {
+            "cmd": cmd,
+            "returncode": 124,
+            "timed_out": True,
+            "timeout_seconds": timeout,
+            "stdout_tail": (exc.stdout or "")[-4000:] if isinstance(exc.stdout, str) else "",
+            "stderr_tail": f"Command timed out after {timeout} seconds.",
+        }
     return {
         "cmd": cmd,
         "returncode": proc.returncode,
+        "timed_out": False,
+        "timeout_seconds": timeout,
         "stdout_tail": proc.stdout[-4000:],
         "stderr_tail": proc.stderr[-4000:],
     }
@@ -156,7 +170,12 @@ def build_bundle(root: Path, output_dir: Path, run_checks: bool = True) -> PackR
             if result["returncode"] != 0:
                 status = "fail"
 
-    entries = [file_entry(root, path) for path in iter_source_files(root)]
+    entries = []
+    for path in iter_source_files(root):
+        try:
+            entries.append(file_entry(root, path))
+        except FileNotFoundError:
+            continue
     entries_sorted = sorted(entries, key=lambda item: item.path)
     largest = sorted(entries, key=lambda item: item.size_bytes, reverse=True)[:15]
 
@@ -168,7 +187,9 @@ def build_bundle(root: Path, output_dir: Path, run_checks: bool = True) -> PackR
 
     with tarfile.open(bundle_path, "w:gz") as tar:
         for entry in entries_sorted:
-            tar.add(root / entry.path, arcname=entry.path)
+            source_path = root / entry.path
+            if source_path.exists():
+                tar.add(source_path, arcname=entry.path)
 
     latest_bundle.write_bytes(bundle_path.read_bytes())
 

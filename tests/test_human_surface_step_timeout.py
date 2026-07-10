@@ -14,6 +14,10 @@ class TestHumanSurfaceStepTimeout(unittest.TestCase):
         self.assertIn("NEXUS step timeout after ${TimeoutSeconds}s.", script)
         self.assertIn("[[NEXUS_EXIT_CODE:", script)
         self.assertIn("$code = 124", script)
+        self.assertIn("Stop-Job -Job $job -ErrorAction SilentlyContinue", script)
+        self.assertNotIn("Stop-Job -Job $job -Force", script)
+        self.assertIn("Pack compiler", script)
+        self.assertIn("[Math]::Max($StepTimeoutSeconds, 420)", script)
 
 
 if __name__ == "__main__":

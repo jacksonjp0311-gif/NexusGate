@@ -444,7 +444,7 @@ let repoGraphCache = null;
 let repoNeuralModel = null;
 let repoSignalCurves = [];
 let repoPulseEvents = [];
-const repoPulseGeometry = new THREE.SphereGeometry(EMBED ? 0.16 : 0.26, 10, 10);
+const repoPulseGeometry = new THREE.SphereGeometry(EMBED ? 0.34 : 0.56, 14, 14);
 
 function repoHash(value) {
   let h = 2166136261;
@@ -479,26 +479,66 @@ function classifyRepoNode(node) {
 
 function buildRepoNeuralModel(graph) {
   const nodes = Array.isArray(graph && graph.nodes) ? graph.nodes : [];
-  const folders = nodes.filter((node) => node.type === "folder" && node.depth <= 2);
-  const rootNames = [...new Set(nodes.map((node) => repoRootFor(node.path)).filter(Boolean))]
-    .filter((name) => name !== "nexus-gate")
-    .slice(0, EMBED ? 14 : 24);
-  const model = { roots: [], hotPaths: [] };
-  const latestModified = Math.max(...nodes.map((node) => Number(node.modified || 0)).filter(Boolean), 0);
+  const rootGroups = new Map();
+  nodes.forEach((node) => {
+    const rootName = repoRootFor(node.path);
+    if (!rootName || rootName === "nexus-gate") return;
+    if (!rootGroups.has(rootName)) rootGroups.set(rootName, []);
+    rootGroups.get(rootName).push(node);
+  });
 
-  rootNames.forEach((rootName, index) => {
-    const rootNodes = nodes.filter((node) => repoRootFor(node.path) === rootName);
-    const rootWeight = rootNodes.reduce((total, node) => total + Number(node.weight || 1), 0);
-    const hasAxon = rootNodes.some((node) => classifyRepoNode(node) === "axon");
-    const angle = (index / Math.max(rootNames.length, 1)) * Math.PI * 2 + seededUnit(rootName, "angle") * 0.34;
+  const model = { roots: [], hotPaths: [], prunedCount: 0 };
+  const latestModified = Math.max(...nodes.map((node) => Number(node.modified || 0)).filter(Boolean), 0);
+  const rankedRoots = [...rootGroups.entries()]
+    .map(([rootName, rootNodes]) => {
+      const rootWeight = rootNodes.reduce((total, node) => total + Number(node.weight || 1), 0);
+      const modified = Math.max(...rootNodes.map((node) => Number(node.modified || 0)).filter(Boolean), 0);
+      const hasAxon = rootNodes.some((node) => classifyRepoNode(node) === "axon");
+      const score = rootWeight + Math.log(rootNodes.length + 1) * 6 + (hasAxon ? 7 : 0) + (modified >= latestModified - 86400000 * 3 ? 4 : 0);
+      return { rootName, rootNodes, rootWeight, modified, hasAxon, score };
+    })
+    .sort((a, b) => b.score - a.score);
+
+  const maxPrimary = EMBED ? 7 : 11;
+  const maxAxonPrimary = EMBED ? 2 : 4;
+  const axons = rankedRoots.filter((root) => root.hasAxon).slice(0, maxAxonPrimary);
+  const dendrites = rankedRoots.filter((root) => !root.hasAxon).slice(0, Math.max(0, maxPrimary - axons.length));
+  const selectedRoots = [...dendrites, ...axons].sort((a, b) => b.score - a.score);
+  model.prunedCount = Math.max(0, rankedRoots.length - selectedRoots.length);
+
+  selectedRoots.forEach((root, index) => {
+    const { rootName, rootNodes, rootWeight, hasAxon } = root;
+    const angle = (index / Math.max(selectedRoots.length, 1)) * Math.PI * 2 + seededUnit(rootName, "angle") * 0.28;
     const elevation = (seededUnit(rootName, "elevation") - 0.5) * (EMBED ? 14 : 22);
-    const length = (EMBED ? 13 : 20) + Math.min(18, Math.log(rootWeight + 1) * 3.6);
+    const length = (EMBED ? 13 : 19) + Math.min(14, Math.log(rootWeight + 1) * 2.8);
     const dir = new THREE.Vector3(Math.cos(angle), Math.sin(angle) * 0.62, Math.sin(angle * 0.7) + elevation * 0.025).normalize();
-    const branchNodes = rootNodes
+    const subGroups = new Map();
+    rootNodes
       .filter((node) => node.depth > 1)
-      .sort((a, b) => Number(b.modified || 0) - Number(a.modified || 0))
-      .slice(0, EMBED ? 5 : 9);
-    model.roots.push({ rootName, rootNodes, branchNodes, hasAxon, dir, length, index });
+      .forEach((node) => {
+        const parts = String(node.path || "").replace(/\\/g, "/").split("/");
+        const subName = parts[1] || node.name || "root";
+        if (!subGroups.has(subName)) subGroups.set(subName, []);
+        subGroups.get(subName).push(node);
+      });
+    const fractalChildren = [...subGroups.entries()]
+      .map(([subName, childNodes]) => ({
+        subName,
+        childNodes,
+        hasAxon: childNodes.some((node) => classifyRepoNode(node) === "axon"),
+        modified: Math.max(...childNodes.map((node) => Number(node.modified || 0)).filter(Boolean), 0),
+        weight: childNodes.reduce((total, node) => total + Number(node.weight || 1), 0)
+      }))
+      .sort((a, b) => (b.modified - a.modified) || (b.weight - a.weight))
+      .slice(0, EMBED ? 4 : 6)
+      .map((child) => ({
+        ...child,
+        terminals: child.childNodes
+          .filter((node) => node.depth > 2 || node.type !== "folder")
+          .sort((a, b) => Number(b.modified || 0) - Number(a.modified || 0))
+          .slice(0, EMBED ? 2 : 3)
+      }));
+    model.roots.push({ rootName, rootNodes, fractalChildren, hasAxon, dir, length, index });
     rootNodes
       .filter((node) => latestModified && Number(node.modified || 0) >= latestModified - 86400000 * 3)
       .slice(0, 5)
@@ -523,30 +563,31 @@ function clearRepoBranches() {
   while (repoSignalGroup.children.length) {
     const child = repoSignalGroup.children.pop();
     if (child.geometry && child.geometry !== repoPulseGeometry) child.geometry.dispose();
+    if (child.material) child.material.dispose();
   }
   repoSignalCurves = [];
   repoPulseEvents = [];
 }
 
-function repoCurveFromRoot(root, salt, branchIndex) {
-  const start = root.dir.clone().multiplyScalar(CONFIG.somaRadius * 0.82);
+function repoCurveFromRoot(root, salt, branchIndex, startPoint, baseDir, lengthScale) {
+  const start = startPoint ? startPoint.clone() : root.dir.clone().multiplyScalar(CONFIG.somaRadius * 0.82);
   const points = [start];
   let cur = start.clone();
   const mainBend = new THREE.Vector3(
     seededUnit(root.rootName, `${salt}:x`) - 0.5,
     seededUnit(root.rootName, `${salt}:y`) - 0.5,
     seededUnit(root.rootName, `${salt}:z`) - 0.5
-  ).multiplyScalar(root.hasAxon ? 2.2 : 4.8);
-  const length = root.length * (branchIndex ? 0.42 + seededUnit(salt, "child-length") * 0.35 : 1);
+  ).multiplyScalar(root.hasAxon ? 1.8 : 3.4);
+  const length = root.length * (lengthScale || (branchIndex ? 0.34 + seededUnit(salt, "child-length") * 0.28 : 1));
   const dir = branchIndex
-    ? root.dir.clone().add(mainBend.clone().normalize().multiplyScalar(0.85 + seededUnit(salt, "spread"))).normalize()
-    : root.dir.clone();
-  for (let i = 1; i <= 7; i++) {
-    const t = i / 7;
+    ? (baseDir || root.dir).clone().add(mainBend.clone().normalize().multiplyScalar(0.56 + seededUnit(salt, "spread") * 0.6)).normalize()
+    : (baseDir || root.dir).clone();
+  for (let i = 1; i <= 6; i++) {
+    const t = i / 6;
     const wiggle = new THREE.Vector3(
-      Math.sin(t * Math.PI * 2 + seededUnit(salt, "wx") * 6) * (root.hasAxon ? 0.8 : 1.6),
-      Math.cos(t * Math.PI * 1.7 + seededUnit(salt, "wy") * 6) * (root.hasAxon ? 0.6 : 1.2),
-      Math.sin(t * Math.PI * 1.3 + seededUnit(salt, "wz") * 6) * (root.hasAxon ? 0.7 : 1.3)
+      Math.sin(t * Math.PI * 2 + seededUnit(salt, "wx") * 6) * (root.hasAxon ? 0.54 : 1.05),
+      Math.cos(t * Math.PI * 1.7 + seededUnit(salt, "wy") * 6) * (root.hasAxon ? 0.42 : 0.88),
+      Math.sin(t * Math.PI * 1.3 + seededUnit(salt, "wz") * 6) * (root.hasAxon ? 0.48 : 0.92)
     );
     cur = start.clone().add(dir.clone().multiplyScalar(length * t)).add(mainBend.clone().multiplyScalar(Math.sin(t * Math.PI) * 0.55)).add(wiggle);
     points.push(cur.clone());
@@ -559,16 +600,36 @@ function renderRepoNeuralNetwork(model) {
   if (!model || !Array.isArray(model.roots)) return;
   model.roots.forEach((root) => {
     const mainCurve = repoCurveFromRoot(root, root.rootName, 0);
-    const mainRadius = EMBED ? (root.hasAxon ? 0.36 : 0.22) : (root.hasAxon ? 0.54 : 0.34);
+    const mainRadius = EMBED ? (root.hasAxon ? 0.22 : 0.16) : (root.hasAxon ? 0.38 : 0.26);
     repoBranchGroup.add(new THREE.Mesh(new THREE.TubeGeometry(mainCurve, 42, mainRadius, 7, false), root.hasAxon ? repoAxonMat : repoBranchMat));
-    repoSignalCurves.push({ curve: mainCurve, kind: root.hasAxon ? "axon" : "dendrite", path: root.rootName });
-    root.branchNodes.forEach((node, idx) => {
-      const branchCurve = repoCurveFromRoot(root, `${node.path}:${idx}`, idx + 1);
-      const isAxon = classifyRepoNode(node) === "axon";
-      repoBranchGroup.add(new THREE.Mesh(new THREE.TubeGeometry(branchCurve, 26, EMBED ? 0.08 : 0.13, 5, false), isAxon ? repoAxonMat : repoBranchMat));
-      repoSignalCurves.push({ curve: branchCurve, kind: isAxon ? "axon" : "dendrite", path: node.path });
-      const end = branchCurve.getPoint(1);
-      const syn = new THREE.Mesh(new THREE.BoxGeometry(EMBED ? 0.34 : 0.46, EMBED ? 0.34 : 0.46, EMBED ? 0.34 : 0.46), isAxon ? repoAxonMat : repoBranchMat);
+    repoSignalCurves.push({ curve: mainCurve, kind: root.hasAxon ? "axon" : "dendrite", path: root.rootName, hot: false });
+    root.fractalChildren.forEach((child, idx) => {
+      const anchorT = 0.36 + (idx / Math.max(root.fractalChildren.length, 1)) * 0.42;
+      const anchor = mainCurve.getPoint(anchorT);
+      const side = new THREE.Vector3(
+        seededUnit(child.subName, "sx") - 0.5,
+        seededUnit(child.subName, "sy") - 0.5,
+        seededUnit(child.subName, "sz") - 0.5
+      ).normalize();
+      const childDir = root.dir.clone().multiplyScalar(0.62).add(side.multiplyScalar(0.82)).normalize();
+      const childCurve = repoCurveFromRoot(root, `${root.rootName}/${child.subName}`, idx + 1, anchor, childDir, 0.32 + seededUnit(child.subName, "len") * 0.2);
+      const childIsAxon = child.hasAxon || root.hasAxon;
+      repoBranchGroup.add(new THREE.Mesh(new THREE.TubeGeometry(childCurve, 24, EMBED ? 0.07 : 0.1, 5, false), childIsAxon ? repoAxonMat : repoBranchMat));
+      repoSignalCurves.push({ curve: childCurve, kind: childIsAxon ? "axon" : "dendrite", path: `${root.rootName}/${child.subName}`, hot: child.modified });
+      child.terminals.forEach((node, terminalIndex) => {
+        const terminalAnchor = childCurve.getPoint(0.58 + terminalIndex * 0.12);
+        const terminalDir = childDir.clone().add(new THREE.Vector3(
+          seededUnit(node.path, "tx") - 0.5,
+          seededUnit(node.path, "ty") - 0.5,
+          seededUnit(node.path, "tz") - 0.5
+        ).multiplyScalar(0.95)).normalize();
+        const terminalCurve = repoCurveFromRoot(root, `${node.path}:${terminalIndex}`, terminalIndex + 10, terminalAnchor, terminalDir, 0.16 + seededUnit(node.path, "flen") * 0.12);
+        const isAxon = classifyRepoNode(node) === "axon";
+        repoBranchGroup.add(new THREE.Mesh(new THREE.TubeGeometry(terminalCurve, 16, EMBED ? 0.035 : 0.055, 4, false), isAxon ? repoAxonMat : repoBranchMat));
+        repoSignalCurves.push({ curve: terminalCurve, kind: isAxon ? "axon" : "dendrite", path: node.path, hot: node.modified });
+      });
+      const end = childCurve.getPoint(1);
+      const syn = new THREE.Mesh(new THREE.BoxGeometry(EMBED ? 0.24 : 0.34, EMBED ? 0.24 : 0.34, EMBED ? 0.24 : 0.34), childIsAxon ? repoAxonMat : repoBranchMat);
       syn.position.copy(end);
       repoBranchGroup.add(syn);
     });
@@ -613,27 +674,31 @@ async function loadRepoGraphFallback() {
 const btnFire = document.getElementById("btn-fire");
 const btnRefresh = document.getElementById("btn-refresh");
 function triggerRepoPulse(reason) {
+  const hotRoots = new Set((repoNeuralModel && repoNeuralModel.hotPaths || []).map((hot) => repoRootFor(hot.path)));
   const selected = repoSignalCurves
-    .filter((entry) => !repoNeuralModel || !repoNeuralModel.hotPaths.length || repoNeuralModel.hotPaths.some((hot) => String(entry.path || "").startsWith(repoRootFor(hot.path))))
-    .slice(0, EMBED ? 12 : 24);
-  const curves = selected.length ? selected : repoSignalCurves.slice(0, EMBED ? 12 : 24);
+    .filter((entry) => hotRoots.size === 0 || hotRoots.has(repoRootFor(entry.path)) || entry.hot)
+    .sort((a, b) => Number(b.hot || 0) - Number(a.hot || 0))
+    .slice(0, EMBED ? 10 : 18);
+  const curves = selected.length ? selected : repoSignalCurves.slice(0, EMBED ? 10 : 18);
   curves.forEach((entry, index) => {
-    const dot = new THREE.Mesh(repoPulseGeometry, repoPulseMat.clone());
+    const material = repoPulseMat.clone();
+    material.opacity = 1;
+    const dot = new THREE.Mesh(repoPulseGeometry, material);
     dot.userData.reason = reason || "manual";
     dot.position.copy(entry.curve.getPoint(0));
     repoSignalGroup.add(dot);
-    repoPulseEvents.push({ mesh: dot, curve: entry.curve, offset: index * 0.035, speed: 0.72 + (index % 5) * 0.08, age: 0, life: 1.35 + (index % 4) * 0.12 });
+    repoPulseEvents.push({ mesh: dot, curve: entry.curve, offset: index * 0.055, speed: 0.92 + (index % 5) * 0.11, age: 0, life: 1.05 + (index % 4) * 0.11 });
   });
   repoNeuralProfile.impulse = 1;
 }
 
 function triggerImpulse(e) {
   if (e && e.target && e.target.closest && e.target.closest(".hud-panel") && e.target !== btnFire) return;
+  triggerRepoPulse("manual-impulse");
   if (STATE.isAnimating) return;
   STATE.isAnimating = true;
   STATE.phase = 1;
   STATE.progress = 0;
-  triggerRepoPulse("manual-impulse");
   if (btnFire) { btnFire.classList.add("disabled"); btnFire.innerText = "FIRING SEQUENCE..."; }
 }
 window.addEventListener("pointerdown", triggerImpulse);

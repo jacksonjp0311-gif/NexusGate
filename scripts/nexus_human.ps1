@@ -76,7 +76,7 @@ function Invoke-Step {
 
     $completed = Wait-Job -Job $job -Timeout $TimeoutSeconds
     if (-not $completed) {
-        Stop-Job -Job $job -Force | Out-Null
+        Stop-Job -Job $job -ErrorAction SilentlyContinue | Out-Null
         $output = @("NEXUS step timeout after ${TimeoutSeconds}s.")
         $code = 124
         Remove-Job -Job $job -Force | Out-Null
@@ -170,7 +170,7 @@ function Run-Feedback {
 }
 
 function Run-Pack {
-    Invoke-Step "Pack compiler" "17_pack_compiler.json" { python -m nexus_gate.build.packer --root . --out dist --json }
+    Invoke-Step "Pack compiler" "17_pack_compiler.json" { python -m nexus_gate.build.packer --root . --out dist --json } -TimeoutSeconds ([Math]::Max($StepTimeoutSeconds, 420))
     Say "Pack lane passed." "OK"
 }
 
