@@ -2,6 +2,7 @@
   const FULL_PATH = "../../neural_activity/index.html";
   const EMBED_PATH = "../../neural_activity/index.html?embed=1&preview=1&aa=1";
   const VERSION = "close-aa";
+  let repoGraphRefreshHandle = null;
 
   function imp(el, prop, value) {
     if (!el) return;
@@ -27,7 +28,32 @@
       "nexus_neural_activity",
       "width=1280,height=820,resizable=yes,scrollbars=no,menubar=no,toolbar=no,location=no,status=no"
     );
+    if (popup) {
+      setTimeout(() => pushRepoGraph(popup), 400);
+      setTimeout(() => pushRepoGraph(popup), 1200);
+      setTimeout(() => fireNeuralImpulse(popup, "popout-open"), 1400);
+    }
     if (!popup) window.location.href = FULL_PATH;
+  }
+
+  async function loadRepoGraph() {
+    if (!window.nexus || !window.nexus.getNeuralRepoGraph) return null;
+    try {
+      return await window.nexus.getNeuralRepoGraph();
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  async function pushRepoGraph(targetWindow) {
+    const graph = await loadRepoGraph();
+    if (!graph || !targetWindow || targetWindow.closed) return;
+    targetWindow.postMessage({ type: "NEXUS_NEURAL_REPO_GRAPH", graph }, "*");
+  }
+
+  function fireNeuralImpulse(targetWindow, reason) {
+    if (!targetWindow || targetWindow.closed) return;
+    targetWindow.postMessage({ type: "NEXUS_NEURAL_TRIGGER_IMPULSE", reason: reason || "nexus-bridge" }, "*");
   }
 
   function setLight(light, ok) {
@@ -173,6 +199,10 @@
     frame.src = EMBED_PATH + "&t=" + Date.now();
     frame.setAttribute("allow", "fullscreen");
     frame.addEventListener("load", () => setLight(light, true));
+    frame.addEventListener("load", () => {
+      pushRepoGraph(frame.contentWindow);
+      fireNeuralImpulse(frame.contentWindow, "mini-load");
+    });
     frame.addEventListener("error", () => setLight(light, false));
     frameStyle(frame);
 
@@ -182,6 +212,10 @@
     header.appendChild(button);
     body.appendChild(frame);
     host.replaceChildren(header, body);
+    body.addEventListener("pointerdown", () => {
+      pushRepoGraph(frame.contentWindow);
+      fireNeuralImpulse(frame.contentWindow, "mini-pointer");
+    });
 
     headerStyle(header, titleRow, light, title, button);
     bodyStyle(body);
@@ -193,6 +227,11 @@
     requestAnimationFrame(mountPanel);
     setTimeout(mountPanel, 150);
     setTimeout(mountPanel, 600);
+    if (!repoGraphRefreshHandle) {
+      repoGraphRefreshHandle = setInterval(() => {
+        document.querySelectorAll(".neural-activity-live-frame").forEach((frame) => pushRepoGraph(frame.contentWindow));
+      }, 8000);
+    }
   }
 
   if (document.readyState === "loading") {
@@ -203,4 +242,7 @@
 
   window.addEventListener("load", boot);
   window.addEventListener("resize", mountPanel);
+  window.addEventListener("focus", () => {
+    document.querySelectorAll(".neural-activity-live-frame").forEach((frame) => pushRepoGraph(frame.contentWindow));
+  });
 })();

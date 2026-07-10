@@ -17,6 +17,7 @@ let petriWindow = null;
 let petriIpcRegistered = false;
 const petriDishProRoot = path.join(repoRoot, "PetriDishPro");
 const petriElectronRoot = path.join(petriDishProRoot, "electron");
+const neuralRepoGraphPath = path.join(repoRoot, "state", "neural_activity", "repo_neural_graph_latest.json");
 
 app.on("second-instance", () => {
   if (mainWindow && !mainWindow.isDestroyed()) {
@@ -48,7 +49,8 @@ const READ_SURFACES = new Set([
   "state/codex_orchestration_index.v0.4.0.json",
   "reports/tui/nexus_tui_ai_handoff_latest.txt",
   "reports/tui/nexus_tui_snapshot_latest.html",
-  "reports/tui/nexus_tui_surface_latest.json"
+  "reports/tui/nexus_tui_surface_latest.json",
+  "state/neural_activity/repo_neural_graph_latest.json"
 ]);
 
 const NEX_CHAT_ROLES = new Set(["FAST", "BALANCED", "DEEP", "TNN", "HANDOFF"]);
@@ -433,6 +435,114 @@ function readJsonIfPresent(filePath) {
   } catch (error) {
     return { parse_error: error.message };
   }
+}
+
+function neuralPathHash(value) {
+  let hash = 2166136261;
+  for (const ch of String(value || "")) {
+    hash ^= ch.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0).toString(16);
+}
+
+function shouldSkipNeuralPath(relativePath, entryName) {
+  const normalized = String(relativePath || "").replace(/\\/g, "/");
+  const blockedNames = new Set([".git", "node_modules", "__pycache__", ".venv", "venv", ".pytest_cache"]);
+  if (blockedNames.has(entryName)) return true;
+  if (normalized.includes("/node_modules/") || normalized.includes("/.git/") || normalized.includes("/__pycache__/")) return true;
+  if (normalized.endsWith(".tar.gz") || normalized.endsWith(".zip") || normalized.endsWith(".pyc")) return true;
+  return false;
+}
+
+function classifyNeuralPath(relativePath, isDirectory) {
+  if (isDirectory) return relativePath ? "folder" : "root";
+  const ext = path.extname(relativePath).toLowerCase();
+  if (ext === ".py") return "python";
+  if (ext === ".js" || ext === ".mjs" || ext === ".cjs") return "javascript";
+  if (ext === ".html" || ext === ".css") return "interface";
+  if (ext === ".json") return "state";
+  if (ext === ".md") return "doctrine";
+  if (ext === ".ps1" || ext === ".sh" || ext === ".bat") return "operator_lane";
+  return "artifact";
+}
+
+function buildNeuralRepoGraph() {
+  const generatedAtUtc = new Date().toISOString();
+  const nodes = [{
+    id: "repo:nexus-gate",
+    path: ".",
+    name: "nexus-gate",
+    type: "root",
+    depth: 0,
+    weight: 10,
+    modified: fs.statSync(repoRoot).mtimeMs
+  }];
+  const edges = [];
+  const queue = [{ abs: repoRoot, rel: "", parentId: "repo:nexus-gate", depth: 0 }];
+  const maxNodes = 720;
+  const maxDepth = 5;
+
+  while (queue.length && nodes.length < maxNodes) {
+    const current = queue.shift();
+    let entries = [];
+    try {
+      entries = fs.readdirSync(current.abs, { withFileTypes: true });
+    } catch (_error) {
+      continue;
+    }
+
+    entries
+      .filter((entry) => !shouldSkipNeuralPath(path.join(current.rel, entry.name), entry.name))
+      .sort((a, b) => Number(b.isDirectory()) - Number(a.isDirectory()) || a.name.localeCompare(b.name))
+      .forEach((entry) => {
+        if (nodes.length >= maxNodes) return;
+        const rel = path.join(current.rel, entry.name).replace(/\\/g, "/");
+        const abs = path.join(current.abs, entry.name);
+        const isDirectory = entry.isDirectory();
+        let stat = null;
+        try { stat = fs.statSync(abs); } catch (_error) {}
+        const id = `repo:${neuralPathHash(rel)}`;
+        nodes.push({
+          id,
+          path: rel,
+          name: entry.name,
+          type: classifyNeuralPath(rel, isDirectory),
+          depth: current.depth + 1,
+          weight: isDirectory ? 3.2 : Math.max(0.7, Math.min(4.5, Math.log10((stat?.size || 1) + 10))),
+          size: stat?.size || 0,
+          modified: stat?.mtimeMs || 0
+        });
+        edges.push({
+          from: current.parentId,
+          to: id,
+          type: isDirectory ? "folder_branch" : "file_synapse",
+          weight: isDirectory ? 0.9 : 0.35
+        });
+        if (isDirectory && current.depth + 1 < maxDepth) {
+          queue.push({ abs, rel, parentId: id, depth: current.depth + 1 });
+        }
+      });
+  }
+
+  const graph = {
+    system: "NEXUS GATE",
+    surface: "neural_activity_repo_graph",
+    version: "v0.1.2",
+    generated_at_utc: generatedAtUtc,
+    source_root: repoRoot,
+    node_count: nodes.length,
+    edge_count: edges.length,
+    nodes,
+    edges,
+    claim_boundary: "Repo Neural Activity graph is read-only filesystem evidence for visualization. It does not grant execution authority, mutation authority, safety proof, or autonomous operation."
+  };
+
+  try {
+    fs.mkdirSync(path.dirname(neuralRepoGraphPath), { recursive: true });
+    fs.writeFileSync(neuralRepoGraphPath, JSON.stringify(graph, null, 2), "utf8");
+  } catch (_error) {}
+  return graph;
 }
 
 function readPetriJsonIfPresent(relPath, fallback = null) {
@@ -897,6 +1007,7 @@ ipcMain.handle("nexus:stopNex", async () => {
 
 ipcMain.handle("nexus:openPetriDishPro", async () => openPetriDishProWindow());
 ipcMain.handle("nexus:getPetriDishProState", async () => buildPetriPreviewState());
+ipcMain.handle("nexus:getNeuralRepoGraph", async () => buildNeuralRepoGraph());
 
 ipcMain.handle("nexus:getTelemetry", async () => {
   const totalMem = os.totalmem();

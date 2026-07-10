@@ -10,6 +10,7 @@ contextBridge.exposeInMainWorld("nexus", {
   getTelemetry: () => ipcRenderer.invoke("nexus:getTelemetry"),
   openPetriDishPro: () => ipcRenderer.invoke("nexus:openPetriDishPro"),
   getPetriDishProState: () => ipcRenderer.invoke("nexus:getPetriDishProState"),
+  getNeuralRepoGraph: () => ipcRenderer.invoke("nexus:getNeuralRepoGraph"),
   ensureOllama: () => ipcRenderer.invoke("nexus:ensureOllama"),
   getContract: () => ipcRenderer.invoke("nexus:getContract")
 });
