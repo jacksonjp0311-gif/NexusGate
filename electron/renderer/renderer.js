@@ -240,6 +240,7 @@ function appendChat(kind, text, meta = "") {
     consoleStream.removeChild(consoleStream.firstElementChild);
   }
   consoleStream.scrollTop = consoleStream.scrollHeight;
+  document.dispatchEvent(new CustomEvent("nexus:message-rendered", { detail: { kind, meta } }));
 }
 
 function resetChatToNexGreeting(greeting) {
@@ -1154,6 +1155,34 @@ async function runHandoffShellAction(scriptText) {
     setProcessing(false);
   }
 }
+function isSimpleNexConversation(text) {
+  const value = String(text || "").trim();
+  if (!value) return false;
+  if (value.startsWith("/")) return false;
+  if (/^(run|status|evolve|reflect|feedback|interconnect|handoff|git|commit|push|pull|shell|powershell|python|npm|node)\b/i.test(value)) return false;
+  if (/\b(commit|push|delete|mutate|execute|run script|apply patch|write file|stage files|repo mutation)\b/i.test(value)) return false;
+  if (/^(hey|hi|hello|yo|sup|you there|are you there|u there|ping|testing|test|what's up|whats up)\??!?$/i.test(value)) return true;
+  if (/^(what do you think|thoughts|help me|can you|tell me|explain|walk me through|talk to me)/i.test(value)) return true;
+  return value.length <= 260;
+}
+
+function naturalNexGreeting(prompt, role) {
+  const mode = role === "FAST" ? "FAST / Phi-4-mini"
+    : role === "BALANCED" ? "BALANCED / Phi-4-mini"
+    : role === "DEEP" ? "DEEP / Mistral"
+    : role === "TNN" ? "Tesseract Neural Network"
+    : role === "HANDOFF" ? "HANDOFF / ChatGPT-Codex"
+    : role;
+  const value = String(prompt || "").trim().toLowerCase();
+  if (/^(you there|are you there|u there|ping|testing|test)\??!?$/.test(value)) {
+    return `Yeah, I'm here. ${mode} is active. Send me what you want to work on.`;
+  }
+  if (/^(hey|hi|hello|yo|sup|what's up|whats up)\??!?$/.test(value)) {
+    return `Hey, I'm here. ${mode} is active. What are we working on?`;
+  }
+  return `I'm here. ${mode} is active. Talk to me normally, or use /run when you want a governed lane.`;
+}
+
 async function sendNexMessage(prompt) {
   if (nexBusy) return;
   clearSystemErrorHud();
@@ -1169,6 +1198,14 @@ async function sendNexMessage(prompt) {
 
   try {
     setBuffer(42, "routing");
+    if (isSimpleNexConversation(prompt)) {
+      const greeting = naturalNexGreeting(prompt, role);
+      appendChat("ai", greeting, `NEX / ${role} / conversational`);
+      writeOutput(greeting, { preTranslated: true });
+      statusEl.textContent = "stable";
+      setBuffer(100, "complete");
+      return;
+    }
     // Offline graceful degradation: if the local model endpoint is blocked, keep chat responsive
     // and route without calling a model (evidence-forward, recommendation-only).
     const ollama = await ensureLocalOllamaBackend();

@@ -31,6 +31,13 @@ class TestNexusConversationOutputBridgeV021B(unittest.TestCase):
     def test_v021f_asset_exists(self):
         self.assertTrue((RENDERER / "nexus_conversation_output_bridge.v0.2.1f.js").exists())
 
+    def test_v021f_conversationalizes_audit_output(self):
+        bridge = (RENDERER / "nexus_conversation_output_bridge.v0.2.1f.js").read_text(encoding="utf-8")
+        self.assertIn("conversationalizeAudit", bridge)
+        self.assertIn("naturalGreeting", bridge)
+        self.assertIn("looksLikeStaleEngineeringMove", bridge)
+        self.assertIn("FAST / Phi-4-mini", bridge)
+
 
 if __name__ == "__main__":
     unittest.main()

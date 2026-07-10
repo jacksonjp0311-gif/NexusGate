@@ -33,6 +33,13 @@ class TestElectronChatStackColorDiscipline(unittest.TestCase):
         self.assertIn(".chat-message.system-error-message .message-body", css)
         self.assertIn("#fee2e2", css)
 
+    def test_readable_conversation_seal_is_present(self):
+        css = (ROOT / "electron" / "renderer" / "styles.css").read_text(encoding="utf-8-sig")
+        self.assertIn("NEXUS v0.7.3: readable conversational chat seal", css)
+        self.assertIn("::selection", css)
+        self.assertIn("-webkit-text-fill-color", css)
+        self.assertIn("white-space: pre-wrap !important", css)
+
     def test_doc_declares_visual_contract(self):
         doc = (ROOT / "docs" / "ui" / "NEX_CHAT_STACK_COLOR_DISCIPLINE.md").read_text(encoding="utf-8-sig")
         self.assertIn("Version: v0.7.2", doc)

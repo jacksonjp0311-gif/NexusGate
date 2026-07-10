@@ -1,4 +1,5 @@
-﻿import unittest
+import subprocess
+import unittest
 from pathlib import Path
 
 
@@ -27,6 +28,21 @@ class TestElectronNexChat(unittest.TestCase):
         self.assertIn("window.nexus.askNex", js)
         self.assertIn("Shift+Enter", js)
         self.assertIn("recommendation-only", js)
+        self.assertIn("isSimpleNexConversation", js)
+        self.assertIn("naturalNexGreeting", js)
+        self.assertIn("NEX / ${role} / conversational", js)
+        self.assertIn("nexus:message-rendered", js)
+
+    def test_conversation_output_bridge_is_valid_javascript(self):
+        bridge = ROOT / "electron" / "renderer" / "nexus_conversation_output_bridge.v0.2.1f.js"
+        result = subprocess.run(
+            ["node", "--check", str(bridge)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_preload_exposes_ask_nex(self):
         preload = (ROOT / "electron" / "preload.js").read_text(encoding="utf-8")
@@ -43,4 +59,3 @@ class TestElectronNexChat(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

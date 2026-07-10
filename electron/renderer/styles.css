@@ -2308,3 +2308,51 @@ body.system-error-active .chat-viewport {
   border: 1px solid rgba(34, 211, 238, .34);
   background: rgba(2, 6, 23, .82);
 }
+
+/* NEXUS v0.7.3: readable conversational chat seal. */
+.chat-viewport::selection,
+.chat-message::selection,
+.message-body::selection,
+.message-body pre::selection {
+  color: #ffffff;
+  background: rgba(34, 211, 238, .34);
+}
+
+.chat-message .message-body pre,
+.message-body pre,
+.ai-output {
+  user-select: text !important;
+  color: inherit !important;
+  background: transparent !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+  line-height: 1.55 !important;
+  white-space: pre-wrap !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+}
+
+.human-message .message-body pre {
+  color: #dbeafe !important;
+}
+
+.ai-message .message-body pre {
+  color: #dcfce7 !important;
+}
+
+.chat-message .message-body {
+  filter: none !important;
+}
+
+.chat-message .message-body header {
+  white-space: normal !important;
+}
+
+.chat-message .message-body header strong,
+.chat-message .message-body header small {
+  display: inline-block !important;
+}
+
+.chat-message .message-body header strong + small::before {
+  content: "";
+}
