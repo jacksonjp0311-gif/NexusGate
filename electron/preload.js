@@ -13,6 +13,7 @@ contextBridge.exposeInMainWorld("nexus", {
   getPetriDishProState: () => ipcRenderer.invoke("nexus:getPetriDishProState"),
   getNeuralRepoGraph: () => ipcRenderer.invoke("nexus:getNeuralRepoGraph"),
   scanGitNexusExternal: (localPath) => ipcRenderer.invoke("nexus:scanGitNexusExternal", { localPath }),
+  copyPngToClipboard: (dataUrl) => ipcRenderer.invoke("nexus:copyPngToClipboard", { dataUrl }),
   getTempestState: () => ipcRenderer.invoke("nexus:getTempestState"),
   openTempestFolder: () => ipcRenderer.invoke("nexus:openTempestFolder"),
   openTempestFullUi: () => ipcRenderer.invoke("nexus:openTempestFullUi"),

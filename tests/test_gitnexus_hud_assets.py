@@ -57,9 +57,15 @@ class TestGitNexusHudAssets(unittest.TestCase):
             "SLOW",
             "ATTRACT",
             "POLES",
+            "PAUSE",
+            "SNAP",
             "mergeCompareGraph",
             "loadCompareGraph",
             "scanGitNexusExternal",
+            "copyPngToClipboard",
+            "snapScreenshotToClipboard",
+            "togglePause",
+            "turnGraph",
             "FILTER_LABELS",
             "MODE HOT",
             "MODE CHANGED",
@@ -113,10 +119,12 @@ class TestGitNexusHudAssets(unittest.TestCase):
         main = (ROOT / "electron" / "main.js").read_text(encoding="utf-8", errors="ignore")
         self.assertIn("scanGitNexusExternal", preload)
         self.assertIn("nexus:scanGitNexusExternal", main)
+        self.assertIn("nexus:copyPngToClipboard", main)
         self.assertIn("compileExternalGitNexusGraph", main)
         self.assertIn("Only local filesystem paths are supported", main)
         self.assertIn("from nexus_gate.gitnexus_bridge.engine import compile_graph", main)
         self.assertIn("file_mutation_from_model_output: false", main)
+        self.assertIn("clipboard.writeImage", main)
 
     def test_geometry_css_exists(self):
         css = (ROOT / "electron" / "renderer" / "nexus_gitnexus_local_hud.v0.5.3.css").read_text(

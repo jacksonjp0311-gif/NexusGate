@@ -149,7 +149,7 @@
 
 #gitnexus-local-hud .gnx-local-controls {
   display: grid;
-  grid-template-columns: repeat(13, minmax(0, auto));
+  grid-template-columns: repeat(15, minmax(0, auto));
   gap: 8px;
   justify-content: end;
   min-width: 0;
@@ -232,6 +232,7 @@
 }
 
 #gitnexus-local-hud .gnx-local-main {
+  position: relative;
   min-height: 0;
   display: grid;
   grid-template-columns: 230px minmax(0, 1fr) 300px;
@@ -250,6 +251,60 @@
 #gitnexus-local-hud .gnx-local-right {
   padding: 14px;
   overflow: hidden;
+}
+
+#gitnexus-local-hud .gnx-side-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+#gitnexus-local-hud .gnx-side-actions .gnx-local-btn {
+  width: 100%;
+}
+
+#gitnexus-local-hud .gnx-popout {
+  position: absolute;
+  right: 314px;
+  top: 12px;
+  bottom: 12px;
+  width: min(720px, calc(100% - 580px));
+  z-index: 8;
+  display: grid;
+  grid-template-rows: 42px minmax(0, 1fr);
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid rgba(125, 255, 77, 0.42);
+  background:
+    radial-gradient(circle at 65% 22%, rgba(125, 255, 77, 0.12), transparent 42%),
+    linear-gradient(145deg, rgba(3, 36, 23, 0.98), rgba(1, 8, 18, 0.98));
+  box-shadow: 0 0 34px rgba(34, 197, 94, 0.18), inset 0 0 24px rgba(34, 197, 94, 0.06);
+}
+
+#gitnexus-local-hud .gnx-popout.is-hidden {
+  display: none;
+}
+
+#gitnexus-local-hud .gnx-popout-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  border-bottom: 1px solid rgba(125, 255, 77, 0.24);
+}
+
+#gitnexus-local-hud .gnx-popout-head strong {
+  color: #86efac;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+}
+
+#gitnexus-local-hud .gnx-popout .gnx-local-top-files,
+#gitnexus-local-hud .gnx-popout .gnx-diagnostics {
+  min-height: 0;
+  max-height: none;
+  overflow: auto;
 }
 
 #gitnexus-local-hud h3 {

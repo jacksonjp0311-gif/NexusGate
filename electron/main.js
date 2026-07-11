@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, shell } = require("electron");
+const { app, BrowserWindow, ipcMain, shell, clipboard, nativeImage } = require("electron");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
@@ -1382,6 +1382,19 @@ ipcMain.handle("nexus:getPetriDishProState", async () => buildPetriPreviewState(
 ipcMain.handle("nexus:getNeuralRepoGraph", async () => buildNeuralRepoGraph());
 ipcMain.handle("nexus:scanGitNexusExternal", async (_event, packet = {}) => {
   return compileExternalGitNexusGraph(packet.localPath);
+});
+ipcMain.handle("nexus:copyPngToClipboard", async (_event, packet = {}) => {
+  const dataUrl = String(packet.dataUrl || "");
+  if (!dataUrl.startsWith("data:image/png;base64,")) {
+    throw new Error("Only PNG data URLs may be copied.");
+  }
+  if (dataUrl.length > 24 * 1024 * 1024) {
+    throw new Error("PNG clipboard payload exceeded limit.");
+  }
+  const image = nativeImage.createFromDataURL(dataUrl);
+  if (image.isEmpty()) throw new Error("PNG clipboard payload was empty.");
+  clipboard.writeImage(image);
+  return { ok: true, format: "image/png" };
 });
 ipcMain.handle("nexus:getTempestState", async () => buildTempestState());
 ipcMain.handle("nexus:openTempestFolder", async () => {

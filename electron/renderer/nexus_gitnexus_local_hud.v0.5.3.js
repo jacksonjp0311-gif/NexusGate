@@ -59,6 +59,19 @@
     core: COLORS.cyan,
     other: COLORS.smoke
   };
+  const COMPARE_TYPE_COLOR = {
+    py: "#ff5fcb",
+    js: "#ffd166",
+    ts: "#ffd166",
+    tsx: "#ffd166",
+    jsx: "#ffd166",
+    test: "#c084fc",
+    state: "#f97316",
+    report: "#f97316",
+    doc: "#38bdf8",
+    core: "#ff5fcb",
+    other: "#f5d0fe"
+  };
 
   const CORE_TYPES = new Set(["core", "py", "js", "test"]);
   const CATEGORY_DEFS = [
@@ -73,9 +86,9 @@
     if (!Object.prototype.hasOwnProperty.call(state.activeCategories, category.id)) state.activeCategories[category.id] = true;
   });
   const SPEED_PROFILES = {
-    fast: { label: "FAST", fps: 60, physics: 1.0, ease: 0.18 },
-    medium: { label: "MEDIUM", fps: 45, physics: 0.74, ease: 0.145 },
-    slow: { label: "SLOW", fps: 30, physics: 0.52, ease: 0.11 }
+    fast: { label: "FAST", fps: 28, physics: 0.58, ease: 0.095 },
+    medium: { label: "MEDIUM", fps: 18, physics: 0.32, ease: 0.065 },
+    slow: { label: "SLOW", fps: 10, physics: 0.12, ease: 0.035 }
   };
   const SPEED_ORDER = ["slow", "medium", "fast"];
 
@@ -400,6 +413,14 @@
     const cleanLabel = safeText(sourceLabel || "compare", "compare").replace(/\\/g, "/").split("/").filter(Boolean).slice(-2).join("/") || "compare";
     const existingNodes = (base.nodes || []).filter((node) => !node.compare);
     const existingEdges = (base.edges || []).filter((edge) => !edge.compare);
+    existingNodes.forEach((node) => {
+      node.repoIndex = 0;
+      if (!node.repoOffsetApplied) {
+        node.x -= 260;
+        node.tx -= 260;
+        node.repoOffsetApplied = true;
+      }
+    });
     const offsetX = 620;
     const prefix = "compare:";
     const copiedNodes = (compare.nodes || []).slice(0, 1000).map((node) => {
@@ -412,6 +433,8 @@
         x: (Number(node.x) || 0) + offsetX,
         tx: (Number(node.tx) || 0) + offsetX,
         compare: true,
+        repoIndex: 1,
+        repoOffsetApplied: true,
         vx: 0,
         vy: 0
       };
@@ -426,16 +449,8 @@
       weight: Math.max(0.08, Number(edge.weight) || 0.18)
     })).filter((edge) => copiedIds.has(edge.a) && copiedIds.has(edge.b));
 
-    const baseHot = existingNodes.filter((node) => !node.folder).sort((a, b) => scoreNode(b) - scoreNode(a)).slice(0, 8);
-    const compareHot = copiedNodes.filter((node) => !node.folder).sort((a, b) => scoreNode(b) - scoreNode(a)).slice(0, 8);
-    const bridgeEdges = [];
-    baseHot.forEach((node, index) => {
-      const other = compareHot[index % Math.max(1, compareHot.length)];
-      if (other) bridgeEdges.push({ a: node.id, b: other.id, type: "trace", weight: 0.10, compare: true });
-    });
-
     const nodes = existingNodes.concat(copiedNodes);
-    const edges = existingEdges.concat(copiedEdges, bridgeEdges);
+    const edges = existingEdges.concat(copiedEdges);
     const byId = new Map(nodes.map((node) => [node.id, node]));
     nodes.forEach((node) => { node.degree = 0; });
     edges.forEach((edge) => {
@@ -702,7 +717,12 @@
     const central = diagnostics.centrality[0]?.node?.path || "no central file";
     const change = diagnostics.changePriority[0]?.node?.path || "no changed or hot file";
     const islandCount = diagnostics.deadIslands.length;
-    return `${lead} Highest centrality: ${central}. Highest patch priority: ${change}. Dead-island candidates: ${islandCount}. Use category toggles to isolate domains before mutation.`;
+    const compareCount = visibleFileNodes().filter((node) => node.repoIndex === 1).length;
+    const repoFrame = compareCount
+      ? `External compare lobe active with ${compareCount} visible files; colors are shifted to separate local architecture from the compared repository.`
+      : "Single-repository lobe active.";
+    const spatial = `Spatial read: density ${(a.density).toFixed(3)}, anisotropy ${a.anisotropy.toFixed(2)}, balance ${Math.round(a.balance * 100)}%. High anisotropy means corridor-like coupling; high bridge pressure means cross-domain risk.`;
+    return `${lead} ${repoFrame} ${spatial} Highest centrality: ${central}. Highest patch priority: ${change}. Dead-island candidates: ${islandCount}. Use category toggles and diagnostic HUDs to isolate domains before mutation.`;
   }
 
   function updateAnalyzerPanel() {
@@ -762,6 +782,78 @@
     placed.push(box);
     return true;
   }
+
+  function setLayoutMode(mode) {
+    state.layoutMode = LAYOUT_LABELS[mode] ? mode : "force";
+    state.velocity.x = 0;
+    state.velocity.y = 0;
+    updateControlStates();
+  }
+
+  function togglePause(force) {
+    state.paused = typeof force === "boolean" ? force : !state.paused;
+    updateControlStates();
+  }
+
+  function turnGraph(amount = Math.PI / 7) {
+    state.target.rot += amount;
+    state.camera.rot += amount * 0.22;
+    state.velocity.rot = amount * 0.01;
+  }
+
+  function updateControlStates() {
+    const hud = q(`#${HUD_ID}`);
+    if (!hud) return;
+    const layoutButton = q("[data-layout]", hud);
+    if (layoutButton) layoutButton.textContent = "FORCE";
+    qa("[data-layout], [data-attractor], [data-poles]", hud).forEach((button) => button.classList.remove("is-on"));
+    if (state.layoutMode === "force") q("[data-layout]", hud)?.classList.add("is-on");
+    if (state.layoutMode === "organism") q("[data-attractor]", hud)?.classList.add("is-on");
+    if (state.layoutMode === "poles") q("[data-poles]", hud)?.classList.add("is-on");
+    const pause = q("[data-pause]", hud);
+    if (pause) {
+      pause.textContent = state.paused ? "RESUME" : "PAUSE";
+      pause.classList.toggle("is-on", state.paused);
+    }
+    const speed = q("[data-speed]", hud);
+    if (speed) speed.textContent = SPEED_PROFILES[state.speedMode]?.label || "SPEED";
+  }
+
+  async function snapScreenshotToClipboard() {
+    const hud = q(`#${HUD_ID}`);
+    const canvas = q("#gnx-local-full-canvas", hud);
+    const status = q("[data-status]", hud);
+    if (!canvas) return;
+    try {
+      const dataUrl = canvas.toDataURL("image/png");
+      if (window.nexus?.copyPngToClipboard) {
+        await window.nexus.copyPngToClipboard(dataUrl);
+        if (status) status.textContent = "GitNexus screenshot copied to clipboard.";
+        return;
+      }
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(dataUrl);
+        if (status) status.textContent = "GitNexus screenshot data URL copied to clipboard.";
+        return;
+      }
+      throw new Error("clipboard bridge unavailable");
+    } catch (error) {
+      if (status) status.textContent = `Screenshot blocked: ${error.message}`;
+    }
+  }
+
+  function openDataHud(kind) {
+    const hud = q(`#${HUD_ID}`);
+    const target = q(`[data-popout='${kind}']`, hud);
+    if (!target) return;
+    qa("[data-popout]", hud).forEach((panel) => panel.classList.add("is-hidden"));
+    target.classList.remove("is-hidden");
+  }
+
+  function closeDataHud(button) {
+    button?.closest?.("[data-popout]")?.classList.add("is-hidden");
+  }
+
   function tickPhysics(dt) {
     const graph = state.graph;
     if (!graph || state.paused) return;
@@ -817,6 +909,7 @@
       for (let j = i + 1; j < simNodes.length; j++) {
         const b = simNodes[j];
         if (!visibleNode(b)) continue;
+        if ((a.repoIndex || 0) !== (b.repoIndex || 0)) continue;
         let dx = a.x - b.x;
         let dy = a.y - b.y;
         let d2 = dx * dx + dy * dy + 0.01;
@@ -859,12 +952,13 @@
     }
   }
 
-  function updateCamera(dt) {
+  function updateCamera(dt, profile = SPEED_PROFILES.medium) {
+    const ease = profile.ease || 0.08;
     state.target.zoom = clamp(state.target.zoom, 0.08, 9);
-    state.camera.x = lerp(state.camera.x, state.target.x, 0.16);
-    state.camera.y = lerp(state.camera.y, state.target.y, 0.16);
-    state.camera.zoom = lerp(state.camera.zoom, state.target.zoom, 0.18);
-    state.camera.rot = lerp(state.camera.rot, state.target.rot, 0.18);
+    state.camera.x = lerp(state.camera.x, state.target.x, ease);
+    state.camera.y = lerp(state.camera.y, state.target.y, ease);
+    state.camera.zoom = lerp(state.camera.zoom, state.target.zoom, ease);
+    state.camera.rot = lerp(state.camera.rot, state.target.rot, ease);
 
     state.target.x += state.velocity.x * dt;
     state.target.y += state.velocity.y * dt;
@@ -898,6 +992,11 @@
 
   function edgeEnergy(e, t) {
     return 0.35 + 0.35 * Math.sin(t * 0.004 + (hashText(e.a + e.b) % 628) / 100);
+  }
+
+  function nodeColor(n) {
+    if (n.compare || n.repoIndex === 1) return COMPARE_TYPE_COLOR[n.kind] || COMPARE_TYPE_COLOR.other;
+    return TYPE_COLOR[n.kind] || TYPE_COLOR.other;
   }
 
   function drawGraph(ctx, w, h, opts = {}) {
@@ -942,7 +1041,10 @@
         const energy = edgeEnergy(e, t);
         const alpha = onPath ? 0.62 : mini ? 0.12 : 0.14 + energy * 0.07;
         const isTrace = e.type === "trace" || e.type === "pulse";
-        ctx.strokeStyle = isTrace
+        const compareEdge = a.compare || b.compare || a.repoIndex === 1 || b.repoIndex === 1;
+        ctx.strokeStyle = compareEdge
+          ? `rgba(255,95,203,${Math.min(0.50, alpha + 0.04)})`
+          : isTrace
           ? `rgba(255,170,0,${alpha})`
           : `rgba(0,240,255,${alpha})`;
         ctx.lineWidth = onPath ? (mini ? 1.2 : 1.8) : (mini ? 0.42 : Math.max(0.48, (e.weight || 0.2) * 1.15));
@@ -960,7 +1062,7 @@
     for (const n of ordered) {
       const p = worldProject(n, fit, mini);
       if (p.x < -80 || p.y < -80 || p.x > w + 80 || p.y > h + 80) continue;
-      const color = n.changed ? COLORS.changed : (TYPE_COLOR[n.kind] || TYPE_COLOR.other);
+      const color = n.changed ? COLORS.changed : nodeColor(n);
       const pulse = 1 + Math.sin(t * 0.003 + n.phase) * 0.10;
       const hotBoost = n.hot ? 1.45 : 1;
       const focusBoost = n.id === selected ? 2.05 : n.id === hover ? 1.75 : neighbors.has(n.id) ? 1.30 : 1;
@@ -975,7 +1077,7 @@
 
       ctx.shadowBlur = n.hot || neighbors.has(n.id) || n.id === selected ? (mini ? 18 : 28) : (mini ? 8 : 12);
       ctx.shadowColor = n.id === selected ? COLORS.text : n.changed ? COLORS.changed : n.hot ? "rgba(255,170,0,0.82)" : color;
-      ctx.fillStyle = n.changed ? COLORS.changed : (n.hot ? COLORS.amber : color);
+      ctx.fillStyle = n.changed ? COLORS.changed : (n.hot && !n.compare ? COLORS.amber : color);
       ctx.beginPath();
       ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
       ctx.fill();
@@ -1023,7 +1125,10 @@
       if (fit) {
         const dt = state.lastT ? clamp((t - state.lastT) / 16.67, 0.25, 2.5) : 1;
         state.miniRot += 0.0028 * dt;
-        if (!state.fullOpen) tickPhysics(dt * 0.35);
+        if (!state.fullOpen) {
+          const profile = SPEED_PROFILES[state.speedMode] || SPEED_PROFILES.medium;
+          tickPhysics(dt * 0.20 * profile.physics);
+        }
         drawGraph(fit.ctx, fit.w, fit.h, { mini: true });
       }
       state.miniRaf = requestAnimationFrame(loop);
@@ -1057,6 +1162,7 @@
         <button class="gnx-local-btn" data-zoom-in>+</button>
         <button class="gnx-local-btn" data-zoom-out>-</button>
         <button class="gnx-local-btn" data-turn>TURN</button>
+        <button class="gnx-local-btn" data-pause>PAUSE</button>
         <button class="gnx-local-btn is-on" data-edges>EDGES</button>
         <button class="gnx-local-btn is-on" data-labels>LABELS</button>
         <button class="gnx-local-btn" data-filter-mode>MODE ALL</button>
@@ -1064,6 +1170,7 @@
         <button class="gnx-local-btn" data-attractor>ATTRACT</button>
         <button class="gnx-local-btn" data-poles>POLES</button>
         <button class="gnx-local-btn is-on" data-speed>FAST</button>
+        <button class="gnx-local-btn" data-snapshot>SNAP</button>
         <button class="gnx-local-btn" data-refresh>REFRESH</button>
         <button class="gnx-local-btn gnx-local-close" data-close>CLOSE</button>
         </div>
@@ -1097,13 +1204,22 @@
           <div class="gnx-geometry-panel" data-geometry-panel><div><span>PATTERN</span><b data-geo="pattern">--</b></div><div><span>DENSITY</span><b data-geo="density">--</b></div><div><span>HUBS</span><b data-geo="hubs">--</b></div><div><span>BRIDGE</span><b data-geo="bridge">--</b></div><div><span>BALANCE</span><b data-geo="balance">--</b></div><div><span>ANISOTROPY</span><b data-geo="anisotropy">--</b></div></div>
           <div class="gnx-local-recommend" data-geo="recommendation">Reading local geometry.</div>
           <div class="gnx-geometry-summary" data-geo="summary">Waiting for geometry summary.</div>
-          <h3>TOP FILES</h3>
-          <ol class="gnx-local-top-files" data-top-files-right></ol>
-          <h3>DIAGNOSTIC REPORTS</h3>
-          <div class="gnx-diagnostics" data-diagnostics></div>
+          <div class="gnx-side-actions">
+            <button class="gnx-local-btn" data-open-top-files>OPEN TOP FILES</button>
+            <button class="gnx-local-btn" data-open-diagnostics>OPEN DIAGNOSTICS</button>
+            <button class="gnx-local-btn" data-snapshot-side>SNAP SCREENSHOT</button>
+          </div>
           <h3>SELECTED NODE</h3>
           <div class="gnx-local-selected" data-selected>No node selected.</div>
         </aside>
+        <section class="gnx-popout is-hidden" data-popout="top-files">
+          <div class="gnx-popout-head"><strong>TOP FILES</strong><button class="gnx-local-btn" data-popout-close>CLOSE</button></div>
+          <ol class="gnx-local-top-files" data-top-files-right></ol>
+        </section>
+        <section class="gnx-popout is-hidden" data-popout="diagnostics">
+          <div class="gnx-popout-head"><strong>DIAGNOSTIC REPORTS</strong><button class="gnx-local-btn" data-popout-close>CLOSE</button></div>
+          <div class="gnx-diagnostics" data-diagnostics></div>
+        </section>
       </main>
       <footer class="gnx-local-foot">
         <span>Evidence only.</span>
@@ -1118,7 +1234,13 @@
     q("[data-fit]", hud).addEventListener("click", fitFull);
     q("[data-zoom-in]", hud).addEventListener("click", () => { zoomAroundCenter(1.18); });
     q("[data-zoom-out]", hud).addEventListener("click", () => { zoomAroundCenter(1 / 1.18); });
-    q("[data-turn]", hud).addEventListener("click", () => { state.target.rot += Math.PI / 9; });
+    q("[data-turn]", hud).addEventListener("click", () => { turnGraph(); });
+    q("[data-pause]", hud).addEventListener("click", () => { togglePause(); });
+    q("[data-snapshot]", hud).addEventListener("click", snapScreenshotToClipboard);
+    q("[data-snapshot-side]", hud).addEventListener("click", snapScreenshotToClipboard);
+    q("[data-open-top-files]", hud).addEventListener("click", () => openDataHud("top-files"));
+    q("[data-open-diagnostics]", hud).addEventListener("click", () => openDataHud("diagnostics"));
+    qa("[data-popout-close]", hud).forEach((button) => button.addEventListener("click", () => closeDataHud(button)));
     q("[data-refresh]", hud).addEventListener("click", async () => {
       await loadGraph(true);
       fitFull();
@@ -1161,24 +1283,18 @@
       });
     });
     q("[data-layout]", hud).addEventListener("click", (e) => {
-      const current = LAYOUT_ORDER.indexOf(state.layoutMode);
-      state.layoutMode = LAYOUT_ORDER[(current + 1 + LAYOUT_ORDER.length) % LAYOUT_ORDER.length];
-      e.currentTarget.textContent = LAYOUT_LABELS[state.layoutMode] || state.layoutMode.toUpperCase();
+      setLayoutMode("force");
     });
     q("[data-attractor]", hud).addEventListener("click", () => {
-      state.layoutMode = "organism";
-      const btn = q("[data-layout]", hud);
-      if (btn) btn.textContent = LAYOUT_LABELS[state.layoutMode];
+      setLayoutMode("organism");
     });
     q("[data-poles]", hud).addEventListener("click", () => {
-      state.layoutMode = "poles";
-      const btn = q("[data-layout]", hud);
-      if (btn) btn.textContent = LAYOUT_LABELS[state.layoutMode];
+      setLayoutMode("poles");
     });
     q("[data-speed]", hud).addEventListener("click", (e) => {
       const index = SPEED_ORDER.indexOf(state.speedMode);
       state.speedMode = SPEED_ORDER[(index + 1 + SPEED_ORDER.length) % SPEED_ORDER.length];
-      e.currentTarget.textContent = SPEED_PROFILES[state.speedMode].label;
+      updateControlStates();
     });
     q(".gnx-local-search", hud).addEventListener("input", (e) => {
       state.search = e.currentTarget.value || "";
@@ -1474,8 +1590,8 @@
         if (fps) fps.textContent = `FPS ${state.fps}`;
       }
 
-      tickPhysics(dt); if (performance.now() - (state.analyzerT || 0) > 900) { state.analyzer = analyzeGeometry(state.graph); state.analyzerT = performance.now(); updateAnalyzerPanel(); }
-      updateCamera(dt);
+      tickPhysics(dt * profile.physics); if (performance.now() - (state.analyzerT || 0) > 900) { state.analyzer = analyzeGeometry(state.graph); state.analyzerT = performance.now(); updateAnalyzerPanel(); }
+      updateCamera(dt, profile);
 
       const canvas = document.getElementById("gnx-local-full-canvas");
       const fit = fitCanvas(canvas);
@@ -1490,6 +1606,7 @@
     const hud = document.getElementById(HUD_ID);
     hud.classList.remove("is-hidden");
     state.fullOpen = true;
+    updateControlStates();
     if (!state.graphLoaded) {
       loadGraph().then(() => { updateHudStats(); updateTopFiles(); fitFull(); });
     } else {
@@ -1535,7 +1652,7 @@
       const pan = 34 / Math.max(0.1, state.target.zoom);
 
       if (key === "escape") { closeHud(); ev.preventDefault(); }
-      if (key === " ") { state.paused = !state.paused; ev.preventDefault(); }
+      if (key === " ") { togglePause(); ev.preventDefault(); }
       if (key === "f") { const n = state.selected && state.graph?.byId?.get(state.selected); if (n) focusNode(n, true); ev.preventDefault(); }
       if (key === "r") { fitFull(); ev.preventDefault(); }
       if (key === "m") { const btn = q("[data-filter-mode]"); if (btn) btn.click(); ev.preventDefault(); }
