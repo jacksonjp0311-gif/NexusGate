@@ -42,6 +42,8 @@ Predictive Evolve is the dry-run planner built on that discovery: predictive tim
 
 Certificate Resume v0.1 records passed-gate evidence hashes from the latest human-surface run and recommends a resume point after failure. Certificates are not a pass claim by themselves; `.\scripts\nexus.ps1 evolve` remains the final commit seal.
 
+## Cortex
+Cortex is now imported at `Cortex/` as a local-first repository assimilation and selective-memory organ. First bootstrap indexed 3,249 eligible NEXUS files, compiled 16,898 neural synapses, and stayed `read_only` because manifest drift degraded the certificate. Benchmarks: Cortex tests 22 pass; Thalamus rank 4 -> 3 with top-3 recall 0% -> 100%; NEXUS packet 3.489 s; interlink 10.063 s. See `docs/runtime/NEXUS_CORTEX.md` and `reports/nexus_cortex_benchmark_report_latest.json`.
 ## AI Toolbelt Console
 Use the AI Toolbelt Console before choosing a patch path.
 
@@ -151,6 +153,7 @@ v1.0.1 routes `phi-wound-gpu` through the non-interactive Ollama JSON adapter in
 | Predictive Gate Timing | `docs/runtime/NEXUS_PREDICTIVE_GATE_TIMING.md` |
 | Predictive Evolve | `docs/runtime/NEXUS_PREDICTIVE_EVOLVE.md` |
 | Certificate Resume | `docs/runtime/NEXUS_CERTIFICATE_RESUME.md` |
+| Cortex | `docs/runtime/NEXUS_CORTEX.md` |
 | Algorithm Cards | `docs/runtime/NEXUS_ALGORITHM_CARDS.md` |
 | Discovery Cards | `docs/runtime/NEXUS_DISCOVERY_CARDS.md` |
 | Meta-Orchestrator Gate | `docs/runtime/NEXUS_META_ORCHESTRATOR_GATE.md` |
@@ -205,11 +208,8 @@ Reflective Intelligence Layer for AI Systems; local-first reflective intelligenc
 | ChatGPT scripting doctrine | `chatgpt/scripts.md` |
 <!-- NEXUS:README_023N_FRESHNESS_END -->
 
-## AI Toolbelt
-AI Toolbelt Console and Toolbelt Cockpit Output are exposed through `toolbelt-start`, `toolbelt-dashboard`, and `toolbelt-json`.
-
-## Nexus Loops / Cards
-NEXUS Loop Cards preserve the HUD/portal surface at `state/loops/nexus_loop_cards_latest.json` and `docs/runtime/NEXUS_LOOP_CARDS.md`.
+## AI Toolbelt / Nexus Loops
+AI Toolbelt Console, Toolbelt Cockpit Output, and NEXUS Loop Cards are exposed through `toolbelt-start`, `toolbelt-dashboard`, `toolbelt-json`, `state/loops/nexus_loop_cards_latest.json`, and `docs/runtime/NEXUS_LOOP_CARDS.md`.
 ## What this is not
 Not production validated. Not a safety proof. Not a security proof. Not a correctness proof. Not autonomous authority. Not write authority. Not memory write authority. Not provider authority. Not a replacement for human authorization. Not a claim that routing proves alignment. Not a claim that RHP proves truth. Not a claim that Nexus geometry proves code correctness. Not a claim that NexusCell is a perfect sandbox or full rollback proof.
 ## Compact Law

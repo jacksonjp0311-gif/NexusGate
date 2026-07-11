@@ -35,6 +35,13 @@ state/nexus_geometric_memory_runtime_latest.json
 state/visual/
 state/wounds/
 state/nexus_cell/
+.cortex/
+state/cortex_memory/
+Cortex/work/
+Cortex/build/
+Cortex/.pytest_cache/
+Cortex/.ruff_cache/
+Cortex/cortex_memory.egg-info/
 
 # draft HUD docs/assets (not yet promoted)
 docs/runtime/NEXUS_METRICS_HUD.md

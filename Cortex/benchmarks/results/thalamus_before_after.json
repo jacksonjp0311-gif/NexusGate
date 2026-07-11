@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "workload": {
+    "files": 250,
+    "runs": 5,
+    "task": "Fix the failing test in module_0125.py and trace the linked pipeline",
+    "target": "module_0125.py",
+    "relevant_paths": [
+      "tests/test_module_0125.py",
+      "module_0124.py"
+    ]
+  },
+  "baseline": {
+    "name": "direct_hybrid_retrieval",
+    "median_seconds": 0.043057,
+    "median_target_rank": 4,
+    "top_3_target_recall": 0.0,
+    "mean_out_of_route_candidates": 3
+  },
+  "thalamus_routed": {
+    "name": "thalamus_routed_hybrid_retrieval",
+    "median_seconds": 0.043966,
+    "median_target_rank": 3,
+    "top_3_target_recall": 1.0,
+    "mean_out_of_route_candidates": 3
+  },
+  "samples": {
+    "baseline": [
+      {
+        "seconds": 0.04268170002615079,
+        "target_rank": 4,
+        "out_of_route_candidates": 3
+      },
+      {
+        "seconds": 0.04305680003017187,
+        "target_rank": 4,
+        "out_of_route_candidates": 3
+      },
+      {
+        "seconds": 0.04449849994853139,
+        "target_rank": 4,
+        "out_of_route_candidates": 3
+      },
+      {
+        "seconds": 0.046357400016859174,
+        "target_rank": 4,
+        "out_of_route_candidates": 3
+      },
+      {
+        "seconds": 0.04296599997906014,
+        "target_rank": 4,
+        "out_of_route_candidates": 3
+      }
+    ],
+    "thalamus_routed": [
+      {
+        "seconds": 0.04287740000290796,
+        "target_rank": 3,
+        "out_of_route_candidates": 3
+      },
+      {
+        "seconds": 0.046188199950847775,
+        "target_rank": 3,
+        "out_of_route_candidates": 3
+      },
+      {
+        "seconds": 0.04292360000545159,
+        "target_rank": 3,
+        "out_of_route_candidates": 3
+      },
+      {
+        "seconds": 0.044610499986447394,
+        "target_rank": 3,
+        "out_of_route_candidates": 3
+      },
+      {
+        "seconds": 0.043966100027319044,
+        "target_rank": 3,
+        "out_of_route_candidates": 3
+      }
+    ]
+  }
+}

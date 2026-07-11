@@ -1,0 +1,77 @@
+{
+  "system": "NEXUS GATE",
+  "subsystem": "Cortex",
+  "source_path": "C:\\Users\\jacks\\OneDrive\\Desktop\\Cortex",
+  "integrated_path": "Cortex",
+  "generated_at_local": "2026-07-11",
+  "mode": "local_first_read_only_evidence_organ",
+  "authority_boundary": {
+    "cortex_may_mutate": false,
+    "human_authorized_only": true,
+    "nexus_gates_remain_final": true
+  },
+  "bootstrap": {
+    "home": "state/cortex_memory",
+    "status": "degraded",
+    "governor_mode": "read_only",
+    "indexed_files": 3249,
+    "index_coverage": 1.0,
+    "unsupported_or_excluded_files": 129,
+    "neural_nodes": 3249,
+    "synapses": 16898,
+    "note": "Bootstrap degraded because the observed manifest drifted after assimilation; this correctly blocks authority claims."
+  },
+  "benchmarks": {
+    "unit_tests": {
+      "tests": 22,
+      "status": "pass"
+    },
+    "thalamus_before_after": {
+      "files": 250,
+      "runs": 5,
+      "baseline_median_seconds": 0.043057,
+      "routed_median_seconds": 0.043966,
+      "baseline_target_rank": 4,
+      "routed_target_rank": 3,
+      "baseline_top3_recall": 0.0,
+      "routed_top3_recall": 1.0
+    },
+    "sparse_activation": {
+      "files_requested": 250,
+      "indexed_nodes": 262,
+      "synapses": 280,
+      "bootstrap_seconds": 1.544496,
+      "activation_seconds": 0.006692,
+      "nodes_fired": 24,
+      "sparse_activation_ratio": 0.09160305
+    },
+    "nexus_local_runs": {
+      "verify_seconds": 20.4519767,
+      "thalamus_seconds": 0.3367976,
+      "interlink_seconds": 10.0630794,
+      "nexus_packet_seconds": 3.4890858,
+      "activate_auto_refresh_seconds": 40.9063631
+    },
+    "self_host_lifecycle": {
+      "status": "not_applicable_from_vendored_copy",
+      "reason": "The benchmark performs git clone --no-local from the active Cortex folder; the NEXUS vendored copy excludes .git."
+    }
+  },
+  "review": {
+    "worked_well": [
+      "Dependency-free core imported cleanly.",
+      "Cortex indexed the NEXUS repository with full eligible-file coverage.",
+      "Thalamus routing improved relevant target rank and top-3 recall on the synthetic workload.",
+      "Nexus packet output is fast enough to become a practical rehydration surface.",
+      "Governor correctly stayed read-only when manifest drift made the bootstrap certificate degraded."
+    ],
+    "improvements": [
+      "Add a NEXUS cortex lane and compiler gate.",
+      "Add manifest refresh/resume so degraded bootstrap can self-explain the exact stale inputs.",
+      "Add a report-pruning policy so Cortex ignores generated evidence churn by default.",
+      "Expose Cortex status and activated paths in Electron as read-only cards.",
+      "Run self-host lifecycle from the original Git-backed Cortex repository or keep a Git metadata stub for benchmark-only validation."
+    ]
+  },
+  "claim_boundary": "Cortex benchmarks are local development evidence only. They do not prove correctness, safety, security, production readiness, biological fidelity, model understanding, or autonomous authority."
+}
