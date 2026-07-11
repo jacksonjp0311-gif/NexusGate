@@ -12,14 +12,14 @@
   },
   "baseline": {
     "name": "direct_hybrid_retrieval",
-    "median_seconds": 0.043057,
+    "median_seconds": 0.06569,
     "median_target_rank": 4,
     "top_3_target_recall": 0.0,
     "mean_out_of_route_candidates": 3
   },
   "thalamus_routed": {
     "name": "thalamus_routed_hybrid_retrieval",
-    "median_seconds": 0.043966,
+    "median_seconds": 0.055284,
     "median_target_rank": 3,
     "top_3_target_recall": 1.0,
     "mean_out_of_route_candidates": 3
@@ -27,54 +27,54 @@
   "samples": {
     "baseline": [
       {
-        "seconds": 0.04268170002615079,
+        "seconds": 0.055391900008544326,
         "target_rank": 4,
         "out_of_route_candidates": 3
       },
       {
-        "seconds": 0.04305680003017187,
+        "seconds": 0.06680440000491217,
         "target_rank": 4,
         "out_of_route_candidates": 3
       },
       {
-        "seconds": 0.04449849994853139,
+        "seconds": 0.07139070000266656,
         "target_rank": 4,
         "out_of_route_candidates": 3
       },
       {
-        "seconds": 0.046357400016859174,
+        "seconds": 0.06025649997172877,
         "target_rank": 4,
         "out_of_route_candidates": 3
       },
       {
-        "seconds": 0.04296599997906014,
+        "seconds": 0.06569020001916215,
         "target_rank": 4,
         "out_of_route_candidates": 3
       }
     ],
     "thalamus_routed": [
       {
-        "seconds": 0.04287740000290796,
+        "seconds": 0.06967860000440851,
         "target_rank": 3,
         "out_of_route_candidates": 3
       },
       {
-        "seconds": 0.046188199950847775,
+        "seconds": 0.0546815000125207,
         "target_rank": 3,
         "out_of_route_candidates": 3
       },
       {
-        "seconds": 0.04292360000545159,
+        "seconds": 0.05795270000817254,
         "target_rank": 3,
         "out_of_route_candidates": 3
       },
       {
-        "seconds": 0.044610499986447394,
+        "seconds": 0.05121710000094026,
         "target_rank": 3,
         "out_of_route_candidates": 3
       },
       {
-        "seconds": 0.043966100027319044,
+        "seconds": 0.05528359999880195,
         "target_rank": 3,
         "out_of_route_candidates": 3
       }

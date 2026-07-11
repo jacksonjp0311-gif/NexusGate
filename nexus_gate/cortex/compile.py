@@ -31,6 +31,7 @@ def compile_gate(root: Path, task: str) -> dict:
         "engine_present": engine.is_dir(),
         "database_integrity": bool(doctor_payload.get("database_integrity")),
         "certificate_verified": doctor_payload.get("governor", {}).get("components", {}).get("integrity") == 1.0,
+        "vector_storage_current": doctor_payload.get("vector_format", {}).get("legacy_or_invalid", 0) == 0,
         "packet_shape": all(key in packet_payload for key in ("intent", "evidence", "authority", "context")),
         "read_only_authority": packet_payload.get("authority", {}).get("cortex_may_mutate") is False,
     }

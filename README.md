@@ -43,7 +43,7 @@ Predictive Evolve is the dry-run planner built on that discovery: predictive tim
 Certificate Resume v0.1 records passed-gate evidence hashes from the latest human-surface run and recommends a resume point after failure. Certificates are not a pass claim by themselves; `.\scripts\nexus.ps1 evolve` remains the final commit seal.
 
 ## Cortex
-Cortex is now imported at `Cortex/` as a local-first repository assimilation and selective-memory organ. First bootstrap indexed 3,249 eligible NEXUS files, compiled 16,898 neural synapses, and stayed `read_only` because manifest drift degraded the certificate. Benchmarks: Cortex tests 22 pass; Thalamus rank 4 -> 3 with top-3 recall 0% -> 100%; NEXUS packet 3.489 s; interlink 10.063 s. See `docs/runtime/NEXUS_CORTEX.md` and `reports/nexus_cortex_benchmark_report_latest.json`.
+Cortex is imported at `Cortex/` as a recommendation-only repository assimilation and selective-memory organ. Sync upgrades from the standalone repo with `.\scripts\nexus.ps1 sync-cortex -Tag "C:\Users\jacks\OneDrive\Desktop\Cortex"`; current synced source is upstream commit `8d5e60b`. The vector storage upgrade migrated `7,919` NEXUS Cortex vectors to versioned float32 BLOBs, reducing benchmark vector payload by `34.71%` and moving sample query mean from `242.630 ms` legacy to `183.011 ms` blob. See `docs/runtime/NEXUS_CORTEX.md`, `reports/nexus_cortex_sync_report_latest.json`, and `reports/nexus_cortex_gate_latest.json`.
 ## AI Toolbelt Console
 Use the AI Toolbelt Console before choosing a patch path.
 

@@ -190,6 +190,11 @@ case "$COMMAND" in
     INTENT="${*:-Run NEXUS Cortex gate.}"
     python -m nexus_gate.cortex.compile --root . --intent "$INTENT" --json
     ;;
+  sync-cortex)
+    shift || true
+    SOURCE="${1:-${HOME}/OneDrive/Desktop/Cortex}"
+    ./scripts/sync_cortex.sh "$SOURCE"
+    ;;
   algorithm-cards) python -m nexus_gate.algorithms.cards --root . --json ;;
   discovery-cards) python -m nexus_gate.discoveries.cards --root . --json ;;
   tui) echo "PowerShell TUI is Windows-only. Run: .\\scripts\\nexus.ps1 tui" ;;

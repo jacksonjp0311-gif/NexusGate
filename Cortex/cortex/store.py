@@ -8,6 +8,8 @@ import time
 from pathlib import Path
 from typing import Any, Iterable
 
+from .embeddings import VECTOR_MAGIC, deserialize_vector, vector_to_bytes
+
 SCHEMA = """
 PRAGMA journal_mode=WAL;
 PRAGMA foreign_keys=ON;
@@ -403,12 +405,21 @@ class Store:
               repo, path, chunk_index, start_line, end_line, kind, text, content_hash,
               vector, embedding_model, metadata, created_at, updated_at
             ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(repo, path, chunk_index, content_hash) DO UPDATE SET
+              start_line=excluded.start_line,
+              end_line=excluded.end_line,
+              kind=excluded.kind,
+              text=excluded.text,
+              vector=excluded.vector,
+              embedding_model=excluded.embedding_model,
+              metadata=excluded.metadata,
+              updated_at=excluded.updated_at
             """,
             (
                 memory["repo"], memory["path"], memory["chunk_index"],
                 memory["start_line"], memory["end_line"], memory["kind"],
                 memory["text"], memory["content_hash"],
-                json.dumps(memory.get("vector")), memory.get("embedding_model"),
+                vector_to_bytes(memory.get("vector")), memory.get("embedding_model"),
                 json.dumps(memory.get("metadata", {}), sort_keys=True), now, now,
             ),
         )
@@ -498,6 +509,42 @@ class Store:
                 json.dumps(symbol.get("metadata", {}), sort_keys=True),
             ),
         )
+
+    def migrate_vectors(self, repo: str | None = None) -> dict[str, int]:
+        """Upgrade legacy JSON or unversioned BLOB vectors without re-indexing source."""
+        where = "WHERE vector IS NOT NULL"
+        args: list[Any] = []
+        if repo:
+            where += " AND repo=?"
+            args.append(repo)
+        rows = self.db.execute(f"SELECT id, vector FROM memories {where}", args).fetchall()
+        migrated = 0
+        skipped = 0
+        for row in rows:
+            raw = row["vector"]
+            if isinstance(raw, bytes) and raw.startswith(VECTOR_MAGIC):
+                skipped += 1
+                continue
+            vector = deserialize_vector(raw)
+            if not vector:
+                skipped += 1
+                continue
+            self.db.execute("UPDATE memories SET vector=?, updated_at=? WHERE id=?", (vector_to_bytes(vector), time.time(), row["id"]))
+            migrated += 1
+        self.db.commit()
+        result = {"scanned": len(rows), "migrated": migrated, "already_current_or_invalid": skipped}
+        self.set_setting(f"vector_migration:{repo or 'all'}", {"completed_at": time.time(), **result})
+        return result
+
+    def vector_format_status(self, repo: str | None = None) -> dict[str, int]:
+        where = "WHERE vector IS NOT NULL"
+        args: list[Any] = []
+        if repo:
+            where += " AND repo=?"
+            args.append(repo)
+        rows = self.db.execute(f"SELECT vector FROM memories {where}", args).fetchall()
+        current = sum(isinstance(row["vector"], bytes) and row["vector"].startswith(VECTOR_MAGIC) for row in rows)
+        return {"total": len(rows), "current_versioned_blob": current, "legacy_or_invalid": len(rows) - current}
 
     def symbols(self, repo: str, path: str | None = None) -> list[sqlite3.Row]:
         if path:

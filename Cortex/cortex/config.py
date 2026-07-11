@@ -35,6 +35,43 @@ DEFAULT_EXCLUDES = [
     ".cortex/bootstrap_certificate.json",
     ".cortex/README.md",
     ".cortex/.gitignore",
+    "reports/*_latest.json",
+    "state/*_latest.json",
+    "ledger",
+    "ledgers",
+    "Tesseract Neural Network/memory",
+    "Tesseract Neural Network/state",
+    # ── Secret / credential files — never index these ──
+    ".env",
+    ".env.local",
+    ".env.production",
+    ".env.staging",
+    ".env.development",
+    ".aws/credentials",
+    ".aws/config",
+    ".ssh/id_rsa",
+    ".ssh/id_ed25519",
+    ".ssh/id_ecdsa",
+    ".ssh/id_dsa",
+    ".npmrc",
+    ".pypirc",
+    ".netrc",
+    ".docker/config.json",
+    "credentials.json",
+    "credentials.plist",
+    "service-account.json",
+    "firebase-adminsdk*.json",
+    "*.pem",
+    "*.key",
+    "*.p12",
+    "*.pfx",
+    "*.keystore",
+    "*.jks",
+    ".gcloud/credentials.db",
+    ".kube/config",
+    ".git-credentials",
+    ".npm/_token*",
+    ".dvc/config",
 ]
 
 DEFAULT_TEXT_EXTENSIONS = [
@@ -80,6 +117,7 @@ class RepoConfig:
     environment_learning_enabled: bool = True
     thalamus_enabled: bool = True
     thalamus_min_lane_relevance: float = 0.25
+    sensitive_exclude_patterns: list[str] = field(default_factory=list)
     neural_interlink_enabled: bool = True
     neural_activation_depth: int = 2
     neural_max_nodes: int = 64
@@ -121,6 +159,7 @@ class RepoConfig:
             "environment_learning_enabled": self.environment_learning_enabled,
             "thalamus_enabled": self.thalamus_enabled,
             "thalamus_min_lane_relevance": self.thalamus_min_lane_relevance,
+            "sensitive_exclude_patterns": self.sensitive_exclude_patterns,
             "neural_interlink_enabled": self.neural_interlink_enabled,
             "neural_activation_depth": self.neural_activation_depth,
             "neural_max_nodes": self.neural_max_nodes,
@@ -139,6 +178,10 @@ class RepoConfig:
         for key, value in data.items():
             if hasattr(base, key):
                 setattr(base, key, value)
+        # Configuration is additive across releases so older repositories receive
+        # newly introduced volatile-surface protections without losing custom rules.
+        base.exclude = list(dict.fromkeys([*base.exclude, *DEFAULT_EXCLUDES]))
+        base.exclude = list(dict.fromkeys([*base.exclude, *base.sensitive_exclude_patterns]))
         return base
 
 

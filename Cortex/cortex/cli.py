@@ -53,13 +53,17 @@ def build_parser() -> argparse.ArgumentParser:
     activate.add_argument("--repo", required=True)
     activate.add_argument("--task", required=True)
     activate.add_argument("--budget", type=int, default=1200)
-    activate.add_argument("--refresh", choices=["auto", "always", "never"], default="auto")
+    activate.add_argument("--refresh", choices=["auto", "always", "never", "packet-fast", "packet-refresh", "bootstrap-full"], default="auto")
     activate.add_argument("--json", action="store_true")
 
     index = sub.add_parser("index", help="Incrementally index an attached repository.")
     index.add_argument("--repo", required=True)
     index.add_argument("--force", action="store_true")
     index.add_argument("--json", action="store_true")
+
+    migrate = sub.add_parser("migrate-vectors", help="Upgrade stored legacy vectors to versioned float32 BLOBs.")
+    migrate.add_argument("--repo")
+    migrate.add_argument("--json", action="store_true")
 
     query_parser = sub.add_parser("query", help="Search repository memory.")
     query_parser.add_argument("query")
@@ -183,6 +187,7 @@ def main(argv: list[str] | None = None) -> None:
             emit(result, args.json)
 
         elif command == "activate":
+            refresh = {"packet-fast": "never", "packet-refresh": "auto", "bootstrap-full": "always"}.get(args.refresh, args.refresh)
             result = activate_repository(
                 home,
                 store,
@@ -190,14 +195,20 @@ def main(argv: list[str] | None = None) -> None:
                 args.repo,
                 args.task,
                 budget=args.budget,
-                refresh=args.refresh,
+                refresh=refresh,
             )
+            result["requested_mode"] = args.refresh
             emit(result, args.json)
 
         elif command == "index":
             root = _repo_root(store, args.repo)
             config = load_repo_config(root)
             emit(index_repository(store, args.repo, config, force=args.force), args.json)
+
+        elif command == "migrate-vectors":
+            if args.repo and not store.repo(args.repo):
+                raise ValueError(f"Unknown repository: {args.repo}. Run cortex bootstrap first.")
+            emit(store.migrate_vectors(args.repo), args.json)
 
         elif command == "query":
             repository = store.repo(args.repo)
@@ -356,6 +367,9 @@ def main(argv: list[str] | None = None) -> None:
                 result["environment"] = environment_summary(store.environment_profile(args.repo))
                 result["neural_interlink"] = neural_graph_state(store, args.repo) if repository else None
                 result["neural_ledger_integrity"] = store.verify_neural_ledger(args.repo) if repository else False
+                result["vector_format"] = store.vector_format_status(args.repo) if repository else None
+                if result["vector_format"] and result["vector_format"]["legacy_or_invalid"]:
+                    result["vector_migration_recommendation"] = f"cortex migrate-vectors --repo {args.repo} --json"
             emit(result, args.json)
 
         elif command == "self-test":
