@@ -23,6 +23,7 @@ set -euo pipefail
 # toolbelt-ship
 # toolbelt|toolbelt-dashboard compatibility marker for v0.9.6 tests
 # wound-compress
+# cortex
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 COMMAND="${1:-rehydrate}"
@@ -184,6 +185,11 @@ case "$COMMAND" in
   predictive-timing) python -m nexus_gate.loops.predictive_timing --root . --json ;;
   predictive-evolve) python -m nexus_gate.loops.predictive_evolve --root . --json ;;
   certificate-resume) python -m nexus_gate.loops.certificate_resume --root . --json ;;
+  cortex)
+    shift || true
+    INTENT="${*:-Run NEXUS Cortex gate.}"
+    python -m nexus_gate.cortex.compile --root . --intent "$INTENT" --json
+    ;;
   algorithm-cards) python -m nexus_gate.algorithms.cards --root . --json ;;
   discovery-cards) python -m nexus_gate.discoveries.cards --root . --json ;;
   tui) echo "PowerShell TUI is Windows-only. Run: .\\scripts\\nexus.ps1 tui" ;;

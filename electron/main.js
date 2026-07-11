@@ -1104,6 +1104,77 @@ function resolveRepoPath(relativePath) {
   return resolved;
 }
 
+function resolveLocalDirectory(inputPath) {
+  const raw = String(inputPath || "").trim();
+  if (!raw) throw new Error("Local path is required.");
+  if (/^[a-z]+:\/\//i.test(raw)) throw new Error("Only local filesystem paths are supported.");
+  const resolved = path.resolve(raw);
+  if (!fs.existsSync(resolved)) throw new Error("Local path does not exist.");
+  const stat = fs.statSync(resolved);
+  if (!stat.isDirectory()) throw new Error("Local path is not a directory.");
+  return resolved;
+}
+
+function compileExternalGitNexusGraph(localPath) {
+  const targetRoot = resolveLocalDirectory(localPath);
+  const script = [
+    "import json, sys",
+    "from pathlib import Path",
+    "from nexus_gate.gitnexus_bridge.engine import compile_graph",
+    "packet = compile_graph(Path(sys.argv[1]))",
+    "print(json.dumps(packet, ensure_ascii=False))"
+  ].join("; ");
+
+  return new Promise((resolve, reject) => {
+    const child = spawn("python", ["-c", script, targetRoot], {
+      cwd: repoRoot,
+      shell: false,
+      windowsHide: true,
+      env: { ...process.env, PYTHONIOENCODING: "utf-8" }
+    });
+    let stdout = "";
+    let stderr = "";
+    const timeout = setTimeout(() => {
+      child.kill();
+      reject(new Error("External GitNexus scan timed out."));
+    }, 30000);
+    child.stdout.on("data", (chunk) => {
+      stdout += chunk.toString();
+      if (stdout.length > 24 * 1024 * 1024) {
+        child.kill();
+        reject(new Error("External GitNexus scan output exceeded limit."));
+      }
+    });
+    child.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
+    child.on("error", (error) => {
+      clearTimeout(timeout);
+      reject(error);
+    });
+    child.on("close", (code) => {
+      clearTimeout(timeout);
+      if (code !== 0) {
+        reject(new Error(stderr || `External GitNexus scan failed with code ${code}.`));
+        return;
+      }
+      try {
+        const packet = JSON.parse(stdout);
+        resolve({
+          ...packet,
+          boundary: {
+            ...(packet.boundary || {}),
+            evidence_only: true,
+            external_repo_compare: true,
+            file_mutation_from_model_output: false,
+            shell_execution: false
+          }
+        });
+      } catch (error) {
+        reject(new Error(`External GitNexus scan returned invalid JSON: ${error.message}`));
+      }
+    });
+  });
+}
+
 function writeSmokeReport(status, extra = {}) {
   if (smokeReportWritten) return;
   smokeReportWritten = true;
@@ -1309,6 +1380,9 @@ ipcMain.handle("nexus:stopNex", async () => {
 ipcMain.handle("nexus:openPetriDishPro", async () => openPetriDishProWindow());
 ipcMain.handle("nexus:getPetriDishProState", async () => buildPetriPreviewState());
 ipcMain.handle("nexus:getNeuralRepoGraph", async () => buildNeuralRepoGraph());
+ipcMain.handle("nexus:scanGitNexusExternal", async (_event, packet = {}) => {
+  return compileExternalGitNexusGraph(packet.localPath);
+});
 ipcMain.handle("nexus:getTempestState", async () => buildTempestState());
 ipcMain.handle("nexus:openTempestFolder", async () => {
   if (!fs.existsSync(tempestRoot)) return { ok: false, status: "missing", path: "T3MP3ST" };

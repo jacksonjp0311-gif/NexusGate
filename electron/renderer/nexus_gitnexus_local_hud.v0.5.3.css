@@ -141,7 +141,7 @@
 
 #gitnexus-local-hud .gnx-local-top {
   display: grid;
-  grid-template-columns: 270px minmax(320px, 0.72fr) minmax(520px, 1fr);
+  grid-template-columns: 270px minmax(430px, 0.95fr) minmax(620px, 1fr);
   gap: 8px;
   align-items: center;
   min-width: 0;
@@ -149,7 +149,7 @@
 
 #gitnexus-local-hud .gnx-local-controls {
   display: grid;
-  grid-template-columns: repeat(11, minmax(0, auto));
+  grid-template-columns: repeat(13, minmax(0, auto));
   gap: 8px;
   justify-content: end;
   min-width: 0;
@@ -179,7 +179,15 @@
   margin-top: 3px;
 }
 
-#gitnexus-local-hud .gnx-local-search {
+#gitnexus-local-hud .gnx-local-search-strip {
+  display: grid;
+  grid-template-columns: minmax(180px, .8fr) minmax(190px, .55fr) 58px;
+  gap: 6px;
+  min-width: 0;
+}
+
+#gitnexus-local-hud .gnx-local-search,
+#gitnexus-local-hud .gnx-compare-path {
   height: 34px;
   border: 1px solid rgba(0, 235, 255, 0.34);
   background: rgba(0, 5, 12, 0.88);
@@ -188,9 +196,11 @@
   outline: none;
   font-family: inherit;
   font-size: 11px;
+  min-width: 0;
 }
 
-#gitnexus-local-hud .gnx-local-search:focus {
+#gitnexus-local-hud .gnx-local-search:focus,
+#gitnexus-local-hud .gnx-compare-path:focus {
   border-color: rgba(125, 255, 77, 0.62);
   box-shadow: 0 0 16px rgba(125, 255, 77, 0.16);
 }

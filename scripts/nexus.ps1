@@ -350,7 +350,12 @@ switch ($Command) {
     "phi-wound" { Invoke-NexusPhiWoundAdvisor -Intent $Tag -UsePhi:$CallModel }
     "preflight" { Invoke-NexusPreflightOptimizer -Intent $Tag }
     "preflight-json" { Invoke-NexusPreflightOptimizer -Intent $Tag -Json }
-    "cortex" { python -m nexus_gate.cortex.compile --root . --intent $Tag --json; if ($LASTEXITCODE -ne 0) { throw "NEXUS Cortex gate failed." } }
+    "cortex" {
+        $cortexIntent = $Tag
+        if ([string]::IsNullOrWhiteSpace($cortexIntent)) { $cortexIntent = "Run NEXUS Cortex gate." }
+        python -m nexus_gate.cortex.compile --root . --intent $cortexIntent --json
+        if ($LASTEXITCODE -ne 0) { throw "NEXUS Cortex gate failed." }
+    }
     "wound-compress" { Invoke-NexusWoundCompression -Intent $Tag }
     "toolbelt" { Invoke-NexusToolbelt -View "dashboard" -Intent $Tag }
     "toolbelt-json" { Invoke-NexusToolbelt -View "dashboard" -Intent $Tag -Json }

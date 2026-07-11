@@ -33,6 +33,13 @@ let allowlistedCommands = [];
 let nexBusy = false;
 let ollamaReady = null; // null=unknown, true=ready, false=offline
 let nexStopRequested = false;
+let floatingHudZ = 100200;
+
+function bringHudToFront(panel) {
+  if (!panel) return;
+  floatingHudZ += 1;
+  panel.style.zIndex = String(floatingHudZ);
+}
 let telemetryLoopHandle = null;
 let petriLoopHandle = null;
 let petriAnimationStarted = false;
@@ -965,7 +972,10 @@ function toggleCardsHud(kind, force) {
   hud.classList.toggle("is-expanded", next);
   hud.toggleAttribute("hidden", !next);
   hud.style.display = next ? "" : "none";
-  if (next) refreshCardsHud(kind);
+  if (next) {
+    bringHudToFront(hud);
+    refreshCardsHud(kind);
+  }
 }
 
 async function refreshTempestHud() {
@@ -999,14 +1009,19 @@ function toggleTempestHud(force) {
   tempestHud.toggleAttribute("hidden", !next);
   tempestHud.style.display = next ? "" : "none";
   document.getElementById("tempest-popout")?.setAttribute("aria-expanded", String(next));
-  if (next) refreshTempestHud();
+  if (next) {
+    bringHudToFront(tempestHud);
+    refreshTempestHud();
+  }
 }
 
 function bindMovableHud(panel, handle) {
   if (!panel || !handle) return;
   let dragging = null;
+  panel.addEventListener("pointerdown", () => bringHudToFront(panel));
   handle.addEventListener("pointerdown", (event) => {
     if (event.target?.closest?.("button")) return;
+    bringHudToFront(panel);
     const rect = panel.getBoundingClientRect();
     dragging = {
       pointerId: event.pointerId,
@@ -1700,6 +1715,8 @@ document.getElementById("tempest-open-ui")?.addEventListener("click", async () =
   setTelemetryText("tempest-launch", JSON.stringify(result, null, 2));
   appendChat("ai", JSON.stringify(result, null, 2), "NEX / T3MP3ST / full-ui");
 });
+bindMovableHud(algorithmCardsHud, algorithmCardsHud?.querySelector(".telemetry-hud-head"));
+bindMovableHud(discoveryCardsHud, discoveryCardsHud?.querySelector(".telemetry-hud-head"));
 bindMovableHud(tempestHud, document.getElementById("tempest-drag-handle"));
 petriOpen?.addEventListener("click", openPetriDishPro);
 petriMiniBody?.addEventListener("click", openPetriDishPro);

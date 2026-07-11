@@ -53,7 +53,13 @@ class TestGitNexusHudAssets(unittest.TestCase):
             "category entropy",
             "SPEED_PROFILES",
             "FAST",
+            "MEDIUM",
             "SLOW",
+            "ATTRACT",
+            "POLES",
+            "mergeCompareGraph",
+            "loadCompareGraph",
+            "scanGitNexusExternal",
             "FILTER_LABELS",
             "MODE HOT",
             "MODE CHANGED",
@@ -80,6 +86,7 @@ class TestGitNexusHudAssets(unittest.TestCase):
         self.assertIn('setFilterMode("all"', js)
         self.assertIn("if (!nodes.length)", js)
         self.assertIn("state.search = \"\"", js)
+        self.assertIn("setAllCategories(true)", js)
         self.assertIn("state.activeCategories[category]", js)
         self.assertIn("visibleFileNodes", js)
 
@@ -88,7 +95,9 @@ class TestGitNexusHudAssets(unittest.TestCase):
             encoding="utf-8", errors="ignore"
         )
         for token in [
-            "grid-template-columns: 270px minmax(320px, 0.72fr) minmax(520px, 1fr)",
+            "grid-template-columns: 270px minmax(430px, 0.95fr) minmax(620px, 1fr)",
+            ".gnx-local-search-strip",
+            ".gnx-compare-path",
             ".gnx-local-controls",
             ".gnx-category-filter",
             ".gnx-category-files",
@@ -98,6 +107,16 @@ class TestGitNexusHudAssets(unittest.TestCase):
             "max-height: 150px",
         ]:
             self.assertIn(token, css)
+
+    def test_external_compare_bridge_is_read_only_and_local(self):
+        preload = (ROOT / "electron" / "preload.js").read_text(encoding="utf-8", errors="ignore")
+        main = (ROOT / "electron" / "main.js").read_text(encoding="utf-8", errors="ignore")
+        self.assertIn("scanGitNexusExternal", preload)
+        self.assertIn("nexus:scanGitNexusExternal", main)
+        self.assertIn("compileExternalGitNexusGraph", main)
+        self.assertIn("Only local filesystem paths are supported", main)
+        self.assertIn("from nexus_gate.gitnexus_bridge.engine import compile_graph", main)
+        self.assertIn("file_mutation_from_model_output: false", main)
 
     def test_geometry_css_exists(self):
         css = (ROOT / "electron" / "renderer" / "nexus_gitnexus_local_hud.v0.5.3.css").read_text(

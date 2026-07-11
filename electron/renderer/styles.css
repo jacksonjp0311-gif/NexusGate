@@ -1643,7 +1643,7 @@ body.nex-processing .nex-interface-symbol {
   left: 7vw;
   right: auto;
   top: 92px;
-  z-index: 74;
+  z-index: 100200;
   width: min(980px, calc(100vw - 80px));
   max-height: calc(100vh - 130px);
   resize: both;
@@ -1658,6 +1658,8 @@ body.nex-processing .nex-interface-symbol {
 
 .nexus-cards-hud .telemetry-hud-head {
   border-bottom-color: rgba(34, 197, 94, .30);
+  cursor: move;
+  user-select: none;
 }
 
 .nexus-cards-hud .telemetry-hud-head span {

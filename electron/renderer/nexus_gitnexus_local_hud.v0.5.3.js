@@ -13,6 +13,7 @@
     fullOpen: false,
     paused: false,
     layoutMode: "force", speedMode: "fast", filterMode: "all",
+    compareSource: "",
     drag: null,
     hover: null,
     selected: null, analyzer: null, analyzerT: 0,
@@ -73,8 +74,10 @@
   });
   const SPEED_PROFILES = {
     fast: { label: "FAST", fps: 60, physics: 1.0, ease: 0.18 },
+    medium: { label: "MEDIUM", fps: 45, physics: 0.74, ease: 0.145 },
     slow: { label: "SLOW", fps: 30, physics: 0.52, ease: 0.11 }
   };
+  const SPEED_ORDER = ["slow", "medium", "fast"];
 
   const FILTER_LABELS = {
     all: "MODE ALL",
@@ -85,8 +88,11 @@
   const LAYOUT_LABELS = {
     force: "FORCE",
     orbit: "ORBIT",
-    circle: "CIRCLE"
+    circle: "CIRCLE",
+    organism: "ATTRACT",
+    poles: "POLES"
   };
+  const LAYOUT_ORDER = ["force", "orbit", "circle", "organism", "poles"];
 
   function q(sel, root = document) { return root.querySelector(sel); }
   function qa(sel, root = document) { return Array.from(root.querySelectorAll(sel)); }
@@ -382,6 +388,78 @@
     return { nodes, edges, byId: byPath, counts: { files: files.length, symbols: nodes.length, edges: edges.length } };
   }
 
+  function setAllCategories(enabled = true) {
+    CATEGORY_DEFS.forEach((category) => {
+      state.activeCategories[category.id] = Boolean(enabled);
+    });
+    updateCategoryPanel();
+  }
+
+  function mergeCompareGraph(base, compare, sourceLabel = "compare") {
+    if (!base || !compare?.nodes?.length) return base;
+    const cleanLabel = safeText(sourceLabel || "compare", "compare").replace(/\\/g, "/").split("/").filter(Boolean).slice(-2).join("/") || "compare";
+    const existingNodes = (base.nodes || []).filter((node) => !node.compare);
+    const existingEdges = (base.edges || []).filter((edge) => !edge.compare);
+    const offsetX = 620;
+    const prefix = "compare:";
+    const copiedNodes = (compare.nodes || []).slice(0, 1000).map((node) => {
+      const id = prefix + node.id;
+      const copied = {
+        ...node,
+        id,
+        path: `${cleanLabel}/${safeText(node.path || node.name || node.id)}`,
+        name: safeText(node.name || node.path || node.id),
+        x: (Number(node.x) || 0) + offsetX,
+        tx: (Number(node.tx) || 0) + offsetX,
+        compare: true,
+        vx: 0,
+        vy: 0
+      };
+      return copied;
+    });
+    const copiedIds = new Set(copiedNodes.map((node) => node.id));
+    const copiedEdges = (compare.edges || []).slice(0, 1400).map((edge) => ({
+      ...edge,
+      a: prefix + edge.a,
+      b: prefix + edge.b,
+      compare: true,
+      weight: Math.max(0.08, Number(edge.weight) || 0.18)
+    })).filter((edge) => copiedIds.has(edge.a) && copiedIds.has(edge.b));
+
+    const baseHot = existingNodes.filter((node) => !node.folder).sort((a, b) => scoreNode(b) - scoreNode(a)).slice(0, 8);
+    const compareHot = copiedNodes.filter((node) => !node.folder).sort((a, b) => scoreNode(b) - scoreNode(a)).slice(0, 8);
+    const bridgeEdges = [];
+    baseHot.forEach((node, index) => {
+      const other = compareHot[index % Math.max(1, compareHot.length)];
+      if (other) bridgeEdges.push({ a: node.id, b: other.id, type: "trace", weight: 0.10, compare: true });
+    });
+
+    const nodes = existingNodes.concat(copiedNodes);
+    const edges = existingEdges.concat(copiedEdges, bridgeEdges);
+    const byId = new Map(nodes.map((node) => [node.id, node]));
+    nodes.forEach((node) => { node.degree = 0; });
+    edges.forEach((edge) => {
+      const a = byId.get(edge.a);
+      const b = byId.get(edge.b);
+      if (a) a.degree += 1;
+      if (b) b.degree += 1;
+    });
+    const baseFiles = base.counts?.files || existingNodes.filter((node) => !node.folder).length;
+    const compareFiles = compare.counts?.files || copiedNodes.filter((node) => !node.folder).length;
+    return {
+      ...base,
+      nodes,
+      edges,
+      byId,
+      source: `${base.source || "local"} + ${cleanLabel}`,
+      counts: {
+        files: baseFiles + compareFiles,
+        symbols: nodes.length,
+        edges: edges.length
+      }
+    };
+  }
+
   async function tryReadJson(path) {
     try {
       const res = await fetch(path + "?t=" + Date.now(), { cache: "no-store" });
@@ -426,6 +504,34 @@
     return state.graph;
   }
 
+  async function loadCompareGraph(localPath) {
+    const hud = q(`#${HUD_ID}`);
+    const status = q("[data-status]", hud);
+    if (!window.nexus?.scanGitNexusExternal) {
+      if (status) status.textContent = "External repo compare bridge is unavailable.";
+      return;
+    }
+    if (status) status.textContent = "Scanning external repo read-only...";
+    try {
+      await loadGraph(false);
+      const packet = await window.nexus.scanGitNexusExternal(localPath);
+      const files = extractCandidateFiles(packet);
+      if (files.length < 3) throw new Error("No candidate files found in external repo.");
+      const compare = buildGraphFromFiles(files);
+      compare.source = packet.root || localPath;
+      state.compareSource = compare.source;
+      state.graph = mergeCompareGraph(state.graph, compare, compare.source);
+      state.analyzer = analyzeGeometry(state.graph);
+      updateHudStats();
+      updateTopFiles();
+      updateAnalyzerPanel();
+      fitFull();
+      if (status) status.textContent = `Compared read-only repo: ${safeText(compare.source).slice(0, 120)}`;
+    } catch (error) {
+      if (status) status.textContent = `Compare blocked: ${error.message}`;
+    }
+  }
+
   function visibleNode(n) {
     if (!n) return false;
     if (!n.folder) {
@@ -462,6 +568,7 @@
 
   function setFilterMode(mode, button) {
     const nextMode = FILTER_LABELS[mode] ? mode : "all";
+    if (nextMode === "all") setAllCategories(true);
     state.filterMode = countVisibleForMode(nextMode) > 0 ? nextMode : "all";
     state.coreOnly = state.filterMode === "core";
     if (button) button.textContent = FILTER_LABELS[state.filterMode];
@@ -665,9 +772,9 @@
     const simNodes = nodes.slice(0, Math.min(520, nodes.length));
     const mode = state.layoutMode;
 
-    const pull = mode === "force" ? 0.014 : mode === "orbit" ? 0.020 : 0.026;
-    const repel = mode === "force" ? 2600 : mode === "orbit" ? 1500 : 2100;
-    const damping = mode === "force" ? 0.88 : 0.90;
+    const pull = mode === "force" ? 0.014 : mode === "orbit" ? 0.020 : mode === "organism" ? 0.024 : 0.026;
+    const repel = mode === "force" ? 2600 : mode === "orbit" ? 1500 : mode === "poles" ? 2300 : 2100;
+    const damping = mode === "force" ? 0.88 : mode === "organism" ? 0.91 : 0.90;
 
     for (const n of simNodes) {
       if (!visibleNode(n)) continue;
@@ -684,6 +791,20 @@
         const angle = (hashText(n.id) % 6283) / 1000 + state.lastT * 0.00004;
         tx = Math.cos(angle) * ring;
         ty = Math.sin(angle) * ring;
+      } else if (mode === "organism") {
+        const h = hashText(n.id);
+        const ring = (n.folder ? 92 : 180) + n.cluster * 62 + ((h >> 7) % 70);
+        const angle = n.cluster * 1.08 + (h % 6283) / 1000 + Math.sin(state.lastT * 0.00034 + n.phase) * 0.22;
+        const strand = Math.sin(state.lastT * 0.00058 + (h % 99)) * (n.folder ? 24 : 56);
+        tx = Math.cos(angle) * ring + Math.cos(angle + Math.PI / 2) * strand;
+        ty = Math.sin(angle) * ring + Math.sin(angle + Math.PI / 2) * strand;
+      } else if (mode === "poles") {
+        const h = hashText(n.id);
+        const polarity = n.cluster % 2 === 0 ? -1 : 1;
+        const poleX = polarity * (180 + n.cluster * 28);
+        const laneY = (n.cluster - 2) * 74;
+        tx = poleX + Math.sin(state.lastT * 0.00046 + n.phase) * (70 + (h % 35));
+        ty = laneY + Math.cos(state.lastT * 0.00036 + (h % 51)) * 92;
       }
 
       n.vx += (tx - n.x) * pull * dt;
@@ -926,7 +1047,11 @@
             <div class="gnx-local-hud-sub">LOCAL GEOMETRY ANALYZER</div>
           </div>
         </div>
-        <input class="gnx-local-search" type="search" placeholder="Search nodes, files, symbols... Ctrl+K" />
+        <div class="gnx-local-search-strip">
+          <input class="gnx-local-search" type="search" placeholder="Search nodes, files, symbols... Ctrl+K" />
+          <input class="gnx-compare-path" type="text" data-compare-path placeholder="Compare local repo path..." />
+          <button class="gnx-local-btn" data-compare-load>LOAD</button>
+        </div>
         <div class="gnx-local-controls">
         <button class="gnx-local-btn" data-fit>FIT</button>
         <button class="gnx-local-btn" data-zoom-in>+</button>
@@ -936,6 +1061,8 @@
         <button class="gnx-local-btn is-on" data-labels>LABELS</button>
         <button class="gnx-local-btn" data-filter-mode>MODE ALL</button>
         <button class="gnx-local-btn is-on" data-layout>FORCE</button>
+        <button class="gnx-local-btn" data-attractor>ATTRACT</button>
+        <button class="gnx-local-btn" data-poles>POLES</button>
         <button class="gnx-local-btn is-on" data-speed>FAST</button>
         <button class="gnx-local-btn" data-refresh>REFRESH</button>
         <button class="gnx-local-btn gnx-local-close" data-close>CLOSE</button>
@@ -1034,16 +1161,39 @@
       });
     });
     q("[data-layout]", hud).addEventListener("click", (e) => {
-      state.layoutMode = state.layoutMode === "force" ? "orbit" : state.layoutMode === "orbit" ? "circle" : "force";
+      const current = LAYOUT_ORDER.indexOf(state.layoutMode);
+      state.layoutMode = LAYOUT_ORDER[(current + 1 + LAYOUT_ORDER.length) % LAYOUT_ORDER.length];
       e.currentTarget.textContent = LAYOUT_LABELS[state.layoutMode] || state.layoutMode.toUpperCase();
-    });    q("[data-speed]", hud).addEventListener("click", (e) => {
-      state.speedMode = state.speedMode === "fast" ? "slow" : "fast";
+    });
+    q("[data-attractor]", hud).addEventListener("click", () => {
+      state.layoutMode = "organism";
+      const btn = q("[data-layout]", hud);
+      if (btn) btn.textContent = LAYOUT_LABELS[state.layoutMode];
+    });
+    q("[data-poles]", hud).addEventListener("click", () => {
+      state.layoutMode = "poles";
+      const btn = q("[data-layout]", hud);
+      if (btn) btn.textContent = LAYOUT_LABELS[state.layoutMode];
+    });
+    q("[data-speed]", hud).addEventListener("click", (e) => {
+      const index = SPEED_ORDER.indexOf(state.speedMode);
+      state.speedMode = SPEED_ORDER[(index + 1 + SPEED_ORDER.length) % SPEED_ORDER.length];
       e.currentTarget.textContent = SPEED_PROFILES[state.speedMode].label;
     });
     q(".gnx-local-search", hud).addEventListener("input", (e) => {
       state.search = e.currentTarget.value || "";
       const hit = firstSearchHit();
       if (hit) focusNode(hit, false);
+    });
+    q("[data-compare-load]", hud).addEventListener("click", async () => {
+      const input = q("[data-compare-path]", hud);
+      const localPath = input?.value?.trim();
+      if (!localPath) {
+        const status = q("[data-status]", hud);
+        if (status) status.textContent = "Enter a local repository path to compare.";
+        return;
+      }
+      await loadCompareGraph(localPath);
     });
 
     const canvas = q("#gnx-local-full-canvas", hud);
@@ -1192,6 +1342,7 @@
       if (search) search.value = "";
       state.filterMode = "all";
       state.coreOnly = false;
+      setAllCategories(true);
       const filterButton = q("[data-filter-mode]");
       if (filterButton) filterButton.textContent = FILTER_LABELS.all;
       graph.nodes.forEach((n) => {
