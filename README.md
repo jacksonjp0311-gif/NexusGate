@@ -4,7 +4,7 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems: a gove
 
 ## Capability Surface
 - Operator HUDs: Electron, PowerShell TUI, Spiral Core Portal, Dev Mode / HANDOFF, Mode Selection, and System Monitor.
-- Governed lanes: `status`, `evolve`, `reflect`, `domain`, `toolbelt`, `preflight`, `predictive-timing`, `wound-compress`, `phi-wound`, `phi-loop-auto`, and `phi-gate-auto`.
+- Governed lanes: `status`, `evolve`, `reflect`, `domain`, `toolbelt`, `preflight`, `predictive-timing`, `predictive-evolve`, `wound-compress`, `phi-wound`, `phi-loop-auto`, and `phi-gate-auto`.
 - Intelligence loops: AI-callable local loop fabric, Algorithm Cards, Discovery Cards, v0.9.3 AI Loop Toolkit Expansion, v0.9.4 Personal Coding Paradise, Toolbelt Console Integration, v0.9.8 Wound Compression Engine, v0.9.9 Preflight Optimizer, v1.1.0 Phi Microdose Loop, AI Toolbelt Console, Toolbelt Cockpit Output, and Meta-Orchestrator Gate.
 - Evidence organs: Neural Activity visual organ, GITNEXUS local codegraph, PetriDishPortal, NexusCell containment, feedback ledger, handoff packets, and compiler reports.
 - Guardrails: human-authorized mutation only, no autonomous authority, no bypassing gates, no production/safety/security proof claims from local passes.
@@ -37,6 +37,8 @@ NEXUS GATE current line: v1.1.3 Meta-Orchestrator Gate. Toolbelt, Preflight, Wou
 
 ## Priority Discovery: Predictive Gate Timing
 Predictive Gate Timing / Runtime Pressure Model is a priority. Timeout history is not intelligence by itself, but recorded lane duration, timeout budget, pass/fail state, artifact churn, and repo size can become bounded expectation: baseline -> drift -> anomaly -> recommended next timeout. The model may predict runtime pressure and recommend gate budgets; it may not bypass gates, hide failures, or self-authorize mutation.
+
+Predictive Evolve is the dry-run planner built on that discovery: predictive timing -> scope classification -> gate selection -> dry-run plan -> final evolve seal required. Run `.\scripts\nexus.ps1 predictive-evolve` before broad validation when you want the next cheapest gate recommendation without executing or authorizing mutation.
 
 ## AI Toolbelt Console
 Use the AI Toolbelt Console before choosing a patch path.
@@ -145,6 +147,7 @@ v1.0.1 routes `phi-wound-gpu` through the non-interactive Ollama JSON adapter in
 | Phi Ollama Adapter | `docs/runtime/NEXUS_PHI_WOUND_OLLAMA_ADAPTER.md` |
 | Preflight Optimizer | `docs/runtime/NEXUS_PREFLIGHT_OPTIMIZER.md` |
 | Predictive Gate Timing | `docs/runtime/NEXUS_PREDICTIVE_GATE_TIMING.md` |
+| Predictive Evolve | `docs/runtime/NEXUS_PREDICTIVE_EVOLVE.md` |
 | Algorithm Cards | `docs/runtime/NEXUS_ALGORITHM_CARDS.md` |
 | Discovery Cards | `docs/runtime/NEXUS_DISCOVERY_CARDS.md` |
 | Meta-Orchestrator Gate | `docs/runtime/NEXUS_META_ORCHESTRATOR_GATE.md` |

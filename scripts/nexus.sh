@@ -182,6 +182,7 @@ case "$COMMAND" in
   reflect) python -m nexus_gate.reflection.compile --root . --json ;;
   domain) python -m nexus_gate.domain.compile --root . --json ;;
   predictive-timing) python -m nexus_gate.loops.predictive_timing --root . --json ;;
+  predictive-evolve) python -m nexus_gate.loops.predictive_evolve --root . --json ;;
   algorithm-cards) python -m nexus_gate.algorithms.cards --root . --json ;;
   discovery-cards) python -m nexus_gate.discoveries.cards --root . --json ;;
   tui) echo "PowerShell TUI is Windows-only. Run: .\\scripts\\nexus.ps1 tui" ;;

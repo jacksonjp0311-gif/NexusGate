@@ -8,10 +8,10 @@ from typing import Any
 
 
 SYSTEM = "NEXUS_DISCOVERY_CARDS"
-VERSION = "0.1.0"
-SCHEMA = "NEXUS_DISCOVERY_CARD_SET.v0.1.0"
+VERSION = "0.2.0"
+SCHEMA = "NEXUS_DISCOVERY_CARD_SET.v0.2.0"
 LATEST_PATH = Path("state/discoveries/nexus_discovery_cards_latest.json")
-VERSIONED_PATH = Path("state/discoveries/nexus_discovery_cards.v0.1.0.json")
+VERSIONED_PATH = Path("state/discoveries/nexus_discovery_cards.v0.2.0.json")
 
 CLAIM_BOUNDARY = (
     "Discovery cards preserve local engineering discoveries as reproducible cards. "
@@ -71,6 +71,50 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.4: surface timing pressure in Electron/System Monitor HUD",
             ],
             "boundary": "Recommendation-only. It may guide gate choice; it may not skip required final evolve before commit.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "predictive-evolve-dry-run-planner",
+            "version": "0.2.0",
+            "title": "Predictive Evolve Dry-Run Planner",
+            "status": "active",
+            "summary": "Predictive timing becomes more useful when wrapped in a dry-run plan that orders the next cheapest gate while preserving the final evolve seal.",
+            "math": {
+                "scope_policy": "scope = classify(changed_files)",
+                "pressure_policy": "pressure = max_level(runtime_pressure)",
+                "plan_rule": "plan = [predictive-timing, targeted_gate(scope, pressure), final_evolve_seal]",
+                "authority_rule": "commit_allowed = final_evolve_passed and human_authorized",
+                "control_loop": "estimate -> classify -> plan -> require seal -> record",
+            },
+            "code_references": [
+                "nexus_gate/loops/predictive_evolve.py::build_predictive_evolve_plan",
+                "nexus_gate/loops/predictive_evolve.py::_plan_steps",
+                "nexus_gate/loops/predictive_timing.py::build_predictive_timing_packet",
+            ],
+            "algorithm_card_refs": [
+                "predictive-evolve-planner-algorithm",
+                "gate-selection-policy",
+                "runtime-pressure-model",
+                "certificate-resume-policy",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 predictive-evolve",
+                "Inspect reports/nexus_predictive_evolve_plan_latest.json",
+                "Run any recommended targeted gate manually",
+                "Run .\\scripts\\nexus.ps1 evolve before commit",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_predictive_evolve_plan_latest.json",
+                "state/loops/nexus_predictive_evolve_plan_latest.json",
+                "reports/nexus_predictive_gate_timing_latest.json",
+                "state/algorithms/nexus_algorithm_cards_latest.json",
+            ],
+            "next_versions": [
+                "v0.3: add HUD runtime pressure visibility",
+                "v0.4: add confidence windows and EWMA pressure smoothing",
+                "v0.5: add certificate resume planning",
+            ],
+            "boundary": "Dry-run and recommendation-only. It may recommend targeted gates; it may not execute them or skip full evolve before commit.",
         }
     ]
     return {

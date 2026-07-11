@@ -9,11 +9,11 @@ from typing import Any
 
 
 SYSTEM = "NEXUS_ALGORITHM_CARDS"
-VERSION = "0.2.0"
-SCHEMA = "NEXUS_ALGORITHM_CARD_SET.v0.2.0"
+VERSION = "0.3.0"
+SCHEMA = "NEXUS_ALGORITHM_CARD_SET.v0.3.0"
 SOURCE_DOC = Path("docs/algorithms/NEXUS_CORE_ALGORITHMS.md")
 LATEST_PATH = Path("state/algorithms/nexus_algorithm_cards_latest.json")
-VERSIONED_PATH = Path("state/algorithms/nexus_algorithm_cards.v0.2.0.json")
+VERSIONED_PATH = Path("state/algorithms/nexus_algorithm_cards.v0.3.0.json")
 
 CLAIM_BOUNDARY = (
     "Algorithm cards are local reasoning and orchestration descriptions only. "
@@ -72,7 +72,7 @@ def build_algorithm_cards(root: str | Path) -> dict[str, Any]:
         title = section["title"]
         cards.append(
             {
-                "schema": "NEXUS_ALGORITHM_CARD.v0.2.0",
+                "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
                 "order": order,
                 "algorithm_id": section["algorithm_id"],
                 "title": title,
@@ -102,6 +102,7 @@ def build_algorithm_cards(root: str | Path) -> dict[str, Any]:
             "adaptive-timeout-budgeting",
             "gate-selection-policy",
             "certificate-resume-policy",
+            "predictive-evolve-planner-algorithm",
         ],
         "claim_boundary": CLAIM_BOUNDARY,
         "authority_boundary": AUTHORITY_BOUNDARY,

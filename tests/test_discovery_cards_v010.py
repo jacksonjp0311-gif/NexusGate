@@ -19,9 +19,9 @@ class TestDiscoveryCardsV010(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr)
         packet = json.loads((ROOT / "state/discoveries/nexus_discovery_cards_latest.json").read_text(encoding="utf-8"))
-        self.assertEqual(packet["schema"], "NEXUS_DISCOVERY_CARD_SET.v0.1.0")
+        self.assertEqual(packet["schema"], "NEXUS_DISCOVERY_CARD_SET.v0.2.0")
         self.assertEqual(packet["portal_entry"], "[18] Discoveries")
-        self.assertGreaterEqual(packet["card_count"], 1)
+        self.assertGreaterEqual(packet["card_count"], 2)
         card = packet["cards"][0]
         self.assertEqual(card["discovery_id"], "predictive-gate-timing-runtime-pressure")
         self.assertIn("drift_ratio", card["math"]["drift"])
@@ -30,6 +30,8 @@ class TestDiscoveryCardsV010(unittest.TestCase):
         self.assertIn("runtime-pressure-model", card["algorithm_card_refs"])
         self.assertIn("ledger/runtime_gate_timings.jsonl", card["evidence_surfaces"])
         self.assertIn("Recommendation-only", card["boundary"])
+        ids = {item["discovery_id"] for item in packet["cards"]}
+        self.assertIn("predictive-evolve-dry-run-planner", ids)
 
     def test_command_surfaces_expose_discovery_cards(self):
         ps = (ROOT / "scripts/nexus.ps1").read_text(encoding="utf-8-sig")
@@ -53,6 +55,7 @@ class TestDiscoveryCardsV010(unittest.TestCase):
         self.assertIn("docs/runtime/NEXUS_DISCOVERY_CARDS.md", readme)
         self.assertIn("math -> code function references -> algorithm card references", docs)
         self.assertIn("Predictive Gate Timing / Runtime Pressure Model", docs)
+        self.assertIn("Predictive Evolve Dry-Run Planner", docs)
 
 
 if __name__ == "__main__":

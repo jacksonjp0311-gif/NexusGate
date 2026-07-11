@@ -19,15 +19,17 @@ class TestAlgorithmCardsV010(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr)
         packet = json.loads((ROOT / "state/algorithms/nexus_algorithm_cards_latest.json").read_text(encoding="utf-8"))
-        self.assertEqual(packet["schema"], "NEXUS_ALGORITHM_CARD_SET.v0.2.0")
-        self.assertGreaterEqual(packet["card_count"], 16)
+        self.assertEqual(packet["schema"], "NEXUS_ALGORITHM_CARD_SET.v0.3.0")
+        self.assertGreaterEqual(packet["card_count"], 17)
         ids = {card["algorithm_id"] for card in packet["cards"]}
         self.assertIn("predictive-gate-timing-runtime-pressure-algorithm", ids)
         self.assertIn("runtime-pressure-model", ids)
         self.assertIn("adaptive-timeout-budgeting", ids)
         self.assertIn("gate-selection-policy", ids)
         self.assertIn("certificate-resume-policy", ids)
+        self.assertIn("predictive-evolve-planner-algorithm", ids)
         self.assertIn("runtime-pressure-model", packet["discovered_algorithms"])
+        self.assertIn("predictive-evolve-planner-algorithm", packet["discovered_algorithms"])
         self.assertFalse(packet["authority_boundary"]["autonomous_authority"])
         self.assertFalse(packet["authority_boundary"]["arbitrary_command_execution"])
         self.assertIn("do not prove correctness", packet["claim_boundary"])
@@ -35,6 +37,7 @@ class TestAlgorithmCardsV010(unittest.TestCase):
     def test_core_algorithm_doc_records_predictive_timing_discovery(self):
         text = (ROOT / "docs/algorithms/NEXUS_CORE_ALGORITHMS.md").read_text(encoding="utf-8-sig")
         self.assertIn("Predictive Gate Timing / Runtime Pressure Algorithm", text)
+        self.assertIn("Predictive Evolve Planner Algorithm", text)
         self.assertIn("duration history -> baseline -> drift -> anomaly", text)
         self.assertIn("prediction by feedback", text)
 
@@ -59,6 +62,7 @@ class TestAlgorithmCardsV010(unittest.TestCase):
         self.assertIn("Algorithm Cards", readme)
         self.assertIn("docs/runtime/NEXUS_ALGORITHM_CARDS.md", readme)
         self.assertIn("Predictive Gate Timing / Runtime Pressure Model", docs)
+        self.assertIn("Predictive Evolve Planner Algorithm", docs)
         self.assertIn("state/algorithms/nexus_algorithm_cards_latest.json", docs)
 
 

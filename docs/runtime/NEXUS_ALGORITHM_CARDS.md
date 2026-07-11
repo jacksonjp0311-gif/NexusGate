@@ -13,6 +13,7 @@ The durable surfaces are:
 ```text
 state/algorithms/nexus_algorithm_cards.v0.1.0.json
 state/algorithms/nexus_algorithm_cards.v0.2.0.json
+state/algorithms/nexus_algorithm_cards.v0.3.0.json
 state/algorithms/nexus_algorithm_cards_latest.json
 python -m nexus_gate.algorithms.cards --root . --json
 ```
@@ -28,6 +29,12 @@ Runtime Pressure Model
 Adaptive Timeout Budgeting
 Gate Selection Policy
 Certificate Resume Policy
+```
+
+v0.3 adds:
+
+```text
+Predictive Evolve Planner Algorithm
 ```
 
 The useful discovery is:

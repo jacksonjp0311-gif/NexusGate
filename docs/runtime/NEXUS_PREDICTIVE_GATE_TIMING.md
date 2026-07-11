@@ -49,6 +49,14 @@ final commit path -> full evolve remains required
 
 This is a recommendation-only loop. It may help Codex and chat sessions avoid waste by preferring targeted gates before full `evolve`. It may not hide failures, bypass gates, extend timeouts autonomously, mutate the repo, or replace human authorization.
 
+Predictive Evolve consumes this timing surface as a dry-run planner:
+
+```text
+predictive timing -> scope classification -> gate selection -> dry-run plan -> final evolve seal required
+```
+
+Run `.\scripts\nexus.ps1 predictive-evolve` when you want a compact next-gate plan without executing the plan.
+
 Run:
 
 ```powershell

@@ -12,6 +12,7 @@ Current surface:
 
 ```text
 state/discoveries/nexus_discovery_cards.v0.1.0.json
+state/discoveries/nexus_discovery_cards.v0.2.0.json
 state/discoveries/nexus_discovery_cards_latest.json
 python -m nexus_gate.discoveries.cards --root . --json
 Spiral Core Portal [18] Discoveries
@@ -26,6 +27,16 @@ duration history -> baseline -> drift -> anomaly -> bounded recommendation
 ```
 
 This card points to the runtime ledger, predictive timing report, algorithm cards, and implementation functions needed to replicate the discovery.
+
+## Second Discovery
+
+Predictive Evolve Dry-Run Planner:
+
+```text
+predictive timing -> scope classification -> gate selection -> dry-run plan -> final evolve seal required
+```
+
+This card points to the planner report, timing report, algorithm cards, and implementation functions needed to reproduce a recommendation-only next-gate plan.
 
 ## Boundary
 

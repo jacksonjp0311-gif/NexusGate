@@ -125,3 +125,11 @@ passed gate + unchanged inputs -> certificate -> resume from active wound -> avo
 ```
 
 Passed gates are local certificates for the current inputs. If a later gate fails, resume from the failed gate unless a passed gate input changed.
+
+## Predictive Evolve Planner Algorithm
+
+```text
+predictive timing -> scope classification -> gate selection -> dry-run plan -> final evolve seal required
+```
+
+Predictive Evolve turns the runtime pressure model into a bounded planning envelope. It recommends the cheapest useful next gate for the current scope, records the plan as evidence, and keeps the authority line clear: it does not execute the plan, mutate the repo, or replace full evolve before commit.
