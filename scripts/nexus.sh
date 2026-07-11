@@ -181,6 +181,7 @@ case "$COMMAND" in
   electron-preflight) python -m nexus_gate.ui.electron_preflight_compile --root . --json ;;
   reflect) python -m nexus_gate.reflection.compile --root . --json ;;
   domain) python -m nexus_gate.domain.compile --root . --json ;;
+  predictive-timing) python -m nexus_gate.loops.predictive_timing --root . --json ;;
   tui) echo "PowerShell TUI is Windows-only. Run: .\\scripts\\nexus.ps1 tui" ;;
   ui) echo "Compatibility UI alias is Windows-only. Run: .\\scripts\\nexus.ps1 ui" ;;
   cell|cell-doctor) python -m nexus_gate.nexus_cell.cli doctor --root . ;;
@@ -206,6 +207,7 @@ case "$COMMAND" in
     python -m nexus_gate.domain.compile --root . --json
     python -m nexus_gate.loops.meta_orchestrator_gate --root . --intent "evolve chain meta-orchestrator seal" --json
     python -m nexus_gate.loops.orchestrator --root . --intent "evolve chain loop orchestration plan" --json
+    python -m nexus_gate.loops.predictive_timing --root . --json
     python -m nexus_gate.build.packer --root . --out dist --json
     ;;
   pack)

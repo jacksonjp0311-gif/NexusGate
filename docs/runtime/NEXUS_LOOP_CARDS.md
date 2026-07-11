@@ -279,6 +279,13 @@ Boundary: cards describe governed local loops. They do not grant autonomous auth
 - Function: Separate model gate for local Phi-4 Mini base model advisory analysis.
 - Command: `python -m nexus_gate.loops.runner --root . --loop phi-wound-gpu-gate --intent "<intent>" --json`
 
+### Predictive Gate Timing
+
+- Loop: `predictive-gate-timing`
+- Group: `Timing`
+- Function: Reduces Codex and operator waste by turning duration history into bounded timeout and gate-order recommendations.
+- Command: `python -m nexus_gate.loops.runner --root . --loop predictive-gate-timing --intent "<intent>" --json`
+
 ### Preflight Optimizer
 
 - Loop: `preflight-optimizer`

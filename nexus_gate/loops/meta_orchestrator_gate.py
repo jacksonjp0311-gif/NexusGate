@@ -20,6 +20,7 @@ READ_SURFACES = [
     "state/loops/nexus_wound_compression_latest.json",
     "reports/nexus_phi_gate_supervisor_report_latest.json",
     "reports/nexus_compile_report_latest.json",
+    "reports/nexus_predictive_gate_timing_latest.json",
 ]
 
 BLOCKED_ACTIONS = [
@@ -118,7 +119,13 @@ def _surface_status(root: Path, rel: str) -> dict[str, Any]:
     }
 
 
-def _derive_recommendation(preflight: dict[str, Any], wound: dict[str, Any], phi: dict[str, Any], git_info: dict[str, Any]) -> dict[str, Any]:
+def _derive_recommendation(
+    preflight: dict[str, Any],
+    wound: dict[str, Any],
+    phi: dict[str, Any],
+    timing: dict[str, Any],
+    git_info: dict[str, Any],
+) -> dict[str, Any]:
     if git_info.get("dirty_count", 0):
         return {
             "next_loop": "scope-hygiene",
@@ -143,6 +150,16 @@ def _derive_recommendation(preflight: dict[str, Any], wound: dict[str, Any], phi
             "next_command": ".\\scripts\\nexus.ps1 phi-gate-compile",
             "why": "Phi Gate Supervisor compiler evidence is missing or failed.",
         }
+    high_timing = [
+        item for item in timing.get("runtime_pressure", [])
+        if item.get("pressure_level") == "high"
+    ]
+    if high_timing:
+        return {
+            "next_loop": "predictive-gate-timing",
+            "next_command": ".\\scripts\\nexus.ps1 predictive-timing",
+            "why": f"{high_timing[0].get('step')} has high runtime pressure; inspect forecast before full evolve.",
+        }
     return {
         "next_loop": "evolution-radar",
         "next_command": ".\\scripts\\nexus.ps1 evolve",
@@ -156,9 +173,10 @@ def build_meta_orchestrator_packet(root: str | Path, intent: str = "") -> dict[s
     preflight = _read_json(root / "reports" / "nexus_preflight_optimizer_latest.json", {})
     wound = _read_json(root / "state" / "loops" / "nexus_wound_compression_latest.json", {})
     phi = _read_json(root / "reports" / "nexus_phi_gate_supervisor_report_latest.json", {})
+    timing = _read_json(root / "reports" / "nexus_predictive_gate_timing_latest.json", {})
     compile_report = _read_json(root / "reports" / "nexus_compile_report_latest.json", {})
     git_info = _git_status(root)
-    recommendation = _derive_recommendation(preflight, wound, phi, git_info)
+    recommendation = _derive_recommendation(preflight, wound, phi, timing, git_info)
 
     panels = [
         _compact_panel(
@@ -203,6 +221,17 @@ def build_meta_orchestrator_packet(root: str | Path, intent: str = "") -> dict[s
                 "version": phi.get("version"),
                 "failed_checks": phi.get("failed_checks") or [],
                 "allowed_repair_lanes": phi.get("allowed_repair_lanes") or [],
+            },
+        ),
+        _compact_panel(
+            "predictive_timing",
+            "Predictive Timing",
+            timing.get("status", "unknown"),
+            (timing.get("recommendation") or {}).get("why") or "Predictive timing packet not emitted yet.",
+            {
+                "runtime_pressure": timing.get("runtime_pressure") or [],
+                "recommended_next_command": (timing.get("recommendation") or {}).get("recommended_next_command"),
+                "claim_boundary": timing.get("claim_boundary"),
             },
         ),
         _compact_panel(

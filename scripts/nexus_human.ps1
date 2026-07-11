@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [switch]$NoGit
 )
@@ -165,6 +165,7 @@ function Run-Feedback {
     Invoke-Step "Domain intelligence compiler" "16_domain_intelligence.json" { python -m nexus_gate.domain.compile --root . --json }
     Invoke-Step "Meta-orchestrator gate" "16b_meta_orchestrator_gate.json" { python -m nexus_gate.loops.meta_orchestrator_gate --root . --intent "evolve chain meta-orchestrator seal" --json }
     Invoke-Step "Loop orchestrator" "16c_loop_orchestrator.json" { python -m nexus_gate.loops.orchestrator --root . --intent "evolve chain loop orchestration plan" --json }
+    Invoke-Step "Predictive timing" "16d_predictive_timing.json" { python -m nexus_gate.loops.predictive_timing --root . --json }
     Say "Feedback/self-healing/interface lanes passed." "OK"
     Show-FeedbackSummary
 }
@@ -313,6 +314,12 @@ if ($Command -eq "meta-orchestrator") {
 if ($Command -eq "orchestrate") {
     Invoke-Step "Loop orchestrator" "16c_loop_orchestrator.json" { python -m nexus_gate.loops.orchestrator --root . --intent "human surface loop orchestration plan" --json }
     Say "Loop orchestration report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "predictive-timing") {
+    Invoke-Step "Predictive timing" "16d_predictive_timing.json" { python -m nexus_gate.loops.predictive_timing --root . --json }
+    Say "Predictive timing report written." "OK"
     exit 0
 }
 

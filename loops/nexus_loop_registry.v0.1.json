@@ -215,6 +215,18 @@
       "description": "Run the read-only v0.9.9 Preflight Optimizer packet.",
       "mutates": false
     },
+    "predictive_timing": {
+      "argv": [
+        "python",
+        "-m",
+        "nexus_gate.loops.predictive_timing",
+        "--root",
+        ".",
+        "--json"
+      ],
+      "description": "Compile Predictive Gate Timing runtime-pressure packet.",
+      "mutates": false
+    },
     "toolbelt_cockpit": {
       "argv": [
         "python",
@@ -1400,6 +1412,32 @@
       ],
       "stop_on_failure": true,
       "title": "Evolution Radar"
+    },
+    "predictive-gate-timing": {
+      "ai_callable": true,
+      "description": "Forecast gate runtime pressure from prior human-surface reports before choosing the next expensive lane.",
+      "display_group": "Timing",
+      "function": "Reduces Codex and operator waste by turning duration history into bounded timeout and gate-order recommendations.",
+      "local_only": true,
+      "mutates": false,
+      "operator_use": "Use before full evolve when runtime pressure, timeout drift, or token/wall-clock waste is suspected.",
+      "requires_human_authorization": false,
+      "stages": [
+        {
+          "command": "predictive_timing",
+          "name": "emit_predictive_timing_packet",
+          "type": "command"
+        },
+        {
+          "max_preview_lines": 80,
+          "name": "predictive_timing_latest",
+          "path": "reports/nexus_predictive_gate_timing_latest.json",
+          "required": false,
+          "type": "read"
+        }
+      ],
+      "stop_on_failure": true,
+      "title": "Predictive Gate Timing"
     },
     "failure-intelligence": {
       "ai_callable": true,
