@@ -157,3 +157,11 @@ Cortex gate + Cortex benchmark + algorithm cards + discovery cards + predictive 
 ```
 
 Predictive Memory Orchestration fuses repository memory health with runtime gate planning. Cortex tells NEXUS whether memory is indexed, bounded, and vector-current; predictive evolve tells NEXUS the cheapest next validation path; cards tell Codex which reusable reasoning patterns exist. The output is a recommendation-only next step and a benchmark trend row, never autonomous execution.
+
+## Cortex Certificate Refresh Algorithm
+
+```text
+index -> telemetry -> graph rebuild -> vector migration -> verify certificate -> activate refresh -> doctor -> NEXUS packet
+```
+
+Cortex Certificate Refresh updates the local memory substrate after repo drift. It refreshes evidence and certificate status without granting Cortex mutation authority or replacing NEXUS evolve gates.

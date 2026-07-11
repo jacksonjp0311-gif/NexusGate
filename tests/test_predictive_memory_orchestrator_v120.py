@@ -78,6 +78,11 @@ class PredictiveMemoryOrchestratorTests(unittest.TestCase):
         self.assertIn("reports/nexus_predictive_memory_orchestrator_latest.json", meta)
         self.assertIn("predictive_memory", meta)
 
+    def test_constrained_cortex_recommends_refresh_lane(self) -> None:
+        source = (ROOT / "nexus_gate" / "loops" / "predictive_memory_orchestrator.py").read_text(encoding="utf-8")
+        self.assertIn("cortex-certificate-refresh", source)
+        self.assertIn(r".\\scripts\\nexus.ps1 cortex-refresh", source)
+
 
 if __name__ == "__main__":
     unittest.main()

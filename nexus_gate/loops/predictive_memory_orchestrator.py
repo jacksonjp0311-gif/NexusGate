@@ -151,9 +151,9 @@ def _recommend(cortex: dict[str, Any], predictive: dict[str, Any], cards: dict[s
         }
     if cortex.get("gate_status") == "constrained":
         return {
-            "recommended_next_loop": "cortex-bootstrap-refresh",
-            "recommended_next_command": ".\\scripts\\nexus.ps1 cortex",
-            "why": "Cortex is healthy but constrained; keep it read-only and refresh the gate after current repo changes settle.",
+            "recommended_next_loop": "cortex-certificate-refresh",
+            "recommended_next_command": ".\\scripts\\nexus.ps1 cortex-refresh",
+            "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning.",
         }
     plan = predictive.get("recommended_plan") or []
     next_step = next((step for step in plan if not step.get("required_before_commit")), None)

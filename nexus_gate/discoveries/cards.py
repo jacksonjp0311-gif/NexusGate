@@ -245,7 +245,7 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "reports/nexus_predictive_evolve_plan_latest.json",
             ],
             "next_versions": [
-                "v0.2: add rolling Cortex benchmark regression thresholds",
+                "v0.2: add Cortex certificate refresh lane",
                 "v0.3: expose predictive memory state in Electron System Monitor HUD",
                 "v0.4: add retrieval confidence trend rows after Cortex query runs",
             ],

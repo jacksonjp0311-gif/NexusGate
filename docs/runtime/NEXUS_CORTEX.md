@@ -21,6 +21,17 @@ The sync lane copies only local Cortex source/docs/tests/benchmarks into `Cortex
 
 Boundary: sync imports source artifacts only. It does not import upstream git history, runtime memory, secrets, external API state, or mutation authority.
 
+## Certificate Refresh
+
+Use the refresh lane after repo changes settle:
+
+```powershell
+.\scripts\nexus.ps1 cortex-refresh
+.\scripts\nexus.ps1 predictive-memory
+```
+
+The refresh lane runs Cortex `index --force`, `telemetry`, `graph --rebuild`, `migrate-vectors`, `verify`, `activate --refresh always`, `doctor`, and `nexus-packet`. It writes `reports/nexus_cortex_refresh_report_latest.json` and refreshes Cortex's repo-local certificate while keeping NEXUS authority read-only and human-bound.
+
 ## Vector Storage Upgrade
 
 Cortex upstream commit `8d5e60b` adds compact versioned vector BLOB storage, migration diagnostics, and a vector migration benchmark. NEXUS migrated the local Cortex memory store:
@@ -62,7 +73,7 @@ The self-host lifecycle benchmark did not run from the vendored copy because `se
 
 1. Keep `sync-cortex` as the only supported local source import path.
 2. Keep the Cortex compiler gate checking database integrity, manifest freshness, vector format, governor mode, and packet shape.
-3. Feed Cortex `nexus-packet` output into Meta-Orchestrator as a recommendation source.
+3. Use `cortex-refresh` after meaningful repo changes, then feed Cortex `nexus-packet` output into Meta-Orchestrator as a recommendation source.
 4. Add Electron read-only visibility for Cortex status, top activated paths, and governor state.
 5. Keep final authority in NEXUS: Cortex may recommend context; NEXUS gates and the human authorize durable mutation.
 

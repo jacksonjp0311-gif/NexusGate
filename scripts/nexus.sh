@@ -196,6 +196,11 @@ case "$COMMAND" in
     INTENT="${*:-Run NEXUS Cortex gate.}"
     python -m nexus_gate.cortex.compile --root . --intent "$INTENT" --json
     ;;
+  cortex-refresh)
+    shift || true
+    INTENT="${*:-Refresh Cortex certificate for NEXUS predictive memory orchestration.}"
+    python -m nexus_gate.cortex.refresh --root . --intent "$INTENT" --json
+    ;;
   sync-cortex)
     shift || true
     SOURCE="${1:-${HOME}/OneDrive/Desktop/Cortex}"

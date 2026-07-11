@@ -208,7 +208,7 @@
         "memory_gain": "gain = vector_payload_reduction_percent + max(query_delta_ms, 0)"
       },
       "next_versions": [
-        "v0.2: add rolling Cortex benchmark regression thresholds",
+        "v0.2: add Cortex certificate refresh lane",
         "v0.3: expose predictive memory state in Electron System Monitor HUD",
         "v0.4: add retrieval confidence trend rows after Cortex query runs"
       ],
@@ -227,7 +227,7 @@
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-11T22:26:38.558802+00:00",
+  "generated_at_utc": "2026-07-11T23:07:49.769130+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",
