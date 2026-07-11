@@ -13,11 +13,12 @@
 # nexus_gate.domain.compile
 # nexus_gate.loops.predictive_timing
 # nexus_gate.loops.predictive_evolve
+# nexus_gate.loops.predictive_memory_orchestrator
 # nexus_gate.loops.certificate_resume
 # nexus_gate.algorithms.cards
 # nexus_gate.discoveries.cards
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "certificate-resume", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "sync-cortex")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "predictive-memory", "certificate-resume", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "sync-cortex")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -439,6 +440,11 @@ switch ($Command) {
     "domain" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 domain }
     "predictive-timing" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 predictive-timing }
     "predictive-evolve" { python -m nexus_gate.loops.predictive_evolve --root . --json }
+    "predictive-memory" {
+        $memoryIntent = $Tag
+        if ([string]::IsNullOrWhiteSpace($memoryIntent)) { $memoryIntent = "Fuse Cortex memory and predictive gate evidence." }
+        python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent $memoryIntent --json
+    }
     "certificate-resume" { python -m nexus_gate.loops.certificate_resume --root . --json }
     "algorithm-cards" { python -m nexus_gate.algorithms.cards --root . --json }
     "discovery-cards" { python -m nexus_gate.discoveries.cards --root . --json }

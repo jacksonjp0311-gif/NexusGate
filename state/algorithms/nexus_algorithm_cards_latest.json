@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 19,
+  "card_count": 20,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -673,6 +673,44 @@
       "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
       "summary": "Cortex vector storage converts legacy JSON vectors into compact versioned binary payloads. The algorithm reduces vector payload size and gives the gate a format-status signal without changing authority or claiming semantic correctness.",
       "title": "Versioned Vector Blob Storage Algorithm"
+    },
+    {
+      "algorithm_id": "predictive-memory-orchestrator-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift",
+        "too_few_samples",
+        "outlier_overfit",
+        "timeout_budget_drift"
+      ],
+      "flow": "Cortex gate + Cortex benchmark + algorithm cards + discovery cards + predictive evolve plan -> memory-aware recommendation -> trend ledger -> final evolve seal required",
+      "inputs": [
+        "human_surface_duration_history",
+        "gate_status_history",
+        "repo_scope_counts"
+      ],
+      "operator_use": "Use before expensive validation to choose bounded timeouts and reduce wasted Codex/operator cycles.",
+      "order": 20,
+      "outputs": [
+        "runtime_pressure",
+        "recommended_timeout_seconds",
+        "recommended_next_command"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Predictive Memory Orchestration fuses repository memory health with runtime gate planning. Cortex tells NEXUS whether memory is indexed, bounded, and vector-current; predictive evolve tells NEXUS the cheapest next validation path; cards tell Codex which reusable reasoning patterns exist. The output is a recommendation-only next step and a benchmark trend row, never autonomous execution.",
+      "title": "Predictive Memory Orchestrator Algorithm"
     }
   ],
   "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
@@ -684,9 +722,10 @@
     "certificate-resume-policy",
     "predictive-evolve-planner-algorithm",
     "cortex-sync-protocol-algorithm",
-    "versioned-vector-blob-storage-algorithm"
+    "versioned-vector-blob-storage-algorithm",
+    "predictive-memory-orchestrator-algorithm"
   ],
-  "generated_at_utc": "2026-07-11T18:33:37.930690+00:00",
+  "generated_at_utc": "2026-07-11T22:26:35.998199+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",

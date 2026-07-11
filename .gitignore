@@ -8,6 +8,7 @@ Thumbs.db
 # logs / reports (local runtime exhaust)
 logs/*.log
 ledger/runtime_gate_timings.jsonl
+ledger/cortex_benchmark_trends.jsonl
 reports/tmp/
 reports/compact_compile_logs/
 reports/script_runs/

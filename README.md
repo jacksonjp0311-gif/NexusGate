@@ -38,7 +38,7 @@ NEXUS GATE current line: v1.1.3 Meta-Orchestrator Gate. Toolbelt, Preflight, Wou
 ## Priority Discovery: Predictive Gate Timing
 Predictive Gate Timing / Runtime Pressure Model is a priority. Timeout history is not intelligence by itself, but recorded lane duration, timeout budget, pass/fail state, artifact churn, and repo size can become bounded expectation: baseline -> drift -> anomaly -> recommended next timeout. The model may predict runtime pressure and recommend gate budgets; it may not bypass gates, hide failures, or self-authorize mutation.
 
-Predictive Evolve is the dry-run planner built on that discovery: predictive timing -> scope classification -> gate selection -> dry-run plan -> final evolve seal required. Run `.\scripts\nexus.ps1 predictive-evolve` before broad validation when you want the next cheapest gate recommendation without executing or authorizing mutation.
+Predictive Evolve is the dry-run planner built on that discovery: predictive timing -> scope classification -> gate selection -> dry-run plan -> final evolve seal required. `.\scripts\nexus.ps1 predictive-memory` fuses Cortex memory health, vector benchmarks, Algorithm Cards, Discovery Cards, and predictive evolve into a memory-aware recommendation plus trend row; it may recommend, not execute or replace final `evolve`.
 
 Certificate Resume v0.1 records passed-gate evidence hashes from the latest human-surface run and recommends a resume point after failure. Certificates are not a pass claim by themselves; `.\scripts\nexus.ps1 evolve` remains the final commit seal.
 
@@ -46,7 +46,6 @@ Certificate Resume v0.1 records passed-gate evidence hashes from the latest huma
 Cortex is imported at `Cortex/` as a recommendation-only repository assimilation and selective-memory organ. Sync upgrades from the standalone repo with `.\scripts\nexus.ps1 sync-cortex -Tag "C:\Users\jacks\OneDrive\Desktop\Cortex"`; current synced source is upstream commit `8d5e60b`. The vector storage upgrade migrated `7,919` NEXUS Cortex vectors to versioned float32 BLOBs, reducing benchmark vector payload by `34.71%` and moving sample query mean from `242.630 ms` legacy to `183.011 ms` blob. See `docs/runtime/NEXUS_CORTEX.md`, `reports/nexus_cortex_sync_report_latest.json`, and `reports/nexus_cortex_gate_latest.json`.
 ## AI Toolbelt Console
 Use the AI Toolbelt Console before choosing a patch path.
-
 ```powershell
 .\scripts\nexus.ps1 toolbelt
 .\scripts\nexus.ps1 toolbelt-start -Tag "<intent>"
@@ -152,6 +151,7 @@ v1.0.1 routes `phi-wound-gpu` through the non-interactive Ollama JSON adapter in
 | Preflight Optimizer | `docs/runtime/NEXUS_PREFLIGHT_OPTIMIZER.md` |
 | Predictive Gate Timing | `docs/runtime/NEXUS_PREDICTIVE_GATE_TIMING.md` |
 | Predictive Evolve | `docs/runtime/NEXUS_PREDICTIVE_EVOLVE.md` |
+| Predictive Memory Orchestrator | `docs/runtime/NEXUS_PREDICTIVE_MEMORY_ORCHESTRATOR.md` |
 | Certificate Resume | `docs/runtime/NEXUS_CERTIFICATE_RESUME.md` |
 | Cortex | `docs/runtime/NEXUS_CORTEX.md` |
 | Algorithm Cards | `docs/runtime/NEXUS_ALGORITHM_CARDS.md` |

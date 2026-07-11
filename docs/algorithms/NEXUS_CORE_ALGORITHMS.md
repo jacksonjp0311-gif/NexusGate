@@ -149,3 +149,11 @@ float vector -> finite-value check -> CTXV1 magic header -> little-endian float3
 ```
 
 Cortex vector storage converts legacy JSON vectors into compact versioned binary payloads. The algorithm reduces vector payload size and gives the gate a format-status signal without changing authority or claiming semantic correctness.
+
+## Predictive Memory Orchestrator Algorithm
+
+```text
+Cortex gate + Cortex benchmark + algorithm cards + discovery cards + predictive evolve plan -> memory-aware recommendation -> trend ledger -> final evolve seal required
+```
+
+Predictive Memory Orchestration fuses repository memory health with runtime gate planning. Cortex tells NEXUS whether memory is indexed, bounded, and vector-current; predictive evolve tells NEXUS the cheapest next validation path; cards tell Codex which reusable reasoning patterns exist. The output is a recommendation-only next step and a benchmark trend row, never autonomous execution.

@@ -24,6 +24,7 @@ set -euo pipefail
 # toolbelt|toolbelt-dashboard compatibility marker for v0.9.6 tests
 # wound-compress
 # cortex
+# predictive-memory
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 COMMAND="${1:-rehydrate}"
@@ -184,6 +185,11 @@ case "$COMMAND" in
   domain) python -m nexus_gate.domain.compile --root . --json ;;
   predictive-timing) python -m nexus_gate.loops.predictive_timing --root . --json ;;
   predictive-evolve) python -m nexus_gate.loops.predictive_evolve --root . --json ;;
+  predictive-memory)
+    shift || true
+    INTENT="${*:-Fuse Cortex memory and predictive gate evidence.}"
+    python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent "$INTENT" --json
+    ;;
   certificate-resume) python -m nexus_gate.loops.certificate_resume --root . --json ;;
   cortex)
     shift || true
@@ -223,6 +229,7 @@ case "$COMMAND" in
     python -m nexus_gate.loops.meta_orchestrator_gate --root . --intent "evolve chain meta-orchestrator seal" --json
     python -m nexus_gate.loops.orchestrator --root . --intent "evolve chain loop orchestration plan" --json
     python -m nexus_gate.loops.predictive_timing --root . --json
+    python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent "evolve chain Cortex memory and predictive gate fusion" --json
     python -m nexus_gate.build.packer --root . --out dist --json
     ;;
   pack)

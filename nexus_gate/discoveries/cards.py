@@ -203,6 +203,53 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.4: add safe bootstrap refresh lane after source sync",
             ],
             "boundary": "Local memory optimization only. It does not prove retrieval correctness, model understanding, safety, security, or mutation authority.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "predictive-memory-orchestrator",
+            "version": "0.1.0",
+            "title": "Predictive Memory Orchestrator",
+            "status": "active",
+            "summary": "NEXUS can reduce wasted validation cycles when Cortex memory health, vector benchmark trends, algorithm cards, discovery cards, and predictive evolve plans are fused into one recommendation-only packet.",
+            "math": {
+                "memory_gain": "gain = vector_payload_reduction_percent + max(query_delta_ms, 0)",
+                "card_readiness": "ready = missing_algorithms == 0 and missing_discoveries == 0",
+                "gate_rule": "next = cortex_repair if memory_unhealthy else predictive_evolve_next_step",
+                "authority_rule": "commit_allowed = final_evolve_passed and human_authorized",
+                "control_loop": "memory -> cards -> timing -> recommend -> record -> require seal",
+            },
+            "code_references": [
+                "nexus_gate/loops/predictive_memory_orchestrator.py::build_predictive_memory_orchestrator",
+                "nexus_gate/loops/predictive_memory_orchestrator.py::_cortex_status",
+                "nexus_gate/loops/predictive_memory_orchestrator.py::_recommend",
+                "nexus_gate/loops/predictive_evolve.py::build_predictive_evolve_plan",
+            ],
+            "algorithm_card_refs": [
+                "predictive-memory-orchestrator-algorithm",
+                "predictive-evolve-planner-algorithm",
+                "versioned-vector-blob-storage-algorithm",
+                "cortex-sync-protocol-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 cortex",
+                ".\\scripts\\nexus.ps1 predictive-evolve",
+                ".\\scripts\\nexus.ps1 predictive-memory",
+                "Inspect reports/nexus_predictive_memory_orchestrator_latest.json",
+                "Run .\\scripts\\nexus.ps1 evolve before commit",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_predictive_memory_orchestrator_latest.json",
+                "state/loops/nexus_predictive_memory_orchestrator_latest.json",
+                "ledger/cortex_benchmark_trends.jsonl",
+                "reports/nexus_cortex_gate_latest.json",
+                "reports/nexus_predictive_evolve_plan_latest.json",
+            ],
+            "next_versions": [
+                "v0.2: add rolling Cortex benchmark regression thresholds",
+                "v0.3: expose predictive memory state in Electron System Monitor HUD",
+                "v0.4: add retrieval confidence trend rows after Cortex query runs",
+            ],
+            "boundary": "Recommendation-only. It may choose the next evidence lane; it may not execute the plan, mutate memory, or skip final evolve before commit.",
         }
     ]
     return {

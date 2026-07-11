@@ -23,6 +23,7 @@ READ_SURFACES = [
     "reports/nexus_compile_report_latest.json",
     "reports/nexus_predictive_gate_timing_latest.json",
     "reports/nexus_predictive_evolve_plan_latest.json",
+    "reports/nexus_predictive_memory_orchestrator_latest.json",
     "reports/nexus_certificate_resume_report_latest.json",
 ]
 
@@ -195,6 +196,7 @@ def build_meta_orchestrator_packet(root: str | Path, intent: str = "") -> dict[s
     phi = _read_json(root / "reports" / "nexus_phi_gate_supervisor_report_latest.json", {})
     timing = _read_json(root / "reports" / "nexus_predictive_gate_timing_latest.json", {})
     predictive_evolve = _read_json(root / "reports" / "nexus_predictive_evolve_plan_latest.json", {})
+    predictive_memory = _read_json(root / "reports" / "nexus_predictive_memory_orchestrator_latest.json", {})
     certificate_resume = _read_json(root / "reports" / "nexus_certificate_resume_report_latest.json", {})
     compile_report = _read_json(root / "reports" / "nexus_compile_report_latest.json", {})
     git_info = _git_status(root)
@@ -265,6 +267,18 @@ def build_meta_orchestrator_packet(root: str | Path, intent: str = "") -> dict[s
                 "recommended_plan": predictive_evolve.get("recommended_plan") or [],
                 "final_evolve_required_before_commit": predictive_evolve.get("final_evolve_required_before_commit"),
                 "claim_boundary": predictive_evolve.get("claim_boundary"),
+            },
+        ),
+        _compact_panel(
+            "predictive_memory",
+            "Predictive Memory",
+            predictive_memory.get("status", "unknown"),
+            (predictive_memory.get("recommendation") or {}).get("why") or "Predictive memory packet not emitted yet.",
+            {
+                "cortex_memory": predictive_memory.get("cortex_memory") or {},
+                "card_memory": predictive_memory.get("card_memory") or {},
+                "recommended_next_command": (predictive_memory.get("recommendation") or {}).get("recommended_next_command"),
+                "claim_boundary": predictive_memory.get("claim_boundary"),
             },
         ),
         _compact_panel(
