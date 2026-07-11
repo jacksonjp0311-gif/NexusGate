@@ -59,7 +59,12 @@ def _plan_steps(timing: dict[str, Any]) -> list[dict[str, Any]]:
         }
     ]
 
-    if recommended_command and recommended_command != ".\\scripts\\nexus.ps1 evolve":
+    seen_commands = {steps[0]["command"]}
+    if (
+        recommended_command
+        and recommended_command != ".\\scripts\\nexus.ps1 evolve"
+        and recommended_command not in seen_commands
+    ):
         steps.append(
             {
                 "order": len(steps) + 1,
@@ -70,6 +75,7 @@ def _plan_steps(timing: dict[str, Any]) -> list[dict[str, Any]]:
                 "dry_run_only": False,
             }
         )
+        seen_commands.add(recommended_command)
 
     steps.append(
         {

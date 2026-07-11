@@ -16,10 +16,12 @@
     "reports/nexus_reflective_loop_report_latest.json",
     "reports/nexus_domain_intelligence_report_latest.json",
     "reports/nexus_predictive_gate_timing_latest.json",
+    "reports/nexus_predictive_evolve_plan_latest.json",
+    "reports/nexus_certificate_resume_report_latest.json",
     "state/algorithms/nexus_algorithm_cards_latest.json",
     "state/discoveries/nexus_discovery_cards_latest.json"
   ],
-  "required_commands": ["python -m unittest discover -s tests", ".\\scripts\\nexus.ps1 predictive-timing", ".\\scripts\\nexus.ps1 domain", ".\\scripts\\nexus.ps1 reflect", ".\\scripts\\nexus.ps1 evolve"],
+  "required_commands": ["python -m unittest discover -s tests", ".\\scripts\\nexus.ps1 predictive-timing", ".\\scripts\\nexus.ps1 predictive-evolve", ".\\scripts\\nexus.ps1 certificate-resume", ".\\scripts\\nexus.ps1 domain", ".\\scripts\\nexus.ps1 reflect", ".\\scripts\\nexus.ps1 evolve"],
   "blocked_actions": ["self_authorize", "bypass_evolve", "secret_access", "external_api_write", "unsupported_claim_promotion"],
   "claim_boundary": "Codex orchestration is bounded repo work with human authority and gates. It does not create autonomous authority."
 }

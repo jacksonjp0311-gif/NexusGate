@@ -20,6 +20,9 @@ class MetaOrchestratorGateTests(unittest.TestCase):
         self.assertIn("self_authorize", packet["blocked_actions"])
         self.assertIn("arbitrary_shell_commands", packet["blocked_actions"])
         self.assertIn("reports/nexus_meta_orchestrator_gate_latest.json", packet["write_surfaces"])
+        panel_ids = {panel["panel_id"] for panel in packet["panels"]}
+        self.assertIn("predictive_evolve", panel_ids)
+        self.assertIn("certificate_resume", panel_ids)
         self.assertIn("production readiness", packet["claim_boundary"])
 
     def test_command_surfaces_expose_meta_orchestrator(self) -> None:
@@ -38,11 +41,19 @@ class MetaOrchestratorGateTests(unittest.TestCase):
         js = (ROOT / "electron" / "renderer" / "renderer.js").read_text(encoding="utf-8-sig")
         css = (ROOT / "electron" / "renderer" / "styles.css").read_text(encoding="utf-8-sig")
         self.assertIn("reports/nexus_meta_orchestrator_gate_latest.json", main)
+        self.assertIn("reports/nexus_predictive_evolve_plan_latest.json", main)
+        self.assertIn("state/algorithms/nexus_algorithm_cards_latest.json", main)
+        self.assertIn("state/discoveries/nexus_discovery_cards_latest.json", main)
         self.assertIn('id="meta-orchestrator-hud"', html)
+        self.assertIn('id="algorithm-cards-hud"', html)
+        self.assertIn('id="discovery-cards-hud"', html)
         self.assertIn('id="meta-orchestrator-popout"', html)
         self.assertIn("renderMetaOrchestratorPanels", js)
+        self.assertIn("toggleCardsHud", js)
+        self.assertIn("ALGORITHM_CARDS_SURFACE", js)
         self.assertIn("META_ORCHESTRATOR_SURFACE", js)
         self.assertIn(".meta-orchestrator-panels", css)
+        self.assertIn(".nexus-cards-hud", css)
         allowlist_block = main.split("const ALLOWLISTED_COMMANDS", 1)[1].split("]);", 1)[0]
         self.assertNotIn('"meta-orchestrator"', allowlist_block)
 

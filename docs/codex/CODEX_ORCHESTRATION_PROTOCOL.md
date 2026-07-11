@@ -11,11 +11,12 @@ Codex should not enter an empty repo. Codex should enter a repo that teaches it.
 5. Run tests.
 6. Run `.\scripts\nexus.ps1 predictive-timing` before full evolve, pack, broad tests, Electron smoke, or any long-running validation lane.
 7. Run `.\scripts\nexus.ps1 predictive-evolve` when you need a dry-run next-gate plan; it may recommend targeted gates, but full evolve remains required before commit.
-8. Run `.\scripts\nexus.ps1 domain`.
-9. Run `.\scripts\nexus.ps1 reflect`.
-10. Run `.\scripts\nexus.ps1 evolve`.
-11. Commit only after gates pass.
-12. Report what changed, what passed, what failed, and what remains blocked.
+8. Run `.\scripts\nexus.ps1 certificate-resume` after a failed gate or when resuming from a known wound; certificates may guide resume, not replace final evolve.
+9. Run `.\scripts\nexus.ps1 domain`.
+10. Run `.\scripts\nexus.ps1 reflect`.
+11. Run `.\scripts\nexus.ps1 evolve`.
+12. Commit only after gates pass.
+13. Report what changed, what passed, what failed, and what remains blocked.
 
 ## Codex Boundary
 
@@ -37,6 +38,7 @@ reports/nexus_reflective_loop_report_latest.json
 reports/nexus_domain_intelligence_report_latest.json
 reports/nexus_predictive_gate_timing_latest.json
 reports/nexus_predictive_evolve_plan_latest.json
+reports/nexus_certificate_resume_report_latest.json
 state/algorithms/nexus_algorithm_cards_latest.json
 state/discoveries/nexus_discovery_cards_latest.json
 ```

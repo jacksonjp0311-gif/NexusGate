@@ -1,5 +1,5 @@
 {
-  "card_count": 2,
+  "card_count": 3,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -89,10 +89,52 @@
       "summary": "Predictive timing becomes more useful when wrapped in a dry-run plan that orders the next cheapest gate while preserving the final evolve seal.",
       "title": "Predictive Evolve Dry-Run Planner",
       "version": "0.2.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "certificate-resume-policy",
+        "predictive-evolve-planner-algorithm",
+        "compiler-gate-algorithm"
+      ],
+      "boundary": "Recommendation-only. Certificates may recommend resume points; they may not claim correctness or skip final evolve before commit.",
+      "code_references": [
+        "nexus_gate/loops/certificate_resume.py::build_certificate_resume_packet",
+        "nexus_gate/loops/certificate_resume.py::_certificate_for",
+        "nexus_gate/loops/certificate_resume.py::_latest_human_surface"
+      ],
+      "discovery_id": "certificate-resume-gate-fingerprint",
+      "evidence_surfaces": [
+        "reports/nexus_certificate_resume_report_latest.json",
+        "state/loops/nexus_certificate_resume_latest.json",
+        "reports/human_surface/*"
+      ],
+      "math": {
+        "commit_rule": "commit_allowed = final_evolve_passed and human_authorized",
+        "control_loop": "gate -> hash -> certify -> fail point -> recommend resume -> require seal",
+        "evidence_hash": "evidence_sha256 = sha256(gate_log_bytes)",
+        "input_fingerprint": "input_fingerprint = sha256(gate_id + git_scope_hash + gate_log_bytes)",
+        "resume_rule": "resume_gate = first(status in {fail, timeout})"
+      },
+      "next_versions": [
+        "v0.2: compare certificate fingerprints across changed inputs",
+        "v0.3: recommend exact targeted rerun command per gate",
+        "v0.4: show certificate status in System Monitor HUD"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 certificate-resume",
+        "Inspect reports/nexus_certificate_resume_report_latest.json",
+        "Fix the active wound if a resume gate is present",
+        "Run .\\scripts\\nexus.ps1 evolve before commit"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Passed gates can become local resume evidence when their logs and current git scope are hashed, but certificates never replace the final evolve seal.",
+      "title": "Certificate Resume Gate Fingerprint",
+      "version": "0.2.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-11T07:56:04.642166+00:00",
+  "generated_at_utc": "2026-07-11T08:52:47.327078+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

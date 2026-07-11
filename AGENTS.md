@@ -30,6 +30,7 @@ Before running full `evolve`, pack, broad test suites, Electron smoke, or any lo
 ```powershell
 .\scripts\nexus.ps1 predictive-timing
 .\scripts\nexus.ps1 predictive-evolve
+.\scripts\nexus.ps1 certificate-resume
 ```
 
 Use the packet at `reports/nexus_predictive_gate_timing_latest.json` to choose the cheapest valid next gate. If runtime pressure is high, prefer targeted tests or the named timing recommendation before repeating an expensive lane.
@@ -235,6 +236,7 @@ Use this lane for normal evolution:
 ```powershell
 .\scripts\nexus.ps1 predictive-timing
 .\scripts\nexus.ps1 predictive-evolve
+.\scripts\nexus.ps1 certificate-resume
 .\scripts\nexus.ps1 evolve
 ```
 

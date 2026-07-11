@@ -86,6 +86,13 @@ def _step_id(path: Path) -> str:
 
 def _step_status(path: Path) -> str:
     text = _read_text(path)
+    try:
+        parsed = json.loads(text)
+        status = str(parsed.get("status", "")).lower()
+        if status in {"pass", "warn", "fail", "timeout"}:
+            return status
+    except Exception:
+        pass
     lower = text.lower()
     if "nexus step timeout" in lower or "timed out" in lower:
         return "timeout"
@@ -162,10 +169,19 @@ def _adaptive_timeout(p90: float, step: str) -> int:
     return int(round(target / 30) * 30)
 
 
-def _pressure_level(ratio: float, timed_out: bool, failed: bool) -> str:
-    if failed or timed_out or ratio >= 1.75:
+MIN_MEANINGFUL_PRESSURE_SECONDS = 5.0
+HIGH_DRIFT_RATIO = 1.75
+MEDIUM_DRIFT_RATIO = 1.25
+
+
+def _pressure_level(ratio: float, timed_out: bool, failed: bool, latest: float, sustained_ratio: float) -> str:
+    if failed or timed_out:
         return "high"
-    if ratio >= 1.25:
+    if latest < MIN_MEANINGFUL_PRESSURE_SECONDS:
+        return "low"
+    if ratio >= HIGH_DRIFT_RATIO and sustained_ratio >= MEDIUM_DRIFT_RATIO:
+        return "high"
+    if ratio >= MEDIUM_DRIFT_RATIO:
         return "medium"
     return "low"
 
@@ -186,10 +202,12 @@ def _analyze_steps(runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
         baseline = statistics.median(durations)
         p90 = _percentile(durations, 0.9)
         ratio = latest / baseline if baseline > 0 else 1.0
+        previous = durations[1] if len(durations) > 1 else latest
+        sustained_ratio = previous / baseline if baseline > 0 else 1.0
         statuses = [item["status"] for item in samples]
         timed_out = statuses[0] == "timeout" or "timeout" in statuses[:3]
         failed = statuses[0] == "fail"
-        level = _pressure_level(ratio, timed_out, failed)
+        level = _pressure_level(ratio, timed_out, failed, latest, sustained_ratio)
         analysis.append(
             {
                 "step": step_name,
@@ -200,6 +218,8 @@ def _analyze_steps(runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "latest_status": statuses[0],
                 "pressure_level": level,
                 "drift_ratio": round(ratio, 3),
+                "sustained_drift_ratio": round(sustained_ratio, 3),
+                "minimum_meaningful_pressure_seconds": MIN_MEANINGFUL_PRESSURE_SECONDS,
                 "recommended_timeout_seconds": _recommend_timeout(p90 or baseline, latest, timed_out, step_name),
             }
         )
@@ -364,6 +384,8 @@ def build_predictive_timing_packet(root: str | Path, max_runs: int = 12) -> dict
             "pack_min_timeout_seconds": 420,
             "max_timeout_seconds": 900,
             "mode": "recommendation_only",
+            "minimum_meaningful_pressure_seconds": MIN_MEANINGFUL_PRESSURE_SECONDS,
+            "hysteresis": "high pressure requires sustained drift unless the gate failed or timed out",
         },
         "gate_selection_policy": gate_policy,
         "recommendation": next_action,

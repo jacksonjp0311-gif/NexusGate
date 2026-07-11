@@ -115,6 +115,48 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.5: add certificate resume planning",
             ],
             "boundary": "Dry-run and recommendation-only. It may recommend targeted gates; it may not execute them or skip full evolve before commit.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "certificate-resume-gate-fingerprint",
+            "version": "0.2.0",
+            "title": "Certificate Resume Gate Fingerprint",
+            "status": "active",
+            "summary": "Passed gates can become local resume evidence when their logs and current git scope are hashed, but certificates never replace the final evolve seal.",
+            "math": {
+                "evidence_hash": "evidence_sha256 = sha256(gate_log_bytes)",
+                "input_fingerprint": "input_fingerprint = sha256(gate_id + git_scope_hash + gate_log_bytes)",
+                "resume_rule": "resume_gate = first(status in {fail, timeout})",
+                "commit_rule": "commit_allowed = final_evolve_passed and human_authorized",
+                "control_loop": "gate -> hash -> certify -> fail point -> recommend resume -> require seal",
+            },
+            "code_references": [
+                "nexus_gate/loops/certificate_resume.py::build_certificate_resume_packet",
+                "nexus_gate/loops/certificate_resume.py::_certificate_for",
+                "nexus_gate/loops/certificate_resume.py::_latest_human_surface",
+            ],
+            "algorithm_card_refs": [
+                "certificate-resume-policy",
+                "predictive-evolve-planner-algorithm",
+                "compiler-gate-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 certificate-resume",
+                "Inspect reports/nexus_certificate_resume_report_latest.json",
+                "Fix the active wound if a resume gate is present",
+                "Run .\\scripts\\nexus.ps1 evolve before commit",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_certificate_resume_report_latest.json",
+                "state/loops/nexus_certificate_resume_latest.json",
+                "reports/human_surface/*",
+            ],
+            "next_versions": [
+                "v0.2: compare certificate fingerprints across changed inputs",
+                "v0.3: recommend exact targeted rerun command per gate",
+                "v0.4: show certificate status in System Monitor HUD",
+            ],
+            "boundary": "Recommendation-only. Certificates may recommend resume points; they may not claim correctness or skip final evolve before commit.",
         }
     ]
     return {

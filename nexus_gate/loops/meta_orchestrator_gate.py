@@ -10,6 +10,7 @@ from typing import Any
 
 VERSION = "1.1.3"
 SCHEMA = "NEXUS_META_ORCHESTRATOR_GATE.v1.1.3"
+# Compatibility marker: predictive-gate-timing now routes through predictive-evolve.
 REPORT_LATEST = Path("reports") / "nexus_meta_orchestrator_gate_latest.json"
 REPORT_VERSIONED = Path("reports") / "nexus_meta_orchestrator_gate.v1.1.3.json"
 STATE_VERSIONED = Path("state") / "loops" / "nexus_meta_orchestrator_gate.v1.1.3.json"
@@ -21,6 +22,8 @@ READ_SURFACES = [
     "reports/nexus_phi_gate_supervisor_report_latest.json",
     "reports/nexus_compile_report_latest.json",
     "reports/nexus_predictive_gate_timing_latest.json",
+    "reports/nexus_predictive_evolve_plan_latest.json",
+    "reports/nexus_certificate_resume_report_latest.json",
 ]
 
 BLOCKED_ACTIONS = [
@@ -124,6 +127,8 @@ def _derive_recommendation(
     wound: dict[str, Any],
     phi: dict[str, Any],
     timing: dict[str, Any],
+    predictive_evolve: dict[str, Any],
+    certificate_resume: dict[str, Any],
     git_info: dict[str, Any],
 ) -> dict[str, Any]:
     if git_info.get("dirty_count", 0):
@@ -156,10 +161,25 @@ def _derive_recommendation(
     ]
     if high_timing:
         return {
-            "next_loop": "predictive-gate-timing",
-            "next_command": ".\\scripts\\nexus.ps1 predictive-timing",
-            "why": f"{high_timing[0].get('step')} has high runtime pressure; inspect forecast before full evolve.",
+            "next_loop": "predictive-evolve",
+            "next_command": ".\\scripts\\nexus.ps1 predictive-evolve",
+            "why": f"{high_timing[0].get('step')} has high runtime pressure; compile a dry-run next-gate plan before full evolve.",
         }
+    if certificate_resume.get("recommended_resume_gate"):
+        return {
+            "next_loop": "certificate-resume",
+            "next_command": ".\\scripts\\nexus.ps1 certificate-resume",
+            "why": f"Certificate Resume recommends resuming from {certificate_resume.get('recommended_resume_gate')}.",
+        }
+    if predictive_evolve.get("status") in {"pass", "warn"}:
+        plan = predictive_evolve.get("recommended_plan") or []
+        next_step = next((step for step in plan if not step.get("required_before_commit")), None)
+        if next_step:
+            return {
+                "next_loop": "predictive-evolve",
+                "next_command": next_step.get("command") or ".\\scripts\\nexus.ps1 predictive-evolve",
+                "why": "Predictive Evolve has a current dry-run plan for the cheapest next gate.",
+            }
     return {
         "next_loop": "evolution-radar",
         "next_command": ".\\scripts\\nexus.ps1 evolve",
@@ -174,9 +194,11 @@ def build_meta_orchestrator_packet(root: str | Path, intent: str = "") -> dict[s
     wound = _read_json(root / "state" / "loops" / "nexus_wound_compression_latest.json", {})
     phi = _read_json(root / "reports" / "nexus_phi_gate_supervisor_report_latest.json", {})
     timing = _read_json(root / "reports" / "nexus_predictive_gate_timing_latest.json", {})
+    predictive_evolve = _read_json(root / "reports" / "nexus_predictive_evolve_plan_latest.json", {})
+    certificate_resume = _read_json(root / "reports" / "nexus_certificate_resume_report_latest.json", {})
     compile_report = _read_json(root / "reports" / "nexus_compile_report_latest.json", {})
     git_info = _git_status(root)
-    recommendation = _derive_recommendation(preflight, wound, phi, timing, git_info)
+    recommendation = _derive_recommendation(preflight, wound, phi, timing, predictive_evolve, certificate_resume, git_info)
 
     panels = [
         _compact_panel(
@@ -232,6 +254,29 @@ def build_meta_orchestrator_packet(root: str | Path, intent: str = "") -> dict[s
                 "runtime_pressure": timing.get("runtime_pressure") or [],
                 "recommended_next_command": (timing.get("recommendation") or {}).get("recommended_next_command"),
                 "claim_boundary": timing.get("claim_boundary"),
+            },
+        ),
+        _compact_panel(
+            "predictive_evolve",
+            "Predictive Evolve",
+            predictive_evolve.get("status", "unknown"),
+            (predictive_evolve.get("gate_selection_policy") or {}).get("why") or "Predictive evolve plan not emitted yet.",
+            {
+                "recommended_plan": predictive_evolve.get("recommended_plan") or [],
+                "final_evolve_required_before_commit": predictive_evolve.get("final_evolve_required_before_commit"),
+                "claim_boundary": predictive_evolve.get("claim_boundary"),
+            },
+        ),
+        _compact_panel(
+            "certificate_resume",
+            "Certificate Resume",
+            certificate_resume.get("status", "unknown"),
+            certificate_resume.get("recommended_resume_gate") or "No resume wound visible.",
+            {
+                "certificate_count": certificate_resume.get("certificate_count"),
+                "recommended_next_command": certificate_resume.get("recommended_next_command"),
+                "final_evolve_required_before_commit": certificate_resume.get("final_evolve_required_before_commit"),
+                "claim_boundary": certificate_resume.get("claim_boundary"),
             },
         ),
         _compact_panel(

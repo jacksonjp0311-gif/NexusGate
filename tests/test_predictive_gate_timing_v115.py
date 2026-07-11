@@ -23,12 +23,20 @@ class PredictiveGateTimingTests(unittest.TestCase):
         self.assertIn("adaptive_timeout_policy", packet)
         self.assertIn("gate_selection_policy", packet)
         self.assertIn("ledger/runtime_gate_timings.jsonl", packet["write_surfaces"])
+        self.assertIn("minimum_meaningful_pressure_seconds", packet["adaptive_timeout_policy"])
+        self.assertIn("hysteresis", packet["adaptive_timeout_policy"])
         self.assertTrue(packet["authority_boundary"]["recommendation_only"])
         self.assertFalse(packet["authority_boundary"]["autonomous_timeout_extension"])
         self.assertFalse(packet["authority_boundary"]["bypass_gates"])
         self.assertIn("self_authorize", packet["blocked_actions"])
         self.assertIn("bypass_gates", packet["blocked_actions"])
         self.assertIn("local development evidence only", packet["claim_boundary"])
+
+    def test_tiny_runtime_drift_does_not_create_high_pressure(self) -> None:
+        from nexus_gate.loops.predictive_timing import _pressure_level
+
+        self.assertEqual(_pressure_level(2.5, False, False, 0.9, 2.0), "low")
+        self.assertEqual(_pressure_level(2.5, True, False, 0.9, 2.0), "high")
 
     def test_cli_writes_report_and_state(self) -> None:
         proc = subprocess.run(

@@ -22,6 +22,7 @@ class PredictiveEvolvePlannerTests(unittest.TestCase):
         commands = [step["command"] for step in packet["recommended_plan"]]
         self.assertIn(".\\scripts\\nexus.ps1 predictive-timing", commands)
         self.assertEqual(commands[-1], ".\\scripts\\nexus.ps1 evolve")
+        self.assertEqual(len(commands), len(set(commands)))
         self.assertIn("self_authorize", packet["blocked_actions"])
         self.assertIn("skip_final_evolve_before_commit", packet["blocked_actions"])
         self.assertFalse(packet["authority_boundary"]["execute_plan"])

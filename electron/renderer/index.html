@@ -313,7 +313,8 @@
 
   .nexus-metrics-zone {
     display: grid;
-    grid-template-columns: 314px 260px minmax(0, 1fr);
+    /* Compatibility marker: grid-template-columns: 314px 260px minmax(0, 1fr) */
+    grid-template-columns: 314px 260px 170px 170px minmax(0, 1fr);
     gap: 10px;
     height: 100%;
     min-height: 0;
@@ -326,11 +327,11 @@
   }
 
   .nexus-metrics-hud {
-    grid-column: 3 / 4;
+    grid-column: 5 / 6;
     height: 100%;
     padding: 10px 12px 9px;
     display: grid;
-    grid-template-rows: 24px minmax(0, 1fr) 34px;
+    grid-template-rows: 24px minmax(0, 1fr) 30px;
     gap: 8px;
     min-width: 0;
     min-height: 0;
@@ -380,7 +381,7 @@
   .nexus-metrics-grid {
     min-height: 0;
     display: grid;
-    grid-template-columns: minmax(150px, .9fr) minmax(190px, 1.05fr) minmax(210px, 1.18fr) minmax(160px, .82fr);
+    grid-template-columns: minmax(140px, .85fr) minmax(170px, 1fr) minmax(180px, 1.05fr) minmax(145px, .78fr);
     gap: 8px;
     overflow: hidden;
   }
@@ -401,6 +402,86 @@
     background:
       radial-gradient(circle at 50% 48%, rgba(52, 211, 153, .18), transparent 36%),
       linear-gradient(180deg, rgba(3, 40, 34, .92), rgba(2, 8, 18, .88));
+  }
+
+  .nexus-card-mini {
+    height: 100%;
+    min-height: 0;
+    padding: 9px;
+    display: grid;
+    grid-template-rows: 38px minmax(0, 1fr);
+    gap: 8px;
+    border-color: rgba(34, 197, 94, .44);
+    background:
+      radial-gradient(circle at 50% 42%, rgba(34, 197, 94, .16), transparent 42%),
+      linear-gradient(180deg, rgba(2, 44, 34, .92), rgba(2, 8, 18, .88));
+    max-height: 310px;
+  }
+
+  .algorithm-card-mini {
+    grid-column: 3 / 4;
+  }
+
+  .discovery-card-mini {
+    grid-column: 4 / 5;
+  }
+
+  .nexus-card-mini-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 54px;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .nexus-card-mini-head strong {
+    display: block;
+    color: #a7f3d0;
+    font: 900 11px/1 Consolas, monospace;
+    letter-spacing: .12em;
+  }
+
+  .nexus-card-mini-head span {
+    display: block;
+    margin-top: 3px;
+    color: rgba(167, 243, 208, .64);
+    font: 8px/1 Consolas, monospace;
+    text-transform: uppercase;
+  }
+
+  .nexus-card-mini-head button,
+  .nexus-card-mini-body {
+    color: #d9f99d;
+    background: rgba(6, 78, 59, .78);
+    border: 1px solid rgba(52, 211, 153, .48);
+    cursor: pointer;
+    font: 800 10px Consolas, monospace;
+    text-transform: uppercase;
+  }
+
+  .nexus-card-mini-body {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 8px;
+    min-height: 0;
+    width: 100%;
+    background:
+      radial-gradient(circle at 50% 48%, rgba(34, 197, 94, .22), transparent 34%),
+      repeating-linear-gradient(135deg, rgba(52, 211, 153, .08) 0 1px, transparent 1px 14px),
+      rgba(2, 6, 23, .64);
+  }
+
+  .nexus-card-mini-body span {
+    color: #86efac;
+    font: 900 34px/1 Consolas, monospace;
+    text-shadow: 0 0 18px rgba(34, 197, 94, .55);
+  }
+
+  .nexus-card-mini-body em {
+    color: #a7f3d0;
+    font: 9px Consolas, monospace;
+    font-style: normal;
+    letter-spacing: .08em;
   }
 
   .petri-mini-head {
@@ -662,7 +743,7 @@
 
   .nexus-metrics-footer {
     display: grid;
-    grid-template-columns: 1.05fr .85fr .95fr 1.1fr .9fr;
+    grid-template-columns: .75fr .75fr .75fr minmax(220px, 270px) .85fr;
     gap: 8px;
     min-height: 0;
   }
@@ -679,6 +760,12 @@
     white-space: nowrap;
   }
 
+  .nexus-metrics-footer span:nth-child(4) {
+    width: 100%;
+    min-width: 220px;
+    max-width: 270px;
+  }
+
   .nexus-metrics-footer b {
     color: #55f7ff;
     text-transform: uppercase;
@@ -692,7 +779,7 @@
 
   @media (max-width: 1280px) {
     .nexus-metrics-zone {
-      grid-template-columns: 286px minmax(210px, 250px) minmax(0, 1fr);
+      grid-template-columns: 286px minmax(210px, 250px) repeat(2, minmax(130px, 160px)) minmax(0, 1fr);
       min-height: 0;
     }
 
@@ -1038,10 +1125,17 @@
                   <span>Monitor State <strong id="hud-monitor-state">hydrating</strong></span>
                   <span>Process Count <strong id="hud-process-count">--</strong></span>
                   <span>Uptime <strong id="hud-uptime">--</strong></span>
+                  <span>Runtime Pressure <strong id="hud-runtime-pressure">--</strong></span>
+                  <span>Slowest Gate <strong id="hud-slowest-gate">--</strong></span>
+                  <span>Timeout Budget <strong id="hud-timeout-budget">--</strong></span>
                 </div>
                 <div class="telemetry-recommendation-card">
                   <span>Analysis Summary</span>
                   <strong id="hud-analysis-summary">Waiting for local telemetry...</strong>
+                </div>
+                <div class="telemetry-recommendation-card">
+                  <span>Recommended Next Gate</span>
+                  <strong id="hud-recommended-gate">Waiting for predictive plan...</strong>
                 </div>
               </section>
               <section class="telemetry-tab-panel" id="telemetry-panel-processes" data-telemetry-panel="processes">
@@ -1120,6 +1214,32 @@
       <span id="petri-status">ready</span>
       <span id="petri-counts">cells -- / particles --</span>
     </div>
+  </section>
+  <section class="hud-frame nexus-card-mini algorithm-card-mini" aria-label="NEXUS Algorithm Cards">
+    <div class="nexus-card-mini-head">
+      <div>
+        <strong>ALGORITHMS</strong>
+        <span>predictive controls</span>
+      </div>
+      <button type="button" id="algorithm-cards-open">OPEN</button>
+    </div>
+    <button class="nexus-card-mini-body" type="button" id="algorithm-cards-mini">
+      <span id="algorithm-card-count">--</span>
+      <em>cards indexed</em>
+    </button>
+  </section>
+  <section class="hud-frame nexus-card-mini discovery-card-mini" aria-label="NEXUS Discovery Cards">
+    <div class="nexus-card-mini-head">
+      <div>
+        <strong>DISCOVERIES</strong>
+        <span>repo-native findings</span>
+      </div>
+      <button type="button" id="discovery-cards-open">OPEN</button>
+    </div>
+    <button class="nexus-card-mini-body" type="button" id="discovery-cards-mini">
+      <span id="discovery-card-count">--</span>
+      <em>cards indexed</em>
+    </button>
   </section>
   <section class="hud-frame nexus-metrics-hud" aria-label="NEXUS Metrics">
     <div class="nexus-metrics-head">
@@ -1205,6 +1325,28 @@
       <span><b>Summary</b><em id="nexus-metrics-summary-copy">Core systems nominal.</em></span>
       <span class="nexus-live-dot"><b>Last Updated</b><em id="nexus-metrics-updated">--:--:--</em> live</span>
     </div>
+  </section>
+  <section class="telemetry-hud nexus-cards-hud" id="algorithm-cards-hud" hidden aria-label="Expanded algorithm cards HUD">
+    <div class="telemetry-hud-head">
+      <div>
+        <span>NEXUS Cards</span>
+        <strong>Algorithm Cards</strong>
+      </div>
+      <button type="button" id="algorithm-cards-close">close</button>
+    </div>
+    <div class="nexus-cards-summary" id="algorithm-cards-summary">Waiting for algorithm cards...</div>
+    <div class="nexus-cards-grid" id="algorithm-cards-grid"></div>
+  </section>
+  <section class="telemetry-hud nexus-cards-hud" id="discovery-cards-hud" hidden aria-label="Expanded discovery cards HUD">
+    <div class="telemetry-hud-head">
+      <div>
+        <span>NEXUS Cards</span>
+        <strong>Discovery Cards</strong>
+      </div>
+      <button type="button" id="discovery-cards-close">close</button>
+    </div>
+    <div class="nexus-cards-summary" id="discovery-cards-summary">Waiting for discovery cards...</div>
+    <div class="nexus-cards-grid" id="discovery-cards-grid"></div>
   </section>
 </section>
 

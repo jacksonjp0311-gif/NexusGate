@@ -27,6 +27,7 @@ Dry-run rules:
 - It may not execute arbitrary shell commands.
 - It may not write git state.
 - It may not skip the final full evolve seal before commit.
+- It may pair with `.\scripts\nexus.ps1 certificate-resume` after a failed gate to inspect passed-gate certificates and recommend the active resume point.
 
 Run:
 

@@ -46,6 +46,12 @@ const READ_SURFACES = new Set([
   "reports/nexus_domain_intelligence_report_latest.json",
   "reports/nexus_meta_orchestrator_gate_latest.json",
   "reports/nexus_loop_orchestration_report_latest.json",
+  "reports/nexus_predictive_gate_timing_latest.json",
+  "reports/nexus_predictive_evolve_plan_latest.json",
+  "reports/nexus_certificate_resume_report_latest.json",
+  "state/algorithms/nexus_algorithm_cards_latest.json",
+  "state/discoveries/nexus_discovery_cards_latest.json",
+  "state/loops/nexus_certificate_resume_latest.json",
   "state/nexus_lineage_manifest_latest.json",
   "state/interface_adapter_contract_index.v0.3.7.json",
   "state/domain_intelligence_index.v0.4.0.json",
@@ -1321,6 +1327,10 @@ function buildTelemetryAnalysis(packet) {
   const freeMem = Number(packet.memory?.free_bytes || 0);
   const recommendations = [];
   const pressure = [];
+  const predictiveTiming = readJsonIfPresent(path.join(repoRoot, "reports", "nexus_predictive_gate_timing_latest.json")) || {};
+  const predictiveEvolve = readJsonIfPresent(path.join(repoRoot, "reports", "nexus_predictive_evolve_plan_latest.json")) || {};
+  const runtimePressure = Array.isArray(predictiveTiming.runtime_pressure) ? predictiveTiming.runtime_pressure : [];
+  const topRuntimePressure = runtimePressure[0] || {};
 
   if (cpu >= 90) {
     pressure.push("cpu");
@@ -1344,6 +1354,9 @@ function buildTelemetryAnalysis(packet) {
   if (recommendations.length === 0) {
     recommendations.push("No immediate local telemetry pressure detected. Continue governed evolve or targeted UI work.");
   }
+  if (topRuntimePressure.pressure_level && topRuntimePressure.pressure_level !== "low") {
+    recommendations.push(`Runtime gate pressure is ${topRuntimePressure.pressure_level} on ${topRuntimePressure.step}. Run predictive-evolve before broad validation.`);
+  }
 
   const status = pressure.length ? "watch" : "stable";
   return {
@@ -1351,10 +1364,20 @@ function buildTelemetryAnalysis(packet) {
     pressure,
     recommendations,
     options: [
+      "Run .\\scripts\\nexus.ps1 predictive-evolve for dry-run next-gate planning.",
+      "Run .\\scripts\\nexus.ps1 certificate-resume to inspect passed-gate certificates.",
       "Run .\\scripts\\nexus.ps1 orchestrate for next loop routing.",
       "Run .\\scripts\\nexus.ps1 evolve before commit/push.",
       "Use System Monitor before model-heavy lanes when CPU/RAM pressure is high."
     ],
+    runtime: {
+      status: predictiveTiming.status || "unknown",
+      pressure_level: topRuntimePressure.pressure_level || "low",
+      slowest_gate: topRuntimePressure.step || "none",
+      recommended_timeout_seconds: topRuntimePressure.recommended_timeout_seconds || null,
+      recommended_next_gate: (predictiveEvolve.recommended_plan || []).map((step) => step.command).join(" -> ") || ".\\scripts\\nexus.ps1 predictive-evolve",
+      final_evolve_required_before_commit: predictiveEvolve.final_evolve_required_before_commit !== false
+    },
     summary: `CPU ${cpu.toFixed(1)}% / RAM ${ram.toFixed(1)}% / free memory ${freeMem && totalMem ? Math.round((freeMem / totalMem) * 100) : 0}%`,
     boundary: "Telemetry analysis is advisory only. It cannot self-authorize repairs, execute commands, certify cybersecurity posture, or mutate the repo."
   };

@@ -21,6 +21,8 @@ const stopButton = document.getElementById("nex-stop-button");
 const telemetryHud = document.getElementById("telemetry-hud");
 const metaOrchestratorHud = document.getElementById("meta-orchestrator-hud");
 const tempestHud = document.getElementById("tempest-hud");
+const algorithmCardsHud = document.getElementById("algorithm-cards-hud");
+const discoveryCardsHud = document.getElementById("discovery-cards-hud");
 const systemErrorHud = document.getElementById("system-error-hud");
 const systemErrorClose = document.getElementById("system-error-close");
 const petriOpen = document.getElementById("petri-open");
@@ -46,6 +48,8 @@ const NEX_SHELL_RELAY_MODE_BOUNDARY = "Shell relay mode runs only allowlisted NE
 const NEX_ARBITRARY_POWERSHELL_BLOCK_MARKER = "arbitrary PowerShell is blocked";
 const NEX_HANDOFF_ACTION_SHELL_BOUNDARY = "HANDOFF selection can run human-authorized ChatGPT/Codex action scripts through the hidden PowerShell bridge; never from autonomous model output.";
 const META_ORCHESTRATOR_SURFACE = "reports/nexus_meta_orchestrator_gate_latest.json";
+const ALGORITHM_CARDS_SURFACE = "state/algorithms/nexus_algorithm_cards_latest.json";
+const DISCOVERY_CARDS_SURFACE = "state/discoveries/nexus_discovery_cards_latest.json";
 
 function renderTempestList(id, values) {
   const root = document.getElementById(id);
@@ -759,6 +763,10 @@ async function refreshTelemetry() {
     setTelemetryText("hud-monitor-state", telemetry.analysis?.status || "stable");
     setTelemetryText("hud-process-count", telemetry.windows?.process_count ?? "--");
     setTelemetryText("hud-uptime", `${Math.round((telemetry.platform?.uptime_seconds || 0) / 60)} min`);
+    setTelemetryText("hud-runtime-pressure", telemetry.analysis?.runtime?.pressure_level || "--");
+    setTelemetryText("hud-slowest-gate", telemetry.analysis?.runtime?.slowest_gate || "--");
+    setTelemetryText("hud-timeout-budget", telemetry.analysis?.runtime?.recommended_timeout_seconds ? `${telemetry.analysis.runtime.recommended_timeout_seconds}s` : "--");
+    setTelemetryText("hud-recommended-gate", telemetry.analysis?.runtime?.recommended_next_gate || ".\\scripts\\nexus.ps1 predictive-evolve");
     setTelemetryText("hud-analysis-summary", telemetry.analysis?.summary || "Telemetry analysis unavailable.");
     setTelemetryHtml("hud-process-list", renderProcessManagerRows(telemetry.windows?.task_manager_processes));
     setTelemetryHtml("hud-storage-list", renderTelemetryRows(telemetry.windows?.logical_disks, "No local disk telemetry."));
@@ -876,6 +884,88 @@ function toggleMetaOrchestratorHud(force) {
   metaOrchestratorHud.toggleAttribute("hidden", !next);
   metaOrchestratorHud.style.display = next ? "" : "none";
   if (next) refreshMetaOrchestratorHud();
+}
+
+function summarizeCardValue(value) {
+  if (Array.isArray(value)) return value.slice(0, 3).join(" | ");
+  if (value && typeof value === "object") {
+    return Object.entries(value).slice(0, 3).map(([key, val]) => `${key}: ${Array.isArray(val) ? val.join(", ") : val}`).join(" | ");
+  }
+  return value === undefined || value === null || value === "" ? "--" : String(value);
+}
+
+function renderCardHudCard(card, mode) {
+  const article = document.createElement("article");
+  article.className = "nexus-card-hud-card";
+  const title = document.createElement("h3");
+  title.textContent = card.title || card.algorithm_id || card.discovery_id || "NEXUS Card";
+  const summary = document.createElement("p");
+  summary.textContent = card.summary || card.operator_use || "No summary recorded.";
+  const dl = document.createElement("dl");
+  const entries = mode === "algorithm"
+    ? [
+        ["ID", card.algorithm_id],
+        ["Flow", card.flow],
+        ["Use", card.operator_use],
+        ["Inputs", card.inputs],
+        ["Outputs", card.outputs],
+        ["Boundary", card.claim_boundary]
+      ]
+    : [
+        ["ID", card.discovery_id],
+        ["Status", card.status],
+        ["Math", card.math],
+        ["Code", card.code_references],
+        ["Evidence", card.evidence_surfaces],
+        ["Boundary", card.boundary]
+      ];
+  entries.forEach(([key, value]) => {
+    const row = document.createElement("div");
+    const dt = document.createElement("dt");
+    const dd = document.createElement("dd");
+    dt.textContent = key;
+    dd.textContent = summarizeCardValue(value);
+    row.appendChild(dt);
+    row.appendChild(dd);
+    dl.appendChild(row);
+  });
+  article.appendChild(title);
+  article.appendChild(summary);
+  article.appendChild(dl);
+  return article;
+}
+
+async function refreshCardsHud(kind) {
+  const isAlgorithm = kind === "algorithm";
+  const surface = isAlgorithm ? ALGORITHM_CARDS_SURFACE : DISCOVERY_CARDS_SURFACE;
+  const countId = isAlgorithm ? "algorithm-card-count" : "discovery-card-count";
+  const summaryId = isAlgorithm ? "algorithm-cards-summary" : "discovery-cards-summary";
+  const gridId = isAlgorithm ? "algorithm-cards-grid" : "discovery-cards-grid";
+  try {
+    const packet = JSON.parse(await window.nexus.readSurface(surface));
+    const cards = Array.isArray(packet.cards) ? packet.cards : [];
+    setTelemetryText(countId, String(packet.card_count ?? cards.length));
+    setTelemetryText(summaryId, `${packet.system || "NEXUS cards"} v${packet.version || "unknown"} / ${cards.length} cards. ${packet.claim_boundary || "Read-only card surface."}`);
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    grid.innerHTML = "";
+    cards.forEach((card) => grid.appendChild(renderCardHudCard(card, isAlgorithm ? "algorithm" : "discovery")));
+  } catch (error) {
+    setTelemetryText(countId, "--");
+    setTelemetryText(summaryId, `Card surface unavailable: ${error.message}`);
+    const grid = document.getElementById(gridId);
+    if (grid) grid.innerHTML = "";
+  }
+}
+
+function toggleCardsHud(kind, force) {
+  const hud = kind === "algorithm" ? algorithmCardsHud : discoveryCardsHud;
+  if (!hud) return;
+  const next = typeof force === "boolean" ? force : !hud.classList.contains("is-expanded");
+  hud.classList.toggle("is-expanded", next);
+  hud.toggleAttribute("hidden", !next);
+  hud.style.display = next ? "" : "none";
+  if (next) refreshCardsHud(kind);
 }
 
 async function refreshTempestHud() {
@@ -1568,6 +1658,8 @@ async function loadSurfaceState() {
   const greeting = "Hello. I am NEX - your bounded reflective intelligence surface. Select a local voice, ask one thing, and I will return recommendation-only feedback with any blocker made clear.";
   resetChatToNexGreeting(greeting);
   statusEl.textContent = "stable";
+  refreshCardsHud("algorithm");
+  refreshCardsHud("discovery");
   document.body.dataset.ready = "true";
   setBuffer(100, "complete");
 }
@@ -1589,6 +1681,12 @@ telemetryHud?.addEventListener("click", (event) => {
 });
 document.getElementById("meta-orchestrator-popout")?.addEventListener("click", () => toggleMetaOrchestratorHud());
 document.getElementById("meta-orchestrator-close")?.addEventListener("click", () => toggleMetaOrchestratorHud(false));
+document.getElementById("algorithm-cards-open")?.addEventListener("click", () => toggleCardsHud("algorithm"));
+document.getElementById("algorithm-cards-mini")?.addEventListener("click", () => toggleCardsHud("algorithm"));
+document.getElementById("algorithm-cards-close")?.addEventListener("click", () => toggleCardsHud("algorithm", false));
+document.getElementById("discovery-cards-open")?.addEventListener("click", () => toggleCardsHud("discovery"));
+document.getElementById("discovery-cards-mini")?.addEventListener("click", () => toggleCardsHud("discovery"));
+document.getElementById("discovery-cards-close")?.addEventListener("click", () => toggleCardsHud("discovery", false));
 document.getElementById("tempest-popout")?.addEventListener("click", () => toggleTempestHud());
 document.getElementById("tempest-close")?.addEventListener("click", () => toggleTempestHud(false));
 document.getElementById("tempest-refresh")?.addEventListener("click", refreshTempestHud);
