@@ -38,6 +38,14 @@ class TestCortexCommandSurface(unittest.TestCase):
         self.assertIn("vector_storage_current", compiler)
         self.assertIn("legacy_or_invalid", compiler)
 
+    def test_cortex_discovery_and_algorithm_cards_exist(self):
+        algorithms = (ROOT / "docs" / "algorithms" / "NEXUS_CORE_ALGORITHMS.md").read_text(encoding="utf-8")
+        discoveries = (ROOT / "nexus_gate" / "discoveries" / "cards.py").read_text(encoding="utf-8")
+        self.assertIn("Cortex Sync Protocol Algorithm", algorithms)
+        self.assertIn("Versioned Vector Blob Storage Algorithm", algorithms)
+        self.assertIn("cortex-versioned-vector-memory", discoveries)
+        self.assertIn("observed_reduction", discoveries)
+
 
 if __name__ == "__main__":
     unittest.main()

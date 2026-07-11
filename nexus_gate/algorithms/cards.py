@@ -103,6 +103,8 @@ def build_algorithm_cards(root: str | Path) -> dict[str, Any]:
             "gate-selection-policy",
             "certificate-resume-policy",
             "predictive-evolve-planner-algorithm",
+            "cortex-sync-protocol-algorithm",
+            "versioned-vector-blob-storage-algorithm",
         ],
         "claim_boundary": CLAIM_BOUNDARY,
         "authority_boundary": AUTHORITY_BOUNDARY,

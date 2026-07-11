@@ -157,6 +157,52 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.4: show certificate status in System Monitor HUD",
             ],
             "boundary": "Recommendation-only. Certificates may recommend resume points; they may not claim correctness or skip final evolve before commit.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "cortex-versioned-vector-memory",
+            "version": "0.1.0",
+            "title": "Cortex Versioned Vector Memory",
+            "status": "active",
+            "summary": "Cortex memory can become cheaper and more governable when semantic vectors are stored as versioned float32 blobs instead of legacy JSON strings.",
+            "math": {
+                "payload_reduction": "reduction = 1 - blob_payload_bytes / legacy_payload_bytes",
+                "observed_reduction": "1 - 1545000 / 2366490 = 0.3471",
+                "query_delta": "delta_ms = legacy_mean_query_ms - blob_mean_query_ms",
+                "observed_query_delta": "242.630 ms - 183.011 ms = 59.619 ms",
+                "format_rule": "current = vector_bytes startswith CTXV1",
+            },
+            "code_references": [
+                "Cortex/cortex/embeddings.py::vector_to_bytes",
+                "Cortex/cortex/embeddings.py::deserialize_vector",
+                "Cortex/cortex/store.py::migrate_vectors",
+                "Cortex/cortex/store.py::vector_format_status",
+                "nexus_gate/cortex/compile.py::compile_gate",
+            ],
+            "algorithm_card_refs": [
+                "versioned-vector-blob-storage-algorithm",
+                "cortex-sync-protocol-algorithm",
+                "compiler-gate-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 sync-cortex -Tag \"C:\\Users\\jacks\\OneDrive\\Desktop\\Cortex\"",
+                "cd Cortex",
+                "python -m cortex --home ..\\state\\cortex_memory migrate-vectors --repo nexus-gate --json",
+                "python -m Cortex.benchmarks.vector_migration_benchmark",
+                ".\\scripts\\nexus.ps1 cortex",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_cortex_gate_latest.json",
+                "reports/nexus_cortex_sync_report_latest.json",
+                "reports/nexus_cortex_vector_benchmark_latest.json",
+                "docs/runtime/NEXUS_CORTEX.md",
+            ],
+            "next_versions": [
+                "v0.2: add benchmark trend ledger for vector payload/query measurements",
+                "v0.3: expose Cortex vector health in Meta-Orchestrator/System Monitor HUD",
+                "v0.4: add safe bootstrap refresh lane after source sync",
+            ],
+            "boundary": "Local memory optimization only. It does not prove retrieval correctness, model understanding, safety, security, or mutation authority.",
         }
     ]
     return {

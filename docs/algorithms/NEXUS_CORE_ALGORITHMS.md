@@ -133,3 +133,19 @@ predictive timing -> scope classification -> gate selection -> dry-run plan -> f
 ```
 
 Predictive Evolve turns the runtime pressure model into a bounded planning envelope. It recommends the cheapest useful next gate for the current scope, records the plan as evidence, and keeps the authority line clear: it does not execute the plan, mutate the repo, or replace full evolve before commit.
+
+## Cortex Sync Protocol Algorithm
+
+```text
+local Cortex source -> exclude runtime/secrets/cache/git surfaces -> copy source/docs/tests/benchmarks -> write sync report -> run Cortex gate -> preserve read-only authority
+```
+
+The sync protocol turns Cortex upgrades into a repeatable bounded lane. It imports local source artifacts only and keeps runtime memory, secrets, git history, external APIs, and mutation authority outside the transfer.
+
+## Versioned Vector Blob Storage Algorithm
+
+```text
+float vector -> finite-value check -> CTXV1 magic header -> little-endian float32 payload -> migration/status report -> retrieval deserialization
+```
+
+Cortex vector storage converts legacy JSON vectors into compact versioned binary payloads. The algorithm reduces vector payload size and gives the gate a format-status signal without changing authority or claiming semantic correctness.

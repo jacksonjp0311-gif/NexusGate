@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 17,
+  "card_count": 19,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -605,6 +605,74 @@
       "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
       "summary": "Predictive Evolve turns the runtime pressure model into a bounded planning envelope. It recommends the cheapest useful next gate for the current scope, records the plan as evidence, and keeps the authority line clear: it does not execute the plan, mutate the repo, or replace full evolve before commit.",
       "title": "Predictive Evolve Planner Algorithm"
+    },
+    {
+      "algorithm_id": "cortex-sync-protocol-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "local Cortex source -> exclude runtime/secrets/cache/git surfaces -> copy source/docs/tests/benchmarks -> write sync report -> run Cortex gate -> preserve read-only authority",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 18,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "The sync protocol turns Cortex upgrades into a repeatable bounded lane. It imports local source artifacts only and keeps runtime memory, secrets, git history, external APIs, and mutation authority outside the transfer.",
+      "title": "Cortex Sync Protocol Algorithm"
+    },
+    {
+      "algorithm_id": "versioned-vector-blob-storage-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "float vector -> finite-value check -> CTXV1 magic header -> little-endian float32 payload -> migration/status report -> retrieval deserialization",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 19,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Cortex vector storage converts legacy JSON vectors into compact versioned binary payloads. The algorithm reduces vector payload size and gives the gate a format-status signal without changing authority or claiming semantic correctness.",
+      "title": "Versioned Vector Blob Storage Algorithm"
     }
   ],
   "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
@@ -614,9 +682,11 @@
     "adaptive-timeout-budgeting",
     "gate-selection-policy",
     "certificate-resume-policy",
-    "predictive-evolve-planner-algorithm"
+    "predictive-evolve-planner-algorithm",
+    "cortex-sync-protocol-algorithm",
+    "versioned-vector-blob-storage-algorithm"
   ],
-  "generated_at_utc": "2026-07-11T07:56:02.674947+00:00",
+  "generated_at_utc": "2026-07-11T18:33:37.930690+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",

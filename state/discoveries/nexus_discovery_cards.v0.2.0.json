@@ -1,5 +1,5 @@
 {
-  "card_count": 3,
+  "card_count": 4,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -131,10 +131,56 @@
       "summary": "Passed gates can become local resume evidence when their logs and current git scope are hashed, but certificates never replace the final evolve seal.",
       "title": "Certificate Resume Gate Fingerprint",
       "version": "0.2.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "versioned-vector-blob-storage-algorithm",
+        "cortex-sync-protocol-algorithm",
+        "compiler-gate-algorithm"
+      ],
+      "boundary": "Local memory optimization only. It does not prove retrieval correctness, model understanding, safety, security, or mutation authority.",
+      "code_references": [
+        "Cortex/cortex/embeddings.py::vector_to_bytes",
+        "Cortex/cortex/embeddings.py::deserialize_vector",
+        "Cortex/cortex/store.py::migrate_vectors",
+        "Cortex/cortex/store.py::vector_format_status",
+        "nexus_gate/cortex/compile.py::compile_gate"
+      ],
+      "discovery_id": "cortex-versioned-vector-memory",
+      "evidence_surfaces": [
+        "reports/nexus_cortex_gate_latest.json",
+        "reports/nexus_cortex_sync_report_latest.json",
+        "reports/nexus_cortex_vector_benchmark_latest.json",
+        "docs/runtime/NEXUS_CORTEX.md"
+      ],
+      "math": {
+        "format_rule": "current = vector_bytes startswith CTXV1",
+        "observed_query_delta": "242.630 ms - 183.011 ms = 59.619 ms",
+        "observed_reduction": "1 - 1545000 / 2366490 = 0.3471",
+        "payload_reduction": "reduction = 1 - blob_payload_bytes / legacy_payload_bytes",
+        "query_delta": "delta_ms = legacy_mean_query_ms - blob_mean_query_ms"
+      },
+      "next_versions": [
+        "v0.2: add benchmark trend ledger for vector payload/query measurements",
+        "v0.3: expose Cortex vector health in Meta-Orchestrator/System Monitor HUD",
+        "v0.4: add safe bootstrap refresh lane after source sync"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 sync-cortex -Tag \"C:\\Users\\jacks\\OneDrive\\Desktop\\Cortex\"",
+        "cd Cortex",
+        "python -m cortex --home ..\\state\\cortex_memory migrate-vectors --repo nexus-gate --json",
+        "python -m Cortex.benchmarks.vector_migration_benchmark",
+        ".\\scripts\\nexus.ps1 cortex"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Cortex memory can become cheaper and more governable when semantic vectors are stored as versioned float32 blobs instead of legacy JSON strings.",
+      "title": "Cortex Versioned Vector Memory",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-11T08:52:47.327078+00:00",
+  "generated_at_utc": "2026-07-11T18:33:39.637015+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",
