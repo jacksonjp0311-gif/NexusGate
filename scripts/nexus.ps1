@@ -398,7 +398,13 @@ switch ($Command) {
         if ($LASTEXITCODE -ne 0) { throw "TNN deep chat failed." }
     }
     "ask" { Invoke-NexusNN -Intent $Tag -UseModel:$CallModel }
-    "rehydrate" { Show-Rehydration; Run-Compiler; Write-Host "[OK] Rehydration complete." }
+    "rehydrate" {
+        Show-Rehydration
+        python -m nexus_gate.loops.predictive_timing --root . --json
+        if ($LASTEXITCODE -ne 0) { throw "Predictive timing preflight failed." }
+        Run-Compiler
+        Write-Host "[OK] Rehydration complete."
+    }
     "compile" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 compile }
     "strict" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_strict_compile.ps1 }
     "pack" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 pack }

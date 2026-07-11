@@ -20,14 +20,15 @@ NEXUS GATE is built by compact script closures, not loose patches. The v0.9.1 se
 
 1. Rehydrate from the repository, not chat memory.
 2. Read the README, docs index, entrypoints, core algorithms, update chart, failure chart, compiler report, and target surface.
-3. Name the exact organ/version being changed.
-4. Generate one bounded All-One script.
-5. Run gates in order.
-6. Treat every passed gate as a certificate.
-7. If a later gate fails, resume from the failed gate instead of rerunning green gates.
-8. Record the active wound in machine-readable form.
-9. Patch the smallest surface that closes the wound.
-10. Compile, test, run the Nexus compiler, stage intended files only, then commit/push only with explicit human authorization.
+3. Run `.\scripts\nexus.ps1 predictive-timing` before full evolve, broad tests, pack, or other expensive gates.
+4. Name the exact organ/version being changed.
+5. Generate one bounded All-One script.
+6. Run gates in order.
+7. Treat every passed gate as a certificate.
+8. If a later gate fails, resume from the failed gate instead of rerunning green gates.
+9. Record the active wound in machine-readable form.
+10. Patch the smallest surface that closes the wound.
+11. Compile, test, run the Nexus compiler, stage intended files only, then commit/push only with explicit human authorization.
 
 ## Gate Semantics
 
@@ -51,14 +52,15 @@ GATE 01: Show HEAD / origin
 GATE 02: RHP origin packet
 GATE 03: Apply minimal patch
 GATE 04: Quarantine known prior-wound residue
-GATE 05: Compile changed Python and tests
-GATE 06: Run targeted wound tests
-GATE 07: Emit required packets/reports
-GATE 08: Run bounded full test suite or certified resume gate
-GATE 09: Run Nexus compiler
-GATE 10: Stage intended files only
-GATE 11: Commit only after green seal
-GATE 12: Push only when the human passed -Push
+GATE 05: Run predictive timing before expensive gates
+GATE 06: Compile changed Python and tests
+GATE 07: Run targeted wound tests
+GATE 08: Emit required packets/reports
+GATE 09: Run bounded full test suite or certified resume gate
+GATE 10: Run Nexus compiler
+GATE 11: Stage intended files only
+GATE 12: Commit only after green seal
+GATE 13: Push only when the human passed -Push
 ```
 
 ## Machine State Packet
@@ -92,6 +94,7 @@ Every generated closer should print or write a compact state packet:
 - Do not stage unrelated runtime residue, report churn, ledgers, memory files, or backup debris.
 - Use `git reset` before staging intended files when stale staging is possible.
 - Always show or record staged files before commit.
+- Run predictive timing before expensive gates and use its recommendation to avoid repeating broad validation when a targeted gate is enough.
 
 ## Wound Lessons From v0.9.1
 

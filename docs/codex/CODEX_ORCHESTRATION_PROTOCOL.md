@@ -9,11 +9,12 @@ Codex should not enter an empty repo. Codex should enter a repo that teaches it.
 3. Inspect domain intelligence reports before creating new claims.
 4. Use bounded patches.
 5. Run tests.
-6. Run `.\scripts\nexus.ps1 domain`.
-7. Run `.\scripts\nexus.ps1 reflect`.
-8. Run `.\scripts\nexus.ps1 evolve`.
-9. Commit only after gates pass.
-10. Report what changed, what passed, what failed, and what remains blocked.
+6. Run `.\scripts\nexus.ps1 predictive-timing` before full evolve, pack, broad tests, Electron smoke, or any long-running validation lane.
+7. Run `.\scripts\nexus.ps1 domain`.
+8. Run `.\scripts\nexus.ps1 reflect`.
+9. Run `.\scripts\nexus.ps1 evolve`.
+10. Commit only after gates pass.
+11. Report what changed, what passed, what failed, and what remains blocked.
 
 ## Codex Boundary
 
@@ -33,4 +34,10 @@ state/interface_adapter_contract_index.v0.3.7.json
 state/domain_intelligence_index.v0.4.0.json
 reports/nexus_reflective_loop_report_latest.json
 reports/nexus_domain_intelligence_report_latest.json
+reports/nexus_predictive_gate_timing_latest.json
+state/algorithms/nexus_algorithm_cards_latest.json
 ```
+
+## Predictive Timing Rule
+
+Codex should treat predictive timing as a runtime-pressure preflight. The packet may recommend a cheaper next gate or a bounded timeout. It cannot authorize mutation, hide failures, bypass gates, or replace the final evolve seal.

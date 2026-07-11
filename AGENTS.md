@@ -23,6 +23,24 @@ Do not claim production validation, safety proof, security proof, correctness pr
 python -m nexus_gate.compiler --root . --json
 ```
 
+## Predictive Timing Preflight
+
+Before running full `evolve`, pack, broad test suites, Electron smoke, or any long-running validation lane, run:
+
+```powershell
+.\scripts\nexus.ps1 predictive-timing
+```
+
+Use the packet at `reports/nexus_predictive_gate_timing_latest.json` to choose the cheapest valid next gate. If runtime pressure is high, prefer targeted tests or the named timing recommendation before repeating an expensive lane.
+
+Hard rules:
+
+```text
+Predictive timing is recommendation-only.
+It may reduce wasted tokens and wall-clock time.
+It may not hide failures, bypass gates, self-authorize, or extend authority.
+```
+
 
 ## Rehydration Visibility Contract
 
@@ -36,6 +54,8 @@ docs/updates/UPDATE_CHART.md
 state/failure_mode_index.v0.1.4.json
 state/update_index.v0.1.4.json
 reports/nexus_compile_report_latest.json, if present
+reports/nexus_predictive_gate_timing_latest.json, if present
+state/algorithms/nexus_algorithm_cards_latest.json, if present
 ```
 
 Hard rule:
@@ -211,6 +231,7 @@ No completion claim without compiled report files.
 Use this lane for normal evolution:
 
 ```powershell
+.\scripts\nexus.ps1 predictive-timing
 .\scripts\nexus.ps1 evolve
 ```
 
