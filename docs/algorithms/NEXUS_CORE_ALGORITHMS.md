@@ -81,3 +81,15 @@ human intent -> named loop trigger -> registry resolution -> stage execution/pla
 ```
 
 The loop body is repository-owned. Generated scripts should pass intent and loop name, not regenerate the full local operating procedure.
+
+## Predictive Gate Timing / Runtime Pressure Algorithm
+
+```text
+gate duration history -> median/p90 baseline -> latest drift ratio -> pressure classification -> bounded timeout recommendation -> cheaper next gate when pressure rises
+```
+
+This is a local predictive control loop. Prior runtimes become a lightweight forecast. The next run is compared against that forecast. If drift rises, the system recommends a bounded timeout, targeted test, or timing inspection before another expensive evolve.
+
+It is prediction by feedback, not model-weight learning. NEXUS learns here by preserving timing evidence, comparing new runs to that evidence, and making future orchestration less wasteful.
+
+Compact form: duration history -> baseline -> drift -> anomaly -> bounded recommendation.

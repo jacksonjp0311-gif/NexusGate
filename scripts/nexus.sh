@@ -182,6 +182,7 @@ case "$COMMAND" in
   reflect) python -m nexus_gate.reflection.compile --root . --json ;;
   domain) python -m nexus_gate.domain.compile --root . --json ;;
   predictive-timing) python -m nexus_gate.loops.predictive_timing --root . --json ;;
+  algorithm-cards) python -m nexus_gate.algorithms.cards --root . --json ;;
   tui) echo "PowerShell TUI is Windows-only. Run: .\\scripts\\nexus.ps1 tui" ;;
   ui) echo "Compatibility UI alias is Windows-only. Run: .\\scripts\\nexus.ps1 ui" ;;
   cell|cell-doctor) python -m nexus_gate.nexus_cell.cli doctor --root . ;;

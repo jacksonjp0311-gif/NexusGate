@@ -51,4 +51,10 @@ All existing routes remain available, including:
 
 ```text
 [13] Neural Activity / Cathedral
+[14] Nexus Loops / Cards
+[15] PetriDishPortal
+[16] T3MP3ST
+[17] Algorithm Cards
 ```
+
+`[17] Algorithm Cards` opens a read-only console over `state/algorithms/nexus_algorithm_cards_latest.json` and can rebuild that packet from `docs/algorithms/NEXUS_CORE_ALGORITHMS.md`.

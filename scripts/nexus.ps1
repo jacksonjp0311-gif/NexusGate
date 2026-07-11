@@ -12,8 +12,9 @@
 # nexus_gate.reflection.compile
 # nexus_gate.domain.compile
 # nexus_gate.loops.predictive_timing
+# nexus_gate.algorithms.cards
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "algorithm-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -416,6 +417,7 @@ switch ($Command) {
     "reflect" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 reflect }
     "domain" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 domain }
     "predictive-timing" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 predictive-timing }
+    "algorithm-cards" { python -m nexus_gate.algorithms.cards --root . --json }
     "tui" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_tui.ps1 }
     "ui" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_ui.ps1 }
     "evolve" { powershell -ExecutionPolicy Bypass -File .\scripts\nexus_human.ps1 evolve }

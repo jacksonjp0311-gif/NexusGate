@@ -17,6 +17,12 @@ Validation Surface:
 
 - `python -m unittest discover -s tests`
 - `python -m nexus_gate.compiler --root . --json`
+- `python -m nexus_gate.algorithms.cards --root . --json`
+
+Card Surface:
+
+- `state/algorithms/nexus_algorithm_cards_latest.json`
+- Spiral Core Portal `[17] Algorithm Cards`
 
 Claim Boundary:
 

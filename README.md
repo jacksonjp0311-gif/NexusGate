@@ -5,7 +5,7 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems: a gove
 ## Capability Surface
 - Operator HUDs: Electron, PowerShell TUI, Spiral Core Portal, Dev Mode / HANDOFF, Mode Selection, and System Monitor.
 - Governed lanes: `status`, `evolve`, `reflect`, `domain`, `toolbelt`, `preflight`, `predictive-timing`, `wound-compress`, `phi-wound`, `phi-loop-auto`, and `phi-gate-auto`.
-- Intelligence loops: AI-callable local loop fabric, v0.9.3 AI Loop Toolkit Expansion, v0.9.4 Personal Coding Paradise, Toolbelt Console Integration, v0.9.8 Wound Compression Engine, v0.9.9 Preflight Optimizer, v1.1.0 Phi Microdose Loop, AI Toolbelt Console, Toolbelt Cockpit Output, and Meta-Orchestrator Gate.
+- Intelligence loops: AI-callable local loop fabric, Algorithm Cards, v0.9.3 AI Loop Toolkit Expansion, v0.9.4 Personal Coding Paradise, Toolbelt Console Integration, v0.9.8 Wound Compression Engine, v0.9.9 Preflight Optimizer, v1.1.0 Phi Microdose Loop, AI Toolbelt Console, Toolbelt Cockpit Output, and Meta-Orchestrator Gate.
 - Evidence organs: Neural Activity visual organ, GITNEXUS local codegraph, PetriDishPortal, NexusCell containment, feedback ledger, handoff packets, and compiler reports.
 - Guardrails: human-authorized mutation only, no autonomous authority, no bypassing gates, no production/safety/security proof claims from local passes.
 - Lineage is preserved in docs/versioning, docs/runtime, reports, and the compatibility marker bank below instead of a bulky README seal list.
@@ -124,7 +124,7 @@ No adapter, no bridge. No schema, no route. No authority verification, no mutati
 ```
 
 ## GitHub / README / Docs
-The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current operator surfaces include Spiral Core Desktop Portal, Electron HUD, PowerShell TUI, Dev Mode / HANDOFF, Failure Doctor, T3MP3ST, Mode Selection HUD, NexusCell, Neural Activity, Nexus Loops / Cards, PetriDishPortal, Personal Coding Paradise, AI Toolbelt Console, and Toolbelt Cockpit.
+The Desktop Entry Portal includes a GitHub / README / Docs submenu. Current operator surfaces include Spiral Core Desktop Portal, Electron HUD, PowerShell TUI, Dev Mode / HANDOFF, Failure Doctor, T3MP3ST, Mode Selection HUD, NexusCell, Neural Activity, Nexus Loops / Cards, Algorithm Cards, PetriDishPortal, Personal Coding Paradise, AI Toolbelt Console, and Toolbelt Cockpit.
 
 ## Phi Wound Ollama Adapter
 v1.0.1 routes `phi-wound-gpu` through the non-interactive Ollama JSON adapter instead of the Orange human launcher.
@@ -145,6 +145,7 @@ v1.0.1 routes `phi-wound-gpu` through the non-interactive Ollama JSON adapter in
 | Phi Ollama Adapter | `docs/runtime/NEXUS_PHI_WOUND_OLLAMA_ADAPTER.md` |
 | Preflight Optimizer | `docs/runtime/NEXUS_PREFLIGHT_OPTIMIZER.md` |
 | Predictive Gate Timing | `docs/runtime/NEXUS_PREDICTIVE_GATE_TIMING.md` |
+| Algorithm Cards | `docs/runtime/NEXUS_ALGORITHM_CARDS.md` |
 | Meta-Orchestrator Gate | `docs/runtime/NEXUS_META_ORCHESTRATOR_GATE.md` |
 | NEXUS Loop Cards | `docs/runtime/NEXUS_LOOP_CARDS.md` |
 | PetriDishPortal | `docs/runtime/NEXUS_PETRIDISH_PORTAL.md` |

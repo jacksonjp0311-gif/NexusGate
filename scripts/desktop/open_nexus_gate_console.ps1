@@ -1164,6 +1164,68 @@ function Invoke-NexusLoopCardsConsole {
     }
 }
 
+function Invoke-NexusAlgorithmCardsConsole {
+    while ($true) {
+        Write-Host ""
+        Write-Host "========================================"
+        Write-Host " NEXUS ALGORITHM CARDS"
+        Write-Host "========================================"
+        Write-Host "Rule: algorithm cards preserve reasoning procedures; they do not self-authorize mutation."
+        Write-Host ""
+
+        $cardsPath = Join-Path $RepoRoot "state\algorithms\nexus_algorithm_cards_latest.json"
+
+        if (-not (Test-Path -LiteralPath $cardsPath -PathType Leaf)) {
+            Write-FAIL ("Algorithm card packet missing: {0}" -f $cardsPath)
+            Write-NG "Choose R to rebuild from docs/algorithms/NEXUS_CORE_ALGORITHMS.md."
+        }
+        else {
+            try {
+                $packet = Get-Content -LiteralPath $cardsPath -Raw | ConvertFrom-Json
+                Write-OK ("Algorithm card packet: {0} cards" -f $packet.card_count)
+                Write-NG ("Source doc: {0}" -f $packet.source_doc)
+                Write-Host ""
+                foreach ($card in @($packet.cards | Sort-Object order)) {
+                    Write-Host ("[{0}] {1}" -f $card.order, $card.title) -ForegroundColor Cyan
+                    Write-Host ("  id      : {0}" -f $card.algorithm_id)
+                    Write-Host ("  flow    : {0}" -f $card.flow)
+                    Write-Host ("  use     : {0}" -f $card.operator_use)
+                    Write-Host ("  outputs : {0}" -f (@($card.outputs) -join ", ")) -ForegroundColor Blue
+                    Write-Host ""
+                }
+            }
+            catch {
+                Write-FAIL ("Algorithm card JSON parse failed: {0}" -f $_.Exception.Message)
+            }
+        }
+
+        Write-Host "R. Rebuild algorithm cards from docs"
+        Write-Host "J. Open algorithm card JSON"
+        Write-Host "D. Open algorithm card docs"
+        Write-Host "B. Back to main menu"
+        Write-Host ""
+        $algorithmChoice = Read-Host "Algorithm Cards"
+
+        if ($algorithmChoice -eq "R" -or $algorithmChoice -eq "r") {
+            python -m nexus_gate.algorithms.cards --root $RepoRoot --json | Out-Null
+            if ($LASTEXITCODE -eq 0) { Write-OK "Algorithm cards rebuilt." } else { Write-FAIL "Algorithm card rebuild failed." }
+            Read-Host "Press Enter to continue"
+        }
+        elseif ($algorithmChoice -eq "J" -or $algorithmChoice -eq "j") {
+            if (Test-Path -LiteralPath $cardsPath -PathType Leaf) { explorer.exe $cardsPath | Out-Null }
+        }
+        elseif ($algorithmChoice -eq "D" -or $algorithmChoice -eq "d") {
+            explorer.exe (Join-Path $RepoRoot "docs\runtime\NEXUS_ALGORITHM_CARDS.md") | Out-Null
+        }
+        elseif ($algorithmChoice -eq "B" -or $algorithmChoice -eq "b") {
+            return
+        }
+        else {
+            Write-NG "Unknown Algorithm Cards choice."
+        }
+    }
+}
+
 function Write-Portal {
     param(
         [string]$Text,
@@ -1229,6 +1291,7 @@ function Show-Menu {
     Write-Portal "  [14] Nexus Loops / Cards                   -> JSON loop cards / HUD-ready registry" "Blue"
     Write-Portal "  [15] PetriDishPortal                       -> organism gate / microscope HUD" "Cyan"
     Write-Portal "  [16] T3MP3ST                               -> authorized security lab / War Room" "Blue"
+    Write-Portal "  [17] Algorithm Cards                      -> predictive/control algorithms" "Cyan"
     Write-Portal "  [Q]  Quit" "Blue"
     Write-Host ""
     Write-Portal "========================================================================================================================" "Cyan"
@@ -1257,6 +1320,7 @@ function Show-Menu {
     # Write-Host "[14] Nexus Loops / Cards"
     # Write-Host "[15] PetriDishPortal"
     # Write-Host "[16] T3MP3ST"
+    # Write-Host "[17] Algorithm Cards"
     # Write-Host "Gateway style: cyber ice-blue / green / yellow portal."
 }
 
@@ -1317,6 +1381,9 @@ while ($true) {
     }
     elseif ($choice -eq "16") {
         Invoke-NexusT3mp3stPortal
+    }
+    elseif ($choice -eq "17") {
+        Invoke-NexusAlgorithmCardsConsole
     }
     elseif ($choice -eq "Q" -or $choice -eq "q") {
         Write-OK "closing NEXUS Gate launcher"
