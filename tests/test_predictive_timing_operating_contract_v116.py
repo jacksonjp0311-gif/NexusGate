@@ -14,6 +14,7 @@ class TestPredictiveTimingOperatingContractV116(unittest.TestCase):
         self.assertIn("Before running full `evolve`", text)
         self.assertIn("reports/nexus_predictive_gate_timing_latest.json", text)
         self.assertIn("state/algorithms/nexus_algorithm_cards_latest.json", text)
+        self.assertIn("state/discoveries/nexus_discovery_cards_latest.json", text)
         self.assertIn("It may not hide failures, bypass gates, self-authorize, or extend authority.", text)
 
     def test_chatgpt_script_doctrine_requires_predictive_timing_gate(self):
@@ -32,6 +33,7 @@ class TestPredictiveTimingOperatingContractV116(unittest.TestCase):
         self.assertIn(".\\scripts\\nexus.ps1 predictive-timing", data["required_commands"])
         self.assertIn("reports/nexus_predictive_gate_timing_latest.json", data["required_read_order"])
         self.assertIn("state/algorithms/nexus_algorithm_cards_latest.json", data["required_read_order"])
+        self.assertIn("state/discoveries/nexus_discovery_cards_latest.json", data["required_read_order"])
 
     def test_rehydrate_commands_emit_predictive_timing(self):
         ps = (ROOT / "scripts/nexus.ps1").read_text(encoding="utf-8-sig")

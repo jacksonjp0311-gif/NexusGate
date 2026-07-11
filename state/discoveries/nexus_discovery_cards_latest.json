@@ -1,0 +1,56 @@
+{
+  "card_count": 1,
+  "cards": [
+    {
+      "algorithm_card_refs": [
+        "runtime-pressure-model",
+        "adaptive-timeout-budgeting",
+        "gate-selection-policy",
+        "certificate-resume-policy"
+      ],
+      "boundary": "Recommendation-only. It may guide gate choice; it may not skip required final evolve before commit.",
+      "code_references": [
+        "nexus_gate/loops/predictive_timing.py::build_predictive_timing_packet",
+        "nexus_gate/loops/predictive_timing.py::_analyze_steps",
+        "nexus_gate/loops/predictive_timing.py::_gate_selection_policy",
+        "nexus_gate/loops/predictive_timing.py::write_outputs"
+      ],
+      "discovery_id": "predictive-gate-timing-runtime-pressure",
+      "evidence_surfaces": [
+        "reports/nexus_predictive_gate_timing_latest.json",
+        "state/loops/nexus_predictive_gate_timing_latest.json",
+        "ledger/runtime_gate_timings.jsonl",
+        "state/algorithms/nexus_algorithm_cards_latest.json"
+      ],
+      "math": {
+        "adaptive_timeout": "timeout = max(min_timeout, min(max_timeout, p90 * 1.5))",
+        "baseline": "median_duration = median(durations)",
+        "control_loop": "observe -> estimate -> compare -> classify -> recommend -> record",
+        "drift": "drift_ratio = latest_duration / median_duration",
+        "p90": "p90_duration = percentile(durations, 0.90)"
+      },
+      "next_versions": [
+        "v0.2: add confidence intervals and per-gate trend windows",
+        "v0.3: add predictive-evolve dry-run planner",
+        "v0.4: surface timing pressure in Electron/System Monitor HUD"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 predictive-timing",
+        "Inspect reports/nexus_predictive_gate_timing_latest.json",
+        "Inspect ledger/runtime_gate_timings.jsonl",
+        "Use the recommendation before repeating full evolve"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.1.0",
+      "status": "active",
+      "summary": "Timeouts and slow gates are not just failures; they are runtime pressure signals that can guide cheaper next gates.",
+      "title": "Predictive Gate Timing / Runtime Pressure Model",
+      "version": "0.1.0"
+    }
+  ],
+  "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
+  "generated_at_utc": "2026-07-11T07:26:33.302863+00:00",
+  "portal_entry": "[18] Discoveries",
+  "schema": "NEXUS_DISCOVERY_CARD_SET.v0.1.0",
+  "system": "NEXUS_DISCOVERY_CARDS",
+  "version": "0.1.0"
+}

@@ -12,6 +12,7 @@ The durable surfaces are:
 
 ```text
 state/algorithms/nexus_algorithm_cards.v0.1.0.json
+state/algorithms/nexus_algorithm_cards.v0.2.0.json
 state/algorithms/nexus_algorithm_cards_latest.json
 python -m nexus_gate.algorithms.cards --root . --json
 ```
@@ -19,6 +20,15 @@ python -m nexus_gate.algorithms.cards --root . --json
 ## Current Discovery
 
 Predictive Gate Timing / Runtime Pressure Model is now a first-class algorithm card.
+
+v0.2 adds:
+
+```text
+Runtime Pressure Model
+Adaptive Timeout Budgeting
+Gate Selection Policy
+Certificate Resume Policy
+```
 
 The useful discovery is:
 

@@ -55,6 +55,9 @@ All existing routes remain available, including:
 [15] PetriDishPortal
 [16] T3MP3ST
 [17] Algorithm Cards
+[18] Discoveries
 ```
 
 `[17] Algorithm Cards` opens a read-only console over `state/algorithms/nexus_algorithm_cards_latest.json` and can rebuild that packet from `docs/algorithms/NEXUS_CORE_ALGORITHMS.md`.
+
+`[18] Discoveries` opens a read-only console over `state/discoveries/nexus_discovery_cards_latest.json` and can rebuild discovery cards with math, code references, algorithm references, and replication steps.

@@ -15,11 +15,14 @@ ROOT = Path(__file__).resolve().parents[1]
 class PredictiveGateTimingTests(unittest.TestCase):
     def test_packet_is_recommendation_only(self) -> None:
         packet = build_predictive_timing_packet(ROOT, max_runs=4)
-        self.assertEqual(packet["schema"], "NEXUS_PREDICTIVE_GATE_TIMING.v1.1.5")
+        self.assertEqual(packet["schema"], "NEXUS_PREDICTIVE_GATE_TIMING.v1.1.6")
         self.assertIn(packet["status"], {"pass", "warn"})
         self.assertIn("step_analysis", packet)
         self.assertIn("runtime_pressure", packet)
         self.assertIn("recommendation", packet)
+        self.assertIn("adaptive_timeout_policy", packet)
+        self.assertIn("gate_selection_policy", packet)
+        self.assertIn("ledger/runtime_gate_timings.jsonl", packet["write_surfaces"])
         self.assertTrue(packet["authority_boundary"]["recommendation_only"])
         self.assertFalse(packet["authority_boundary"]["autonomous_timeout_extension"])
         self.assertFalse(packet["authority_boundary"]["bypass_gates"])
@@ -47,9 +50,10 @@ class PredictiveGateTimingTests(unittest.TestCase):
         )
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
         packet = json.loads(proc.stdout)
-        self.assertEqual(packet["schema"], "NEXUS_PREDICTIVE_GATE_TIMING.v1.1.5")
+        self.assertEqual(packet["schema"], "NEXUS_PREDICTIVE_GATE_TIMING.v1.1.6")
         self.assertTrue((ROOT / "reports" / "nexus_predictive_gate_timing_latest.json").exists())
         self.assertTrue((ROOT / "state" / "loops" / "nexus_predictive_gate_timing_latest.json").exists())
+        self.assertTrue((ROOT / "ledger" / "runtime_gate_timings.jsonl").exists())
 
     def test_command_surfaces_expose_predictive_timing(self) -> None:
         ps = (ROOT / "scripts" / "nexus.ps1").read_text(encoding="utf-8-sig")

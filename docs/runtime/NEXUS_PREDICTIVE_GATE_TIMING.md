@@ -5,11 +5,13 @@ Predictive Gate Timing / Runtime Pressure Model converts prior local gate timing
 It reads:
 
 - `reports/human_surface/*`
+- `git status --porcelain`
 
 It writes:
 
 - `reports/nexus_predictive_gate_timing_latest.json`
 - `state/loops/nexus_predictive_gate_timing_latest.json`
+- `ledger/runtime_gate_timings.jsonl`
 
 The loop estimates:
 
@@ -20,11 +22,29 @@ The loop estimates:
 - timeout/failure pressure
 - recommended next timeout budget
 - recommended next efficient command
+- changed-file scope
+- cheapest valid next gate recommendation
 
 Core rule:
 
 ```text
 duration history -> baseline -> drift -> anomaly -> bounded recommendation
+```
+
+Adaptive timeout policy:
+
+```text
+timeout = max(min_timeout, min(max_timeout, p90 * 1.5))
+```
+
+Gate selection policy:
+
+```text
+docs-only -> docs/readme tests first
+electron-only -> electron smoke first
+python-only -> targeted unit tests first
+high runtime pressure -> predictive timing + bounded tests first
+final commit path -> full evolve remains required
 ```
 
 This is a recommendation-only loop. It may help Codex and chat sessions avoid waste by preferring targeted gates before full `evolve`. It may not hide failures, bypass gates, extend timeouts autonomously, mutate the repo, or replace human authorization.

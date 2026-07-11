@@ -36,6 +36,7 @@ reports/nexus_reflective_loop_report_latest.json
 reports/nexus_domain_intelligence_report_latest.json
 reports/nexus_predictive_gate_timing_latest.json
 state/algorithms/nexus_algorithm_cards_latest.json
+state/discoveries/nexus_discovery_cards_latest.json
 ```
 
 ## Predictive Timing Rule

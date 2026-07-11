@@ -56,6 +56,7 @@ state/update_index.v0.1.4.json
 reports/nexus_compile_report_latest.json, if present
 reports/nexus_predictive_gate_timing_latest.json, if present
 state/algorithms/nexus_algorithm_cards_latest.json, if present
+state/discoveries/nexus_discovery_cards_latest.json, if present
 ```
 
 Hard rule:

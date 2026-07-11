@@ -3,15 +3,17 @@ from __future__ import annotations
 import argparse
 import json
 import statistics
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 
-VERSION = "1.1.5"
-SCHEMA = "NEXUS_PREDICTIVE_GATE_TIMING.v1.1.5"
+VERSION = "1.1.6"
+SCHEMA = "NEXUS_PREDICTIVE_GATE_TIMING.v1.1.6"
 REPORT_LATEST = Path("reports") / "nexus_predictive_gate_timing_latest.json"
 STATE_LATEST = Path("state") / "loops" / "nexus_predictive_gate_timing_latest.json"
+TIMING_LEDGER = Path("ledger") / "runtime_gate_timings.jsonl"
 
 CLAIM_BOUNDARY = (
     "Predictive Gate Timing is local development evidence only. It estimates "
@@ -67,6 +69,15 @@ def _read_text(path: Path) -> str:
 def _write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _append_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    if not rows:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as handle:
+        for row in rows:
+            handle.write(json.dumps(row, sort_keys=True) + "\n")
 
 
 def _step_id(path: Path) -> str:
@@ -142,6 +153,15 @@ def _recommend_timeout(baseline: float, latest: float, timed_out: bool, step: st
     return int(min(900, max(minimum, round(target / 30) * 30)))
 
 
+def _adaptive_timeout(p90: float, step: str) -> int:
+    minimum = 60
+    if step == "17_pack_compiler":
+        minimum = 420
+    maximum = 900
+    target = max(minimum, min(maximum, p90 * 1.5 if p90 > 0 else minimum))
+    return int(round(target / 30) * 30)
+
+
 def _pressure_level(ratio: float, timed_out: bool, failed: bool) -> str:
     if failed or timed_out or ratio >= 1.75:
         return "high"
@@ -201,7 +221,83 @@ def _repo_pressure(root: Path) -> dict[str, Any]:
     }
 
 
-def _next_action(step_analysis: list[dict[str, Any]]) -> dict[str, str]:
+def _git_scope(root: Path) -> dict[str, Any]:
+    try:
+        proc = subprocess.run(
+            ["git", "status", "--porcelain"],
+            cwd=str(root),
+            capture_output=True,
+            text=True,
+            timeout=8,
+            check=False,
+        )
+    except Exception:
+        return {"dirty_count": 0, "changed_files": [], "changed_file_count": 0, "scope": "unknown"}
+    files: list[str] = []
+    for line in proc.stdout.splitlines():
+        if not line.strip():
+            continue
+        files.append(line[3:].strip().replace("\\", "/"))
+    scope = _classify_scope(files)
+    return {
+        "dirty_count": len(files),
+        "changed_file_count": len(files),
+        "changed_files": files[:80],
+        "scope": scope,
+    }
+
+
+def _classify_scope(files: list[str]) -> str:
+    if not files:
+        return "clean"
+    docs = [p for p in files if p.startswith("docs/") or p in {"README.md", "AGENTS.md"} or p.endswith(".md")]
+    electron = [p for p in files if p.startswith("electron/") or p.endswith((".js", ".css", ".html"))]
+    python = [p for p in files if p.startswith("nexus_gate/") or p.startswith("tests/") or p.endswith(".py")]
+    scripts = [p for p in files if p.startswith("scripts/") or p.endswith((".ps1", ".sh"))]
+    if len(docs) == len(files):
+        return "docs_only"
+    if len(electron) == len(files):
+        return "electron_only"
+    if len(python) == len(files):
+        return "python_only"
+    if len(scripts) == len(files):
+        return "scripts_only"
+    return "mixed"
+
+
+def _gate_selection_policy(scope: str, has_high_pressure: bool) -> dict[str, Any]:
+    if has_high_pressure:
+        return {
+            "policy_id": "runtime-pressure-first",
+            "recommended_command": ".\\scripts\\nexus.ps1 predictive-timing",
+            "why": "Runtime pressure is high; inspect timing and run targeted gates before repeating full evolve.",
+        }
+    if scope == "docs_only":
+        return {
+            "policy_id": "docs-targeted-first",
+            "recommended_command": 'python -m unittest discover -s tests -p "test_readme*.py"',
+            "why": "Only docs/readme surfaces changed; run targeted docs/readme tests before full evolve.",
+        }
+    if scope == "electron_only":
+        return {
+            "policy_id": "electron-smoke-first",
+            "recommended_command": "cd electron; npm run smoke",
+            "why": "Only Electron/UI surfaces changed; run Electron smoke before full evolve.",
+        }
+    if scope == "python_only":
+        return {
+            "policy_id": "python-targeted-first",
+            "recommended_command": 'python -m unittest discover -s tests -p "<targeted_test.py>"',
+            "why": "Python/test surfaces changed; run targeted unit tests before full evolve.",
+        }
+    return {
+        "policy_id": "normal-evolve-when-ready",
+        "recommended_command": ".\\scripts\\nexus.ps1 evolve",
+        "why": "Scope is clean or mixed; normal evolve remains the final local seal when patch scope is ready.",
+    }
+
+
+def _next_action(step_analysis: list[dict[str, Any]], gate_policy: dict[str, Any]) -> dict[str, str]:
     high = [item for item in step_analysis if item["pressure_level"] == "high"]
     medium = [item for item in step_analysis if item["pressure_level"] == "medium"]
     if high:
@@ -217,6 +313,12 @@ def _next_action(step_analysis: list[dict[str, Any]]) -> dict[str, str]:
             "recommended_next_command": 'python -m unittest discover -s tests -p "<targeted_test.py>"',
             "recommended_next_loop": "targeted-gate-first",
             "why": f"{step} shows medium drift; run targeted tests before full evolve to reduce token and wall-clock waste.",
+        }
+    if gate_policy.get("policy_id") != "normal-evolve-when-ready":
+        return {
+            "recommended_next_command": gate_policy["recommended_command"],
+            "recommended_next_loop": gate_policy["policy_id"],
+            "why": gate_policy["why"],
         }
     return {
         "recommended_next_command": ".\\scripts\\nexus.ps1 evolve",
@@ -234,9 +336,12 @@ def build_predictive_timing_packet(root: str | Path, max_runs: int = 12) -> dict
         key=lambda item: ({"high": 3, "medium": 2, "low": 1}.get(item["pressure_level"], 0), item["drift_ratio"]),
         reverse=True,
     )[:5]
-    next_action = _next_action(analysis)
+    git_scope = _git_scope(root_path)
+    has_high_pressure = any(item["pressure_level"] == "high" for item in analysis)
+    gate_policy = _gate_selection_policy(git_scope["scope"], has_high_pressure)
+    next_action = _next_action(analysis, gate_policy)
     status = "pass"
-    if any(item["pressure_level"] == "high" for item in analysis):
+    if has_high_pressure:
         status = "warn"
 
     return {
@@ -247,11 +352,20 @@ def build_predictive_timing_packet(root: str | Path, max_runs: int = 12) -> dict
         "status": status,
         "generated_utc": _utc(),
         "run_sample_count": len(runs),
-        "read_surfaces": ["reports/human_surface/*"],
-        "write_surfaces": [REPORT_LATEST.as_posix(), STATE_LATEST.as_posix()],
+        "read_surfaces": ["reports/human_surface/*", "git status --porcelain"],
+        "write_surfaces": [REPORT_LATEST.as_posix(), STATE_LATEST.as_posix(), TIMING_LEDGER.as_posix()],
         "runtime_pressure": highest,
         "step_analysis": analysis,
         "repo_pressure": _repo_pressure(root_path),
+        "git_scope": git_scope,
+        "adaptive_timeout_policy": {
+            "formula": "timeout = max(min_timeout, min(max_timeout, p90 * 1.5))",
+            "min_timeout_seconds": 60,
+            "pack_min_timeout_seconds": 420,
+            "max_timeout_seconds": 900,
+            "mode": "recommendation_only",
+        },
+        "gate_selection_policy": gate_policy,
         "recommendation": next_action,
         "blocked_actions": BLOCKED_ACTIONS,
         "authority_boundary": {
@@ -278,11 +392,30 @@ def write_outputs(root: str | Path, packet: dict[str, Any]) -> None:
             "generated_utc": packet["generated_utc"],
             "run_sample_count": packet["run_sample_count"],
             "runtime_pressure": packet["runtime_pressure"],
+            "gate_selection_policy": packet["gate_selection_policy"],
             "recommendation": packet["recommendation"],
             "blocked_actions": packet["blocked_actions"],
             "claim_boundary": packet["claim_boundary"],
         },
     )
+    timestamp = packet["generated_utc"]
+    git_scope = packet.get("git_scope", {})
+    rows = []
+    for item in packet.get("step_analysis", []):
+        rows.append(
+            {
+                "timestamp": timestamp,
+                "gate": item["step"],
+                "duration_sec": item["latest_seconds"],
+                "status": item["latest_status"],
+                "repo_dirty_count": git_scope.get("dirty_count", 0),
+                "changed_files": git_scope.get("changed_file_count", 0),
+                "pressure_level": item["pressure_level"],
+                "drift_ratio": item["drift_ratio"],
+                "recommended_timeout_seconds": _adaptive_timeout(item.get("p90_seconds", 0), item["step"]),
+            }
+        )
+    _append_jsonl(root_path / TIMING_LEDGER, rows)
 
 
 def render(packet: dict[str, Any]) -> str:

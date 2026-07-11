@@ -1226,6 +1226,67 @@ function Invoke-NexusAlgorithmCardsConsole {
     }
 }
 
+function Invoke-NexusDiscoveryCardsConsole {
+    while ($true) {
+        Write-Host ""
+        Write-Host "========================================"
+        Write-Host " NEXUS DISCOVERIES"
+        Write-Host "========================================"
+        Write-Host "Rule: discoveries become versioned cards; cards do not grant authority."
+        Write-Host ""
+
+        $cardsPath = Join-Path $RepoRoot "state\discoveries\nexus_discovery_cards_latest.json"
+
+        if (-not (Test-Path -LiteralPath $cardsPath -PathType Leaf)) {
+            Write-FAIL ("Discovery card packet missing: {0}" -f $cardsPath)
+            Write-NG "Choose R to rebuild from discovery sources."
+        }
+        else {
+            try {
+                $packet = Get-Content -LiteralPath $cardsPath -Raw | ConvertFrom-Json
+                Write-OK ("Discovery card packet: {0} cards" -f $packet.card_count)
+                Write-Host ""
+                foreach ($card in @($packet.cards)) {
+                    Write-Host ("[{0}] {1}" -f $card.version, $card.title) -ForegroundColor Cyan
+                    Write-Host ("  id      : {0}" -f $card.discovery_id)
+                    Write-Host ("  summary : {0}" -f $card.summary)
+                    Write-Host ("  math    : {0}" -f $card.math.control_loop) -ForegroundColor Blue
+                    Write-Host ("  code    : {0}" -f (@($card.code_references) -join "; "))
+                    Write-Host ""
+                }
+            }
+            catch {
+                Write-FAIL ("Discovery card JSON parse failed: {0}" -f $_.Exception.Message)
+            }
+        }
+
+        Write-Host "R. Rebuild discovery cards"
+        Write-Host "J. Open discovery card JSON"
+        Write-Host "D. Open discovery card docs"
+        Write-Host "B. Back to main menu"
+        Write-Host ""
+        $discoveryChoice = Read-Host "Discoveries"
+
+        if ($discoveryChoice -eq "R" -or $discoveryChoice -eq "r") {
+            python -m nexus_gate.discoveries.cards --root $RepoRoot --json | Out-Null
+            if ($LASTEXITCODE -eq 0) { Write-OK "Discovery cards rebuilt." } else { Write-FAIL "Discovery card rebuild failed." }
+            Read-Host "Press Enter to continue"
+        }
+        elseif ($discoveryChoice -eq "J" -or $discoveryChoice -eq "j") {
+            if (Test-Path -LiteralPath $cardsPath -PathType Leaf) { explorer.exe $cardsPath | Out-Null }
+        }
+        elseif ($discoveryChoice -eq "D" -or $discoveryChoice -eq "d") {
+            explorer.exe (Join-Path $RepoRoot "docs\runtime\NEXUS_DISCOVERY_CARDS.md") | Out-Null
+        }
+        elseif ($discoveryChoice -eq "B" -or $discoveryChoice -eq "b") {
+            return
+        }
+        else {
+            Write-NG "Unknown Discoveries choice."
+        }
+    }
+}
+
 function Write-Portal {
     param(
         [string]$Text,
@@ -1292,6 +1353,7 @@ function Show-Menu {
     Write-Portal "  [15] PetriDishPortal                       -> organism gate / microscope HUD" "Cyan"
     Write-Portal "  [16] T3MP3ST                               -> authorized security lab / War Room" "Blue"
     Write-Portal "  [17] Algorithm Cards                      -> predictive/control algorithms" "Cyan"
+    Write-Portal "  [18] Discoveries                          -> math/code replication cards" "Blue"
     Write-Portal "  [Q]  Quit" "Blue"
     Write-Host ""
     Write-Portal "========================================================================================================================" "Cyan"
@@ -1321,6 +1383,7 @@ function Show-Menu {
     # Write-Host "[15] PetriDishPortal"
     # Write-Host "[16] T3MP3ST"
     # Write-Host "[17] Algorithm Cards"
+    # Write-Host "[18] Discoveries"
     # Write-Host "Gateway style: cyber ice-blue / green / yellow portal."
 }
 
@@ -1384,6 +1447,9 @@ while ($true) {
     }
     elseif ($choice -eq "17") {
         Invoke-NexusAlgorithmCardsConsole
+    }
+    elseif ($choice -eq "18") {
+        Invoke-NexusDiscoveryCardsConsole
     }
     elseif ($choice -eq "Q" -or $choice -eq "q") {
         Write-OK "closing NEXUS Gate launcher"
