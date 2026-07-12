@@ -52,6 +52,7 @@ class OutcomeAwareArbiterV220Tests(unittest.TestCase):
         self.assertIn('"outcome-learn"', human)
         self.assertIn("16i_outcome_learner", human)
         self.assertIn("outcome-learn", readme)
+        self.assertIn("runtime-hygiene", readme)
 
 
 if __name__ == "__main__":

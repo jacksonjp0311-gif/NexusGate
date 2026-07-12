@@ -1,5 +1,5 @@
 {
-  "card_count": 14,
+  "card_count": 15,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -566,10 +566,48 @@
       "summary": "A recommendation becomes reusable intelligence only after the system records an outcome and computes route fitness.",
       "title": "Recommendation Outcome Learning",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "runtime-churn-hygiene-algorithm",
+        "scope-hygiene-algorithm",
+        "authority-gate-algorithm"
+      ],
+      "boundary": "Runtime hygiene may clean allowlisted generated surfaces only. It is not source deletion, proof, authority, or unbounded git cleanup.",
+      "code_references": [
+        "nexus_gate/hygiene/runtime_churn.py::build_runtime_hygiene_report",
+        "reports/nexus_runtime_hygiene_latest.json",
+        "scripts/nexus.ps1"
+      ],
+      "discovery_id": "generated-surface-source-separation",
+      "evidence_surfaces": [
+        "reports/nexus_runtime_hygiene_latest.json",
+        ".gitignore",
+        "git status --short"
+      ],
+      "math": {
+        "cleanable": "cleanable = allowlisted(generated_tracked + generated_untracked)",
+        "dirty_scope": "dirty = generated_tracked + generated_untracked + source_dirty",
+        "safety": "source_dirty_after_clean = source_dirty_before_clean"
+      },
+      "next_versions": [
+        "v0.2: install local post-commit hook for optional automatic clean-runtime",
+        "v0.3: add HUD warning when source_dirty remains after cleanup"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 runtime-hygiene",
+        ".\\scripts\\nexus.ps1 clean-runtime",
+        "Inspect remaining_source_dirty before staging."
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Recurring post-evolve dirty state is two mixed signals: generated evidence exhaust and source mutation. Separating them keeps source changes visible while making generated churn cleanable.",
+      "title": "Generated Surface / Source Separation",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-12T11:25:52.903210+00:00",
+  "generated_at_utc": "2026-07-12T11:58:34.453728+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

@@ -58,7 +58,7 @@ class CoherenceFieldV200Tests(unittest.TestCase):
         self.assertIn("nexus_gate.coherence.field", sh)
         self.assertIn('"coherence-field"', human)
         self.assertIn("16h_coherence_field", human)
-        self.assertIn("v2.2.0 Outcome-Aware Arbiter", readme)
+        self.assertIn("v2.3.0 Runtime Churn Hygiene", readme)
         self.assertIn("reports/nexus_coherence_field_latest.json", agents)
 
     def test_v2_docs_and_policy_kernel_exist(self) -> None:

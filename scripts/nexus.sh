@@ -28,6 +28,7 @@ set -euo pipefail
   # decision-envelope
   # coherence-field
   # outcome-learn
+  # runtime-hygiene
 # predictive-memory
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
@@ -199,6 +200,9 @@ case "$COMMAND" in
   decision-envelope) python -m nexus_gate.decision.envelope --root . --json ;;
   coherence-field) python -m nexus_gate.coherence.field --root . --json ;;
   outcome-learn) python -m nexus_gate.outcomes.learn --root . --json ;;
+  runtime-hygiene) python -m nexus_gate.hygiene.runtime_churn --root . --json ;;
+  clean-runtime) python -m nexus_gate.hygiene.runtime_churn --root . --apply --json ;;
+  install-hooks) ./scripts/install_nexus_git_hooks.sh ;;
   cortex)
     shift || true
     INTENT="${*:-Run NEXUS Cortex gate.}"
@@ -244,6 +248,7 @@ case "$COMMAND" in
     python -m nexus_gate.loops.predictive_timing --root . --json
     python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent "evolve chain Cortex memory and predictive gate fusion" --json
     python -m nexus_gate.build.packer --root . --out dist --json
+    python -m nexus_gate.hygiene.runtime_churn --root . --json
     ;;
   pack)
     python -m nexus_gate.build.packer --root . --out dist --json

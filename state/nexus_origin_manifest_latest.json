@@ -29,10 +29,11 @@
     "required_origin_surfaces_present": true
   },
   "claim_boundary": "Origin Seal is local development evidence only. It binds current repository identity, key surface hashes, commit state, and subsystem version lineage. It does not prove correctness, safety, security, production readiness, model understanding, or autonomous authority.",
-  "commit": "bf812bc46e3cddeb1ab97b13a454ccd77438fc9f",
-  "dirty_count": 91,
+  "commit": "ca23822cf1b38537b485a8efd4e2c474b7545e42",
+  "dirty_count": 67,
   "dirty_entries_sample": [
-    "M NexusCell/ledger/nexus_cell_continuity.jsonl",
+    "M .gitignore",
+    " M NexusCell/ledger/nexus_cell_continuity.jsonl",
     " M README.md",
     " M \"Tesseract Neural Network/memory/conversation_latest.json\"",
     " M \"Tesseract Neural Network/memory/tnn_memory.jsonl\"",
@@ -45,9 +46,7 @@
     " M docs/versioning/NEXUS_CHANGELOG.md",
     " M ledger/nexus_cell/continuity.jsonl",
     " M ledger/nexus_gate_ledger.v0.1.0.jsonl",
-    " M nexus_gate/coherence/field.py",
-    " M nexus_gate/decision/arbiter.py",
-    " M nexus_gate/decision/envelope.py",
+    " M ledger/recommendation_outcomes.jsonl",
     " M nexus_gate/discoveries/cards.py",
     " M nexus_gate/origin/seal.py",
     " M reports/CHATGPT_HANDOFF_LATEST.md",
@@ -71,28 +70,29 @@
     " M reports/nexus_receptor_compile_report_latest.json",
     " M reports/nexus_reflective_loop_report_latest.json",
     " M reports/nexus_runtime_compile_report_latest.json",
-    " M reports/nexus_self_healing_report_latest.json"
+    " M reports/nexus_self_healing_report_latest.json",
+    " M scripts/nexus.ps1"
   ],
-  "generated_utc": "2026-07-12T11:26:09.288976+00:00",
+  "generated_utc": "2026-07-12T11:58:49.653666+00:00",
   "legacy_version_lineage": {
     "cortex_refresh_version": "1.2.1",
     "lineage_manifest_phase": "Domain Intelligence Orchestrator",
     "lineage_manifest_system_version": "0.4.0",
     "meta_orchestrator_version": "1.1.3",
     "predictive_memory_version": "1.2.0",
-    "product_phase": "Outcome-Aware Arbiter",
-    "product_version": "2.2.0",
+    "product_phase": "Runtime Churn Hygiene",
+    "product_version": "2.3.0",
     "pyproject_distribution_version": "0.9.7",
     "python_package_api_version": "0.1.3"
   },
   "next_action": ".\\scripts\\nexus.ps1 predictive-memory; .\\scripts\\nexus.ps1 evolve",
-  "origin_manifest_hash": "8b5486778f0e1bdca991d3332d27b9f8213d3b35bd41f9c88741fb2bfa892282",
+  "origin_manifest_hash": "15eaa2923adf7c30efa28273b64d648adb1ee7c64b26d24089770f30e647ea55",
   "origin_surfaces": [
     {
-      "bytes": 19226,
+      "bytes": 19291,
       "exists": true,
       "path": "README.md",
-      "sha256": "7d9210a312226ac6e1abab147b8e366217a7ba00849bb9b2cce6ee9a3f4356a3"
+      "sha256": "02e96b9223617e701bad5438eabadd42a64afdc00fcc63b189823e6feef97d21"
     },
     {
       "bytes": 17283,
@@ -113,16 +113,16 @@
       "sha256": "96b3d426abc316b64feaa10a11646b78583461f747b1833b5f6bcee76ac60b87"
     },
     {
-      "bytes": 9117,
+      "bytes": 9280,
       "exists": true,
       "path": "docs/updates/UPDATE_CHART.md",
-      "sha256": "08f19787cea84e0abb16e05ce5f9dcb4bfa875ffff9ddc5bd45b73ddad86a1b7"
+      "sha256": "faca948b05b7e8dab8dbac96e17f84ed6e281cffd0be000f4dded8fe475e34d9"
     },
     {
-      "bytes": 13787,
+      "bytes": 14114,
       "exists": true,
       "path": "docs/versioning/NEXUS_CHANGELOG.md",
-      "sha256": "25b0a18d32f581113347980ca8fca66a3111846691d46a26e38ad9470e79e5b6"
+      "sha256": "27a6527faef2662fabaff33aae41abfbcdb6bc795010a5f5700344f673c05622"
     },
     {
       "bytes": 1142,
@@ -137,34 +137,34 @@
       "sha256": "6edac68a0f96abc8221dc629bacad38cd4d8477a3f2016ac1802842706847460"
     },
     {
-      "bytes": 62754,
+      "bytes": 64499,
       "exists": true,
       "path": "state/algorithms/nexus_algorithm_cards_latest.json",
-      "sha256": "22698e51ffb12ecc4dfabe3e26c44b6a6646508d940c27077a27edde5d79da56"
+      "sha256": "673be4ae1ccd8420a8ab96f6497320183a67629515e46049d5d23c1244c9f03d"
     },
     {
-      "bytes": 28035,
+      "bytes": 29812,
       "exists": true,
       "path": "state/discoveries/nexus_discovery_cards_latest.json",
-      "sha256": "e622c2ae9dae68d7893f6d323af53cd58e6b7fcf9d6e3682c3d0052fe4edbad0"
+      "sha256": "8d21598718d15fff79c0415a3bfe0a9b258c112d7c00b0000e9a2f4bb9c6f922"
     },
     {
-      "bytes": 18063,
+      "bytes": 18072,
       "exists": true,
       "path": "reports/nexus_compile_report_latest.json",
-      "sha256": "23dcfcb31a7363055c27e164f1d99b4c4208b533837a5d7cad2bc2d58454d4c5"
+      "sha256": "37e5ef83219f976b60fb201433243a85e81b72080cfbe2f881949558e0dafedb"
     },
     {
-      "bytes": 16767,
+      "bytes": 16728,
       "exists": true,
       "path": "reports/nexus_meta_orchestrator_gate_latest.json",
-      "sha256": "27718679f639c16947b0f079d0d12c13781b5bea6f77650592b0de258717d10e"
+      "sha256": "d233f0165185e70d4fd519aba03ec0079166a91c9564b1c9e1bc1c4373d574a9"
     },
     {
-      "bytes": 13249,
+      "bytes": 11466,
       "exists": true,
       "path": "reports/nexus_predictive_memory_orchestrator_latest.json",
-      "sha256": "8b93ee34167ac149da4c0b22c3944d4a0793efc07276fefb11a7d9c350c5335b"
+      "sha256": "18d981c0d2458021a1467ead2f537dd922874aba29d5e3d1b5fb36110c3c62e9"
     },
     {
       "bytes": 39342,
@@ -173,8 +173,8 @@
       "sha256": "3d5240bfdf2db3a26ad40ae1dd48ed3c6d97b53c7a843ac23975394cc6ab0e28"
     }
   ],
-  "product_phase": "Outcome-Aware Arbiter",
-  "product_version": "2.2.0",
+  "product_phase": "Runtime Churn Hygiene",
+  "product_version": "2.3.0",
   "read_surfaces": [
     "README.md",
     "AGENTS.md",
@@ -191,10 +191,10 @@
     "reports/nexus_predictive_memory_orchestrator_latest.json",
     "reports/nexus_cortex_refresh_report_latest.json"
   ],
-  "readme_current_line": "v2.2.0 Outcome-Aware Arbiter, extending Causal Coherence Routing. Product identity is bound by `state/nexus_origin_manifest_latest.json` and `reports/nexus_origin_seal_latest.json`; Decision Envelope consumes Coherence Field and arbiter calibration from `state/coherence/arbiter_calibration_latest.json`. Older version strings in `pyproject.toml`, `nexus_gate/__init__.py`, lineage files, and subsystem reports are preserved as subsystem lineage until deliberate migration. Toolbelt, Preflight, Wound Compression, Predictive Memory, Cortex Refresh, Origin Seal, Decision Envelope, Coherence Field, and Outcome Learner compile into recommendation-only route evidence; authority remains human-bound.",
-  "schema": "NEXUS_ORIGIN_SEAL.v2.2.0",
+  "readme_current_line": "v2.3.0 Runtime Churn Hygiene, extending Outcome-Aware Arbiter and Causal Coherence Routing. Product identity is bound by `state/nexus_origin_manifest_latest.json` and `reports/nexus_origin_seal_latest.json`; Decision Envelope consumes Coherence Field and arbiter calibration. Older version strings in `pyproject.toml`, `nexus_gate/__init__.py`, lineage files, and subsystem reports are subsystem lineage until deliberate migration. Toolbelt, Preflight, Wound Compression, Predictive Memory, Cortex Refresh, Origin Seal, Decision Envelope, Coherence Field, Outcome Learner, and Runtime Hygiene compile into recommendation-only route evidence; authority remains human-bound.",
+  "schema": "NEXUS_ORIGIN_SEAL.v2.3.0",
   "status": "pass",
-  "surface_hash": "97e0343b384412f682a66c8566ccf65520a790f29b779137c2d51e49b44e73d5",
+  "surface_hash": "4d5873e86bb3194bcb424976c0067d8d6c3f4eeebff4ac241fa3d03a5f3d7753",
   "system": "NEXUS GATE",
   "write_surfaces": [
     "reports/nexus_origin_seal_latest.json",

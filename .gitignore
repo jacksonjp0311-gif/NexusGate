@@ -14,6 +14,8 @@ reports/compact_compile_logs/
 reports/script_runs/
 reports/tui/
 electron/reports/
+dist/nexus_gate_pack_manifest_20*.json
+dist/nexus_gate_source_bundle_20*.tar.gz
 
 # common generated reports (keep canonical tracked ones; ignore new exhaust)
 reports/*.json

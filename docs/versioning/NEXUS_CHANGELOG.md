@@ -1,5 +1,12 @@
-## v2.2.0 - Outcome-Aware Arbiter
+## v2.3.0 - Runtime Churn Hygiene
 Status: current
+- Adds generated runtime-surface classifier.
+- Adds `runtime-hygiene` dry-run and `clean-runtime` apply lanes.
+- Ignores timestamped pack exhaust while preserving tracked latest evidence surfaces for explicit promotion.
+- Preserves source changes and blocks unbounded cleanup.
+
+## v2.2.0 - Outcome-Aware Arbiter
+Status: sealed
 - Adds recommendation outcome ledger and outcome learner.
 - Adds arbiter calibration and pressure memory state.
 - Feeds calibration into Recommendation Arbiter scoring.

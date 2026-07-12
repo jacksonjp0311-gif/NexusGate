@@ -262,6 +262,14 @@ coherence score samples -> rising/falling/stable trend -> hysteresis-aware routi
 
 Pressure memory prevents route flapping by requiring persistent pressure changes before changing route class.
 
+## Runtime Churn Hygiene Algorithm
+
+```text
+git status -> allowlisted generated tracked surfaces -> allowlisted untracked exhaust -> source dirty remains visible -> optional bounded clean
+```
+
+Runtime hygiene prevents generated evidence exhaust from masking source mutations. It may restore known generated surfaces and remove known timestamped pack exhaust; it may not clean unclassified files, run unbounded git clean, or erase source changes.
+
 ## Causal Memory Closure Algorithm
 
 ```text

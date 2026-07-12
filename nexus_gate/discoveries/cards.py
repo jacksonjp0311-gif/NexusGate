@@ -592,6 +592,44 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.3: expose route fitness in Electron System Monitor HUD",
             ],
             "boundary": "Outcome learning calibrates recommendation pressure. It is not proof, execution, or authority.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "generated-surface-source-separation",
+            "version": "0.1.0",
+            "title": "Generated Surface / Source Separation",
+            "status": "active",
+            "summary": "Recurring post-evolve dirty state is two mixed signals: generated evidence exhaust and source mutation. Separating them keeps source changes visible while making generated churn cleanable.",
+            "math": {
+                "dirty_scope": "dirty = generated_tracked + generated_untracked + source_dirty",
+                "cleanable": "cleanable = allowlisted(generated_tracked + generated_untracked)",
+                "safety": "source_dirty_after_clean = source_dirty_before_clean",
+            },
+            "code_references": [
+                "nexus_gate/hygiene/runtime_churn.py::build_runtime_hygiene_report",
+                "reports/nexus_runtime_hygiene_latest.json",
+                "scripts/nexus.ps1",
+            ],
+            "algorithm_card_refs": [
+                "runtime-churn-hygiene-algorithm",
+                "scope-hygiene-algorithm",
+                "authority-gate-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 runtime-hygiene",
+                ".\\scripts\\nexus.ps1 clean-runtime",
+                "Inspect remaining_source_dirty before staging.",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_runtime_hygiene_latest.json",
+                ".gitignore",
+                "git status --short",
+            ],
+            "next_versions": [
+                "v0.2: install local post-commit hook for optional automatic clean-runtime",
+                "v0.3: add HUD warning when source_dirty remains after cleanup",
+            ],
+            "boundary": "Runtime hygiene may clean allowlisted generated surfaces only. It is not source deletion, proof, authority, or unbounded git cleanup.",
         }
     ]
     return {

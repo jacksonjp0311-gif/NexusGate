@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "origin-seal", "decision-envelope", "coherence-field", "outcome-learn", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "origin-seal", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [switch]$NoGit
 )
@@ -184,6 +184,7 @@ function Run-All {
     Run-Compile
     Run-Feedback
     Run-Pack
+    Invoke-Step "Runtime hygiene" "18_runtime_hygiene.json" { python -m nexus_gate.hygiene.runtime_churn --root . --json }
     Say "Compiled report files written." "OK"
     Say "Human surface passed." "OK"
 }
@@ -213,6 +214,7 @@ function Show-Status {
         ".\reports\nexus_decision_envelope_latest.json",
         ".\reports\nexus_coherence_field_latest.json",
         ".\reports\nexus_recommendation_outcome_latest.json",
+        ".\reports\nexus_runtime_hygiene_latest.json",
         ".\state\nexus_origin_manifest_latest.json",
         ".\state\decision\nexus_decision_envelope_latest.json",
         ".\state\coherence\nexus_coherence_field_latest.json",
@@ -365,6 +367,18 @@ if ($Command -eq "coherence-field") {
 if ($Command -eq "outcome-learn") {
     Invoke-Step "Outcome learner" "16i_outcome_learner.json" { python -m nexus_gate.outcomes.learn --root . --intent "human surface recommendation outcome learning" --json }
     Say "Outcome learner report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "runtime-hygiene") {
+    Invoke-Step "Runtime hygiene" "16j_runtime_hygiene.json" { python -m nexus_gate.hygiene.runtime_churn --root . --json }
+    Say "Runtime hygiene report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "clean-runtime") {
+    Invoke-Step "Runtime hygiene clean" "16j_runtime_hygiene.json" { python -m nexus_gate.hygiene.runtime_churn --root . --apply --json }
+    Say "Runtime generated churn cleaned." "OK"
     exit 0
 }
 
