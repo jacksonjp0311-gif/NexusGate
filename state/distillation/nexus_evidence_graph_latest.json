@@ -1,0 +1,710 @@
+{
+  "biological_efficiency_principles": [
+    {
+      "nexus_translation": "Heavy evidence becomes compact graph nodes with source hashes.",
+      "principle_id": "efficient-coding",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9298461/",
+      "summary": "Reduce predictable redundancy while preserving salient signal and provenance."
+    },
+    {
+      "nexus_translation": "Old generated exhaust is prunable only after distillation; recurring useful nodes remain linked.",
+      "principle_id": "synaptic-pruning",
+      "source_url": "https://my.clevelandclinic.org/health/articles/synaptic-pruning",
+      "summary": "Repeatedly unused weak connections are candidates for pruning; used pathways strengthen."
+    },
+    {
+      "nexus_translation": "Distilled graph keeps local clusters and cross-surface bridge links for route analysis.",
+      "principle_id": "small-world-efficiency",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5603984/",
+      "summary": "High clustering plus short path length supports efficient global/local information flow."
+    },
+    {
+      "nexus_translation": "Pruning remains recommendation-only until human authorization and final evolve.",
+      "principle_id": "homeostatic-retention",
+      "source_url": "https://elifesciences.org/reviewed-preprints/104746",
+      "summary": "Compression must preserve stability; pruning cannot outrun validation."
+    }
+  ],
+  "blocked_actions": [
+    "delete_source_files",
+    "delete_docs_or_tests",
+    "prune_without_distillation_node",
+    "prune_without_source_hash",
+    "self_authorize_pruning",
+    "bypass_final_evolve",
+    "external_api_writes",
+    "secret_access"
+  ],
+  "claim_boundary": "Evidence Distillation Graph is local development compression evidence only. It preserves hashes, summaries, and graph links for heavy evidence surfaces. It does not prove correctness, safety, security, production readiness, scientific truth, model understanding, or autonomous authority.",
+  "edges": [
+    {
+      "relation": "compressed_into_cards",
+      "source": "RouteNode:e720baf2a7a02c88",
+      "target": "AlgorithmNode:ebd10501ea9fce76"
+    },
+    {
+      "relation": "compressed_into_cards",
+      "source": "RouteNode:e720baf2a7a02c88",
+      "target": "DiscoveryNode:41946218dac8074f"
+    },
+    {
+      "relation": "compressed_into_cards",
+      "source": "CoherenceNode:8dd5e9793ebbc4ff",
+      "target": "AlgorithmNode:ebd10501ea9fce76"
+    },
+    {
+      "relation": "compressed_into_cards",
+      "source": "CoherenceNode:8dd5e9793ebbc4ff",
+      "target": "DiscoveryNode:41946218dac8074f"
+    },
+    {
+      "relation": "compressed_into_cards",
+      "source": "OutcomeNode:8cfa915fd25a29ac",
+      "target": "AlgorithmNode:ebd10501ea9fce76"
+    },
+    {
+      "relation": "compressed_into_cards",
+      "source": "OutcomeNode:8cfa915fd25a29ac",
+      "target": "DiscoveryNode:41946218dac8074f"
+    }
+  ],
+  "emergence": {
+    "motif": "route + coherence + outcome",
+    "next_action": "Compare distillation graph across future evolve epochs to detect recurring motifs.",
+    "node_type_counts": {
+      "AlgorithmNode": 1,
+      "CoherenceNode": 3,
+      "DiscoveryNode": 1,
+      "EvidenceNode": 5,
+      "OutcomeNode": 1,
+      "PrincipleNode": 4,
+      "RouteNode": 1,
+      "RuntimePressureNode": 1
+    },
+    "status": "forming"
+  },
+  "generated_at_utc": "2026-07-12T20:29:44.600531+00:00",
+  "graph_hash": "601a525450072c3c06401e590b7f341435fd490ddd8ace5e647a89d325a527e5",
+  "graph_metrics": {
+    "compression_mode": "summary_hash_pointer_graph",
+    "distilled_source_bytes": 202653,
+    "edge_count": 6,
+    "node_count": 17
+  },
+  "nodes": [
+    {
+      "bytes": 9249,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "EvidenceNode:da73503128f55e89",
+      "node_type": "EvidenceNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "8e1eda69ca96cb9256a85b861992d98cac5970e7966d3af1d6b36b68a64ead4c",
+      "source_surface": "reports/nexus_origin_seal_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": null,
+        "node_hint": "NEXUS GATE",
+        "schema": "NEXUS_ORIGIN_SEAL.v2.6.0",
+        "score": null,
+        "selected_command": null,
+        "status": "pass",
+        "version": "2.6.0"
+      }
+    },
+    {
+      "bytes": 4580,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "EvidenceNode:43e07648752a9fc7",
+      "node_type": "EvidenceNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "20fb3edbe4e009a626d325bb96364178d7ad2642bb7015eaaa469f4a9b1c8f2a",
+      "source_surface": "reports/nexus_triadic_lattice_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": "triadic_geometric_route_alignment",
+        "node_hint": "NEXUS GATE",
+        "schema": "NEXUS_TRIADIC_GEOMETRIC_LATTICE.v2.5.0",
+        "score": null,
+        "selected_command": null,
+        "status": "pass",
+        "version": "2.5.0"
+      }
+    },
+    {
+      "bytes": 24607,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "RouteNode:e720baf2a7a02c88",
+      "node_type": "RouteNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "11d26047453aee1ec19e2a782d9b38bf6e7ee4425848a9e4afbb6815a8e88cb4",
+      "source_surface": "reports/nexus_decision_envelope_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": "triadic_lattice_decision_envelope",
+        "node_hint": "NEXUS GATE",
+        "schema": "NEXUS_DECISION_ENVELOPE.v2.5.0",
+        "score": null,
+        "selected_command": ".\\scripts\\nexus.ps1 cortex-refresh",
+        "status": "warn",
+        "version": "2.5.0"
+      }
+    },
+    {
+      "bytes": 9458,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "CoherenceNode:8dd5e9793ebbc4ff",
+      "node_type": "CoherenceNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "76a5c2aada75f4cbb51ced502f61772980e5f4abfe851dd8837cc309ddf0c4dd",
+      "source_surface": "reports/nexus_coherence_field_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": "outcome_aware_coherence_field",
+        "node_hint": "NEXUS GATE",
+        "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.4.0",
+        "score": 94,
+        "selected_command": ".\\scripts\\nexus.ps1 cortex-refresh",
+        "status": "pass",
+        "version": "2.4.0"
+      }
+    },
+    {
+      "bytes": 2896,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "OutcomeNode:8cfa915fd25a29ac",
+      "node_type": "OutcomeNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "bff27f5f5e37ea350a64acfee044b29796b72cebe134a184c7a11eb8c9a37bdb",
+      "source_surface": "reports/nexus_recommendation_outcome_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": null,
+        "node_hint": "NEXUS GATE",
+        "schema": "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.2.0",
+        "score": null,
+        "selected_command": null,
+        "status": "pass",
+        "version": "2.2.0"
+      }
+    },
+    {
+      "bytes": 11264,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "EvidenceNode:70eefbea7a17bc9f",
+      "node_type": "EvidenceNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "9c7fc7d12f3161d72b11c5972450cd64baecec3f568490b41be848bba4da30c6",
+      "source_surface": "reports/nexus_predictive_memory_orchestrator_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": "predictive_memory_orchestrator",
+        "node_hint": "NEXUS GATE",
+        "schema": "NEXUS_PREDICTIVE_MEMORY_ORCHESTRATOR.v1.2.0",
+        "score": null,
+        "selected_command": null,
+        "status": "warn",
+        "version": "1.2.0"
+      }
+    },
+    {
+      "bytes": 15428,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "RuntimePressureNode:3f114af20902be71",
+      "node_type": "RuntimePressureNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "93f25f93590eb4cf2fe2fd234425c1f18797f315fcdac4159f89a7c5b33cc3e6",
+      "source_surface": "reports/nexus_predictive_gate_timing_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": "predictive_gate_timing",
+        "node_hint": "NEXUS GATE",
+        "schema": "NEXUS_PREDICTIVE_GATE_TIMING.v1.1.6",
+        "score": null,
+        "selected_command": null,
+        "status": "pass",
+        "version": "1.1.6"
+      }
+    },
+    {
+      "bytes": 9197,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "EvidenceNode:de6b59d3e8d0078f",
+      "node_type": "EvidenceNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "7ff65150cced8b281d2d19f87775bed02ccad5dfbd3bed3b2dbc3244fbd282ec",
+      "source_surface": "reports/nexus_runtime_hygiene_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": "dry_run",
+        "node_hint": "NEXUS GATE",
+        "schema": "NEXUS_RUNTIME_CHURN_HYGIENE.v2.3.0",
+        "score": null,
+        "selected_command": null,
+        "status": "warn",
+        "version": "2.3.0"
+      }
+    },
+    {
+      "bytes": 74839,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "AlgorithmNode:ebd10501ea9fce76",
+      "node_type": "AlgorithmNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "5fa6017814f519b47d399ab188c90f3428e44e6cc55c6b04c073e4bf392f9ad5",
+      "source_surface": "state/algorithms/nexus_algorithm_cards_latest.json",
+      "summary": {
+        "card_count": 44,
+        "mode": null,
+        "node_hint": "NEXUS_ALGORITHM_CARDS",
+        "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
+        "score": null,
+        "selected_command": null,
+        "status": null,
+        "version": "0.3.0"
+      }
+    },
+    {
+      "bytes": 35670,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "DiscoveryNode:41946218dac8074f",
+      "node_type": "DiscoveryNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "06c3f2ed9d17a769f18c7cd7e2045949fee98eae2a5169c14122bff339058ea5",
+      "source_surface": "state/discoveries/nexus_discovery_cards_latest.json",
+      "summary": {
+        "card_count": 18,
+        "mode": null,
+        "node_hint": "NEXUS_DISCOVERY_CARDS",
+        "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
+        "score": null,
+        "selected_command": null,
+        "status": null,
+        "version": "0.2.0"
+      }
+    },
+    {
+      "bytes": 4580,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "EvidenceNode:f645d67a640a2aca",
+      "node_type": "EvidenceNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "20fb3edbe4e009a626d325bb96364178d7ad2642bb7015eaaa469f4a9b1c8f2a",
+      "source_surface": "state/lattice/nexus_triadic_lattice_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": "triadic_geometric_route_alignment",
+        "node_hint": "NEXUS GATE",
+        "schema": "NEXUS_TRIADIC_GEOMETRIC_LATTICE.v2.5.0",
+        "score": null,
+        "selected_command": null,
+        "status": "pass",
+        "version": "2.5.0"
+      }
+    },
+    {
+      "bytes": 482,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "CoherenceNode:33e339db53d5b9cf",
+      "node_type": "CoherenceNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "30aaf0b66d64daf1610a5b2e5631d4eaa30abe8e107c15fa827d77fd48eff871",
+      "source_surface": "state/coherence/arbiter_calibration_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": null,
+        "node_hint": null,
+        "schema": "NEXUS_ARBITER_CALIBRATION.v2.2.0",
+        "score": null,
+        "selected_command": null,
+        "status": null,
+        "version": "2.2.0"
+      }
+    },
+    {
+      "bytes": 403,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "CoherenceNode:94fe7f728a05f075",
+      "node_type": "CoherenceNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "9726b373c22f5cd933135baf5780770748ae4bd2ce385a70277910efe92fe4ae",
+      "source_surface": "state/coherence/pressure_memory_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": null,
+        "node_hint": null,
+        "schema": "NEXUS_PRESSURE_MEMORY.v2.2.0",
+        "score": null,
+        "selected_command": null,
+        "status": null,
+        "version": "2.2.0"
+      }
+    },
+    {
+      "bytes": 0,
+      "claim_boundary": "Biological principle is an engineering analogy, not biological proof.",
+      "confidence": 0.72,
+      "links": [
+        "EvidenceNode",
+        "RouteNode",
+        "RuntimePressureNode"
+      ],
+      "node_id": "PrincipleNode:c3c3b4a34482a7bc",
+      "node_type": "PrincipleNode",
+      "prunable": false,
+      "retention_policy": "keep_raw_reference",
+      "source_hash": "e746d2a844e3e48646abde1d293aa1147e777a847511baf16b8747a215f1e8d6",
+      "source_surface": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9298461/",
+      "summary": {
+        "nexus_translation": "Heavy evidence becomes compact graph nodes with source hashes.",
+        "principle_id": "efficient-coding",
+        "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9298461/",
+        "summary": "Reduce predictable redundancy while preserving salient signal and provenance."
+      }
+    },
+    {
+      "bytes": 0,
+      "claim_boundary": "Biological principle is an engineering analogy, not biological proof.",
+      "confidence": 0.72,
+      "links": [
+        "EvidenceNode",
+        "RouteNode",
+        "RuntimePressureNode"
+      ],
+      "node_id": "PrincipleNode:78c9ae52e5a18cb7",
+      "node_type": "PrincipleNode",
+      "prunable": false,
+      "retention_policy": "keep_raw_reference",
+      "source_hash": "8cd74b1e4d5b8fb23298162f1448be04bb22242d36976a1bff2e65c08105dbba",
+      "source_surface": "https://my.clevelandclinic.org/health/articles/synaptic-pruning",
+      "summary": {
+        "nexus_translation": "Old generated exhaust is prunable only after distillation; recurring useful nodes remain linked.",
+        "principle_id": "synaptic-pruning",
+        "source_url": "https://my.clevelandclinic.org/health/articles/synaptic-pruning",
+        "summary": "Repeatedly unused weak connections are candidates for pruning; used pathways strengthen."
+      }
+    },
+    {
+      "bytes": 0,
+      "claim_boundary": "Biological principle is an engineering analogy, not biological proof.",
+      "confidence": 0.72,
+      "links": [
+        "EvidenceNode",
+        "RouteNode",
+        "RuntimePressureNode"
+      ],
+      "node_id": "PrincipleNode:ecfcb89ca9d1cc48",
+      "node_type": "PrincipleNode",
+      "prunable": false,
+      "retention_policy": "keep_raw_reference",
+      "source_hash": "d27a3856c40865f06ca5a6c5ea8bc9ff97f3811ce608ef09c99ff4d506f33d8e",
+      "source_surface": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5603984/",
+      "summary": {
+        "nexus_translation": "Distilled graph keeps local clusters and cross-surface bridge links for route analysis.",
+        "principle_id": "small-world-efficiency",
+        "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5603984/",
+        "summary": "High clustering plus short path length supports efficient global/local information flow."
+      }
+    },
+    {
+      "bytes": 0,
+      "claim_boundary": "Biological principle is an engineering analogy, not biological proof.",
+      "confidence": 0.72,
+      "links": [
+        "EvidenceNode",
+        "RouteNode",
+        "RuntimePressureNode"
+      ],
+      "node_id": "PrincipleNode:ecd6c12f8bbd4dcc",
+      "node_type": "PrincipleNode",
+      "prunable": false,
+      "retention_policy": "keep_raw_reference",
+      "source_hash": "839766247a44698f80ea1f42dfe69a3611f3df7745c091b2af4a10f3f832c590",
+      "source_surface": "https://elifesciences.org/reviewed-preprints/104746",
+      "summary": {
+        "nexus_translation": "Pruning remains recommendation-only until human authorization and final evolve.",
+        "principle_id": "homeostatic-retention",
+        "source_url": "https://elifesciences.org/reviewed-preprints/104746",
+        "summary": "Compression must preserve stability; pruning cannot outrun validation."
+      }
+    }
+  ],
+  "phase": "Evidence Distillation Graph",
+  "pruning_policy": {
+    "apply_command_future": ".\\scripts\\nexus.ps1 prune-evidence",
+    "blocked_patterns": [
+      {
+        "path": "nexus_gate/",
+        "reason": "source/docs/tests/policy surfaces are protected"
+      },
+      {
+        "path": "tests/",
+        "reason": "source/docs/tests/policy surfaces are protected"
+      },
+      {
+        "path": "docs/",
+        "reason": "source/docs/tests/policy surfaces are protected"
+      },
+      {
+        "path": "scripts/",
+        "reason": "source/docs/tests/policy surfaces are protected"
+      },
+      {
+        "path": "README.md",
+        "reason": "source/docs/tests/policy surfaces are protected"
+      },
+      {
+        "path": "AGENTS.md",
+        "reason": "source/docs/tests/policy surfaces are protected"
+      }
+    ],
+    "candidate_bytes": 1624429,
+    "candidate_count": 80,
+    "candidates": [
+      {
+        "bytes": 28090,
+        "path": "reports/human_surface/20260712_162714/16i2_evidence_distillation.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "48256c0c8972444098434c7399cbafacfe0e87d04d13d509b8dc2dd05af850f8"
+      },
+      {
+        "bytes": 24616,
+        "path": "reports/human_surface/20260712_162714/16g_decision_envelope.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "158a8c1a7df4e6816d03e77217ba4698e7180190b2e47fb0d3820dac9753cae3"
+      },
+      {
+        "bytes": 24614,
+        "path": "reports/human_surface/20260712_155543/16g_decision_envelope.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "edd1002920c149936557c5d610261c9b608183869341b8b9dd7ecb5170482f79"
+      },
+      {
+        "bytes": 21538,
+        "path": "reports/human_surface/20260712_082532/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "011ae2fd46cf35fcc2b7e8d82837115f0176eb544064efc86b072c62846ed3fa"
+      },
+      {
+        "bytes": 21538,
+        "path": "reports/human_surface/20260712_162714/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "fbcf24d0c95c4639555a6b60cdd46a0837a736b849a705608d9b80219d3ab050"
+      },
+      {
+        "bytes": 21537,
+        "path": "reports/human_surface/20260711_190556/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "d22c07a14e48ba229278556ebba7c4483b145c698cf0d70e055a0bf15306eada"
+      },
+      {
+        "bytes": 21537,
+        "path": "reports/human_surface/20260711_235755/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "0e41a5874c5d81e0e08224f1858aa1e28950162e5074fbdaf6ce3c20cd620c10"
+      },
+      {
+        "bytes": 21535,
+        "path": "reports/human_surface/20260710_122726/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "6683c1f7d2616b72e2e5ad91b2e719a716bf9e3b9160e436cb5a5e6bb6705075"
+      },
+      {
+        "bytes": 21535,
+        "path": "reports/human_surface/20260711_010513/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "f1f14e4e6e6b3569f820fea710f9c7d6b0b8e8cf0ceab2d091878ecfa380c82a"
+      },
+      {
+        "bytes": 21535,
+        "path": "reports/human_surface/20260711_085010/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "346da10f9e2a20ee7dc46c3660ed4dac92a6d8206073807ac3e770cb6d4cd4c0"
+      },
+      {
+        "bytes": 21532,
+        "path": "reports/human_surface/20260711_045049/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "c85e93a3b22b3356d12d68d6457542f969f98390b63cf227422bbbf671b28dd4"
+      },
+      {
+        "bytes": 21530,
+        "path": "reports/human_surface/20260712_075126/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "d75307f654d1e8f91353927a7b9e035d0b5f2cb4a331fecfe5a268efacaeb294"
+      },
+      {
+        "bytes": 21530,
+        "path": "reports/human_surface/20260712_075629/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "c5d184860490ea4b9e8e1bbcba0bba834a8a395bab7704dfd9f7113afd5a7ac3"
+      },
+      {
+        "bytes": 21529,
+        "path": "reports/human_surface/20260712_155543/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "f09da8ffbf0dada8b0a73e2dc91c73c2bf0d465401635546ae109e134dd6856d"
+      },
+      {
+        "bytes": 21528,
+        "path": "reports/human_surface/20260711_214645/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "86e4237c254ffd75ad7c7c3254a9267d1fb0d9ef592f29fcf01bdc2b8534a401"
+      },
+      {
+        "bytes": 21528,
+        "path": "reports/human_surface/20260712_010116/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "a7429cfd199beec13bb3dd618065d8272ecb02a2d9befa445fff2ba7478ee3b2"
+      },
+      {
+        "bytes": 21528,
+        "path": "reports/human_surface/20260712_035219/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "5951a8763f53fe59ae240b750cf495b3e04841f5c3f993fbc4ec09140fb3c2bd"
+      },
+      {
+        "bytes": 21528,
+        "path": "reports/human_surface/20260712_072347/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "61050be15ba81b0f2a5c7313e52926d653f33fc52c70d1dc2e37afa6aa5f430e"
+      },
+      {
+        "bytes": 21526,
+        "path": "reports/human_surface/20260709_205256/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "703b898b3794d2331d2c5f60aa2c91eefbedbc66e55074c0bc8e285a80074eee"
+      },
+      {
+        "bytes": 21526,
+        "path": "reports/human_surface/20260709_214453/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "f227ca32881ee8502f3272b8441115cb003fdcab124ce78289f4083f4c6c04a8"
+      },
+      {
+        "bytes": 21526,
+        "path": "reports/human_surface/20260709_220136/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "266fb1c0663c17dff7c4a709dba0ee913dcc747f72d49b55316f9b2600b8d1f1"
+      },
+      {
+        "bytes": 21526,
+        "path": "reports/human_surface/20260709_221853/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "5dfa1d9d2efc44ababc8f9e77d987fa73b764d4bdaa6168fdb1ad94698390732"
+      },
+      {
+        "bytes": 21526,
+        "path": "reports/human_surface/20260709_224136/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "f3726cf98c65ebf437bb9d2825e7b955b343d0a23f0afe7ddedebfd9d4080666"
+      },
+      {
+        "bytes": 21526,
+        "path": "reports/human_surface/20260710_094041/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "499c66ef7e39b6e5ed6b2f1d71d79c96a3b88b8c468ace951bce898c8eaeb48f"
+      },
+      {
+        "bytes": 21526,
+        "path": "reports/human_surface/20260710_095720/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "f46c92db1c800b7503dcbc3a1d731517d3ba4ee58e0e32001d4cf295c8bca46a"
+      }
+    ],
+    "mode": "recommendation_only",
+    "requires_final_evolve": true,
+    "requires_human_authorization": true
+  },
+  "read_surfaces": [
+    "reports/nexus_origin_seal_latest.json",
+    "reports/nexus_triadic_lattice_latest.json",
+    "reports/nexus_decision_envelope_latest.json",
+    "reports/nexus_coherence_field_latest.json",
+    "reports/nexus_recommendation_outcome_latest.json",
+    "reports/nexus_predictive_memory_orchestrator_latest.json",
+    "reports/nexus_predictive_gate_timing_latest.json",
+    "reports/nexus_runtime_hygiene_latest.json",
+    "state/algorithms/nexus_algorithm_cards_latest.json",
+    "state/discoveries/nexus_discovery_cards_latest.json",
+    "state/lattice/nexus_triadic_lattice_latest.json",
+    "state/coherence/arbiter_calibration_latest.json",
+    "state/coherence/pressure_memory_latest.json"
+  ],
+  "repository": {
+    "branch": "main",
+    "commit": "5cf0743182c4555cb85ac1b343150f3785abd7ae"
+  },
+  "schema": "NEXUS_EVIDENCE_DISTILLATION_GRAPH.v2.6.0",
+  "status": "pass",
+  "system": "NEXUS GATE",
+  "version": "2.6.0",
+  "write_surfaces": [
+    "reports/nexus_evidence_distillation_report_latest.json",
+    "state/distillation/nexus_evidence_graph_latest.json",
+    "ledger/evidence_distillation.jsonl"
+  ]
+}

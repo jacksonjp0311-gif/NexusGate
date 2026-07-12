@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 40,
+  "card_count": 44,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -1155,6 +1155,142 @@
       "title": "Outcome Feedback Algorithm"
     },
     {
+      "algorithm_id": "evidence-distillation-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "heavy evidence -> source hash -> compact node -> graph link -> provenance-preserving memory",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 34,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Evidence Distillation compresses large reports, state packets, ledgers, and cards into smaller graph nodes. The node keeps summary fields, source hash, source surface, confidence, retention policy, and claim boundary so Codex can rehydrate from compact graph memory before opening heavy files.",
+      "title": "Evidence Distillation Algorithm"
+    },
+    {
+      "algorithm_id": "provenance-preserving-pruning-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "artifact -> distillation node exists -> source hash exists -> retention rule -> pruning recommendation -> human authorization",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 35,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Pruning is recommendation-only. Source, docs, tests, policy, manifests, and current latest evidence are protected. Runtime exhaust may be recommended for pruning only after distillation.",
+      "title": "Provenance-Preserving Pruning Algorithm"
+    },
+    {
+      "algorithm_id": "concept-graph-compression-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "many evidence nodes -> recurring relationship -> compact concept node -> future rehydration pointer",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 36,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Concept graph compression uses repeated links across routes, outcomes, coherence, cards, and runtime pressure to expose higher-order concepts without rereading every raw artifact.",
+      "title": "Concept Graph Compression Algorithm"
+    },
+    {
+      "algorithm_id": "emergence-detection-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "graph motifs + recurrence + pressure + outcomes -> discovery candidate",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 37,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Emergence detection identifies recurring route/coherence/outcome motifs as discovery candidates. It does not claim truth; it creates a candidate card path that still requires evidence and gates.",
+      "title": "Emergence Detection Algorithm"
+    },
+    {
       "algorithm_id": "arbiter-calibration-algorithm",
       "authority_boundary": {
         "arbitrary_command_execution": false,
@@ -1178,7 +1314,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 34,
+      "order": 38,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1212,7 +1348,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 35,
+      "order": 39,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1246,7 +1382,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 36,
+      "order": 40,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1280,7 +1416,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 37,
+      "order": 41,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1314,7 +1450,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 38,
+      "order": 42,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1348,7 +1484,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 39,
+      "order": 43,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1382,7 +1518,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 40,
+      "order": 44,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1405,10 +1541,13 @@
     "certificate-resume-policy",
     "coherence-field-algorithm",
     "compiler-gate-algorithm",
+    "concept-graph-compression-algorithm",
     "controlled-lane-receipt-algorithm",
     "cortex-certificate-refresh-algorithm",
     "cortex-sync-protocol-algorithm",
     "decision-envelope-arbitration-algorithm",
+    "emergence-detection-algorithm",
+    "evidence-distillation-algorithm",
     "evidence-freshness-algorithm",
     "failure-doctor-algorithm",
     "gate-dependency-invalidation-algorithm",
@@ -1425,6 +1564,7 @@
     "predictive-gate-timing-runtime-pressure-algorithm",
     "predictive-memory-orchestrator-algorithm",
     "pressure-memory-algorithm",
+    "provenance-preserving-pruning-algorithm",
     "reflective-repair-algorithm",
     "rehydration-algorithm",
     "repo-native-memory-promotion-algorithm",
@@ -1437,7 +1577,7 @@
     "versioned-vector-blob-storage-algorithm"
   ],
   "discovery_source": "derived_from_cards_algorithm_id",
-  "generated_at_utc": "2026-07-12T19:59:52.607250+00:00",
+  "generated_at_utc": "2026-07-12T20:31:32.936559+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",

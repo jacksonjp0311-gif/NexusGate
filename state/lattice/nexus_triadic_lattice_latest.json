@@ -10,13 +10,13 @@
     "promote_geometry_to_authority"
   ],
   "claim_boundary": "Triadic Geometric Lattice is recommendation-routing evidence only. It scores evidence, geometry, and authority alignment for candidate routes. It does not execute, mutate files, grant authority, prove correctness, or replace final evolve.",
-  "generated_at_utc": "2026-07-12T19:58:43.732147+00:00",
+  "generated_at_utc": "2026-07-12T20:30:25.456597+00:00",
   "graph_source": "state/gitnexus/gitnexus_graph_latest.json",
   "impact_counts": {
     "hot": 21,
     "impacted": 240
   },
-  "lattice_packet_hash": "0b021fa6c8b3b2943c9b61ce9350870cc8a330bb54907a49a492ac89455c4c5d",
+  "lattice_packet_hash": "e01e9740eae690f425385f6babeb2adc0d98a020a9893c1270944a2d1ee5a3e4",
   "mode": "triadic_geometric_route_alignment",
   "read_surfaces": [
     "state/gitnexus/gitnexus_graph_latest.json",
@@ -27,14 +27,14 @@
   ],
   "repository_snapshot": {
     "branch": "main",
-    "epoch_id": "e0159b0b77c1d388d5867e01",
-    "generated_at_utc": "2026-07-12T19:58:43.721776+00:00",
+    "epoch_id": "c330412d6852bbdb36d4e978",
+    "generated_at_utc": "2026-07-12T20:30:25.440936+00:00",
     "input_snapshot_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "input_surfaces": [],
-    "repository_commit": "249eba91fbd6cf5fc6009683cde64934f71e7afc",
+    "repository_commit": "5cf0743182c4555cb85ac1b343150f3785abd7ae",
     "schema": "NEXUS_REPOSITORY_SNAPSHOT.v2.4.0",
-    "source_status_count": 25,
-    "source_status_hash": "9f6c5b7caed98bde5433127a7b064d5c8d964f703e21a377d3d1ee64e08ac7f3"
+    "source_status_count": 22,
+    "source_status_hash": "f31eb4ad12fe405d24544047edd95514d1f8abbab9c63496af7891134dab0fab"
   },
   "route_alignments": [
     {

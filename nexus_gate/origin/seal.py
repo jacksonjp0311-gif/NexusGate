@@ -10,9 +10,9 @@ from pathlib import Path
 from typing import Any
 
 
-PRODUCT_VERSION = "2.5.0"
-PRODUCT_PHASE = "Triadic Geometric Lattice"
-SCHEMA = "NEXUS_ORIGIN_SEAL.v2.5.0"
+PRODUCT_VERSION = "2.6.0"
+PRODUCT_PHASE = "Evidence Distillation Graph"
+SCHEMA = "NEXUS_ORIGIN_SEAL.v2.6.0"
 REPORT_LATEST = Path("reports") / "nexus_origin_seal_latest.json"
 STATE_LATEST = Path("state") / "nexus_origin_manifest_latest.json"
 
@@ -49,6 +49,7 @@ ORIGIN_SURFACES = [
     "reports/nexus_predictive_memory_orchestrator_latest.json",
     "reports/nexus_cortex_refresh_report_latest.json",
     "reports/nexus_triadic_lattice_latest.json",
+    "reports/nexus_evidence_distillation_report_latest.json",
 ]
 
 

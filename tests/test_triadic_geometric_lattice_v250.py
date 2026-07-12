@@ -93,7 +93,7 @@ class TriadicGeometricLatticeV250Tests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8-sig")
         algorithms = (ROOT / "docs" / "algorithms" / "NEXUS_CORE_ALGORITHMS.md").read_text(encoding="utf-8-sig")
         discoveries = (ROOT / "nexus_gate" / "discoveries" / "cards.py").read_text(encoding="utf-8-sig")
-        self.assertIn("v2.5.0 Triadic Geometric Lattice", readme)
+        self.assertIn("Triadic Geometric Lattice", readme)
         self.assertIn("Triadic Geometric Lattice Algorithm", algorithms)
         self.assertIn("triadic-geometric-lattice-routing", discoveries)
         self.assertTrue((ROOT / "docs" / "design" / "TRIADIC_GEOMETRIC_LATTICE_DESIGN.md").exists())

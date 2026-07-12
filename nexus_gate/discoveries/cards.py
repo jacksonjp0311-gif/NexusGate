@@ -708,6 +708,46 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.3: expose lattice alignment in System Monitor and GitNexus HUDs",
             ],
             "boundary": "Triadic routing is recommendation pressure only. It cannot execute, mutate, grant authority, or skip final evolve.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "evidence-distillation-graph",
+            "version": "0.1.0",
+            "title": "Evidence Distillation Graph",
+            "status": "active",
+            "summary": "Heavy evidence can be compressed into hash-backed graph nodes so NEXUS keeps recurring structure while releasing generated exhaust under a retention policy.",
+            "math": {
+                "compression": "raw_surface -> hash + summary + links + retention_policy",
+                "efficient_coding": "keep salient signal; remove repeated predictable payload",
+                "pruning_gate": "prunable = distilled and hashed and not protected and human_authorized",
+                "emergence_candidate": "motif = recurrence(route + coherence + outcome)",
+            },
+            "code_references": [
+                "nexus_gate/distillation/graph.py::build_evidence_distillation_graph",
+                "reports/nexus_evidence_distillation_report_latest.json",
+                "state/distillation/nexus_evidence_graph_latest.json",
+            ],
+            "algorithm_card_refs": [
+                "evidence-distillation-algorithm",
+                "provenance-preserving-pruning-algorithm",
+                "concept-graph-compression-algorithm",
+                "emergence-detection-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 distill",
+                "Inspect graph_metrics, pruning_policy, and emergence.",
+                "Run .\\scripts\\nexus.ps1 evolve before any durable pruning decision.",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_evidence_distillation_report_latest.json",
+                "state/distillation/nexus_evidence_graph_latest.json",
+                "ledger/evidence_distillation.jsonl",
+            ],
+            "next_versions": [
+                "v0.2: compare graph hashes across epochs",
+                "v0.3: promote repeated motifs into discovery candidates automatically",
+            ],
+            "boundary": "Distillation compresses evidence into graph memory. It does not delete source, self-authorize pruning, prove truth, or replace final evolve.",
         }
     ]
     return {

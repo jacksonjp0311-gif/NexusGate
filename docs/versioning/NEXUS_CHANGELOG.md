@@ -1,5 +1,12 @@
-## v2.5.0 - Triadic Geometric Lattice
+## v2.6.0 - Evidence Distillation Graph
 Status: current
+- Adds `nexus_gate.distillation.graph` and `.\scripts\nexus.ps1 distill`.
+- Converts heavy reports/state into hash-backed graph nodes with summaries and provenance.
+- Adds biological-efficiency principles: efficient coding, synaptic pruning, small-world efficiency, and homeostatic retention as engineering analogies.
+- Adds recommendation-only pruning policy and emergence motif summary.
+
+## v2.5.0 - Triadic Geometric Lattice
+Status: sealed
 - Adds triadic route alignment over evidence, geometry, and authority axes.
 - Adds `nexus_gate.lattice.triadic` and `.\scripts\nexus.ps1 triadic-lattice`.
 - Feeds lattice alignment into the recommendation arbiter as a bounded adjustment.

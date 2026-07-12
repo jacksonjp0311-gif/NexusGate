@@ -1,5 +1,5 @@
 {
-  "card_count": 17,
+  "card_count": 18,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -682,10 +682,50 @@
       "summary": "A route is strongest when evidence freshness, geometric efficiency, and authority alignment are all strong. Multiplicative alignment prevents one axis from masking collapse in another.",
       "title": "Triadic Geometric Lattice Routing",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "evidence-distillation-algorithm",
+        "provenance-preserving-pruning-algorithm",
+        "concept-graph-compression-algorithm",
+        "emergence-detection-algorithm"
+      ],
+      "boundary": "Distillation compresses evidence into graph memory. It does not delete source, self-authorize pruning, prove truth, or replace final evolve.",
+      "code_references": [
+        "nexus_gate/distillation/graph.py::build_evidence_distillation_graph",
+        "reports/nexus_evidence_distillation_report_latest.json",
+        "state/distillation/nexus_evidence_graph_latest.json"
+      ],
+      "discovery_id": "evidence-distillation-graph",
+      "evidence_surfaces": [
+        "reports/nexus_evidence_distillation_report_latest.json",
+        "state/distillation/nexus_evidence_graph_latest.json",
+        "ledger/evidence_distillation.jsonl"
+      ],
+      "math": {
+        "compression": "raw_surface -> hash + summary + links + retention_policy",
+        "efficient_coding": "keep salient signal; remove repeated predictable payload",
+        "emergence_candidate": "motif = recurrence(route + coherence + outcome)",
+        "pruning_gate": "prunable = distilled and hashed and not protected and human_authorized"
+      },
+      "next_versions": [
+        "v0.2: compare graph hashes across epochs",
+        "v0.3: promote repeated motifs into discovery candidates automatically"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 distill",
+        "Inspect graph_metrics, pruning_policy, and emergence.",
+        "Run .\\scripts\\nexus.ps1 evolve before any durable pruning decision."
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Heavy evidence can be compressed into hash-backed graph nodes so NEXUS keeps recurring structure while releasing generated exhaust under a retention policy.",
+      "title": "Evidence Distillation Graph",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-12T19:59:52.661088+00:00",
+  "generated_at_utc": "2026-07-12T20:31:33.041798+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

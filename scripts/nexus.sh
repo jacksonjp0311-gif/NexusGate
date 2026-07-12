@@ -26,6 +26,7 @@ set -euo pipefail
 # cortex
   # origin-seal
   # triadic-lattice
+  # distill
   # decision-envelope
   # coherence-field
   # outcome-learn
@@ -199,6 +200,7 @@ case "$COMMAND" in
   certificate-resume) python -m nexus_gate.loops.certificate_resume --root . --json ;;
   origin-seal) python -m nexus_gate.origin.seal --root . --json ;;
   triadic-lattice) python -m nexus_gate.lattice.triadic --root . --json ;;
+  distill) python -m nexus_gate.distillation.graph --root . --json ;;
   decision-envelope) python -m nexus_gate.decision.envelope --root . --json ;;
   coherence-field) python -m nexus_gate.coherence.field --root . --json ;;
   outcome-learn) python -m nexus_gate.outcomes.learn --root . --json ;;
@@ -254,6 +256,7 @@ case "$COMMAND" in
     python -m nexus_gate.decision.envelope --root . --intent "evolve chain self-bootstrap decision envelope" --json
     python -m nexus_gate.coherence.field --root . --intent "evolve chain coherence continuity field" --json
     python -m nexus_gate.outcomes.learn --root . --intent "evolve chain recommendation outcome learning" --json
+    python -m nexus_gate.distillation.graph --root . --json
     python -m nexus_gate.build.packer --root . --out dist --json
     python -m nexus_gate.hygiene.runtime_churn --root . --json
     ;;

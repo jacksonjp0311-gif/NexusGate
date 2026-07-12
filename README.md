@@ -4,7 +4,7 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems: a gove
 
 ## Capability Surface
 - Operator HUDs: Electron, PowerShell TUI, Spiral Core Portal, Dev Mode / HANDOFF, Mode Selection, and System Monitor.
-- Governed lanes: `status`, `evolve`, `origin-seal`, `triadic-lattice`, `decision-envelope`, `coherence-field`, `outcome-learn`, `runtime-hygiene`, `clean-runtime`, `install-hooks`, `reflect`, `domain`, `toolbelt`, `preflight`, `predictive-timing`, `predictive-evolve`, `predictive-memory`, `certificate-resume`, `cortex-refresh`, `wound-compress`, `phi-wound`, `phi-loop-auto`, and `phi-gate-auto`.
+- Governed lanes: `status`, `evolve`, `origin-seal`, `triadic-lattice`, `distill`, `decision-envelope`, `coherence-field`, `outcome-learn`, `runtime-hygiene`, `clean-runtime`, `install-hooks`, `reflect`, `domain`, `toolbelt`, `preflight`, `predictive-timing`, `predictive-evolve`, `predictive-memory`, `certificate-resume`, `cortex-refresh`, `wound-compress`, `phi-wound`, `phi-loop-auto`, and `phi-gate-auto`.
 - Intelligence loops: AI-callable local loop fabric, Algorithm Cards, Discovery Cards, v0.9.3 AI Loop Toolkit Expansion, v0.9.4 Personal Coding Paradise, Toolbelt Console Integration, v0.9.8 Wound Compression Engine, v0.9.9 Preflight Optimizer, v1.1.0 Phi Microdose Loop, AI Toolbelt Console, Toolbelt Cockpit Output, and Meta-Orchestrator Gate.
 - Evidence organs: Neural Activity visual organ, GITNEXUS local codegraph, PetriDishPortal, NexusCell containment, feedback ledger, handoff packets, and compiler reports.
 - Guardrails: human-authorized mutation only, no autonomous authority, no bypassing gates, no production/safety/security proof claims from local passes.
@@ -20,7 +20,7 @@ cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
 .\scripts\nexus.ps1 toolbelt
 .\scripts\nexus.ps1 toolbelt-next -Tag "<intent>"
 .\scripts\nexus.ps1 toolbelt-json -Tag "<intent>"
-.\scripts\nexus.ps1 origin-seal; .\scripts\nexus.ps1 triadic-lattice; .\scripts\nexus.ps1 decision-envelope
+.\scripts\nexus.ps1 origin-seal; .\scripts\nexus.ps1 triadic-lattice; .\scripts\nexus.ps1 distill; .\scripts\nexus.ps1 decision-envelope
 .\scripts\nexus.ps1 coherence-field; .\scripts\nexus.ps1 outcome-learn; .\scripts\nexus.ps1 runtime-hygiene
 .\scripts\nexus.ps1 wound-compress -Tag "<failed gate>"
 .\scripts\nexus.ps1 preflight -Tag "<intent>"
@@ -29,7 +29,7 @@ python -m nexus_gate.compiler --root . --json
 ```
 
 ## Human Director Box
-NEXUS GATE current line: v2.5.0 Triadic Geometric Lattice, extending Causal Loop Hardening, Runtime Churn Hygiene, Outcome-Aware Arbiter, and Causal Coherence Routing. Product identity is bound by `state/nexus_origin_manifest_latest.json` and `reports/nexus_origin_seal_latest.json`; Decision Envelope consumes Coherence Field, arbiter calibration, repository snapshot epoch, and Triadic Lattice evidence. Older version strings in `pyproject.toml`, `nexus_gate/__init__.py`, lineage files, and subsystem reports are subsystem lineage until deliberate migration. Toolbelt, Preflight, Wound Compression, Predictive Memory, Cortex Refresh, Origin Seal, Triadic Lattice, Decision Envelope, Coherence Field, Outcome Learner, and Runtime Hygiene compile into recommendation-only route evidence; authority remains human-bound.
+NEXUS GATE current line: v2.6.0 Evidence Distillation Graph, extending Triadic Geometric Lattice, Causal Loop Hardening, and Causal Coherence Routing. Product identity is bound by `state/nexus_origin_manifest_latest.json` and `reports/nexus_origin_seal_latest.json`; Decision Envelope consumes Coherence Field, arbiter calibration, repository snapshot epoch, Triadic Lattice evidence, and distilled evidence graph nodes. Older version strings in `pyproject.toml`, `nexus_gate/__init__.py`, lineage files, and subsystem reports are subsystem lineage until deliberate migration. Toolbelt, Preflight, Wound Compression, Predictive Memory, Cortex Refresh, Origin Seal, Triadic Lattice, Distillation, Decision Envelope, Coherence Field, Outcome Learner, and Runtime Hygiene compile into recommendation-only route evidence; authority remains human-bound.
 
 ## Priority Discovery: Predictive Gate Timing
 Predictive Gate Timing / Runtime Pressure Model is a priority. Timeout history is not intelligence by itself, but recorded lane duration, timeout budget, pass/fail state, artifact churn, and repo size can become bounded expectation: baseline -> drift -> anomaly -> recommended next timeout. The model may predict runtime pressure and recommend gate budgets; it may not bypass gates, hide failures, or self-authorize mutation.

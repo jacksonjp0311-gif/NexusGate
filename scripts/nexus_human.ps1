@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "origin-seal", "triadic-lattice", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [switch]$NoGit
 )
@@ -172,6 +172,7 @@ function Run-Feedback {
     Invoke-Step "Decision envelope" "16g_decision_envelope.json" { python -m nexus_gate.decision.envelope --root . --intent "evolve chain self-bootstrap decision envelope" --json }
     Invoke-Step "Coherence field" "16h_coherence_field.json" { python -m nexus_gate.coherence.field --root . --intent "evolve chain coherence continuity field" --json }
     Invoke-Step "Outcome learner" "16i_outcome_learner.json" { python -m nexus_gate.outcomes.learn --root . --intent "evolve chain recommendation outcome learning" --json }
+    Invoke-Step "Evidence distillation graph" "16i2_evidence_distillation.json" { python -m nexus_gate.distillation.graph --root . --json }
     Say "Feedback/self-healing/interface lanes passed." "OK"
     Show-FeedbackSummary
 }
@@ -216,11 +217,13 @@ function Show-Status {
         ".\reports\nexus_decision_envelope_latest.json",
         ".\reports\nexus_coherence_field_latest.json",
         ".\reports\nexus_recommendation_outcome_latest.json",
+        ".\reports\nexus_evidence_distillation_report_latest.json",
         ".\reports\nexus_runtime_hygiene_latest.json",
         ".\state\nexus_origin_manifest_latest.json",
         ".\state\lattice\nexus_triadic_lattice_latest.json",
         ".\state\decision\nexus_decision_envelope_latest.json",
         ".\state\coherence\nexus_coherence_field_latest.json",
+        ".\state\distillation\nexus_evidence_graph_latest.json",
         ".\state\coherence\arbiter_calibration_latest.json",
         ".\state\coherence\pressure_memory_latest.json",
         ".\state\nexus_lineage_manifest_latest.json",
@@ -376,6 +379,12 @@ if ($Command -eq "coherence-field") {
 if ($Command -eq "outcome-learn") {
     Invoke-Step "Outcome learner" "16i_outcome_learner.json" { python -m nexus_gate.outcomes.learn --root . --intent "human surface recommendation outcome learning" --json }
     Say "Outcome learner report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "distill") {
+    Invoke-Step "Evidence distillation graph" "16i2_evidence_distillation.json" { python -m nexus_gate.distillation.graph --root . --json }
+    Say "Evidence distillation graph written." "OK"
     exit 0
 }
 

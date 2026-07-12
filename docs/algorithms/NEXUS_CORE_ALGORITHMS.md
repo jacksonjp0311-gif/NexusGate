@@ -269,6 +269,38 @@ selected recommendation -> observed gate result -> outcome ledger -> route fitne
 
 A recommendation becomes useful intelligence only after an outcome is recorded. The outcome may tune future route pressure, but it may not authorize execution or skip final evolve.
 
+## Evidence Distillation Algorithm
+
+```text
+heavy evidence -> source hash -> compact node -> graph link -> provenance-preserving memory
+```
+
+Evidence Distillation compresses large reports, state packets, ledgers, and cards into smaller graph nodes. The node keeps summary fields, source hash, source surface, confidence, retention policy, and claim boundary so Codex can rehydrate from compact graph memory before opening heavy files.
+
+## Provenance-Preserving Pruning Algorithm
+
+```text
+artifact -> distillation node exists -> source hash exists -> retention rule -> pruning recommendation -> human authorization
+```
+
+Pruning is recommendation-only. Source, docs, tests, policy, manifests, and current latest evidence are protected. Runtime exhaust may be recommended for pruning only after distillation.
+
+## Concept Graph Compression Algorithm
+
+```text
+many evidence nodes -> recurring relationship -> compact concept node -> future rehydration pointer
+```
+
+Concept graph compression uses repeated links across routes, outcomes, coherence, cards, and runtime pressure to expose higher-order concepts without rereading every raw artifact.
+
+## Emergence Detection Algorithm
+
+```text
+graph motifs + recurrence + pressure + outcomes -> discovery candidate
+```
+
+Emergence detection identifies recurring route/coherence/outcome motifs as discovery candidates. It does not claim truth; it creates a candidate card path that still requires evidence and gates.
+
 ## Arbiter Calibration Algorithm
 
 ```text
