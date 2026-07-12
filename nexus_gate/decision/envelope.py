@@ -9,10 +9,13 @@ from pathlib import Path
 from typing import Any
 
 from nexus_gate.decision.arbiter import arbitrate_recommendations
+from nexus_gate.coherence.states import classify_coherence
+from nexus_gate.loops.wounds import has_active_wound
+from nexus_gate.state.snapshot import capture_repository_snapshot, packet_is_fresh
 
 
-VERSION = "2.2.0"
-SCHEMA = "NEXUS_DECISION_ENVELOPE.v2.2.0"
+VERSION = "2.4.0"
+SCHEMA = "NEXUS_DECISION_ENVELOPE.v2.4.0"
 REPORT_LATEST = Path("reports") / "nexus_decision_envelope_latest.json"
 STATE_LATEST = Path("state") / "decision" / "nexus_decision_envelope_latest.json"
 
@@ -109,7 +112,14 @@ def _recommendation(
     estimated_cost: str = "bounded",
     blocking_conditions: list[str] | None = None,
     source_packet: Any | None = None,
+    repository_snapshot: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    freshness = None
+    if isinstance(source_packet, dict) and repository_snapshot:
+        freshness = {
+            "fresh": packet_is_fresh(source_packet, repository_snapshot),
+            "rule": "repository_commit + source_status_hash + input_snapshot_hash",
+        }
     return {
         "source": source,
         "action": action,
@@ -120,6 +130,7 @@ def _recommendation(
         "estimated_cost": estimated_cost,
         "blocking_conditions": blocking_conditions or [],
         "source_packet_hash": _packet_hash(source_packet) if source_packet is not None else None,
+        "source_packet_freshness": freshness,
     }
 
 
@@ -180,6 +191,7 @@ def _build_recommendations(
     certificate_resume: dict[str, Any],
     preflight: dict[str, Any],
     git_scope: dict[str, Any],
+    repository_snapshot: dict[str, Any],
 ) -> list[dict[str, Any]]:
     recommendations: list[dict[str, Any]] = []
     if origin_report.get("status") not in {"pass", "warn"}:
@@ -192,8 +204,9 @@ def _build_recommendations(
             0.95,
             "short",
             source_packet=origin_report,
+            repository_snapshot=repository_snapshot,
         ))
-    if wound.get("status") == "fail" or wound.get("active_wound_key"):
+    if has_active_wound(wound):
         recommendations.append(_recommendation(
             "wound-compression",
             "compress_active_wound",
@@ -203,6 +216,7 @@ def _build_recommendations(
             0.9,
             "medium",
             source_packet=wound,
+            repository_snapshot=repository_snapshot,
         ))
     memory_rec = predictive_memory.get("recommendation") or {}
     memory_command = memory_rec.get("recommended_next_command")
@@ -216,6 +230,7 @@ def _build_recommendations(
             0.84,
             "bounded",
             source_packet=predictive_memory,
+            repository_snapshot=repository_snapshot,
         ))
     if git_scope.get("dirty_count", 0):
         recommendations.append(_recommendation(
@@ -227,6 +242,7 @@ def _build_recommendations(
             0.82,
             "short",
             source_packet=git_scope,
+            repository_snapshot=repository_snapshot,
         ))
     if certificate_resume.get("recommended_resume_gate"):
         recommendations.append(_recommendation(
@@ -238,6 +254,7 @@ def _build_recommendations(
             0.75,
             "short",
             source_packet=certificate_resume,
+            repository_snapshot=repository_snapshot,
         ))
     high_timing = [
         item for item in timing.get("runtime_pressure", [])
@@ -253,6 +270,7 @@ def _build_recommendations(
             0.72,
             "short",
             source_packet=timing,
+            repository_snapshot=repository_snapshot,
         ))
     plan = predictive_evolve.get("recommended_plan") or []
     next_step = next((step for step in plan if not step.get("required_before_commit")), None)
@@ -266,6 +284,7 @@ def _build_recommendations(
             0.68,
             "bounded",
             source_packet=predictive_evolve,
+            repository_snapshot=repository_snapshot,
         ))
     if preflight.get("status") == "fail":
         recommendations.append(_recommendation(
@@ -277,6 +296,7 @@ def _build_recommendations(
             0.86,
             "medium",
             source_packet=preflight,
+            repository_snapshot=repository_snapshot,
         ))
     recommendations.append(_recommendation(
         "final-seal",
@@ -312,6 +332,7 @@ def _select_action(
 
 def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any]:
     root_path = Path(root).resolve()
+    repository_snapshot = capture_repository_snapshot(root_path, READ_SURFACES)
     origin_manifest = _read_json(root_path / "state" / "nexus_origin_manifest_latest.json", {})
     origin_report = _read_json(root_path / "reports" / "nexus_origin_seal_latest.json", {})
     cortex_refresh = _read_json(root_path / "reports" / "nexus_cortex_refresh_report_latest.json", {})
@@ -338,8 +359,11 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
         certificate_resume,
         preflight,
         git_scope,
+        repository_snapshot,
     )
-    if coherence.get("status") == "fail" or ((coherence.get("coherence") or {}).get("score") or 100) < 70:
+    raw_score = (coherence.get("coherence") or {}).get("score")
+    coherence_state = classify_coherence(raw_score)
+    if coherence.get("status") == "fail" or coherence_state.value in {"critical", "degraded"}:
         recommendations.append(_recommendation(
             "coherence-field",
             "restore_coherence_field",
@@ -349,6 +373,7 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
             0.88,
             "short",
             source_packet=coherence,
+            repository_snapshot=repository_snapshot,
         ))
     selected, arbiter = _select_action(recommendations, coherence, calibration)
     missing = [
@@ -373,6 +398,7 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
         "status": status,
         "generated_at_utc": _utc(),
         "intent": intent,
+        "repository_snapshot": repository_snapshot,
         "origin": _origin_summary(origin_manifest, origin_report),
         "evidence": [
             {"surface": rel, "exists": False if rel in missing else True}
@@ -391,6 +417,7 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
         "coherence_input": {
             "status": coherence.get("status", "unknown"),
             "score": (coherence.get("coherence") or {}).get("score"),
+            "state": coherence_state.value,
             "lineage_entropy": (coherence.get("coherence") or {}).get("lineage_entropy"),
             "field_state": (coherence.get("coherence") or {}).get("field_state"),
         },

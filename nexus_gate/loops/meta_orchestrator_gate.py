@@ -7,6 +7,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from nexus_gate.loops.wounds import has_active_wound
+
 
 VERSION = "1.1.3"
 SCHEMA = "NEXUS_META_ORCHESTRATOR_GATE.v1.1.3"
@@ -145,7 +147,7 @@ def _derive_recommendation(
             "next_command": '.\\scripts\\nexus.ps1 wound-compress -Tag "preflight failure"',
             "why": "Preflight has failed gates; compress the active wound before mutation.",
         }
-    if wound.get("status") == "fail" or wound.get("active_wound_key"):
+    if has_active_wound(wound):
         return {
             "next_loop": "compiler-wound-focus",
             "next_command": '.\\scripts\\nexus.ps1 phi-gate-compile',

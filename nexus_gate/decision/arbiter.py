@@ -2,6 +2,10 @@ from __future__ import annotations
 
 from typing import Any
 
+from nexus_gate.coherence.states import CoherenceState, classify_coherence
+
+
+SCHEMA = "NEXUS_RECOMMENDATION_ARBITER.v2.4.0"
 
 SEVERITY_WEIGHT = {
     "required": 55,
@@ -33,11 +37,13 @@ SOURCE_PRIORITY = {
 
 
 def _coherence_adjustment(recommendation: dict[str, Any], coherence: dict[str, Any]) -> int:
-    score = int(((coherence.get("coherence") or {}).get("score")) or 0)
+    raw_score = (coherence.get("coherence") or {}).get("score")
+    score = int(raw_score if raw_score is not None else 0)
+    state = classify_coherence(score)
     entropy = int(((coherence.get("coherence") or {}).get("lineage_entropy")) or 0)
     source = recommendation.get("source")
     adjustment = 0
-    if score and score < 70:
+    if state in {CoherenceState.CRITICAL, CoherenceState.DEGRADED}:
         if source in {"origin-seal", "coherence-field", "preflight"}:
             adjustment += 18
         if source == "final-seal":
@@ -56,18 +62,32 @@ def _calibration_adjustment(recommendation: dict[str, Any], calibration: dict[st
     return float((source_calibration.get(source) or {}).get("weight_adjustment") or 0.0)
 
 
+def _confidence(value: Any) -> float:
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError):
+        parsed = 0.0
+    return max(0.0, min(1.0, parsed))
+
+
 def score_recommendation(
     recommendation: dict[str, Any],
     coherence: dict[str, Any] | None = None,
     calibration: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     coherence = coherence or {}
-    confidence = float(recommendation.get("confidence") or 0.0)
+    confidence = _confidence(recommendation.get("confidence"))
     severity = SEVERITY_WEIGHT.get(str(recommendation.get("severity", "info")), 10)
     source = SOURCE_PRIORITY.get(str(recommendation.get("source", "")), 8)
     cost = COST_PENALTY.get(str(recommendation.get("estimated_cost", "bounded")), 6)
     blockers = len(recommendation.get("blocking_conditions") or [])
-    stale_penalty = 8 if recommendation.get("source_packet_hash") is None and recommendation.get("source") != "final-seal" else 0
+    freshness = recommendation.get("source_packet_freshness") or {}
+    stale_penalty = 0
+    if recommendation.get("source") != "final-seal":
+        if recommendation.get("source_packet_hash") is None:
+            stale_penalty += 8
+        if freshness.get("fresh") is False:
+            stale_penalty += 10
     final_guard = 0
     if recommendation.get("source") == "final-seal":
         # Final evolve is mandatory before commit, but not usually the cheapest next routing action.
@@ -98,10 +118,19 @@ def arbitrate_recommendations(
     if not recommendations:
         raise ValueError("Cannot arbitrate an empty recommendation set.")
     scored = [score_recommendation(item, coherence, calibration) for item in recommendations]
-    selected = sorted(scored, key=lambda item: item["arbiter_score"], reverse=True)[0]
+    selected = max(
+        scored,
+        key=lambda item: (
+            item["arbiter_score"],
+            SEVERITY_WEIGHT.get(str(item.get("severity", "info")), 0),
+            SOURCE_PRIORITY.get(str(item.get("source", "")), 0),
+            str(item.get("source", "")),
+            str(item.get("action", "")),
+        ),
+    )
     return {
-        "schema": "NEXUS_RECOMMENDATION_ARBITER.v2.1.0",
-        "mode": "causal_coherence_routing",
+        "schema": SCHEMA,
+        "mode": "causal_loop_hardened_routing",
         "selected": selected,
         "scored_recommendations": scored,
         "coherence_input": {

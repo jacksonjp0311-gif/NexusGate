@@ -15,8 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 class CoherenceFieldV200Tests(unittest.TestCase):
     def test_coherence_field_declares_v2_protocol_and_boundary(self) -> None:
         packet = build_coherence_field(ROOT, intent="test coherence")
-        self.assertEqual(packet["schema"], "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.2.0")
-        self.assertEqual(packet["version"], "2.2.0")
+        self.assertEqual(packet["schema"], "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.4.0")
+        self.assertEqual(packet["version"], "2.4.0")
         self.assertIn(packet["status"], {"pass", "warn"})
         self.assertIn("coherence", packet)
         self.assertIn("score", packet["coherence"])
@@ -26,6 +26,8 @@ class CoherenceFieldV200Tests(unittest.TestCase):
         self.assertIn("benchmark_manifest", packet)
         self.assertIn("continuity_protocol", packet)
         self.assertIn("outcome_learning", packet)
+        self.assertIn("repository_snapshot", packet)
+        self.assertIn("state", packet["coherence"])
         self.assertTrue(packet["selected_next_action"]["recommendation_only"])
         self.assertTrue(packet["selected_next_action"]["requires_human_authorization"])
         self.assertIn("convert_coherence_to_authority", packet["blocked_actions"])
@@ -42,7 +44,7 @@ class CoherenceFieldV200Tests(unittest.TestCase):
         )
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
         packet = json.loads(proc.stdout)
-        self.assertEqual(packet["schema"], "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.2.0")
+        self.assertEqual(packet["schema"], "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.4.0")
         self.assertTrue((ROOT / "reports" / "nexus_coherence_field_latest.json").exists())
         self.assertTrue((ROOT / "state" / "coherence" / "nexus_coherence_field_latest.json").exists())
 
@@ -58,7 +60,7 @@ class CoherenceFieldV200Tests(unittest.TestCase):
         self.assertIn("nexus_gate.coherence.field", sh)
         self.assertIn('"coherence-field"', human)
         self.assertIn("16h_coherence_field", human)
-        self.assertIn("v2.3.0 Runtime Churn Hygiene", readme)
+        self.assertIn("v2.4.0 Causal Loop Hardening", readme)
         self.assertIn("reports/nexus_coherence_field_latest.json", agents)
 
     def test_v2_docs_and_policy_kernel_exist(self) -> None:

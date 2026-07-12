@@ -7,9 +7,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from nexus_gate.coherence.states import classify_coherence, coherence_status
+from nexus_gate.state.snapshot import capture_repository_snapshot, packet_is_fresh
 
-VERSION = "2.2.0"
-SCHEMA = "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.2.0"
+VERSION = "2.4.0"
+SCHEMA = "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.4.0"
 REPORT_LATEST = Path("reports") / "nexus_coherence_field_latest.json"
 STATE_LATEST = Path("state") / "coherence" / "nexus_coherence_field_latest.json"
 
@@ -146,6 +148,7 @@ def _runtime_pressure(decision: dict[str, Any]) -> dict[str, Any]:
 
 def build_coherence_field(root: str | Path, intent: str = "") -> dict[str, Any]:
     root_path = Path(root).resolve()
+    repository_snapshot = capture_repository_snapshot(root_path, REQUIRED_SURFACES)
     decision = _read_json(root_path / "reports" / "nexus_decision_envelope_latest.json", {})
     origin = _read_json(root_path / "reports" / "nexus_origin_seal_latest.json", {})
     algorithms = _read_json(root_path / "state" / "algorithms" / "nexus_algorithm_cards_latest.json", {})
@@ -159,9 +162,8 @@ def build_coherence_field(root: str | Path, intent: str = "") -> dict[str, Any]:
     missing = [item["path"] for item in surfaces if not item["exists"]]
     score = _coherence_score(origin, decision, missing, git_scope, algorithms, discoveries)
     entropy = _lineage_entropy(origin, missing, git_scope)
-    status = "pass" if score >= 85 and not missing else "warn"
-    if score < 60:
-        status = "fail"
+    coherence_state = classify_coherence(score)
+    status = coherence_status(score, bool(missing))
 
     selected = decision.get("selected_action") or {}
     return {
@@ -173,13 +175,16 @@ def build_coherence_field(root: str | Path, intent: str = "") -> dict[str, Any]:
         "status": status,
         "generated_at_utc": _utc(),
         "intent": intent,
+        "repository_snapshot": repository_snapshot,
         "coherence": {
             "score": score,
             "threshold": 85,
+            "state": coherence_state.value,
             "lineage_entropy": entropy,
-            "field_state": "coherent" if score >= 85 else "forming",
+            "field_state": coherence_state.value,
             "dirty_count": git_scope.get("dirty_count"),
             "missing_surfaces": missing,
+            "decision_packet_fresh": packet_is_fresh(decision, repository_snapshot),
         },
         "origin": {
             "status": origin.get("status", "unknown"),

@@ -111,7 +111,8 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v2.0.0 | Coherence Continuity Protocol | sealed | Adds coherence-field lane, policy kernel scaffold, continuity protocol docs, coherence report/state, and v2 arc integration after Decision Envelope. |
 | v2.1.0 | Causal Coherence Routing | sealed | Adds recommendation arbiter scoring and feeds Coherence Field into Decision Envelope route selection under pressure. |
 | v2.2.0 | Outcome-Aware Arbiter | sealed | Adds recommendation outcome ledger, route fitness, arbiter calibration, pressure memory, and outcome-aware routing pressure. |
-| v2.3.0 | Runtime Churn Hygiene | current | Adds generated-surface classifier and clean-runtime lane to prevent report/pack exhaust from masking source changes. |
+| v2.3.0 | Runtime Churn Hygiene | sealed | Adds generated-surface classifier and clean-runtime lane to prevent report/pack exhaust from masking source changes. |
+| v2.4.0 | Causal Loop Hardening | current | Fixes zero-coherence routing, wound sentinels, confidence clamping, deterministic arbiter tie-breaks, and adds repository snapshot epochs. |
 ## v0.9.5 - AI Toolbelt Surface
 
 No version step without update chart entry. Adds operator-visible toolbelt index and README Toolbelt section.

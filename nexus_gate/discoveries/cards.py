@@ -630,6 +630,46 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.3: add HUD warning when source_dirty remains after cleanup",
             ],
             "boundary": "Runtime hygiene may clean allowlisted generated surfaces only. It is not source deletion, proof, authority, or unbounded git cleanup.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "control-state-adversarial-testing",
+            "version": "0.1.0",
+            "title": "Control-State Adversarial Testing",
+            "status": "active",
+            "summary": "Routing loops need tests for pathological control values, not only happy-path evidence flow. Zero, sentinels, overconfident scores, tied scores, and stale epochs are control wounds.",
+            "math": {
+                "coherence_state": "state = classify(score); score=0 => critical",
+                "confidence": "confidence = clamp(raw, 0, 1)",
+                "deterministic_route": "selected = max(score, severity, source_priority, source, action)",
+                "freshness": "fresh = commit_match and source_status_hash_match and input_snapshot_hash_match",
+            },
+            "code_references": [
+                "nexus_gate/coherence/states.py",
+                "nexus_gate/state/snapshot.py",
+                "nexus_gate/decision/arbiter.py",
+                "nexus_gate/loops/wounds.py",
+            ],
+            "algorithm_card_refs": [
+                "causal-loop-hardening-algorithm",
+                "causal-coherence-routing-algorithm",
+                "authority-gate-algorithm",
+            ],
+            "replication_steps": [
+                "python -m unittest discover -s tests -p \"test_causal_coherence_routing_v210.py\"",
+                ".\\scripts\\nexus.ps1 decision-envelope",
+                ".\\scripts\\nexus.ps1 coherence-field",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_decision_envelope_latest.json",
+                "reports/nexus_coherence_field_latest.json",
+                "docs/design/CAUSAL_LOOP_HARDENING_DESIGN.md",
+            ],
+            "next_versions": [
+                "v0.2: add epoch mismatch blocking instead of only stale scoring",
+                "v0.3: add oscillation tests across multiple decision/coherence cycles",
+            ],
+            "boundary": "Adversarial testing improves route reliability. It does not prove correctness, safety, or autonomous authority.",
         }
     ]
     return {

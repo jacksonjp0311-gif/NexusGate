@@ -15,8 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 class DecisionEnvelopeV130Tests(unittest.TestCase):
     def test_decision_envelope_is_self_bootstrap_and_recommendation_only(self) -> None:
         packet = build_decision_envelope(ROOT, intent="test self bootstrap")
-        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.2.0")
-        self.assertEqual(packet["version"], "2.2.0")
+        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.4.0")
+        self.assertEqual(packet["version"], "2.4.0")
         self.assertEqual(packet["mode"], "outcome_aware_decision_envelope")
         self.assertIn(packet["status"], {"pass", "warn"})
         self.assertTrue(packet["authority"]["recommendation_only"])
@@ -33,6 +33,7 @@ class DecisionEnvelopeV130Tests(unittest.TestCase):
         self.assertIn("arbiter", packet)
         self.assertIn("coherence_input", packet)
         self.assertIn("outcome_awareness", packet)
+        self.assertIn("repository_snapshot", packet)
         self.assertTrue(packet["selected_action"]["recommendation_only"])
 
     def test_decision_envelope_cli_writes_report_and_state(self) -> None:
@@ -46,7 +47,7 @@ class DecisionEnvelopeV130Tests(unittest.TestCase):
         )
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
         packet = json.loads(proc.stdout)
-        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.2.0")
+        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.4.0")
         self.assertTrue((ROOT / "reports" / "nexus_decision_envelope_latest.json").exists())
         self.assertTrue((ROOT / "state" / "decision" / "nexus_decision_envelope_latest.json").exists())
 

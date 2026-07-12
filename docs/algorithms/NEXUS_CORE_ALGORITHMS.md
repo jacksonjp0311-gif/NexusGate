@@ -238,6 +238,14 @@ candidate recommendations + coherence field -> arbiter scoring -> selected route
 
 Causal Coherence Routing lets field pressure affect recommendation selection. Low coherence, high entropy, stale evidence, missing policy, active wounds, and runtime pressure increase orientation/repair recommendations without granting execution authority.
 
+## Causal Loop Hardening Algorithm
+
+```text
+repository snapshot -> typed coherence state -> normalized wounds -> clamped confidence -> fresh packet scoring -> deterministic route
+```
+
+Causal Loop Hardening prevents edge-case routing drift. A score of zero remains critical, inactive wound sentinels do not trigger repair routes, confidence cannot exceed one, and tied routes resolve deterministically. Snapshot epochs make stale packet use visible before route selection.
+
 ## Outcome Feedback Algorithm
 
 ```text

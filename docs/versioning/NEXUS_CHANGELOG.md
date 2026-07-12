@@ -1,5 +1,14 @@
-## v2.3.0 - Runtime Churn Hygiene
+## v2.4.0 - Causal Loop Hardening
 Status: current
+- Fixes zero-coherence handling in arbiter and Decision Envelope.
+- Normalizes inactive wound sentinels before routing wound repairs.
+- Clamps recommendation confidence to [0, 1].
+- Adds deterministic arbiter tie-breaking.
+- Adds repository snapshot epoch packets to Decision Envelope and Coherence Field.
+- Adds source-packet freshness metadata for recommendation scoring.
+
+## v2.3.0 - Runtime Churn Hygiene
+Status: sealed
 - Adds generated runtime-surface classifier.
 - Adds `runtime-hygiene` dry-run and `clean-runtime` apply lanes.
 - Ignores timestamped pack exhaust while preserving tracked latest evidence surfaces for explicit promotion.
