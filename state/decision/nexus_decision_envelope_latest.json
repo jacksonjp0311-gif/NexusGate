@@ -76,10 +76,10 @@
       "surface": "git status --short"
     }
   ],
-  "generated_at_utc": "2026-07-12T04:06:39.135439+00:00",
+  "generated_at_utc": "2026-07-12T05:03:16.796633+00:00",
   "intent": "Self-bootstrap NEXUS decision envelope.",
   "memory": {
-    "algorithm_cards": 31,
+    "algorithm_cards": 33,
     "cortex_authority": {
       "cortex_may_mutate_repo": false,
       "external_api_writes": false,
@@ -89,7 +89,7 @@
       "secret_access": false
     },
     "cortex_refresh_status": "constrained",
-    "discovery_cards": 11,
+    "discovery_cards": 12,
     "predictive_memory_next_command": ".\\scripts\\nexus.ps1 cortex-refresh",
     "predictive_memory_next_loop": "cortex-certificate-refresh",
     "predictive_memory_status": "warn"
@@ -97,10 +97,10 @@
   "mode": "self_bootstrap_decision_envelope",
   "origin": {
     "commit": null,
-    "origin_manifest_hash": "7708e8d0e2cceab7ab4bcfcbd8afec1a4f102bc04df1c5888660493c851f2a66",
-    "product_phase": "Canonical Decision Envelope",
-    "product_version": "1.3.0",
-    "schema": "NEXUS_ORIGIN_SEAL.v1.3.0",
+    "origin_manifest_hash": "2d45a9fe40885692fbae72f2166a2176a0ed93e87ea8259323269fd12674859c",
+    "product_phase": "Coherence Continuity Protocol",
+    "product_version": "2.0.0",
+    "schema": "NEXUS_ORIGIN_SEAL.v2.0.0",
     "status": "pass"
   },
   "phase": "Canonical Decision Envelope",
@@ -128,7 +128,7 @@
       "estimated_cost": "bounded",
       "severity": "high",
       "source": "predictive-memory",
-      "source_packet_hash": "5f4a210d0ea80f3f165c9e1207ef221d3fede7abacd7359ac8070e20abdca750",
+      "source_packet_hash": "7c2bbd82e5b52430f3af82b2a36179771b896b9d5636f6c145d68a6add303b36",
       "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning."
     },
     {
@@ -139,7 +139,7 @@
       "estimated_cost": "short",
       "severity": "medium",
       "source": "git-scope",
-      "source_packet_hash": "ff17e8f3e27fcf0abae65736b3c5290ee0b84438370fd527b4bd531276dc9a03",
+      "source_packet_hash": "78c8897f8eda6b49768847528e97bb25c1113e6fdadefe9aa974b28662ed15de",
       "why": "The working tree is dirty; inspect scope before compounding changes or staging."
     },
     {
@@ -150,7 +150,7 @@
       "estimated_cost": "bounded",
       "severity": "info",
       "source": "predictive-evolve",
-      "source_packet_hash": "5882a43a859bc3113873e5e6a9e1b6226bec30656c8291d42ac54f6262f660b4",
+      "source_packet_hash": "35347ffcdd0e6d037bbc59572d37c0fa271058215491d67edc911d91318295ad",
       "why": "Predictive Evolve selected the cheapest useful non-final gate."
     },
     {
@@ -170,7 +170,7 @@
   "risk": {
     "active_wound_key": null,
     "certificate_resume_gate": null,
-    "dirty_count": 78,
+    "dirty_count": 82,
     "runtime_pressure": "pass",
     "slowest_gate": null
   },

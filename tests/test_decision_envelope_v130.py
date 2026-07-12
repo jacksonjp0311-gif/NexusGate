@@ -59,7 +59,7 @@ class DecisionEnvelopeV130Tests(unittest.TestCase):
         self.assertIn("nexus_gate.decision.envelope", sh)
         self.assertIn('"decision-envelope"', human)
         self.assertIn("16g_decision_envelope", human)
-        self.assertIn("v1.3.0 Canonical Decision Envelope", readme)
+        self.assertIn("decision-envelope", readme)
         self.assertIn("reports/nexus_decision_envelope_latest.json", agents)
 
     def test_docs_cards_record_self_bootstrap_discovery(self) -> None:

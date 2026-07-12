@@ -1,5 +1,13 @@
-## v1.3.0 - Canonical Decision Envelope
+## v2.0.0 - Coherence Continuity Protocol
 Status: current
+- Adds `.\scripts\nexus.ps1 coherence-field` as the v2.0 coherence and continuity compiler.
+- Adds policy kernel scaffold under `policy/` for authority laws, risk profiles, capabilities, and claim boundaries.
+- Adds Governed Agent Continuity Protocol and Coherence Field protocol docs.
+- Adds coherence field report/state surfaces for score, entropy, runtime pressure, decision state, policy status, evidence dependency scaffold, wound intelligence scaffold, and benchmark scaffold.
+- Preserves the boundary: coherence may guide routing, but coherence may not grant authority.
+
+## v1.3.0 - Canonical Decision Envelope
+Status: sealed
 - Adds `.\scripts\nexus.ps1 decision-envelope` as the self-bootstrap packet surface.
 - Gathers origin, memory, timing, predictive evolve, wounds, certificates, cards, and git scope into one normalized recommendation envelope.
 - Writes `reports/nexus_decision_envelope_latest.json` and `state/decision/nexus_decision_envelope_latest.json`.

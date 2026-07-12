@@ -107,7 +107,8 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v0.9.3 | AI Loop Toolkit Expansion | Added creative AI-callable local loops and HUD-ready cards | No version step without update chart entry |
 | v0.9.4 | Personal Coding Paradise Loop Toolkit | AI-callable local coding loops, cards, docs, tests, compiler visibility | No version step without update chart entry |
 | v1.2.2 | Origin Seal + Causal Memory Wiring | sealed | Adds canonical origin manifest/report, origin-seal lane, card-derived algorithm readiness, new discovery cards, and Meta-Orchestrator predictive-memory recommendation input. |
-| v1.3.0 | Canonical Decision Envelope | current | Adds self-bootstrap decision-envelope lane, report/state packet, docs, cards, and evolve-chain integration after Origin Seal. |
+| v1.3.0 | Canonical Decision Envelope | sealed | Adds self-bootstrap decision-envelope lane, report/state packet, docs, cards, and evolve-chain integration after Origin Seal. |
+| v2.0.0 | Coherence Continuity Protocol | current | Adds coherence-field lane, policy kernel scaffold, continuity protocol docs, coherence report/state, and v2 arc integration after Decision Envelope. |
 ## v0.9.5 - AI Toolbelt Surface
 
 No version step without update chart entry. Adds operator-visible toolbelt index and README Toolbelt section.

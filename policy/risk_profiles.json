@@ -1,0 +1,26 @@
+{
+  "schema": "NEXUS_RISK_PROFILES.v2.0.0",
+  "system": "NEXUS GATE",
+  "profiles": {
+    "read_only": {
+      "risk": "low",
+      "allowed": true
+    },
+    "recommendation_only": {
+      "risk": "low",
+      "allowed": true
+    },
+    "operation_packet_write": {
+      "risk": "medium",
+      "allowed": "human_bounded"
+    },
+    "source_mutation": {
+      "risk": "high",
+      "allowed": "human_authorized_patch_only"
+    },
+    "arbitrary_shell": {
+      "risk": "critical",
+      "allowed": false
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "NEXUS_GOVERNED_AGENT_CONTINUITY_PROTOCOL.v2.0.0",
+  "system": "NEXUS GATE",
+  "version": "2.0.0",
+  "loop": [
+    "intent_packet",
+    "origin_certificate",
+    "evidence_packet",
+    "authority_decision",
+    "human_authorization",
+    "controlled_invocation",
+    "execution_receipt",
+    "validation_certificate_or_wound",
+    "memory_promotion_decision",
+    "continuation_packet"
+  ],
+  "authority_boundary": {
+    "autonomous_authority": false,
+    "human_authorization_required_for_mutation": true,
+    "final_evolve_required_before_commit": true
+  },
+  "claim_boundary": "The continuity protocol preserves orientation across sessions. It does not prove correctness, safety, security, production readiness, model understanding, or autonomous authority."
+}

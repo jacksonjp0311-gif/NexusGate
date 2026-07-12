@@ -214,6 +214,22 @@ origin seal + Cortex memory + predictive gates + wounds + certificates + git sco
 
 Self Bootstrap means the repo can wake itself into an oriented state for Codex, chat, TUI, or Electron without granting itself authority. The packet selects a next action as recommendation-only evidence; it never executes the action or replaces final evolve.
 
+## Coherence Field Algorithm
+
+```text
+origin + decision envelope + memory + runtime pressure + policy + wounds + certificates + git scope -> coherence score + continuity recommendation
+```
+
+The Coherence Field is a shared state-space for NEXUS organs. It measures orientation, entropy, stale surfaces, policy visibility, and selected next action while preserving the law that coherence may guide routing but may not grant authority.
+
+## Governed Agent Continuity Algorithm
+
+```text
+intent packet -> origin certificate -> evidence packet -> authority decision -> human authorization -> controlled invocation -> receipt -> validation certificate or wound -> memory promotion decision -> continuation packet
+```
+
+The continuity algorithm turns NEXUS into a portable protocol for AI-to-repo and human-to-AI work. It preserves context across sessions without granting implicit authority to models, memory, HUDs, or compilers.
+
 ## Causal Memory Closure Algorithm
 
 ```text

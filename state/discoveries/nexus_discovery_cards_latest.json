@@ -1,5 +1,5 @@
 {
-  "card_count": 11,
+  "card_count": 12,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -452,10 +452,48 @@
       "summary": "NEXUS can gather its current origin, memory, runtime pressure, wounds, certificates, cards, and git scope into one canonical recommendation packet for fast rehydration.",
       "title": "Self-Bootstrap Decision Envelope",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "coherence-field-algorithm",
+        "governed-agent-continuity-algorithm",
+        "authority-monotonicity-algorithm"
+      ],
+      "boundary": "Coherence is an operating field for orientation, not proof, authority, or autonomous mutation.",
+      "code_references": [
+        "nexus_gate/coherence/field.py::build_coherence_field",
+        "reports/nexus_coherence_field_latest.json",
+        "state/coherence/nexus_coherence_field_latest.json"
+      ],
+      "discovery_id": "coherence-continuity-threshold",
+      "evidence_surfaces": [
+        "reports/nexus_coherence_field_latest.json",
+        "reports/nexus_decision_envelope_latest.json",
+        "policy/authority_laws.json"
+      ],
+      "math": {
+        "authority_rule": "coherence_guides_routing and not coherence_grants_authority",
+        "field": "F = coherence(origin, memory, timing, wounds, policy, certificates, git_scope)",
+        "score": "C = 100 - drift_penalties - missing_surface_penalties - dirty_scope_pressure - card_readiness_penalty"
+      },
+      "next_versions": [
+        "v0.2: wire coherence field into Electron System Monitor HUD",
+        "v0.3: make recommendation arbitration consume coherence score causally"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 origin-seal",
+        ".\\scripts\\nexus.ps1 decision-envelope",
+        ".\\scripts\\nexus.ps1 coherence-field"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "NEXUS crosses a coherence threshold when origin, memory, runtime pressure, wounds, policy, cards, and decision evidence compile into one shared field for fast rehydration.",
+      "title": "Coherence Continuity Threshold",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-12T03:59:54.341834+00:00",
+  "generated_at_utc": "2026-07-12T05:03:17.555832+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

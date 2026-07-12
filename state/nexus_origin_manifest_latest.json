@@ -29,8 +29,8 @@
     "required_origin_surfaces_present": true
   },
   "claim_boundary": "Origin Seal is local development evidence only. It binds current repository identity, key surface hashes, commit state, and subsystem version lineage. It does not prove correctness, safety, security, production readiness, model understanding, or autonomous authority.",
-  "commit": "8ab324d477ce7711081dccd53a3ea45cc3c9c123",
-  "dirty_count": 75,
+  "commit": "8f0902ed96ec6f09495a6984e65e00671a8cf27a",
+  "dirty_count": 82,
   "dirty_entries_sample": [
     "M AGENTS.md",
     " M NexusCell/ledger/nexus_cell_continuity.jsonl",
@@ -73,32 +73,32 @@
     " M scripts/nexus.ps1",
     " M scripts/nexus.sh"
   ],
-  "generated_utc": "2026-07-12T04:00:09.586703+00:00",
+  "generated_utc": "2026-07-12T05:03:32.703386+00:00",
   "legacy_version_lineage": {
     "cortex_refresh_version": "1.2.1",
     "lineage_manifest_phase": "Domain Intelligence Orchestrator",
     "lineage_manifest_system_version": "0.4.0",
     "meta_orchestrator_version": "1.1.3",
     "predictive_memory_version": "1.2.0",
-    "product_phase": "Canonical Decision Envelope",
-    "product_version": "1.3.0",
+    "product_phase": "Coherence Continuity Protocol",
+    "product_version": "2.0.0",
     "pyproject_distribution_version": "0.9.7",
     "python_package_api_version": "0.1.3"
   },
   "next_action": ".\\scripts\\nexus.ps1 predictive-memory; .\\scripts\\nexus.ps1 evolve",
-  "origin_manifest_hash": "7708e8d0e2cceab7ab4bcfcbd8afec1a4f102bc04df1c5888660493c851f2a66",
+  "origin_manifest_hash": "cbe3abd7230a47bb3f92a32930717d589132501ff7592b4a1c506087b085ec98",
   "origin_surfaces": [
     {
-      "bytes": 19213,
+      "bytes": 19368,
       "exists": true,
       "path": "README.md",
-      "sha256": "918d114e982408e606188e735bb5eb4fe83fdc38652a74157615b7e604da751c"
+      "sha256": "a672a4d1b5947134b43736ec3f7154652ef1728cfc6c1674ac7461ba3b9d6e96"
     },
     {
-      "bytes": 17131,
+      "bytes": 17283,
       "exists": true,
       "path": "AGENTS.md",
-      "sha256": "ebced0148d670521416f34447aa9af17adb26a56a9e058b881567e152043ceb4"
+      "sha256": "97811dec0d2ee25b796d3d4287379832bffb6050354a4c64c6892d5f9e3205f9"
     },
     {
       "bytes": 361,
@@ -113,16 +113,16 @@
       "sha256": "96b3d426abc316b64feaa10a11646b78583461f747b1833b5f6bcee76ac60b87"
     },
     {
-      "bytes": 8577,
+      "bytes": 8780,
       "exists": true,
       "path": "docs/updates/UPDATE_CHART.md",
-      "sha256": "e581218f1263612f4001a0fb01e7e899dd3d3763a119d2fcf11bbbc5c424f372"
+      "sha256": "d26c21b972d2747a158e9ec98e40db34c384b124ce5ef8403dab92058a831a4f"
     },
     {
-      "bytes": 12476,
+      "bytes": 13111,
       "exists": true,
       "path": "docs/versioning/NEXUS_CHANGELOG.md",
-      "sha256": "27f13cedd94b6f6017f8d9d99b7c5c84accb16d8235c4441b84347e4a5c2f961"
+      "sha256": "41ee5f94b7c6e65a864ebc94216d430a663aa1747a72c75d38f26f1812846abc"
     },
     {
       "bytes": 1142,
@@ -137,34 +137,34 @@
       "sha256": "6edac68a0f96abc8221dc629bacad38cd4d8477a3f2016ac1802842706847460"
     },
     {
-      "bytes": 52765,
+      "bytes": 56279,
       "exists": true,
       "path": "state/algorithms/nexus_algorithm_cards_latest.json",
-      "sha256": "0529d46d238e13a35a8f3186ef22adc49f752f08bfecec302ece8dc760f021f3"
+      "sha256": "0e2187cd3b15ced5829e5fea55397fa419613680cb0a068d13ea89c26efcec3a"
     },
     {
-      "bytes": 22758,
+      "bytes": 24585,
       "exists": true,
       "path": "state/discoveries/nexus_discovery_cards_latest.json",
-      "sha256": "a6bab8ab87345b21e31374fea28dab6439638a58bd7e341bab5b513db48dd098"
+      "sha256": "829e14b9fd3cccc19b9489870f70b765bb442e5c9fc00745daeac8fb57de1e94"
     },
     {
       "bytes": 18063,
       "exists": true,
       "path": "reports/nexus_compile_report_latest.json",
-      "sha256": "40d4ae0e8a9ba6164508c80faf54a92f5137d29cb4510b08e6e98f4922503e5d"
+      "sha256": "e746259288a264cfe273f3aad36cd12b908df68b15082281654dbcc31f897220"
     },
     {
-      "bytes": 16724,
+      "bytes": 16701,
       "exists": true,
       "path": "reports/nexus_meta_orchestrator_gate_latest.json",
-      "sha256": "b88a668af3816f846d93123c52f0bb95ee7c70e1a6b7d7246712852abd3a2ae0"
+      "sha256": "e1b5c5343001ed2c50310b10d925f7051a6481439700ca337269753afc7863ee"
     },
     {
-      "bytes": 12568,
+      "bytes": 13053,
       "exists": true,
       "path": "reports/nexus_predictive_memory_orchestrator_latest.json",
-      "sha256": "f4658139830ff266efdb0b557d57787c3300f4105654e14f068843d4b3a3acf3"
+      "sha256": "d6245bf6af05e1f8664edb46e7ef83a2f7a699c18af64a660996502a436e5f40"
     },
     {
       "bytes": 39342,
@@ -173,8 +173,8 @@
       "sha256": "3d5240bfdf2db3a26ad40ae1dd48ed3c6d97b53c7a843ac23975394cc6ab0e28"
     }
   ],
-  "product_phase": "Canonical Decision Envelope",
-  "product_version": "1.3.0",
+  "product_phase": "Coherence Continuity Protocol",
+  "product_version": "2.0.0",
   "read_surfaces": [
     "README.md",
     "AGENTS.md",
@@ -191,10 +191,10 @@
     "reports/nexus_predictive_memory_orchestrator_latest.json",
     "reports/nexus_cortex_refresh_report_latest.json"
   ],
-  "readme_current_line": "v1.3.0 Canonical Decision Envelope. Product identity is bound by `state/nexus_origin_manifest_latest.json` and `reports/nexus_origin_seal_latest.json`; the self-bootstrap packet is bound by `reports/nexus_decision_envelope_latest.json` and `state/decision/nexus_decision_envelope_latest.json`. Older version strings in `pyproject.toml`, `nexus_gate/__init__.py`, lineage files, and subsystem reports are preserved as subsystem lineage until a deliberate compatibility migration updates them. Toolbelt, Preflight, Wound Compression, Predictive Memory, Cortex Refresh, Origin Seal, and the Decision Envelope compile into recommendation-only route evidence for Codex/chat/Electron HUD rehydration; authority remains human-bound.",
-  "schema": "NEXUS_ORIGIN_SEAL.v1.3.0",
+  "readme_current_line": "v2.0.0 Coherence Continuity Protocol. Product identity is bound by `state/nexus_origin_manifest_latest.json` and `reports/nexus_origin_seal_latest.json`; the self-bootstrap packet is bound by `reports/nexus_decision_envelope_latest.json`; the coherence field is bound by `reports/nexus_coherence_field_latest.json` and `state/coherence/nexus_coherence_field_latest.json`. Older version strings in `pyproject.toml`, `nexus_gate/__init__.py`, lineage files, and subsystem reports are preserved as subsystem lineage until a deliberate compatibility migration updates them. Toolbelt, Preflight, Wound Compression, Predictive Memory, Cortex Refresh, Origin Seal, Decision Envelope, and Coherence Field compile into recommendation-only route evidence for Codex/chat/Electron HUD rehydration; authority remains human-bound.",
+  "schema": "NEXUS_ORIGIN_SEAL.v2.0.0",
   "status": "pass",
-  "surface_hash": "95840d51e5ffa8f08959b4044ebfe20497be4908ef10a04e6bea0a8015a51ccb",
+  "surface_hash": "49a72e397439955532b509d8ecb33c81a2c4b6926f4544765c9b53c163904bac",
   "system": "NEXUS GATE",
   "write_surfaces": [
     "reports/nexus_origin_seal_latest.json",

@@ -478,6 +478,44 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.3: add canonical decision envelope schema tests for every recommendation source",
             ],
             "boundary": "Self-bootstrap is self-orientation, not self-execution or self-authorization.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "coherence-continuity-threshold",
+            "version": "0.1.0",
+            "title": "Coherence Continuity Threshold",
+            "status": "active",
+            "summary": "NEXUS crosses a coherence threshold when origin, memory, runtime pressure, wounds, policy, cards, and decision evidence compile into one shared field for fast rehydration.",
+            "math": {
+                "field": "F = coherence(origin, memory, timing, wounds, policy, certificates, git_scope)",
+                "score": "C = 100 - drift_penalties - missing_surface_penalties - dirty_scope_pressure - card_readiness_penalty",
+                "authority_rule": "coherence_guides_routing and not coherence_grants_authority",
+            },
+            "code_references": [
+                "nexus_gate/coherence/field.py::build_coherence_field",
+                "reports/nexus_coherence_field_latest.json",
+                "state/coherence/nexus_coherence_field_latest.json",
+            ],
+            "algorithm_card_refs": [
+                "coherence-field-algorithm",
+                "governed-agent-continuity-algorithm",
+                "authority-monotonicity-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 origin-seal",
+                ".\\scripts\\nexus.ps1 decision-envelope",
+                ".\\scripts\\nexus.ps1 coherence-field",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_coherence_field_latest.json",
+                "reports/nexus_decision_envelope_latest.json",
+                "policy/authority_laws.json",
+            ],
+            "next_versions": [
+                "v0.2: wire coherence field into Electron System Monitor HUD",
+                "v0.3: make recommendation arbitration consume coherence score causally",
+            ],
+            "boundary": "Coherence is an operating field for orientation, not proof, authority, or autonomous mutation.",
         }
     ]
     return {

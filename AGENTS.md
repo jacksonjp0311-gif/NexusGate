@@ -33,6 +33,7 @@ Before running full `evolve`, pack, broad test suites, Electron smoke, or any lo
 .\scripts\nexus.ps1 certificate-resume
 .\scripts\nexus.ps1 origin-seal
 .\scripts\nexus.ps1 decision-envelope
+.\scripts\nexus.ps1 coherence-field
 ```
 
 Use the packet at `reports/nexus_predictive_gate_timing_latest.json` to choose the cheapest valid next gate. If runtime pressure is high, prefer targeted tests or the named timing recommendation before repeating an expensive lane.
@@ -61,8 +62,10 @@ reports/nexus_compile_report_latest.json, if present
 reports/nexus_predictive_gate_timing_latest.json, if present
 reports/nexus_origin_seal_latest.json, if present
 reports/nexus_decision_envelope_latest.json, if present
+reports/nexus_coherence_field_latest.json, if present
 state/nexus_origin_manifest_latest.json, if present
 state/decision/nexus_decision_envelope_latest.json, if present
+state/coherence/nexus_coherence_field_latest.json, if present
 state/algorithms/nexus_algorithm_cards_latest.json, if present
 state/discoveries/nexus_discovery_cards_latest.json, if present
 ```

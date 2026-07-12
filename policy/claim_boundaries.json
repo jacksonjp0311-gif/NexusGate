@@ -1,0 +1,11 @@
+{
+  "schema": "NEXUS_CLAIM_BOUNDARIES.v2.0.0",
+  "system": "NEXUS GATE",
+  "boundaries": {
+    "local_pass": "Local gates are development evidence, not proof of correctness, safety, security, or production readiness.",
+    "coherence": "Coherence is an orientation signal, not truth or authority.",
+    "memory": "Memory is evidence qualified for recurrence, not autonomous knowledge.",
+    "simulation": "Simulation is not empirical proof.",
+    "recommendation": "Recommendation is not execution."
+  }
+}

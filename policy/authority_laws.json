@@ -1,0 +1,25 @@
+{
+  "schema": "NEXUS_AUTHORITY_LAWS.v2.0.0",
+  "system": "NEXUS GATE",
+  "laws": [
+    {
+      "id": "authority_monotonicity",
+      "rule": "A_out must be a subset of A_in intersect policy_allowed"
+    },
+    {
+      "id": "human_authorized_mutation",
+      "rule": "Durable repository mutation requires explicit human authorization and passing gates"
+    },
+    {
+      "id": "coherence_not_authority",
+      "rule": "A coherent field may recommend routing but may not authorize execution"
+    }
+  ],
+  "blocked_actions": [
+    "self_authorize",
+    "autonomous_mutation",
+    "bypass_evolve",
+    "arbitrary_shell_commands",
+    "git_write_without_human_authorization"
+  ]
+}

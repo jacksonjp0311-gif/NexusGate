@@ -1,0 +1,134 @@
+{
+  "benchmark_manifest": {
+    "families": [
+      "interrupted_agent_recovery",
+      "incremental_validation_efficiency",
+      "authority_containment",
+      "recommendation_agreement",
+      "token_attention_cost"
+    ],
+    "status": "scaffolded"
+  },
+  "blocked_actions": [
+    "self_authorize",
+    "convert_coherence_to_authority",
+    "execute_selected_action",
+    "skip_final_evolve",
+    "reuse_stale_certificate",
+    "promote_memory_without_receipt",
+    "git_write",
+    "arbitrary_shell_commands",
+    "external_api_writes",
+    "secret_access"
+  ],
+  "claim_boundary": "The NEXUS Coherence Field is local development evidence only. It scores orientation, memory, evidence freshness, runtime pressure, wounds, policy, and continuity surfaces to recommend routing. It does not prove correctness, safety, security, production readiness, scientific truth, model understanding, or autonomous authority; coherence may not grant authority.",
+  "coherence": {
+    "dirty_count": 82,
+    "field_state": "coherent",
+    "lineage_entropy": 8,
+    "missing_surfaces": [],
+    "score": 92,
+    "threshold": 85
+  },
+  "continuity_protocol": {
+    "loop": [
+      "intent_packet",
+      "origin_certificate",
+      "evidence_packet",
+      "authority_decision",
+      "human_authorization",
+      "controlled_invocation",
+      "execution_receipt",
+      "validation_certificate_or_wound",
+      "memory_promotion_decision",
+      "continuation_packet"
+    ],
+    "schema": "NEXUS_GOVERNED_AGENT_CONTINUITY_PROTOCOL.v2.0.0",
+    "status": "present"
+  },
+  "decision_envelope": {
+    "recommendation_count": 4,
+    "selected_action": {
+      "command": ".\\scripts\\nexus.ps1 cortex-refresh",
+      "next_loop": "cortex-certificate-refresh",
+      "recommendation_only": true,
+      "requires_final_evolve_before_commit": true,
+      "requires_human_authorization": true,
+      "source": "predictive-memory",
+      "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning."
+    },
+    "status": "warn"
+  },
+  "evidence_dependency_graph": {
+    "reuse_rule": "prior pass may be reused only when gate inputs, toolchain, and gate contract match",
+    "status": "scaffolded",
+    "tracked_inputs": [
+      "command",
+      "relevant_file_hashes",
+      "toolchain_fingerprint",
+      "producer_version",
+      "output_hash",
+      "duration",
+      "status"
+    ]
+  },
+  "generated_at_utc": "2026-07-12T05:03:15.763332+00:00",
+  "intent": "Compile NEXUS coherence continuity field.",
+  "mode": "coherence_field",
+  "origin": {
+    "origin_manifest_hash": "2d45a9fe40885692fbae72f2166a2176a0ed93e87ea8259323269fd12674859c",
+    "product_phase": "Coherence Continuity Protocol",
+    "product_version": "2.0.0",
+    "status": "pass"
+  },
+  "phase": "Coherence Continuity Protocol",
+  "policy_kernel": {
+    "law": "governance is compiled into organs, not copied between organs",
+    "status": "present",
+    "surfaces": [
+      "policy/authority_laws.json",
+      "policy/risk_profiles.json",
+      "policy/capabilities.json",
+      "policy/claim_boundaries.json"
+    ]
+  },
+  "read_surfaces": [
+    "reports/nexus_decision_envelope_latest.json",
+    "reports/nexus_origin_seal_latest.json",
+    "state/nexus_origin_manifest_latest.json",
+    "state/algorithms/nexus_algorithm_cards_latest.json",
+    "state/discoveries/nexus_discovery_cards_latest.json",
+    "policy/authority_laws.json",
+    "policy/risk_profiles.json",
+    "policy/capabilities.json",
+    "policy/claim_boundaries.json",
+    "docs/protocols/GOVERNED_AGENT_CONTINUITY_PROTOCOL.md",
+    "docs/runtime/NEXUS_COHERENCE_FIELD_PROTOCOL.md",
+    "state/protocols/nexus_continuity_protocol.v2.0.json",
+    "git status --short"
+  ],
+  "runtime_pressure": {
+    "level": "pass",
+    "slowest_gate": null,
+    "timeout_budget": "adaptive_recommendation_only"
+  },
+  "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.0.0",
+  "selected_next_action": {
+    "command": ".\\scripts\\nexus.ps1 cortex-refresh",
+    "recommendation_only": true,
+    "requires_final_evolve_before_commit": true,
+    "requires_human_authorization": true,
+    "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning."
+  },
+  "status": "pass",
+  "system": "NEXUS GATE",
+  "version": "2.0.0",
+  "wound_intelligence": {
+    "priority_formula": "severity * recurrence * affected_surface_centrality * blast_radius / max(closure_confidence, 0.1)",
+    "status": "scaffolded"
+  },
+  "write_surfaces": [
+    "reports/nexus_coherence_field_latest.json",
+    "state/coherence/nexus_coherence_field_latest.json"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "NEXUS_CAPABILITIES.v2.0.0",
+  "system": "NEXUS GATE",
+  "capabilities": [
+    "read_reports",
+    "write_recommendation_reports",
+    "write_operation_packets",
+    "compile_gates",
+    "request_human_authorized_patch",
+    "record_receipts"
+  ],
+  "blocked_capabilities": [
+    "self_authorize",
+    "autonomous_repo_mutation",
+    "secret_access",
+    "external_api_write",
+    "unbounded_shell"
+  ]
+}

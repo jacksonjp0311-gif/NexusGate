@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "origin-seal", "decision-envelope", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "origin-seal", "decision-envelope", "coherence-field", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [switch]$NoGit
 )
@@ -169,6 +169,7 @@ function Run-Feedback {
     Invoke-Step "Predictive memory orchestrator" "16e_predictive_memory_orchestrator.json" { python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent "evolve chain Cortex memory and predictive gate fusion" --json }
     Invoke-Step "Origin seal" "16f_origin_seal.json" { python -m nexus_gate.origin.seal --root . --json }
     Invoke-Step "Decision envelope" "16g_decision_envelope.json" { python -m nexus_gate.decision.envelope --root . --intent "evolve chain self-bootstrap decision envelope" --json }
+    Invoke-Step "Coherence field" "16h_coherence_field.json" { python -m nexus_gate.coherence.field --root . --intent "evolve chain coherence continuity field" --json }
     Say "Feedback/self-healing/interface lanes passed." "OK"
     Show-FeedbackSummary
 }
@@ -209,8 +210,10 @@ function Show-Status {
         ".\reports\nexus_predictive_memory_orchestrator_latest.json",
         ".\reports\nexus_origin_seal_latest.json",
         ".\reports\nexus_decision_envelope_latest.json",
+        ".\reports\nexus_coherence_field_latest.json",
         ".\state\nexus_origin_manifest_latest.json",
         ".\state\decision\nexus_decision_envelope_latest.json",
+        ".\state\coherence\nexus_coherence_field_latest.json",
         ".\state\nexus_lineage_manifest_latest.json",
         ".\state\interface_adapter_contract_index.v0.3.7.json",
         ".\state\domain_intelligence_index.v0.4.0.json",
@@ -346,6 +349,12 @@ if ($Command -eq "origin-seal") {
 if ($Command -eq "decision-envelope") {
     Invoke-Step "Decision envelope" "16g_decision_envelope.json" { python -m nexus_gate.decision.envelope --root . --intent "human surface self-bootstrap decision envelope" --json }
     Say "Decision envelope report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "coherence-field") {
+    Invoke-Step "Coherence field" "16h_coherence_field.json" { python -m nexus_gate.coherence.field --root . --intent "human surface coherence continuity field" --json }
+    Say "Coherence field report written." "OK"
     exit 0
 }
 
