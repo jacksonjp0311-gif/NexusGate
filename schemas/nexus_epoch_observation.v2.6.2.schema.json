@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS Epoch Observation v2.6.2",
+  "type": "object",
+  "required": ["schema", "source_epoch_id", "observation_id", "generated_at_utc"],
+  "properties": {
+    "schema": {"const": "NEXUS_EPOCH_OBSERVATION.v2.6.2"},
+    "source_epoch_id": {"type": "string"},
+    "observation_id": {"type": "string"},
+    "generated_at_utc": {"type": "string"}
+  }
+}

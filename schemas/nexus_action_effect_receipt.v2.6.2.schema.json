@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"NEXUS Action Effect Receipt v2.6.2","type":"object","required":["schema","action_id","recommendation_id","surface_effects"],"properties":{"schema":{"const":"NEXUS_ACTION_EFFECT_RECEIPT.v2.6.2"},"action_id":{"type":"string"},"recommendation_id":{"type":"string"}}}

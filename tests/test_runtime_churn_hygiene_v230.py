@@ -37,7 +37,7 @@ class RuntimeChurnHygieneV230Tests(unittest.TestCase):
 
     def test_runtime_hygiene_dry_run_writes_report(self) -> None:
         report = build_runtime_hygiene_report(ROOT, apply=False)
-        self.assertEqual(report["schema"], "NEXUS_RUNTIME_CHURN_HYGIENE.v2.3.0")
+        self.assertEqual(report["schema"], "NEXUS_RUNTIME_CHURN_HYGIENE.v2.6.2")
         self.assertIn(report["status"], {"pass", "warn"})
         self.assertTrue((ROOT / "reports" / "nexus_runtime_hygiene_latest.json").exists())
         self.assertIn("does not prove", report["claim_boundary"])

@@ -22,12 +22,14 @@
 # nexus_gate.lattice.triadic
 # nexus_gate.distillation.graph
 # nexus_gate.epochs.seal
+# nexus_gate.actions.cli
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "predictive-memory", "certificate-resume", "epoch-seal", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "install-hooks", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "cortex-refresh", "sync-cortex")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "predictive-memory", "certificate-resume", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "action-recommend", "action-status", "action-authorize", "action-deny", "action-execute", "action-effects", "action-validate", "action-finalize", "action-chain-verify", "causal-receipts", "install-hooks", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "cortex-refresh", "sync-cortex")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
     [string]$Tag = "",
+    [string]$ActionId = "",
     [switch]$NoCommit,
     [switch]$CallModel,
     [string]$Loop = "rhp-core",
@@ -458,6 +460,9 @@ switch ($Command) {
     }
     "certificate-resume" { python -m nexus_gate.loops.certificate_resume --root . --json }
     "epoch-seal" { python -m nexus_gate.epochs.seal --root . --json }
+    "epoch-observe" { python -m nexus_gate.epochs.seal --root . --json }
+    "epoch-verify" { python -m nexus_gate.epochs.seal --root . --verify --json }
+    "epoch-chain-verify" { python -m nexus_gate.epochs.seal --root . --chain-verify --json }
     "origin-seal" { python -m nexus_gate.origin.seal --root . --json }
     "triadic-lattice" { python -m nexus_gate.lattice.triadic --root . --json }
     "distill" { python -m nexus_gate.distillation.graph --root . --json }
@@ -478,6 +483,16 @@ switch ($Command) {
     }
     "runtime-hygiene" { python -m nexus_gate.hygiene.runtime_churn --root . --json }
     "clean-runtime" { python -m nexus_gate.hygiene.runtime_churn --root . --apply --json }
+    "action-recommend" { python -m nexus_gate.actions.cli recommend --root . --json }
+    "action-status" { python -m nexus_gate.actions.cli status --root . --action-id $ActionId --json }
+    "action-authorize" { python -m nexus_gate.actions.cli authorize --root . --action-id $ActionId --note $Tag --json }
+    "action-deny" { python -m nexus_gate.actions.cli deny --root . --action-id $ActionId --json }
+    "action-execute" { python -m nexus_gate.actions.cli execute --root . --action-id $ActionId --json }
+    "action-effects" { python -m nexus_gate.actions.cli effects --root . --action-id $ActionId --json }
+    "action-validate" { python -m nexus_gate.actions.cli validate --root . --action-id $ActionId --json }
+    "action-finalize" { python -m nexus_gate.actions.cli finalize --root . --action-id $ActionId --json }
+    "action-chain-verify" { python -m nexus_gate.actions.cli chain-verify --root . --json }
+    "causal-receipts" { python -m nexus_gate.actions.cli receipts --root . --json }
     "install-hooks" { & (Join-Path $PSScriptRoot "install_nexus_git_hooks.ps1") -Root $Root }
     "algorithm-cards" { python -m nexus_gate.algorithms.cards --root . --json }
     "discovery-cards" { python -m nexus_gate.discoveries.cards --root . --json }

@@ -6,11 +6,11 @@
     "role_targeting": "explicit_role_required_for_deep_test",
     "tool_execution": "blocked_from_model_output"
   },
-  "generated_utc": "2026-07-05T04:27:06.829763+00:00",
-  "intent": "NEX chat bridge dry run: verify role targeted DEEP routing without granting authority.",
+  "generated_utc": "2026-07-12T23:23:09.995300+00:00",
+  "intent": "can the chat answer",
   "inventory": {
-    "blob_count": 10,
-    "manifest_count": 3,
+    "blob_count": 15,
+    "manifest_count": 4,
     "missing_blobs": [],
     "models": {
       "mistral:latest": {
@@ -21,31 +21,104 @@
         "referenced_blob_count": 5,
         "type": "7.2B"
       },
-      "phi3:latest": {
-        "manifest_path": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models\\manifests\\registry.ollama.ai\\library\\phi3\\latest",
+      "phi4-mini:latest": {
+        "manifest_path": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models\\manifests\\registry.ollama.ai\\library\\phi4-mini\\latest",
         "manifest_present": true,
-        "name": "phi3:latest",
-        "quant": "Q4_0",
-        "referenced_blob_count": 5,
-        "type": "3.8B"
+        "name": "phi4-mini:latest",
+        "quant": null,
+        "referenced_blob_count": 4,
+        "type": null
       },
-      "phi3:mini": {
-        "manifest_path": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models\\manifests\\registry.ollama.ai\\library\\phi3\\mini",
+      "tnn-mistral:latest": {
+        "manifest_path": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models\\manifests\\registry.ollama.ai\\library\\tnn-mistral\\latest",
         "manifest_present": true,
-        "name": "phi3:mini",
-        "quant": "Q4_0",
-        "referenced_blob_count": 5,
-        "type": "3.8B"
+        "name": "tnn-mistral:latest",
+        "quant": null,
+        "referenced_blob_count": 6,
+        "type": null
+      },
+      "tnn-phi4-mini:latest": {
+        "manifest_path": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models\\manifests\\registry.ollama.ai\\library\\tnn-phi4-mini\\latest",
+        "manifest_present": true,
+        "name": "tnn-phi4-mini:latest",
+        "quant": "Q4_K_M",
+        "referenced_blob_count": 6,
+        "type": "Phi-4-mini"
       }
     },
     "models_root": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models",
     "models_root_exists": true,
-    "ollama_models_env": null,
+    "ollama_models_env": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models",
     "orphan_blobs": [],
-    "total_blob_size_bytes": 6549003297,
-    "total_blob_size_gb": 6.1
+    "total_blob_size_bytes": 6864703330,
+    "total_blob_size_gb": 6.39
   },
-  "model_responses": [],
+  "model_responses": [
+    {
+      "backend_model": "tnn-phi4-mini:latest",
+      "captured_stream": "\nTNN CHAT\n--------\nTNN // FAST SCAFFOLD\nnext: wire the streaming TNN lane into the Electron chat panel.\nthen: add a latency benchmark and model-health badge.\nverify: run tests, commit, push.\nboundary: recommendation-only.\n\nTNN // HOT MODEL STREAM\nTNN // MODEL BUDGET HIT\nThe hot model did not start streaming inside fast budget.\nnext: use the scaffold now, or run tnn-warm/tnn-doctor then retry.\nboundary: recommendation-only.\n\nmodel: Tesseract Neural Network/phi4-mini-hot-brain\nbackend: tnn-phi4-mini:latest\nscaffold_ms: 0\ntotal_ms: 2067\nmodel_budget_hit: true\nnote: Ollama unavailable: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\nmode: hot_compact_guard_v6\n",
+      "chat_packet": {
+        "boundary": "recommendation-only; no offensive cyber guidance; no shell execution, mutation, live pulls, scraping, or autonomous authority",
+        "boundary_rewrite": false,
+        "deep": false,
+        "engine_version": "tnn.stream_chat.v0.2.0W",
+        "error": "Ollama unavailable: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+        "hot_compacted": true,
+        "intent": "can the chat answer",
+        "latency_ms": 2067,
+        "model": "tnn-phi4-mini:latest",
+        "model_budget_hit": true,
+        "model_label": "Tesseract Neural Network/phi4-mini-hot-brain",
+        "model_response": "TNN // MODEL BUDGET HIT\nThe hot model did not start streaming inside fast budget.\nnext: use the scaffold now, or run tnn-warm/tnn-doctor then retry.\nboundary: recommendation-only.",
+        "ok": true,
+        "partial_chars": 0,
+        "raw_partial_response": "",
+        "response": "TNN // FAST SCAFFOLD\nnext: wire the streaming TNN lane into the Electron chat panel.\nthen: add a latency benchmark and model-health badge.\nverify: run tests, commit, push.\nboundary: recommendation-only.\n\nTNN // MODEL BUDGET HIT\nThe hot model did not start streaming inside fast budget.\nnext: use the scaffold now, or run tnn-warm/tnn-doctor then retry.\nboundary: recommendation-only.",
+        "role": "TNN",
+        "scaffold_ms": 0,
+        "stream_completed": false,
+        "time_to_first_token_ms": null,
+        "total_latency_ms": 2067
+      },
+      "chat_response": "TNN // FAST SCAFFOLD\nnext: wire the streaming TNN lane into the Electron chat panel.\nthen: add a latency benchmark and model-health badge.\nverify: run tests, commit, push.\nboundary: recommendation-only.\n\nTNN // MODEL BUDGET HIT\nThe hot model did not start streaming inside fast budget.\nnext: use the scaffold now, or run tnn-warm/tnn-doctor then retry.\nboundary: recommendation-only.",
+      "model": "Tesseract Neural Network/phi4-mini-hot-brain",
+      "model_label": "Tesseract Neural Network/phi4-mini-hot-brain",
+      "neuralforge_required": false,
+      "ok": true,
+      "receipt_bundle": {
+        "blocked_reasons": [],
+        "claim_boundary": "NexusGate-local seed bundle. No external source is required at runtime.",
+        "missing_receipts": [
+          "control_bundle",
+          "approval",
+          "sandbox_plan"
+        ],
+        "neuralforge_required": false,
+        "ok": true,
+        "receipts": {
+          "source_intake": {
+            "claim_boundary": "NexusGate-local TNN seed; no live network calls, scraping, raw collection, or mutation.",
+            "live_pull_allowed": false,
+            "mutation_allowed": false,
+            "ok": true,
+            "raw_collection_allowed": false,
+            "registry_allowed": true,
+            "scraping_allowed": false,
+            "source_count": 0,
+            "source_intake_version": "tnn.local_seed.v0.1.1A"
+          }
+        },
+        "root_found": true,
+        "self_contained": true,
+        "source": "nexusgate_local_seed",
+        "tnn_version": "nexus.tesseract_neural_network.v0.1.1A"
+      },
+      "response": "TNN // FAST SCAFFOLD\nnext: wire the streaming TNN lane into the Electron chat panel.\nthen: add a latency benchmark and model-health badge.\nverify: run tests, commit, push.\nboundary: recommendation-only.\n\nTNN // MODEL BUDGET HIT\nThe hot model did not start streaming inside fast budget.\nnext: use the scaffold now, or run tnn-warm/tnn-doctor then retry.\nboundary: recommendation-only.",
+      "role": "TNN",
+      "self_contained": true,
+      "tnn_version": "nexus.tesseract_neural_network.v0.2.0Z"
+    }
+  ],
   "models_root": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models",
   "outputs": {
     "chatgpt_handoff": "reports/CHATGPT_HANDOFF_LATEST.md",
@@ -79,24 +152,34 @@
       "compounding_without_evidence_ledger"
     ],
     "role_descriptions": {
-      "BALANCED": "Balanced local recommendation voice using Phi-3 when available.",
+      "BALANCED": "Balanced local recommendation voice using Phi-4-mini when available.",
       "DEEP": "Deeper local recommendation voice using Mistral when available.",
-      "FAST": "Quick local recommendation voice using Phi-3 when available.",
-      "HANDOFF": "No local model required; writes ChatGPT/Codex handoff packets."
+      "FAST": "Quick local recommendation voice using Phi-4-mini when available.",
+      "HANDOFF": "No local model required; writes ChatGPT/Codex handoff packets.",
+      "TNN": "Tesseract Neural Network local Phi-4-mini hot lane with bounded NexusGate context, memory, and gates."
     },
     "role_preferences": {
       "BALANCED": [
-        "phi3:mini",
-        "phi3:latest"
+        "tnn-phi4-mini:latest",
+        "phi4:mini",
+        "phi4:latest",
+        "tnn-phi4-mini:latest",
+        "tnn-phi4-mini:latest"
       ],
       "DEEP": [
         "mistral:latest"
       ],
       "FAST": [
-        "phi3:mini",
-        "phi3:latest"
+        "tnn-phi4-mini:latest",
+        "phi4:mini",
+        "phi4:latest",
+        "tnn-phi4-mini:latest",
+        "tnn-phi4-mini:latest"
       ],
-      "HANDOFF": []
+      "HANDOFF": [],
+      "TNN": [
+        "tnn-phi4-mini:latest"
+      ]
     },
     "router_law": [
       "No adapter, no bridge.",
@@ -125,6 +208,7 @@
       "FAST",
       "BALANCED",
       "DEEP",
+      "TNN",
       "HANDOFF"
     ],
     "version": "0.6.4"
@@ -132,8 +216,8 @@
   "role_assignments": {
     "BALANCED": {
       "available": true,
-      "model": "phi3:mini",
-      "reason": "Selected preferred local model phi3:mini.",
+      "model": "tnn-phi4-mini:latest",
+      "reason": "Selected preferred local model tnn-phi4-mini:latest.",
       "role": "BALANCED"
     },
     "DEEP": {
@@ -144,8 +228,8 @@
     },
     "FAST": {
       "available": true,
-      "model": "phi3:mini",
-      "reason": "Selected preferred local model phi3:mini.",
+      "model": "tnn-phi4-mini:latest",
+      "reason": "Selected preferred local model tnn-phi4-mini:latest.",
       "role": "FAST"
     },
     "HANDOFF": {
@@ -153,21 +237,27 @@
       "model": null,
       "reason": "HANDOFF writes packets and requires no local model.",
       "role": "HANDOFF"
+    },
+    "TNN": {
+      "available": true,
+      "model": "Tesseract Neural Network/phi4-mini-hot-brain",
+      "reason": "TNN chats through local Phi-4-mini using NexusGate-local context, memory, and gates.",
+      "role": "TNN"
     }
   },
   "root": "<repo-root>",
   "route_decisions": [
     {
-      "call_model": false,
-      "intent": "NEX chat bridge dry run: verify role targeted DEEP routing without granting authority.",
-      "model": "mistral:latest",
-      "model_called": false,
-      "reason": "Selected preferred local model mistral:latest.",
+      "call_model": true,
+      "intent": "can the chat answer",
+      "model": "Tesseract Neural Network/phi4-mini-hot-brain",
+      "model_called": true,
+      "reason": "TNN chats through local Phi-4-mini using NexusGate-local context, memory, and gates.",
       "recommendation_only": true,
-      "role": "DEEP",
+      "role": "TNN",
       "route_kind": "recommendation"
     }
   ],
-  "target_role": "DEEP",
+  "target_role": "TNN",
   "version": "0.6.4"
 }

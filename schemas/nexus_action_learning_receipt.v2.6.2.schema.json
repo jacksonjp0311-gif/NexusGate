@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"NEXUS Action Learning Receipt v2.6.2","type":"object","required":["schema","action_id","recommendation_id","learnable","causal_confidence"],"properties":{"schema":{"const":"NEXUS_ACTION_LEARNING_RECEIPT.v2.6.2"},"learnable":{"type":"boolean"},"causal_confidence":{"type":"number"}}}

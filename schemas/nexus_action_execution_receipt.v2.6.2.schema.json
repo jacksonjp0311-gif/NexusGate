@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"NEXUS Action Execution Receipt v2.6.2","type":"object","required":["schema","action_id","recommendation_id","execution"],"properties":{"schema":{"const":"NEXUS_ACTION_EXECUTION_RECEIPT.v2.6.2"},"action_id":{"type":"string"},"recommendation_id":{"type":"string"}}}

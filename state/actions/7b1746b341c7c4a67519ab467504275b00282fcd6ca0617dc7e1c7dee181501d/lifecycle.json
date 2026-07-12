@@ -1,0 +1,15 @@
+{
+  "action_id": "7b1746b341c7c4a67519ab467504275b00282fcd6ca0617dc7e1c7dee181501d",
+  "claim_boundary": "Causal Action Receipts bind recommendations, explicit human authorization, registered execution, repository effects, validation, epoch identity, and bounded calibration. They do not prove consciousness, general intelligence, scientific truth, security, production readiness, autonomous authority, or globally correct causal inference.",
+  "history": [
+    {
+      "at": "2026-07-12T23:02:56.004507+00:00",
+      "from": "NONE",
+      "reason": "recommendation created",
+      "to": "PROPOSED"
+    }
+  ],
+  "schema": "NEXUS_ACTION_LIFECYCLE.v2.6.2",
+  "state": "PROPOSED",
+  "updated_at_utc": "2026-07-12T23:02:56.004507+00:00"
+}

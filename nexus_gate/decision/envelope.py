@@ -321,10 +321,33 @@ def _select_action(
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     arbiter = arbitrate_recommendations(recommendations, coherence, calibration)
     selected = arbiter["selected"]
+    command = selected["command"]
+    command_registry_id = None
+    if "cortex-refresh" in command or selected["action"] == "cortex-refresh":
+        command_registry_id = "nexus.cortex-refresh"
+    elif "predictive-memory" in command:
+        command_registry_id = "nexus.predictive-memory"
+    elif "origin-seal" in command:
+        command_registry_id = "nexus.origin-seal"
+    elif "epoch-seal" in command:
+        command_registry_id = "nexus.epoch-seal"
+    elif "distill" in command:
+        command_registry_id = "nexus.distill"
+    elif "coherence-field" in command:
+        command_registry_id = "nexus.coherence-field"
+    elif "decision-envelope" in command:
+        command_registry_id = "nexus.decision-envelope"
+    elif "runtime-hygiene" in command:
+        command_registry_id = "nexus.runtime-hygiene"
     return {
         "source": selected["source"],
         "next_loop": selected["action"],
-        "command": selected["command"],
+        "command": command,
+        "command_registry_id": command_registry_id,
+        "normalized_arguments": {},
+        "arguments_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "authorization_required": True,
+        "execution_status": "not_executed",
         "why": selected["why"],
         "arbiter_score": selected["arbiter_score"],
         "requires_human_authorization": True,

@@ -9,33 +9,58 @@
     },
     "coherence_input": {
       "lineage_entropy": 8,
-      "score": 91,
+      "score": 88,
       "status": "pass"
     },
-    "mode": "causal_coherence_routing",
-    "schema": "NEXUS_RECOMMENDATION_ARBITER.v2.1.0",
+    "lattice_input": {
+      "routes_with_alignment": 4,
+      "triad": "evidence + geometry + authority"
+    },
+    "mode": "triadic_causal_lattice_routing",
+    "schema": "NEXUS_RECOMMENDATION_ARBITER.v2.5.0",
     "scored_recommendations": [
       {
         "action": "cortex-certificate-refresh",
         "arbiter_factors": {
           "blocking_penalty": 0,
-          "calibration_adjustment": 6.0,
+          "calibration_adjustment": 3.0,
           "coherence_adjustment": 0,
           "confidence_weight": 16.8,
           "cost_penalty": 5,
           "final_guard": 0,
           "severity_weight": 38,
           "source_priority": 20,
-          "stale_penalty": 0
+          "stale_penalty": 10,
+          "triadic_lattice_adjustment": -0.281
         },
-        "arbiter_score": 75.8,
+        "arbiter_score": 62.519,
         "blocking_conditions": [],
         "command": ".\\scripts\\nexus.ps1 cortex-refresh",
         "confidence": 0.84,
         "estimated_cost": "bounded",
         "severity": "high",
         "source": "predictive-memory",
-        "source_packet_hash": "e8dc1604a87a0c35149172071341c70c7ec7a1aaa59bbae731d01c4ac323b1b4",
+        "source_packet_freshness": {
+          "fresh": false,
+          "rule": "repository_commit + source_status_hash + input_snapshot_hash"
+        },
+        "source_packet_hash": "ee97e1d947fbc9c78b71dc3b5a440bb0d4e677b8c6f635de72ae300f6333be63",
+        "triadic_lattice": {
+          "action": "cortex-certificate-refresh",
+          "alignment": 0.6344,
+          "arbiter_adjustment": -0.281,
+          "axes": {
+            "authority": 0.96,
+            "evidence": 0.38,
+            "geometry": 0.7
+          },
+          "notes": [
+            "source packet is stale against current snapshot",
+            "route has neutral geometry alignment",
+            "route uses governed NEXUS command surface"
+          ],
+          "source": "predictive-memory"
+        },
         "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning."
       },
       {
@@ -49,16 +74,37 @@
           "final_guard": 0,
           "severity_weight": 26,
           "source_priority": 18,
-          "stale_penalty": 0
+          "stale_penalty": 10,
+          "triadic_lattice_adjustment": 0.436
         },
-        "arbiter_score": 66.4,
+        "arbiter_score": 56.836,
         "blocking_conditions": [],
         "command": ".\\scripts\\nexus.ps1 preflight-json -Tag \"decision envelope dirty scope\"",
         "confidence": 0.82,
         "estimated_cost": "short",
         "severity": "medium",
         "source": "git-scope",
-        "source_packet_hash": "bd283c30f9bf63f89a68b98ad20cfac398ef00c0d289d35a06890f724fe88064",
+        "source_packet_freshness": {
+          "fresh": false,
+          "rule": "repository_commit + source_status_hash + input_snapshot_hash"
+        },
+        "source_packet_hash": "56d7ef8cdbfc3d9a821bb69fded1dde7c2c00808bb788ebb445cc344f4be15b9",
+        "triadic_lattice": {
+          "action": "inspect_dirty_scope",
+          "alignment": 0.6742,
+          "arbiter_adjustment": 0.436,
+          "axes": {
+            "authority": 0.96,
+            "evidence": 0.38,
+            "geometry": 0.84
+          },
+          "notes": [
+            "source packet is stale against current snapshot",
+            "route targets bounded scope/runtime geometry",
+            "route uses governed NEXUS command surface"
+          ],
+          "source": "git-scope"
+        },
         "why": "The working tree is dirty; inspect scope before compounding changes or staging."
       },
       {
@@ -72,16 +118,37 @@
           "final_guard": 0,
           "severity_weight": 12,
           "source_priority": 12,
-          "stale_penalty": 0
+          "stale_penalty": 10,
+          "triadic_lattice_adjustment": 0.436
         },
-        "arbiter_score": 32.6,
+        "arbiter_score": 23.036,
         "blocking_conditions": [],
         "command": ".\\scripts\\nexus.ps1 predictive-timing",
         "confidence": 0.68,
         "estimated_cost": "bounded",
         "severity": "info",
         "source": "predictive-evolve",
-        "source_packet_hash": "36cf224ae32c769382b811b787d8ab3bdda282de68bac8c96c984d41f5481b13",
+        "source_packet_freshness": {
+          "fresh": false,
+          "rule": "repository_commit + source_status_hash + input_snapshot_hash"
+        },
+        "source_packet_hash": "0d180ae3af8fd99db55c828a0af92b6740d95a2e0f82eb52409d76c71965ad48",
+        "triadic_lattice": {
+          "action": "predictive-timing",
+          "alignment": 0.6742,
+          "arbiter_adjustment": 0.436,
+          "axes": {
+            "authority": 0.96,
+            "evidence": 0.38,
+            "geometry": 0.84
+          },
+          "notes": [
+            "source packet is stale against current snapshot",
+            "route targets bounded scope/runtime geometry",
+            "route uses governed NEXUS command surface"
+          ],
+          "source": "predictive-evolve"
+        },
         "why": "Predictive Evolve selected the cheapest useful non-final gate."
       },
       {
@@ -95,9 +162,10 @@
           "final_guard": -18,
           "severity_weight": 55,
           "source_priority": 8,
-          "stale_penalty": 0
+          "stale_penalty": 0,
+          "triadic_lattice_adjustment": 0.396
         },
-        "arbiter_score": 40.0,
+        "arbiter_score": 40.396,
         "blocking_conditions": [
           "never_skip_before_commit"
         ],
@@ -106,7 +174,25 @@
         "estimated_cost": "long",
         "severity": "required",
         "source": "final-seal",
+        "source_packet_freshness": null,
         "source_packet_hash": null,
+        "triadic_lattice": {
+          "action": "run_final_evolve_before_commit",
+          "alignment": 0.672,
+          "arbiter_adjustment": 0.396,
+          "axes": {
+            "authority": 0.74,
+            "evidence": 0.82,
+            "geometry": 0.5
+          },
+          "notes": [
+            "final seal has no upstream packet but remains mandatory",
+            "route spans full repository geometry",
+            "full-repo impact makes final seal expensive before scoped lanes",
+            "mandatory final guard is authority-safe but expensive"
+          ],
+          "source": "final-seal"
+        },
         "why": "Final evolve remains required before any durable commit or push."
       }
     ],
@@ -114,23 +200,44 @@
       "action": "cortex-certificate-refresh",
       "arbiter_factors": {
         "blocking_penalty": 0,
-        "calibration_adjustment": 6.0,
+        "calibration_adjustment": 3.0,
         "coherence_adjustment": 0,
         "confidence_weight": 16.8,
         "cost_penalty": 5,
         "final_guard": 0,
         "severity_weight": 38,
         "source_priority": 20,
-        "stale_penalty": 0
+        "stale_penalty": 10,
+        "triadic_lattice_adjustment": -0.281
       },
-      "arbiter_score": 75.8,
+      "arbiter_score": 62.519,
       "blocking_conditions": [],
       "command": ".\\scripts\\nexus.ps1 cortex-refresh",
       "confidence": 0.84,
       "estimated_cost": "bounded",
       "severity": "high",
       "source": "predictive-memory",
-      "source_packet_hash": "e8dc1604a87a0c35149172071341c70c7ec7a1aaa59bbae731d01c4ac323b1b4",
+      "source_packet_freshness": {
+        "fresh": false,
+        "rule": "repository_commit + source_status_hash + input_snapshot_hash"
+      },
+      "source_packet_hash": "ee97e1d947fbc9c78b71dc3b5a440bb0d4e677b8c6f635de72ae300f6333be63",
+      "triadic_lattice": {
+        "action": "cortex-certificate-refresh",
+        "alignment": 0.6344,
+        "arbiter_adjustment": -0.281,
+        "axes": {
+          "authority": 0.96,
+          "evidence": 0.38,
+          "geometry": 0.7
+        },
+        "notes": [
+          "source packet is stale against current snapshot",
+          "route has neutral geometry alignment",
+          "route uses governed NEXUS command surface"
+        ],
+        "source": "predictive-memory"
+      },
       "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning."
     }
   },
@@ -160,7 +267,8 @@
   "coherence_input": {
     "field_state": "coherent",
     "lineage_entropy": 8,
-    "score": 91,
+    "score": 88,
+    "state": "coherent",
     "status": "pass"
   },
   "evidence": [
@@ -226,13 +334,21 @@
     },
     {
       "exists": true,
+      "surface": "reports/nexus_triadic_lattice_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "state/lattice/nexus_triadic_lattice_latest.json"
+    },
+    {
+      "exists": true,
       "surface": "git status --short"
     }
   ],
-  "generated_at_utc": "2026-07-12T11:25:52.138981+00:00",
+  "generated_at_utc": "2026-07-12T23:22:08.542702+00:00",
   "intent": "Self-bootstrap NEXUS decision envelope.",
   "memory": {
-    "algorithm_cards": 37,
+    "algorithm_cards": 54,
     "cortex_authority": {
       "cortex_may_mutate_repo": false,
       "external_api_writes": false,
@@ -242,27 +358,27 @@
       "secret_access": false
     },
     "cortex_refresh_status": "constrained",
-    "discovery_cards": 14,
+    "discovery_cards": 21,
     "predictive_memory_next_command": ".\\scripts\\nexus.ps1 cortex-refresh",
     "predictive_memory_next_loop": "cortex-certificate-refresh",
     "predictive_memory_status": "warn"
   },
-  "mode": "outcome_aware_decision_envelope",
+  "mode": "triadic_lattice_decision_envelope",
   "origin": {
     "commit": null,
-    "origin_manifest_hash": "c29688ef2ed9b059876368a1a67ddf934264bc25f63b11f7ce7e66c7d74af401",
-    "product_phase": "Outcome-Aware Arbiter",
-    "product_version": "2.2.0",
-    "schema": "NEXUS_ORIGIN_SEAL.v2.2.0",
+    "origin_manifest_hash": "d5a724c5792ba333e84bd66bd947e2f0986216b928663c0cbe31b478b511fe75",
+    "product_phase": "Causal Action Receipt Loop",
+    "product_version": "2.6.2",
+    "schema": "NEXUS_ORIGIN_SEAL.v2.6.2",
     "status": "pass"
   },
   "outcome_awareness": {
     "calibration_schema": "NEXUS_ARBITER_CALIBRATION.v2.2.0",
-    "latest_coherence_score": 91.0,
+    "latest_coherence_score": 88.0,
     "pressure_memory_schema": "NEXUS_PRESSURE_MEMORY.v2.2.0",
     "pressure_trend": "stable"
   },
-  "phase": "Outcome-Aware Arbiter",
+  "phase": "Triadic Geometric Lattice",
   "read_surfaces": [
     "state/nexus_origin_manifest_latest.json",
     "reports/nexus_origin_seal_latest.json",
@@ -279,6 +395,8 @@
     "reports/nexus_coherence_field_latest.json",
     "state/coherence/arbiter_calibration_latest.json",
     "state/coherence/pressure_memory_latest.json",
+    "reports/nexus_triadic_lattice_latest.json",
+    "state/lattice/nexus_triadic_lattice_latest.json",
     "git status --short"
   ],
   "recommendations": [
@@ -290,7 +408,27 @@
       "estimated_cost": "bounded",
       "severity": "high",
       "source": "predictive-memory",
-      "source_packet_hash": "e8dc1604a87a0c35149172071341c70c7ec7a1aaa59bbae731d01c4ac323b1b4",
+      "source_packet_freshness": {
+        "fresh": false,
+        "rule": "repository_commit + source_status_hash + input_snapshot_hash"
+      },
+      "source_packet_hash": "ee97e1d947fbc9c78b71dc3b5a440bb0d4e677b8c6f635de72ae300f6333be63",
+      "triadic_lattice": {
+        "action": "cortex-certificate-refresh",
+        "alignment": 0.6344,
+        "arbiter_adjustment": -0.281,
+        "axes": {
+          "authority": 0.96,
+          "evidence": 0.38,
+          "geometry": 0.7
+        },
+        "notes": [
+          "source packet is stale against current snapshot",
+          "route has neutral geometry alignment",
+          "route uses governed NEXUS command surface"
+        ],
+        "source": "predictive-memory"
+      },
       "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning."
     },
     {
@@ -301,7 +439,27 @@
       "estimated_cost": "short",
       "severity": "medium",
       "source": "git-scope",
-      "source_packet_hash": "bd283c30f9bf63f89a68b98ad20cfac398ef00c0d289d35a06890f724fe88064",
+      "source_packet_freshness": {
+        "fresh": false,
+        "rule": "repository_commit + source_status_hash + input_snapshot_hash"
+      },
+      "source_packet_hash": "56d7ef8cdbfc3d9a821bb69fded1dde7c2c00808bb788ebb445cc344f4be15b9",
+      "triadic_lattice": {
+        "action": "inspect_dirty_scope",
+        "alignment": 0.6742,
+        "arbiter_adjustment": 0.436,
+        "axes": {
+          "authority": 0.96,
+          "evidence": 0.38,
+          "geometry": 0.84
+        },
+        "notes": [
+          "source packet is stale against current snapshot",
+          "route targets bounded scope/runtime geometry",
+          "route uses governed NEXUS command surface"
+        ],
+        "source": "git-scope"
+      },
       "why": "The working tree is dirty; inspect scope before compounding changes or staging."
     },
     {
@@ -312,7 +470,27 @@
       "estimated_cost": "bounded",
       "severity": "info",
       "source": "predictive-evolve",
-      "source_packet_hash": "36cf224ae32c769382b811b787d8ab3bdda282de68bac8c96c984d41f5481b13",
+      "source_packet_freshness": {
+        "fresh": false,
+        "rule": "repository_commit + source_status_hash + input_snapshot_hash"
+      },
+      "source_packet_hash": "0d180ae3af8fd99db55c828a0af92b6740d95a2e0f82eb52409d76c71965ad48",
+      "triadic_lattice": {
+        "action": "predictive-timing",
+        "alignment": 0.6742,
+        "arbiter_adjustment": 0.436,
+        "axes": {
+          "authority": 0.96,
+          "evidence": 0.38,
+          "geometry": 0.84
+        },
+        "notes": [
+          "source packet is stale against current snapshot",
+          "route targets bounded scope/runtime geometry",
+          "route uses governed NEXUS command surface"
+        ],
+        "source": "predictive-evolve"
+      },
       "why": "Predictive Evolve selected the cheapest useful non-final gate."
     },
     {
@@ -325,22 +503,142 @@
       "estimated_cost": "long",
       "severity": "required",
       "source": "final-seal",
+      "source_packet_freshness": null,
       "source_packet_hash": null,
+      "triadic_lattice": {
+        "action": "run_final_evolve_before_commit",
+        "alignment": 0.672,
+        "arbiter_adjustment": 0.396,
+        "axes": {
+          "authority": 0.74,
+          "evidence": 0.82,
+          "geometry": 0.5
+        },
+        "notes": [
+          "final seal has no upstream packet but remains mandatory",
+          "route spans full repository geometry",
+          "full-repo impact makes final seal expensive before scoped lanes",
+          "mandatory final guard is authority-safe but expensive"
+        ],
+        "source": "final-seal"
+      },
       "why": "Final evolve remains required before any durable commit or push."
     }
   ],
+  "repository_snapshot": {
+    "branch": "main",
+    "epoch_id": "588100b9306e67f2de42e61a",
+    "generated_at_utc": "2026-07-12T23:22:08.447472+00:00",
+    "input_snapshot_hash": "7005e69a35bc9690747cbba9d0d59aee08ce79ae5e3e3c5fd19945786695f519",
+    "input_surfaces": [
+      {
+        "exists": true,
+        "path": "state/nexus_origin_manifest_latest.json",
+        "sha256": "308a54f12b438bc77aaaa5e0033ba56270e8d58c6aa30a1ef2d98787e7be55f7"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_origin_seal_latest.json",
+        "sha256": "308a54f12b438bc77aaaa5e0033ba56270e8d58c6aa30a1ef2d98787e7be55f7"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_cortex_refresh_report_latest.json",
+        "sha256": "3d5240bfdf2db3a26ad40ae1dd48ed3c6d97b53c7a843ac23975394cc6ab0e28"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_cortex_gate_latest.json",
+        "sha256": "77f4841c9c88322c4ce55eedd4d6fd4115936ded86224900d7a8828219b213f0"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_predictive_memory_orchestrator_latest.json",
+        "sha256": "b3785431748dc7d33b087558fdbbcad7ed66d7b40090bb1d2aae6f9d9aca5163"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_predictive_evolve_plan_latest.json",
+        "sha256": "1a5c7da866bfabfc1d662a74ecb97c614fbf1ebac3466c08f2a7354eb76b9cdd"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_predictive_gate_timing_latest.json",
+        "sha256": "9a0bfe76c3c3c8e8b098529c14b2a3347d280cd1d2fc36c36ff2da672da50627"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_certificate_resume_report_latest.json",
+        "sha256": "4018c1f02758167a7edfc37eaf7bc42bb319bec54c09684f16549466d17dcbca"
+      },
+      {
+        "exists": true,
+        "path": "state/loops/nexus_wound_compression_latest.json",
+        "sha256": "0f0533f432d8fd8bbed04061691bda843e9d9357fd8e4947b7c08b50ab2106f8"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_preflight_optimizer_latest.json",
+        "sha256": "1dcca0a3eb5d3cd86137c637c1ef329130254ed5ef46877d72217ba32edf4c0b"
+      },
+      {
+        "exists": true,
+        "path": "state/algorithms/nexus_algorithm_cards_latest.json",
+        "sha256": "c1613377122df3ed1aea2d5cd254e77b5318e2576f35e56d89bc284ac930f0a8"
+      },
+      {
+        "exists": true,
+        "path": "state/discoveries/nexus_discovery_cards_latest.json",
+        "sha256": "dd86a73aeb9691f1e572013606a667515a20ee2fba3661346df295a0038c1b7e"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_coherence_field_latest.json",
+        "sha256": "638207fdb00839314055415757d48cec64b7e500f9f66b8edf489b64637a6309"
+      },
+      {
+        "exists": true,
+        "path": "state/coherence/arbiter_calibration_latest.json",
+        "sha256": "76e08f0ca4ddd21fc17861005b3fbae016e7077a1bb14056beef66dc5744173e"
+      },
+      {
+        "exists": true,
+        "path": "state/coherence/pressure_memory_latest.json",
+        "sha256": "88344b3c60049f6a84a0c006f5d51e3c752e3a657e8f1c6a7f8230dd683f0cf4"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_triadic_lattice_latest.json",
+        "sha256": "e3a50de150b9a0532c6392a7246849995ba532f54c78b79f032f78b7981cdd2f"
+      },
+      {
+        "exists": true,
+        "path": "state/lattice/nexus_triadic_lattice_latest.json",
+        "sha256": "e3a50de150b9a0532c6392a7246849995ba532f54c78b79f032f78b7981cdd2f"
+      }
+    ],
+    "repository_commit": "bf9b8d48da9250b38e6fb871ad2a554d63a8643a",
+    "schema": "NEXUS_REPOSITORY_SNAPSHOT.v2.4.0",
+    "source_status_count": 47,
+    "source_status_hash": "1e2ed7f7d29d5a5b4607a2203269ff854b7e1a5db7626ae189182aa0d160f8d0"
+  },
   "risk": {
     "active_wound_key": null,
     "certificate_resume_gate": null,
-    "dirty_count": 91,
+    "dirty_count": 127,
     "runtime_pressure": "pass",
     "slowest_gate": null
   },
-  "schema": "NEXUS_DECISION_ENVELOPE.v2.2.0",
+  "schema": "NEXUS_DECISION_ENVELOPE.v2.5.0",
   "selected_action": {
-    "arbiter_score": 75.8,
+    "arbiter_score": 62.519,
+    "arguments_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "authorization_required": true,
     "command": ".\\scripts\\nexus.ps1 cortex-refresh",
+    "command_registry_id": "nexus.cortex-refresh",
+    "execution_status": "not_executed",
     "next_loop": "cortex-certificate-refresh",
+    "normalized_arguments": {},
     "recommendation_only": true,
     "requires_final_evolve_before_commit": true,
     "requires_human_authorization": true,
@@ -349,7 +647,34 @@
   },
   "status": "warn",
   "system": "NEXUS GATE",
-  "version": "2.2.0",
+  "triadic_lattice": {
+    "average_alignment": 0.6637,
+    "lattice_packet_hash": "08599b301d6a9a20044ccfaa3b4abd636d6a404c5e12821bf5d6643ba26dfdb7",
+    "schema": "NEXUS_TRIADIC_GEOMETRIC_LATTICE.v2.5.0",
+    "selected_hint": {
+      "action": "inspect_dirty_scope",
+      "alignment": 0.6742,
+      "arbiter_adjustment": 0.436,
+      "axes": {
+        "authority": 0.96,
+        "evidence": 0.38,
+        "geometry": 0.84
+      },
+      "notes": [
+        "source packet is stale against current snapshot",
+        "route targets bounded scope/runtime geometry",
+        "route uses governed NEXUS command surface"
+      ],
+      "source": "git-scope"
+    },
+    "status": "pass",
+    "triad": {
+      "authority": "human-bound command surfaces and non-escalation boundaries",
+      "evidence": "packet freshness, source hashes, and generated report admissibility",
+      "geometry": "GitNexus impact pressure, hot-file pressure, and route blast radius"
+    }
+  },
+  "version": "2.5.0",
   "warnings": [
     "dirty_scope",
     "bounded_next_action_pending"

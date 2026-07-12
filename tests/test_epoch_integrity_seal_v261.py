@@ -14,9 +14,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class EpochIntegritySealV261Tests(unittest.TestCase):
     def test_epoch_seal_builds_source_root_identity(self) -> None:
-        packet = build_epoch_integrity_seal(ROOT)
-        self.assertEqual(packet["schema"], "NEXUS_EPOCH_INTEGRITY_SEAL.v2.6.1")
-        self.assertEqual(packet["product_version"], "2.6.1")
+        packet = build_epoch_integrity_seal(ROOT)["manifest"]
+        self.assertEqual(packet["schema"], "NEXUS_SOURCE_EPOCH.v2.6.2")
+        self.assertEqual(packet["product_version"], "2.6.2")
         self.assertIn(packet["epoch_state"], {"sealed_clean", "sealed_working_tree", "dehydrated"})
         self.assertEqual(len(packet["source_root"]), 64)
         self.assertEqual(len(packet["epoch_id"]), 64)
@@ -41,7 +41,8 @@ class EpochIntegritySealV261Tests(unittest.TestCase):
         self.assertTrue((ROOT / "state" / "latest_epoch_pointer.json").exists())
         self.assertTrue((ROOT / "state" / "epochs" / epoch_id / "epoch_manifest.json").exists())
         self.assertTrue((ROOT / "state" / "epochs" / epoch_id / "origin_packet.json").exists())
-        self.assertTrue((ROOT / "state" / "epochs" / epoch_id / "gate_index.json").exists())
+        self.assertTrue((ROOT / "state" / "epochs" / epoch_id / "source_index.json").exists())
+        self.assertTrue((ROOT / "state" / "epochs" / epoch_id / "compatibility_packet.json").exists())
         ledger = ROOT / "ledger" / "epoch_chain.jsonl"
         self.assertTrue(ledger.exists())
         last = json.loads([line for line in ledger.read_text(encoding="utf-8-sig").splitlines() if line][-1])
@@ -61,7 +62,7 @@ class EpochIntegritySealV261Tests(unittest.TestCase):
         self.assertIn("nexus_gate.epochs.seal", ps)
         self.assertIn("epoch-seal)", sh)
         self.assertIn("nexus_gate.epochs.seal", human)
-        self.assertIn("v2.6.1 Epoch Integrity Seal", readme)
+        self.assertIn("v2.6.2 Causal Action Receipt Loop", readme)
         self.assertIn("reports/nexus_epoch_integrity_seal_latest.json", agents)
         self.assertIn("Epoch Integrity Seal Algorithm", algorithms)
         self.assertIn("epoch-integrity-seal", discoveries)

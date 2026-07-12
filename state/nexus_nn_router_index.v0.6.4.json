@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-05T04:27:06.829763+00:00",
+  "generated_utc": "2026-07-12T23:23:09.995300+00:00",
   "models_root": "%USERPROFILE%\\OneDrive\\Desktop\\.ollama\\models",
   "policy": {
     "allowed_route_kinds": [
@@ -27,24 +27,34 @@
       "compounding_without_evidence_ledger"
     ],
     "role_descriptions": {
-      "BALANCED": "Balanced local recommendation voice using Phi-3 when available.",
+      "BALANCED": "Balanced local recommendation voice using Phi-4-mini when available.",
       "DEEP": "Deeper local recommendation voice using Mistral when available.",
-      "FAST": "Quick local recommendation voice using Phi-3 when available.",
-      "HANDOFF": "No local model required; writes ChatGPT/Codex handoff packets."
+      "FAST": "Quick local recommendation voice using Phi-4-mini when available.",
+      "HANDOFF": "No local model required; writes ChatGPT/Codex handoff packets.",
+      "TNN": "Tesseract Neural Network local Phi-4-mini hot lane with bounded NexusGate context, memory, and gates."
     },
     "role_preferences": {
       "BALANCED": [
-        "phi3:mini",
-        "phi3:latest"
+        "tnn-phi4-mini:latest",
+        "phi4:mini",
+        "phi4:latest",
+        "tnn-phi4-mini:latest",
+        "tnn-phi4-mini:latest"
       ],
       "DEEP": [
         "mistral:latest"
       ],
       "FAST": [
-        "phi3:mini",
-        "phi3:latest"
+        "tnn-phi4-mini:latest",
+        "phi4:mini",
+        "phi4:latest",
+        "tnn-phi4-mini:latest",
+        "tnn-phi4-mini:latest"
       ],
-      "HANDOFF": []
+      "HANDOFF": [],
+      "TNN": [
+        "tnn-phi4-mini:latest"
+      ]
     },
     "router_law": [
       "No adapter, no bridge.",
@@ -73,6 +83,7 @@
       "FAST",
       "BALANCED",
       "DEEP",
+      "TNN",
       "HANDOFF"
     ],
     "version": "0.6.4"
@@ -80,8 +91,8 @@
   "role_assignments": {
     "BALANCED": {
       "available": true,
-      "model": "phi3:mini",
-      "reason": "Selected preferred local model phi3:mini.",
+      "model": "tnn-phi4-mini:latest",
+      "reason": "Selected preferred local model tnn-phi4-mini:latest.",
       "role": "BALANCED"
     },
     "DEEP": {
@@ -92,8 +103,8 @@
     },
     "FAST": {
       "available": true,
-      "model": "phi3:mini",
-      "reason": "Selected preferred local model phi3:mini.",
+      "model": "tnn-phi4-mini:latest",
+      "reason": "Selected preferred local model tnn-phi4-mini:latest.",
       "role": "FAST"
     },
     "HANDOFF": {
@@ -101,20 +112,26 @@
       "model": null,
       "reason": "HANDOFF writes packets and requires no local model.",
       "role": "HANDOFF"
+    },
+    "TNN": {
+      "available": true,
+      "model": "Tesseract Neural Network/phi4-mini-hot-brain",
+      "reason": "TNN chats through local Phi-4-mini using NexusGate-local context, memory, and gates.",
+      "role": "TNN"
     }
   },
   "route_decisions": [
     {
-      "call_model": false,
-      "intent": "NEX chat bridge dry run: verify role targeted DEEP routing without granting authority.",
-      "model": "mistral:latest",
-      "model_called": false,
-      "reason": "Selected preferred local model mistral:latest.",
+      "call_model": true,
+      "intent": "can the chat answer",
+      "model": "Tesseract Neural Network/phi4-mini-hot-brain",
+      "model_called": true,
+      "reason": "TNN chats through local Phi-4-mini using NexusGate-local context, memory, and gates.",
       "recommendation_only": true,
-      "role": "DEEP",
+      "role": "TNN",
       "route_kind": "recommendation"
     }
   ],
-  "target_role": "DEEP",
+  "target_role": "TNN",
   "version": "0.6.4"
 }

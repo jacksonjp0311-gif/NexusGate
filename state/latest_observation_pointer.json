@@ -1,0 +1,7 @@
+{
+  "observation_id": "bd94b642786bf857b405030411334bf76a7ebd34d3556745f76bd38c4a9fb991",
+  "observation_path": "state/epochs/2644f029a92dbfc68f7c49f6f66e098ad5bf01838777b5396868730fe35378a6/observations/bd94b642786bf857b405030411334bf76a7ebd34d3556745f76bd38c4a9fb991.json",
+  "schema": "NEXUS_LATEST_OBSERVATION_POINTER.v2.6.2",
+  "source_epoch_id": "2644f029a92dbfc68f7c49f6f66e098ad5bf01838777b5396868730fe35378a6",
+  "updated_at_utc": "2026-07-12T23:22:18.934828+00:00"
+}

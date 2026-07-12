@@ -158,13 +158,20 @@ def _pressure_memory(rows: list[dict[str, Any]], latest_coherence: dict[str, Any
 
 def build_outcome_report(root: str | Path, intent: str = "", record: bool = True) -> dict[str, Any]:
     root_path = Path(root).resolve()
+    latest_action = _read_json(root_path / "state" / "latest_action_pointer.json", {})
+    action_id = latest_action.get("action_id")
+    learning_receipt = _read_json(root_path / "state" / "actions" / str(action_id) / "learning.json", {}) if action_id else {}
     decision = _read_json(root_path / "reports" / "nexus_decision_envelope_latest.json", {})
     coherence = _read_json(root_path / "reports" / "nexus_coherence_field_latest.json", {})
     latest_gate = _latest_human_surface(root_path)
     selected = decision.get("selected_action") or {}
-    outcome = latest_gate.get("status", "unknown")
-    if not latest_gate.get("path"):
-        outcome = "skipped"
+    outcome = "skipped"
+    learning_status = "blocked"
+    blocked_reason = "no validated causal action receipt"
+    if learning_receipt.get("learnable") is True:
+        outcome = (learning_receipt.get("outcome") or {}).get("classification", "unknown")
+        learning_status = "learnable"
+        blocked_reason = ""
     event_basis = {
         "selected": selected,
         "human_surface": latest_gate.get("path"),
@@ -179,13 +186,22 @@ def build_outcome_report(root: str | Path, intent: str = "", record: bool = True
         "arbiter_score": selected.get("arbiter_score"),
         "outcome": outcome,
         "human_surface_path": latest_gate.get("path"),
+        "action_id": action_id,
+        "learning_receipt_hash": learning_receipt.get("receipt_hash"),
+        "learning_status": learning_status,
+        "blocked_reason": blocked_reason,
+        "law": "No receipt, no learning.",
         "coherence_score": ((coherence.get("coherence") or {}).get("score")),
         "lineage_entropy": ((coherence.get("coherence") or {}).get("lineage_entropy")),
         "route_fitness": _route_fitness(outcome, coherence),
         "followup_needed": outcome not in {"pass", "warn"},
-        "lesson": "Route outcome recorded; future recommendations may adjust source pressure from calibration.",
+        "lesson": (
+            "Validated causal action receipt recorded; future recommendations may adjust source pressure from calibration."
+            if learning_status == "learnable"
+            else "No validated causal receipt exists; outcome remains observational and cannot calibrate route pressure."
+        ),
     }
-    if record:
+    if record and learning_status == "learnable":
         _append_jsonl_once(root_path / LEDGER_PATH, row)
     rows = _read_jsonl(root_path / LEDGER_PATH)
     if row.get("event_id") not in {item.get("event_id") for item in rows}:
@@ -197,7 +213,10 @@ def build_outcome_report(root: str | Path, intent: str = "", record: bool = True
         "system": "NEXUS GATE",
         "version": VERSION,
         "phase": "Outcome-Aware Arbiter",
-        "status": "pass" if outcome in {"pass", "warn", "skipped", "unknown"} else "fail",
+        "status": "pass" if learning_status == "learnable" else "warn",
+        "learning_status": learning_status,
+        "blocked_reason": blocked_reason,
+        "law": "No receipt, no learning.",
         "generated_at_utc": _utc(),
         "intent": intent,
         "latest_outcome": row,

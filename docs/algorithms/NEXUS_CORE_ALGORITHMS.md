@@ -364,3 +364,75 @@ canonical source files -> source Merkle root -> parent epoch + runtime contract 
 ```
 
 Epoch Integrity gives graph learning a stable timebase without making Git commit SHA the primary identity. Generated evidence can be committed after it is produced, so NEXUS uses source-root identity first and stores commit SHA as advisory attestation.
+
+## Source Epoch Identity Algorithm
+
+```text
+canonical source + relevant untracked source + runtime contract + schema compatibility -> source epoch id
+```
+
+Source Epoch identity changes only when source content or compatibility rules change. Re-running observation against unchanged source reuses the same Source Epoch.
+
+## Epoch Observation Algorithm
+
+```text
+source epoch -> gate report hashes + dirty state + runtime state + producer version -> observation event -> observation ledger
+```
+
+Observation records what was seen during a run without fabricating a new developmental epoch.
+
+## Append-Only Ledger Transaction Algorithm
+
+```text
+lock -> verify tail -> build event -> previous hash -> event hash -> append -> fsync -> verify tail
+```
+
+Ledger events are hash-linked JSONL rows. Latest files are convenience pointers; hash chains are the durable event memory.
+
+## Command Registry Resolution Algorithm
+
+```text
+selected route -> command registry id -> fixed executor target -> normalized arguments -> bounded registered lane
+```
+
+Raw shell strings are not authority objects. Registered command resolution makes action receipts bind to known NEXUS lanes only.
+
+## Human Authorization Binding Algorithm
+
+```text
+recommendation receipt -> explicit human authorization -> command id + args hash + pre-epoch binding -> single-action authority receipt
+```
+
+Authorization is explicit evidence. It is not inferred from command invocation, success, process existence, model output, or previous authorization.
+
+## Causal Action Lifecycle Algorithm
+
+```text
+PROPOSED -> AUTHORIZED -> EXECUTING -> EXECUTED -> VALIDATED -> LEARNABLE
+```
+
+Invalid transitions are rejected and recorded. Recommendation is not execution, execution is not validation, and validation is not durable learning without causal confidence.
+
+## Effect-Set Comparison Algorithm
+
+```text
+predicted write set + expected effects -> actual changed surfaces -> unexpected writes + precision/recall + confounder pressure
+```
+
+Unexpected writes remain visible and can block learning.
+
+## Causal Confidence Algorithm
+
+```text
+K = epoch_integrity * authorization_binding * execution_binding * write_agreement * validation_coverage * (1 - confounder_pressure)
+```
+
+Hard failures set causal confidence to zero. Learnability requires high confidence and admissible pre/post epochs.
+
+## Receipt-Gated Calibration Algorithm
+
+```text
+validated learning receipt -> bounded route model update -> replay-safe calibration ledger
+```
+
+No receipt means no learning. Working-tree-only epochs, duplicate receipts, validation failures, and confounded effects do not update durable route fitness.

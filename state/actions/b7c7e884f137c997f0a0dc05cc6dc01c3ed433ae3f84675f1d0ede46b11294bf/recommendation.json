@@ -1,0 +1,129 @@
+{
+  "action_id": "b7c7e884f137c997f0a0dc05cc6dc01c3ed433ae3f84675f1d0ede46b11294bf",
+  "authority_boundary": {
+    "autonomous_execution": false,
+    "recommendation_only": true
+  },
+  "claim_boundary": "Causal Action Receipts bind recommendations, explicit human authorization, registered execution, repository effects, validation, epoch identity, and bounded calibration. They do not prove consciousness, general intelligence, scientific truth, security, production readiness, autonomous authority, or globally correct causal inference.",
+  "constraints": {
+    "blocking_conditions": [],
+    "expires_at_utc": "2026-07-12T23:10:23.485853+00:00",
+    "human_authorization_required": true
+  },
+  "created_at_utc": "2026-07-12T22:40:23.484433+00:00",
+  "evidence": {
+    "coherence_field_hash": "b7de2e31c24bc5c08c49f8c1d471d1db0ebfe1ce7d94f0ff3b55af1b83a7914e",
+    "decision_envelope_hash": "803f863ad60dc2142c180939b89db2610d72f5ca4243fe053d67f1d076b3bac2",
+    "distillation_graph_hash": "2c02fd98882c6f1035baa76f5a42cd0bcd44b2337d8fddcc1470e0a185f5f9ba",
+    "origin_seal_hash": "9ad1d9c2779f3291ddb297ece55bd961ad4b60d8e18e39d4b3001fe2e40446a9",
+    "predictive_memory_hash": "a60ac91f9adfa91059bcad61a8d33a8b00e2ed3a25e852c9007a6fa825acc3f3",
+    "triadic_lattice_hash": "18dd379e504e03a328ba0fb611a562331154663c439341b345a08aeaba8a902e"
+  },
+  "pre_epoch": {
+    "durable_admissibility": "invalid",
+    "eligible_as_learning_parent": false,
+    "epoch_id": "fb702ffb4556a5118998b65653f092eb0c6f203bff91dbdd942c2c8d34d2236a",
+    "epoch_manifest_hash": "5a55a541a414730da8ceebc597c181c8c424970b6f2aed050ebbbd97bad1cfe4",
+    "epoch_state": "invalid_epoch_collision",
+    "git_commit": "bf9b8d48da9250b38e6fb871ad2a554d63a8643a",
+    "git_status_hash": "8a8afae3df328a0475e568cee1e0f3b1b13ecccce9b25e5b63c4448778fb982e",
+    "git_status_paths": [
+      "AGENTS.md",
+      "README.md",
+      "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "docs/design/CAUSAL_ACTION_RECEIPT_LOOP_v2.6.2.md",
+      "docs/design/EPOCH_INTEGRITY_HARDENING_v2.6.1a.md",
+      "docs/protocols/APPEND_ONLY_LEDGER_PROTOCOL.md",
+      "docs/protocols/CAUSAL_ACTION_RECEIPT_PROTOCOL.md",
+      "docs/protocols/ROUTE_CALIBRATION_PROTOCOL.md",
+      "docs/protocols/SOURCE_EPOCH_AND_OBSERVATION_PROTOCOL.md",
+      "docs/updates/UPDATE_CHART.md",
+      "docs/versioning/NEXUS_CHANGELOG.md",
+      "electron/main.js",
+      "ledger/action_lifecycle.jsonl",
+      "ledger/action_receipts.jsonl",
+      "ledger/epoch_chain.jsonl",
+      "ledger/epoch_observations.jsonl",
+      "nexus_gate/actions/__init__.py",
+      "nexus_gate/actions/cli.py",
+      "nexus_gate/decision/envelope.py",
+      "nexus_gate/discoveries/cards.py",
+      "nexus_gate/epochs/seal.py",
+      "nexus_gate/hygiene/runtime_churn.py",
+      "nexus_gate/ledger/__init__.py",
+      "nexus_gate/ledger/append_only.py",
+      "nexus_gate/origin/seal.py",
+      "nexus_gate/outcomes/learn.py",
+      "registry/nexus_command_registry.v2.6.2.json",
+      "reports/nexus_epoch_integrity_seal_latest.json",
+      "schemas/nexus_action_authorization_receipt.v2.6.2.schema.json",
+      "schemas/nexus_action_effect_receipt.v2.6.2.schema.json",
+      "schemas/nexus_action_execution_receipt.v2.6.2.schema.json",
+      "schemas/nexus_action_learning_receipt.v2.6.2.schema.json",
+      "schemas/nexus_action_ledger_event.v2.6.2.schema.json",
+      "schemas/nexus_action_recommendation_receipt.v2.6.2.schema.json",
+      "schemas/nexus_action_validation_receipt.v2.6.2.schema.json",
+      "schemas/nexus_command_registry.v2.6.2.schema.json",
+      "schemas/nexus_epoch_observation.v2.6.2.schema.json",
+      "schemas/nexus_source_epoch.v2.6.2.schema.json",
+      "scripts/nexus.ps1",
+      "scripts/nexus.sh",
+      "scripts/nexus_human.ps1",
+      "state/actions/1fe8ad713df314a06d35291d7527e0c1954075706715e827ead5008fff4c4cb0/lifecycle.json",
+      "state/actions/1fe8ad713df314a06d35291d7527e0c1954075706715e827ead5008fff4c4cb0/recommendation.json",
+      "state/actions/ec94404d68f95ff495299d51cb687fc0fb0c7e291eab491fc0da6eb94795b297/lifecycle.json",
+      "state/actions/ec94404d68f95ff495299d51cb687fc0fb0c7e291eab491fc0da6eb94795b297/recommendation.json",
+      "state/algorithms/nexus_algorithm_cards.v0.3.0.json",
+      "state/algorithms/nexus_algorithm_cards_latest.json",
+      "state/discoveries/nexus_discovery_cards.v0.2.0.json",
+      "state/discoveries/nexus_discovery_cards_latest.json",
+      "state/epochs/fb702ffb4556a5118998b65653f092eb0c6f203bff91dbdd942c2c8d34d2236a/observations/2b27803516a7eda55e0e7f617d64e220d2469bb1cf9a68afcc33c2ed422f4582.json",
+      "state/epochs/fb702ffb4556a5118998b65653f092eb0c6f203bff91dbdd942c2c8d34d2236a/observations/395fbdae496fe88a98abae8bd890010bda839c67d08aa9ca00f64a60fb5bc605.json",
+      "state/epochs/fb702ffb4556a5118998b65653f092eb0c6f203bff91dbdd942c2c8d34d2236a/observations/8f4c4c55e1d0a1a0dcb3b037fc1b1baa867f125f50356cbc7d9b9ef1f73ff2df.json",
+      "state/latest_action_pointer.json",
+      "state/latest_epoch_pointer.json",
+      "state/latest_observation_pointer.json",
+      "state/neural_activity/repo_neural_graph_latest.json",
+      "tests/test_append_only_ledger_v262.py",
+      "tests/test_causal_action_receipts_v262.py",
+      "tests/test_epoch_integrity_hardening_v261a.py",
+      "tests/test_epoch_integrity_seal_v261.py",
+      "tests/test_neural_graph_runtime_hygiene_v262.py"
+    ],
+    "origin_manifest_hash": "9ad1d9c2779f3291ddb297ece55bd961ad4b60d8e18e39d4b3001fe2e40446a9",
+    "source_root": "71ee2e36e14fe1e2530faef1c3e5bf4eb6772f20e4af8edda4f1b74b6add83d1",
+    "working_tree_snapshot_hash": "64798a91c048dd50e4c8ecf9924d91209e9c9c9fc79f94f7ae650c12579f2db4"
+  },
+  "predictions": {
+    "expected_duration_seconds": 300,
+    "expected_effects": [
+      "registered_lane_report_update"
+    ],
+    "expected_exit_class": "success",
+    "expected_gate_changes": [
+      "epoch_observed"
+    ],
+    "predicted_read_set": [
+      "Cortex/",
+      "state/cortex/",
+      "reports/"
+    ],
+    "predicted_write_set": [
+      "state/cortex/",
+      "reports/nexus_cortex_refresh_report_latest.json"
+    ]
+  },
+  "receipt_hash": "53e391295b241b9025178d540568701e95b1bd6961f3e399b6df1e575fbc69a1",
+  "recommendation": {
+    "arguments_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "command_registry_id": "nexus.cortex-refresh",
+    "confidence": 0.72,
+    "lane": "cortex-refresh",
+    "normalized_arguments": {},
+    "reason": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning.",
+    "risk_estimate": 0.5,
+    "utility_estimate": 65.519
+  },
+  "recommendation_id": "c01d8350996509b9426476c0cf8cb85f119aeb9120d7536c2c501f116cf0688b",
+  "schema": "NEXUS_ACTION_RECOMMENDATION_RECEIPT.v2.6.2"
+}

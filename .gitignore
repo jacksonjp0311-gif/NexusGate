@@ -35,6 +35,7 @@ state/loops/toolkit_*.json
 state/loops/nexus_*_state.json
 state/loops/nexus_toolbelt.v*.json
 state/nexus_geometric_memory_runtime_latest.json
+state/neural_activity/repo_neural_graph_latest.json
 state/visual/
 state/wounds/
 state/nexus_cell/

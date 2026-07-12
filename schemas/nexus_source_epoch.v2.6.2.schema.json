@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS Source Epoch v2.6.2",
+  "type": "object",
+  "required": ["schema", "source_epoch_id", "source_root", "epoch_state", "durable_admissibility"],
+  "properties": {
+    "schema": {"const": "NEXUS_SOURCE_EPOCH.v2.6.2"},
+    "source_epoch_id": {"type": "string"},
+    "source_root": {"type": "string"},
+    "epoch_state": {"type": "string"},
+    "durable_admissibility": {"type": "string"}
+  }
+}

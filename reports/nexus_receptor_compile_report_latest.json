@@ -3,7 +3,7 @@
   "version": "0.1.8-receptor-compiler",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-04T01:08:53.889488+00:00",
+  "generated_at_utc": "2026-07-12T23:20:40.405689+00:00",
   "checks": [
     {
       "check": "receptor_required_paths",

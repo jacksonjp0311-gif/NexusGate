@@ -1,104 +1,104 @@
 {
   "system": "NEXUS GATE",
   "version": "0.1.6b-pack-compiler",
-  "generated_at_utc": "2026-07-04T01:09:16.856139+00:00",
+  "generated_at_utc": "2026-07-12T23:23:25.568593+00:00",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "file_count": 1723,
-  "total_bytes": 9933138,
-  "total_lines": 311126,
-  "bundle_path": "dist/nexus_gate_source_bundle_20260704_010915.tar.gz",
-  "manifest_path": "dist/nexus_gate_pack_manifest_20260704_010915.json",
+  "file_count": 5466,
+  "total_bytes": 49835032,
+  "total_lines": 1121486,
+  "bundle_path": "dist/nexus_gate_source_bundle_20260712_232321.tar.gz",
+  "manifest_path": "dist/nexus_gate_pack_manifest_20260712_232321.json",
   "largest_files": [
     {
-      "path": "docs/feedback/FEEDBACK_LOG.md",
-      "size_bytes": 104841,
-      "line_count": 3020,
-      "sha256": "0a284a0bb83ce6ddb54f916b5d7bf9a107ae678c3fcd114978015975c6f84fbd"
+      "path": "PetriDishPro/reports/latest_run.json",
+      "size_bytes": 1395430,
+      "line_count": 59782,
+      "sha256": "0149c1c1b329f7de34f0fea53bac55798eb9e4ff7b955a447af04e791fd1be82"
     },
     {
-      "path": "electron/node_modules/got/readme.md",
-      "size_bytes": 86361,
-      "line_count": 2478,
-      "sha256": "d145da1303f04ccffb0bf1144f46f8f02d411dbc4699ee6c79c8b3201eff8382"
+      "path": "PetriDishPro/artifacts/runs/petri_1783544884_20260709/run.json",
+      "size_bytes": 1395430,
+      "line_count": 59782,
+      "sha256": "0149c1c1b329f7de34f0fea53bac55798eb9e4ff7b955a447af04e791fd1be82"
     },
     {
-      "path": "electron/node_modules/fs-extra/CHANGELOG.md",
-      "size_bytes": 62556,
-      "line_count": 865,
-      "sha256": "dc091c5286a1671453f2fca693e4bb6e27d02fed972cbc4b40c1903ddacd24cb"
+      "path": "PetriDishPro/reports/latest_density.json",
+      "size_bytes": 1314277,
+      "line_count": 56969,
+      "sha256": "f274bdba868dd6822f764bcf5ab86fd36fd2e75cc1ffe747dae76cc1890899b8"
     },
     {
-      "path": "scripts/nexus_tui.ps1",
-      "size_bytes": 47227,
-      "line_count": 997,
-      "sha256": "c5f699dbe1b737c082361c1d7767df3087734ede7c97b4d4397ce809b650dbc7"
+      "path": "PetriDishPro/artifacts/runs/petri_1783544884_20260709/density.json",
+      "size_bytes": 1314277,
+      "line_count": 56969,
+      "sha256": "f274bdba868dd6822f764bcf5ab86fd36fd2e75cc1ffe747dae76cc1890899b8"
     },
     {
-      "path": "README.md",
-      "size_bytes": 39567,
-      "line_count": 1413,
-      "sha256": "c84779f96f58883b18190bd52374694dfe4569167df2dde6051b0c44ce28519e"
+      "path": "reports/gitnexus_report_latest.json",
+      "size_bytes": 675074,
+      "line_count": 20245,
+      "sha256": "87b0f370e6132d29ca1ef0c0b77885a96cc11c5105d0d020ec8dc9aa6b2c46ac"
     },
     {
-      "path": "electron/node_modules/yauzl/README.md",
-      "size_bytes": 31177,
-      "line_count": 659,
-      "sha256": "8df92afb1e8ea3c754672e919693569573505e8503cd33972d496e4a28d89abc"
+      "path": "GITNEXUS/reports/gitnexus_report_latest.json",
+      "size_bytes": 675074,
+      "line_count": 20245,
+      "sha256": "87b0f370e6132d29ca1ef0c0b77885a96cc11c5105d0d020ec8dc9aa6b2c46ac"
     },
     {
-      "path": "electron/package-lock.json",
-      "size_bytes": 30774,
-      "line_count": 872,
-      "sha256": "00e076dadbe675bfe71a865464ee2664bbea3f44225190c468d365b5551d5cc6"
+      "path": "GITNEXUS/state/gitnexus_graph_latest.json",
+      "size_bytes": 675074,
+      "line_count": 20245,
+      "sha256": "87b0f370e6132d29ca1ef0c0b77885a96cc11c5105d0d020ec8dc9aa6b2c46ac"
     },
     {
-      "path": "electron/node_modules/.package-lock.json",
-      "size_bytes": 30623,
-      "line_count": 865,
-      "sha256": "9e3fd8c5f23350cfcec670cb9d48b66e9f87edbc9aca9679271e9a174d31905f"
+      "path": "state/gitnexus/gitnexus_graph_latest.json",
+      "size_bytes": 675074,
+      "line_count": 20245,
+      "sha256": "87b0f370e6132d29ca1ef0c0b77885a96cc11c5105d0d020ec8dc9aa6b2c46ac"
     },
     {
-      "path": "electron/node_modules/type-fest/readme.md",
-      "size_bytes": 29282,
-      "line_count": 643,
-      "sha256": "ec274a82eb8c4695b61bb17e93e1960358b4113eb79ce5572c198ed663574c24"
+      "path": "T3MP3ST/node_modules/typescript/lib/ru/diagnosticMessages.generated.json",
+      "size_bytes": 443587,
+      "line_count": 2122,
+      "sha256": "29bb8ea9d44f55bb7acdedfac0a57865ea40552f004d0d6e3b96746ac76666cc"
     },
     {
-      "path": "electron/node_modules/global-agent/node_modules/semver/README.md",
-      "size_bytes": 25669,
-      "line_count": 681,
-      "sha256": "f1a789dcec285150be24db2ea04dd3175031554fa9834ec92fab83fb5e025a57"
+      "path": "T3MP3ST/node_modules/typescript/lib/ja/diagnosticMessages.generated.json",
+      "size_bytes": 381398,
+      "line_count": 2122,
+      "sha256": "ae1a2d439bfb60b9fa32408bde0e9ec39840a33d621014fcb5b2fb4e69a606de"
     },
     {
-      "path": "nexus_gate/compiler/compiler.py",
-      "size_bytes": 22324,
-      "line_count": 500,
-      "sha256": "a8926ee4df1e095d7efc0544b4470cc5aa55e52af2e38ed6cba7ed8f1d9e85ab"
+      "path": "T3MP3ST/node_modules/typescript/lib/ko/diagnosticMessages.generated.json",
+      "size_bytes": 346139,
+      "line_count": 2122,
+      "sha256": "31b27d2d556fc037eeac1672f771bf940ec70afba342e977faa75a2fa292a8be"
     },
     {
-      "path": "electron/node_modules/debug/README.md",
-      "size_bytes": 22115,
-      "line_count": 482,
-      "sha256": "486cb669048bd5014adf9ea117e27a45c4e61b0e668f464c724273beb8170797"
+      "path": "T3MP3ST/node_modules/typescript/lib/fr/diagnosticMessages.generated.json",
+      "size_bytes": 346016,
+      "line_count": 2122,
+      "sha256": "9fc1836d7575840a8b7a63dacdedd99e90e4144c0bbe29a4b7fa78a86e0e8bf5"
     },
     {
-      "path": "reports/nexus_feedback_report_20260703_214354.json",
-      "size_bytes": 21604,
-      "line_count": 701,
-      "sha256": "f51d3a2c97a4c12b6d8646a4dc1262c5c6561ae95ee0d4c6b1ce22815fb240be"
+      "path": "T3MP3ST/bench/xbow/results/blackbox-golden-final/xben_084_24.json",
+      "size_bytes": 345760,
+      "line_count": 1,
+      "sha256": "e624cefa419e790fe5ef895b377862cb9c9eb6988bde87c38273bb588277bc96"
     },
     {
-      "path": "reports/nexus_feedback_report_20260703_215031.json",
-      "size_bytes": 21604,
-      "line_count": 701,
-      "sha256": "5347675dd52fc9caa59cc4c964582cd4edaac671e5faba110e45a942b2ff0b56"
+      "path": "T3MP3ST/node_modules/typescript/lib/de/diagnosticMessages.generated.json",
+      "size_bytes": 344426,
+      "line_count": 2122,
+      "sha256": "a4031a8028febc35f92ba317104878d93f02c1750e6ee16351c2270ab4dff517"
     },
     {
-      "path": "reports/nexus_feedback_report_20260703_215231.json",
-      "size_bytes": 21604,
-      "line_count": 701,
-      "sha256": "c0669a66842314f2e2bd4426b529651d0d7406d5205713c03d3ad047fd570be0"
+      "path": "T3MP3ST/node_modules/typescript/lib/pl/diagnosticMessages.generated.json",
+      "size_bytes": 342111,
+      "line_count": 2122,
+      "sha256": "0645575abe920de1ee4cf3f2f70c7abc7f6691daa01cf1e9ad6b1ce53917c9ff"
     }
   ],
   "commands": [
@@ -111,7 +111,9 @@
         "tests"
       ],
       "returncode": 0,
-      "stdout_tail": "Listing 'nexus_gate'...\nListing 'nexus_gate\\\\adapters'...\nListing 'nexus_gate\\\\bridge'...\nListing 'nexus_gate\\\\build'...\nListing 'nexus_gate\\\\compiler'...\nListing 'nexus_gate\\\\core'...\nListing 'nexus_gate\\\\domain'...\nListing 'nexus_gate\\\\evidence'...\nListing 'nexus_gate\\\\feedback'...\nListing 'nexus_gate\\\\interconnect'...\nListing 'nexus_gate\\\\policies'...\nListing 'nexus_gate\\\\receptors'...\nListing 'nexus_gate\\\\reflection'...\nListing 'nexus_gate\\\\runtime'...\nListing 'nexus_gate\\\\schemas'...\nListing 'nexus_gate\\\\self_healing'...\nListing 'nexus_gate\\\\ui'...\nListing 'tests'...\n",
+      "timed_out": false,
+      "timeout_seconds": 240,
+      "stdout_tail": "Listing 'nexus_gate'...\nListing 'nexus_gate\\\\actions'...\nListing 'nexus_gate\\\\adapters'...\nListing 'nexus_gate\\\\algorithms'...\nListing 'nexus_gate\\\\bridge'...\nListing 'nexus_gate\\\\build'...\nListing 'nexus_gate\\\\coherence'...\nListing 'nexus_gate\\\\compiler'...\nListing 'nexus_gate\\\\core'...\nListing 'nexus_gate\\\\cortex'...\nListing 'nexus_gate\\\\decision'...\nListing 'nexus_gate\\\\discoveries'...\nListing 'nexus_gate\\\\distillation'...\nListing 'nexus_gate\\\\domain'...\nListing 'nexus_gate\\\\epochs'...\nListing 'nexus_gate\\\\evidence'...\nListing 'nexus_gate\\\\failure_intelligence'...\nListing 'nexus_gate\\\\feedback'...\nListing 'nexus_gate\\\\geometric_memory'...\nListing 'nexus_gate\\\\gitnexus'...\nListing 'nexus_gate\\\\gitnexus_bridge'...\nListing 'nexus_gate\\\\hygiene'...\nListing 'nexus_gate\\\\interconnect'...\nListing 'nexus_gate\\\\lattice'...\nListing 'nexus_gate\\\\ledger'...\nListing 'nexus_gate\\\\loops'...\nListing 'nexus_gate\\\\nexus_cell'...\nListing 'nexus_gate\\\\nexus_cell\\\\boundary'...\nListing 'nexus_gate\\\\nexus_cell\\\\runners'...\nListing 'nexus_gate\\\\nexus_cell\\\\secrets'...\nListing 'nexus_gate\\\\nexus_shell'...\nListing 'nexus_gate\\\\nn_router'...\nListing 'nexus_gate\\\\origin'...\nListing 'nexus_gate\\\\outcomes'...\nListing 'nexus_gate\\\\policies'...\nListing 'nexus_gate\\\\receptors'...\nListing 'nexus_gate\\\\reflection'...\nListing 'nexus_gate\\\\runtime'...\nListing 'nexus_gate\\\\schemas'...\nListing 'nexus_gate\\\\self_healing'...\nListing 'nexus_gate\\\\state'...\nListing 'nexus_gate\\\\ui'...\nListing 'tests'...\nListing 'tests\\\\_quarantine_prior_wounds'...\n",
       "stderr_tail": ""
     },
     {
@@ -124,8 +126,10 @@
         "tests"
       ],
       "returncode": 0,
+      "timed_out": false,
+      "timeout_seconds": 240,
       "stdout_tail": "",
-      "stderr_tail": "................................................................................................................................\n----------------------------------------------------------------------\nRan 128 tests in 5.412s\n\nOK\n"
+      "stderr_tail": "..................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 546 tests in 49.039s\n\nOK\n"
     },
     {
       "cmd": [
@@ -137,7 +141,9 @@
         "--json"
       ],
       "returncode": 0,
-      "stdout_tail": "odes/FAILURE_MODE_CHART.md\",\n          \"docs/updates/UPDATE_CHART.md\",\n          \"reports/nexus_compile_report_latest.json\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"update_chart_current\",\n      \"status\": \"pass\",\n      \"message\": \"Update chart includes current v0.1.5 state.\",\n      \"evidence\": {\n        \"required\": [\n          \"v0.1.5\",\n          \"Strict compiler\",\n          \"Cold Evidence\",\n          \"No version step without update chart entry\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"cold_evidence_contracts\",\n      \"status\": \"pass\",\n      \"message\": \"Cold evidence and wound route contracts are visible.\",\n      \"evidence\": {\n        \"contracts\": [\n          \"ShadowReport\",\n          \"ShadowFailure\",\n          \"ShadowWound\",\n          \"WoundRoute\",\n          \"ReplayCertificate\",\n          \"DemotionDecision\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"cold_evidence_engine\",\n      \"status\": \"pass\",\n      \"message\": \"Cold evidence engine classifies failure, wounds, routes, and certifies replay.\",\n      \"evidence\": {\n        \"failure\": \"shadow_failure_unrouted\",\n        \"wound_status\": \"open\",\n        \"route_action\": \"replay\",\n        \"replay_passed\": true\n      }\n    },\n    {\n      \"gate\": \"forbidden_bypass_scan\",\n      \"status\": \"pass\",\n      \"message\": \"No forbidden bypass markers found.\",\n      \"evidence\": {\n        \"markers\": [\n          \"bypass_authority=True\",\n          \"skip_authority_gate=True\",\n          \"disable_ledger=True\",\n          \"unsafe_engage=True\",\n          \"allow_mutation_without_authority\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"direct_compiler_calls\",\n      \"status\": \"pass\",\n      \"message\": \"Compile/loop/promote/strict scripts call the gated compiler directly.\",\n      \"evidence\": {\n        \"checked\": [\n          \"scripts/nexus.ps1\",\n          \"scripts/nexus_compile.ps1\",\n          \"scripts/nexus_once.ps1\",\n          \"scripts/nexus_dev_loop.ps1\",\n          \"scripts/nexus_promote.ps1\",\n          \"scripts/nexus_strict_compile.ps1\",\n          \"scripts/nexus.sh\",\n          \"scripts/nexus_compile.sh\",\n          \"scripts/nexus_once.sh\",\n          \"scripts/nexus_dev_loop.sh\",\n          \"scripts/nexus_promote.sh\",\n          \"scripts/nexus_strict_compile.sh\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"compact_commands\",\n      \"status\": \"pass\",\n      \"message\": \"Compact command surface is present.\",\n      \"evidence\": {\n        \"required\": [\n          \"scripts/nexus.ps1\",\n          \"scripts/nexus.sh\",\n          \"docs/runtime/COMPACT_COMMANDS.md\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"python_compile\",\n      \"status\": \"pass\",\n      \"message\": \"Python source compiled.\",\n      \"evidence\": {\n        \"paths\": [\n          \"nexus_gate\",\n          \"tests\"\n        ]\n      }\n    },\n    {\n      \"gate\": \"route_contracts\",\n      \"status\": \"pass\",\n      \"message\": \"Core route contracts hold.\",\n      \"evidence\": {\n        \"decisions\": {\n          \"missing_schema\": \"reject\",\n          \"no_authority_tool\": \"shadow\",\n          \"read_only\": \"engage\"\n        }\n      }\n    },\n    {\n      \"gate\": \"unit_tests\",\n      \"status\": \"pass\",\n      \"message\": \"Unit tests passed.\",\n      \"evidence\": {\n        \"cmd\": [\n          \"C:\\\\Program Files\\\\Python312\\\\python.exe\",\n          \"-m\",\n          \"unittest\",\n          \"discover\",\n          \"-s\",\n          \"tests\"\n        ],\n        \"returncode\": 0,\n        \"stdout_tail\": \"\",\n        \"stderr_tail\": \"................................................................................................................................\\n----------------------------------------------------------------------\\nRan 128 tests in 4.979s\\n\\nOK\\n\"\n      }\n    },\n    {\n      \"gate\": \"ledger_appendable\",\n      \"status\": \"pass\",\n      \"message\": \"Ledger is appendable.\",\n      \"evidence\": {\n        \"path\": \"ledger\\\\nexus_gate_ledger.v0.1.0.jsonl\"\n      }\n    }\n  ],\n  \"claim_boundary\": \"Local development gate only. Not a production validation, safety proof, security proof, or correctness proof.\"\n}\n",
+      "timed_out": false,
+      "timeout_seconds": 240,
+      "stdout_tail": "s in 0.002s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_runtime_router.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"...\\n----------------------------------------------------------------------\\nRan 3 tests in 0.000s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_self_healing_feedback.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"....\\n----------------------------------------------------------------------\\nRan 4 tests in 0.112s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_spiral_core_portal_v012.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \".........\\n----------------------------------------------------------------------\\nRan 9 tests in 0.016s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_spiral_gate_logo_v010.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \".......\\n----------------------------------------------------------------------\\nRan 7 tests in 0.006s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_strict_compiler_surface.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"...\\n----------------------------------------------------------------------\\nRan 3 tests in 0.001s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_system_monitor_hud_v098.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"....\\n----------------------------------------------------------------------\\nRan 4 tests in 0.127s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_t3mp3st_portal.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"....\\n----------------------------------------------------------------------\\nRan 4 tests in 0.005s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_tesseract_neural_network_minimal.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"......\\n----------------------------------------------------------------------\\nRan 6 tests in 7.065s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_triadic_geometric_lattice_v250.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \".....\\n----------------------------------------------------------------------\\nRan 5 tests in 0.959s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_tui_electron_bridge.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"....\\n----------------------------------------------------------------------\\nRan 4 tests in 0.002s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_tui_hud_operator_surface.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"....\\n----------------------------------------------------------------------\\nRan 4 tests in 0.002s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_ui_balanced_chat_layout.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"...\\n----------------------------------------------------------------------\\nRan 3 tests in 0.001s\\n\\nOK\\n\"\n          },\n          {\n            \"file\": \"test_wound_compression_engine_v098.py\",\n            \"returncode\": 0,\n            \"stdout_tail\": \"\",\n            \"stderr_tail\": \"...\\n----------------------------------------------------------------------\\nRan 3 tests in 0.173s\\n\\nOK\\n\"\n          }\n        ]\n      }\n    },\n    {\n      \"gate\": \"ledger_appendable\",\n      \"status\": \"pass\",\n      \"message\": \"Ledger is appendable.\",\n      \"evidence\": {\n        \"path\": \"ledger\\\\nexus_gate_ledger.v0.1.0.jsonl\"\n      }\n    }\n  ],\n  \"claim_boundary\": \"Local development gate only. Not a production validation, safety proof, security proof, or correctness proof.\"\n}\n",
       "stderr_tail": ""
     }
   ],

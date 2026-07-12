@@ -200,6 +200,9 @@ case "$COMMAND" in
     ;;
   certificate-resume) python -m nexus_gate.loops.certificate_resume --root . --json ;;
   epoch-seal) python -m nexus_gate.epochs.seal --root . --json ;;
+  epoch-observe) python -m nexus_gate.epochs.seal --root . --json ;;
+  epoch-verify) python -m nexus_gate.epochs.seal --root . --verify --json ;;
+  epoch-chain-verify) python -m nexus_gate.epochs.seal --root . --chain-verify --json ;;
   origin-seal) python -m nexus_gate.origin.seal --root . --json ;;
   triadic-lattice) python -m nexus_gate.lattice.triadic --root . --json ;;
   distill) python -m nexus_gate.distillation.graph --root . --json ;;
@@ -208,6 +211,39 @@ case "$COMMAND" in
   outcome-learn) python -m nexus_gate.outcomes.learn --root . --json ;;
   runtime-hygiene) python -m nexus_gate.hygiene.runtime_churn --root . --json ;;
   clean-runtime) python -m nexus_gate.hygiene.runtime_churn --root . --apply --json ;;
+  action-recommend) python -m nexus_gate.actions.cli recommend --root . --json ;;
+  action-status)
+    shift || true
+    python -m nexus_gate.actions.cli status --root . --action-id "${1:-}" --json
+    ;;
+  action-authorize)
+    shift || true
+    ACTION_ID="${1:-}"
+    shift || true
+    python -m nexus_gate.actions.cli authorize --root . --action-id "$ACTION_ID" --note "${*:-}" --json
+    ;;
+  action-deny)
+    shift || true
+    python -m nexus_gate.actions.cli deny --root . --action-id "${1:-}" --json
+    ;;
+  action-execute)
+    shift || true
+    python -m nexus_gate.actions.cli execute --root . --action-id "${1:-}" --json
+    ;;
+  action-effects)
+    shift || true
+    python -m nexus_gate.actions.cli effects --root . --action-id "${1:-}" --json
+    ;;
+  action-validate)
+    shift || true
+    python -m nexus_gate.actions.cli validate --root . --action-id "${1:-}" --json
+    ;;
+  action-finalize)
+    shift || true
+    python -m nexus_gate.actions.cli finalize --root . --action-id "${1:-}" --json
+    ;;
+  action-chain-verify) python -m nexus_gate.actions.cli chain-verify --root . --json ;;
+  causal-receipts) python -m nexus_gate.actions.cli receipts --root . --json ;;
   install-hooks) ./scripts/install_nexus_git_hooks.sh ;;
   cortex)
     shift || true

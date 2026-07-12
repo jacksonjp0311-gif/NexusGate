@@ -3,7 +3,7 @@
   "version": "0.2.2-feedback",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-04T01:09:12.113747+00:00",
+  "generated_at_utc": "2026-07-12T23:22:27.084194+00:00",
   "signals": [
     {
       "name": "nexus_compiler",
@@ -11,7 +11,7 @@
       "evidence": {
         "path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\nexus_compile_report_latest.json",
         "exists": true,
-        "version": "0.1.5-strict-cold-evidence-compiler",
+        "version": "0.9.5-personal-coding-paradise-compiler",
         "status": "pass"
       }
     },
@@ -73,8 +73,8 @@
         "exists": true,
         "version": "0.2.2-evidence-compaction",
         "status": "pass",
-        "file_count": 1356,
-        "total_bytes": 17640004
+        "file_count": 1442,
+        "total_bytes": 178481584
       }
     },
     {
@@ -95,9 +95,9 @@
         "exists": true,
         "version": "0.1.6b-pack-compiler",
         "status": "pass",
-        "file_count": 1661,
-        "total_bytes": 9491558,
-        "total_lines": 297015
+        "file_count": 5354,
+        "total_bytes": 47046091,
+        "total_lines": 1061527
       }
     }
   ],
@@ -106,41 +106,41 @@
     "Run .\\scripts\\nexus.ps1 compact before adding more runtime lanes."
   ],
   "evidence_pressure": {
-    "file_count": 1357,
-    "total_bytes": 17655678,
+    "file_count": 1444,
+    "total_bytes": 178497889,
     "pressure_level": "high",
     "newest_files": [
+      {
+        "path": "reports\\nexus_interconnect_report_20260712_232226.json",
+        "size_bytes": 15674
+      },
       {
         "path": "reports\\nexus_interconnect_report_latest.json",
         "size_bytes": 15674
       },
       {
-        "path": "reports\\nexus_interconnect_report_20260704_010911.json",
-        "size_bytes": 15674
-      },
-      {
-        "path": "reports\\nexus_evidence_compaction_report_20260704_010911.json",
-        "size_bytes": 630
+        "path": "reports\\nexus_evidence_compaction_report_20260712_232226.json",
+        "size_bytes": 631
       },
       {
         "path": "reports\\nexus_evidence_compaction_report_latest.json",
-        "size_bytes": 630
+        "size_bytes": 631
       },
       {
-        "path": "reports\\nexus_electron_preflight_report_latest.json",
-        "size_bytes": 5540
+        "path": "reports\\nexus_evidence_compaction_report_20260712_232225.json",
+        "size_bytes": 631
       },
       {
-        "path": "reports\\nexus_electron_environment_report_latest.json",
-        "size_bytes": 1610
+        "path": "reports\\nexus_evidence_distillation_report_latest.json",
+        "size_bytes": 32191
       },
       {
-        "path": "reports\\nexus_domain_intelligence_report_latest.json",
-        "size_bytes": 3633
+        "path": "ledger\\evidence_distillation.jsonl",
+        "size_bytes": 25587
       },
       {
-        "path": "reports\\nexus_bounded_runtime_report_latest.json",
-        "size_bytes": 6295
+        "path": "reports\\nexus_epoch_integrity_seal_latest.json",
+        "size_bytes": 39183
       }
     ]
   },
@@ -149,7 +149,7 @@
     "version": "0.2.7-domain-interconnect",
     "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
     "status": "pass",
-    "generated_at_utc": "2026-07-04T01:09:11.754206+00:00",
+    "generated_at_utc": "2026-07-12T23:22:26.743623+00:00",
     "nodes": [
       {
         "node_id": "runtime:bounded_bridge",
@@ -697,5 +697,5 @@
     "claim_boundary": "Interconnect graph is local architecture evidence only. It does not prove production interoperability, safety, consciousness, autonomous authority, or correctness."
   },
   "claim_boundary": "Feedback report is local development evidence only. It is not a production validation, safety proof, security proof, or correctness proof.",
-  "report_hash": "56f90587519f4d1a2f5d3583a098f14c4c6052de3d9acfc4e7e3fcaf0f2a358b"
+  "report_hash": "a9836582a6ce82700d1f1f79d840e2d3e190c8444f83786f5d4968aaf512a143"
 }

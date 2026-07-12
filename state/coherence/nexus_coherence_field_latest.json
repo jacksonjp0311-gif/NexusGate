@@ -23,11 +23,13 @@
   ],
   "claim_boundary": "The NEXUS Coherence Field is local development evidence only. It scores orientation, memory, evidence freshness, runtime pressure, wounds, policy, and continuity surfaces to recommend routing. It does not prove correctness, safety, security, production readiness, scientific truth, model understanding, or autonomous authority; coherence may not grant authority.",
   "coherence": {
-    "dirty_count": 91,
+    "decision_packet_fresh": false,
+    "dirty_count": 127,
     "field_state": "coherent",
     "lineage_entropy": 8,
     "missing_surfaces": [],
-    "score": 91,
+    "score": 88,
+    "state": "coherent",
     "threshold": 85
   },
   "continuity_protocol": {
@@ -49,9 +51,14 @@
   "decision_envelope": {
     "recommendation_count": 4,
     "selected_action": {
-      "arbiter_score": 75.8,
+      "arbiter_score": 62.519,
+      "arguments_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "authorization_required": true,
       "command": ".\\scripts\\nexus.ps1 cortex-refresh",
+      "command_registry_id": "nexus.cortex-refresh",
+      "execution_status": "not_executed",
       "next_loop": "cortex-certificate-refresh",
+      "normalized_arguments": {},
       "recommendation_only": true,
       "requires_final_evolve_before_commit": true,
       "requires_human_authorization": true,
@@ -73,13 +80,13 @@
       "status"
     ]
   },
-  "generated_at_utc": "2026-07-12T11:25:51.106564+00:00",
+  "generated_at_utc": "2026-07-12T23:22:06.636972+00:00",
   "intent": "Compile NEXUS coherence continuity field.",
   "mode": "outcome_aware_coherence_field",
   "origin": {
-    "origin_manifest_hash": "c29688ef2ed9b059876368a1a67ddf934264bc25f63b11f7ce7e66c7d74af401",
-    "product_phase": "Outcome-Aware Arbiter",
-    "product_version": "2.2.0",
+    "origin_manifest_hash": "d5a724c5792ba333e84bd66bd947e2f0986216b928663c0cbe31b478b511fe75",
+    "product_phase": "Causal Action Receipt Loop",
+    "product_version": "2.6.2",
     "status": "pass"
   },
   "outcome_learning": {
@@ -87,22 +94,27 @@
       "predictive-memory"
     ],
     "latest_outcome": {
-      "arbiter_score": 75.8,
-      "coherence_score": 91,
-      "event_id": "ae9a2b9d6c260cf09f58fe47",
-      "followup_needed": false,
-      "human_surface_path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\human_surface\\20260712_072347",
-      "lesson": "Route outcome recorded; future recommendations may adjust source pressure from calibration.",
+      "action_id": "32fdbddcb15ec47434d2622be81d3c78820dcbd19ad039f30db014f039d1acb8",
+      "arbiter_score": 62.519,
+      "blocked_reason": "no validated causal action receipt",
+      "coherence_score": 88,
+      "event_id": "6f48b621840b85981f1339f9",
+      "followup_needed": true,
+      "human_surface_path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\human_surface\\20260712_191826",
+      "law": "No receipt, no learning.",
+      "learning_receipt_hash": null,
+      "learning_status": "blocked",
+      "lesson": "No validated causal receipt exists; outcome remains observational and cannot calibrate route pressure.",
       "lineage_entropy": 8,
-      "outcome": "pass",
-      "route_fitness": 1.0,
+      "outcome": "skipped",
+      "route_fitness": 0.5,
       "selected_action": "cortex-certificate-refresh",
       "selected_command": ".\\scripts\\nexus.ps1 cortex-refresh",
       "selected_source": "predictive-memory",
-      "timestamp": "2026-07-12T11:25:25.650687+00:00"
+      "timestamp": "2026-07-12T23:21:29.091696+00:00"
     },
     "pressure_trend": "stable",
-    "route_fitness": 1.0,
+    "route_fitness": 0.5,
     "status": "present"
   },
   "phase": "Outcome-Aware Arbiter",
@@ -134,14 +146,101 @@
     "reports/nexus_recommendation_outcome_latest.json",
     "git status --short"
   ],
+  "repository_snapshot": {
+    "branch": "main",
+    "epoch_id": "e1ea2bc8db1c21743e75ef19",
+    "generated_at_utc": "2026-07-12T23:22:06.559030+00:00",
+    "input_snapshot_hash": "1a8789b36758adcb88bd63fc5259da59f8f7108ea8c28e3af7d6c7032c1f1295",
+    "input_surfaces": [
+      {
+        "exists": true,
+        "path": "reports/nexus_decision_envelope_latest.json",
+        "sha256": "94d2b39110226c92406cfe6cb60879a5636206dc7dda52ac1e139953f9c89e39"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_origin_seal_latest.json",
+        "sha256": "308a54f12b438bc77aaaa5e0033ba56270e8d58c6aa30a1ef2d98787e7be55f7"
+      },
+      {
+        "exists": true,
+        "path": "state/nexus_origin_manifest_latest.json",
+        "sha256": "308a54f12b438bc77aaaa5e0033ba56270e8d58c6aa30a1ef2d98787e7be55f7"
+      },
+      {
+        "exists": true,
+        "path": "state/algorithms/nexus_algorithm_cards_latest.json",
+        "sha256": "c1613377122df3ed1aea2d5cd254e77b5318e2576f35e56d89bc284ac930f0a8"
+      },
+      {
+        "exists": true,
+        "path": "state/discoveries/nexus_discovery_cards_latest.json",
+        "sha256": "dd86a73aeb9691f1e572013606a667515a20ee2fba3661346df295a0038c1b7e"
+      },
+      {
+        "exists": true,
+        "path": "policy/authority_laws.json",
+        "sha256": "4e554a1275419b8dfe4e21ccff7b22c6197cdd26ae212e20800af870fd1922bb"
+      },
+      {
+        "exists": true,
+        "path": "policy/risk_profiles.json",
+        "sha256": "8a3f4292d2ddac75aca13a3b3175cdf9e186a4101864ad6d1ff0ec8b2c1b46e7"
+      },
+      {
+        "exists": true,
+        "path": "policy/capabilities.json",
+        "sha256": "9a752acbe52ce88b79543455705f5fd70cc19c32a40f68c7a6bd7bf0540c95eb"
+      },
+      {
+        "exists": true,
+        "path": "policy/claim_boundaries.json",
+        "sha256": "a1dbddfa233f6647cf3dbe3095f69f8f955318b9f0d486f68da492070324bb23"
+      },
+      {
+        "exists": true,
+        "path": "docs/protocols/GOVERNED_AGENT_CONTINUITY_PROTOCOL.md",
+        "sha256": "f9346878a840f460036e8813d31024d9cf3ab798448a4c72317300253c38417c"
+      },
+      {
+        "exists": true,
+        "path": "docs/runtime/NEXUS_COHERENCE_FIELD_PROTOCOL.md",
+        "sha256": "6d922f76cbe0c492730c8d48656cde51954f48af3bebf7065344d6c57059ec48"
+      },
+      {
+        "exists": true,
+        "path": "state/protocols/nexus_continuity_protocol.v2.0.json",
+        "sha256": "4128a509bce844ffb5129b3999077c43344c6821c067ddfc543d75588b29d4ac"
+      },
+      {
+        "exists": true,
+        "path": "state/coherence/arbiter_calibration_latest.json",
+        "sha256": "76e08f0ca4ddd21fc17861005b3fbae016e7077a1bb14056beef66dc5744173e"
+      },
+      {
+        "exists": true,
+        "path": "state/coherence/pressure_memory_latest.json",
+        "sha256": "88344b3c60049f6a84a0c006f5d51e3c752e3a657e8f1c6a7f8230dd683f0cf4"
+      },
+      {
+        "exists": true,
+        "path": "reports/nexus_recommendation_outcome_latest.json",
+        "sha256": "06ad2bfef9486f933f881a8452a06f45e3396c11f31ac4aa261f45a45790217c"
+      }
+    ],
+    "repository_commit": "bf9b8d48da9250b38e6fb871ad2a554d63a8643a",
+    "schema": "NEXUS_REPOSITORY_SNAPSHOT.v2.4.0",
+    "source_status_count": 47,
+    "source_status_hash": "1e2ed7f7d29d5a5b4607a2203269ff854b7e1a5db7626ae189182aa0d160f8d0"
+  },
   "runtime_pressure": {
     "level": "pass",
     "slowest_gate": null,
     "timeout_budget": "adaptive_recommendation_only"
   },
-  "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.2.0",
+  "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.4.0",
   "selected_next_action": {
-    "arbiter_score": 75.8,
+    "arbiter_score": 62.519,
     "command": ".\\scripts\\nexus.ps1 cortex-refresh",
     "recommendation_only": true,
     "requires_final_evolve_before_commit": true,
@@ -150,7 +249,7 @@
   },
   "status": "pass",
   "system": "NEXUS GATE",
-  "version": "2.2.0",
+  "version": "2.4.0",
   "wound_intelligence": {
     "priority_formula": "severity * recurrence * affected_surface_centrality * blast_radius / max(closure_confidence, 0.1)",
     "status": "scaffolded"

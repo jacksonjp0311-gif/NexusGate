@@ -32,11 +32,14 @@ Before running full `evolve`, pack, broad test suites, Electron smoke, or any lo
 .\scripts\nexus.ps1 predictive-evolve
 .\scripts\nexus.ps1 certificate-resume
 .\scripts\nexus.ps1 epoch-seal
+.\scripts\nexus.ps1 epoch-verify
 .\scripts\nexus.ps1 origin-seal
 .\scripts\nexus.ps1 triadic-lattice
 .\scripts\nexus.ps1 distill
 .\scripts\nexus.ps1 decision-envelope
 .\scripts\nexus.ps1 coherence-field
+.\scripts\nexus.ps1 action-recommend
+.\scripts\nexus.ps1 action-chain-verify
 ```
 
 Use the packet at `reports/nexus_predictive_gate_timing_latest.json` to choose the cheapest valid next gate. If runtime pressure is high, prefer targeted tests or the named timing recommendation before repeating an expensive lane.
@@ -48,6 +51,22 @@ Predictive timing is recommendation-only.
 It may reduce wasted tokens and wall-clock time.
 It may not hide failures, bypass gates, self-authorize, or extend authority.
 ```
+
+## Causal Action Receipt Law
+
+Current line: `v2.6.2 Causal Action Receipt Loop`.
+
+No receipt, no learning.
+
+Agents may create recommendation receipts in shadow mode. Agents may not infer human authorization from command invocation, previous approval, process existence, report presence, model output, or successful execution. Explicit action authorization is required before any registered action execution:
+
+```powershell
+.\scripts\nexus.ps1 action-authorize -ActionId "<id>" -Tag "<human note>"
+```
+
+Action learning requires recommendation, authorization, execution, effects, validation, and learning receipts under `state/actions/<action_id>/`. Outcome Learner must treat missing validated receipts as blocked observational state, not durable calibration.
+
+Generated visualization caches such as `state/neural_activity/repo_neural_graph_latest.json` are runtime surfaces. They must not be treated as canonical source identity or durable learning parents.
 
 
 ## Rehydration Visibility Contract

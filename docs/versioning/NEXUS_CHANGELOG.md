@@ -1,5 +1,14 @@
-## v2.6.1 - Epoch Integrity Seal
+## v2.6.2 - Causal Action Receipt Loop
 Status: current
+- Adds Source Epoch / Observation split for v2.6.1a Epoch Integrity Hardening.
+- Adds concurrency-aware append-only ledger helper.
+- Adds causal action recommendation, authorization, execution, effects, validation, and learning receipt surfaces.
+- Adds command registry `registry/nexus_command_registry.v2.6.2.json`.
+- Enforces Outcome Learner law: No receipt, no learning.
+- Classifies the live neural repo graph as generated runtime cache and adds deterministic structural graph manifest support.
+
+## v2.6.1 - Epoch Integrity Seal
+Status: sealed
 - Adds `nexus_gate.epochs.seal` and `.\scripts\nexus.ps1 epoch-seal`.
 - Creates source-root epoch identity before commit, with commit SHA stored only as advisory attestation.
 - Writes immutable epoch packets under `state/epochs/<epoch_id>/` plus `state/latest_epoch_pointer.json`.

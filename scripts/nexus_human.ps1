@@ -3,8 +3,9 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "action-recommend", "action-chain-verify", "causal-receipts", "evolve", "status", "gitfix")]
     [string]$Command = "all",
+    [string]$ActionId = "",
     [switch]$NoGit
 )
 
@@ -168,12 +169,15 @@ function Run-Feedback {
     Invoke-Step "Predictive timing" "16d_predictive_timing.json" { python -m nexus_gate.loops.predictive_timing --root . --json }
     Invoke-Step "Predictive memory orchestrator" "16e_predictive_memory_orchestrator.json" { python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent "evolve chain Cortex memory and predictive gate fusion" --json }
     Invoke-Step "Epoch integrity seal" "16e2_epoch_integrity_seal.json" { python -m nexus_gate.epochs.seal --root . --json }
+    Invoke-Step "Epoch integrity verify" "16e3_epoch_integrity_verify.json" { python -m nexus_gate.epochs.seal --root . --verify --json }
     Invoke-Step "Origin seal" "16f_origin_seal.json" { python -m nexus_gate.origin.seal --root . --json }
     Invoke-Step "Triadic geometric lattice" "16f2_triadic_lattice.json" { python -m nexus_gate.lattice.triadic --root . --json }
     Invoke-Step "Decision envelope" "16g_decision_envelope.json" { python -m nexus_gate.decision.envelope --root . --intent "evolve chain self-bootstrap decision envelope" --json }
     Invoke-Step "Coherence field" "16h_coherence_field.json" { python -m nexus_gate.coherence.field --root . --intent "evolve chain coherence continuity field" --json }
     Invoke-Step "Outcome learner" "16i_outcome_learner.json" { python -m nexus_gate.outcomes.learn --root . --intent "evolve chain recommendation outcome learning" --json }
     Invoke-Step "Evidence distillation graph" "16i2_evidence_distillation.json" { python -m nexus_gate.distillation.graph --root . --json }
+    Invoke-Step "Causal action recommendation shadow receipt" "16i3_causal_action_recommendation.json" { python -m nexus_gate.actions.cli recommend --root . --json }
+    Invoke-Step "Causal action chain verify" "16i4_action_chain_verify.json" { python -m nexus_gate.actions.cli chain-verify --root . --json }
     Say "Feedback/self-healing/interface lanes passed." "OK"
     Show-FeedbackSummary
 }
@@ -188,6 +192,7 @@ function Run-All {
     Run-Feedback
     Run-Pack
     Invoke-Step "Runtime hygiene" "18_runtime_hygiene.json" { python -m nexus_gate.hygiene.runtime_churn --root . --json }
+    Invoke-Step "Epoch chain verify" "19_epoch_chain_verify.json" { python -m nexus_gate.epochs.seal --root . --chain-verify --json }
     Say "Compiled report files written." "OK"
     Say "Human surface passed." "OK"
 }
@@ -367,6 +372,24 @@ if ($Command -eq "epoch-seal") {
     exit 0
 }
 
+if ($Command -eq "epoch-observe") {
+    Invoke-Step "Epoch observation" "16e2_epoch_integrity_seal.json" { python -m nexus_gate.epochs.seal --root . --json }
+    Say "Epoch observation written." "OK"
+    exit 0
+}
+
+if ($Command -eq "epoch-verify") {
+    Invoke-Step "Epoch integrity verify" "16e3_epoch_integrity_verify.json" { python -m nexus_gate.epochs.seal --root . --verify --json }
+    Say "Epoch integrity verified." "OK"
+    exit 0
+}
+
+if ($Command -eq "epoch-chain-verify") {
+    Invoke-Step "Epoch chain verify" "16e4_epoch_chain_verify.json" { python -m nexus_gate.epochs.seal --root . --chain-verify --json }
+    Say "Epoch chain verified." "OK"
+    exit 0
+}
+
 if ($Command -eq "triadic-lattice") {
     Invoke-Step "Triadic geometric lattice" "16f2_triadic_lattice.json" { python -m nexus_gate.lattice.triadic --root . --json }
     Say "Triadic lattice report written." "OK"
@@ -400,6 +423,24 @@ if ($Command -eq "distill") {
 if ($Command -eq "runtime-hygiene") {
     Invoke-Step "Runtime hygiene" "16j_runtime_hygiene.json" { python -m nexus_gate.hygiene.runtime_churn --root . --json }
     Say "Runtime hygiene report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "action-recommend") {
+    Invoke-Step "Causal action recommendation" "16i3_causal_action_recommendation.json" { python -m nexus_gate.actions.cli recommend --root . --json }
+    Say "Causal action recommendation receipt written." "OK"
+    exit 0
+}
+
+if ($Command -eq "action-chain-verify") {
+    Invoke-Step "Causal action chain verify" "16i4_action_chain_verify.json" { python -m nexus_gate.actions.cli chain-verify --root . --json }
+    Say "Causal action chain verified." "OK"
+    exit 0
+}
+
+if ($Command -eq "causal-receipts") {
+    Invoke-Step "Causal action status" "16i5_causal_action_status.json" { python -m nexus_gate.actions.cli receipts --root . --action-id $ActionId --json }
+    Say "Causal action status written." "OK"
     exit 0
 }
 

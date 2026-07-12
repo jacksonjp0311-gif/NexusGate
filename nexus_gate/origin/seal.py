@@ -10,9 +10,9 @@ from pathlib import Path
 from typing import Any
 
 
-PRODUCT_VERSION = "2.6.1"
-PRODUCT_PHASE = "Epoch Integrity Seal"
-SCHEMA = "NEXUS_ORIGIN_SEAL.v2.6.1"
+PRODUCT_VERSION = "2.6.2"
+PRODUCT_PHASE = "Causal Action Receipt Loop"
+SCHEMA = "NEXUS_ORIGIN_SEAL.v2.6.2"
 REPORT_LATEST = Path("reports") / "nexus_origin_seal_latest.json"
 STATE_LATEST = Path("state") / "nexus_origin_manifest_latest.json"
 
@@ -169,7 +169,23 @@ def build_origin_seal(root: str | Path) -> dict[str, Any]:
 
     epoch_report = _read_json(root_path / "reports" / "nexus_epoch_integrity_seal_latest.json", {})
     epoch_pointer = _read_json(root_path / "state" / "latest_epoch_pointer.json", {})
+    observation_pointer = _read_json(root_path / "state" / "latest_observation_pointer.json", {})
     epoch_visible = bool(epoch_report) and bool(epoch_pointer)
+    epoch_id = epoch_pointer.get("source_epoch_id") or epoch_pointer.get("epoch_id")
+    epoch_integrity = {
+        "visible": epoch_visible,
+        "valid": bool(epoch_visible)
+        and epoch_id == (epoch_report.get("source_epoch_id") or epoch_report.get("epoch_id"))
+        and epoch_pointer.get("source_root") == epoch_report.get("source_root")
+        and bool(observation_pointer)
+        and observation_pointer.get("source_epoch_id") == epoch_id,
+        "source_epoch_id": epoch_id,
+        "source_root_match": epoch_pointer.get("source_root") == epoch_report.get("source_root"),
+        "manifest_hash_valid": bool(epoch_report.get("manifest_hash")),
+        "ledger_chain_valid": bool((epoch_report.get("epoch_chain") or {}).get("chain_valid", True)),
+        "observation_valid": bool(observation_pointer) and observation_pointer.get("source_epoch_id") == epoch_id,
+        "durable_admissibility": epoch_pointer.get("durable_admissibility", "dehydrated"),
+    }
 
     checks = {
         "product_line_current": product_line_ok,
@@ -178,6 +194,7 @@ def build_origin_seal(root: str | Path) -> dict[str, Any]:
         "meta_orchestrator_visible": meta_visible,
         "predictive_memory_visible": memory_visible,
         "epoch_integrity_visible": epoch_visible,
+        "epoch_integrity_valid": epoch_integrity["valid"],
         "authority_boundary_declared": True,
         "final_evolve_required": True,
     }
@@ -208,6 +225,7 @@ def build_origin_seal(root: str | Path) -> dict[str, Any]:
         "surface_hash": surface_hash,
         "origin_surfaces": surfaces,
         "legacy_version_lineage": legacy_version_lineage,
+        "epoch_integrity": epoch_integrity,
         "checks": checks,
         "readme_current_line": version_line,
         "read_surfaces": ORIGIN_SURFACES,

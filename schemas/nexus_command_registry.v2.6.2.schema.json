@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS Command Registry v2.6.2",
+  "type": "object",
+  "required": ["schema", "commands"],
+  "properties": {
+    "schema": {"const": "NEXUS_COMMAND_REGISTRY.v2.6.2"},
+    "commands": {"type": "array"}
+  }
+}

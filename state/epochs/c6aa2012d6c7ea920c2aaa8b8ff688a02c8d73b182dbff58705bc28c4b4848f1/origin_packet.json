@@ -1,0 +1,13 @@
+{
+  "claim_boundary": "Source Epoch and Observation packets provide local temporal identity evidence only. They separate content-addressed repository identity from repeatable observation runs. They do not prove correctness, safety, security, production readiness, model understanding, consciousness, or autonomous authority.",
+  "durable_admissibility": "working_tree_only",
+  "eligible_as_learning_parent": false,
+  "epoch_state": "sealed_working_tree",
+  "epoch_subsystem_version": "2.6.1a",
+  "product_version": "2.6.2",
+  "schema": "NEXUS_EPOCH_ORIGIN_PACKET.v2.6.2",
+  "source_epoch_id": "c6aa2012d6c7ea920c2aaa8b8ff688a02c8d73b182dbff58705bc28c4b4848f1",
+  "source_root": "40a6f52f2a3defd800d2779ad5f6960a53bbe588e5df7502c084c630b9193c1e",
+  "tracked_source_root": "f7b2189272dac5c54cba7a983dcecf8076f8e0d4c915ad5f991f8b3978c16af1",
+  "working_tree_source_root": "40a6f52f2a3defd800d2779ad5f6960a53bbe588e5df7502c084c630b9193c1e"
+}

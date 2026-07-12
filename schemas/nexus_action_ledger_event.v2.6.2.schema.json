@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"NEXUS Action Ledger Event v2.6.2","type":"object","required":["schema","event_type","event_hash","previous_event_hash"],"properties":{"schema":{"type":"string"},"event_type":{"type":"string"},"event_hash":{"type":"string"},"previous_event_hash":{"type":"string"}}}

@@ -790,6 +790,82 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.4: stale packet rejection by source-root contract",
             ],
             "boundary": "Epoch sealing provides source identity and temporal ordering. It cannot execute, self-authorize, prove correctness, or replace final evolve.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "no-receipt-no-learning",
+            "version": "0.1.0",
+            "title": "No Receipt, No Learning",
+            "status": "active",
+            "summary": "NEXUS may not learn from a route unless recommendation, authorization, execution, effects, validation, and learnability receipts bind the outcome causally.",
+            "math": {
+                "causal_confidence": "K = E * A * X * W * V * (1 - F)",
+                "hard_zero": "missing authorization OR stale epoch OR command mismatch OR missing execution receipt -> K = 0",
+                "learnability": "K >= 0.85 AND admissible epochs AND validation passed",
+            },
+            "code_references": [
+                "nexus_gate/actions/cli.py",
+                "registry/nexus_command_registry.v2.6.2.json",
+                "ledger/action_receipts.jsonl",
+            ],
+            "algorithm_card_refs": [
+                "causal-action-lifecycle-algorithm",
+                "causal-confidence-algorithm",
+                "receipt-gated-calibration-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 action-recommend",
+                ".\\scripts\\nexus.ps1 action-chain-verify",
+                "Authorize and execute only by explicit human command.",
+            ],
+            "evidence_surfaces": [
+                "state/actions/<action_id>/recommendation.json",
+                "state/actions/<action_id>/authorization.json",
+                "state/actions/<action_id>/execution.json",
+                "state/actions/<action_id>/validation.json",
+                "state/actions/<action_id>/learning.json",
+            ],
+            "next_versions": [
+                "v0.2: route model calibration from three independent learnable receipts",
+                "v0.3: effect-set instrumentation beyond Git write surfaces",
+            ],
+            "boundary": "Receipt learning is local causal-attribution evidence only. It does not grant autonomous authority or prove global correctness.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "generated-visualization-state-not-source",
+            "version": "0.1.0",
+            "title": "Generated Visualization State Must Not Pollute Source Identity",
+            "status": "active",
+            "summary": "Live neural visualization caches can change because time changed, not because NEXUS evolved. Runtime graph churn must be excluded from Source Epoch identity and classified as generated runtime cache.",
+            "math": {
+                "structural_graph_hash": "SHA256(deterministic nodes + deterministic edges)",
+                "excluded_fields": "generated_at_utc, absolute_source_root, mtime, process state",
+            },
+            "code_references": [
+                "electron/main.js::buildNeuralRepoGraph",
+                "nexus_gate/hygiene/runtime_churn.py",
+                "nexus_gate/epochs/seal.py::_is_generated_or_ignored",
+            ],
+            "algorithm_card_refs": [
+                "source-epoch-identity-algorithm",
+                "append-only-ledger-transaction-algorithm",
+            ],
+            "replication_steps": [
+                "Open Neural Activity and refresh graph.",
+                ".\\scripts\\nexus.ps1 runtime-hygiene",
+                ".\\scripts\\nexus.ps1 epoch-seal",
+            ],
+            "evidence_surfaces": [
+                "state/neural_activity/repo_neural_graph_latest.json",
+                "state/neural_activity/repo_neural_graph_manifest_latest.json",
+                "reports/nexus_runtime_hygiene_latest.json",
+            ],
+            "next_versions": [
+                "v0.2: graph epoch delta comparison",
+                "v0.3: source-node to evidence-node compression map",
+            ],
+            "boundary": "Visualization state supports operator awareness. It is not source identity, memory proof, or authority.",
         }
     ]
     return {

@@ -1,5 +1,5 @@
 {
-  "card_count": 19,
+  "card_count": 21,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -764,10 +764,86 @@
       "summary": "Temporal graph learning needs identity that exists before commit. Source-root epochs let NEXUS compare evidence, memory, and route outcomes across runs without depending on a future commit hash.",
       "title": "Epoch Integrity Seal",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "causal-action-lifecycle-algorithm",
+        "causal-confidence-algorithm",
+        "receipt-gated-calibration-algorithm"
+      ],
+      "boundary": "Receipt learning is local causal-attribution evidence only. It does not grant autonomous authority or prove global correctness.",
+      "code_references": [
+        "nexus_gate/actions/cli.py",
+        "registry/nexus_command_registry.v2.6.2.json",
+        "ledger/action_receipts.jsonl"
+      ],
+      "discovery_id": "no-receipt-no-learning",
+      "evidence_surfaces": [
+        "state/actions/<action_id>/recommendation.json",
+        "state/actions/<action_id>/authorization.json",
+        "state/actions/<action_id>/execution.json",
+        "state/actions/<action_id>/validation.json",
+        "state/actions/<action_id>/learning.json"
+      ],
+      "math": {
+        "causal_confidence": "K = E * A * X * W * V * (1 - F)",
+        "hard_zero": "missing authorization OR stale epoch OR command mismatch OR missing execution receipt -> K = 0",
+        "learnability": "K >= 0.85 AND admissible epochs AND validation passed"
+      },
+      "next_versions": [
+        "v0.2: route model calibration from three independent learnable receipts",
+        "v0.3: effect-set instrumentation beyond Git write surfaces"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 action-recommend",
+        ".\\scripts\\nexus.ps1 action-chain-verify",
+        "Authorize and execute only by explicit human command."
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "NEXUS may not learn from a route unless recommendation, authorization, execution, effects, validation, and learnability receipts bind the outcome causally.",
+      "title": "No Receipt, No Learning",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "source-epoch-identity-algorithm",
+        "append-only-ledger-transaction-algorithm"
+      ],
+      "boundary": "Visualization state supports operator awareness. It is not source identity, memory proof, or authority.",
+      "code_references": [
+        "electron/main.js::buildNeuralRepoGraph",
+        "nexus_gate/hygiene/runtime_churn.py",
+        "nexus_gate/epochs/seal.py::_is_generated_or_ignored"
+      ],
+      "discovery_id": "generated-visualization-state-not-source",
+      "evidence_surfaces": [
+        "state/neural_activity/repo_neural_graph_latest.json",
+        "state/neural_activity/repo_neural_graph_manifest_latest.json",
+        "reports/nexus_runtime_hygiene_latest.json"
+      ],
+      "math": {
+        "excluded_fields": "generated_at_utc, absolute_source_root, mtime, process state",
+        "structural_graph_hash": "SHA256(deterministic nodes + deterministic edges)"
+      },
+      "next_versions": [
+        "v0.2: graph epoch delta comparison",
+        "v0.3: source-node to evidence-node compression map"
+      ],
+      "replication_steps": [
+        "Open Neural Activity and refresh graph.",
+        ".\\scripts\\nexus.ps1 runtime-hygiene",
+        ".\\scripts\\nexus.ps1 epoch-seal"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Live neural visualization caches can change because time changed, not because NEXUS evolved. Runtime graph churn must be excluded from Source Epoch identity and classified as generated runtime cache.",
+      "title": "Generated Visualization State Must Not Pollute Source Identity",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-12T21:21:54.717101+00:00",
+  "generated_at_utc": "2026-07-12T23:22:09.772244+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

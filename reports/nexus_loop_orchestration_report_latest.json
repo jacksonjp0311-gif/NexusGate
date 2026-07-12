@@ -7,7 +7,7 @@
     "recommendation_only": true,
     "ui_authority": false
   },
-  "available_loop_count": 67,
+  "available_loop_count": 69,
   "available_loops": [
     "ai-orchestrator-preflight",
     "alignment-score",
@@ -47,6 +47,7 @@
     "phi-microdose-loop",
     "phi-wound-advisor",
     "phi-wound-gpu-gate",
+    "predictive-gate-timing",
     "preflight-optimizer",
     "refactor-map",
     "reflective-validation",
@@ -61,6 +62,7 @@
     "session-brief",
     "stale-surface-scan",
     "surface-map",
+    "system-monitor-scout",
     "test-strategy",
     "toolbelt-cockpit",
     "toolbelt-console",
@@ -88,7 +90,7 @@
   ],
   "claim_boundary": "Loop orchestration is local development evidence only. It may select and run allowlisted non-mutating loop stages when human-authorized; it does not grant autonomous authority, arbitrary shell execution, git write, secret access, external API writes, or repo mutation from model output.",
   "execute_requested": false,
-  "generated_utc": "2026-07-10T02:20:31.849816+00:00",
+  "generated_utc": "2026-07-12T23:22:31.165251+00:00",
   "human_authorized": false,
   "intent": "unit cli orchestration",
   "loop_packet": {
@@ -141,6 +143,7 @@
       "phi-microdose-loop",
       "phi-wound-advisor",
       "phi-wound-gpu-gate",
+      "predictive-gate-timing",
       "preflight-optimizer",
       "refactor-map",
       "reflective-validation",
@@ -155,6 +158,7 @@
       "session-brief",
       "stale-surface-scan",
       "surface-map",
+      "system-monitor-scout",
       "test-strategy",
       "toolbelt-cockpit",
       "toolbelt-console",
@@ -175,19 +179,19 @@
     "description": "Classify local changes into intended source/docs/tests versus residue/backups/runtime churn.",
     "execute_requested": false,
     "exit_code": 0,
-    "generated_utc": "2026-07-10T02:20:31.849816+00:00",
+    "generated_utc": "2026-07-12T23:22:31.165251+00:00",
     "human_authorized": false,
     "intent": "unit cli orchestration",
     "intent_hash": "10eec740d93662ba05057f7eb84078ecf70f792f3a9f26ba29fbf4aaf7a9d39a",
     "loop": "scope-hygiene",
-    "loop_packet_id": "b16b7163a27fb155b3e3251acaa7c3db584dc857f969520bcb116df74fb645ab",
+    "loop_packet_id": "d2f91ed5f8d059aac7e92800f2e364413e4989fc32c55ab764002234123b752a",
     "mode": "nexus_meta_loop_runner",
     "mutates": false,
     "outputs": {
       "report": "reports/nexus_loop_packet_latest.json",
       "state": "state/loops/loop_state_latest.json"
     },
-    "registry_hash": "fa81eff1ce33989a5832513c35219e5eeacb6122819c37451d30ae07b8087401",
+    "registry_hash": "0ed32a1fbfababaa680df5436e9dc0d060ac2039ab425be74f9ccea53432b34b",
     "registry_path": "loops\\nexus_loop_registry.v0.1.json",
     "requires_human_authorization": true,
     "stages": [
@@ -235,7 +239,7 @@
     "version": "0.9.7"
   },
   "meta_recommendation": {
-    "recommended_next_command": ".\\scripts\\nexus.ps1 preflight-json -Tag \"scope dirty v1.1.3\"",
+    "recommended_next_command": ".\\scripts\\nexus.ps1 preflight-json -Tag \"scope dirty origin-seal\"",
     "recommended_next_loop": "scope-hygiene",
     "status": "pass",
     "why": "Working tree has uncommitted residue; preserve intended-file staging before compounding."
@@ -243,7 +247,7 @@
   "mode": "loop_orchestrator",
   "schema": "NEXUS_LOOP_ORCHESTRATOR.v1.1.4",
   "selected_loop": "scope-hygiene",
-  "selected_loop_packet_id": "b16b7163a27fb155b3e3251acaa7c3db584dc857f969520bcb116df74fb645ab",
+  "selected_loop_packet_id": "d2f91ed5f8d059aac7e92800f2e364413e4989fc32c55ab764002234123b752a",
   "selected_loop_status": "pass",
   "selection_reason": "meta_orchestrator_recommendation",
   "status": "pass",

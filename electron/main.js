@@ -684,12 +684,29 @@ function buildNeuralRepoGraph() {
       });
   }
 
+  const structuralNodes = nodes.map((node) => ({
+    id: node.id,
+    path: String(node.path || "").replace(/\\/g, "/"),
+    name: node.name,
+    type: node.type,
+    depth: node.depth,
+    weight: node.weight,
+    size: node.size
+  })).sort((a, b) => a.id.localeCompare(b.id));
+  const structuralEdges = edges.map((edge) => ({
+    from: edge.from,
+    to: edge.to,
+    type: edge.type,
+    weight: edge.weight
+  })).sort((a, b) => `${a.from}:${a.to}`.localeCompare(`${b.from}:${b.to}`));
+  const structuralGraphHash = neuralPathHash(JSON.stringify({ nodes: structuralNodes, edges: structuralEdges }));
   const graph = {
     system: "NEXUS GATE",
     surface: "neural_activity_repo_graph",
-    version: "v0.1.2",
+    version: "v0.2.0",
     generated_at_utc: generatedAtUtc,
     source_root: repoRoot,
+    structural_graph_hash: structuralGraphHash,
     node_count: nodes.length,
     edge_count: edges.length,
     nodes,
@@ -699,7 +716,30 @@ function buildNeuralRepoGraph() {
 
   try {
     fs.mkdirSync(path.dirname(neuralRepoGraphPath), { recursive: true });
-    fs.writeFileSync(neuralRepoGraphPath, JSON.stringify(graph, null, 2), "utf8");
+    let previousHash = null;
+    try {
+      previousHash = JSON.parse(fs.readFileSync(neuralRepoGraphPath, "utf8"))?.structural_graph_hash || null;
+    } catch (_error) {}
+    if (previousHash !== structuralGraphHash) {
+      const tempPath = `${neuralRepoGraphPath}.tmp`;
+      fs.writeFileSync(tempPath, `${JSON.stringify(graph, null, 2)}\n`, "utf8");
+      fs.renameSync(tempPath, neuralRepoGraphPath);
+    }
+    const manifestPath = path.join(repoRoot, "state", "neural_activity", "repo_neural_graph_manifest_latest.json");
+    const manifest = {
+      schema: "NEXUS_REPO_NEURAL_GRAPH_MANIFEST.v0.2.0",
+      generator_version: "0.2.0",
+      source_epoch_id: null,
+      source_root: null,
+      structural_graph_hash: structuralGraphHash,
+      node_count: nodes.length,
+      edge_count: edges.length,
+      max_nodes: maxNodes,
+      max_depth: maxDepth,
+      volatile_fields_excluded: ["generated_at_utc", "absolute_source_root", "mtime", "modified"],
+      claim_boundary: "Repo Neural Graph manifest is deterministic visualization evidence only; the live graph remains a generated runtime cache."
+    };
+    fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
   } catch (_error) {}
   return graph;
 }

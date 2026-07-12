@@ -115,7 +115,9 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v2.4.0 | Causal Loop Hardening | sealed | Fixes zero-coherence routing, wound sentinels, confidence clamping, deterministic arbiter tie-breaks, and adds repository snapshot epochs. |
 | v2.5.0 | Triadic Geometric Lattice | sealed | Adds evidence + geometry + authority lattice alignment to recommendation routing and exposes a `triadic-lattice` gate. |
 | v2.6.0 | Evidence Distillation Graph | sealed | Distills heavy evidence into hash-backed graph nodes, biological-efficiency principles, emergence motifs, and recommendation-only pruning policy. |
-| v2.6.1 | Epoch Integrity Seal | current | Adds source-root epoch identity, immutable epoch packets, latest pointer, append-only epoch chain, and distillation ledger append semantics. |
+| v2.6.1 | Epoch Integrity Seal | sealed | Adds source-root epoch identity, immutable epoch packets, latest pointer, append-only epoch chain, and distillation ledger append semantics. |
+| v2.6.1a | Epoch Integrity Hardening | current | Separates Source Epochs from Observation Events, includes relevant untracked source, verifies immutable epoch directories, and excludes neural runtime graph churn from source identity. |
+| v2.6.2 | Causal Action Receipt Loop | current | Adds registered-command action receipts, explicit human authorization binding, effect/validation/learning gates, and the law: no receipt, no learning. |
 ## v0.9.5 - AI Toolbelt Surface
 
 No version step without update chart entry. Adds operator-visible toolbelt index and README Toolbelt section.

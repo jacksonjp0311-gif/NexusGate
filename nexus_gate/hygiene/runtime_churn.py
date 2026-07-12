@@ -9,8 +9,8 @@ from pathlib import Path
 from typing import Any
 
 
-VERSION = "2.3.0"
-SCHEMA = "NEXUS_RUNTIME_CHURN_HYGIENE.v2.3.0"
+VERSION = "2.6.2"
+SCHEMA = "NEXUS_RUNTIME_CHURN_HYGIENE.v2.6.2"
 REPORT_LATEST = Path("reports") / "nexus_runtime_hygiene_latest.json"
 
 TRACKED_GENERATED_PATTERNS = [
@@ -41,6 +41,10 @@ TRACKED_GENERATED_PATTERNS = [
     "state/neural_activity/repo_neural_graph_latest.json",
     "state/nexus_origin_manifest_latest.json",
     "state/nexus_nn_router_index.v*.json",
+]
+
+GENERATED_RUNTIME_CACHE_PATTERNS = [
+    "state/neural_activity/repo_neural_graph_latest.json",
 ]
 
 UNTRACKED_GENERATED_PATTERNS = [
@@ -118,6 +122,9 @@ def _classify(rows: list[dict[str, str]]) -> dict[str, list[dict[str, str]]]:
             else:
                 source_dirty.append(row)
         elif _matches(path, TRACKED_GENERATED_PATTERNS):
+            if _matches(path, GENERATED_RUNTIME_CACHE_PATTERNS):
+                row = dict(row)
+                row["classification"] = "generated_runtime_cache"
             tracked_generated.append(row)
         else:
             source_dirty.append(row)
@@ -192,6 +199,10 @@ def build_runtime_hygiene_report(root: str | Path, apply: bool = False) -> dict[
         },
         "tracked_generated": classified["tracked_generated"],
         "untracked_generated": classified["untracked_generated"],
+        "generated_runtime_caches": [
+            row for row in classified["tracked_generated"]
+            if row.get("classification") == "generated_runtime_cache"
+        ],
         "source_dirty": classified["source_dirty"],
         "restored": restored,
         "removed": removed,
