@@ -15,8 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 class CoherenceFieldV200Tests(unittest.TestCase):
     def test_coherence_field_declares_v2_protocol_and_boundary(self) -> None:
         packet = build_coherence_field(ROOT, intent="test coherence")
-        self.assertEqual(packet["schema"], "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.0.0")
-        self.assertEqual(packet["version"], "2.0.0")
+        self.assertEqual(packet["schema"], "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.1.0")
+        self.assertEqual(packet["version"], "2.1.0")
         self.assertIn(packet["status"], {"pass", "warn"})
         self.assertIn("coherence", packet)
         self.assertIn("score", packet["coherence"])
@@ -41,7 +41,7 @@ class CoherenceFieldV200Tests(unittest.TestCase):
         )
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
         packet = json.loads(proc.stdout)
-        self.assertEqual(packet["schema"], "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.0.0")
+        self.assertEqual(packet["schema"], "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.1.0")
         self.assertTrue((ROOT / "reports" / "nexus_coherence_field_latest.json").exists())
         self.assertTrue((ROOT / "state" / "coherence" / "nexus_coherence_field_latest.json").exists())
 
@@ -57,12 +57,14 @@ class CoherenceFieldV200Tests(unittest.TestCase):
         self.assertIn("nexus_gate.coherence.field", sh)
         self.assertIn('"coherence-field"', human)
         self.assertIn("16h_coherence_field", human)
-        self.assertIn("v2.0.0 Coherence Continuity Protocol", readme)
+        self.assertIn("v2.1.0 Causal Coherence Routing", readme)
         self.assertIn("reports/nexus_coherence_field_latest.json", agents)
 
     def test_v2_docs_and_policy_kernel_exist(self) -> None:
         required = [
             "docs/runtime/NEXUS_COHERENCE_FIELD_PROTOCOL.md",
+            "docs/design/CAUSAL_COHERENCE_ROUTING_DESIGN.md",
+            "docs/protocols/CAUSAL_COHERENCE_ROUTING_PROTOCOL.md",
             "docs/protocols/GOVERNED_AGENT_CONTINUITY_PROTOCOL.md",
             "policy/authority_laws.json",
             "policy/risk_profiles.json",
@@ -76,7 +78,9 @@ class CoherenceFieldV200Tests(unittest.TestCase):
         discoveries = (ROOT / "nexus_gate" / "discoveries" / "cards.py").read_text(encoding="utf-8-sig")
         self.assertIn("Coherence Field Algorithm", algorithms)
         self.assertIn("Governed Agent Continuity Algorithm", algorithms)
+        self.assertIn("Causal Coherence Routing Algorithm", algorithms)
         self.assertIn("coherence-continuity-threshold", discoveries)
+        self.assertIn("causal-coherence-routing", discoveries)
 
 
 if __name__ == "__main__":

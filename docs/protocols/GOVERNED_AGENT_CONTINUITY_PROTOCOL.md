@@ -20,6 +20,7 @@ The protocol is designed for Codex, ChatGPT, local agents, TUI, Electron, future
 ## Boundary
 
 The protocol may preserve orientation across sessions.
+In v2.1, causal coherence routing can prioritize orientation, repair, or validation under pressure.
 
 It may not create autonomous authority.
 

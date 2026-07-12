@@ -516,6 +516,44 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.3: make recommendation arbitration consume coherence score causally",
             ],
             "boundary": "Coherence is an operating field for orientation, not proof, authority, or autonomous mutation.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "causal-coherence-routing",
+            "version": "0.1.0",
+            "title": "Causal Coherence Routing",
+            "status": "active",
+            "summary": "Coherence becomes useful when it changes recommendation pressure without becoming authority.",
+            "math": {
+                "arbiter_score": "severity + source_priority + confidence - cost - blockers - stale_penalty + coherence_adjustment",
+                "selection": "selected_route = argmax(score(candidate_recommendations, coherence_field))",
+                "boundary": "selected_route != executed_route unless human_authorized and gates_passed",
+            },
+            "code_references": [
+                "nexus_gate/decision/arbiter.py::arbitrate_recommendations",
+                "nexus_gate/decision/envelope.py::build_decision_envelope",
+                "reports/nexus_decision_envelope_latest.json",
+            ],
+            "algorithm_card_refs": [
+                "causal-coherence-routing-algorithm",
+                "coherence-field-algorithm",
+                "decision-envelope-arbitration-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 coherence-field",
+                ".\\scripts\\nexus.ps1 decision-envelope",
+                "Inspect arbiter.scored_recommendations and selected_action",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_coherence_field_latest.json",
+                "reports/nexus_decision_envelope_latest.json",
+                "docs/protocols/CAUSAL_COHERENCE_ROUTING_PROTOCOL.md",
+            ],
+            "next_versions": [
+                "v0.2: add outcome feedback from selected route to arbiter calibration",
+                "v0.3: expose arbiter score in Electron System Monitor HUD",
+            ],
+            "boundary": "Causal coherence is routing pressure only; it is not execution, proof, or authority.",
         }
     ]
     return {

@@ -23,7 +23,7 @@
   ],
   "claim_boundary": "The NEXUS Coherence Field is local development evidence only. It scores orientation, memory, evidence freshness, runtime pressure, wounds, policy, and continuity surfaces to recommend routing. It does not prove correctness, safety, security, production readiness, scientific truth, model understanding, or autonomous authority; coherence may not grant authority.",
   "coherence": {
-    "dirty_count": 82,
+    "dirty_count": 83,
     "field_state": "coherent",
     "lineage_entropy": 8,
     "missing_surfaces": [],
@@ -49,6 +49,7 @@
   "decision_envelope": {
     "recommendation_count": 4,
     "selected_action": {
+      "arbiter_score": 69.8,
       "command": ".\\scripts\\nexus.ps1 cortex-refresh",
       "next_loop": "cortex-certificate-refresh",
       "recommendation_only": true,
@@ -72,16 +73,16 @@
       "status"
     ]
   },
-  "generated_at_utc": "2026-07-12T05:03:15.763332+00:00",
+  "generated_at_utc": "2026-07-12T07:54:20.263327+00:00",
   "intent": "Compile NEXUS coherence continuity field.",
-  "mode": "coherence_field",
+  "mode": "causal_coherence_field",
   "origin": {
-    "origin_manifest_hash": "2d45a9fe40885692fbae72f2166a2176a0ed93e87ea8259323269fd12674859c",
-    "product_phase": "Coherence Continuity Protocol",
-    "product_version": "2.0.0",
+    "origin_manifest_hash": "8f9005bd5ba7c665bd3bb43168e6cc45b38b8a2aba250be74b46240a8b77db35",
+    "product_phase": "Causal Coherence Routing",
+    "product_version": "2.1.0",
     "status": "pass"
   },
-  "phase": "Coherence Continuity Protocol",
+  "phase": "Causal Coherence Routing",
   "policy_kernel": {
     "law": "governance is compiled into organs, not copied between organs",
     "status": "present",
@@ -112,8 +113,9 @@
     "slowest_gate": null,
     "timeout_budget": "adaptive_recommendation_only"
   },
-  "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.0.0",
+  "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.1.0",
   "selected_next_action": {
+    "arbiter_score": 69.8,
     "command": ".\\scripts\\nexus.ps1 cortex-refresh",
     "recommendation_only": true,
     "requires_final_evolve_before_commit": true,
@@ -122,7 +124,7 @@
   },
   "status": "pass",
   "system": "NEXUS GATE",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "wound_intelligence": {
     "priority_formula": "severity * recurrence * affected_surface_centrality * blast_radius / max(closure_confidence, 0.1)",
     "status": "scaffolded"

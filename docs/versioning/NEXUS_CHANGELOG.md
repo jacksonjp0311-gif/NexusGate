@@ -1,5 +1,12 @@
-## v2.0.0 - Coherence Continuity Protocol
+## v2.1.0 - Causal Coherence Routing
 Status: current
+- Adds Recommendation Arbiter scoring for route selection.
+- Feeds Coherence Field into Decision Envelope selection.
+- Adds causal coherence routing design and protocol docs.
+- Preserves the boundary: coherence may steer recommendations, but cannot execute or authorize.
+
+## v2.0.0 - Coherence Continuity Protocol
+Status: sealed
 - Adds `.\scripts\nexus.ps1 coherence-field` as the v2.0 coherence and continuity compiler.
 - Adds policy kernel scaffold under `policy/` for authority laws, risk profiles, capabilities, and claim boundaries.
 - Adds Governed Agent Continuity Protocol and Coherence Field protocol docs.

@@ -230,6 +230,14 @@ intent packet -> origin certificate -> evidence packet -> authority decision -> 
 
 The continuity algorithm turns NEXUS into a portable protocol for AI-to-repo and human-to-AI work. It preserves context across sessions without granting implicit authority to models, memory, HUDs, or compilers.
 
+## Causal Coherence Routing Algorithm
+
+```text
+candidate recommendations + coherence field -> arbiter scoring -> selected route -> human authorization -> final evolve seal
+```
+
+Causal Coherence Routing lets field pressure affect recommendation selection. Low coherence, high entropy, stale evidence, missing policy, active wounds, and runtime pressure increase orientation/repair recommendations without granting execution authority.
+
 ## Causal Memory Closure Algorithm
 
 ```text

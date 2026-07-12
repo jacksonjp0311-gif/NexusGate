@@ -8,9 +8,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from nexus_gate.decision.arbiter import arbitrate_recommendations
 
-VERSION = "1.3.0"
-SCHEMA = "NEXUS_DECISION_ENVELOPE.v1.3.0"
+
+VERSION = "2.1.0"
+SCHEMA = "NEXUS_DECISION_ENVELOPE.v2.1.0"
 REPORT_LATEST = Path("reports") / "nexus_decision_envelope_latest.json"
 STATE_LATEST = Path("state") / "decision" / "nexus_decision_envelope_latest.json"
 
@@ -46,6 +48,7 @@ READ_SURFACES = [
     "reports/nexus_preflight_optimizer_latest.json",
     "state/algorithms/nexus_algorithm_cards_latest.json",
     "state/discoveries/nexus_discovery_cards_latest.json",
+    "reports/nexus_coherence_field_latest.json",
     "git status --short",
 ]
 
@@ -286,28 +289,19 @@ def _build_recommendations(
     return recommendations
 
 
-def _select_action(recommendations: list[dict[str, Any]]) -> dict[str, Any]:
-    priority = {
-        "origin-seal": 0,
-        "wound-compression": 1,
-        "preflight": 2,
-        "predictive-memory": 3,
-        "git-scope": 4,
-        "certificate-resume": 5,
-        "predictive-timing": 6,
-        "predictive-evolve": 7,
-        "final-seal": 99,
-    }
-    selected = sorted(recommendations, key=lambda item: priority.get(item.get("source"), 50))[0]
+def _select_action(recommendations: list[dict[str, Any]], coherence: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+    arbiter = arbitrate_recommendations(recommendations, coherence)
+    selected = arbiter["selected"]
     return {
         "source": selected["source"],
         "next_loop": selected["action"],
         "command": selected["command"],
         "why": selected["why"],
+        "arbiter_score": selected["arbiter_score"],
         "requires_human_authorization": True,
         "requires_final_evolve_before_commit": True,
         "recommendation_only": True,
-    }
+    }, arbiter
 
 
 def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any]:
@@ -324,6 +318,7 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
     preflight = _read_json(root_path / "reports" / "nexus_preflight_optimizer_latest.json", {})
     algorithms = _read_json(root_path / "state" / "algorithms" / "nexus_algorithm_cards_latest.json", {})
     discoveries = _read_json(root_path / "state" / "discoveries" / "nexus_discovery_cards_latest.json", {})
+    coherence = _read_json(root_path / "reports" / "nexus_coherence_field_latest.json", {})
     git_scope = _git_scope(root_path)
 
     recommendations = _build_recommendations(
@@ -336,7 +331,18 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
         preflight,
         git_scope,
     )
-    selected = _select_action(recommendations)
+    if coherence.get("status") == "fail" or ((coherence.get("coherence") or {}).get("score") or 100) < 70:
+        recommendations.append(_recommendation(
+            "coherence-field",
+            "restore_coherence_field",
+            ".\\scripts\\nexus.ps1 coherence-field",
+            "Coherence Field pressure is high; refresh field state before selecting mutation routes.",
+            "high",
+            0.88,
+            "short",
+            source_packet=coherence,
+        ))
+    selected, arbiter = _select_action(recommendations, coherence)
     missing = [
         rel for rel in READ_SURFACES
         if not rel.startswith("git ") and not (root_path / rel).exists()
@@ -354,8 +360,8 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
         "schema": SCHEMA,
         "system": "NEXUS GATE",
         "version": VERSION,
-        "phase": "Canonical Decision Envelope",
-        "mode": "self_bootstrap_decision_envelope",
+        "phase": "Causal Coherence Routing",
+        "mode": "causal_coherence_decision_envelope",
         "status": status,
         "generated_at_utc": _utc(),
         "intent": intent,
@@ -374,6 +380,12 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
             "human_authorization_required_for_mutation": True,
         },
         "risk": _risk_summary(git_scope, timing, wound, certificate_resume),
+        "coherence_input": {
+            "status": coherence.get("status", "unknown"),
+            "score": (coherence.get("coherence") or {}).get("score"),
+            "lineage_entropy": (coherence.get("coherence") or {}).get("lineage_entropy"),
+            "field_state": (coherence.get("coherence") or {}).get("field_state"),
+        },
         "wounds": {
             "active_wound_key": wound.get("active_wound_key"),
             "status": wound.get("status", "unknown"),
@@ -383,6 +395,7 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
             "status": certificate_resume.get("status", "unknown"),
         },
         "recommendations": recommendations,
+        "arbiter": arbiter,
         "selected_action": selected,
         "warnings": warnings,
         "blocked_actions": BLOCKED_ACTIONS,

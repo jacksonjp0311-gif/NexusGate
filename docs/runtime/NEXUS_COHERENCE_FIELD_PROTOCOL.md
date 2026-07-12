@@ -1,6 +1,6 @@
 # NEXUS Coherence Field Protocol
 
-The Coherence Field is the v2.0 continuity surface for NEXUS GATE.
+The Coherence Field is the v2.x continuity surface for NEXUS GATE.
 
 It compresses the active operating state into one field packet:
 
@@ -43,3 +43,5 @@ The score is a routing signal, not a truth certificate.
 coherence may guide routing
 coherence may not grant authority
 ```
+
+In v2.1, Decision Envelope consumes the field through the Recommendation Arbiter. The field becomes causal as pressure, not authority.

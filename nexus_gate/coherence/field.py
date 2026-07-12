@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import Any
 
 
-VERSION = "2.0.0"
-SCHEMA = "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.0.0"
+VERSION = "2.1.0"
+SCHEMA = "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.1.0"
 REPORT_LATEST = Path("reports") / "nexus_coherence_field_latest.json"
 STATE_LATEST = Path("state") / "coherence" / "nexus_coherence_field_latest.json"
 
@@ -162,8 +162,8 @@ def build_coherence_field(root: str | Path, intent: str = "") -> dict[str, Any]:
         "schema": SCHEMA,
         "system": "NEXUS GATE",
         "version": VERSION,
-        "phase": "Coherence Continuity Protocol",
-        "mode": "coherence_field",
+        "phase": "Causal Coherence Routing",
+        "mode": "causal_coherence_field",
         "status": status,
         "generated_at_utc": _utc(),
         "intent": intent,
@@ -227,6 +227,7 @@ def build_coherence_field(root: str | Path, intent: str = "") -> dict[str, Any]:
         "selected_next_action": {
             "command": selected.get("command", ".\\scripts\\nexus.ps1 decision-envelope"),
             "why": selected.get("why", "Compile decision envelope before choosing a route."),
+            "arbiter_score": selected.get("arbiter_score"),
             "recommendation_only": True,
             "requires_human_authorization": True,
             "requires_final_evolve_before_commit": True,

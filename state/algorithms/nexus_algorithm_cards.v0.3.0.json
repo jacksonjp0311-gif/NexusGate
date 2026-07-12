@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 33,
+  "card_count": 34,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -1019,6 +1019,40 @@
       "title": "Governed Agent Continuity Algorithm"
     },
     {
+      "algorithm_id": "causal-coherence-routing-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "candidate recommendations + coherence field -> arbiter scoring -> selected route -> human authorization -> final evolve seal",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 30,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Causal Coherence Routing lets field pressure affect recommendation selection. Low coherence, high entropy, stale evidence, missing policy, active wounds, and runtime pressure increase orientation/repair recommendations without granting execution authority.",
+      "title": "Causal Coherence Routing Algorithm"
+    },
+    {
       "algorithm_id": "causal-memory-closure-algorithm",
       "authority_boundary": {
         "arbitrary_command_execution": false,
@@ -1042,7 +1076,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 30,
+      "order": 31,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1076,7 +1110,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 31,
+      "order": 32,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1110,7 +1144,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 32,
+      "order": 33,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1144,7 +1178,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 33,
+      "order": 34,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1160,6 +1194,7 @@
     "adaptive-timeout-budgeting",
     "authority-gate-algorithm",
     "authority-monotonicity-algorithm",
+    "causal-coherence-routing-algorithm",
     "causal-memory-closure-algorithm",
     "certificate-resume-policy",
     "coherence-field-algorithm",
@@ -1192,7 +1227,7 @@
     "versioned-vector-blob-storage-algorithm"
   ],
   "discovery_source": "derived_from_cards_algorithm_id",
-  "generated_at_utc": "2026-07-12T05:03:14.173260+00:00",
+  "generated_at_utc": "2026-07-12T07:54:18.407864+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",
