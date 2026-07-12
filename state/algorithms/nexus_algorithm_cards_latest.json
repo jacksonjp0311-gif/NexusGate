@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 34,
+  "card_count": 37,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -1053,6 +1053,108 @@
       "title": "Causal Coherence Routing Algorithm"
     },
     {
+      "algorithm_id": "outcome-feedback-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "selected recommendation -> observed gate result -> outcome ledger -> route fitness -> calibration packet",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 31,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "A recommendation becomes useful intelligence only after an outcome is recorded. The outcome may tune future route pressure, but it may not authorize execution or skip final evolve.",
+      "title": "Outcome Feedback Algorithm"
+    },
+    {
+      "algorithm_id": "arbiter-calibration-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "recommendation outcomes by source -> source reliability -> weight adjustment -> next arbiter score",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 32,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Calibration estimates whether a recommendation source has historically helped. It adjusts pressure softly and remains bounded by human authority.",
+      "title": "Arbiter Calibration Algorithm"
+    },
+    {
+      "algorithm_id": "pressure-memory-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "coherence score samples -> rising/falling/stable trend -> hysteresis-aware routing signal",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 33,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Pressure memory prevents route flapping by requiring persistent pressure changes before changing route class.",
+      "title": "Pressure Memory Algorithm"
+    },
+    {
       "algorithm_id": "causal-memory-closure-algorithm",
       "authority_boundary": {
         "arbitrary_command_execution": false,
@@ -1076,7 +1178,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 31,
+      "order": 34,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1110,7 +1212,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 32,
+      "order": 35,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1144,7 +1246,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 33,
+      "order": 36,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1178,7 +1280,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 34,
+      "order": 37,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1192,6 +1294,7 @@
   "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
   "discovered_algorithms": [
     "adaptive-timeout-budgeting",
+    "arbiter-calibration-algorithm",
     "authority-gate-algorithm",
     "authority-monotonicity-algorithm",
     "causal-coherence-routing-algorithm",
@@ -1214,9 +1317,11 @@
     "lineage-topology-algorithm",
     "meta-loop-registry-algorithm",
     "origin-seal-algorithm",
+    "outcome-feedback-algorithm",
     "predictive-evolve-planner-algorithm",
     "predictive-gate-timing-runtime-pressure-algorithm",
     "predictive-memory-orchestrator-algorithm",
+    "pressure-memory-algorithm",
     "reflective-repair-algorithm",
     "rehydration-algorithm",
     "repo-native-memory-promotion-algorithm",
@@ -1227,7 +1332,7 @@
     "versioned-vector-blob-storage-algorithm"
   ],
   "discovery_source": "derived_from_cards_algorithm_id",
-  "generated_at_utc": "2026-07-12T07:54:18.407864+00:00",
+  "generated_at_utc": "2026-07-12T11:25:49.241758+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",

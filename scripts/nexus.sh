@@ -27,6 +27,7 @@ set -euo pipefail
   # origin-seal
   # decision-envelope
   # coherence-field
+  # outcome-learn
 # predictive-memory
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
@@ -197,6 +198,7 @@ case "$COMMAND" in
   origin-seal) python -m nexus_gate.origin.seal --root . --json ;;
   decision-envelope) python -m nexus_gate.decision.envelope --root . --json ;;
   coherence-field) python -m nexus_gate.coherence.field --root . --json ;;
+  outcome-learn) python -m nexus_gate.outcomes.learn --root . --json ;;
   cortex)
     shift || true
     INTENT="${*:-Run NEXUS Cortex gate.}"

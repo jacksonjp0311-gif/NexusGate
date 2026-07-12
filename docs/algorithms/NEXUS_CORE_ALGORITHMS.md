@@ -238,6 +238,30 @@ candidate recommendations + coherence field -> arbiter scoring -> selected route
 
 Causal Coherence Routing lets field pressure affect recommendation selection. Low coherence, high entropy, stale evidence, missing policy, active wounds, and runtime pressure increase orientation/repair recommendations without granting execution authority.
 
+## Outcome Feedback Algorithm
+
+```text
+selected recommendation -> observed gate result -> outcome ledger -> route fitness -> calibration packet
+```
+
+A recommendation becomes useful intelligence only after an outcome is recorded. The outcome may tune future route pressure, but it may not authorize execution or skip final evolve.
+
+## Arbiter Calibration Algorithm
+
+```text
+recommendation outcomes by source -> source reliability -> weight adjustment -> next arbiter score
+```
+
+Calibration estimates whether a recommendation source has historically helped. It adjusts pressure softly and remains bounded by human authority.
+
+## Pressure Memory Algorithm
+
+```text
+coherence score samples -> rising/falling/stable trend -> hysteresis-aware routing signal
+```
+
+Pressure memory prevents route flapping by requiring persistent pressure changes before changing route class.
+
 ## Causal Memory Closure Algorithm
 
 ```text

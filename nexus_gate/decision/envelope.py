@@ -11,8 +11,8 @@ from typing import Any
 from nexus_gate.decision.arbiter import arbitrate_recommendations
 
 
-VERSION = "2.1.0"
-SCHEMA = "NEXUS_DECISION_ENVELOPE.v2.1.0"
+VERSION = "2.2.0"
+SCHEMA = "NEXUS_DECISION_ENVELOPE.v2.2.0"
 REPORT_LATEST = Path("reports") / "nexus_decision_envelope_latest.json"
 STATE_LATEST = Path("state") / "decision" / "nexus_decision_envelope_latest.json"
 
@@ -49,6 +49,8 @@ READ_SURFACES = [
     "state/algorithms/nexus_algorithm_cards_latest.json",
     "state/discoveries/nexus_discovery_cards_latest.json",
     "reports/nexus_coherence_field_latest.json",
+    "state/coherence/arbiter_calibration_latest.json",
+    "state/coherence/pressure_memory_latest.json",
     "git status --short",
 ]
 
@@ -289,8 +291,12 @@ def _build_recommendations(
     return recommendations
 
 
-def _select_action(recommendations: list[dict[str, Any]], coherence: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
-    arbiter = arbitrate_recommendations(recommendations, coherence)
+def _select_action(
+    recommendations: list[dict[str, Any]],
+    coherence: dict[str, Any],
+    calibration: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    arbiter = arbitrate_recommendations(recommendations, coherence, calibration)
     selected = arbiter["selected"]
     return {
         "source": selected["source"],
@@ -319,6 +325,8 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
     algorithms = _read_json(root_path / "state" / "algorithms" / "nexus_algorithm_cards_latest.json", {})
     discoveries = _read_json(root_path / "state" / "discoveries" / "nexus_discovery_cards_latest.json", {})
     coherence = _read_json(root_path / "reports" / "nexus_coherence_field_latest.json", {})
+    calibration = _read_json(root_path / "state" / "coherence" / "arbiter_calibration_latest.json", {})
+    pressure_memory = _read_json(root_path / "state" / "coherence" / "pressure_memory_latest.json", {})
     git_scope = _git_scope(root_path)
 
     recommendations = _build_recommendations(
@@ -342,7 +350,7 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
             "short",
             source_packet=coherence,
         ))
-    selected, arbiter = _select_action(recommendations, coherence)
+    selected, arbiter = _select_action(recommendations, coherence, calibration)
     missing = [
         rel for rel in READ_SURFACES
         if not rel.startswith("git ") and not (root_path / rel).exists()
@@ -360,8 +368,8 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
         "schema": SCHEMA,
         "system": "NEXUS GATE",
         "version": VERSION,
-        "phase": "Causal Coherence Routing",
-        "mode": "causal_coherence_decision_envelope",
+        "phase": "Outcome-Aware Arbiter",
+        "mode": "outcome_aware_decision_envelope",
         "status": status,
         "generated_at_utc": _utc(),
         "intent": intent,
@@ -385,6 +393,12 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
             "score": (coherence.get("coherence") or {}).get("score"),
             "lineage_entropy": (coherence.get("coherence") or {}).get("lineage_entropy"),
             "field_state": (coherence.get("coherence") or {}).get("field_state"),
+        },
+        "outcome_awareness": {
+            "calibration_schema": calibration.get("schema"),
+            "pressure_memory_schema": pressure_memory.get("schema"),
+            "pressure_trend": pressure_memory.get("trend"),
+            "latest_coherence_score": pressure_memory.get("latest_coherence_score"),
         },
         "wounds": {
             "active_wound_key": wound.get("active_wound_key"),

@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import Any
 
 
-VERSION = "2.1.0"
-SCHEMA = "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.1.0"
+VERSION = "2.2.0"
+SCHEMA = "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.2.0"
 REPORT_LATEST = Path("reports") / "nexus_coherence_field_latest.json"
 STATE_LATEST = Path("state") / "coherence" / "nexus_coherence_field_latest.json"
 
@@ -47,6 +47,9 @@ REQUIRED_SURFACES = [
     "docs/protocols/GOVERNED_AGENT_CONTINUITY_PROTOCOL.md",
     "docs/runtime/NEXUS_COHERENCE_FIELD_PROTOCOL.md",
     "state/protocols/nexus_continuity_protocol.v2.0.json",
+    "state/coherence/arbiter_calibration_latest.json",
+    "state/coherence/pressure_memory_latest.json",
+    "reports/nexus_recommendation_outcome_latest.json",
 ]
 
 
@@ -148,6 +151,9 @@ def build_coherence_field(root: str | Path, intent: str = "") -> dict[str, Any]:
     algorithms = _read_json(root_path / "state" / "algorithms" / "nexus_algorithm_cards_latest.json", {})
     discoveries = _read_json(root_path / "state" / "discoveries" / "nexus_discovery_cards_latest.json", {})
     protocol = _read_json(root_path / "state" / "protocols" / "nexus_continuity_protocol.v2.0.json", {})
+    calibration = _read_json(root_path / "state" / "coherence" / "arbiter_calibration_latest.json", {})
+    pressure_memory = _read_json(root_path / "state" / "coherence" / "pressure_memory_latest.json", {})
+    outcome = _read_json(root_path / "reports" / "nexus_recommendation_outcome_latest.json", {})
     git_scope = _git_scope(root_path)
     surfaces = [_surface_status(root_path, rel) for rel in REQUIRED_SURFACES]
     missing = [item["path"] for item in surfaces if not item["exists"]]
@@ -162,8 +168,8 @@ def build_coherence_field(root: str | Path, intent: str = "") -> dict[str, Any]:
         "schema": SCHEMA,
         "system": "NEXUS GATE",
         "version": VERSION,
-        "phase": "Causal Coherence Routing",
-        "mode": "causal_coherence_field",
+        "phase": "Outcome-Aware Arbiter",
+        "mode": "outcome_aware_coherence_field",
         "status": status,
         "generated_at_utc": _utc(),
         "intent": intent,
@@ -218,6 +224,13 @@ def build_coherence_field(root: str | Path, intent: str = "") -> dict[str, Any]:
                 "recommendation_agreement",
                 "token_attention_cost",
             ],
+        },
+        "outcome_learning": {
+            "status": "present" if outcome else "missing",
+            "latest_outcome": outcome.get("latest_outcome"),
+            "pressure_trend": pressure_memory.get("trend"),
+            "calibrated_sources": sorted((calibration.get("source_calibration") or {}).keys()),
+            "route_fitness": (outcome.get("latest_outcome") or {}).get("route_fitness"),
         },
         "continuity_protocol": {
             "status": "present" if protocol else "missing",

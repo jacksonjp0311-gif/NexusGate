@@ -1,5 +1,13 @@
-## v2.1.0 - Causal Coherence Routing
+## v2.2.0 - Outcome-Aware Arbiter
 Status: current
+- Adds recommendation outcome ledger and outcome learner.
+- Adds arbiter calibration and pressure memory state.
+- Feeds calibration into Recommendation Arbiter scoring.
+- Adds outcome-aware arbiter design and protocol docs.
+- Preserves the boundary: outcomes calibrate routing pressure, not authority.
+
+## v2.1.0 - Causal Coherence Routing
+Status: sealed
 - Adds Recommendation Arbiter scoring for route selection.
 - Feeds Coherence Field into Decision Envelope selection.
 - Adds causal coherence routing design and protocol docs.

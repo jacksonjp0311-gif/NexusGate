@@ -23,11 +23,11 @@
   ],
   "claim_boundary": "The NEXUS Coherence Field is local development evidence only. It scores orientation, memory, evidence freshness, runtime pressure, wounds, policy, and continuity surfaces to recommend routing. It does not prove correctness, safety, security, production readiness, scientific truth, model understanding, or autonomous authority; coherence may not grant authority.",
   "coherence": {
-    "dirty_count": 83,
+    "dirty_count": 91,
     "field_state": "coherent",
     "lineage_entropy": 8,
     "missing_surfaces": [],
-    "score": 92,
+    "score": 91,
     "threshold": 85
   },
   "continuity_protocol": {
@@ -49,7 +49,7 @@
   "decision_envelope": {
     "recommendation_count": 4,
     "selected_action": {
-      "arbiter_score": 69.8,
+      "arbiter_score": 75.8,
       "command": ".\\scripts\\nexus.ps1 cortex-refresh",
       "next_loop": "cortex-certificate-refresh",
       "recommendation_only": true,
@@ -73,16 +73,39 @@
       "status"
     ]
   },
-  "generated_at_utc": "2026-07-12T07:54:20.263327+00:00",
+  "generated_at_utc": "2026-07-12T11:25:51.106564+00:00",
   "intent": "Compile NEXUS coherence continuity field.",
-  "mode": "causal_coherence_field",
+  "mode": "outcome_aware_coherence_field",
   "origin": {
-    "origin_manifest_hash": "8f9005bd5ba7c665bd3bb43168e6cc45b38b8a2aba250be74b46240a8b77db35",
-    "product_phase": "Causal Coherence Routing",
-    "product_version": "2.1.0",
+    "origin_manifest_hash": "c29688ef2ed9b059876368a1a67ddf934264bc25f63b11f7ce7e66c7d74af401",
+    "product_phase": "Outcome-Aware Arbiter",
+    "product_version": "2.2.0",
     "status": "pass"
   },
-  "phase": "Causal Coherence Routing",
+  "outcome_learning": {
+    "calibrated_sources": [
+      "predictive-memory"
+    ],
+    "latest_outcome": {
+      "arbiter_score": 75.8,
+      "coherence_score": 91,
+      "event_id": "ae9a2b9d6c260cf09f58fe47",
+      "followup_needed": false,
+      "human_surface_path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\human_surface\\20260712_072347",
+      "lesson": "Route outcome recorded; future recommendations may adjust source pressure from calibration.",
+      "lineage_entropy": 8,
+      "outcome": "pass",
+      "route_fitness": 1.0,
+      "selected_action": "cortex-certificate-refresh",
+      "selected_command": ".\\scripts\\nexus.ps1 cortex-refresh",
+      "selected_source": "predictive-memory",
+      "timestamp": "2026-07-12T11:25:25.650687+00:00"
+    },
+    "pressure_trend": "stable",
+    "route_fitness": 1.0,
+    "status": "present"
+  },
+  "phase": "Outcome-Aware Arbiter",
   "policy_kernel": {
     "law": "governance is compiled into organs, not copied between organs",
     "status": "present",
@@ -106,6 +129,9 @@
     "docs/protocols/GOVERNED_AGENT_CONTINUITY_PROTOCOL.md",
     "docs/runtime/NEXUS_COHERENCE_FIELD_PROTOCOL.md",
     "state/protocols/nexus_continuity_protocol.v2.0.json",
+    "state/coherence/arbiter_calibration_latest.json",
+    "state/coherence/pressure_memory_latest.json",
+    "reports/nexus_recommendation_outcome_latest.json",
     "git status --short"
   ],
   "runtime_pressure": {
@@ -113,9 +139,9 @@
     "slowest_gate": null,
     "timeout_budget": "adaptive_recommendation_only"
   },
-  "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.1.0",
+  "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.2.0",
   "selected_next_action": {
-    "arbiter_score": 69.8,
+    "arbiter_score": 75.8,
     "command": ".\\scripts\\nexus.ps1 cortex-refresh",
     "recommendation_only": true,
     "requires_final_evolve_before_commit": true,
@@ -124,7 +150,7 @@
   },
   "status": "pass",
   "system": "NEXUS GATE",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "wound_intelligence": {
     "priority_formula": "severity * recurrence * affected_surface_centrality * blast_radius / max(closure_confidence, 0.1)",
     "status": "scaffolded"

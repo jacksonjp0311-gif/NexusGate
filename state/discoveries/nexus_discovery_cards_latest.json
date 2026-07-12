@@ -1,5 +1,5 @@
 {
-  "card_count": 13,
+  "card_count": 14,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -528,10 +528,48 @@
       "summary": "Coherence becomes useful when it changes recommendation pressure without becoming authority.",
       "title": "Causal Coherence Routing",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "outcome-feedback-algorithm",
+        "arbiter-calibration-algorithm",
+        "pressure-memory-algorithm"
+      ],
+      "boundary": "Outcome learning calibrates recommendation pressure. It is not proof, execution, or authority.",
+      "code_references": [
+        "nexus_gate/outcomes/learn.py::build_outcome_report",
+        "ledger/recommendation_outcomes.jsonl",
+        "state/coherence/arbiter_calibration_latest.json"
+      ],
+      "discovery_id": "recommendation-outcome-learning",
+      "evidence_surfaces": [
+        "reports/nexus_recommendation_outcome_latest.json",
+        "state/coherence/arbiter_calibration_latest.json",
+        "state/coherence/pressure_memory_latest.json"
+      ],
+      "math": {
+        "route_fitness": "outcome_score + coherence_bonus",
+        "source_reliability": "(passes + 0.5 * warnings) / runs",
+        "weight_adjustment": "(source_reliability - 0.5) * 12"
+      },
+      "next_versions": [
+        "v0.2: record explicit command duration and output hashes",
+        "v0.3: expose route fitness in Electron System Monitor HUD"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 decision-envelope",
+        ".\\scripts\\nexus.ps1 coherence-field",
+        ".\\scripts\\nexus.ps1 outcome-learn"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "A recommendation becomes reusable intelligence only after the system records an outcome and computes route fitness.",
+      "title": "Recommendation Outcome Learning",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-12T07:54:22.051639+00:00",
+  "generated_at_utc": "2026-07-12T11:25:52.903210+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

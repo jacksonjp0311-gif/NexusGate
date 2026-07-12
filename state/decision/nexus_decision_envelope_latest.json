@@ -1,9 +1,15 @@
 {
   "arbiter": {
     "boundary": "Recommendation arbitration may select a route. It may not execute it, grant authority, or skip final evolve before commit.",
+    "calibration_input": {
+      "schema": "NEXUS_ARBITER_CALIBRATION.v2.2.0",
+      "sources": [
+        "predictive-memory"
+      ]
+    },
     "coherence_input": {
       "lineage_entropy": 8,
-      "score": 92,
+      "score": 91,
       "status": "pass"
     },
     "mode": "causal_coherence_routing",
@@ -13,6 +19,7 @@
         "action": "cortex-certificate-refresh",
         "arbiter_factors": {
           "blocking_penalty": 0,
+          "calibration_adjustment": 6.0,
           "coherence_adjustment": 0,
           "confidence_weight": 16.8,
           "cost_penalty": 5,
@@ -21,20 +28,21 @@
           "source_priority": 20,
           "stale_penalty": 0
         },
-        "arbiter_score": 69.8,
+        "arbiter_score": 75.8,
         "blocking_conditions": [],
         "command": ".\\scripts\\nexus.ps1 cortex-refresh",
         "confidence": 0.84,
         "estimated_cost": "bounded",
         "severity": "high",
         "source": "predictive-memory",
-        "source_packet_hash": "5b9cd95d6447d7bbd5803ce78795715f658da33f0ac5088a58d310321eea57a5",
+        "source_packet_hash": "e8dc1604a87a0c35149172071341c70c7ec7a1aaa59bbae731d01c4ac323b1b4",
         "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning."
       },
       {
         "action": "inspect_dirty_scope",
         "arbiter_factors": {
           "blocking_penalty": 0,
+          "calibration_adjustment": 0.0,
           "coherence_adjustment": 8,
           "confidence_weight": 16.4,
           "cost_penalty": 2,
@@ -50,13 +58,14 @@
         "estimated_cost": "short",
         "severity": "medium",
         "source": "git-scope",
-        "source_packet_hash": "bbf534553cafa14ade18e63c6967ae9dc478b3a0c65a5f6f15a25676cae1cce7",
+        "source_packet_hash": "bd283c30f9bf63f89a68b98ad20cfac398ef00c0d289d35a06890f724fe88064",
         "why": "The working tree is dirty; inspect scope before compounding changes or staging."
       },
       {
         "action": "predictive-timing",
         "arbiter_factors": {
           "blocking_penalty": 0,
+          "calibration_adjustment": 0.0,
           "coherence_adjustment": 0,
           "confidence_weight": 13.6,
           "cost_penalty": 5,
@@ -72,13 +81,14 @@
         "estimated_cost": "bounded",
         "severity": "info",
         "source": "predictive-evolve",
-        "source_packet_hash": "ba9b053eb68fc8058e107cc7aba3a86300ab7baf2a75c6286d95747b0d26eaf9",
+        "source_packet_hash": "36cf224ae32c769382b811b787d8ab3bdda282de68bac8c96c984d41f5481b13",
         "why": "Predictive Evolve selected the cheapest useful non-final gate."
       },
       {
         "action": "run_final_evolve_before_commit",
         "arbiter_factors": {
           "blocking_penalty": 1,
+          "calibration_adjustment": 0.0,
           "coherence_adjustment": 0,
           "confidence_weight": 20.0,
           "cost_penalty": 24,
@@ -104,6 +114,7 @@
       "action": "cortex-certificate-refresh",
       "arbiter_factors": {
         "blocking_penalty": 0,
+        "calibration_adjustment": 6.0,
         "coherence_adjustment": 0,
         "confidence_weight": 16.8,
         "cost_penalty": 5,
@@ -112,14 +123,14 @@
         "source_priority": 20,
         "stale_penalty": 0
       },
-      "arbiter_score": 69.8,
+      "arbiter_score": 75.8,
       "blocking_conditions": [],
       "command": ".\\scripts\\nexus.ps1 cortex-refresh",
       "confidence": 0.84,
       "estimated_cost": "bounded",
       "severity": "high",
       "source": "predictive-memory",
-      "source_packet_hash": "5b9cd95d6447d7bbd5803ce78795715f658da33f0ac5088a58d310321eea57a5",
+      "source_packet_hash": "e8dc1604a87a0c35149172071341c70c7ec7a1aaa59bbae731d01c4ac323b1b4",
       "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning."
     }
   },
@@ -149,7 +160,7 @@
   "coherence_input": {
     "field_state": "coherent",
     "lineage_entropy": 8,
-    "score": 92,
+    "score": 91,
     "status": "pass"
   },
   "evidence": [
@@ -207,13 +218,21 @@
     },
     {
       "exists": true,
+      "surface": "state/coherence/arbiter_calibration_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "state/coherence/pressure_memory_latest.json"
+    },
+    {
+      "exists": true,
       "surface": "git status --short"
     }
   ],
-  "generated_at_utc": "2026-07-12T07:54:21.290212+00:00",
+  "generated_at_utc": "2026-07-12T11:25:52.138981+00:00",
   "intent": "Self-bootstrap NEXUS decision envelope.",
   "memory": {
-    "algorithm_cards": 34,
+    "algorithm_cards": 37,
     "cortex_authority": {
       "cortex_may_mutate_repo": false,
       "external_api_writes": false,
@@ -223,21 +242,27 @@
       "secret_access": false
     },
     "cortex_refresh_status": "constrained",
-    "discovery_cards": 13,
+    "discovery_cards": 14,
     "predictive_memory_next_command": ".\\scripts\\nexus.ps1 cortex-refresh",
     "predictive_memory_next_loop": "cortex-certificate-refresh",
     "predictive_memory_status": "warn"
   },
-  "mode": "causal_coherence_decision_envelope",
+  "mode": "outcome_aware_decision_envelope",
   "origin": {
     "commit": null,
-    "origin_manifest_hash": "8f9005bd5ba7c665bd3bb43168e6cc45b38b8a2aba250be74b46240a8b77db35",
-    "product_phase": "Causal Coherence Routing",
-    "product_version": "2.1.0",
-    "schema": "NEXUS_ORIGIN_SEAL.v2.1.0",
+    "origin_manifest_hash": "c29688ef2ed9b059876368a1a67ddf934264bc25f63b11f7ce7e66c7d74af401",
+    "product_phase": "Outcome-Aware Arbiter",
+    "product_version": "2.2.0",
+    "schema": "NEXUS_ORIGIN_SEAL.v2.2.0",
     "status": "pass"
   },
-  "phase": "Causal Coherence Routing",
+  "outcome_awareness": {
+    "calibration_schema": "NEXUS_ARBITER_CALIBRATION.v2.2.0",
+    "latest_coherence_score": 91.0,
+    "pressure_memory_schema": "NEXUS_PRESSURE_MEMORY.v2.2.0",
+    "pressure_trend": "stable"
+  },
+  "phase": "Outcome-Aware Arbiter",
   "read_surfaces": [
     "state/nexus_origin_manifest_latest.json",
     "reports/nexus_origin_seal_latest.json",
@@ -252,6 +277,8 @@
     "state/algorithms/nexus_algorithm_cards_latest.json",
     "state/discoveries/nexus_discovery_cards_latest.json",
     "reports/nexus_coherence_field_latest.json",
+    "state/coherence/arbiter_calibration_latest.json",
+    "state/coherence/pressure_memory_latest.json",
     "git status --short"
   ],
   "recommendations": [
@@ -263,7 +290,7 @@
       "estimated_cost": "bounded",
       "severity": "high",
       "source": "predictive-memory",
-      "source_packet_hash": "5b9cd95d6447d7bbd5803ce78795715f658da33f0ac5088a58d310321eea57a5",
+      "source_packet_hash": "e8dc1604a87a0c35149172071341c70c7ec7a1aaa59bbae731d01c4ac323b1b4",
       "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning."
     },
     {
@@ -274,7 +301,7 @@
       "estimated_cost": "short",
       "severity": "medium",
       "source": "git-scope",
-      "source_packet_hash": "bbf534553cafa14ade18e63c6967ae9dc478b3a0c65a5f6f15a25676cae1cce7",
+      "source_packet_hash": "bd283c30f9bf63f89a68b98ad20cfac398ef00c0d289d35a06890f724fe88064",
       "why": "The working tree is dirty; inspect scope before compounding changes or staging."
     },
     {
@@ -285,7 +312,7 @@
       "estimated_cost": "bounded",
       "severity": "info",
       "source": "predictive-evolve",
-      "source_packet_hash": "ba9b053eb68fc8058e107cc7aba3a86300ab7baf2a75c6286d95747b0d26eaf9",
+      "source_packet_hash": "36cf224ae32c769382b811b787d8ab3bdda282de68bac8c96c984d41f5481b13",
       "why": "Predictive Evolve selected the cheapest useful non-final gate."
     },
     {
@@ -305,13 +332,13 @@
   "risk": {
     "active_wound_key": null,
     "certificate_resume_gate": null,
-    "dirty_count": 83,
+    "dirty_count": 91,
     "runtime_pressure": "pass",
     "slowest_gate": null
   },
-  "schema": "NEXUS_DECISION_ENVELOPE.v2.1.0",
+  "schema": "NEXUS_DECISION_ENVELOPE.v2.2.0",
   "selected_action": {
-    "arbiter_score": 69.8,
+    "arbiter_score": 75.8,
     "command": ".\\scripts\\nexus.ps1 cortex-refresh",
     "next_loop": "cortex-certificate-refresh",
     "recommendation_only": true,
@@ -322,7 +349,7 @@
   },
   "status": "warn",
   "system": "NEXUS GATE",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "warnings": [
     "dirty_scope",
     "bounded_next_action_pending"

@@ -43,11 +43,12 @@ class CausalCoherenceRoutingV210Tests(unittest.TestCase):
 
     def test_decision_envelope_contains_causal_arbiter(self) -> None:
         packet = build_decision_envelope(ROOT, intent="causal coherence test")
-        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.1.0")
+        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.2.0")
         self.assertEqual(packet["arbiter"]["schema"], "NEXUS_RECOMMENDATION_ARBITER.v2.1.0")
         self.assertIn("scored_recommendations", packet["arbiter"])
         self.assertIn("arbiter_score", packet["selected_action"])
         self.assertTrue(packet["selected_action"]["requires_human_authorization"])
+        self.assertIn("outcome_awareness", packet)
 
 
 if __name__ == "__main__":

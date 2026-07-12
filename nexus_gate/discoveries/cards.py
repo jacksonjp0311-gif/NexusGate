@@ -554,6 +554,44 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.3: expose arbiter score in Electron System Monitor HUD",
             ],
             "boundary": "Causal coherence is routing pressure only; it is not execution, proof, or authority.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "recommendation-outcome-learning",
+            "version": "0.1.0",
+            "title": "Recommendation Outcome Learning",
+            "status": "active",
+            "summary": "A recommendation becomes reusable intelligence only after the system records an outcome and computes route fitness.",
+            "math": {
+                "route_fitness": "outcome_score + coherence_bonus",
+                "source_reliability": "(passes + 0.5 * warnings) / runs",
+                "weight_adjustment": "(source_reliability - 0.5) * 12",
+            },
+            "code_references": [
+                "nexus_gate/outcomes/learn.py::build_outcome_report",
+                "ledger/recommendation_outcomes.jsonl",
+                "state/coherence/arbiter_calibration_latest.json",
+            ],
+            "algorithm_card_refs": [
+                "outcome-feedback-algorithm",
+                "arbiter-calibration-algorithm",
+                "pressure-memory-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 decision-envelope",
+                ".\\scripts\\nexus.ps1 coherence-field",
+                ".\\scripts\\nexus.ps1 outcome-learn",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_recommendation_outcome_latest.json",
+                "state/coherence/arbiter_calibration_latest.json",
+                "state/coherence/pressure_memory_latest.json",
+            ],
+            "next_versions": [
+                "v0.2: record explicit command duration and output hashes",
+                "v0.3: expose route fitness in Electron System Monitor HUD",
+            ],
+            "boundary": "Outcome learning calibrates recommendation pressure. It is not proof, execution, or authority.",
         }
     ]
     return {

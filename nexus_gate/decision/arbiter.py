@@ -49,7 +49,18 @@ def _coherence_adjustment(recommendation: dict[str, Any], coherence: dict[str, A
     return adjustment
 
 
-def score_recommendation(recommendation: dict[str, Any], coherence: dict[str, Any] | None = None) -> dict[str, Any]:
+def _calibration_adjustment(recommendation: dict[str, Any], calibration: dict[str, Any] | None = None) -> float:
+    calibration = calibration or {}
+    source = recommendation.get("source") or "unknown"
+    source_calibration = calibration.get("source_calibration") or {}
+    return float((source_calibration.get(source) or {}).get("weight_adjustment") or 0.0)
+
+
+def score_recommendation(
+    recommendation: dict[str, Any],
+    coherence: dict[str, Any] | None = None,
+    calibration: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     coherence = coherence or {}
     confidence = float(recommendation.get("confidence") or 0.0)
     severity = SEVERITY_WEIGHT.get(str(recommendation.get("severity", "info")), 10)
@@ -61,7 +72,8 @@ def score_recommendation(recommendation: dict[str, Any], coherence: dict[str, An
     if recommendation.get("source") == "final-seal":
         # Final evolve is mandatory before commit, but not usually the cheapest next routing action.
         final_guard = -18
-    total = round(severity + source + (confidence * 20) + _coherence_adjustment(recommendation, coherence) - cost - blockers - stale_penalty + final_guard, 3)
+    calibration_boost = _calibration_adjustment(recommendation, calibration)
+    total = round(severity + source + (confidence * 20) + _coherence_adjustment(recommendation, coherence) + calibration_boost - cost - blockers - stale_penalty + final_guard, 3)
     scored = dict(recommendation)
     scored["arbiter_score"] = total
     scored["arbiter_factors"] = {
@@ -72,15 +84,20 @@ def score_recommendation(recommendation: dict[str, Any], coherence: dict[str, An
         "blocking_penalty": blockers,
         "stale_penalty": stale_penalty,
         "coherence_adjustment": _coherence_adjustment(recommendation, coherence),
+        "calibration_adjustment": calibration_boost,
         "final_guard": final_guard,
     }
     return scored
 
 
-def arbitrate_recommendations(recommendations: list[dict[str, Any]], coherence: dict[str, Any] | None = None) -> dict[str, Any]:
+def arbitrate_recommendations(
+    recommendations: list[dict[str, Any]],
+    coherence: dict[str, Any] | None = None,
+    calibration: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     if not recommendations:
         raise ValueError("Cannot arbitrate an empty recommendation set.")
-    scored = [score_recommendation(item, coherence) for item in recommendations]
+    scored = [score_recommendation(item, coherence, calibration) for item in recommendations]
     selected = sorted(scored, key=lambda item: item["arbiter_score"], reverse=True)[0]
     return {
         "schema": "NEXUS_RECOMMENDATION_ARBITER.v2.1.0",
@@ -91,6 +108,10 @@ def arbitrate_recommendations(recommendations: list[dict[str, Any]], coherence: 
             "status": (coherence or {}).get("status", "unknown"),
             "score": ((coherence or {}).get("coherence") or {}).get("score"),
             "lineage_entropy": ((coherence or {}).get("coherence") or {}).get("lineage_entropy"),
+        },
+        "calibration_input": {
+            "schema": (calibration or {}).get("schema"),
+            "sources": sorted(((calibration or {}).get("source_calibration") or {}).keys()),
         },
         "boundary": "Recommendation arbitration may select a route. It may not execute it, grant authority, or skip final evolve before commit.",
     }
