@@ -1,0 +1,135 @@
+{
+  "average_alignment": 0.6637,
+  "blocked_actions": [
+    "self_authorize",
+    "execute_selected_action",
+    "bypass_final_evolve",
+    "git_write",
+    "external_api_writes",
+    "secret_access",
+    "promote_geometry_to_authority"
+  ],
+  "claim_boundary": "Triadic Geometric Lattice is recommendation-routing evidence only. It scores evidence, geometry, and authority alignment for candidate routes. It does not execute, mutate files, grant authority, prove correctness, or replace final evolve.",
+  "generated_at_utc": "2026-07-12T19:58:43.732147+00:00",
+  "graph_source": "state/gitnexus/gitnexus_graph_latest.json",
+  "impact_counts": {
+    "hot": 21,
+    "impacted": 240
+  },
+  "lattice_packet_hash": "0b021fa6c8b3b2943c9b61ce9350870cc8a330bb54907a49a492ac89455c4c5d",
+  "mode": "triadic_geometric_route_alignment",
+  "read_surfaces": [
+    "state/gitnexus/gitnexus_graph_latest.json",
+    "GITNEXUS/state/gitnexus_graph_latest.json",
+    "reports/gitnexus_report_latest.json",
+    "state/interconnect_graph.v0.2.2.json",
+    "reports/nexus_decision_envelope_latest.json"
+  ],
+  "repository_snapshot": {
+    "branch": "main",
+    "epoch_id": "e0159b0b77c1d388d5867e01",
+    "generated_at_utc": "2026-07-12T19:58:43.721776+00:00",
+    "input_snapshot_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "input_surfaces": [],
+    "repository_commit": "249eba91fbd6cf5fc6009683cde64934f71e7afc",
+    "schema": "NEXUS_REPOSITORY_SNAPSHOT.v2.4.0",
+    "source_status_count": 25,
+    "source_status_hash": "9f6c5b7caed98bde5433127a7b064d5c8d964f703e21a377d3d1ee64e08ac7f3"
+  },
+  "route_alignments": [
+    {
+      "action": "cortex-certificate-refresh",
+      "alignment": 0.6344,
+      "arbiter_adjustment": -0.281,
+      "axes": {
+        "authority": 0.96,
+        "evidence": 0.38,
+        "geometry": 0.7
+      },
+      "notes": [
+        "source packet is stale against current snapshot",
+        "route has neutral geometry alignment",
+        "route uses governed NEXUS command surface"
+      ],
+      "source": "predictive-memory"
+    },
+    {
+      "action": "inspect_dirty_scope",
+      "alignment": 0.6742,
+      "arbiter_adjustment": 0.436,
+      "axes": {
+        "authority": 0.96,
+        "evidence": 0.38,
+        "geometry": 0.84
+      },
+      "notes": [
+        "source packet is stale against current snapshot",
+        "route targets bounded scope/runtime geometry",
+        "route uses governed NEXUS command surface"
+      ],
+      "source": "git-scope"
+    },
+    {
+      "action": "predictive-timing",
+      "alignment": 0.6742,
+      "arbiter_adjustment": 0.436,
+      "axes": {
+        "authority": 0.96,
+        "evidence": 0.38,
+        "geometry": 0.84
+      },
+      "notes": [
+        "source packet is stale against current snapshot",
+        "route targets bounded scope/runtime geometry",
+        "route uses governed NEXUS command surface"
+      ],
+      "source": "predictive-evolve"
+    },
+    {
+      "action": "run_final_evolve_before_commit",
+      "alignment": 0.672,
+      "arbiter_adjustment": 0.396,
+      "axes": {
+        "authority": 0.74,
+        "evidence": 0.82,
+        "geometry": 0.5
+      },
+      "notes": [
+        "final seal has no upstream packet but remains mandatory",
+        "route spans full repository geometry",
+        "full-repo impact makes final seal expensive before scoped lanes",
+        "mandatory final guard is authority-safe but expensive"
+      ],
+      "source": "final-seal"
+    }
+  ],
+  "schema": "NEXUS_TRIADIC_GEOMETRIC_LATTICE.v2.5.0",
+  "selected_hint": {
+    "action": "inspect_dirty_scope",
+    "alignment": 0.6742,
+    "arbiter_adjustment": 0.436,
+    "axes": {
+      "authority": 0.96,
+      "evidence": 0.38,
+      "geometry": 0.84
+    },
+    "notes": [
+      "source packet is stale against current snapshot",
+      "route targets bounded scope/runtime geometry",
+      "route uses governed NEXUS command surface"
+    ],
+    "source": "git-scope"
+  },
+  "status": "pass",
+  "system": "NEXUS GATE",
+  "triad": {
+    "authority": "human-bound command surfaces and non-escalation boundaries",
+    "evidence": "packet freshness, source hashes, and generated report admissibility",
+    "geometry": "GitNexus impact pressure, hot-file pressure, and route blast radius"
+  },
+  "version": "2.5.0",
+  "write_surfaces": [
+    "reports/nexus_triadic_lattice_latest.json",
+    "state/lattice/nexus_triadic_lattice_latest.json"
+  ]
+}

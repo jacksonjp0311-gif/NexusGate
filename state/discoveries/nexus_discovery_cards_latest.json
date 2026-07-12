@@ -1,5 +1,5 @@
 {
-  "card_count": 15,
+  "card_count": 17,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -604,10 +604,88 @@
       "summary": "Recurring post-evolve dirty state is two mixed signals: generated evidence exhaust and source mutation. Separating them keeps source changes visible while making generated churn cleanable.",
       "title": "Generated Surface / Source Separation",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "causal-loop-hardening-algorithm",
+        "causal-coherence-routing-algorithm",
+        "authority-gate-algorithm"
+      ],
+      "boundary": "Adversarial testing improves route reliability. It does not prove correctness, safety, or autonomous authority.",
+      "code_references": [
+        "nexus_gate/coherence/states.py",
+        "nexus_gate/state/snapshot.py",
+        "nexus_gate/decision/arbiter.py",
+        "nexus_gate/loops/wounds.py"
+      ],
+      "discovery_id": "control-state-adversarial-testing",
+      "evidence_surfaces": [
+        "reports/nexus_decision_envelope_latest.json",
+        "reports/nexus_coherence_field_latest.json",
+        "docs/design/CAUSAL_LOOP_HARDENING_DESIGN.md"
+      ],
+      "math": {
+        "coherence_state": "state = classify(score); score=0 => critical",
+        "confidence": "confidence = clamp(raw, 0, 1)",
+        "deterministic_route": "selected = max(score, severity, source_priority, source, action)",
+        "freshness": "fresh = commit_match and source_status_hash_match and input_snapshot_hash_match"
+      },
+      "next_versions": [
+        "v0.2: add epoch mismatch blocking instead of only stale scoring",
+        "v0.3: add oscillation tests across multiple decision/coherence cycles"
+      ],
+      "replication_steps": [
+        "python -m unittest discover -s tests -p \"test_causal_coherence_routing_v210.py\"",
+        ".\\scripts\\nexus.ps1 decision-envelope",
+        ".\\scripts\\nexus.ps1 coherence-field"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Routing loops need tests for pathological control values, not only happy-path evidence flow. Zero, sentinels, overconfident scores, tied scores, and stale epochs are control wounds.",
+      "title": "Control-State Adversarial Testing",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "triadic-geometric-lattice-algorithm",
+        "causal-loop-hardening-algorithm",
+        "gitnexus-impact-extraction-algorithm"
+      ],
+      "boundary": "Triadic routing is recommendation pressure only. It cannot execute, mutate, grant authority, or skip final evolve.",
+      "code_references": [
+        "nexus_gate/lattice/triadic.py::build_triadic_lattice",
+        "nexus_gate/decision/arbiter.py::score_recommendation",
+        "nexus_gate/decision/envelope.py::build_decision_envelope"
+      ],
+      "discovery_id": "triadic-geometric-lattice-routing",
+      "evidence_surfaces": [
+        "reports/nexus_triadic_lattice_latest.json",
+        "state/lattice/nexus_triadic_lattice_latest.json",
+        "reports/nexus_decision_envelope_latest.json"
+      ],
+      "math": {
+        "alignment": "cuberoot(evidence * geometry * authority)",
+        "arbiter_adjustment": "(alignment - 0.65) * 18",
+        "axis_boundary": "high geometry cannot compensate for missing authority or stale evidence"
+      },
+      "next_versions": [
+        "v0.2: feed live GitNexus centrality and bridge-risk directly into geometry axis",
+        "v0.3: expose lattice alignment in System Monitor and GitNexus HUDs"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 triadic-lattice",
+        ".\\scripts\\nexus.ps1 decision-envelope",
+        "Inspect arbiter.scored_recommendations[].arbiter_factors.triadic_lattice_adjustment"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "A route is strongest when evidence freshness, geometric efficiency, and authority alignment are all strong. Multiplicative alignment prevents one axis from masking collapse in another.",
+      "title": "Triadic Geometric Lattice Routing",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-12T11:58:34.453728+00:00",
+  "generated_at_utc": "2026-07-12T19:59:52.661088+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

@@ -15,9 +15,9 @@ ROOT = Path(__file__).resolve().parents[1]
 class DecisionEnvelopeV130Tests(unittest.TestCase):
     def test_decision_envelope_is_self_bootstrap_and_recommendation_only(self) -> None:
         packet = build_decision_envelope(ROOT, intent="test self bootstrap")
-        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.4.0")
-        self.assertEqual(packet["version"], "2.4.0")
-        self.assertEqual(packet["mode"], "outcome_aware_decision_envelope")
+        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.5.0")
+        self.assertEqual(packet["version"], "2.5.0")
+        self.assertEqual(packet["mode"], "triadic_lattice_decision_envelope")
         self.assertIn(packet["status"], {"pass", "warn"})
         self.assertTrue(packet["authority"]["recommendation_only"])
         self.assertFalse(packet["authority"]["autonomous_authority"])
@@ -34,6 +34,7 @@ class DecisionEnvelopeV130Tests(unittest.TestCase):
         self.assertIn("coherence_input", packet)
         self.assertIn("outcome_awareness", packet)
         self.assertIn("repository_snapshot", packet)
+        self.assertIn("triadic_lattice", packet)
         self.assertTrue(packet["selected_action"]["recommendation_only"])
 
     def test_decision_envelope_cli_writes_report_and_state(self) -> None:
@@ -47,7 +48,7 @@ class DecisionEnvelopeV130Tests(unittest.TestCase):
         )
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
         packet = json.loads(proc.stdout)
-        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.4.0")
+        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.5.0")
         self.assertTrue((ROOT / "reports" / "nexus_decision_envelope_latest.json").exists())
         self.assertTrue((ROOT / "state" / "decision" / "nexus_decision_envelope_latest.json").exists())
 
@@ -58,12 +59,14 @@ class DecisionEnvelopeV130Tests(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8-sig")
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8-sig")
         self.assertIn('"decision-envelope"', ps)
+        self.assertIn('"triadic-lattice"', ps)
         self.assertIn("nexus_gate.decision.envelope", ps)
         self.assertIn("decision-envelope)", sh)
         self.assertIn("nexus_gate.decision.envelope", sh)
         self.assertIn('"decision-envelope"', human)
         self.assertIn("16g_decision_envelope", human)
         self.assertIn("Causal Coherence Routing", readme)
+        self.assertIn("Triadic Geometric Lattice", readme)
         self.assertIn("reports/nexus_decision_envelope_latest.json", agents)
 
     def test_docs_cards_record_self_bootstrap_discovery(self) -> None:
@@ -72,6 +75,7 @@ class DecisionEnvelopeV130Tests(unittest.TestCase):
         runtime_doc = (ROOT / "docs" / "runtime" / "NEXUS_DECISION_ENVELOPE.md").read_text(encoding="utf-8-sig")
         self.assertIn("Self Bootstrap Decision Envelope Algorithm", algorithms)
         self.assertIn("Causal Coherence Routing Algorithm", algorithms)
+        self.assertIn("Triadic Geometric Lattice Algorithm", algorithms)
         self.assertIn("self-bootstrap-decision-envelope", discoveries)
         self.assertIn("self-orientation, not self-authorization", runtime_doc)
 

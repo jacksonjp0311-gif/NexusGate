@@ -60,7 +60,7 @@ class CoherenceFieldV200Tests(unittest.TestCase):
         self.assertIn("nexus_gate.coherence.field", sh)
         self.assertIn('"coherence-field"', human)
         self.assertIn("16h_coherence_field", human)
-        self.assertIn("v2.4.0 Causal Loop Hardening", readme)
+        self.assertIn("v2.5.0 Triadic Geometric Lattice", readme)
         self.assertIn("reports/nexus_coherence_field_latest.json", agents)
 
     def test_v2_docs_and_policy_kernel_exist(self) -> None:

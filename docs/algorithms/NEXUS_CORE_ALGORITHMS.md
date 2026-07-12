@@ -246,6 +246,21 @@ repository snapshot -> typed coherence state -> normalized wounds -> clamped con
 
 Causal Loop Hardening prevents edge-case routing drift. A score of zero remains critical, inactive wound sentinels do not trigger repair routes, confidence cannot exceed one, and tied routes resolve deterministically. Snapshot epochs make stale packet use visible before route selection.
 
+## Triadic Geometric Lattice Algorithm
+
+```text
+candidate recommendation -> evidence axis + geometry axis + authority axis -> geometric mean alignment -> arbiter adjustment -> selected route
+```
+
+Triadic Geometric Lattice turns routing into a three-axis field. Evidence asks whether packet inputs are fresh; geometry asks whether the route is low-blast and aligned with GitNexus impact; authority asks whether the command remains inside governed human-bound surfaces.
+
+```text
+alignment = cuberoot(evidence * geometry * authority)
+arbiter_adjustment = (alignment - 0.65) * 18
+```
+
+The lattice may optimize route selection. It may not grant authority, mutate files, execute commands, or replace final evolve.
+
 ## Outcome Feedback Algorithm
 
 ```text

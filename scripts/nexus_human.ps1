@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "origin-seal", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "origin-seal", "triadic-lattice", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [switch]$NoGit
 )
@@ -168,6 +168,7 @@ function Run-Feedback {
     Invoke-Step "Predictive timing" "16d_predictive_timing.json" { python -m nexus_gate.loops.predictive_timing --root . --json }
     Invoke-Step "Predictive memory orchestrator" "16e_predictive_memory_orchestrator.json" { python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent "evolve chain Cortex memory and predictive gate fusion" --json }
     Invoke-Step "Origin seal" "16f_origin_seal.json" { python -m nexus_gate.origin.seal --root . --json }
+    Invoke-Step "Triadic geometric lattice" "16f2_triadic_lattice.json" { python -m nexus_gate.lattice.triadic --root . --json }
     Invoke-Step "Decision envelope" "16g_decision_envelope.json" { python -m nexus_gate.decision.envelope --root . --intent "evolve chain self-bootstrap decision envelope" --json }
     Invoke-Step "Coherence field" "16h_coherence_field.json" { python -m nexus_gate.coherence.field --root . --intent "evolve chain coherence continuity field" --json }
     Invoke-Step "Outcome learner" "16i_outcome_learner.json" { python -m nexus_gate.outcomes.learn --root . --intent "evolve chain recommendation outcome learning" --json }
@@ -211,11 +212,13 @@ function Show-Status {
         ".\reports\nexus_loop_orchestration_report_latest.json",
         ".\reports\nexus_predictive_memory_orchestrator_latest.json",
         ".\reports\nexus_origin_seal_latest.json",
+        ".\reports\nexus_triadic_lattice_latest.json",
         ".\reports\nexus_decision_envelope_latest.json",
         ".\reports\nexus_coherence_field_latest.json",
         ".\reports\nexus_recommendation_outcome_latest.json",
         ".\reports\nexus_runtime_hygiene_latest.json",
         ".\state\nexus_origin_manifest_latest.json",
+        ".\state\lattice\nexus_triadic_lattice_latest.json",
         ".\state\decision\nexus_decision_envelope_latest.json",
         ".\state\coherence\nexus_coherence_field_latest.json",
         ".\state\coherence\arbiter_calibration_latest.json",
@@ -349,6 +352,12 @@ if ($Command -eq "predictive-memory") {
 if ($Command -eq "origin-seal") {
     Invoke-Step "Origin seal" "16f_origin_seal.json" { python -m nexus_gate.origin.seal --root . --json }
     Say "Origin seal report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "triadic-lattice") {
+    Invoke-Step "Triadic geometric lattice" "16f2_triadic_lattice.json" { python -m nexus_gate.lattice.triadic --root . --json }
+    Say "Triadic lattice report written." "OK"
     exit 0
 }
 

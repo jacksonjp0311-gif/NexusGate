@@ -1,5 +1,12 @@
-## v2.4.0 - Causal Loop Hardening
+## v2.5.0 - Triadic Geometric Lattice
 Status: current
+- Adds triadic route alignment over evidence, geometry, and authority axes.
+- Adds `nexus_gate.lattice.triadic` and `.\scripts\nexus.ps1 triadic-lattice`.
+- Feeds lattice alignment into the recommendation arbiter as a bounded adjustment.
+- Preserves the boundary: geometric efficiency may steer recommendations, but cannot execute, self-authorize, or skip final evolve.
+
+## v2.4.0 - Causal Loop Hardening
+Status: sealed
 - Fixes zero-coherence handling in arbiter and Decision Envelope.
 - Normalizes inactive wound sentinels before routing wound repairs.
 - Clamps recommendation confidence to [0, 1].

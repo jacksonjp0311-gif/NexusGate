@@ -670,6 +670,44 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.3: add oscillation tests across multiple decision/coherence cycles",
             ],
             "boundary": "Adversarial testing improves route reliability. It does not prove correctness, safety, or autonomous authority.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "triadic-geometric-lattice-routing",
+            "version": "0.1.0",
+            "title": "Triadic Geometric Lattice Routing",
+            "status": "active",
+            "summary": "A route is strongest when evidence freshness, geometric efficiency, and authority alignment are all strong. Multiplicative alignment prevents one axis from masking collapse in another.",
+            "math": {
+                "alignment": "cuberoot(evidence * geometry * authority)",
+                "arbiter_adjustment": "(alignment - 0.65) * 18",
+                "axis_boundary": "high geometry cannot compensate for missing authority or stale evidence",
+            },
+            "code_references": [
+                "nexus_gate/lattice/triadic.py::build_triadic_lattice",
+                "nexus_gate/decision/arbiter.py::score_recommendation",
+                "nexus_gate/decision/envelope.py::build_decision_envelope",
+            ],
+            "algorithm_card_refs": [
+                "triadic-geometric-lattice-algorithm",
+                "causal-loop-hardening-algorithm",
+                "gitnexus-impact-extraction-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 triadic-lattice",
+                ".\\scripts\\nexus.ps1 decision-envelope",
+                "Inspect arbiter.scored_recommendations[].arbiter_factors.triadic_lattice_adjustment",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_triadic_lattice_latest.json",
+                "state/lattice/nexus_triadic_lattice_latest.json",
+                "reports/nexus_decision_envelope_latest.json",
+            ],
+            "next_versions": [
+                "v0.2: feed live GitNexus centrality and bridge-risk directly into geometry axis",
+                "v0.3: expose lattice alignment in System Monitor and GitNexus HUDs",
+            ],
+            "boundary": "Triadic routing is recommendation pressure only. It cannot execute, mutate, grant authority, or skip final evolve.",
         }
     ]
     return {

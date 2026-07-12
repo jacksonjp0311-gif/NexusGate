@@ -10,12 +10,13 @@ from typing import Any
 
 from nexus_gate.decision.arbiter import arbitrate_recommendations
 from nexus_gate.coherence.states import classify_coherence
+from nexus_gate.lattice.triadic import build_triadic_lattice, apply_lattice_alignment
 from nexus_gate.loops.wounds import has_active_wound
 from nexus_gate.state.snapshot import capture_repository_snapshot, packet_is_fresh
 
 
-VERSION = "2.4.0"
-SCHEMA = "NEXUS_DECISION_ENVELOPE.v2.4.0"
+VERSION = "2.5.0"
+SCHEMA = "NEXUS_DECISION_ENVELOPE.v2.5.0"
 REPORT_LATEST = Path("reports") / "nexus_decision_envelope_latest.json"
 STATE_LATEST = Path("state") / "decision" / "nexus_decision_envelope_latest.json"
 
@@ -54,6 +55,8 @@ READ_SURFACES = [
     "reports/nexus_coherence_field_latest.json",
     "state/coherence/arbiter_calibration_latest.json",
     "state/coherence/pressure_memory_latest.json",
+    "reports/nexus_triadic_lattice_latest.json",
+    "state/lattice/nexus_triadic_lattice_latest.json",
     "git status --short",
 ]
 
@@ -375,6 +378,8 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
             source_packet=coherence,
             repository_snapshot=repository_snapshot,
         ))
+    triadic_lattice = build_triadic_lattice(root_path, recommendations, repository_snapshot)
+    recommendations = apply_lattice_alignment(recommendations, triadic_lattice)
     selected, arbiter = _select_action(recommendations, coherence, calibration)
     missing = [
         rel for rel in READ_SURFACES
@@ -393,8 +398,8 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
         "schema": SCHEMA,
         "system": "NEXUS GATE",
         "version": VERSION,
-        "phase": "Outcome-Aware Arbiter",
-        "mode": "outcome_aware_decision_envelope",
+        "phase": "Triadic Geometric Lattice",
+        "mode": "triadic_lattice_decision_envelope",
         "status": status,
         "generated_at_utc": _utc(),
         "intent": intent,
@@ -426,6 +431,14 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
             "pressure_memory_schema": pressure_memory.get("schema"),
             "pressure_trend": pressure_memory.get("trend"),
             "latest_coherence_score": pressure_memory.get("latest_coherence_score"),
+        },
+        "triadic_lattice": {
+            "schema": triadic_lattice.get("schema"),
+            "status": triadic_lattice.get("status"),
+            "average_alignment": triadic_lattice.get("average_alignment"),
+            "selected_hint": triadic_lattice.get("selected_hint"),
+            "triad": triadic_lattice.get("triad"),
+            "lattice_packet_hash": triadic_lattice.get("lattice_packet_hash"),
         },
         "wounds": {
             "active_wound_key": wound.get("active_wound_key"),

@@ -38,17 +38,18 @@ class CausalCoherenceRoutingV210Tests(unittest.TestCase):
             },
         ]
         result = arbitrate_recommendations(recs, {"coherence": {"score": 55, "lineage_entropy": 9, "missing_surfaces": ["x"]}})
-        self.assertEqual(result["schema"], "NEXUS_RECOMMENDATION_ARBITER.v2.4.0")
+        self.assertEqual(result["schema"], "NEXUS_RECOMMENDATION_ARBITER.v2.5.0")
         self.assertEqual(result["selected"]["source"], "coherence-field")
         self.assertIn("may not execute", result["boundary"])
 
     def test_decision_envelope_contains_causal_arbiter(self) -> None:
         packet = build_decision_envelope(ROOT, intent="causal coherence test")
-        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.4.0")
-        self.assertEqual(packet["arbiter"]["schema"], "NEXUS_RECOMMENDATION_ARBITER.v2.4.0")
+        self.assertEqual(packet["schema"], "NEXUS_DECISION_ENVELOPE.v2.5.0")
+        self.assertEqual(packet["arbiter"]["schema"], "NEXUS_RECOMMENDATION_ARBITER.v2.5.0")
         self.assertIn("scored_recommendations", packet["arbiter"])
         self.assertIn("arbiter_score", packet["selected_action"])
         self.assertIn("repository_snapshot", packet)
+        self.assertIn("triadic_lattice", packet)
         self.assertIn("epoch_id", packet["repository_snapshot"])
         self.assertTrue(packet["selected_action"]["requires_human_authorization"])
         self.assertIn("outcome_awareness", packet)
@@ -81,6 +82,7 @@ class CausalCoherenceRoutingV210Tests(unittest.TestCase):
         self.assertEqual(selected["source"], "coherence-field")
         self.assertEqual(selected["arbiter_factors"]["confidence_weight"], 20.0)
         self.assertGreater(selected["arbiter_factors"]["coherence_adjustment"], 0)
+        self.assertIn("triadic_lattice_adjustment", selected["arbiter_factors"])
 
     def test_wound_sentinel_normalization(self) -> None:
         self.assertFalse(has_active_wound({"status": "pass", "active_wound_key": "none"}))

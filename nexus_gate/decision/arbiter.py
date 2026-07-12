@@ -5,7 +5,7 @@ from typing import Any
 from nexus_gate.coherence.states import CoherenceState, classify_coherence
 
 
-SCHEMA = "NEXUS_RECOMMENDATION_ARBITER.v2.4.0"
+SCHEMA = "NEXUS_RECOMMENDATION_ARBITER.v2.5.0"
 
 SEVERITY_WEIGHT = {
     "required": 55,
@@ -93,7 +93,9 @@ def score_recommendation(
         # Final evolve is mandatory before commit, but not usually the cheapest next routing action.
         final_guard = -18
     calibration_boost = _calibration_adjustment(recommendation, calibration)
-    total = round(severity + source + (confidence * 20) + _coherence_adjustment(recommendation, coherence) + calibration_boost - cost - blockers - stale_penalty + final_guard, 3)
+    lattice = recommendation.get("triadic_lattice") or {}
+    lattice_adjustment = float(lattice.get("arbiter_adjustment") or 0.0)
+    total = round(severity + source + (confidence * 20) + _coherence_adjustment(recommendation, coherence) + calibration_boost + lattice_adjustment - cost - blockers - stale_penalty + final_guard, 3)
     scored = dict(recommendation)
     scored["arbiter_score"] = total
     scored["arbiter_factors"] = {
@@ -105,6 +107,7 @@ def score_recommendation(
         "stale_penalty": stale_penalty,
         "coherence_adjustment": _coherence_adjustment(recommendation, coherence),
         "calibration_adjustment": calibration_boost,
+        "triadic_lattice_adjustment": lattice_adjustment,
         "final_guard": final_guard,
     }
     return scored
@@ -130,7 +133,7 @@ def arbitrate_recommendations(
     )
     return {
         "schema": SCHEMA,
-        "mode": "causal_loop_hardened_routing",
+        "mode": "triadic_causal_lattice_routing",
         "selected": selected,
         "scored_recommendations": scored,
         "coherence_input": {
@@ -141,6 +144,10 @@ def arbitrate_recommendations(
         "calibration_input": {
             "schema": (calibration or {}).get("schema"),
             "sources": sorted(((calibration or {}).get("source_calibration") or {}).keys()),
+        },
+        "lattice_input": {
+            "routes_with_alignment": len([item for item in scored if item.get("triadic_lattice")]),
+            "triad": "evidence + geometry + authority",
         },
         "boundary": "Recommendation arbitration may select a route. It may not execute it, grant authority, or skip final evolve before commit.",
     }

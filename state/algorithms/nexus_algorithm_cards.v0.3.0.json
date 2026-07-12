@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 38,
+  "card_count": 40,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -1053,6 +1053,74 @@
       "title": "Causal Coherence Routing Algorithm"
     },
     {
+      "algorithm_id": "causal-loop-hardening-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "repository snapshot -> typed coherence state -> normalized wounds -> clamped confidence -> fresh packet scoring -> deterministic route",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 31,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Causal Loop Hardening prevents edge-case routing drift. A score of zero remains critical, inactive wound sentinels do not trigger repair routes, confidence cannot exceed one, and tied routes resolve deterministically. Snapshot epochs make stale packet use visible before route selection.",
+      "title": "Causal Loop Hardening Algorithm"
+    },
+    {
+      "algorithm_id": "triadic-geometric-lattice-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "candidate recommendation -> evidence axis + geometry axis + authority axis -> geometric mean alignment -> arbiter adjustment -> selected route",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 32,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Triadic Geometric Lattice turns routing into a three-axis field. Evidence asks whether packet inputs are fresh; geometry asks whether the route is low-blast and aligned with GitNexus impact; authority asks whether the command remains inside governed human-bound surfaces. The lattice may optimize route selection. It may not grant authority, mutate files, execute commands, or replace final evolve.",
+      "title": "Triadic Geometric Lattice Algorithm"
+    },
+    {
       "algorithm_id": "outcome-feedback-algorithm",
       "authority_boundary": {
         "arbitrary_command_execution": false,
@@ -1076,7 +1144,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 31,
+      "order": 33,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1110,7 +1178,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 32,
+      "order": 34,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1144,7 +1212,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 33,
+      "order": 35,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1178,7 +1246,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 34,
+      "order": 36,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1212,7 +1280,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 35,
+      "order": 37,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1246,7 +1314,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 36,
+      "order": 38,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1280,7 +1348,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 37,
+      "order": 39,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1314,7 +1382,7 @@
         "bounded_context"
       ],
       "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
-      "order": 38,
+      "order": 40,
       "outputs": [
         "algorithm_card",
         "bounded_recommendation"
@@ -1332,6 +1400,7 @@
     "authority-gate-algorithm",
     "authority-monotonicity-algorithm",
     "causal-coherence-routing-algorithm",
+    "causal-loop-hardening-algorithm",
     "causal-memory-closure-algorithm",
     "certificate-resume-policy",
     "coherence-field-algorithm",
@@ -1363,11 +1432,12 @@
     "runtime-churn-hygiene-algorithm",
     "runtime-pressure-model",
     "self-bootstrap-decision-envelope-algorithm",
+    "triadic-geometric-lattice-algorithm",
     "ui-surface-algorithm",
     "versioned-vector-blob-storage-algorithm"
   ],
   "discovery_source": "derived_from_cards_algorithm_id",
-  "generated_at_utc": "2026-07-12T11:58:30.582665+00:00",
+  "generated_at_utc": "2026-07-12T19:59:52.607250+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",

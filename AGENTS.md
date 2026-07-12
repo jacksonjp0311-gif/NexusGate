@@ -32,6 +32,7 @@ Before running full `evolve`, pack, broad test suites, Electron smoke, or any lo
 .\scripts\nexus.ps1 predictive-evolve
 .\scripts\nexus.ps1 certificate-resume
 .\scripts\nexus.ps1 origin-seal
+.\scripts\nexus.ps1 triadic-lattice
 .\scripts\nexus.ps1 decision-envelope
 .\scripts\nexus.ps1 coherence-field
 ```
@@ -61,9 +62,11 @@ state/update_index.v0.1.4.json
 reports/nexus_compile_report_latest.json, if present
 reports/nexus_predictive_gate_timing_latest.json, if present
 reports/nexus_origin_seal_latest.json, if present
+reports/nexus_triadic_lattice_latest.json, if present
 reports/nexus_decision_envelope_latest.json, if present
 reports/nexus_coherence_field_latest.json, if present
 state/nexus_origin_manifest_latest.json, if present
+state/lattice/nexus_triadic_lattice_latest.json, if present
 state/decision/nexus_decision_envelope_latest.json, if present
 state/coherence/nexus_coherence_field_latest.json, if present
 state/algorithms/nexus_algorithm_cards_latest.json, if present
