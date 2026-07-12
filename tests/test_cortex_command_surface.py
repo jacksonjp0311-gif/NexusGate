@@ -57,6 +57,8 @@ class TestCortexCommandSurface(unittest.TestCase):
         self.assertIn("nexus_cortex_refresh_report_latest.json", refresh)
         self.assertIn("repo_mutation_from_cortex", refresh)
         self.assertIn("bypass_nexus_gates", refresh)
+        self.assertIn("_is_read_only_authority", refresh)
+        self.assertIn("cortex_may_authorize_mutation", refresh)
 
     def test_cortex_discovery_and_algorithm_cards_exist(self):
         algorithms = (ROOT / "docs" / "algorithms" / "NEXUS_CORE_ALGORITHMS.md").read_text(encoding="utf-8")

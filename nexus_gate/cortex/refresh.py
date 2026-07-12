@@ -93,6 +93,27 @@ def _compact_evidence(packet_payload: dict[str, Any]) -> list[dict[str, Any]]:
     return compact
 
 
+def _is_read_only_authority(authority: dict[str, Any]) -> bool:
+    if not isinstance(authority, dict):
+        return False
+    mutating_flags = [
+        authority.get("cortex_may_mutate"),
+        authority.get("cortex_may_mutate_repo"),
+        authority.get("cortex_may_authorize_mutation"),
+        authority.get("may_mutate"),
+        authority.get("mutation_authority"),
+        authority.get("repo_mutation"),
+        authority.get("git_write"),
+        authority.get("external_api_writes"),
+        authority.get("secret_access"),
+    ]
+    explicitly_blocked = any(value is False for value in mutating_flags)
+    no_granted_mutation = not any(value is True for value in mutating_flags)
+    mode = str(authority.get("mode") or authority.get("governor_mode") or "").lower()
+    bounded_mode = mode in {"", "read_only", "recommend_only", "recommendation_only"}
+    return explicitly_blocked and no_granted_mutation and bounded_mode
+
+
 def refresh_cortex(root: str | Path, intent: str = "", repo: str = "nexus-gate") -> dict[str, Any]:
     root_path = Path(root).resolve()
     engine = root_path / "Cortex"
@@ -150,7 +171,7 @@ def refresh_cortex(root: str | Path, intent: str = "", repo: str = "nexus-gate")
         "governor_read_only_or_bounded": governor.get("mode") in {"read_only", "normal", "constrained"},
         "governor_integrity": components.get("integrity"),
         "packet_shape": all(key in packet_payload for key in ("intent", "evidence", "authority", "context")),
-        "read_only_authority": packet_payload.get("authority", {}).get("cortex_may_mutate") is False,
+        "read_only_authority": _is_read_only_authority(packet_payload.get("authority", {})),
     }
     status = "ready" if all(
         checks[key]

@@ -108,7 +108,9 @@ def _cortex_status(cortex_gate: dict[str, Any], benchmark: dict[str, Any], sync:
 
 
 def _card_status(algorithms: dict[str, Any], discoveries: dict[str, Any]) -> dict[str, Any]:
-    algorithm_ids = set(algorithms.get("discovered_algorithms") or [])
+    card_algorithm_ids = {card.get("algorithm_id") for card in algorithms.get("cards") or []}
+    discovered_algorithm_ids = set(algorithms.get("discovered_algorithms") or [])
+    algorithm_ids = {item for item in card_algorithm_ids.union(discovered_algorithm_ids) if item}
     discovery_ids = {card.get("discovery_id") for card in discoveries.get("cards") or []}
     required_algorithms = {
         "predictive-evolve-planner-algorithm",
@@ -123,6 +125,7 @@ def _card_status(algorithms: dict[str, Any], discoveries: dict[str, Any]) -> dic
     return {
         "algorithm_count": algorithms.get("card_count", 0),
         "discovery_count": discoveries.get("card_count", 0),
+        "algorithm_readiness_source": "cards[].algorithm_id",
         "required_algorithms_present": sorted(required_algorithms.intersection(algorithm_ids)),
         "missing_algorithms": sorted(required_algorithms.difference(algorithm_ids)),
         "required_discoveries_present": sorted(required_discoveries.intersection(discovery_ids)),

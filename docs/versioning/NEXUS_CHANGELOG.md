@@ -1,5 +1,13 @@
-## v0.9.7 - Toolbelt Console Integration
+## v1.2.2 - Origin Seal + Causal Memory Wiring
 Status: current
+- Adds canonical product-origin report and manifest through `.\scripts\nexus.ps1 origin-seal`.
+- Records current product identity separately from older package/API/subsystem lineage.
+- Makes algorithm readiness derive from actual generated cards.
+- Promotes authority monotonicity, evidence freshness, gate invalidation, reflexive non-sovereignty, and lineage entropy into discovery cards.
+- Wires Predictive Memory into Meta-Orchestrator top-level recommendation arbitration while preserving human authority and final evolve requirements.
+
+## v0.9.7 - Toolbelt Console Integration
+Status: historical
 - Normalizes Toolbelt Console/Next/Process/Ship Console loops to satisfy meta-loop runner stage contracts.
 - Adds missing allowed-command argv entries for Toolbelt command stages.
 - Aligns version identity across README, ROADMAP, changelog, and pyproject.

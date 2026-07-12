@@ -129,13 +129,14 @@ def _derive_recommendation(
     phi: dict[str, Any],
     timing: dict[str, Any],
     predictive_evolve: dict[str, Any],
+    predictive_memory: dict[str, Any],
     certificate_resume: dict[str, Any],
     git_info: dict[str, Any],
 ) -> dict[str, Any]:
     if git_info.get("dirty_count", 0):
         return {
             "next_loop": "scope-hygiene",
-            "next_command": '.\\scripts\\nexus.ps1 preflight-json -Tag "scope dirty v1.1.3"',
+            "next_command": '.\\scripts\\nexus.ps1 preflight-json -Tag "scope dirty origin-seal"',
             "why": "Working tree has uncommitted residue; preserve intended-file staging before compounding.",
         }
     if preflight.get("status") == "fail":
@@ -172,6 +173,14 @@ def _derive_recommendation(
             "next_command": ".\\scripts\\nexus.ps1 certificate-resume",
             "why": f"Certificate Resume recommends resuming from {certificate_resume.get('recommended_resume_gate')}.",
         }
+    memory_rec = predictive_memory.get("recommendation") or {}
+    memory_command = memory_rec.get("recommended_next_command")
+    if predictive_memory.get("status") in {"pass", "warn"} and memory_command:
+        return {
+            "next_loop": memory_rec.get("recommended_next_loop") or "predictive-memory",
+            "next_command": memory_command,
+            "why": f"Predictive Memory selected this from Cortex/card/timing evidence: {memory_rec.get('why')}",
+        }
     if predictive_evolve.get("status") in {"pass", "warn"}:
         plan = predictive_evolve.get("recommended_plan") or []
         next_step = next((step for step in plan if not step.get("required_before_commit")), None)
@@ -200,7 +209,7 @@ def build_meta_orchestrator_packet(root: str | Path, intent: str = "") -> dict[s
     certificate_resume = _read_json(root / "reports" / "nexus_certificate_resume_report_latest.json", {})
     compile_report = _read_json(root / "reports" / "nexus_compile_report_latest.json", {})
     git_info = _git_status(root)
-    recommendation = _derive_recommendation(preflight, wound, phi, timing, predictive_evolve, certificate_resume, git_info)
+    recommendation = _derive_recommendation(preflight, wound, phi, timing, predictive_evolve, predictive_memory, certificate_resume, git_info)
 
     panels = [
         _compact_panel(

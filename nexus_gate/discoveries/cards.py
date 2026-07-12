@@ -250,6 +250,196 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.4: add retrieval confidence trend rows after Cortex query runs",
             ],
             "boundary": "Recommendation-only. It may choose the next evidence lane; it may not execute the plan, mutate memory, or skip final evolve before commit.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "authority-monotonicity-law",
+            "version": "0.1.0",
+            "title": "Authority Monotonicity Law",
+            "status": "active",
+            "summary": "NEXUS can transform intelligence, but authority may only be preserved or reduced as packets move through adapters, models, memory, HUDs, compilers, and certificates.",
+            "math": {
+                "authority_rule": "A_out subseteq A_in intersection P_allowed",
+                "violation": "exists capability in A_out where capability notin A_in or notin P_allowed",
+                "control_loop": "inspect authority -> normalize fields -> reject authority increases -> preserve boundary",
+            },
+            "code_references": [
+                "nexus_gate/runtime/router.py",
+                "nexus_gate/cortex/compile.py::_is_read_only_authority",
+                "nexus_gate/nexus_cell/authority.py",
+            ],
+            "algorithm_card_refs": [
+                "authority-monotonicity-algorithm",
+                "authority-gate-algorithm",
+                "cortex-certificate-refresh-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 origin-seal",
+                ".\\scripts\\nexus.ps1 cortex",
+                "Verify no generated packet grants mutation authority from read-only input",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_origin_seal_latest.json",
+                "reports/nexus_cortex_gate_latest.json",
+                "reports/nexus_meta_orchestrator_gate_latest.json",
+            ],
+            "next_versions": [
+                "v0.2: compile blocked-action dictionaries from one policy kernel",
+                "v0.3: add automated authority monotonicity test fixtures",
+            ],
+            "boundary": "Authority law only. It does not grant authority, execution, git write, network access, or safety proof.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "evidence-freshness-law",
+            "version": "0.1.0",
+            "title": "Evidence Freshness Law",
+            "status": "active",
+            "summary": "Repository evidence outranks stdout only when schema, origin hash, producer compatibility, relevant inputs, and freshness policy still match the current repository state.",
+            "math": {
+                "fresh_evidence": "valid = schema_ok and origin_hash_ok and producer_compatible and inputs_unchanged and freshness_ok",
+                "stale_rule": "stale evidence is diagnostic, not admissible truth",
+                "control_loop": "locate packet -> validate schema -> compare origin -> compare inputs -> admit or demote",
+            },
+            "code_references": [
+                "nexus_gate/origin/seal.py::build_origin_seal",
+                "nexus_gate/loops/certificate_resume.py::build_certificate_resume_packet",
+                "nexus_gate/loops/wound_compression.py",
+            ],
+            "algorithm_card_refs": [
+                "evidence-freshness-algorithm",
+                "origin-seal-algorithm",
+                "certificate-resume-policy",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 origin-seal",
+                "Inspect state/nexus_origin_manifest_latest.json",
+                "Compare origin_manifest_hash before trusting stale reports",
+            ],
+            "evidence_surfaces": [
+                "state/nexus_origin_manifest_latest.json",
+                "reports/nexus_origin_seal_latest.json",
+                "reports/human_surface/*",
+            ],
+            "next_versions": [
+                "v0.2: add per-report origin hash checks",
+                "v0.3: reject stale report truth in wound compression",
+            ],
+            "boundary": "Freshness is an admissibility rule. It does not prove correctness, safety, or production readiness.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "gate-dependency-invalidation",
+            "version": "0.1.0",
+            "title": "Gate Dependency Invalidation",
+            "status": "active",
+            "summary": "Passed gates become useful certificates only when the relevant input, toolchain, and gate-contract fingerprints still match.",
+            "math": {
+                "reuse_rule": "reuse(gate) = prior_pass and hash(inputs_now)==hash(inputs_then) and toolchain_now==toolchain_then and contract_now==contract_then",
+                "invalidate_rule": "changed input or changed contract or changed toolchain -> rerun gate",
+                "control_loop": "record dependencies -> compare before reuse -> recommend resume -> require final evolve",
+            },
+            "code_references": [
+                "nexus_gate/loops/certificate_resume.py",
+                "nexus_gate/loops/predictive_evolve.py",
+                "nexus_gate/loops/predictive_timing.py",
+            ],
+            "algorithm_card_refs": [
+                "gate-dependency-invalidation-algorithm",
+                "certificate-resume-policy",
+                "predictive-evolve-planner-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 certificate-resume",
+                "Inspect reports/nexus_certificate_resume_report_latest.json",
+                "Require .\\scripts\\nexus.ps1 evolve before commit",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_certificate_resume_report_latest.json",
+                "reports/human_surface/*",
+                "ledger/runtime_gate_timings.jsonl",
+            ],
+            "next_versions": [
+                "v0.2: hash explicit gate dependency sets",
+                "v0.3: add dependency graph HUD panel",
+            ],
+            "boundary": "Gate reuse is recommendation-only and never skips final evolve before commit.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "reflexive-non-sovereignty",
+            "version": "0.1.0",
+            "title": "Reflexive Non-Sovereignty",
+            "status": "active",
+            "summary": "NEXUS may observe, diagnose, recommend, validate, and remember itself without gaining the authority to authorize itself.",
+            "math": {
+                "law": "self_observation != self_authorization",
+                "mutation_rule": "durable_mutation_allowed = human_authorized and required_gates_passed",
+                "control_loop": "self-observe -> recommend -> human gate -> controlled action -> receipt",
+            },
+            "code_references": [
+                "nexus_gate/origin/seal.py",
+                "nexus_gate/loops/meta_orchestrator_gate.py",
+                "nexus_gate/nexus_cell/runner.py",
+            ],
+            "algorithm_card_refs": [
+                "authority-monotonicity-algorithm",
+                "causal-memory-closure-algorithm",
+                "controlled-lane-receipt-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 meta-orchestrator",
+                ".\\scripts\\nexus.ps1 origin-seal",
+                "Confirm recommendation surfaces cannot self-authorize mutation",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_meta_orchestrator_gate_latest.json",
+                "reports/nexus_origin_seal_latest.json",
+                "state/loops/nexus_meta_orchestrator_gate.v1.1.3.json",
+            ],
+            "next_versions": [
+                "v0.2: add canonical decision envelope",
+                "v0.3: add end-to-end receipt-to-memory promotion test",
+            ],
+            "boundary": "Self-observation and self-diagnosis are not self-authority.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "lineage-entropy",
+            "version": "0.1.0",
+            "title": "Lineage Entropy",
+            "status": "active",
+            "summary": "Multiple inconsistent current-version declarations are a measurable health signal. Origin Seal reduces ambiguity by declaring one product identity and preserving older strings as subsystem lineage.",
+            "math": {
+                "lineage_entropy": "distinct_current_identities + stale_origin_surfaces + unsealed_commits + incompatible_schema_refs",
+                "reduction_rule": "canonical_origin_manifest lowers identity ambiguity without deleting subsystem lineage",
+                "control_loop": "scan identity surfaces -> classify product/subsystem -> seal manifest -> track entropy",
+            },
+            "code_references": [
+                "nexus_gate/origin/seal.py::build_origin_seal",
+                "state/nexus_origin_manifest_latest.json",
+                "README.md::Human Director Box",
+            ],
+            "algorithm_card_refs": [
+                "origin-seal-algorithm",
+                "evidence-freshness-algorithm",
+                "lineage-topology-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 origin-seal",
+                "Inspect legacy_version_lineage in state/nexus_origin_manifest_latest.json",
+                "Use the origin seal as current identity during rehydration",
+            ],
+            "evidence_surfaces": [
+                "state/nexus_origin_manifest_latest.json",
+                "state/nexus_lineage_manifest_latest.json",
+                "README.md",
+            ],
+            "next_versions": [
+                "v0.2: add numeric lineage entropy score",
+                "v0.3: add origin drift warning to Meta-Orchestrator",
+            ],
+            "boundary": "Lineage entropy is an orientation metric, not a correctness or production readiness proof.",
         }
     ]
     return {

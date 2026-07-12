@@ -4,7 +4,7 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems: a gove
 
 ## Capability Surface
 - Operator HUDs: Electron, PowerShell TUI, Spiral Core Portal, Dev Mode / HANDOFF, Mode Selection, and System Monitor.
-- Governed lanes: `status`, `evolve`, `reflect`, `domain`, `toolbelt`, `preflight`, `predictive-timing`, `predictive-evolve`, `certificate-resume`, `wound-compress`, `phi-wound`, `phi-loop-auto`, and `phi-gate-auto`.
+- Governed lanes: `status`, `evolve`, `origin-seal`, `reflect`, `domain`, `toolbelt`, `preflight`, `predictive-timing`, `predictive-evolve`, `predictive-memory`, `certificate-resume`, `cortex-refresh`, `wound-compress`, `phi-wound`, `phi-loop-auto`, and `phi-gate-auto`.
 - Intelligence loops: AI-callable local loop fabric, Algorithm Cards, Discovery Cards, v0.9.3 AI Loop Toolkit Expansion, v0.9.4 Personal Coding Paradise, Toolbelt Console Integration, v0.9.8 Wound Compression Engine, v0.9.9 Preflight Optimizer, v1.1.0 Phi Microdose Loop, AI Toolbelt Console, Toolbelt Cockpit Output, and Meta-Orchestrator Gate.
 - Evidence organs: Neural Activity visual organ, GITNEXUS local codegraph, PetriDishPortal, NexusCell containment, feedback ledger, handoff packets, and compiler reports.
 - Guardrails: human-authorized mutation only, no autonomous authority, no bypassing gates, no production/safety/security proof claims from local passes.
@@ -20,20 +20,15 @@ cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
 .\scripts\nexus.ps1 toolbelt
 .\scripts\nexus.ps1 toolbelt-next -Tag "<intent>"
 .\scripts\nexus.ps1 toolbelt-json -Tag "<intent>"
+.\scripts\nexus.ps1 origin-seal
 .\scripts\nexus.ps1 wound-compress -Tag "<failed gate>"
 .\scripts\nexus.ps1 preflight -Tag "<intent>"
 python -m unittest discover -s tests
 python -m nexus_gate.compiler --root . --json
 ```
 
-```bash
-cd ~/OneDrive/Desktop/nexus-gate
-bash scripts/nexus.sh toolbelt "<intent>"
-bash scripts/nexus.sh toolbelt-next "<intent>"
-```
-
 ## Human Director Box
-NEXUS GATE current line: v1.1.3 Meta-Orchestrator Gate. Toolbelt, Preflight, Wound Compression, and Phi Gate Supervisor now compile into one recommendation-only route panel for Codex/chat/Electron HUD rehydration; authority remains human-bound.
+NEXUS GATE current line: v1.2.2 Origin Seal. Product identity is now bound by `state/nexus_origin_manifest_latest.json` and `reports/nexus_origin_seal_latest.json`; older version strings in `pyproject.toml`, `nexus_gate/__init__.py`, lineage files, and subsystem reports are preserved as subsystem lineage until a deliberate compatibility migration updates them. Toolbelt, Preflight, Wound Compression, Predictive Memory, Cortex Refresh, and Meta-Orchestrator compile into recommendation-only route evidence for Codex/chat/Electron HUD rehydration; authority remains human-bound.
 
 ## Priority Discovery: Predictive Gate Timing
 Predictive Gate Timing / Runtime Pressure Model is a priority. Timeout history is not intelligence by itself, but recorded lane duration, timeout budget, pass/fail state, artifact churn, and repo size can become bounded expectation: baseline -> drift -> anomaly -> recommended next timeout. The model may predict runtime pressure and recommend gate budgets; it may not bypass gates, hide failures, or self-authorize mutation.

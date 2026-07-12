@@ -1,0 +1,203 @@
+{
+  "authority_boundary": {
+    "autonomous_authority": false,
+    "external_api_writes": false,
+    "final_evolve_required_before_commit": true,
+    "git_write": false,
+    "human_authorization_required_for_mutation": true,
+    "recommendation_only": true,
+    "repo_mutation": false,
+    "secret_access": false
+  },
+  "blocked_actions": [
+    "self_authorize",
+    "version_claim_without_manifest",
+    "stale_evidence_as_truth",
+    "bypass_evolve",
+    "git_write",
+    "external_api_writes",
+    "secret_access"
+  ],
+  "branch": "main",
+  "checks": {
+    "authority_boundary_declared": true,
+    "compile_report_visible": true,
+    "final_evolve_required": true,
+    "meta_orchestrator_visible": true,
+    "predictive_memory_visible": true,
+    "product_line_current": true,
+    "required_origin_surfaces_present": true
+  },
+  "claim_boundary": "Origin Seal is local development evidence only. It binds current repository identity, key surface hashes, commit state, and subsystem version lineage. It does not prove correctness, safety, security, production readiness, model understanding, or autonomous authority.",
+  "commit": "1ffb475594de103cd60cb20ac121f7757bec1caf",
+  "dirty_count": 77,
+  "dirty_entries_sample": [
+    "M AGENTS.md",
+    " M NexusCell/ledger/nexus_cell_continuity.jsonl",
+    " M README.md",
+    " M \"Tesseract Neural Network/memory/conversation_latest.json\"",
+    " M \"Tesseract Neural Network/memory/tnn_memory.jsonl\"",
+    " M \"Tesseract Neural Network/state/tnn_state_latest.json\"",
+    " M dist/nexus_gate_pack_manifest_latest.json",
+    " M dist/nexus_gate_source_bundle_latest.tar.gz",
+    " M docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+    " M docs/feedback/FEEDBACK_LOG.md",
+    " M docs/updates/UPDATE_CHART.md",
+    " M docs/versioning/NEXUS_CHANGELOG.md",
+    " M ledger/nexus_cell/continuity.jsonl",
+    " M ledger/nexus_gate_ledger.v0.1.0.jsonl",
+    " M nexus_gate/algorithms/cards.py",
+    " M nexus_gate/cortex/refresh.py",
+    " M nexus_gate/discoveries/cards.py",
+    " M nexus_gate/loops/meta_orchestrator_gate.py",
+    " M nexus_gate/loops/predictive_memory_orchestrator.py",
+    " M reports/CHATGPT_HANDOFF_LATEST.md",
+    " M reports/CODEX_HANDOFF_LATEST.md",
+    " M reports/nexus_adapter_compile_report_latest.json",
+    " M reports/nexus_bounded_runtime_report_latest.json",
+    " M reports/nexus_bridge_compile_report_latest.json",
+    " M reports/nexus_compile_report_latest.json",
+    " M reports/nexus_domain_intelligence_report_latest.json",
+    " M reports/nexus_electron_environment_report_latest.json",
+    " M reports/nexus_electron_preflight_report_latest.json",
+    " M reports/nexus_electron_smoke_report_latest.json",
+    " M reports/nexus_evidence_compaction_report_latest.json",
+    " M reports/nexus_feedback_interface_report_latest.json",
+    " M reports/nexus_feedback_report_latest.json",
+    " M reports/nexus_interconnect_report_latest.json",
+    " M reports/nexus_loop_orchestration_report_latest.json",
+    " M reports/nexus_meta_orchestrator_gate.v1.1.3.json",
+    " M reports/nexus_meta_orchestrator_gate_latest.json",
+    " M reports/nexus_nn_router_report_latest.json",
+    " M reports/nexus_receptor_compile_report_latest.json",
+    " M reports/nexus_reflective_loop_report_latest.json",
+    " M reports/nexus_runtime_compile_report_latest.json"
+  ],
+  "generated_utc": "2026-07-12T01:49:10.436281+00:00",
+  "legacy_version_lineage": {
+    "cortex_refresh_version": "1.2.1",
+    "lineage_manifest_phase": "Domain Intelligence Orchestrator",
+    "lineage_manifest_system_version": "0.4.0",
+    "meta_orchestrator_version": "1.1.3",
+    "predictive_memory_version": "1.2.0",
+    "product_phase": "Origin Seal",
+    "product_version": "1.2.2",
+    "pyproject_distribution_version": "0.9.7",
+    "python_package_api_version": "0.1.3"
+  },
+  "next_action": ".\\scripts\\nexus.ps1 predictive-memory; .\\scripts\\nexus.ps1 evolve",
+  "origin_manifest_hash": "434523f67e3faab5996c12ebc704a97873cd30df63f1b3b64bddf10907323d08",
+  "origin_surfaces": [
+    {
+      "bytes": 18528,
+      "exists": true,
+      "path": "README.md",
+      "sha256": "0b0aafd8cff6f5fcfdf653d766a7ecc0f13d0d6a949fb89ba835bdd84be162c0"
+    },
+    {
+      "bytes": 16974,
+      "exists": true,
+      "path": "AGENTS.md",
+      "sha256": "0b9afb2d835192ea23d7abcf161e38f0bfc5a8f894a1e74646766b55b9692c18"
+    },
+    {
+      "bytes": 361,
+      "exists": true,
+      "path": "pyproject.toml",
+      "sha256": "5e5a10010fb849e15ba3744f457b552f80b7dbdf3249d83380802a0ca05cf55c"
+    },
+    {
+      "bytes": 265,
+      "exists": true,
+      "path": "nexus_gate/__init__.py",
+      "sha256": "96b3d426abc316b64feaa10a11646b78583461f747b1833b5f6bcee76ac60b87"
+    },
+    {
+      "bytes": 8399,
+      "exists": true,
+      "path": "docs/updates/UPDATE_CHART.md",
+      "sha256": "3e6015696554856b675719508215ae15027a5b5f8f436e002050fff74609fe42"
+    },
+    {
+      "bytes": 11913,
+      "exists": true,
+      "path": "docs/versioning/NEXUS_CHANGELOG.md",
+      "sha256": "13c379213ee688897f71f1c59b37e2962adf1540a8548c1c359538fca65ef8e5"
+    },
+    {
+      "bytes": 1142,
+      "exists": true,
+      "path": "docs/versioning/NEXUS_LINEAGE_PROTOCOL.md",
+      "sha256": "bd43d109131590344a887c637f427a9b07c08748d40d2a9382dfeba949f630ac"
+    },
+    {
+      "bytes": 2604,
+      "exists": true,
+      "path": "state/nexus_lineage_manifest_latest.json",
+      "sha256": "6edac68a0f96abc8221dc629bacad38cd4d8477a3f2016ac1802842706847460"
+    },
+    {
+      "bytes": 50981,
+      "exists": true,
+      "path": "state/algorithms/nexus_algorithm_cards_latest.json",
+      "sha256": "98d0f5187211b99ca418eb649789ed6a2d879dd463306b3a3a0dbef859b5bd7e"
+    },
+    {
+      "bytes": 20835,
+      "exists": true,
+      "path": "state/discoveries/nexus_discovery_cards_latest.json",
+      "sha256": "f435aadb66555453ba66c55cef771b7e657abad0a6499855e355cdcbc51e9bd2"
+    },
+    {
+      "bytes": 18063,
+      "exists": true,
+      "path": "reports/nexus_compile_report_latest.json",
+      "sha256": "650d3a691f6c7e2cc7abba0f9b149bf3092d7c73777609fbe1f019ad037b3e9a"
+    },
+    {
+      "bytes": 16779,
+      "exists": true,
+      "path": "reports/nexus_meta_orchestrator_gate_latest.json",
+      "sha256": "5d51dcb9b3266ff7e30d3cc2a0e6581c7eeb98e777534af80f9e2c6ef7a5de10"
+    },
+    {
+      "bytes": 12768,
+      "exists": true,
+      "path": "reports/nexus_predictive_memory_orchestrator_latest.json",
+      "sha256": "21ce5a49bf0e3f77d9f282b71c6b918c89f6bbbe6655fb6a1391651a60b01bf1"
+    },
+    {
+      "bytes": 39342,
+      "exists": true,
+      "path": "reports/nexus_cortex_refresh_report_latest.json",
+      "sha256": "3d5240bfdf2db3a26ad40ae1dd48ed3c6d97b53c7a843ac23975394cc6ab0e28"
+    }
+  ],
+  "product_phase": "Origin Seal",
+  "product_version": "1.2.2",
+  "read_surfaces": [
+    "README.md",
+    "AGENTS.md",
+    "pyproject.toml",
+    "nexus_gate/__init__.py",
+    "docs/updates/UPDATE_CHART.md",
+    "docs/versioning/NEXUS_CHANGELOG.md",
+    "docs/versioning/NEXUS_LINEAGE_PROTOCOL.md",
+    "state/nexus_lineage_manifest_latest.json",
+    "state/algorithms/nexus_algorithm_cards_latest.json",
+    "state/discoveries/nexus_discovery_cards_latest.json",
+    "reports/nexus_compile_report_latest.json",
+    "reports/nexus_meta_orchestrator_gate_latest.json",
+    "reports/nexus_predictive_memory_orchestrator_latest.json",
+    "reports/nexus_cortex_refresh_report_latest.json"
+  ],
+  "readme_current_line": "v1.2.2 Origin Seal. Product identity is now bound by `state/nexus_origin_manifest_latest.json` and `reports/nexus_origin_seal_latest.json`; older version strings in `pyproject.toml`, `nexus_gate/__init__.py`, lineage files, and subsystem reports are preserved as subsystem lineage until a deliberate compatibility migration updates them. Toolbelt, Preflight, Wound Compression, Predictive Memory, Cortex Refresh, and Meta-Orchestrator compile into recommendation-only route evidence for Codex/chat/Electron HUD rehydration; authority remains human-bound.",
+  "schema": "NEXUS_ORIGIN_SEAL.v1.2.2",
+  "status": "pass",
+  "surface_hash": "51397db61728ab7253f8d26ec21543b8ee2dad98b7484aa7c9bdac590ee55fcd",
+  "system": "NEXUS GATE",
+  "write_surfaces": [
+    "reports/nexus_origin_seal_latest.json",
+    "state/nexus_origin_manifest_latest.json"
+  ]
+}

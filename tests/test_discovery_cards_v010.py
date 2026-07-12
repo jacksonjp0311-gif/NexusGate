@@ -32,6 +32,11 @@ class TestDiscoveryCardsV010(unittest.TestCase):
         self.assertIn("Recommendation-only", card["boundary"])
         ids = {item["discovery_id"] for item in packet["cards"]}
         self.assertIn("predictive-evolve-dry-run-planner", ids)
+        self.assertIn("authority-monotonicity-law", ids)
+        self.assertIn("evidence-freshness-law", ids)
+        self.assertIn("gate-dependency-invalidation", ids)
+        self.assertIn("reflexive-non-sovereignty", ids)
+        self.assertIn("lineage-entropy", ids)
 
     def test_command_surfaces_expose_discovery_cards(self):
         ps = (ROOT / "scripts/nexus.ps1").read_text(encoding="utf-8-sig")

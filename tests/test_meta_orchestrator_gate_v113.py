@@ -22,8 +22,14 @@ class MetaOrchestratorGateTests(unittest.TestCase):
         self.assertIn("reports/nexus_meta_orchestrator_gate_latest.json", packet["write_surfaces"])
         panel_ids = {panel["panel_id"] for panel in packet["panels"]}
         self.assertIn("predictive_evolve", panel_ids)
+        self.assertIn("predictive_memory", panel_ids)
         self.assertIn("certificate_resume", panel_ids)
         self.assertIn("production readiness", packet["claim_boundary"])
+
+    def test_predictive_memory_is_top_level_recommendation_input(self) -> None:
+        source = (ROOT / "nexus_gate" / "loops" / "meta_orchestrator_gate.py").read_text(encoding="utf-8")
+        self.assertIn("predictive_memory: dict", source)
+        self.assertIn("Predictive Memory selected this", source)
 
     def test_command_surfaces_expose_meta_orchestrator(self) -> None:
         ps = (ROOT / "scripts" / "nexus.ps1").read_text(encoding="utf-8-sig")

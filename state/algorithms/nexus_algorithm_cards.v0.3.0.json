@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 21,
+  "card_count": 30,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -745,22 +745,349 @@
       "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
       "summary": "Cortex Certificate Refresh updates the local memory substrate after repo drift. It refreshes evidence and certificate status without granting Cortex mutation authority or replacing NEXUS evolve gates.",
       "title": "Cortex Certificate Refresh Algorithm"
+    },
+    {
+      "algorithm_id": "origin-seal-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "README current line + package versions + lineage + key report hashes + commit SHA -> origin manifest hash -> current product identity",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 22,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Origin Seal distinguishes current product identity from subsystem lineage. Older package, API, and report versions remain visible as lineage instead of being mistaken for the current product origin.",
+      "title": "Origin Seal Algorithm"
+    },
+    {
+      "algorithm_id": "authority-monotonicity-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "A_out = A_in intersection policy_allowed; reject if any adapter, model, memory, UI, compiler, or certificate increases authority",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use before mutation or execution routing.",
+      "order": 23,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Authority may stay equal or decrease as packets move through NEXUS. No interface, memory surface, recommendation, compiler result, or visualization may manufacture new authority.",
+      "title": "Authority Monotonicity Algorithm"
+    },
+    {
+      "algorithm_id": "evidence-freshness-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "schema valid + origin hash match + producer compatible + relevant inputs unchanged + freshness policy satisfied -> admissible evidence",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 24,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Files are stronger than stdout, but stale files are not current truth. Evidence becomes admissible only when its origin and freshness survive the current gate policy.",
+      "title": "Evidence Freshness Algorithm"
+    },
+    {
+      "algorithm_id": "gate-dependency-invalidation-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "prior pass + relevant input hashes unchanged + toolchain unchanged + gate contract unchanged -> reusable certificate; otherwise invalidate",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 25,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Certificate reuse must depend on actual gate inputs, not just a prior green line. This turns passed gates into bounded computational assets without skipping the final evolve seal.",
+      "title": "Gate Dependency Invalidation Algorithm"
+    },
+    {
+      "algorithm_id": "decision-envelope-arbitration-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "toolbelt + preflight + wounds + timing + predictive memory + certificates -> normalized recommendations -> selected next action",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 26,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "The next intelligence layer is not another recommender. It is an arbiter that normalizes recommendation packets, compares cost/risk/evidence, and selects one bounded next step.",
+      "title": "Decision Envelope Arbitration Algorithm"
+    },
+    {
+      "algorithm_id": "causal-memory-closure-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "memory -> recommendation -> authorized action -> receipt -> outcome evidence -> memory promotion or wound",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 27,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Memory should become causal only through evidence. Successful authorized actions may become future memory candidates; failed actions become wounds until replay closes them.",
+      "title": "Causal Memory Closure Algorithm"
+    },
+    {
+      "algorithm_id": "controlled-lane-receipt-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "named lane -> policy check -> human authorization -> bounded execution -> stdout/stderr digests -> receipt hash -> ledger event",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 28,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Controlled lanes turn local execution into evidence-bearing action. The receipt records what ran and under which authority boundary without becoming arbitrary shell authority.",
+      "title": "Controlled Lane Receipt Algorithm"
+    },
+    {
+      "algorithm_id": "lineage-topology-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "module versions + interface versions + commits + reports + blocked promotions -> origin and lineage map",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 29,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Lineage topology lets an agent distinguish product identity, subsystem versions, scaffolded surfaces, blocked promotions, and stale reports before compounding.",
+      "title": "Lineage Topology Algorithm"
+    },
+    {
+      "algorithm_id": "repo-native-memory-promotion-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "candidate lesson -> provenance -> evidence -> gate pass -> claim boundary -> lineage entry -> durable card or memory surface",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 30,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "NEXUS does not learn by changing model weights. It learns by promoting evidence-qualified lessons into repository-native surfaces that future sessions can rehydrate.",
+      "title": "Repo-Native Memory Promotion Algorithm"
     }
   ],
   "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
   "discovered_algorithms": [
-    "predictive-gate-timing",
-    "runtime-pressure-model",
     "adaptive-timeout-budgeting",
-    "gate-selection-policy",
+    "authority-gate-algorithm",
+    "authority-monotonicity-algorithm",
+    "causal-memory-closure-algorithm",
     "certificate-resume-policy",
-    "predictive-evolve-planner-algorithm",
+    "compiler-gate-algorithm",
+    "controlled-lane-receipt-algorithm",
+    "cortex-certificate-refresh-algorithm",
     "cortex-sync-protocol-algorithm",
-    "versioned-vector-blob-storage-algorithm",
+    "decision-envelope-arbitration-algorithm",
+    "evidence-freshness-algorithm",
+    "failure-doctor-algorithm",
+    "gate-dependency-invalidation-algorithm",
+    "gate-selection-policy",
+    "geometric-memory-router-algorithm",
+    "geometric-preflight-cleanup-algorithm",
+    "geometric-runtime-packet-algorithm",
+    "lineage-topology-algorithm",
+    "meta-loop-registry-algorithm",
+    "origin-seal-algorithm",
+    "predictive-evolve-planner-algorithm",
+    "predictive-gate-timing-runtime-pressure-algorithm",
     "predictive-memory-orchestrator-algorithm",
-    "cortex-certificate-refresh-algorithm"
+    "reflective-repair-algorithm",
+    "rehydration-algorithm",
+    "repo-native-memory-promotion-algorithm",
+    "route-decision-algorithm",
+    "runtime-pressure-model",
+    "ui-surface-algorithm",
+    "versioned-vector-blob-storage-algorithm"
   ],
-  "generated_at_utc": "2026-07-11T23:07:47.224132+00:00",
+  "discovery_source": "derived_from_cards_algorithm_id",
+  "generated_at_utc": "2026-07-12T01:48:51.443751+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",

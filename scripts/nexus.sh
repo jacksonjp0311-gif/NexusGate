@@ -24,6 +24,7 @@ set -euo pipefail
 # toolbelt|toolbelt-dashboard compatibility marker for v0.9.6 tests
 # wound-compress
 # cortex
+# origin-seal
 # predictive-memory
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
@@ -191,6 +192,7 @@ case "$COMMAND" in
     python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent "$INTENT" --json
     ;;
   certificate-resume) python -m nexus_gate.loops.certificate_resume --root . --json ;;
+  origin-seal) python -m nexus_gate.origin.seal --root . --json ;;
   cortex)
     shift || true
     INTENT="${*:-Run NEXUS Cortex gate.}"

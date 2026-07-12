@@ -88,6 +88,7 @@ def build_algorithm_cards(root: str | Path) -> dict[str, Any]:
             }
         )
 
+    discovered_algorithms = sorted({card["algorithm_id"] for card in cards})
     return {
         "schema": SCHEMA,
         "system": SYSTEM,
@@ -96,18 +97,8 @@ def build_algorithm_cards(root: str | Path) -> dict[str, Any]:
         "source_doc": str(SOURCE_DOC).replace("\\", "/"),
         "card_count": len(cards),
         "cards": cards,
-        "discovered_algorithms": [
-            "predictive-gate-timing",
-            "runtime-pressure-model",
-            "adaptive-timeout-budgeting",
-            "gate-selection-policy",
-            "certificate-resume-policy",
-            "predictive-evolve-planner-algorithm",
-            "cortex-sync-protocol-algorithm",
-            "versioned-vector-blob-storage-algorithm",
-            "predictive-memory-orchestrator-algorithm",
-            "cortex-certificate-refresh-algorithm",
-        ],
+        "discovered_algorithms": discovered_algorithms,
+        "discovery_source": "derived_from_cards_algorithm_id",
         "claim_boundary": CLAIM_BOUNDARY,
         "authority_boundary": AUTHORITY_BOUNDARY,
     }

@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "origin-seal", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [switch]$NoGit
 )
@@ -167,6 +167,7 @@ function Run-Feedback {
     Invoke-Step "Loop orchestrator" "16c_loop_orchestrator.json" { python -m nexus_gate.loops.orchestrator --root . --intent "evolve chain loop orchestration plan" --json }
     Invoke-Step "Predictive timing" "16d_predictive_timing.json" { python -m nexus_gate.loops.predictive_timing --root . --json }
     Invoke-Step "Predictive memory orchestrator" "16e_predictive_memory_orchestrator.json" { python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent "evolve chain Cortex memory and predictive gate fusion" --json }
+    Invoke-Step "Origin seal" "16f_origin_seal.json" { python -m nexus_gate.origin.seal --root . --json }
     Say "Feedback/self-healing/interface lanes passed." "OK"
     Show-FeedbackSummary
 }
@@ -205,6 +206,8 @@ function Show-Status {
         ".\reports\nexus_meta_orchestrator_gate_latest.json",
         ".\reports\nexus_loop_orchestration_report_latest.json",
         ".\reports\nexus_predictive_memory_orchestrator_latest.json",
+        ".\reports\nexus_origin_seal_latest.json",
+        ".\state\nexus_origin_manifest_latest.json",
         ".\state\nexus_lineage_manifest_latest.json",
         ".\state\interface_adapter_contract_index.v0.3.7.json",
         ".\state\domain_intelligence_index.v0.4.0.json",
@@ -328,6 +331,12 @@ if ($Command -eq "predictive-timing") {
 if ($Command -eq "predictive-memory") {
     Invoke-Step "Predictive memory orchestrator" "16e_predictive_memory_orchestrator.json" { python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent "human surface Cortex memory and predictive gate fusion" --json }
     Say "Predictive memory report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "origin-seal") {
+    Invoke-Step "Origin seal" "16f_origin_seal.json" { python -m nexus_gate.origin.seal --root . --json }
+    Say "Origin seal report written." "OK"
     exit 0
 }
 

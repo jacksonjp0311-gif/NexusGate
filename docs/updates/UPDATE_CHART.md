@@ -106,6 +106,7 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 
 | v0.9.3 | AI Loop Toolkit Expansion | Added creative AI-callable local loops and HUD-ready cards | No version step without update chart entry |
 | v0.9.4 | Personal Coding Paradise Loop Toolkit | AI-callable local coding loops, cards, docs, tests, compiler visibility | No version step without update chart entry |
+| v1.2.2 | Origin Seal + Causal Memory Wiring | current | Adds canonical origin manifest/report, origin-seal lane, card-derived algorithm readiness, new discovery cards, and Meta-Orchestrator predictive-memory recommendation input. |
 ## v0.9.5 - AI Toolbelt Surface
 
 No version step without update chart entry. Adds operator-visible toolbelt index and README Toolbelt section.

@@ -165,3 +165,75 @@ index -> telemetry -> graph rebuild -> vector migration -> verify certificate ->
 ```
 
 Cortex Certificate Refresh updates the local memory substrate after repo drift. It refreshes evidence and certificate status without granting Cortex mutation authority or replacing NEXUS evolve gates.
+
+## Origin Seal Algorithm
+
+```text
+README current line + package versions + lineage + key report hashes + commit SHA -> origin manifest hash -> current product identity
+```
+
+Origin Seal distinguishes current product identity from subsystem lineage. Older package, API, and report versions remain visible as lineage instead of being mistaken for the current product origin.
+
+## Authority Monotonicity Algorithm
+
+```text
+A_out = A_in intersection policy_allowed; reject if any adapter, model, memory, UI, compiler, or certificate increases authority
+```
+
+Authority may stay equal or decrease as packets move through NEXUS. No interface, memory surface, recommendation, compiler result, or visualization may manufacture new authority.
+
+## Evidence Freshness Algorithm
+
+```text
+schema valid + origin hash match + producer compatible + relevant inputs unchanged + freshness policy satisfied -> admissible evidence
+```
+
+Files are stronger than stdout, but stale files are not current truth. Evidence becomes admissible only when its origin and freshness survive the current gate policy.
+
+## Gate Dependency Invalidation Algorithm
+
+```text
+prior pass + relevant input hashes unchanged + toolchain unchanged + gate contract unchanged -> reusable certificate; otherwise invalidate
+```
+
+Certificate reuse must depend on actual gate inputs, not just a prior green line. This turns passed gates into bounded computational assets without skipping the final evolve seal.
+
+## Decision Envelope Arbitration Algorithm
+
+```text
+toolbelt + preflight + wounds + timing + predictive memory + certificates -> normalized recommendations -> selected next action
+```
+
+The next intelligence layer is not another recommender. It is an arbiter that normalizes recommendation packets, compares cost/risk/evidence, and selects one bounded next step.
+
+## Causal Memory Closure Algorithm
+
+```text
+memory -> recommendation -> authorized action -> receipt -> outcome evidence -> memory promotion or wound
+```
+
+Memory should become causal only through evidence. Successful authorized actions may become future memory candidates; failed actions become wounds until replay closes them.
+
+## Controlled Lane Receipt Algorithm
+
+```text
+named lane -> policy check -> human authorization -> bounded execution -> stdout/stderr digests -> receipt hash -> ledger event
+```
+
+Controlled lanes turn local execution into evidence-bearing action. The receipt records what ran and under which authority boundary without becoming arbitrary shell authority.
+
+## Lineage Topology Algorithm
+
+```text
+module versions + interface versions + commits + reports + blocked promotions -> origin and lineage map
+```
+
+Lineage topology lets an agent distinguish product identity, subsystem versions, scaffolded surfaces, blocked promotions, and stale reports before compounding.
+
+## Repo-Native Memory Promotion Algorithm
+
+```text
+candidate lesson -> provenance -> evidence -> gate pass -> claim boundary -> lineage entry -> durable card or memory surface
+```
+
+NEXUS does not learn by changing model weights. It learns by promoting evidence-qualified lessons into repository-native surfaces that future sessions can rehydrate.
