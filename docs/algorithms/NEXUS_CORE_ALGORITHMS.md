@@ -206,6 +206,14 @@ toolbelt + preflight + wounds + timing + predictive memory + certificates -> nor
 
 The next intelligence layer is not another recommender. It is an arbiter that normalizes recommendation packets, compares cost/risk/evidence, and selects one bounded next step.
 
+## Self Bootstrap Decision Envelope Algorithm
+
+```text
+origin seal + Cortex memory + predictive gates + wounds + certificates + git scope -> canonical decision envelope -> human-authorized next step
+```
+
+Self Bootstrap means the repo can wake itself into an oriented state for Codex, chat, TUI, or Electron without granting itself authority. The packet selects a next action as recommendation-only evidence; it never executes the action or replaces final evolve.
+
 ## Causal Memory Closure Algorithm
 
 ```text

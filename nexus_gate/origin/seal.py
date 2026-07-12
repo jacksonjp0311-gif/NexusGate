@@ -10,9 +10,9 @@ from pathlib import Path
 from typing import Any
 
 
-PRODUCT_VERSION = "1.2.2"
-PRODUCT_PHASE = "Origin Seal"
-SCHEMA = "NEXUS_ORIGIN_SEAL.v1.2.2"
+PRODUCT_VERSION = "1.3.0"
+PRODUCT_PHASE = "Canonical Decision Envelope"
+SCHEMA = "NEXUS_ORIGIN_SEAL.v1.3.0"
 REPORT_LATEST = Path("reports") / "nexus_origin_seal_latest.json"
 STATE_LATEST = Path("state") / "nexus_origin_manifest_latest.json"
 

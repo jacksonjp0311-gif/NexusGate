@@ -440,6 +440,44 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.3: add origin drift warning to Meta-Orchestrator",
             ],
             "boundary": "Lineage entropy is an orientation metric, not a correctness or production readiness proof.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "self-bootstrap-decision-envelope",
+            "version": "0.1.0",
+            "title": "Self-Bootstrap Decision Envelope",
+            "status": "active",
+            "summary": "NEXUS can gather its current origin, memory, runtime pressure, wounds, certificates, cards, and git scope into one canonical recommendation packet for fast rehydration.",
+            "math": {
+                "envelope": "D = select(normalize(origin, memory, timing, wounds, certificates, cards, git_scope))",
+                "authority_rule": "selected_action is recommendation_only and requires_human_authorization",
+                "bootstrap_loop": "origin -> evidence -> normalized recommendations -> selected next action -> final evolve",
+            },
+            "code_references": [
+                "nexus_gate/decision/envelope.py::build_decision_envelope",
+                "reports/nexus_decision_envelope_latest.json",
+                "state/decision/nexus_decision_envelope_latest.json",
+            ],
+            "algorithm_card_refs": [
+                "self-bootstrap-decision-envelope-algorithm",
+                "decision-envelope-arbitration-algorithm",
+                "authority-monotonicity-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 origin-seal",
+                ".\\scripts\\nexus.ps1 decision-envelope",
+                "Inspect selected_action and blocked_actions before choosing a lane",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_decision_envelope_latest.json",
+                "state/decision/nexus_decision_envelope_latest.json",
+                "reports/nexus_origin_seal_latest.json",
+            ],
+            "next_versions": [
+                "v0.2: feed decision envelope into Electron Meta-Orchestrator HUD",
+                "v0.3: add canonical decision envelope schema tests for every recommendation source",
+            ],
+            "boundary": "Self-bootstrap is self-orientation, not self-execution or self-authorization.",
         }
     ]
     return {

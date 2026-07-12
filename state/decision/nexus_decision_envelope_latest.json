@@ -1,0 +1,202 @@
+{
+  "authority": {
+    "autonomous_authority": false,
+    "execution_enabled": false,
+    "final_evolve_required_before_commit": true,
+    "git_write_enabled": false,
+    "human_authorization_required_for_mutation": true,
+    "recommendation_only": true
+  },
+  "blocked_actions": [
+    "self_authorize",
+    "execute_selected_action",
+    "bypass_final_evolve",
+    "git_write",
+    "arbitrary_shell_commands",
+    "external_api_writes",
+    "secret_access",
+    "memory_promotion_without_evidence"
+  ],
+  "certificates": {
+    "recommended_resume_gate": null,
+    "status": "pass"
+  },
+  "claim_boundary": "The NEXUS Decision Envelope is local development evidence only. It gathers origin, memory, runtime, wound, certificate, and git-scope evidence into a recommendation-only packet. It does not execute the recommendation, prove correctness, safety, security, production readiness, model understanding, or grant autonomous authority.",
+  "evidence": [
+    {
+      "exists": true,
+      "surface": "state/nexus_origin_manifest_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "reports/nexus_origin_seal_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "reports/nexus_cortex_refresh_report_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "reports/nexus_cortex_gate_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "reports/nexus_predictive_memory_orchestrator_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "reports/nexus_predictive_evolve_plan_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "reports/nexus_predictive_gate_timing_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "reports/nexus_certificate_resume_report_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "state/loops/nexus_wound_compression_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "reports/nexus_preflight_optimizer_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "state/algorithms/nexus_algorithm_cards_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "state/discoveries/nexus_discovery_cards_latest.json"
+    },
+    {
+      "exists": true,
+      "surface": "git status --short"
+    }
+  ],
+  "generated_at_utc": "2026-07-12T04:06:39.135439+00:00",
+  "intent": "Self-bootstrap NEXUS decision envelope.",
+  "memory": {
+    "algorithm_cards": 31,
+    "cortex_authority": {
+      "cortex_may_mutate_repo": false,
+      "external_api_writes": false,
+      "final_nexus_evolve_required": true,
+      "git_write": false,
+      "recommendation_only": true,
+      "secret_access": false
+    },
+    "cortex_refresh_status": "constrained",
+    "discovery_cards": 11,
+    "predictive_memory_next_command": ".\\scripts\\nexus.ps1 cortex-refresh",
+    "predictive_memory_next_loop": "cortex-certificate-refresh",
+    "predictive_memory_status": "warn"
+  },
+  "mode": "self_bootstrap_decision_envelope",
+  "origin": {
+    "commit": null,
+    "origin_manifest_hash": "7708e8d0e2cceab7ab4bcfcbd8afec1a4f102bc04df1c5888660493c851f2a66",
+    "product_phase": "Canonical Decision Envelope",
+    "product_version": "1.3.0",
+    "schema": "NEXUS_ORIGIN_SEAL.v1.3.0",
+    "status": "pass"
+  },
+  "phase": "Canonical Decision Envelope",
+  "read_surfaces": [
+    "state/nexus_origin_manifest_latest.json",
+    "reports/nexus_origin_seal_latest.json",
+    "reports/nexus_cortex_refresh_report_latest.json",
+    "reports/nexus_cortex_gate_latest.json",
+    "reports/nexus_predictive_memory_orchestrator_latest.json",
+    "reports/nexus_predictive_evolve_plan_latest.json",
+    "reports/nexus_predictive_gate_timing_latest.json",
+    "reports/nexus_certificate_resume_report_latest.json",
+    "state/loops/nexus_wound_compression_latest.json",
+    "reports/nexus_preflight_optimizer_latest.json",
+    "state/algorithms/nexus_algorithm_cards_latest.json",
+    "state/discoveries/nexus_discovery_cards_latest.json",
+    "git status --short"
+  ],
+  "recommendations": [
+    {
+      "action": "cortex-certificate-refresh",
+      "blocking_conditions": [],
+      "command": ".\\scripts\\nexus.ps1 cortex-refresh",
+      "confidence": 0.84,
+      "estimated_cost": "bounded",
+      "severity": "high",
+      "source": "predictive-memory",
+      "source_packet_hash": "5f4a210d0ea80f3f165c9e1207ef221d3fede7abacd7359ac8070e20abdca750",
+      "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning."
+    },
+    {
+      "action": "inspect_dirty_scope",
+      "blocking_conditions": [],
+      "command": ".\\scripts\\nexus.ps1 preflight-json -Tag \"decision envelope dirty scope\"",
+      "confidence": 0.82,
+      "estimated_cost": "short",
+      "severity": "medium",
+      "source": "git-scope",
+      "source_packet_hash": "ff17e8f3e27fcf0abae65736b3c5290ee0b84438370fd527b4bd531276dc9a03",
+      "why": "The working tree is dirty; inspect scope before compounding changes or staging."
+    },
+    {
+      "action": "predictive-timing",
+      "blocking_conditions": [],
+      "command": ".\\scripts\\nexus.ps1 predictive-timing",
+      "confidence": 0.68,
+      "estimated_cost": "bounded",
+      "severity": "info",
+      "source": "predictive-evolve",
+      "source_packet_hash": "5882a43a859bc3113873e5e6a9e1b6226bec30656c8291d42ac54f6262f660b4",
+      "why": "Predictive Evolve selected the cheapest useful non-final gate."
+    },
+    {
+      "action": "run_final_evolve_before_commit",
+      "blocking_conditions": [
+        "never_skip_before_commit"
+      ],
+      "command": ".\\scripts\\nexus.ps1 evolve",
+      "confidence": 1.0,
+      "estimated_cost": "long",
+      "severity": "required",
+      "source": "final-seal",
+      "source_packet_hash": null,
+      "why": "Final evolve remains required before any durable commit or push."
+    }
+  ],
+  "risk": {
+    "active_wound_key": null,
+    "certificate_resume_gate": null,
+    "dirty_count": 78,
+    "runtime_pressure": "pass",
+    "slowest_gate": null
+  },
+  "schema": "NEXUS_DECISION_ENVELOPE.v1.3.0",
+  "selected_action": {
+    "command": ".\\scripts\\nexus.ps1 cortex-refresh",
+    "next_loop": "cortex-certificate-refresh",
+    "recommendation_only": true,
+    "requires_final_evolve_before_commit": true,
+    "requires_human_authorization": true,
+    "source": "predictive-memory",
+    "why": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning."
+  },
+  "status": "warn",
+  "system": "NEXUS GATE",
+  "version": "1.3.0",
+  "warnings": [
+    "dirty_scope",
+    "bounded_next_action_pending"
+  ],
+  "wounds": {
+    "active_wound_key": null,
+    "status": "unknown"
+  },
+  "write_surfaces": [
+    "reports/nexus_decision_envelope_latest.json",
+    "state/decision/nexus_decision_envelope_latest.json"
+  ]
+}

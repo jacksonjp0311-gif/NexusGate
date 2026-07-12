@@ -32,6 +32,7 @@ Before running full `evolve`, pack, broad test suites, Electron smoke, or any lo
 .\scripts\nexus.ps1 predictive-evolve
 .\scripts\nexus.ps1 certificate-resume
 .\scripts\nexus.ps1 origin-seal
+.\scripts\nexus.ps1 decision-envelope
 ```
 
 Use the packet at `reports/nexus_predictive_gate_timing_latest.json` to choose the cheapest valid next gate. If runtime pressure is high, prefer targeted tests or the named timing recommendation before repeating an expensive lane.
@@ -59,7 +60,9 @@ state/update_index.v0.1.4.json
 reports/nexus_compile_report_latest.json, if present
 reports/nexus_predictive_gate_timing_latest.json, if present
 reports/nexus_origin_seal_latest.json, if present
+reports/nexus_decision_envelope_latest.json, if present
 state/nexus_origin_manifest_latest.json, if present
+state/decision/nexus_decision_envelope_latest.json, if present
 state/algorithms/nexus_algorithm_cards_latest.json, if present
 state/discoveries/nexus_discovery_cards_latest.json, if present
 ```
@@ -560,3 +563,42 @@ Command surfaces must use --call-model and --auto-repair.
 Legacy --call-phi and --self-heal flags are contract failures.
 No supervisor path may grant arbitrary shell, git push, network, secret, or autonomous mutation authority.
 ```
+
+<!-- CORTEX:MANAGED:BEGIN -->
+## Cortex Repository Memory Protocol
+
+This repository uses Cortex for verified repository assimilation, selective recall, and sparse neural interlinking.
+Every activation is first routed through the local deterministic Thalamus planner, which allocates memory lanes and inhibits irrelevant evidence.
+
+### Mandatory startup sequence
+
+Before broad repository reading, planning, editing, or code generation:
+
+1. Run `.\.cortex\bin\cortex.ps1 activate -Task "<current task>"` on Windows PowerShell, or `./.cortex/bin/cortex.sh activate --task "<current task>"` on Bash.
+2. Inspect the returned bootstrap status, governor mode, learned environment, evidence references, neural support paths, and structural neighborhood.
+3. If the bootstrap certificate is missing, degraded, or stale, run the wrapper's `bootstrap` command before relying on memory.
+4. Read only the cited files and line ranges first. Expand context only when the packet is insufficient.
+5. Treat repository source, tests, compiler output, and current runtime evidence as more authoritative than summaries.
+6. Record decisions, discoveries, invariants, failures, fixes, and outcomes with the wrapper's `remember` command.
+7. Run `consolidate` at task completion to create a provenance-bearing Discovery Card.
+
+### Authority boundary
+
+Cortex provides memory, relationships, telemetry, sparse activation, and evidence references. Neural plasticity changes only bounded internal association weights; it never authorizes durable source mutation. The host repository's rules and explicit human authorization remain controlling.
+
+### Required commands
+
+```powershell
+.\.cortex\bin\cortex.ps1 activate -Task "<task>"
+.\.cortex\bin\cortex.ps1 query -Query "<narrow question>"
+.\.cortex\bin\cortex.ps1 remember -Kind decision -Text "<decision>"
+.\.cortex\bin\cortex.ps1 consolidate
+```
+
+```bash
+./.cortex/bin/cortex.sh activate --task "<task>"
+./.cortex/bin/cortex.sh query --query "<narrow question>"
+./.cortex/bin/cortex.sh remember --kind decision --text "<decision>"
+./.cortex/bin/cortex.sh consolidate
+```
+<!-- CORTEX:MANAGED:END -->

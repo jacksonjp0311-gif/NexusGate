@@ -4,7 +4,7 @@ NEXUS GATE is a local-first reflective intelligence layer for AI systems: a gove
 
 ## Capability Surface
 - Operator HUDs: Electron, PowerShell TUI, Spiral Core Portal, Dev Mode / HANDOFF, Mode Selection, and System Monitor.
-- Governed lanes: `status`, `evolve`, `origin-seal`, `reflect`, `domain`, `toolbelt`, `preflight`, `predictive-timing`, `predictive-evolve`, `predictive-memory`, `certificate-resume`, `cortex-refresh`, `wound-compress`, `phi-wound`, `phi-loop-auto`, and `phi-gate-auto`.
+- Governed lanes: `status`, `evolve`, `origin-seal`, `decision-envelope`, `reflect`, `domain`, `toolbelt`, `preflight`, `predictive-timing`, `predictive-evolve`, `predictive-memory`, `certificate-resume`, `cortex-refresh`, `wound-compress`, `phi-wound`, `phi-loop-auto`, and `phi-gate-auto`.
 - Intelligence loops: AI-callable local loop fabric, Algorithm Cards, Discovery Cards, v0.9.3 AI Loop Toolkit Expansion, v0.9.4 Personal Coding Paradise, Toolbelt Console Integration, v0.9.8 Wound Compression Engine, v0.9.9 Preflight Optimizer, v1.1.0 Phi Microdose Loop, AI Toolbelt Console, Toolbelt Cockpit Output, and Meta-Orchestrator Gate.
 - Evidence organs: Neural Activity visual organ, GITNEXUS local codegraph, PetriDishPortal, NexusCell containment, feedback ledger, handoff packets, and compiler reports.
 - Guardrails: human-authorized mutation only, no autonomous authority, no bypassing gates, no production/safety/security proof claims from local passes.
@@ -21,6 +21,7 @@ cd "$env:USERPROFILE\OneDrive\Desktop\nexus-gate"
 .\scripts\nexus.ps1 toolbelt-next -Tag "<intent>"
 .\scripts\nexus.ps1 toolbelt-json -Tag "<intent>"
 .\scripts\nexus.ps1 origin-seal
+.\scripts\nexus.ps1 decision-envelope
 .\scripts\nexus.ps1 wound-compress -Tag "<failed gate>"
 .\scripts\nexus.ps1 preflight -Tag "<intent>"
 python -m unittest discover -s tests
@@ -28,7 +29,7 @@ python -m nexus_gate.compiler --root . --json
 ```
 
 ## Human Director Box
-NEXUS GATE current line: v1.2.2 Origin Seal. Product identity is now bound by `state/nexus_origin_manifest_latest.json` and `reports/nexus_origin_seal_latest.json`; older version strings in `pyproject.toml`, `nexus_gate/__init__.py`, lineage files, and subsystem reports are preserved as subsystem lineage until a deliberate compatibility migration updates them. Toolbelt, Preflight, Wound Compression, Predictive Memory, Cortex Refresh, and Meta-Orchestrator compile into recommendation-only route evidence for Codex/chat/Electron HUD rehydration; authority remains human-bound.
+NEXUS GATE current line: v1.3.0 Canonical Decision Envelope. Product identity is bound by `state/nexus_origin_manifest_latest.json` and `reports/nexus_origin_seal_latest.json`; the self-bootstrap packet is bound by `reports/nexus_decision_envelope_latest.json` and `state/decision/nexus_decision_envelope_latest.json`. Older version strings in `pyproject.toml`, `nexus_gate/__init__.py`, lineage files, and subsystem reports are preserved as subsystem lineage until a deliberate compatibility migration updates them. Toolbelt, Preflight, Wound Compression, Predictive Memory, Cortex Refresh, Origin Seal, and the Decision Envelope compile into recommendation-only route evidence for Codex/chat/Electron HUD rehydration; authority remains human-bound.
 
 ## Priority Discovery: Predictive Gate Timing
 Predictive Gate Timing / Runtime Pressure Model is a priority. Timeout history is not intelligence by itself, but recorded lane duration, timeout budget, pass/fail state, artifact churn, and repo size can become bounded expectation: baseline -> drift -> anomaly -> recommended next timeout. The model may predict runtime pressure and recommend gate budgets; it may not bypass gates, hide failures, or self-authorize mutation.
@@ -36,6 +37,9 @@ Predictive Gate Timing / Runtime Pressure Model is a priority. Timeout history i
 Predictive Evolve is the dry-run planner built on that discovery: predictive timing -> scope classification -> gate selection -> dry-run plan -> final evolve seal required. `.\scripts\nexus.ps1 predictive-memory` fuses Cortex memory health, vector benchmarks, Algorithm Cards, Discovery Cards, and predictive evolve into a memory-aware recommendation plus trend row; it may recommend, not execute or replace final `evolve`.
 
 Certificate Resume v0.1 records passed-gate evidence hashes from the latest human-surface run and recommends a resume point after failure. Certificates are not a pass claim by themselves; `.\scripts\nexus.ps1 evolve` remains the final commit seal.
+
+## Self-Bootstrap Decision Envelope
+`.\scripts\nexus.ps1 decision-envelope` compiles the canonical v1.3.0 decision packet: origin -> memory -> runtime pressure -> wounds -> certificates -> git scope -> normalized recommendations -> selected next action. This is the current self-bootstrap surface for Codex and chat rehydration. It may recommend the next safest command, but it cannot execute, self-authorize, mutate the repo, or replace final `evolve`.
 
 ## Cortex
 Cortex is imported at `Cortex/` as a recommendation-only repository assimilation and selective-memory organ. Sync upgrades from the standalone repo with `.\scripts\nexus.ps1 sync-cortex -Tag "C:\Users\jacks\OneDrive\Desktop\Cortex"`; current synced source is upstream commit `8d5e60b`. The vector storage upgrade migrated `7,919` NEXUS Cortex vectors to versioned float32 BLOBs, reducing benchmark vector payload by `34.71%` and moving sample query mean from `242.630 ms` legacy to `183.011 ms` blob. See `docs/runtime/NEXUS_CORTEX.md`, `reports/nexus_cortex_sync_report_latest.json`, and `reports/nexus_cortex_gate_latest.json`.

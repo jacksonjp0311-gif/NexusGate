@@ -1,5 +1,5 @@
 {
-  "card_count": 10,
+  "card_count": 11,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -414,10 +414,48 @@
       "summary": "Multiple inconsistent current-version declarations are a measurable health signal. Origin Seal reduces ambiguity by declaring one product identity and preserving older strings as subsystem lineage.",
       "title": "Lineage Entropy",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "self-bootstrap-decision-envelope-algorithm",
+        "decision-envelope-arbitration-algorithm",
+        "authority-monotonicity-algorithm"
+      ],
+      "boundary": "Self-bootstrap is self-orientation, not self-execution or self-authorization.",
+      "code_references": [
+        "nexus_gate/decision/envelope.py::build_decision_envelope",
+        "reports/nexus_decision_envelope_latest.json",
+        "state/decision/nexus_decision_envelope_latest.json"
+      ],
+      "discovery_id": "self-bootstrap-decision-envelope",
+      "evidence_surfaces": [
+        "reports/nexus_decision_envelope_latest.json",
+        "state/decision/nexus_decision_envelope_latest.json",
+        "reports/nexus_origin_seal_latest.json"
+      ],
+      "math": {
+        "authority_rule": "selected_action is recommendation_only and requires_human_authorization",
+        "bootstrap_loop": "origin -> evidence -> normalized recommendations -> selected next action -> final evolve",
+        "envelope": "D = select(normalize(origin, memory, timing, wounds, certificates, cards, git_scope))"
+      },
+      "next_versions": [
+        "v0.2: feed decision envelope into Electron Meta-Orchestrator HUD",
+        "v0.3: add canonical decision envelope schema tests for every recommendation source"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 origin-seal",
+        ".\\scripts\\nexus.ps1 decision-envelope",
+        "Inspect selected_action and blocked_actions before choosing a lane"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "NEXUS can gather its current origin, memory, runtime pressure, wounds, certificates, cards, and git scope into one canonical recommendation packet for fast rehydration.",
+      "title": "Self-Bootstrap Decision Envelope",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-12T01:48:54.300973+00:00",
+  "generated_at_utc": "2026-07-12T03:59:54.341834+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

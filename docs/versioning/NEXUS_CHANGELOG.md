@@ -1,5 +1,13 @@
-## v1.2.2 - Origin Seal + Causal Memory Wiring
+## v1.3.0 - Canonical Decision Envelope
 Status: current
+- Adds `.\scripts\nexus.ps1 decision-envelope` as the self-bootstrap packet surface.
+- Gathers origin, memory, timing, predictive evolve, wounds, certificates, cards, and git scope into one normalized recommendation envelope.
+- Writes `reports/nexus_decision_envelope_latest.json` and `state/decision/nexus_decision_envelope_latest.json`.
+- Integrates the decision envelope into the human/evolve chain after Origin Seal.
+- Preserves the boundary: self-bootstrap is self-orientation, not self-authorization.
+
+## v1.2.2 - Origin Seal + Causal Memory Wiring
+Status: sealed
 - Adds canonical product-origin report and manifest through `.\scripts\nexus.ps1 origin-seal`.
 - Records current product identity separately from older package/API/subsystem lineage.
 - Makes algorithm readiness derive from actual generated cards.
