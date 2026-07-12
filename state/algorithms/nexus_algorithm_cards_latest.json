@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 44,
+  "card_count": 45,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -1527,6 +1527,40 @@
       "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
       "summary": "NEXUS does not learn by changing model weights. It learns by promoting evidence-qualified lessons into repository-native surfaces that future sessions can rehydrate.",
       "title": "Repo-Native Memory Promotion Algorithm"
+    },
+    {
+      "algorithm_id": "epoch-integrity-seal-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "canonical source files -> source Merkle root -> parent epoch + runtime contract -> epoch id -> immutable epoch directory -> append-only chain",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 45,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Epoch Integrity gives graph learning a stable timebase without making Git commit SHA the primary identity. Generated evidence can be committed after it is produced, so NEXUS uses source-root identity first and stores commit SHA as advisory attestation.",
+      "title": "Epoch Integrity Seal Algorithm"
     }
   ],
   "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
@@ -1547,6 +1581,7 @@
     "cortex-sync-protocol-algorithm",
     "decision-envelope-arbitration-algorithm",
     "emergence-detection-algorithm",
+    "epoch-integrity-seal-algorithm",
     "evidence-distillation-algorithm",
     "evidence-freshness-algorithm",
     "failure-doctor-algorithm",
@@ -1577,7 +1612,7 @@
     "versioned-vector-blob-storage-algorithm"
   ],
   "discovery_source": "derived_from_cards_algorithm_id",
-  "generated_at_utc": "2026-07-12T20:31:32.936559+00:00",
+  "generated_at_utc": "2026-07-12T21:21:54.539621+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",

@@ -31,6 +31,7 @@ Before running full `evolve`, pack, broad test suites, Electron smoke, or any lo
 .\scripts\nexus.ps1 predictive-timing
 .\scripts\nexus.ps1 predictive-evolve
 .\scripts\nexus.ps1 certificate-resume
+.\scripts\nexus.ps1 epoch-seal
 .\scripts\nexus.ps1 origin-seal
 .\scripts\nexus.ps1 triadic-lattice
 .\scripts\nexus.ps1 distill
@@ -62,12 +63,14 @@ state/failure_mode_index.v0.1.4.json
 state/update_index.v0.1.4.json
 reports/nexus_compile_report_latest.json, if present
 reports/nexus_predictive_gate_timing_latest.json, if present
+reports/nexus_epoch_integrity_seal_latest.json, if present
 reports/nexus_origin_seal_latest.json, if present
 reports/nexus_triadic_lattice_latest.json, if present
 reports/nexus_evidence_distillation_report_latest.json, if present
 reports/nexus_decision_envelope_latest.json, if present
 reports/nexus_coherence_field_latest.json, if present
 state/nexus_origin_manifest_latest.json, if present
+state/latest_epoch_pointer.json, if present
 state/lattice/nexus_triadic_lattice_latest.json, if present
 state/distillation/nexus_evidence_graph_latest.json, if present
 state/decision/nexus_decision_envelope_latest.json, if present

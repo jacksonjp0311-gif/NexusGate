@@ -15,9 +15,9 @@ ROOT = Path(__file__).resolve().parents[1]
 class OriginSealV122Tests(unittest.TestCase):
     def test_origin_seal_packet_declares_current_product_identity(self) -> None:
         packet = build_origin_seal(ROOT)
-        self.assertEqual(packet["schema"], "NEXUS_ORIGIN_SEAL.v2.6.0")
-        self.assertEqual(packet["product_version"], "2.6.0")
-        self.assertEqual(packet["product_phase"], "Evidence Distillation Graph")
+        self.assertEqual(packet["schema"], "NEXUS_ORIGIN_SEAL.v2.6.1")
+        self.assertEqual(packet["product_version"], "2.6.1")
+        self.assertEqual(packet["product_phase"], "Epoch Integrity Seal")
         self.assertIn(packet["status"], {"pass", "warn"})
         self.assertIn("origin_manifest_hash", packet)
         self.assertIn("legacy_version_lineage", packet)
@@ -38,7 +38,7 @@ class OriginSealV122Tests(unittest.TestCase):
         )
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
         packet = json.loads(proc.stdout)
-        self.assertEqual(packet["schema"], "NEXUS_ORIGIN_SEAL.v2.6.0")
+        self.assertEqual(packet["schema"], "NEXUS_ORIGIN_SEAL.v2.6.1")
         self.assertTrue((ROOT / "reports" / "nexus_origin_seal_latest.json").exists())
         self.assertTrue((ROOT / "state" / "nexus_origin_manifest_latest.json").exists())
 
@@ -54,8 +54,9 @@ class OriginSealV122Tests(unittest.TestCase):
         self.assertIn("nexus_gate.origin.seal", sh)
         self.assertIn('"origin-seal"', human)
         self.assertIn("16f_origin_seal", human)
-        self.assertIn("v2.6.0 Evidence Distillation Graph", readme)
+        self.assertIn("v2.6.1 Epoch Integrity Seal", readme)
         self.assertIn("state/nexus_origin_manifest_latest.json", agents)
+        self.assertIn("state/latest_epoch_pointer.json", agents)
 
 
 if __name__ == "__main__":

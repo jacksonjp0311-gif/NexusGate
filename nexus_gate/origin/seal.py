@@ -10,9 +10,9 @@ from pathlib import Path
 from typing import Any
 
 
-PRODUCT_VERSION = "2.6.0"
-PRODUCT_PHASE = "Evidence Distillation Graph"
-SCHEMA = "NEXUS_ORIGIN_SEAL.v2.6.0"
+PRODUCT_VERSION = "2.6.1"
+PRODUCT_PHASE = "Epoch Integrity Seal"
+SCHEMA = "NEXUS_ORIGIN_SEAL.v2.6.1"
 REPORT_LATEST = Path("reports") / "nexus_origin_seal_latest.json"
 STATE_LATEST = Path("state") / "nexus_origin_manifest_latest.json"
 
@@ -48,8 +48,10 @@ ORIGIN_SURFACES = [
     "reports/nexus_meta_orchestrator_gate_latest.json",
     "reports/nexus_predictive_memory_orchestrator_latest.json",
     "reports/nexus_cortex_refresh_report_latest.json",
+    "reports/nexus_epoch_integrity_seal_latest.json",
     "reports/nexus_triadic_lattice_latest.json",
     "reports/nexus_evidence_distillation_report_latest.json",
+    "state/latest_epoch_pointer.json",
 ]
 
 
@@ -165,12 +167,17 @@ def build_origin_seal(root: str | Path) -> dict[str, Any]:
     meta_visible = bool(meta)
     memory_visible = bool(predictive_memory)
 
+    epoch_report = _read_json(root_path / "reports" / "nexus_epoch_integrity_seal_latest.json", {})
+    epoch_pointer = _read_json(root_path / "state" / "latest_epoch_pointer.json", {})
+    epoch_visible = bool(epoch_report) and bool(epoch_pointer)
+
     checks = {
         "product_line_current": product_line_ok,
         "required_origin_surfaces_present": required_present,
         "compile_report_visible": compile_visible,
         "meta_orchestrator_visible": meta_visible,
         "predictive_memory_visible": memory_visible,
+        "epoch_integrity_visible": epoch_visible,
         "authority_boundary_declared": True,
         "final_evolve_required": True,
     }
@@ -184,6 +191,8 @@ def build_origin_seal(root: str | Path) -> dict[str, Any]:
         "meta_orchestrator_version": meta.get("version"),
         "predictive_memory_version": predictive_memory.get("version"),
         "cortex_refresh_version": cortex_refresh.get("version"),
+        "epoch_integrity_version": epoch_report.get("product_version") or epoch_report.get("version"),
+        "latest_epoch_id": epoch_pointer.get("epoch_id"),
     }
     packet = {
         "schema": SCHEMA,

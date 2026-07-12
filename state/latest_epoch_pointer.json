@@ -1,0 +1,9 @@
+{
+  "epoch_id": "ba4ac31df48d2c98b4430a94f3863adeef79aa3aa783f3de60a8d3d485973c41",
+  "epoch_manifest": "state/epochs/ba4ac31df48d2c98b4430a94f3863adeef79aa3aa783f3de60a8d3d485973c41/epoch_manifest.json",
+  "epoch_state": "sealed_working_tree",
+  "pointer_boundary": "Latest pointer is convenience only; epoch directories and ledger are the durable memory.",
+  "schema": "NEXUS_LATEST_EPOCH_POINTER.v2.6.1",
+  "source_root": "925f80739f680e3c3dd20a785feecc0b1dea08b6df54ec00b8928afe685df3f8",
+  "updated_at_utc": "2026-07-12T21:25:21.102039+00:00"
+}

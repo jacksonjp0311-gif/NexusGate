@@ -25,6 +25,7 @@ set -euo pipefail
 # wound-compress
 # cortex
   # origin-seal
+  # epoch-seal
   # triadic-lattice
   # distill
   # decision-envelope
@@ -198,6 +199,7 @@ case "$COMMAND" in
     python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent "$INTENT" --json
     ;;
   certificate-resume) python -m nexus_gate.loops.certificate_resume --root . --json ;;
+  epoch-seal) python -m nexus_gate.epochs.seal --root . --json ;;
   origin-seal) python -m nexus_gate.origin.seal --root . --json ;;
   triadic-lattice) python -m nexus_gate.lattice.triadic --root . --json ;;
   distill) python -m nexus_gate.distillation.graph --root . --json ;;
@@ -251,6 +253,7 @@ case "$COMMAND" in
     python -m nexus_gate.loops.orchestrator --root . --intent "evolve chain loop orchestration plan" --json
     python -m nexus_gate.loops.predictive_timing --root . --json
     python -m nexus_gate.loops.predictive_memory_orchestrator --root . --intent "evolve chain Cortex memory and predictive gate fusion" --json
+    python -m nexus_gate.epochs.seal --root . --json
     python -m nexus_gate.origin.seal --root . --json
     python -m nexus_gate.lattice.triadic --root . --json
     python -m nexus_gate.decision.envelope --root . --intent "evolve chain self-bootstrap decision envelope" --json

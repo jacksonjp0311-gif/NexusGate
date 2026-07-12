@@ -1,5 +1,13 @@
-## v2.6.0 - Evidence Distillation Graph
+## v2.6.1 - Epoch Integrity Seal
 Status: current
+- Adds `nexus_gate.epochs.seal` and `.\scripts\nexus.ps1 epoch-seal`.
+- Creates source-root epoch identity before commit, with commit SHA stored only as advisory attestation.
+- Writes immutable epoch packets under `state/epochs/<epoch_id>/` plus `state/latest_epoch_pointer.json`.
+- Appends hash-linked epoch events to `ledger/epoch_chain.jsonl`.
+- Updates distillation to append ledger events and block pruning candidates without distillation-node coverage.
+
+## v2.6.0 - Evidence Distillation Graph
+Status: sealed
 - Adds `nexus_gate.distillation.graph` and `.\scripts\nexus.ps1 distill`.
 - Converts heavy reports/state into hash-backed graph nodes with summaries and provenance.
 - Adds biological-efficiency principles: efficient coding, synaptic pruning, small-world efficiency, and homeostatic retention as engineering analogies.

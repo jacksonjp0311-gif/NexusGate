@@ -748,6 +748,48 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.3: promote repeated motifs into discovery candidates automatically",
             ],
             "boundary": "Distillation compresses evidence into graph memory. It does not delete source, self-authorize pruning, prove truth, or replace final evolve.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "epoch-integrity-seal",
+            "version": "0.1.0",
+            "title": "Epoch Integrity Seal",
+            "status": "active",
+            "summary": "Temporal graph learning needs identity that exists before commit. Source-root epochs let NEXUS compare evidence, memory, and route outcomes across runs without depending on a future commit hash.",
+            "math": {
+                "source_root": "MerkleRoot(sha256(path + NUL + file_sha256) for canonical source files)",
+                "epoch_id": "SHA256(source_root + parent_epoch_id + runtime_contract_version)",
+                "chain_event": "event_hash = SHA256(previous_event_hash + epoch_id + source_root + generated_at_utc)",
+                "coherence_rule": "latest pointer is convenience; immutable epoch directory + append-only ledger are durable memory",
+            },
+            "code_references": [
+                "nexus_gate/epochs/seal.py::build_epoch_integrity_seal",
+                "reports/nexus_epoch_integrity_seal_latest.json",
+                "state/latest_epoch_pointer.json",
+                "ledger/epoch_chain.jsonl",
+            ],
+            "algorithm_card_refs": [
+                "epoch-integrity-seal-algorithm",
+                "evidence-distillation-algorithm",
+                "causal-loop-hardening-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 epoch-seal",
+                "Inspect state/latest_epoch_pointer.json.",
+                "Compare state/epochs/<epoch_id>/epoch_manifest.json across future runs.",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_epoch_integrity_seal_latest.json",
+                "state/latest_epoch_pointer.json",
+                "state/epochs/<epoch_id>/epoch_manifest.json",
+                "ledger/epoch_chain.jsonl",
+            ],
+            "next_versions": [
+                "v0.2: graph epoch delta comparison",
+                "v0.3: post-commit attestation binding",
+                "v0.4: stale packet rejection by source-root contract",
+            ],
+            "boundary": "Epoch sealing provides source identity and temporal ordering. It cannot execute, self-authorize, prove correctness, or replace final evolve.",
         }
     ]
     return {

@@ -1,0 +1,72 @@
+{
+  "claim_boundary": "Gate index records report presence and hashes only; it is not proof of final correctness.",
+  "epoch_id": "ba4ac31df48d2c98b4430a94f3863adeef79aa3aa783f3de60a8d3d485973c41",
+  "gates": {
+    "coherence-field": {
+      "exists": true,
+      "path": "reports/nexus_coherence_field_latest.json",
+      "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.4.0",
+      "sha256": "4735ed9d07e4d09511ee56ac8294cf09270f3451c202687c9777fc8f622109b5",
+      "status": "pass",
+      "version": "2.4.0"
+    },
+    "compile": {
+      "exists": true,
+      "path": "reports/nexus_compile_report_latest.json",
+      "schema": null,
+      "sha256": "7eeade2b92fb4239abed9bb85a16fe23a59235087eebb772684779888c67b481",
+      "status": "pass",
+      "version": "0.9.5-personal-coding-paradise-compiler"
+    },
+    "decision-envelope": {
+      "exists": true,
+      "path": "reports/nexus_decision_envelope_latest.json",
+      "schema": "NEXUS_DECISION_ENVELOPE.v2.5.0",
+      "sha256": "c24f789629915504c3384a82cf60aed4a7c7a65247ebfeda323c1e7905625e92",
+      "status": "warn",
+      "version": "2.5.0"
+    },
+    "distill": {
+      "exists": true,
+      "path": "reports/nexus_evidence_distillation_report_latest.json",
+      "schema": "NEXUS_EVIDENCE_DISTILLATION_GRAPH.v2.6.0",
+      "sha256": "6f1af79f211e94bfccecbad22c065f0ea60b5beaa300f91bf656533befb8cc36",
+      "status": "pass",
+      "version": "2.6.0"
+    },
+    "origin-seal": {
+      "exists": true,
+      "path": "reports/nexus_origin_seal_latest.json",
+      "schema": "NEXUS_ORIGIN_SEAL.v2.6.1",
+      "sha256": "87000a899aa9d6352bb8d63257031b1b8ac9b912f2038b69a463c22af09bcdc2",
+      "status": "pass",
+      "version": "2.6.1"
+    },
+    "outcome-learn": {
+      "exists": true,
+      "path": "reports/nexus_recommendation_outcome_latest.json",
+      "schema": "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.2.0",
+      "sha256": "98115a9f3f0437ea3f9c5a538ae5d575bf25a0548f5a4f62eda62053adf3d5c8",
+      "status": "pass",
+      "version": "2.2.0"
+    },
+    "runtime-hygiene": {
+      "exists": true,
+      "path": "reports/nexus_runtime_hygiene_latest.json",
+      "schema": "NEXUS_RUNTIME_CHURN_HYGIENE.v2.3.0",
+      "sha256": "4e2c376588325b610d55a0b17f30e5a70b63a73e00d078b75c16a12accfc99dd",
+      "status": "warn",
+      "version": "2.3.0"
+    },
+    "triadic-lattice": {
+      "exists": true,
+      "path": "reports/nexus_triadic_lattice_latest.json",
+      "schema": "NEXUS_TRIADIC_GEOMETRIC_LATTICE.v2.5.0",
+      "sha256": "773d067a48e1ff8562c23a47792b9571f1fd09c2568af4c839e961adcfd7cceb",
+      "status": "pass",
+      "version": "2.5.0"
+    }
+  },
+  "schema": "NEXUS_EPOCH_GATE_INDEX.v2.6.1",
+  "source_root": "925f80739f680e3c3dd20a785feecc0b1dea08b6df54ec00b8928afe685df3f8"
+}

@@ -1,5 +1,5 @@
 {
-  "card_count": 18,
+  "card_count": 19,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -722,10 +722,52 @@
       "summary": "Heavy evidence can be compressed into hash-backed graph nodes so NEXUS keeps recurring structure while releasing generated exhaust under a retention policy.",
       "title": "Evidence Distillation Graph",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "epoch-integrity-seal-algorithm",
+        "evidence-distillation-algorithm",
+        "causal-loop-hardening-algorithm"
+      ],
+      "boundary": "Epoch sealing provides source identity and temporal ordering. It cannot execute, self-authorize, prove correctness, or replace final evolve.",
+      "code_references": [
+        "nexus_gate/epochs/seal.py::build_epoch_integrity_seal",
+        "reports/nexus_epoch_integrity_seal_latest.json",
+        "state/latest_epoch_pointer.json",
+        "ledger/epoch_chain.jsonl"
+      ],
+      "discovery_id": "epoch-integrity-seal",
+      "evidence_surfaces": [
+        "reports/nexus_epoch_integrity_seal_latest.json",
+        "state/latest_epoch_pointer.json",
+        "state/epochs/<epoch_id>/epoch_manifest.json",
+        "ledger/epoch_chain.jsonl"
+      ],
+      "math": {
+        "chain_event": "event_hash = SHA256(previous_event_hash + epoch_id + source_root + generated_at_utc)",
+        "coherence_rule": "latest pointer is convenience; immutable epoch directory + append-only ledger are durable memory",
+        "epoch_id": "SHA256(source_root + parent_epoch_id + runtime_contract_version)",
+        "source_root": "MerkleRoot(sha256(path + NUL + file_sha256) for canonical source files)"
+      },
+      "next_versions": [
+        "v0.2: graph epoch delta comparison",
+        "v0.3: post-commit attestation binding",
+        "v0.4: stale packet rejection by source-root contract"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 epoch-seal",
+        "Inspect state/latest_epoch_pointer.json.",
+        "Compare state/epochs/<epoch_id>/epoch_manifest.json across future runs."
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Temporal graph learning needs identity that exists before commit. Source-root epochs let NEXUS compare evidence, memory, and route outcomes across runs without depending on a future commit hash.",
+      "title": "Epoch Integrity Seal",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-12T20:31:33.041798+00:00",
+  "generated_at_utc": "2026-07-12T21:21:54.717101+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

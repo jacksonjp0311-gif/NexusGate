@@ -39,33 +39,33 @@
   "edges": [
     {
       "relation": "compressed_into_cards",
-      "source": "RouteNode:e720baf2a7a02c88",
-      "target": "AlgorithmNode:ebd10501ea9fce76"
+      "source": "RouteNode:d8823237670b283f",
+      "target": "AlgorithmNode:ed8572c127cfa954"
     },
     {
       "relation": "compressed_into_cards",
-      "source": "RouteNode:e720baf2a7a02c88",
-      "target": "DiscoveryNode:41946218dac8074f"
+      "source": "RouteNode:d8823237670b283f",
+      "target": "DiscoveryNode:545dcfe033351390"
     },
     {
       "relation": "compressed_into_cards",
-      "source": "CoherenceNode:8dd5e9793ebbc4ff",
-      "target": "AlgorithmNode:ebd10501ea9fce76"
+      "source": "CoherenceNode:d64e424384b940bd",
+      "target": "AlgorithmNode:ed8572c127cfa954"
     },
     {
       "relation": "compressed_into_cards",
-      "source": "CoherenceNode:8dd5e9793ebbc4ff",
-      "target": "DiscoveryNode:41946218dac8074f"
+      "source": "CoherenceNode:d64e424384b940bd",
+      "target": "DiscoveryNode:545dcfe033351390"
     },
     {
       "relation": "compressed_into_cards",
-      "source": "OutcomeNode:8cfa915fd25a29ac",
-      "target": "AlgorithmNode:ebd10501ea9fce76"
+      "source": "OutcomeNode:53715be1075e8ade",
+      "target": "AlgorithmNode:ed8572c127cfa954"
     },
     {
       "relation": "compressed_into_cards",
-      "source": "OutcomeNode:8cfa915fd25a29ac",
-      "target": "DiscoveryNode:41946218dac8074f"
+      "source": "OutcomeNode:53715be1075e8ade",
+      "target": "DiscoveryNode:545dcfe033351390"
     }
   ],
   "emergence": {
@@ -75,7 +75,7 @@
       "AlgorithmNode": 1,
       "CoherenceNode": 3,
       "DiscoveryNode": 1,
-      "EvidenceNode": 5,
+      "EvidenceNode": 7,
       "OutcomeNode": 1,
       "PrincipleNode": 4,
       "RouteNode": 1,
@@ -83,35 +83,64 @@
     },
     "status": "forming"
   },
-  "generated_at_utc": "2026-07-12T20:29:44.600531+00:00",
-  "graph_hash": "601a525450072c3c06401e590b7f341435fd490ddd8ace5e647a89d325a527e5",
+  "epoch_identity": {
+    "epoch_id": "ba4ac31df48d2c98b4430a94f3863adeef79aa3aa783f3de60a8d3d485973c41",
+    "epoch_state": "sealed_working_tree",
+    "pointer_boundary": "Latest pointer is convenience only; epoch directories and ledger are the durable memory.",
+    "source_root": "925f80739f680e3c3dd20a785feecc0b1dea08b6df54ec00b8928afe685df3f8"
+  },
+  "generated_at_utc": "2026-07-12T21:25:22.132541+00:00",
+  "graph_hash": "310128f790662824e115ea52b94486dfe59eceea0769ee338a89f8cc685c7831",
   "graph_metrics": {
     "compression_mode": "summary_hash_pointer_graph",
-    "distilled_source_bytes": 202653,
+    "distilled_source_bytes": 233266,
     "edge_count": 6,
-    "node_count": 17
+    "node_count": 19
   },
+  "ledger_event_hash": "1369344277bbf5be7fd9ab40360c48d1adb595f731ecc5d6a053943a0e0c7d7c",
   "nodes": [
     {
-      "bytes": 9249,
+      "bytes": 9195,
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "EvidenceNode:da73503128f55e89",
+      "node_id": "EvidenceNode:ab84f945448adacb",
       "node_type": "EvidenceNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "8e1eda69ca96cb9256a85b861992d98cac5970e7966d3af1d6b36b68a64ead4c",
+      "source_hash": "17defccad8378ec18496feeb1a49c15a6931d6579e95819d1dde9920dec4c8db",
       "source_surface": "reports/nexus_origin_seal_latest.json",
       "summary": {
         "card_count": null,
         "mode": null,
         "node_hint": "NEXUS GATE",
-        "schema": "NEXUS_ORIGIN_SEAL.v2.6.0",
+        "schema": "NEXUS_ORIGIN_SEAL.v2.6.1",
         "score": null,
         "selected_command": null,
         "status": "pass",
-        "version": "2.6.0"
+        "version": "2.6.1"
+      }
+    },
+    {
+      "bytes": 28844,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "EvidenceNode:485f4463bf65c816",
+      "node_type": "EvidenceNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "5e1cc57867637554322010709f9d3a97c3b2499a216818d19d8c83b9ae1b94db",
+      "source_surface": "reports/nexus_epoch_integrity_seal_latest.json",
+      "summary": {
+        "card_count": null,
+        "mode": null,
+        "node_hint": "NEXUS GATE",
+        "schema": "NEXUS_EPOCH_INTEGRITY_SEAL.v2.6.1",
+        "score": null,
+        "selected_command": null,
+        "status": "pass",
+        "version": "2.6.1"
       }
     },
     {
@@ -119,11 +148,11 @@
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "EvidenceNode:43e07648752a9fc7",
+      "node_id": "EvidenceNode:6777e63bd90541a9",
       "node_type": "EvidenceNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "20fb3edbe4e009a626d325bb96364178d7ad2642bb7015eaaa469f4a9b1c8f2a",
+      "source_hash": "773d067a48e1ff8562c23a47792b9571f1fd09c2568af4c839e961adcfd7cceb",
       "source_surface": "reports/nexus_triadic_lattice_latest.json",
       "summary": {
         "card_count": null,
@@ -137,15 +166,15 @@
       }
     },
     {
-      "bytes": 24607,
+      "bytes": 24600,
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "RouteNode:e720baf2a7a02c88",
+      "node_id": "RouteNode:d8823237670b283f",
       "node_type": "RouteNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "11d26047453aee1ec19e2a782d9b38bf6e7ee4425848a9e4afbb6815a8e88cb4",
+      "source_hash": "c24f789629915504c3384a82cf60aed4a7c7a65247ebfeda323c1e7905625e92",
       "source_surface": "reports/nexus_decision_envelope_latest.json",
       "summary": {
         "card_count": null,
@@ -159,22 +188,22 @@
       }
     },
     {
-      "bytes": 9458,
+      "bytes": 9451,
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "CoherenceNode:8dd5e9793ebbc4ff",
+      "node_id": "CoherenceNode:d64e424384b940bd",
       "node_type": "CoherenceNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "76a5c2aada75f4cbb51ced502f61772980e5f4abfe851dd8837cc309ddf0c4dd",
+      "source_hash": "4735ed9d07e4d09511ee56ac8294cf09270f3451c202687c9777fc8f622109b5",
       "source_surface": "reports/nexus_coherence_field_latest.json",
       "summary": {
         "card_count": null,
         "mode": "outcome_aware_coherence_field",
         "node_hint": "NEXUS GATE",
         "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.4.0",
-        "score": 94,
+        "score": 97,
         "selected_command": ".\\scripts\\nexus.ps1 cortex-refresh",
         "status": "pass",
         "version": "2.4.0"
@@ -185,11 +214,11 @@
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "OutcomeNode:8cfa915fd25a29ac",
+      "node_id": "OutcomeNode:53715be1075e8ade",
       "node_type": "OutcomeNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "bff27f5f5e37ea350a64acfee044b29796b72cebe134a184c7a11eb8c9a37bdb",
+      "source_hash": "98115a9f3f0437ea3f9c5a538ae5d575bf25a0548f5a4f62eda62053adf3d5c8",
       "source_surface": "reports/nexus_recommendation_outcome_latest.json",
       "summary": {
         "card_count": null,
@@ -203,15 +232,15 @@
       }
     },
     {
-      "bytes": 11264,
+      "bytes": 9200,
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "EvidenceNode:70eefbea7a17bc9f",
+      "node_id": "EvidenceNode:0df5d7e9a5bc924e",
       "node_type": "EvidenceNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "9c7fc7d12f3161d72b11c5972450cd64baecec3f568490b41be848bba4da30c6",
+      "source_hash": "d6dd540adcdc1466dbc35ef33ffcdf2aeb757c497cf97b703723ac25f1cadd27",
       "source_surface": "reports/nexus_predictive_memory_orchestrator_latest.json",
       "summary": {
         "card_count": null,
@@ -225,15 +254,15 @@
       }
     },
     {
-      "bytes": 15428,
+      "bytes": 14492,
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "RuntimePressureNode:3f114af20902be71",
+      "node_id": "RuntimePressureNode:177f049cba8d98f7",
       "node_type": "RuntimePressureNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "93f25f93590eb4cf2fe2fd234425c1f18797f315fcdac4159f89a7c5b33cc3e6",
+      "source_hash": "b6bdca8a12682d87e7ae01adc09f257f49c1ede378e5d9756617912c3ba483ec",
       "source_surface": "reports/nexus_predictive_gate_timing_latest.json",
       "summary": {
         "card_count": null,
@@ -247,19 +276,19 @@
       }
     },
     {
-      "bytes": 9197,
+      "bytes": 9795,
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "EvidenceNode:de6b59d3e8d0078f",
+      "node_id": "EvidenceNode:520ebba55482968e",
       "node_type": "EvidenceNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "7ff65150cced8b281d2d19f87775bed02ccad5dfbd3bed3b2dbc3244fbd282ec",
+      "source_hash": "4e2c376588325b610d55a0b17f30e5a70b63a73e00d078b75c16a12accfc99dd",
       "source_surface": "reports/nexus_runtime_hygiene_latest.json",
       "summary": {
         "card_count": null,
-        "mode": "dry_run",
+        "mode": "apply",
         "node_hint": "NEXUS GATE",
         "schema": "NEXUS_RUNTIME_CHURN_HYGIENE.v2.3.0",
         "score": null,
@@ -269,18 +298,18 @@
       }
     },
     {
-      "bytes": 74839,
+      "bytes": 76579,
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "AlgorithmNode:ebd10501ea9fce76",
+      "node_id": "AlgorithmNode:ed8572c127cfa954",
       "node_type": "AlgorithmNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "5fa6017814f519b47d399ab188c90f3428e44e6cc55c6b04c073e4bf392f9ad5",
+      "source_hash": "cab9c218eea76d091253d7548bcd3d54b95dc6416ccdf35d2dd4790cab4d6f29",
       "source_surface": "state/algorithms/nexus_algorithm_cards_latest.json",
       "summary": {
-        "card_count": 44,
+        "card_count": 45,
         "mode": null,
         "node_hint": "NEXUS_ALGORITHM_CARDS",
         "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
@@ -291,18 +320,18 @@
       }
     },
     {
-      "bytes": 35670,
+      "bytes": 37773,
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "DiscoveryNode:41946218dac8074f",
+      "node_id": "DiscoveryNode:545dcfe033351390",
       "node_type": "DiscoveryNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "06c3f2ed9d17a769f18c7cd7e2045949fee98eae2a5169c14122bff339058ea5",
+      "source_hash": "bf09328005b1c58eea61b5116b9b04daf468d7c86a1dcbe4b4aa0ecd6da3b66d",
       "source_surface": "state/discoveries/nexus_discovery_cards_latest.json",
       "summary": {
-        "card_count": 18,
+        "card_count": 19,
         "mode": null,
         "node_hint": "NEXUS_DISCOVERY_CARDS",
         "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
@@ -313,15 +342,37 @@
       }
     },
     {
-      "bytes": 4580,
+      "bytes": 559,
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "EvidenceNode:f645d67a640a2aca",
+      "node_id": "EvidenceNode:430d52e31b34a442",
       "node_type": "EvidenceNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "20fb3edbe4e009a626d325bb96364178d7ad2642bb7015eaaa469f4a9b1c8f2a",
+      "source_hash": "36fe094b7e0c45748b4e1b9c571d89b79dcd640067b866521adefe8e2a83f8f8",
+      "source_surface": "state/latest_epoch_pointer.json",
+      "summary": {
+        "card_count": null,
+        "mode": null,
+        "node_hint": null,
+        "schema": "NEXUS_LATEST_EPOCH_POINTER.v2.6.1",
+        "score": null,
+        "selected_command": null,
+        "status": null,
+        "version": null
+      }
+    },
+    {
+      "bytes": 4445,
+      "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
+      "confidence": 0.88,
+      "links": [],
+      "node_id": "EvidenceNode:b24558c336c35f6e",
+      "node_type": "EvidenceNode",
+      "prunable": false,
+      "retention_policy": "keep_latest",
+      "source_hash": "6c5cc9a6b73fbfe6c033921d64ecf81a4481ceb6f5e4493ebf56eb52a6bd86ee",
       "source_surface": "state/lattice/nexus_triadic_lattice_latest.json",
       "summary": {
         "card_count": null,
@@ -335,15 +386,15 @@
       }
     },
     {
-      "bytes": 482,
+      "bytes": 464,
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "CoherenceNode:33e339db53d5b9cf",
+      "node_id": "CoherenceNode:9dbdec69cc16a9fc",
       "node_type": "CoherenceNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "30aaf0b66d64daf1610a5b2e5631d4eaa30abe8e107c15fa827d77fd48eff871",
+      "source_hash": "bd0d0ec1d5fd1f107a6cd268802036c70f13f7f4a1288e9ff229d87fb76b9d80",
       "source_surface": "state/coherence/arbiter_calibration_latest.json",
       "summary": {
         "card_count": null,
@@ -357,15 +408,15 @@
       }
     },
     {
-      "bytes": 403,
+      "bytes": 393,
       "claim_boundary": "Distilled node is a compact pointer, not full context or proof.",
       "confidence": 0.88,
       "links": [],
-      "node_id": "CoherenceNode:94fe7f728a05f075",
+      "node_id": "CoherenceNode:b5c21f7ac19bcb4c",
       "node_type": "CoherenceNode",
       "prunable": false,
       "retention_policy": "keep_latest",
-      "source_hash": "9726b373c22f5cd933135baf5780770748ae4bd2ce385a70277910efe92fe4ae",
+      "source_hash": "8127579395227dadba7525f16a2321935b7b51eabd31abf0e7359d69cb4bcec8",
       "source_surface": "state/coherence/pressure_memory_latest.json",
       "summary": {
         "card_count": null,
@@ -496,10 +547,33 @@
         "reason": "source/docs/tests/policy surfaces are protected"
       }
     ],
-    "candidate_bytes": 1624429,
-    "candidate_count": 80,
-    "candidates": [
+    "candidate_bytes": 0,
+    "candidate_count": 0,
+    "candidates": [],
+    "mode": "recommendation_only",
+    "requires_final_evolve": true,
+    "requires_human_authorization": true,
+    "uncovered_runtime_exhaust_bytes": 1659318,
+    "uncovered_runtime_exhaust_count": 80,
+    "uncovered_runtime_exhaust_sample": [
       {
+        "blocked_reason": "no prunable distillation node coverage",
+        "bytes": 32122,
+        "path": "reports/human_surface/20260712_170713/16i2_evidence_distillation.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "0a39684411f91c5f323afea9013c2167a6962ef03d70f0d35b6bac978e534f8a"
+      },
+      {
+        "blocked_reason": "no prunable distillation node coverage",
+        "bytes": 28888,
+        "path": "reports/human_surface/20260712_170713/16e2_epoch_integrity_seal.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "6347c0519a9c8ef1062e178f4aefc7e5fd765ce20b53ed8addbff1b143d72e86"
+      },
+      {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 28090,
         "path": "reports/human_surface/20260712_162714/16i2_evidence_distillation.json",
         "protected": false,
@@ -507,6 +581,7 @@
         "source_hash": "48256c0c8972444098434c7399cbafacfe0e87d04d13d509b8dc2dd05af850f8"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 24616,
         "path": "reports/human_surface/20260712_162714/16g_decision_envelope.json",
         "protected": false,
@@ -514,6 +589,7 @@
         "source_hash": "158a8c1a7df4e6816d03e77217ba4698e7180190b2e47fb0d3820dac9753cae3"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 24614,
         "path": "reports/human_surface/20260712_155543/16g_decision_envelope.json",
         "protected": false,
@@ -521,6 +597,15 @@
         "source_hash": "edd1002920c149936557c5d610261c9b608183869341b8b9dd7ecb5170482f79"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
+        "bytes": 24609,
+        "path": "reports/human_surface/20260712_170713/16g_decision_envelope.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "480e36a18af77980b6ece1b8a825d0653b6d2b4446a3bfdec0131d7ba1ecbac0"
+      },
+      {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21538,
         "path": "reports/human_surface/20260712_082532/10_feedback_compiler.json",
         "protected": false,
@@ -528,6 +613,7 @@
         "source_hash": "011ae2fd46cf35fcc2b7e8d82837115f0176eb544064efc86b072c62846ed3fa"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21538,
         "path": "reports/human_surface/20260712_162714/10_feedback_compiler.json",
         "protected": false,
@@ -535,6 +621,7 @@
         "source_hash": "fbcf24d0c95c4639555a6b60cdd46a0837a736b849a705608d9b80219d3ab050"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21537,
         "path": "reports/human_surface/20260711_190556/10_feedback_compiler.json",
         "protected": false,
@@ -542,6 +629,7 @@
         "source_hash": "d22c07a14e48ba229278556ebba7c4483b145c698cf0d70e055a0bf15306eada"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21537,
         "path": "reports/human_surface/20260711_235755/10_feedback_compiler.json",
         "protected": false,
@@ -549,6 +637,7 @@
         "source_hash": "0e41a5874c5d81e0e08224f1858aa1e28950162e5074fbdaf6ce3c20cd620c10"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21535,
         "path": "reports/human_surface/20260710_122726/10_feedback_compiler.json",
         "protected": false,
@@ -556,6 +645,7 @@
         "source_hash": "6683c1f7d2616b72e2e5ad91b2e719a716bf9e3b9160e436cb5a5e6bb6705075"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21535,
         "path": "reports/human_surface/20260711_010513/10_feedback_compiler.json",
         "protected": false,
@@ -563,6 +653,7 @@
         "source_hash": "f1f14e4e6e6b3569f820fea710f9c7d6b0b8e8cf0ceab2d091878ecfa380c82a"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21535,
         "path": "reports/human_surface/20260711_085010/10_feedback_compiler.json",
         "protected": false,
@@ -570,6 +661,7 @@
         "source_hash": "346da10f9e2a20ee7dc46c3660ed4dac92a6d8206073807ac3e770cb6d4cd4c0"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21532,
         "path": "reports/human_surface/20260711_045049/10_feedback_compiler.json",
         "protected": false,
@@ -577,6 +669,7 @@
         "source_hash": "c85e93a3b22b3356d12d68d6457542f969f98390b63cf227422bbbf671b28dd4"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21530,
         "path": "reports/human_surface/20260712_075126/10_feedback_compiler.json",
         "protected": false,
@@ -584,6 +677,7 @@
         "source_hash": "d75307f654d1e8f91353927a7b9e035d0b5f2cb4a331fecfe5a268efacaeb294"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21530,
         "path": "reports/human_surface/20260712_075629/10_feedback_compiler.json",
         "protected": false,
@@ -591,6 +685,7 @@
         "source_hash": "c5d184860490ea4b9e8e1bbcba0bba834a8a395bab7704dfd9f7113afd5a7ac3"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21529,
         "path": "reports/human_surface/20260712_155543/10_feedback_compiler.json",
         "protected": false,
@@ -598,6 +693,15 @@
         "source_hash": "f09da8ffbf0dada8b0a73e2dc91c73c2bf0d465401635546ae109e134dd6856d"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
+        "bytes": 21529,
+        "path": "reports/human_surface/20260712_170713/10_feedback_compiler.json",
+        "protected": false,
+        "reason": "timestamped generated runtime exhaust",
+        "source_hash": "e499d8152ea280b2b8b7f73b85a4ac02bc3479e2e1f3dea6712ae497e772f63e"
+      },
+      {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21528,
         "path": "reports/human_surface/20260711_214645/10_feedback_compiler.json",
         "protected": false,
@@ -605,6 +709,7 @@
         "source_hash": "86e4237c254ffd75ad7c7c3254a9267d1fb0d9ef592f29fcf01bdc2b8534a401"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21528,
         "path": "reports/human_surface/20260712_010116/10_feedback_compiler.json",
         "protected": false,
@@ -612,6 +717,7 @@
         "source_hash": "a7429cfd199beec13bb3dd618065d8272ecb02a2d9befa445fff2ba7478ee3b2"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21528,
         "path": "reports/human_surface/20260712_035219/10_feedback_compiler.json",
         "protected": false,
@@ -619,6 +725,7 @@
         "source_hash": "5951a8763f53fe59ae240b750cf495b3e04841f5c3f993fbc4ec09140fb3c2bd"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21528,
         "path": "reports/human_surface/20260712_072347/10_feedback_compiler.json",
         "protected": false,
@@ -626,6 +733,7 @@
         "source_hash": "61050be15ba81b0f2a5c7313e52926d653f33fc52c70d1dc2e37afa6aa5f430e"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21526,
         "path": "reports/human_surface/20260709_205256/10_feedback_compiler.json",
         "protected": false,
@@ -633,6 +741,7 @@
         "source_hash": "703b898b3794d2331d2c5f60aa2c91eefbedbc66e55074c0bc8e285a80074eee"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21526,
         "path": "reports/human_surface/20260709_214453/10_feedback_compiler.json",
         "protected": false,
@@ -640,47 +749,18 @@
         "source_hash": "f227ca32881ee8502f3272b8441115cb003fdcab124ce78289f4083f4c6c04a8"
       },
       {
+        "blocked_reason": "no prunable distillation node coverage",
         "bytes": 21526,
         "path": "reports/human_surface/20260709_220136/10_feedback_compiler.json",
         "protected": false,
         "reason": "timestamped generated runtime exhaust",
         "source_hash": "266fb1c0663c17dff7c4a709dba0ee913dcc747f72d49b55316f9b2600b8d1f1"
-      },
-      {
-        "bytes": 21526,
-        "path": "reports/human_surface/20260709_221853/10_feedback_compiler.json",
-        "protected": false,
-        "reason": "timestamped generated runtime exhaust",
-        "source_hash": "5dfa1d9d2efc44ababc8f9e77d987fa73b764d4bdaa6168fdb1ad94698390732"
-      },
-      {
-        "bytes": 21526,
-        "path": "reports/human_surface/20260709_224136/10_feedback_compiler.json",
-        "protected": false,
-        "reason": "timestamped generated runtime exhaust",
-        "source_hash": "f3726cf98c65ebf437bb9d2825e7b955b343d0a23f0afe7ddedebfd9d4080666"
-      },
-      {
-        "bytes": 21526,
-        "path": "reports/human_surface/20260710_094041/10_feedback_compiler.json",
-        "protected": false,
-        "reason": "timestamped generated runtime exhaust",
-        "source_hash": "499c66ef7e39b6e5ed6b2f1d71d79c96a3b88b8c468ace951bce898c8eaeb48f"
-      },
-      {
-        "bytes": 21526,
-        "path": "reports/human_surface/20260710_095720/10_feedback_compiler.json",
-        "protected": false,
-        "reason": "timestamped generated runtime exhaust",
-        "source_hash": "f46c92db1c800b7503dcbc3a1d731517d3ba4ee58e0e32001d4cf295c8bca46a"
       }
-    ],
-    "mode": "recommendation_only",
-    "requires_final_evolve": true,
-    "requires_human_authorization": true
+    ]
   },
   "read_surfaces": [
     "reports/nexus_origin_seal_latest.json",
+    "reports/nexus_epoch_integrity_seal_latest.json",
     "reports/nexus_triadic_lattice_latest.json",
     "reports/nexus_decision_envelope_latest.json",
     "reports/nexus_coherence_field_latest.json",
@@ -690,13 +770,15 @@
     "reports/nexus_runtime_hygiene_latest.json",
     "state/algorithms/nexus_algorithm_cards_latest.json",
     "state/discoveries/nexus_discovery_cards_latest.json",
+    "state/latest_epoch_pointer.json",
     "state/lattice/nexus_triadic_lattice_latest.json",
     "state/coherence/arbiter_calibration_latest.json",
     "state/coherence/pressure_memory_latest.json"
   ],
   "repository": {
     "branch": "main",
-    "commit": "5cf0743182c4555cb85ac1b343150f3785abd7ae"
+    "commit": "04cfe25a72c7f35a07d6e34147504a8904a9056b",
+    "commit_role": "advisory; source_root epoch is primary when available"
   },
   "schema": "NEXUS_EVIDENCE_DISTILLATION_GRAPH.v2.6.0",
   "status": "pass",

@@ -1,0 +1,9 @@
+{
+  "claim_boundary": "Epoch Integrity Seal is local development identity evidence only. It creates a source-root epoch and append-only chain for later graph, memory, and routing comparisons. It does not prove correctness, safety, security, production readiness, model understanding, or autonomous authority.",
+  "epoch_id": "ba4ac31df48d2c98b4430a94f3863adeef79aa3aa783f3de60a8d3d485973c41",
+  "epoch_state": "sealed_working_tree",
+  "origin_manifest_hash": "d3d90270080d82e00350e268917cf1e0d595a118277268b879441f5e1e112436",
+  "product_version": "2.6.1",
+  "schema": "NEXUS_EPOCH_ORIGIN_PACKET.v2.6.1",
+  "source_root": "925f80739f680e3c3dd20a785feecc0b1dea08b6df54ec00b8928afe685df3f8"
+}

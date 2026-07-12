@@ -356,3 +356,11 @@ candidate lesson -> provenance -> evidence -> gate pass -> claim boundary -> lin
 ```
 
 NEXUS does not learn by changing model weights. It learns by promoting evidence-qualified lessons into repository-native surfaces that future sessions can rehydrate.
+
+## Epoch Integrity Seal Algorithm
+
+```text
+canonical source files -> source Merkle root -> parent epoch + runtime contract -> epoch id -> immutable epoch directory -> append-only chain
+```
+
+Epoch Integrity gives graph learning a stable timebase without making Git commit SHA the primary identity. Generated evidence can be committed after it is produced, so NEXUS uses source-root identity first and stores commit SHA as advisory attestation.

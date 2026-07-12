@@ -46,6 +46,7 @@ SOURCE_PROTECTED_PREFIXES = (
 
 DISTILL_SURFACES = [
     "reports/nexus_origin_seal_latest.json",
+    "reports/nexus_epoch_integrity_seal_latest.json",
     "reports/nexus_triadic_lattice_latest.json",
     "reports/nexus_decision_envelope_latest.json",
     "reports/nexus_coherence_field_latest.json",
@@ -55,6 +56,7 @@ DISTILL_SURFACES = [
     "reports/nexus_runtime_hygiene_latest.json",
     "state/algorithms/nexus_algorithm_cards_latest.json",
     "state/discoveries/nexus_discovery_cards_latest.json",
+    "state/latest_epoch_pointer.json",
     "state/lattice/nexus_triadic_lattice_latest.json",
     "state/coherence/arbiter_calibration_latest.json",
     "state/coherence/pressure_memory_latest.json",
@@ -217,18 +219,68 @@ def _protected_prune_candidate(path: str) -> bool:
     return normalized.startswith(SOURCE_PROTECTED_PREFIXES) or normalized in {"README.md", "AGENTS.md", "pyproject.toml"}
 
 
-def _pruning_plan(root: Path) -> dict[str, Any]:
+def _last_ledger_hash(path: Path) -> str:
+    if not path.exists():
+        return "genesis"
+    for line in reversed(path.read_text(encoding="utf-8-sig").splitlines()):
+        if not line.strip():
+            continue
+        try:
+            item = json.loads(line)
+        except Exception:
+            continue
+        return item.get("event_hash") or "genesis"
+    return "genesis"
+
+
+def _append_ledger_event(path: Path, event: dict[str, Any]) -> dict[str, Any]:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    body = dict(event)
+    body["previous_event_hash"] = _last_ledger_hash(path)
+    body["event_id"] = _sha_obj({
+        "graph_hash": body.get("graph_hash"),
+        "previous_event_hash": body["previous_event_hash"],
+        "generated_at_utc": body.get("generated_at_utc"),
+    })
+    body["event_hash"] = _sha_obj(body)
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(body, sort_keys=True) + "\n")
+        handle.flush()
+    return body
+
+
+def _pruning_plan(root: Path, nodes: list[dict[str, Any]]) -> dict[str, Any]:
     raw = _runtime_exhaust_candidates(root)
-    safe = [item for item in raw if not _protected_prune_candidate(item["path"])]
+    node_by_hash = {node.get("source_hash"): node for node in nodes if node.get("source_hash")}
+    covered: list[dict[str, Any]] = []
+    uncovered: list[dict[str, Any]] = []
+    for item in raw:
+        node = node_by_hash.get(item["source_hash"])
+        if node and node.get("prunable") is True and not _protected_prune_candidate(item["path"]):
+            covered.append({
+                **item,
+                "distillation_node_id": node.get("node_id"),
+                "coverage": 1.0,
+                "rehydration_test": "pending",
+                "human_authorization_required": True,
+            })
+        else:
+            uncovered.append({
+                **item,
+                "blocked_reason": "no prunable distillation node coverage",
+            })
     blocked = [
         {"path": prefix, "reason": "source/docs/tests/policy surfaces are protected"}
         for prefix in ["nexus_gate/", "tests/", "docs/", "scripts/", "README.md", "AGENTS.md"]
     ]
     return {
         "mode": "recommendation_only",
-        "candidate_count": len(safe),
-        "candidate_bytes": sum(item["bytes"] for item in safe),
-        "candidates": safe[:25],
+        "candidate_count": len(covered),
+        "candidate_bytes": sum(item["bytes"] for item in covered),
+        "candidates": covered[:25],
+        "uncovered_runtime_exhaust_count": len(uncovered),
+        "uncovered_runtime_exhaust_bytes": sum(item["bytes"] for item in uncovered),
+        "uncovered_runtime_exhaust_sample": uncovered[:25],
         "blocked_patterns": blocked,
         "requires_human_authorization": True,
         "requires_final_evolve": True,
@@ -264,6 +316,7 @@ def build_evidence_distillation_graph(root: str | Path) -> dict[str, Any]:
             for target in ["state/algorithms/nexus_algorithm_cards_latest.json", "state/discoveries/nexus_discovery_cards_latest.json"]:
                 if target in node_ids:
                     edges.append({"source": node_ids[source], "target": node_ids[target], "relation": "compressed_into_cards"})
+    epoch_pointer = _read_json(root_path / "state" / "latest_epoch_pointer.json") or {}
     packet = {
         "schema": SCHEMA,
         "system": "NEXUS GATE",
@@ -274,6 +327,13 @@ def build_evidence_distillation_graph(root: str | Path) -> dict[str, Any]:
         "repository": {
             "commit": _git(root_path, ["rev-parse", "HEAD"]) or "unknown",
             "branch": _git(root_path, ["branch", "--show-current"]) or "unknown",
+            "commit_role": "advisory; source_root epoch is primary when available",
+        },
+        "epoch_identity": {
+            "epoch_id": epoch_pointer.get("epoch_id"),
+            "source_root": epoch_pointer.get("source_root"),
+            "epoch_state": epoch_pointer.get("epoch_state"),
+            "pointer_boundary": epoch_pointer.get("pointer_boundary"),
         },
         "biological_efficiency_principles": BIOLOGICAL_PRINCIPLES,
         "nodes": nodes,
@@ -284,14 +344,14 @@ def build_evidence_distillation_graph(root: str | Path) -> dict[str, Any]:
             "distilled_source_bytes": sum(int(node.get("bytes") or 0) for node in nodes),
             "compression_mode": "summary_hash_pointer_graph",
         },
-        "pruning_policy": _pruning_plan(root_path),
+        "pruning_policy": _pruning_plan(root_path, nodes),
         "emergence": _emergence_summary(nodes),
         "read_surfaces": DISTILL_SURFACES,
         "write_surfaces": [REPORT_LATEST.as_posix(), STATE_LATEST.as_posix(), LEDGER.as_posix()],
         "blocked_actions": BLOCKED_ACTIONS,
         "claim_boundary": CLAIM_BOUNDARY,
     }
-    packet["graph_hash"] = _sha_obj({"nodes": nodes, "edges": edges, "repository": packet["repository"]})
+    packet["graph_hash"] = _sha_obj({"nodes": nodes, "edges": edges, "epoch_identity": packet["epoch_identity"]})
     return packet
 
 
@@ -304,13 +364,20 @@ def write_evidence_distillation_graph(root: str | Path) -> dict[str, Any]:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(encoded, encoding="utf-8")
     ledger = root_path / LEDGER
-    ledger.parent.mkdir(parents=True, exist_ok=True)
-    ledger.write_text(json.dumps({
+    event = _append_ledger_event(ledger, {
+        "schema": "NEXUS_EVIDENCE_DISTILLATION_LEDGER_EVENT.v2.6.1",
         "generated_at_utc": packet["generated_at_utc"],
         "graph_hash": packet["graph_hash"],
+        "epoch_id": packet.get("epoch_identity", {}).get("epoch_id"),
+        "source_root": packet.get("epoch_identity", {}).get("source_root"),
         "node_count": packet["graph_metrics"]["node_count"],
         "candidate_prune_bytes": packet["pruning_policy"]["candidate_bytes"],
-    }, sort_keys=True) + "\n", encoding="utf-8")
+        "uncovered_runtime_exhaust_bytes": packet["pruning_policy"]["uncovered_runtime_exhaust_bytes"],
+    })
+    packet["ledger_event_hash"] = event["event_hash"]
+    for rel in (REPORT_LATEST, STATE_LATEST):
+        path = root_path / rel
+        path.write_text(json.dumps(packet, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return packet
 
 
