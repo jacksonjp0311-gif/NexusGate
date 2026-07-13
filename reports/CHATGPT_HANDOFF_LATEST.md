@@ -1,7 +1,7 @@
 # NEXUS ChatGPT Handoff Latest
 
 - Version: 0.6.4
-- Generated UTC: 2026-07-12T23:23:09.995300+00:00
+- Generated UTC: 2026-07-13T02:28:02.969215+00:00
 - Intent: can the chat answer
 - Target role: TNN
 - Boundary: recommendation-only; human authorizes durable mutation.

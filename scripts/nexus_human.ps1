@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "action-recommend", "action-chain-verify", "causal-receipts", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "action-recommend", "action-chain-verify", "causal-receipts", "first-learning-readiness", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [string]$ActionId = "",
     [switch]$NoGit
@@ -192,6 +192,7 @@ function Run-All {
     Run-Feedback
     Run-Pack
     Invoke-Step "Runtime hygiene" "18_runtime_hygiene.json" { python -m nexus_gate.hygiene.runtime_churn --root . --json }
+    Invoke-Step "First learning readiness" "18b_first_learning_readiness.json" { python -m nexus_gate.actions.cli first-learning-readiness --root . --json }
     Invoke-Step "Epoch chain verify" "19_epoch_chain_verify.json" { python -m nexus_gate.epochs.seal --root . --chain-verify --json }
     Say "Compiled report files written." "OK"
     Say "Human surface passed." "OK"
@@ -441,6 +442,12 @@ if ($Command -eq "action-chain-verify") {
 if ($Command -eq "causal-receipts") {
     Invoke-Step "Causal action status" "16i5_causal_action_status.json" { python -m nexus_gate.actions.cli receipts --root . --action-id $ActionId --json }
     Say "Causal action status written." "OK"
+    exit 0
+}
+
+if ($Command -eq "first-learning-readiness") {
+    Invoke-Step "First learning readiness" "16i6_first_learning_readiness.json" { python -m nexus_gate.actions.cli first-learning-readiness --root . --json }
+    Say "First learning readiness report written." "OK"
     exit 0
 }
 

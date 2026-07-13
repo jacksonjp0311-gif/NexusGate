@@ -1,5 +1,5 @@
 {
-  "card_count": 21,
+  "card_count": 23,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -840,10 +840,82 @@
       "summary": "Live neural visualization caches can change because time changed, not because NEXUS evolved. Runtime graph churn must be excluded from Source Epoch identity and classified as generated runtime cache.",
       "title": "Generated Visualization State Must Not Pollute Source Identity",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "final-evolve-learning-proof-algorithm",
+        "receipt-dependency-enforcement-algorithm",
+        "replay-safe-calibration-algorithm"
+      ],
+      "boundary": "Durable learning is local calibration evidence only. It does not prove global correctness or grant authority.",
+      "code_references": [
+        "nexus_gate/actions/cli.py::finalize",
+        "reports/nexus_first_learning_readiness_latest.json"
+      ],
+      "discovery_id": "local-success-is-not-durable-learning",
+      "evidence_surfaces": [
+        "state/actions/<action_id>/learning.json",
+        "reports/nexus_first_learning_readiness_latest.json"
+      ],
+      "math": {
+        "causal_confidence": "K = E * A * R * X * W * V * F * D",
+        "durable_gate": "final_evolve_passed AND clean_epoch_admissible AND no high confounder pressure",
+        "hard_zero": "unknown evidence does not equal pass"
+      },
+      "next_versions": [
+        "v0.2: first clean epoch learning rehearsal",
+        "v0.3: calibration approval command"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 first-learning-readiness",
+        "Run a receipt lifecycle only after explicit human authorization.",
+        "Inspect learning.json blocking_reasons before any calibration claim."
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "A command can execute successfully while still being non-learnable because effects are missing, final evolve did not pass, the epoch is working-tree-only, or confounders remain.",
+      "title": "Local Success Is Not Durable Learning",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "authorization-expiry-algorithm",
+        "registry-definition-binding-algorithm",
+        "human-authorization-binding-algorithm"
+      ],
+      "boundary": "Authorization evidence binds a local action. It is not reusable, delegable, or identity proof.",
+      "code_references": [
+        "nexus_gate/actions/cli.py::_verify_authorization_for_execution",
+        "registry/nexus_command_registry.v2.6.2.json"
+      ],
+      "discovery_id": "authorization-is-temporal-causal-evidence",
+      "evidence_surfaces": [
+        "state/actions/<action_id>/authorization.json",
+        "state/actions/<action_id>/lifecycle.json"
+      ],
+      "math": {
+        "authorization_valid": "entry_hash_match AND args_hash_match AND epoch_match AND now <= expires_at",
+        "expiry_rule": "now > expires_at -> EXPIRED",
+        "stale_rule": "registry change OR source change -> STALE"
+      },
+      "next_versions": [
+        "v0.2: UI expiry countdown",
+        "v0.3: explicit reauthorization packet"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 action-recommend",
+        ".\\scripts\\nexus.ps1 action-authorize -ActionId \"<id>\"",
+        "Change source or registry and verify execution blocks as stale."
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Authorization is valid only for one action, one command definition, one argument hash, one source epoch, and one expiry window.",
+      "title": "Authorization Is Temporal Causal Evidence",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-12T23:22:09.772244+00:00",
+  "generated_at_utc": "2026-07-13T02:27:18.400603+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

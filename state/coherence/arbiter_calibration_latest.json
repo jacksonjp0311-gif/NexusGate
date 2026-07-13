@@ -1,6 +1,6 @@
 {
   "boundary": "Calibration may adjust recommendation pressure. It may not authorize execution.",
-  "generated_at_utc": "2026-07-12T23:22:40.441522+00:00",
+  "generated_at_utc": "2026-07-13T02:27:38.091399+00:00",
   "schema": "NEXUS_ARBITER_CALIBRATION.v2.2.0",
   "source_calibration": {
     "predictive-memory": {
@@ -14,5 +14,5 @@
       "weight_adjustment": 3.0
     }
   },
-  "version": "2.2.0"
+  "version": "2.6.3"
 }

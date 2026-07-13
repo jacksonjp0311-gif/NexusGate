@@ -244,6 +244,7 @@ case "$COMMAND" in
     ;;
   action-chain-verify) python -m nexus_gate.actions.cli chain-verify --root . --json ;;
   causal-receipts) python -m nexus_gate.actions.cli receipts --root . --json ;;
+  first-learning-readiness) python -m nexus_gate.actions.cli first-learning-readiness --root . --json ;;
   install-hooks) ./scripts/install_nexus_git_hooks.sh ;;
   cortex)
     shift || true

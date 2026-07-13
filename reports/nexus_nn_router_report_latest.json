@@ -6,7 +6,7 @@
     "role_targeting": "explicit_role_required_for_deep_test",
     "tool_execution": "blocked_from_model_output"
   },
-  "generated_utc": "2026-07-12T23:23:09.995300+00:00",
+  "generated_utc": "2026-07-13T02:28:02.969215+00:00",
   "intent": "can the chat answer",
   "inventory": {
     "blob_count": 15,
@@ -56,7 +56,7 @@
   "model_responses": [
     {
       "backend_model": "tnn-phi4-mini:latest",
-      "captured_stream": "\nTNN CHAT\n--------\nTNN // FAST SCAFFOLD\nnext: wire the streaming TNN lane into the Electron chat panel.\nthen: add a latency benchmark and model-health badge.\nverify: run tests, commit, push.\nboundary: recommendation-only.\n\nTNN // HOT MODEL STREAM\nTNN // MODEL BUDGET HIT\nThe hot model did not start streaming inside fast budget.\nnext: use the scaffold now, or run tnn-warm/tnn-doctor then retry.\nboundary: recommendation-only.\n\nmodel: Tesseract Neural Network/phi4-mini-hot-brain\nbackend: tnn-phi4-mini:latest\nscaffold_ms: 0\ntotal_ms: 2067\nmodel_budget_hit: true\nnote: Ollama unavailable: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\nmode: hot_compact_guard_v6\n",
+      "captured_stream": "\nTNN CHAT\n--------\nTNN // FAST SCAFFOLD\nnext: wire the streaming TNN lane into the Electron chat panel.\nthen: add a latency benchmark and model-health badge.\nverify: run tests, commit, push.\nboundary: recommendation-only.\n\nTNN // HOT MODEL STREAM\nTNN // MODEL BUDGET HIT\nThe hot model did not start streaming inside fast budget.\nnext: use the scaffold now, or run tnn-warm/tnn-doctor then retry.\nboundary: recommendation-only.\n\nmodel: Tesseract Neural Network/phi4-mini-hot-brain\nbackend: tnn-phi4-mini:latest\nscaffold_ms: 1\ntotal_ms: 2062\nmodel_budget_hit: true\nnote: Ollama unavailable: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\nmode: hot_compact_guard_v6\n",
       "chat_packet": {
         "boundary": "recommendation-only; no offensive cyber guidance; no shell execution, mutation, live pulls, scraping, or autonomous authority",
         "boundary_rewrite": false,
@@ -65,7 +65,7 @@
         "error": "Ollama unavailable: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
         "hot_compacted": true,
         "intent": "can the chat answer",
-        "latency_ms": 2067,
+        "latency_ms": 2062,
         "model": "tnn-phi4-mini:latest",
         "model_budget_hit": true,
         "model_label": "Tesseract Neural Network/phi4-mini-hot-brain",
@@ -75,10 +75,10 @@
         "raw_partial_response": "",
         "response": "TNN // FAST SCAFFOLD\nnext: wire the streaming TNN lane into the Electron chat panel.\nthen: add a latency benchmark and model-health badge.\nverify: run tests, commit, push.\nboundary: recommendation-only.\n\nTNN // MODEL BUDGET HIT\nThe hot model did not start streaming inside fast budget.\nnext: use the scaffold now, or run tnn-warm/tnn-doctor then retry.\nboundary: recommendation-only.",
         "role": "TNN",
-        "scaffold_ms": 0,
+        "scaffold_ms": 1,
         "stream_completed": false,
         "time_to_first_token_ms": null,
-        "total_latency_ms": 2067
+        "total_latency_ms": 2062
       },
       "chat_response": "TNN // FAST SCAFFOLD\nnext: wire the streaming TNN lane into the Electron chat panel.\nthen: add a latency benchmark and model-health badge.\nverify: run tests, commit, push.\nboundary: recommendation-only.\n\nTNN // MODEL BUDGET HIT\nThe hot model did not start streaming inside fast budget.\nnext: use the scaffold now, or run tnn-warm/tnn-doctor then retry.\nboundary: recommendation-only.",
       "model": "Tesseract Neural Network/phi4-mini-hot-brain",

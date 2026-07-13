@@ -1,0 +1,8 @@
+{
+  "maximum_product_version": null,
+  "minimum_product_version": "2.6.1",
+  "runtime_contract_version": "epoch-integrity-hardening.v2.6.1a",
+  "schema": "NEXUS_EPOCH_COMPATIBILITY_PACKET.v2.6.2",
+  "schema_compatibility_hash": "source-epoch-observation-v1",
+  "source_epoch_id": "097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85"
+}

@@ -1,0 +1,939 @@
+{
+  "authority_boundary": {
+    "autonomous_authority": false,
+    "final_evolve_required_before_commit": true,
+    "human_authorization_required_for_mutation": true,
+    "recommendation_only": true
+  },
+  "blocked_actions": [
+    "self_authorize",
+    "treat_commit_sha_as_primary_epoch",
+    "overwrite_epoch_history",
+    "learn_from_working_tree_only_epoch",
+    "prune_without_distillation_coverage",
+    "bypass_final_evolve",
+    "external_api_writes",
+    "secret_access"
+  ],
+  "checks": {
+    "commit_sha_not_primary_epoch": true,
+    "human_authority_boundary_declared": true,
+    "latest_pointer_is_convenience_only": true,
+    "neural_runtime_graph_excluded": true,
+    "required_surfaces_present": true,
+    "source_epoch_excludes_parent_epoch": true,
+    "source_root_present": true,
+    "untracked_source_included": true
+  },
+  "claim_boundary": "Source Epoch and Observation packets provide local temporal identity evidence only. They separate content-addressed repository identity from repeatable observation runs. They do not prove correctness, safety, security, production readiness, model understanding, consciousness, or autonomous authority.",
+  "dirty_source_count": 20,
+  "dirty_source_entries_sample": [
+    " M README.md",
+    " M docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+    " M docs/feedback/FEEDBACK_LOG.md",
+    " M docs/updates/UPDATE_CHART.md",
+    " M docs/versioning/NEXUS_CHANGELOG.md",
+    " M nexus_gate/actions/cli.py",
+    " M nexus_gate/discoveries/cards.py",
+    " M nexus_gate/outcomes/learn.py",
+    " M scripts/nexus.ps1",
+    " M scripts/nexus.sh",
+    " M scripts/nexus_human.ps1",
+    " M tests/test_causal_action_receipts_v262.py",
+    " M tests/test_outcome_aware_arbiter_v220.py",
+    "?? docs/design/CAUSAL_INTEGRITY_HARDENING_v2.6.3.md",
+    "?? docs/protocols/AUTHORIZATION_INTEGRITY_PROTOCOL.md",
+    "?? docs/protocols/CALIBRATION_APPLICATION_PROTOCOL.md",
+    "?? docs/protocols/EFFECT_ATTRIBUTION_PROTOCOL.md",
+    "?? docs/protocols/FINAL_EVOLVE_LEARNING_GATE.md",
+    "?? docs/protocols/FIRST_DURABLE_LEARNING_EXPERIMENT.md",
+    "?? tests/test_causal_integrity_hardening_v263.py"
+  ],
+  "durable_admissibility": "working_tree_only",
+  "eligible_as_learning_parent": false,
+  "epoch_directory_integrity": {
+    "compatibility_packet_hash_valid": true,
+    "directory_status": "created",
+    "manifest_hash_valid": true,
+    "origin_packet_hash_valid": true,
+    "source_index_hash_valid": true
+  },
+  "epoch_id": "bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6",
+  "epoch_state": "sealed_working_tree",
+  "epoch_subsystem_version": "2.6.1a",
+  "gate_index": {
+    "coherence-field": {
+      "exists": true,
+      "path": "reports/nexus_coherence_field_latest.json",
+      "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.4.0",
+      "sha256": "08d0d653e2f44b5138e12b1abd83c1a40cd5c755bc79b48744c72eda3bfee5f8",
+      "status": "pass",
+      "version": "2.4.0"
+    },
+    "compile": {
+      "exists": true,
+      "path": "reports/nexus_compile_report_latest.json",
+      "schema": null,
+      "sha256": "3221b62cd18579f91f90cd28ef09b5ce992ccb625b2326caf09032b385f056e9",
+      "status": "pass",
+      "version": "0.9.5-personal-coding-paradise-compiler"
+    },
+    "decision-envelope": {
+      "exists": true,
+      "path": "reports/nexus_decision_envelope_latest.json",
+      "schema": "NEXUS_DECISION_ENVELOPE.v2.5.0",
+      "sha256": "7136f7aa825c3f10c93d1b165e83a2ceeced737710c134d4a523734584c0fac5",
+      "status": "warn",
+      "version": "2.5.0"
+    },
+    "distill": {
+      "exists": true,
+      "path": "reports/nexus_evidence_distillation_report_latest.json",
+      "schema": "NEXUS_EVIDENCE_DISTILLATION_GRAPH.v2.6.0",
+      "sha256": "f859edd3e699c09950f0851f7000edf6814b9043ee9261b0b8c79760c905f9aa",
+      "status": "pass",
+      "version": "2.6.0"
+    },
+    "origin-seal": {
+      "exists": true,
+      "path": "reports/nexus_origin_seal_latest.json",
+      "schema": "NEXUS_ORIGIN_SEAL.v2.6.2",
+      "sha256": "f27bd89e714cd804ee5b019bc2aef334bed9f277a88df274f21e5d50769ba6e6",
+      "status": "pass",
+      "version": "2.6.2"
+    },
+    "outcome-learn": {
+      "exists": true,
+      "path": "reports/nexus_recommendation_outcome_latest.json",
+      "schema": "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.6.3",
+      "sha256": "1a3f909b7e3ab484b9d81abfb45ee26192c4146aeac46c5afa0d0656b73d9126",
+      "status": "warn",
+      "version": "2.6.3"
+    },
+    "runtime-hygiene": {
+      "exists": true,
+      "path": "reports/nexus_runtime_hygiene_latest.json",
+      "schema": "NEXUS_RUNTIME_CHURN_HYGIENE.v2.6.2",
+      "sha256": "5d8a1ffd37f12b0e777d7fc48d307ebefff9c48f807c63697d1f80da0f981500",
+      "status": "warn",
+      "version": "2.6.2"
+    },
+    "triadic-lattice": {
+      "exists": true,
+      "path": "reports/nexus_triadic_lattice_latest.json",
+      "schema": "NEXUS_TRIADIC_GEOMETRIC_LATTICE.v2.5.0",
+      "sha256": "6769bc0c8116772ee243df9d32006f4447dae86a96d28190004e0f9c3ee834b9",
+      "status": "pass",
+      "version": "2.5.0"
+    }
+  },
+  "generated_at_utc": "2026-07-13T02:14:15.141589+00:00",
+  "manifest_hash": "c0fd4832a0ff3f7f3a33620d2d602efd450d97fa71a59921edd0085b9e492fb0",
+  "primary_root_kind": "working_tree_source_root",
+  "product_phase": "Causal Action Receipt Loop",
+  "product_version": "2.6.2",
+  "read_surfaces": [
+    "README.md",
+    "AGENTS.md",
+    "docs/updates/UPDATE_CHART.md",
+    "docs/versioning/NEXUS_CHANGELOG.md",
+    "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+    "nexus_gate/origin/seal.py",
+    "nexus_gate/distillation/graph.py"
+  ],
+  "repository_attestation": {
+    "branch": "main",
+    "commit_sha": "c64864f07a93671a4520c45da84ce95594e07174",
+    "note": "Commit SHA is not the primary epoch identity because source epoch identity is available before commit.",
+    "role": "advisory_post_source_identity_binding"
+  },
+  "required_surfaces": [
+    {
+      "bytes": 20517,
+      "exists": true,
+      "path": "README.md",
+      "sha256": "ae322b108b044021fe7f7c0b19fb22d41711fa8aef7f88c5d0d451080b460a2b"
+    },
+    {
+      "bytes": 19076,
+      "exists": true,
+      "path": "AGENTS.md",
+      "sha256": "ee467213397d7e9f82afccebb43cce3a2f52f52bfd1af488a5a1f0cfb68cb338"
+    },
+    {
+      "bytes": 10732,
+      "exists": true,
+      "path": "docs/updates/UPDATE_CHART.md",
+      "sha256": "16b503b2b6fdc40101e849a45eaa6e3819648c183fad4c18a4873dca8e2c2502"
+    },
+    {
+      "bytes": 17106,
+      "exists": true,
+      "path": "docs/versioning/NEXUS_CHANGELOG.md",
+      "sha256": "471187a849df97216bdf4b5cb8902e33619cadf1e21c1bb097a761347c987e72"
+    },
+    {
+      "bytes": 21279,
+      "exists": true,
+      "path": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "sha256": "f3acb7c65384878dd34281867e4d8d3cc3b75e6cd0310c07061f30c9ca5cce21"
+    },
+    {
+      "bytes": 11158,
+      "exists": true,
+      "path": "nexus_gate/origin/seal.py",
+      "sha256": "476af3e4269fe9734e5a2891bcad476750f6c223b5725a2ec55b3a9fc6c1263e"
+    },
+    {
+      "bytes": 16066,
+      "exists": true,
+      "path": "nexus_gate/distillation/graph.py",
+      "sha256": "0f25ebd6c6814fa34204b64d69df910a6064af0d5a6e5ace7b212762cf0cb192"
+    }
+  ],
+  "runtime_contract_version": "epoch-integrity-hardening.v2.6.1a",
+  "schema": "NEXUS_SOURCE_EPOCH.v2.6.2",
+  "schema_compatibility_hash": "source-epoch-observation-v1",
+  "source_epoch_id": "bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6",
+  "source_root": "b4905c7b514aeea097e97dc876d9ce6e564aeffaedea81c010f1f641c517df04",
+  "source_surface_count": 656,
+  "source_surface_index_hash": "874dfde0898266f149317b411051d7052a1e5d6d9170dc69f84e5aa697df933a",
+  "source_surface_sample": [
+    {
+      "bytes": 756,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "8f27a5e1a7af48628a3f2d88123b6a5b51b2a5d853b56c1d7342f638ab6d0521",
+      "path": ".github/workflows/ci.yml",
+      "sha256": "60d8f0eef0e5df8d6f907bdafc1ae02bc59e3a209b0bcf9d0c9605245dc395ac"
+    },
+    {
+      "bytes": 19076,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "bdabd2632a9b8936e3857869d71d2185f7ba4d885e22669c18c4e93a8914d80f",
+      "path": "AGENTS.md",
+      "sha256": "ee467213397d7e9f82afccebb43cce3a2f52f52bfd1af488a5a1f0cfb68cb338"
+    },
+    {
+      "bytes": 20517,
+      "exclusion_reason": null,
+      "git_state": "modified",
+      "included": true,
+      "leaf_hash": "567ebbfa3f089bb273540a94c00eee21d72a139250e5eb99cf36da95b77938f7",
+      "path": "README.md",
+      "sha256": "ae322b108b044021fe7f7c0b19fb22d41711fa8aef7f88c5d0d451080b460a2b"
+    },
+    {
+      "bytes": 9601,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "5104a6aab8a32b11e90cff5ac71edca9e8024f03786dc2039ef09e258a33603d",
+      "path": "chatgpt/scripts.md",
+      "sha256": "b729f2add178450672ab6f5cc55b3f5f803ec56b9aedbd22c8e5eb811d76cf11"
+    },
+    {
+      "bytes": 6481,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "f27e492b250b5b52d9c932104138f19611e2f24b12486887ab5a760cb7dc2504",
+      "path": "docs/ENTRYPOINTS.md",
+      "sha256": "4e13ef72a7d7681016deccc5bc3077bb7c205f918b4566019c13b05e85192e87"
+    },
+    {
+      "bytes": 635,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "16519da9a8536bdd0431c549667054232b69207022e4d9f44ad0168957d05a87",
+      "path": "docs/NEXUS_GATE_FOLDER_MAP.md",
+      "sha256": "5ea3e91ee2125f2c3dc1b6f55eec17247be30298cc83efa57169aff2f7d5c32e"
+    },
+    {
+      "bytes": 1838,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "6a77d4b4a478f9dc87a4457ef5fcddd98dc4c03e320cbd953ffdb6ebb97cd56a",
+      "path": "docs/README.md",
+      "sha256": "c053e6b38e0ad2783312b63b2c5ed5c5b443b8178a8dec7fe3f713baf80ed3e2"
+    },
+    {
+      "bytes": 708,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "405732695422b13ec79cc1b9100c5cf9c83893325cae4a3eb1dbb735d5f9fcd3",
+      "path": "docs/adapters/ADAPTER_REGISTRY.md",
+      "sha256": "3469646d315e2c16299d9568c7f1b4ccb7549fc311054f70b6a4fe65219c912a"
+    },
+    {
+      "bytes": 298,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "9cbe55b0696f2df8b13826955e20ded3db9bfa33fd4f287dbd080c3f9aad837f",
+      "path": "docs/adapters/FRAMEWORK_ADAPTER_CONTRACT.md",
+      "sha256": "810e55f63207b7f5f4d17eedce7fa3a2b3557dfd6220b7a53f8aa637ed72e844"
+    },
+    {
+      "bytes": 536,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "8a336428e62561d3d5e287a194be9f8c23ddf3aad7ae97cf7fc476a23367b010",
+      "path": "docs/adapters/LOCAL_DEMO_ADAPTER.md",
+      "sha256": "0f6e6f2d68604ce8128af8a1296a3bf2fbd15097b6739382fb345d1f16f02a38"
+    },
+    {
+      "bytes": 21279,
+      "exclusion_reason": null,
+      "git_state": "modified",
+      "included": true,
+      "leaf_hash": "e40561ac835a109c1bc879b85e299ef6ff994ddfd15df6b9d0c71c4f7073abee",
+      "path": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "sha256": "f3acb7c65384878dd34281867e4d8d3cc3b75e6cd0310c07061f30c9ca5cce21"
+    },
+    {
+      "bytes": 1648,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "81b1e490a51b3c086a97a1ad5b83c75de73cab09fa34c8f3d5c6b5dc372c4bc9",
+      "path": "docs/algorithms/NEXUS_TESSERACT_ALIGNMENT_KERNEL.md",
+      "sha256": "9eca1f4dda87e33aaf0858b9e2b7839ee3d3912c96a432582e044a82101f4ef7"
+    },
+    {
+      "bytes": 777,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "d285cb6a4e1d01208b519f0d3369fb1660d9d14f8fffb7b2a8f210b65a58bae3",
+      "path": "docs/algorithms/README.md",
+      "sha256": "d04d885135fb144b789599b561a8ef0189b61c60d8588e286194801db9ef5ecd"
+    },
+    {
+      "bytes": 584,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "c149399539724d474d86a8af5c5bf4643610e60bf12b06fb664043d78b39392a",
+      "path": "docs/architecture/NEXUS_GATE_ARCHITECTURE.md",
+      "sha256": "5c66de11a26a39e3782f6ca03fa064f3cfc23d1579ce54d5189c24323756964d"
+    },
+    {
+      "bytes": 1020,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "1363f1e1179b288e44b51e5d36b20c39aa013ee63d6acd6e8765c300394f8f08",
+      "path": "docs/architecture/PROFESSIONAL_ARCHITECTURE.md",
+      "sha256": "fc3ec03dcc22b16ff38acc096a53e773d412da94d316a0cff716d836bc5f2f80"
+    },
+    {
+      "bytes": 313,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "7b769c493edbe01d12a30f0b51eaaf52bac69f743d1d71cb6e8d1740661655af",
+      "path": "docs/authority/AUTHORITY_BOUNDARY.md",
+      "sha256": "42c3debf8322725da116df8afbae00cc0ed1fa8bd43413798181e976fea125e9"
+    },
+    {
+      "bytes": 817,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "fd56952e0340c5a148d74e93927417c7a4aec4903893734126c60fd96fc298cd",
+      "path": "docs/bridge/BOUNDED_BRIDGE_RUNTIME.md",
+      "sha256": "f1d853870e3c96f9b0ff8e6d8690cbf3500da2d16764bcf679eb11e9d33fd8b7"
+    },
+    {
+      "bytes": 1050,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "c82a7be52a20b7f69df4f6d7a1082a3a83170a9b31115561b89952d0fde78775",
+      "path": "docs/bridge/BRIDGE_SESSION_RUNNER.md",
+      "sha256": "4956fc1f63724244b2da000a3eb56002e0c489e70bccd3b67675461b64fc4a6f"
+    },
+    {
+      "bytes": 904,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "939fc5e656c25aba4411e44994988c4ac2e99b6147fe07ad4e82e9e6b163ad47",
+      "path": "docs/chat/CHAT_INTELLIGENCE_ROUTING.md",
+      "sha256": "d3ca7fa8a63645ee33aec004f479bb75662db56f34ea5cad24d0b4cea472dbb7"
+    },
+    {
+      "bytes": 1227,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "fa0ce3101343f9fc70655d4f697c94a711986cf4f26217eb7e159c2aae8251a8",
+      "path": "docs/chat/CHAT_INTERFACE_GOVERNANCE.md",
+      "sha256": "2e846fdb013d6b5d93392db35f41a8e69286f6f5a870afcf1dad03866623a10c"
+    },
+    {
+      "bytes": 715,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "a805e7c672b0e9219747bf2d84ccbc33e15899c7e2a6edb01843d961d15580c9",
+      "path": "docs/chat/CHAT_INTERFACE_WALKTHROUGH.md",
+      "sha256": "6f4ec0d1459bd7959b502d6736cd40127e3a638cfb76c52b4d61f651fc3c1286"
+    },
+    {
+      "bytes": 695,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "867ee836a5a42681b8593edc9fb01d33e3848325e688895e9f397f38052401bb",
+      "path": "docs/chat/CHAT_OPERATION_CONTRACT.md",
+      "sha256": "76b110b062fc41ac85f394d282564b0c994f4923c11fcdad12d857b5a35afd9f"
+    },
+    {
+      "bytes": 1091,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "2654577f33f5b028804c544a01ab7e132318ade61be668e700e02bee9ea718e5",
+      "path": "docs/chat/CHAT_OPERATOR_SURFACES.md",
+      "sha256": "4099e60b3b329288dff5005b7a57acb9fde1eb4237602dec9e245af2e9e1eb0b"
+    },
+    {
+      "bytes": 441,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "47e99982199fd05952af8d9f15e7dc66ff7730578bbbece79050567592ebff3e",
+      "path": "docs/chat/CHAT_PERFORMANCE_METRICS.md",
+      "sha256": "a09c896fd30d6743671921c6b3d37a4f1704eabc649b21902d8e38ec58858657"
+    },
+    {
+      "bytes": 958,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "48935ff6894e34725c1e0242df91bbef508c84a3f101648543093e7d647412c6",
+      "path": "docs/chat/README.md",
+      "sha256": "70a8db8e648e56f1af39d17db1d1dfef608d773f4dced5bb0221fc7da2143443"
+    },
+    {
+      "bytes": 2432,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "d2b179a0fecdcc8053838555017f7025242aecc8935a3616bca715b966948fbc",
+      "path": "docs/codex/CODEX_ORCHESTRATION_PROTOCOL.md",
+      "sha256": "5549bdca51217e91f6e23e9c989a71852be1a35cee530086b3082ff9f5944001"
+    },
+    {
+      "bytes": 488,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "8f3a64b6e30a7a50bf54de2c6cab80edccce0089bbf34c22f8da345cd40632a9",
+      "path": "docs/context/README.md",
+      "sha256": "f9dbacbcdf1518f9cc5ea78f7197945f0b227062d816ccb9de0b78de0299323a"
+    },
+    {
+      "bytes": 1218,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "66a63208c8c68e298d096f39270ed126a6102f706da64b7a5b8052804f94addb",
+      "path": "docs/context/REHYDRATION_BOOT.md",
+      "sha256": "b4c23bd55e36d24bef5aea0f9e5dc8e076b151b05bd9c95cdea68f78b8d46f62"
+    },
+    {
+      "bytes": 548,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "dc859d8a12e96e229c67180d861ca252cc21c8bf4b90924d40fd933b70d72846",
+      "path": "docs/context/rcc_nexus_index.json",
+      "sha256": "60f189ec01a07b604b4dcd84362c3317d932a280037675b02356b90a69c14e89"
+    },
+    {
+      "bytes": 938,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "d43bcf5de0be1899929e279fdaa1e943c8117262ac94e202440ab83459854e26",
+      "path": "docs/context/rehydration_manifest.v0.1.4.json",
+      "sha256": "7e5c874dffe79f555431bc2e2f24e77c539f2af0448bf57aa48c4f829ee522c4"
+    },
+    {
+      "bytes": 596,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "da2745d01796ab883239843c0f9639d45d91adeebba61087b8567a443d1f32ba",
+      "path": "docs/context/repository_context_index.json",
+      "sha256": "cab3625e79d3b15948c01c350f67585793d38236dd61f96db7ad77b8fbb8a9d2"
+    },
+    {
+      "bytes": 452,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "dca56a6db477c6f9ed11edfe9f9da6d1506a0ef28aad066c942f8c410cf51318",
+      "path": "docs/context/validation_surface.md",
+      "sha256": "1b182619aa3e574d40a53a8e6e0d852b284e31c699640ed714038dbd87589757"
+    },
+    {
+      "bytes": 1009,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "26979f0370e5e58c2b804617936a7b0372b2793807f51b7915d5b4f0385339ce",
+      "path": "docs/design/CAUSAL_ACTION_RECEIPT_LOOP_v2.6.2.md",
+      "sha256": "18ea9cb5ac36096fd1783267517f7711b68002e7a00f3aeb7c2fba1ad4070645"
+    },
+    {
+      "bytes": 1025,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "c9b44c996acbe6266495be33fa7c2ea8a014653de218ea80e7e229c7b5992021",
+      "path": "docs/design/CAUSAL_COHERENCE_ROUTING_DESIGN.md",
+      "sha256": "53f30506b7c92e4e24869b9a0bf8c58cd2a52d70cbfa262473320bb1953962cb"
+    },
+    {
+      "bytes": 1361,
+      "exclusion_reason": null,
+      "git_state": "untracked",
+      "included": true,
+      "leaf_hash": "9038125bf3c895a5c5d6cae9f270036816f910a8fee5cea6c0a9dfdda5b8bf2e",
+      "path": "docs/design/CAUSAL_INTEGRITY_HARDENING_v2.6.3.md",
+      "sha256": "41d46ece87928805a2bba1c06db09d0e385fc8109fd01d223fea7f76bf1b286d"
+    },
+    {
+      "bytes": 1076,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "31556b2fcc7afbdc98b4d2c64dc58a7750b66a5963419574c39cf579742d26c0",
+      "path": "docs/design/CAUSAL_LOOP_HARDENING_DESIGN.md",
+      "sha256": "bd87ce8a926910690f84ef89e7055db417d0491633db2be860b2a04624436e2b"
+    },
+    {
+      "bytes": 878,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "6e907f7428366f837495ef236e2e9f8f1c163bfd04c643d9b245d22fb9e40451",
+      "path": "docs/design/EPOCH_INTEGRITY_HARDENING_v2.6.1a.md",
+      "sha256": "a7b0e614fcc3bea9576cd6a5d9e8456e00888eea95fab1a9358804f58c429d59"
+    },
+    {
+      "bytes": 1267,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "bc9205ce6093b59150542a183a11e2ae5b9db93d1d2bc13cfe700515d178d242",
+      "path": "docs/design/EPOCH_INTEGRITY_SEAL_DESIGN.md",
+      "sha256": "7b521a028b9432d084dde5f24a06495a4264f465e15cf218743f84380b6f7aa6"
+    },
+    {
+      "bytes": 771,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "b070a1ff16503e4e0445c479d2ea531d182062e66ed0b4c9f8933055c9a2c6c2",
+      "path": "docs/design/EVIDENCE_DISTILLATION_GRAPH_DESIGN.md",
+      "sha256": "471243c285d4e397d13cb9446f931d490df54d06213e4cd8fc5012c76a028438"
+    },
+    {
+      "bytes": 725,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "dedfae07f3c60d25ba12c9759e295e42b3b30b0d6ea003ece3cfdbedfee2abdf",
+      "path": "docs/design/OUTCOME_AWARE_ARBITER_DESIGN.md",
+      "sha256": "370cd9cece3437923fb8b44a3c1dc97aa81234774f8d26e55f70b6e83489f168"
+    },
+    {
+      "bytes": 898,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "8dcf114e1b4d2f2c824d4a48b524573a97c253996eac990d673c112bf72ef805",
+      "path": "docs/design/TRIADIC_GEOMETRIC_LATTICE_DESIGN.md",
+      "sha256": "3732766ff678c414b4788caa4bce4a147e570c4c3094969ddc6005562d4051b8"
+    },
+    {
+      "bytes": 941,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "7f07839adca2d479a7eb27aeef1d48f8c2d470f107d4b755fd5343c7cb1f4681",
+      "path": "docs/evidence/COLD_EVIDENCE_ENGINE.md",
+      "sha256": "3a702bca4bc403bd5d41f844122d9302d71b06802ef5c165816c54085e1fb9a6"
+    },
+    {
+      "bytes": 361,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "3779233377a6d76ebad51a7a24f063b4f32ab85d5a7fa124c367e5ed838b0859",
+      "path": "docs/evidence/EVIDENCE_DISCIPLINE.md",
+      "sha256": "3e85a6b844586559a0d20fa6ba78a3268d3cd161cebd563d9abda98734d4cb38"
+    },
+    {
+      "bytes": 1082,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "6f25859c6a55aba69f7915b0f2b276cba90fafe8e658ac12eab45a9d2623b327",
+      "path": "docs/failure_modes/FAILURE_MODES.md",
+      "sha256": "dc2ee7b059fa37bde3e4f5ae22f02f39ef69c38b9b6c5c5f41e504545abcfa52"
+    },
+    {
+      "bytes": 9697,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "740ac95628520df159f99233355adbbfe7a55e300e702e52c1e3583651b50e05",
+      "path": "docs/failure_modes/FAILURE_MODE_CHART.md",
+      "sha256": "79f8a6bb2288b2a84caad5b84e72b5b402c807f0a2f8d13b4d76835acf34e5e4"
+    },
+    {
+      "bytes": 11270,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "1d8f75817c9e1a13da7d6d05bdaca4ef0a8b5bbe62d51d68a843d293d6340bd2",
+      "path": "docs/failure_modes/NEXUS_FAILURE_MODE_DOCTOR.md",
+      "sha256": "419f07b4e2a55a61742196b7c4857170fafa9d3119ba8a400ccfba60eb03caf5"
+    },
+    {
+      "bytes": 479,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "d3cae1ec94bb3aca2bb4a3f7972edf6258eb1adc1d46e3c01a41016fdab075e5",
+      "path": "docs/failure_modes/README.md",
+      "sha256": "7771a5e954fecfe57833134fdad0c3a9e6adfcffb4265aafaef0746d800a5596"
+    },
+    {
+      "bytes": 637,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "36a621b60f0a434b24a047288c4590bd1cff0e63f4e25eb9511b9f74f0aa0795",
+      "path": "docs/failure_modes/WOUND_ROUTING.md",
+      "sha256": "8ce91330d2d01ee4cca2ed75ca53f72e7adc46383f33f64f6d33ade2404b360c"
+    },
+    {
+      "bytes": 121778,
+      "exclusion_reason": null,
+      "git_state": "modified",
+      "included": true,
+      "leaf_hash": "6e315d0602271d09c2bcc22b58df323f16b00507acd3eecd3a035e3410cc1539",
+      "path": "docs/feedback/FEEDBACK_LOG.md",
+      "sha256": "2da767fda3a4a6e8b65cd05be186e505979667da57d33a469c52a05deb5d83fc"
+    },
+    {
+      "bytes": 1802,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "a530781c3f46e68b7149ac61ed90253d2748a6bcb6dc0c12fbd572c2db2a1240",
+      "path": "docs/feedback/FEEDBACK_SYSTEM.md",
+      "sha256": "c183c6ba4bf2db7507503729a4215e63bafd166239e447a906316ea48820cd09"
+    },
+    {
+      "bytes": 1144,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "8fc22f18ca25a6b0e0820bdc396237528a4223a24fab3e6c40780c65f217e059",
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_BIG_HUD.md",
+      "sha256": "9f7e4ece8b803f3deb2b722b701766c415700ae1a14a9262d8d5c2b49d7521ea"
+    },
+    {
+      "bytes": 557,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "1ba40609d075ed6b4ce7e980bce65d41006d8243321e0c55c3f3b06bc9950a64",
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_CORE_PORT.md",
+      "sha256": "121f970b0b335b4eeb53d66dd81b77e023406cfb9898fee79c272137e022e513"
+    },
+    {
+      "bytes": 550,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "e7ea6fae0c89e25c1463a70fcee6627aae81cf197598147f08f2164baa604ddc",
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_HUD_PLACEMENT.md",
+      "sha256": "ea56b1be106a9e1238793c01dd6c78673728ffc36e9d3e17735476b77dca841f"
+    },
+    {
+      "bytes": 649,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "71d27701574cad1e2b73dec6f03205e6e528f5ea5d63112a87447a7d470f0122",
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_IMPACT_BRIDGE.md",
+      "sha256": "dea3c37b201ed578c2c4b34392d61e7114bd10c41fac27ba01a4dfe3911c3b2b"
+    },
+    {
+      "bytes": 3306,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "74f0f5fc17a971b0f9fedb20205c993f63cd4e852c12c7e34d05ddf53ff84e46",
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_INTERACTIVE_HUD.md",
+      "sha256": "ced31d302aea6dadedc26bcadb361699869d219e203971a6944d8aabdb5efa4c"
+    },
+    {
+      "bytes": 1082,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "facb1373921432cc9bc569f94a8b996880bbe012f9152c169e88ca59c26f714a",
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_LOCAL_HUD.md",
+      "sha256": "9b5e54e9f82fbe2d68d10e4eb7239c1e283600cbd4b5e616f2a2cb143bd38387"
+    },
+    {
+      "bytes": 1185,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "5f3dbda504f6aad5bb3407f901867275eb0af81569f9c89fdd89a2547521c253",
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_RUNTIME_SAFE_HUD.md",
+      "sha256": "e2ce0445f6e1a29621835291007e5b83d31ff50886bdac11da6d3e5b27618361"
+    },
+    {
+      "bytes": 753,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "4f3bc0ebd2fc4884874df6b2f47798a9dea9cd246f8ed9896e22d80a8ed9df98",
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_SCOPE_HYGIENE.md",
+      "sha256": "027123c4587eaf5efa83e396b4d067cf9d41b3c8e0f82fe60986c519175f53c2"
+    },
+    {
+      "bytes": 478,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "a08ec8d7f1ee0ad00719071968e6de088b26b54201fef677f75c692ddc2ee4fa",
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_SCOPE_SWITCH.md",
+      "sha256": "e1fc7ae1d17e547fc0abf085354558632a0efb4bfb649986f4eb4a554d4ff0d1"
+    },
+    {
+      "bytes": 993,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "5f73eb46786468570eeddab03e1d040926a7a84b0ea5a13f51fac5516288ad1a",
+      "path": "docs/gitnexus/NEXUS_GITNEXUS_UPSTREAM_BRIDGE.md",
+      "sha256": "bfbeb52946095725c1a1b104e685fec004aaa458febf48383e0557f4df4860c7"
+    },
+    {
+      "bytes": 976,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "baef7afd87ff45f2068bc9a8a2491270739ed07772758aeac0a23d29bd178298",
+      "path": "docs/goal/GOAL_LOCK.md",
+      "sha256": "fc5247d272fb5e5a21ea1e189944fc90f766a3edb3ae5b23f1efb13f2c138273"
+    },
+    {
+      "bytes": 177,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "c230a71c0f5d1fb3c842191b13cc2d540209da89a0d31742a0d3f25d3f7baefc",
+      "path": "docs/injections/rhp_nexus_ai_shell_v0_1_3.md",
+      "sha256": "d2ed9215c649f32fbf116d1bd266bac8ca5f92900c6e855a87a5082d085b5ee0"
+    },
+    {
+      "bytes": 1088,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "31d15d1e70575b9868d41d31fd2fb895b9b4fa9a440a1d6e189854116283052a",
+      "path": "docs/intelligence/CROSS_DOMAIN_SYNTHESIS_PROTOCOL.md",
+      "sha256": "ccc4b802844365b432f9749999f2c13f46593df445dd1b6956ca257b257e1095"
+    },
+    {
+      "bytes": 1855,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "23b7d7a7634a6350dab44da831d97550fab4c66322cd97df7a5527447832813a",
+      "path": "docs/intelligence/DOMAIN_INTELLIGENCE_ORCHESTRATOR.md",
+      "sha256": "7510d567415bb97b5df82cea7ee84402ed1b778ccdebb09539c7a43a1ea74f19"
+    },
+    {
+      "bytes": 3168,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "4e8774dec3eb0c40b9ead3e40a4bb752ba562bde56b4d53bae7a809eb08762b9",
+      "path": "docs/intelligence/NEXUS_GEOMETRIC_MEMORY_ROUTER.md",
+      "sha256": "3476e29961286f933fdbfd7c1cf37e8e8697b66de41f4a0aea298697b36d126a"
+    },
+    {
+      "bytes": 2602,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "b840680ea7945e1ec49b0a1973ce72062b92fd41bc797901d37cbb038a2158fc",
+      "path": "docs/intelligence/NEXUS_NN_MODEL_ROUTER.md",
+      "sha256": "2e21249ee6a9dfc96b4032f269b210721604bc31fb51d68e7ee705731dab2dd8"
+    },
+    {
+      "bytes": 3902,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "7e1b86e3a4ac491086a76fe6917951229148b22a4d007edff00041d4edd262bf",
+      "path": "docs/intelligence/REFLECTIVE_INTELLIGENCE_LOOP.md",
+      "sha256": "2d60040813df6154cd5c10643d0c8f3daaf35a1133ecae3495d5e0b6447d659c"
+    },
+    {
+      "bytes": 1128,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "b9e8aa3de120424df275c3a5915b70c60b1c21d068fc0a85ecbe782154eb121f",
+      "path": "docs/intelligence/REPO_NATIVE_LEARNING.md",
+      "sha256": "5ecfdc0c317862e75bd27abdb36cc4a87699c8e9241bce7954c763a63b102b65"
+    },
+    {
+      "bytes": 6900,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "7ab12935506f2a9b06f5f9862fded5daae1aa2c3d5d2906e25d49fc3c538a09c",
+      "path": "docs/intelligence/TESSERACT_NEURAL_NETWORK.md",
+      "sha256": "427e143e047cb81bf42b5c7cdf0e974c5d16fc91ddf8f80e2371d4547c7dfa22"
+    },
+    {
+      "bytes": 1188,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "01f6f8bd5bc955819570a652e7c81390f18667b7acbb855b1f804da14d990c30",
+      "path": "docs/interfaces/INTERFACE_ADAPTER_CONTRACT.md",
+      "sha256": "1bf8cdf9dde97a38c19a07360c98d633209f935f832e1c03a773fdb9e4e9ff73"
+    },
+    {
+      "bytes": 439,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "d4711c21f9c7ed742741bc3776994e1d0e484284c8434183007f10471e0ed877",
+      "path": "docs/latency/LOW_LATENCY_RUNTIME.md",
+      "sha256": "80b3ae26db7665f1031a4ad6659f660ab6c30dbb783766bd6560f6391cfef166"
+    },
+    {
+      "bytes": 1045,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "93b10b862803010fd0316d6bcd74d3c7d7d9583fe21609bf143871d11f66152b",
+      "path": "docs/memory/EIMT_RUNTIME_MEMORY_CONTRACT.md",
+      "sha256": "33b0905d6d274fcef81c7e2ee2994dfb91ef6c970bd5a9270aaeb9121b74d683"
+    },
+    {
+      "bytes": 820,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "02bdabc669f78e63eb01bb00ae4579212cc6c431ef89dc885f0f087741753b2d",
+      "path": "docs/nexus_cell/CUBE_TO_NEXUS_CELL_PORT_MAP.md",
+      "sha256": "b6b14ca7b07032ba16255d789569fc6468b7b30a2bb76ac6ef1a4ae1566a135b"
+    },
+    {
+      "bytes": 1137,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "76f88b686c6f075c85afc6ce047d30a2bf7ea13ee721cd715ae66722b6378ad5",
+      "path": "docs/nexus_cell/NEXUS_CELL.md",
+      "sha256": "f252142c2b35059009337324b71ba110dbc179d4797ea72cea7d4662b0a5d3fd"
+    },
+    {
+      "bytes": 18101,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "11c93b72512fe86d4048edbe6f1610a78ffaeb1c4a83e244a897a1278b7605c7",
+      "path": "docs/nexus_cell/NEXUS_CELL_ARCHITECTURE.md",
+      "sha256": "a1caa359746792a7a5fab432127a3b9268715db6d04405e65e1c822a02486cd6"
+    },
+    {
+      "bytes": 1086,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "0490c3cd072a19ae8eaeb9c1c460cc807eb36336eafa7f990af0fe2d5c228c55",
+      "path": "docs/nexus_cell/NEXUS_CELL_COMPILER_VISIBILITY.md",
+      "sha256": "1e91bd83d37b144a5132a08ea1ceb558ef585be9b73082fece06d881df8cfbf6"
+    },
+    {
+      "bytes": 1155,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "aed0fb6d914c058968ff5b5cb7e5e0ef06ad01964c75166cd9f6571b152f4c6a",
+      "path": "docs/nexus_cell/NEXUS_CELL_CONTEXT_BRIDGE.md",
+      "sha256": "96f04613cd12158a6da1890df09ca12f19ba94804bb5b820081836fc0c182838"
+    },
+    {
+      "bytes": 1146,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "bf74e2709cffbf9b62a565ceafc5658baa13e0d98c5f5ba6d615b558f0808e45",
+      "path": "docs/nexus_cell/NEXUS_CELL_CORE_BRIDGE.md",
+      "sha256": "22d110a0efc4e3663150eccbea8e2fdfa5437b5fd3cceffd7eda8f08930aae7a"
+    },
+    {
+      "bytes": 705,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "d55b4a594ddf430aabcabf1f7eda2d53f413de9e30d776d1765adf110cb52b28",
+      "path": "docs/nexus_cell/NEXUS_CELL_ENTRYPOINT.md",
+      "sha256": "32f53fe59b7c7e35c2a180d39102db984e829cbcdcf21174c6b588d556699e52"
+    },
+    {
+      "bytes": 933,
+      "exclusion_reason": null,
+      "git_state": "tracked",
+      "included": true,
+      "leaf_hash": "30a1011b9ae211f06273b8f314a160327edb660ae7f77ff2a74664fe04189677",
+      "path": "docs/nexus_cell/NEXUS_CELL_FULL_CORE_RUNTIME.md",
+      "sha256": "89bb73432d30b391f96818b267b20180d95d9b7de77807d3716ffdbf8e93a634"
+    }
+  ],
+  "status": "pass",
+  "system": "NEXUS GATE",
+  "tracked_source_root": "6cab5243cbc9b015124d8022ece3262993d5454dec347410b287b3bb5942e9bd",
+  "working_tree_source_root": "b4905c7b514aeea097e97dc876d9ce6e564aeffaedea81c010f1f641c517df04",
+  "write_surfaces": [
+    "reports/nexus_epoch_integrity_seal_latest.json",
+    "state/latest_epoch_pointer.json",
+    "state/latest_observation_pointer.json",
+    "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/epoch_manifest.json",
+    "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/origin_packet.json",
+    "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/source_index.json",
+    "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/compatibility_packet.json",
+    "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/observations/cf90c32c0f212dff34f209a5f95d82cc55707bababcad1ec5b26bcb86fb28b26.json",
+    "ledger/epoch_chain.jsonl",
+    "ledger/epoch_observations.jsonl"
+  ]
+}

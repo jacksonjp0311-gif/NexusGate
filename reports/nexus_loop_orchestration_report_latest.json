@@ -90,7 +90,7 @@
   ],
   "claim_boundary": "Loop orchestration is local development evidence only. It may select and run allowlisted non-mutating loop stages when human-authorized; it does not grant autonomous authority, arbitrary shell execution, git write, secret access, external API writes, or repo mutation from model output.",
   "execute_requested": false,
-  "generated_utc": "2026-07-12T23:22:31.165251+00:00",
+  "generated_utc": "2026-07-13T02:27:35.071607+00:00",
   "human_authorized": false,
   "intent": "unit cli orchestration",
   "loop_packet": {
@@ -179,7 +179,7 @@
     "description": "Classify local changes into intended source/docs/tests versus residue/backups/runtime churn.",
     "execute_requested": false,
     "exit_code": 0,
-    "generated_utc": "2026-07-12T23:22:31.165251+00:00",
+    "generated_utc": "2026-07-13T02:27:35.071607+00:00",
     "human_authorized": false,
     "intent": "unit cli orchestration",
     "intent_hash": "10eec740d93662ba05057f7eb84078ecf70f792f3a9f26ba29fbf4aaf7a9d39a",

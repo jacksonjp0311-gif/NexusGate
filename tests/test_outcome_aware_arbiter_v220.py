@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class OutcomeAwareArbiterV220Tests(unittest.TestCase):
     def test_outcome_report_compiles_without_authority(self) -> None:
         packet = build_outcome_report(ROOT, intent="test outcome", record=False)
-        self.assertEqual(packet["schema"], "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.2.0")
+        self.assertIn(packet["schema"], {"NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.2.0", "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.6.3"})
         self.assertIn(packet["status"], {"pass", "warn"})
         self.assertIn("latest_outcome", packet)
         self.assertIn("calibration", packet)
@@ -35,7 +35,7 @@ class OutcomeAwareArbiterV220Tests(unittest.TestCase):
         )
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
         packet = json.loads(proc.stdout)
-        self.assertEqual(packet["schema"], "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.2.0")
+        self.assertIn(packet["schema"], {"NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.2.0", "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.6.3"})
         self.assertTrue((ROOT / "reports" / "nexus_recommendation_outcome_latest.json").exists())
         self.assertTrue((ROOT / "state" / "coherence" / "arbiter_calibration_latest.json").exists())
         self.assertTrue((ROOT / "state" / "coherence" / "pressure_memory_latest.json").exists())

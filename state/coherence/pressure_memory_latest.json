@@ -1,10 +1,10 @@
 {
   "boundary": "Pressure memory is a routing signal, not authority.",
-  "generated_at_utc": "2026-07-12T23:22:40.441522+00:00",
+  "generated_at_utc": "2026-07-13T02:27:38.091399+00:00",
   "hysteresis_rule": "Do not switch route class from pressure alone until the trend persists across at least three samples.",
-  "latest_coherence_score": 88.0,
+  "latest_coherence_score": 91.0,
   "samples": 5,
   "schema": "NEXUS_PRESSURE_MEMORY.v2.2.0",
   "trend": "stable",
-  "version": "2.2.0"
+  "version": "2.6.3"
 }

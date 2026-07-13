@@ -1,0 +1,80 @@
+{
+  "claim_boundary": "Source Epoch and Observation packets provide local temporal identity evidence only. They separate content-addressed repository identity from repeatable observation runs. They do not prove correctness, safety, security, production readiness, model understanding, consciousness, or autonomous authority.",
+  "dirty_source_count": 20,
+  "durable_admissibility": "working_tree_only",
+  "epoch_state": "sealed_working_tree",
+  "gate_index": {
+    "coherence-field": {
+      "exists": true,
+      "path": "reports/nexus_coherence_field_latest.json",
+      "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.4.0",
+      "sha256": "f5063105297d4cb39ce5aaf5f6082a0bb27d891f0c0c7fd1515faabed526ca69",
+      "status": "pass",
+      "version": "2.4.0"
+    },
+    "compile": {
+      "exists": true,
+      "path": "reports/nexus_compile_report_latest.json",
+      "schema": null,
+      "sha256": "1aecede7989e52395381d688132b161f228659f9ac81878b5f11d4b0c0aab7b1",
+      "status": "pass",
+      "version": "0.9.5-personal-coding-paradise-compiler"
+    },
+    "decision-envelope": {
+      "exists": true,
+      "path": "reports/nexus_decision_envelope_latest.json",
+      "schema": "NEXUS_DECISION_ENVELOPE.v2.5.0",
+      "sha256": "42d0d70d3dff974706f38f7dcb387e24e390d1f1b383a0725f600f8269b1cefa",
+      "status": "warn",
+      "version": "2.5.0"
+    },
+    "distill": {
+      "exists": true,
+      "path": "reports/nexus_evidence_distillation_report_latest.json",
+      "schema": "NEXUS_EVIDENCE_DISTILLATION_GRAPH.v2.6.0",
+      "sha256": "694f7399ebf8b0459c67daeb0aa8fec3452cf1009180f081d768332aaf8f31e3",
+      "status": "pass",
+      "version": "2.6.0"
+    },
+    "origin-seal": {
+      "exists": true,
+      "path": "reports/nexus_origin_seal_latest.json",
+      "schema": "NEXUS_ORIGIN_SEAL.v2.6.2",
+      "sha256": "9034250575f8f5a2866b02e7e5e8d16bc0b0a1cae9ced8424e375b9e7fe0837e",
+      "status": "pass",
+      "version": "2.6.2"
+    },
+    "outcome-learn": {
+      "exists": true,
+      "path": "reports/nexus_recommendation_outcome_latest.json",
+      "schema": "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.6.3",
+      "sha256": "a99046e96fc9f5ad4fc4a877783da7a01be95d4a7395b0e9de02a83ad0530e5f",
+      "status": "warn",
+      "version": "2.6.3"
+    },
+    "runtime-hygiene": {
+      "exists": true,
+      "path": "reports/nexus_runtime_hygiene_latest.json",
+      "schema": "NEXUS_RUNTIME_CHURN_HYGIENE.v2.6.2",
+      "sha256": "f95095e8649c986a648e7cf4ba01b482dac9a3ad4455d16644e1c753d2d90815",
+      "status": "warn",
+      "version": "2.6.2"
+    },
+    "triadic-lattice": {
+      "exists": true,
+      "path": "reports/nexus_triadic_lattice_latest.json",
+      "schema": "NEXUS_TRIADIC_GEOMETRIC_LATTICE.v2.5.0",
+      "sha256": "cc5a889df19392826fe7555268571a8bfd4c0f385ee0c297a892f5611845ba24",
+      "status": "pass",
+      "version": "2.5.0"
+    }
+  },
+  "gate_index_hash": "0c51e5259a1590f06ab8b08761936fde1450b783704af794bbf452cee2f7127b",
+  "generated_at_utc": "2026-07-13T02:23:39.372452+00:00",
+  "observation_id": "6fac44d4cc4cdc9ef89409d792fee3647bd0256ff0d6d4d8f04bf5423ee8bd2f",
+  "producer_version": "2.6.2",
+  "product_version": "2.6.2",
+  "schema": "NEXUS_EPOCH_OBSERVATION.v2.6.2",
+  "source_epoch_id": "a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05",
+  "system": "NEXUS GATE"
+}

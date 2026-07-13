@@ -3,7 +3,7 @@
   "version": "0.3.6-electron-hud-runtime-preflight",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-12T23:22:14.386429+00:00",
+  "generated_at_utc": "2026-07-13T02:27:19.961200+00:00",
   "checks": [
     {
       "check": "electron_required_paths",

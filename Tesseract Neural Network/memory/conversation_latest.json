@@ -1,13 +1,13 @@
 {
   "boundary": "recommendation-only; no offensive cyber guidance; no shell execution, mutation, live pulls, scraping, or autonomous authority",
   "boundary_rewrite": false,
-  "created_at_unix": 1783898592.5059106,
+  "created_at_unix": 1783909685.5433798,
   "deep": false,
   "engine_version": "tnn.stream_chat.v0.2.0W",
   "error": "Ollama unavailable: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
   "hot_compacted": true,
   "intent": "think quickly",
-  "latency_ms": 2087,
+  "latency_ms": 2077,
   "model": "tnn-phi4-mini:latest",
   "model_budget_hit": true,
   "model_label": "Tesseract Neural Network/phi4-mini-hot-brain",
@@ -20,5 +20,5 @@
   "scaffold_ms": 0,
   "stream_completed": false,
   "time_to_first_token_ms": null,
-  "total_latency_ms": 2087
+  "total_latency_ms": 2077
 }

@@ -1,0 +1,21 @@
+{
+  "action_chains_valid": true,
+  "authorization_integrity_ready": true,
+  "blocking_reasons": [
+    "clean_admissible_epoch_required"
+  ],
+  "calibration_path_ready": true,
+  "claim_boundary": "Causal Action Receipts bind recommendations, explicit human authorization, registered execution, repository effects, validation, epoch identity, and bounded calibration. They do not prove consciousness, general intelligence, scientific truth, security, production readiness, autonomous authority, or globally correct causal inference.",
+  "clean_epoch_available": false,
+  "effect_capture_ready": true,
+  "epoch_chains_valid": true,
+  "final_evolve_enforced": true,
+  "generated_at_utc": "2026-07-13T02:26:26.063570+00:00",
+  "observation_chains_valid": true,
+  "recommended_test_route": "nexus.cortex-refresh",
+  "registry_valid": true,
+  "schema": "NEXUS_FIRST_LEARNING_READINESS.v2.6.3",
+  "status": "blocked",
+  "system": "NEXUS GATE",
+  "version": "2.6.3"
+}

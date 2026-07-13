@@ -436,3 +436,51 @@ validated learning receipt -> bounded route model update -> replay-safe calibrat
 ```
 
 No receipt means no learning. Working-tree-only epochs, duplicate receipts, validation failures, and confounded effects do not update durable route fitness.
+
+## Receipt Dependency Enforcement Algorithm
+
+```text
+requested stage -> required prior receipt set -> immutable receipt hash check -> lifecycle state check -> allow or block
+```
+
+Receipt dependency enforcement prevents validation, finalization, or learning from skipping effect proof. It does not prove the evidence is globally complete.
+
+## Authorization Expiry Algorithm
+
+```text
+authorization receipt -> expires_at_utc -> current time -> expired/still valid -> execute or block
+```
+
+Authorization is single-window and non-reusable. Expired authorization becomes `EXPIRED`, not implied consent.
+
+## Registry Definition Binding Algorithm
+
+```text
+registry entry -> canonical hash -> recommendation binding -> authorization binding -> execution-time hash comparison
+```
+
+Registry definition binding prevents authorization reuse after executor target, write set, timeout, risk class, postcondition, or learning eligibility changes.
+
+## Action-Window Effect Attribution Algorithm
+
+```text
+pre snapshot -> post snapshot -> added/deleted/modified/already-dirty delta -> classify canonical/generated writes -> confounder pressure
+```
+
+This is action-window-associated attribution. NEXUS does not claim process-level file-access causality without direct instrumentation.
+
+## Final Evolve Learning Proof Algorithm
+
+```text
+validation receipt -> final_evolve_required -> final_evolve_report_hash -> final_evolve_passed -> durable learning decision
+```
+
+Targeted validation may pass while durable learning remains blocked. Final evolve is local gate evidence, not production proof.
+
+## Replay-Safe Calibration Algorithm
+
+```text
+learning receipt -> receipt hash -> calibration ledger replay check -> capped update -> route model before/after hash
+```
+
+One receipt may inform, several independent receipts may influence, repeated validated evidence may promote. Calibration adjusts recommendation pressure only.

@@ -3,8 +3,8 @@
   "version": "0.9.5-personal-coding-paradise-compiler",
   "root": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate",
   "status": "pass",
-  "generated_at_utc": "2026-07-12T23:23:14.767142+00:00",
-  "duration_ms": 79926,
+  "generated_at_utc": "2026-07-13T02:26:11.491804+00:00",
+  "duration_ms": 85682,
   "gates": [
     {
       "gate": "required_paths",
@@ -352,13 +352,13 @@
       "message": "Bounded per-file unit tests passed.",
       "evidence": {
         "mode": "bounded_per_file_unittest",
-        "count": 139,
+        "count": 140,
         "results": [
           {
             "file": "test_reflective_repair_loop_v082.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.002s\n\nOK\n"
+            "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.003s\n\nOK\n"
           },
           {
             "file": "test_rehydration_failure_update_charts.py",
@@ -370,7 +370,7 @@
             "file": "test_rehydration_process_lineage.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.003s\n\nOK\n"
+            "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.006s\n\nOK\n"
           },
           {
             "file": "test_repo_native_learning.py",
@@ -382,19 +382,19 @@
             "file": "test_rhp_nexus_surface.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.003s\n\nOK\n"
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n"
           },
           {
             "file": "test_runtime_churn_hygiene_v230.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.099s\n\nOK\n"
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.103s\n\nOK\n"
           },
           {
             "file": "test_runtime_command_surface.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.002s\n\nOK\n"
+            "stderr_tail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n"
           },
           {
             "file": "test_runtime_router.py",
@@ -418,7 +418,7 @@
             "file": "test_spiral_gate_logo_v010.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.006s\n\nOK\n"
+            "stderr_tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.007s\n\nOK\n"
           },
           {
             "file": "test_strict_compiler_surface.py",
@@ -430,25 +430,25 @@
             "file": "test_system_monitor_hud_v098.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.127s\n\nOK\n"
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.137s\n\nOK\n"
           },
           {
             "file": "test_t3mp3st_portal.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.005s\n\nOK\n"
+            "stderr_tail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.004s\n\nOK\n"
           },
           {
             "file": "test_tesseract_neural_network_minimal.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "......\n----------------------------------------------------------------------\nRan 6 tests in 7.065s\n\nOK\n"
+            "stderr_tail": "......\n----------------------------------------------------------------------\nRan 6 tests in 7.071s\n\nOK\n"
           },
           {
             "file": "test_triadic_geometric_lattice_v250.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.959s\n\nOK\n"
+            "stderr_tail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 1.290s\n\nOK\n"
           },
           {
             "file": "test_tui_electron_bridge.py",
@@ -472,7 +472,7 @@
             "file": "test_wound_compression_engine_v098.py",
             "returncode": 0,
             "stdout_tail": "",
-            "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.173s\n\nOK\n"
+            "stderr_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.151s\n\nOK\n"
           }
         ]
       }

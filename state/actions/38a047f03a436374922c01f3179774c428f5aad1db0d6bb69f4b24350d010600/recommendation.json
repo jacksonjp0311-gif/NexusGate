@@ -1,0 +1,1037 @@
+{
+  "action_id": "38a047f03a436374922c01f3179774c428f5aad1db0d6bb69f4b24350d010600",
+  "authority_boundary": {
+    "autonomous_execution": false,
+    "recommendation_only": true
+  },
+  "claim_boundary": "Causal Action Receipts bind recommendations, explicit human authorization, registered execution, repository effects, validation, epoch identity, and bounded calibration. They do not prove consciousness, general intelligence, scientific truth, security, production readiness, autonomous authority, or globally correct causal inference.",
+  "constraints": {
+    "blocking_conditions": [],
+    "expires_at_utc": "2026-07-13T02:53:50.543963+00:00",
+    "human_authorization_required": true
+  },
+  "created_at_utc": "2026-07-13T02:23:50.541436+00:00",
+  "evidence": {
+    "coherence_field_hash": "8dcefcaff184d37f994fee106a2022cf7805ddb06934bc11345f3fdcca45af85",
+    "decision_envelope_hash": "fec52fc670f6b0edd3a4ac18129733d461a9ac407c7ea0a2a5a716669e316678",
+    "distillation_graph_hash": "c2cddd4c8ef591a60abceb84500863bda17ca6c08372e51cd028a723b10530e8",
+    "origin_seal_hash": "99b3e5487d392006a7115a84a0649250786e29799934fa7776c018a8d57154b7",
+    "predictive_memory_hash": "f505737551753788b72ecf25672d0b96fe886815c01e146ef0eba5586373b2b8",
+    "triadic_lattice_hash": "769fdb2f48e0baaa3aed5530ad0f43925945b703efbe10277355830a26df1b49"
+  },
+  "pre_epoch": {
+    "durable_admissibility": "working_tree_only",
+    "eligible_as_learning_parent": false,
+    "epoch_id": "a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05",
+    "epoch_manifest_hash": "dcfc417ea1e7487c3fffe49f79f4f79f107b4e2281c7664f876941d72edf23a4",
+    "epoch_state": "sealed_working_tree",
+    "git_commit": "c64864f07a93671a4520c45da84ce95594e07174",
+    "git_status_hash": "d9218c8cdb9a5ecd2f6079ce8489571cdb63bf3408671a9d8c965763aa7dbe4b",
+    "git_status_paths": [
+      "AGENTS.md",
+      "NexusCell/ledger/nexus_cell_continuity.jsonl",
+      "README.md",
+      "Tesseract Neural Network/memory/conversation_latest.json",
+      "Tesseract Neural Network/memory/tnn_memory.jsonl",
+      "Tesseract Neural Network/state/tnn_state_latest.json",
+      "dist/nexus_gate_pack_manifest_latest.json",
+      "dist/nexus_gate_source_bundle_latest.tar.gz",
+      "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "docs/design/CAUSAL_INTEGRITY_HARDENING_v2.6.3.md",
+      "docs/feedback/FEEDBACK_LOG.md",
+      "docs/protocols/AUTHORIZATION_INTEGRITY_PROTOCOL.md",
+      "docs/protocols/CALIBRATION_APPLICATION_PROTOCOL.md",
+      "docs/protocols/EFFECT_ATTRIBUTION_PROTOCOL.md",
+      "docs/protocols/FINAL_EVOLVE_LEARNING_GATE.md",
+      "docs/protocols/FIRST_DURABLE_LEARNING_EXPERIMENT.md",
+      "docs/updates/UPDATE_CHART.md",
+      "docs/versioning/NEXUS_CHANGELOG.md",
+      "ledger/action_lifecycle.jsonl",
+      "ledger/action_receipts.jsonl",
+      "ledger/epoch_chain.jsonl",
+      "ledger/epoch_observations.jsonl",
+      "ledger/evidence_distillation.jsonl",
+      "ledger/nexus_cell/continuity.jsonl",
+      "ledger/nexus_gate_ledger.v0.1.0.jsonl",
+      "nexus_gate/actions/cli.py",
+      "nexus_gate/discoveries/cards.py",
+      "nexus_gate/outcomes/learn.py",
+      "reports/CHATGPT_HANDOFF_LATEST.md",
+      "reports/CODEX_HANDOFF_LATEST.md",
+      "reports/nexus_adapter_compile_report_latest.json",
+      "reports/nexus_bounded_runtime_report_latest.json",
+      "reports/nexus_bridge_compile_report_latest.json",
+      "reports/nexus_compile_report_latest.json",
+      "reports/nexus_domain_intelligence_report_latest.json",
+      "reports/nexus_electron_environment_report_latest.json",
+      "reports/nexus_electron_preflight_report_latest.json",
+      "reports/nexus_epoch_integrity_seal_latest.json",
+      "reports/nexus_evidence_compaction_report_latest.json",
+      "reports/nexus_feedback_interface_report_latest.json",
+      "reports/nexus_feedback_report_latest.json",
+      "reports/nexus_interconnect_report_latest.json",
+      "reports/nexus_loop_orchestration_report_latest.json",
+      "reports/nexus_meta_orchestrator_gate.v1.1.3.json",
+      "reports/nexus_meta_orchestrator_gate_latest.json",
+      "reports/nexus_nn_router_report_latest.json",
+      "reports/nexus_receptor_compile_report_latest.json",
+      "reports/nexus_reflective_loop_report_latest.json",
+      "reports/nexus_runtime_compile_report_latest.json",
+      "reports/nexus_self_healing_report_latest.json",
+      "scripts/nexus.ps1",
+      "scripts/nexus.sh",
+      "scripts/nexus_human.ps1",
+      "state/actions/2d20430d292e53065fcd5621516a0e1999065eabeb110e348f9ccc45552e74f9/lifecycle.json",
+      "state/actions/2d20430d292e53065fcd5621516a0e1999065eabeb110e348f9ccc45552e74f9/recommendation.json",
+      "state/ai_feedback_context_latest.json",
+      "state/algorithms/nexus_algorithm_cards.v0.3.0.json",
+      "state/algorithms/nexus_algorithm_cards_latest.json",
+      "state/coherence/arbiter_calibration_latest.json",
+      "state/coherence/nexus_coherence_field_latest.json",
+      "state/coherence/pressure_memory_latest.json",
+      "state/decision/nexus_decision_envelope_latest.json",
+      "state/discoveries/nexus_discovery_cards.v0.2.0.json",
+      "state/discoveries/nexus_discovery_cards_latest.json",
+      "state/distillation/nexus_evidence_graph_latest.json",
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/compatibility_packet.json",
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/epoch_manifest.json",
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/observations/93f779ec90a15fa43a0a1942a467899e08de8958790335cb5de084877b5e7540.json",
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/observations/a9cd1daac3d9f2b2ecad0f2387b8a453815886477396e4b2ff38f7f70899b1ad.json",
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/origin_packet.json",
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/source_index.json",
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/compatibility_packet.json",
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/epoch_manifest.json",
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/observations/2bbd34bdca776aa80696a8a76818f8f549035c434451e8eced00ff369c974fd5.json",
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/observations/38a265a66f8dd7b64dda39bd84d10fdb719cd3f89ec6e4b5a638b2ae68076d06.json",
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/observations/5b7d11b6881c2cf2de5a72fc7a61d09bc6de6e6f513d59ac3f02a7e11feb490f.json",
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/origin_packet.json",
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/source_index.json",
+      "state/epochs/6bc38a595bc75fdeeba77ce91cd728fcc443a036a83119015f361980907c712b/compatibility_packet.json",
+      "state/epochs/6bc38a595bc75fdeeba77ce91cd728fcc443a036a83119015f361980907c712b/epoch_manifest.json",
+      "state/epochs/6bc38a595bc75fdeeba77ce91cd728fcc443a036a83119015f361980907c712b/observations/4b470d5ce8f9cfdebf504a64e5d4cb6e4eedb9a3259b55596f3e69f417f8de23.json",
+      "state/epochs/6bc38a595bc75fdeeba77ce91cd728fcc443a036a83119015f361980907c712b/origin_packet.json",
+      "state/epochs/6bc38a595bc75fdeeba77ce91cd728fcc443a036a83119015f361980907c712b/source_index.json",
+      "state/epochs/855e097ea198d289f1ed66c38e1c54ae64d7d2e3adc1ae46d8cd2c9ec3e96a6b/compatibility_packet.json",
+      "state/epochs/855e097ea198d289f1ed66c38e1c54ae64d7d2e3adc1ae46d8cd2c9ec3e96a6b/epoch_manifest.json",
+      "state/epochs/855e097ea198d289f1ed66c38e1c54ae64d7d2e3adc1ae46d8cd2c9ec3e96a6b/observations/b6e60ac2215d40e302eaea389a6b4a978eb413bfc332e454da4e3c1ab699e085.json",
+      "state/epochs/855e097ea198d289f1ed66c38e1c54ae64d7d2e3adc1ae46d8cd2c9ec3e96a6b/origin_packet.json",
+      "state/epochs/855e097ea198d289f1ed66c38e1c54ae64d7d2e3adc1ae46d8cd2c9ec3e96a6b/source_index.json",
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/compatibility_packet.json",
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/epoch_manifest.json",
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/observations/3e51e0f0f3582e56cbd985a6f12b387fd0ef917e323d0bbdba566a2f2bb91ead.json",
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/observations/6fac44d4cc4cdc9ef89409d792fee3647bd0256ff0d6d4d8f04bf5423ee8bd2f.json",
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/origin_packet.json",
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/source_index.json",
+      "state/epochs/abbb565706301a7c5ad001c55f414b687eccaf9ef56814893fcbbed3b2e90f14/compatibility_packet.json",
+      "state/epochs/abbb565706301a7c5ad001c55f414b687eccaf9ef56814893fcbbed3b2e90f14/epoch_manifest.json",
+      "state/epochs/abbb565706301a7c5ad001c55f414b687eccaf9ef56814893fcbbed3b2e90f14/observations/10ec82938e2e467a3fca18ed3e722a62406b7b8ad21b691187f7e88dd884ea88.json",
+      "state/epochs/abbb565706301a7c5ad001c55f414b687eccaf9ef56814893fcbbed3b2e90f14/origin_packet.json",
+      "state/epochs/abbb565706301a7c5ad001c55f414b687eccaf9ef56814893fcbbed3b2e90f14/source_index.json",
+      "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/compatibility_packet.json",
+      "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/epoch_manifest.json",
+      "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/observations/cf90c32c0f212dff34f209a5f95d82cc55707bababcad1ec5b26bcb86fb28b26.json",
+      "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/origin_packet.json",
+      "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/source_index.json",
+      "state/epochs/cd3a99d6709ec947ccb7792f731feef8199cd81eaec6d01148dbc87c10c6b0a6/compatibility_packet.json",
+      "state/epochs/cd3a99d6709ec947ccb7792f731feef8199cd81eaec6d01148dbc87c10c6b0a6/epoch_manifest.json",
+      "state/epochs/cd3a99d6709ec947ccb7792f731feef8199cd81eaec6d01148dbc87c10c6b0a6/observations/9a0fad0a9f979842d15033f3baf811604d707f344b912edefd36da3056319a0b.json",
+      "state/epochs/cd3a99d6709ec947ccb7792f731feef8199cd81eaec6d01148dbc87c10c6b0a6/origin_packet.json",
+      "state/epochs/cd3a99d6709ec947ccb7792f731feef8199cd81eaec6d01148dbc87c10c6b0a6/source_index.json",
+      "state/epochs/de613cc4206215c20dd357450a5f980a6f5713f1f07996d4c2f0885a877a9106/compatibility_packet.json",
+      "state/epochs/de613cc4206215c20dd357450a5f980a6f5713f1f07996d4c2f0885a877a9106/epoch_manifest.json",
+      "state/epochs/de613cc4206215c20dd357450a5f980a6f5713f1f07996d4c2f0885a877a9106/observations/c1354263a6c3836e14c1315c731d6956d84e09a7396665c460bfa37e4b323569.json",
+      "state/epochs/de613cc4206215c20dd357450a5f980a6f5713f1f07996d4c2f0885a877a9106/origin_packet.json",
+      "state/epochs/de613cc4206215c20dd357450a5f980a6f5713f1f07996d4c2f0885a877a9106/source_index.json",
+      "state/epochs/e50a7f787b4005a4a45ebeb647d9e926902abfbefa40773f8c0f73b3856c758f/compatibility_packet.json",
+      "state/epochs/e50a7f787b4005a4a45ebeb647d9e926902abfbefa40773f8c0f73b3856c758f/epoch_manifest.json",
+      "state/epochs/e50a7f787b4005a4a45ebeb647d9e926902abfbefa40773f8c0f73b3856c758f/observations/d9518aac048fd14e2c0b4a1b5134040f9b57f214962a094b99f719b9dddd4692.json",
+      "state/epochs/e50a7f787b4005a4a45ebeb647d9e926902abfbefa40773f8c0f73b3856c758f/origin_packet.json",
+      "state/epochs/e50a7f787b4005a4a45ebeb647d9e926902abfbefa40773f8c0f73b3856c758f/source_index.json",
+      "state/epochs/e64cf8975ba73c847ecf4c5901dd6bfb1332431be11d7f82751c6c96c380db3f/compatibility_packet.json",
+      "state/epochs/e64cf8975ba73c847ecf4c5901dd6bfb1332431be11d7f82751c6c96c380db3f/epoch_manifest.json",
+      "state/epochs/e64cf8975ba73c847ecf4c5901dd6bfb1332431be11d7f82751c6c96c380db3f/observations/f731a7f98a1fdfa7b5763b47cfc75165ffaac49e72f32164c59b6f579ffce586.json",
+      "state/epochs/e64cf8975ba73c847ecf4c5901dd6bfb1332431be11d7f82751c6c96c380db3f/origin_packet.json",
+      "state/epochs/e64cf8975ba73c847ecf4c5901dd6bfb1332431be11d7f82751c6c96c380db3f/source_index.json",
+      "state/interconnect_graph.v0.2.2.json",
+      "state/latest_action_pointer.json",
+      "state/latest_epoch_pointer.json",
+      "state/latest_observation_pointer.json",
+      "state/lattice/nexus_triadic_lattice_latest.json",
+      "state/loops/nexus_loop_orchestration_latest.json",
+      "state/loops/nexus_meta_orchestrator_gate.v1.1.3.json",
+      "state/loops/nexus_toolbelt.v0.9.7.json",
+      "state/loops/nexus_toolbelt_latest.json",
+      "state/nexus_nn_router_index.v0.6.4.json",
+      "state/nexus_origin_manifest_latest.json",
+      "tests/test_causal_action_receipts_v262.py",
+      "tests/test_causal_integrity_hardening_v263.py",
+      "tests/test_outcome_aware_arbiter_v220.py"
+    ],
+    "origin_manifest_hash": "99b3e5487d392006a7115a84a0649250786e29799934fa7776c018a8d57154b7",
+    "source_root": "3dc1197fa01a9a0ee14438dd10b9a0d58b2d2701dbc77086ac18cc8b9b0f2ddc",
+    "working_tree_files": {
+      "AGENTS.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "ee467213397d7e9f82afccebb43cce3a2f52f52bfd1af488a5a1f0cfb68cb338",
+        "size": 19076
+      },
+      "NexusCell/ledger/nexus_cell_continuity.jsonl": {
+        "classification": "other",
+        "exists": true,
+        "hash": "d31b92dd7bbcc3dfd9c80f2caad74c6edcf5a9c908ee2c32a91d5168d3208a2a",
+        "size": 81736
+      },
+      "README.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "ae322b108b044021fe7f7c0b19fb22d41711fa8aef7f88c5d0d451080b460a2b",
+        "size": 20517
+      },
+      "Tesseract Neural Network/memory/conversation_latest.json": {
+        "classification": "other",
+        "exists": true,
+        "hash": "35e70cc46b05bc4ee8b61d7d4706c2e3cb7c82c0017b494a8e890844d3ebf892",
+        "size": 1460
+      },
+      "Tesseract Neural Network/memory/tnn_memory.jsonl": {
+        "classification": "other",
+        "exists": true,
+        "hash": "b4f2dbdd78e4b6be0ca14467c28e5f5db021baa52acf9d9775262189b208ccf0",
+        "size": 107203
+      },
+      "Tesseract Neural Network/state/tnn_state_latest.json": {
+        "classification": "other",
+        "exists": true,
+        "hash": "c6dd6ac16b28240f47f2e602ba36e0fa66865d270a19a43b5a420f4929cdae2e",
+        "size": 526
+      },
+      "dist/nexus_gate_pack_manifest_latest.json": {
+        "classification": "other",
+        "exists": true,
+        "hash": "76c230e6e967be59f6896de5750e7b72235cfeb6abea79828e10b906ac98f853",
+        "size": 11922
+      },
+      "dist/nexus_gate_source_bundle_latest.tar.gz": {
+        "classification": "other",
+        "exists": true,
+        "hash": "be7659f5d8f9bda1a72dbf4f80c7b855f3644bbe0c52d8d1e07cda07f0ab0a39",
+        "size": 10863092
+      },
+      "docs/algorithms/NEXUS_CORE_ALGORITHMS.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "f3acb7c65384878dd34281867e4d8d3cc3b75e6cd0310c07061f30c9ca5cce21",
+        "size": 21279
+      },
+      "docs/design/CAUSAL_INTEGRITY_HARDENING_v2.6.3.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "41d46ece87928805a2bba1c06db09d0e385fc8109fd01d223fea7f76bf1b286d",
+        "size": 1361
+      },
+      "docs/feedback/FEEDBACK_LOG.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "48133314f70519abd9ac050d5561247904ab9508d903c2e71adc8e8d5db2dd57",
+        "size": 127364
+      },
+      "docs/protocols/AUTHORIZATION_INTEGRITY_PROTOCOL.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "4367d0e971dd569d5c18164f198934c5b78ae268cae0b6173353663eb88b8caf",
+        "size": 573
+      },
+      "docs/protocols/CALIBRATION_APPLICATION_PROTOCOL.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "b464d2e9478ab87af830e52ceed7b82eb79716d426cd966e6765a3538dd294bf",
+        "size": 387
+      },
+      "docs/protocols/EFFECT_ATTRIBUTION_PROTOCOL.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "caacf40038d18097e6c32d6e63fc931b526ce4daeb46d90c6d546d89fd01539d",
+        "size": 613
+      },
+      "docs/protocols/FINAL_EVOLVE_LEARNING_GATE.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "cb44948264c31f8c900a10adaaff2954666136d8b51a76fbe0a7935a975a7a1d",
+        "size": 447
+      },
+      "docs/protocols/FIRST_DURABLE_LEARNING_EXPERIMENT.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "b2044071bc25d11dc0b24630f74a1788b44a0bfbf221df631d9f9bfd5921ada6",
+        "size": 678
+      },
+      "docs/updates/UPDATE_CHART.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "16b503b2b6fdc40101e849a45eaa6e3819648c183fad4c18a4873dca8e2c2502",
+        "size": 10732
+      },
+      "docs/versioning/NEXUS_CHANGELOG.md": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "471187a849df97216bdf4b5cb8902e33619cadf1e21c1bb097a761347c987e72",
+        "size": 17106
+      },
+      "ledger/action_lifecycle.jsonl": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "00e8a0cfa12c85524dce5b91777608f3717ac3fc6c09037e73665eab1d8d7fc4",
+        "size": 42102
+      },
+      "ledger/action_receipts.jsonl": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "fc378dd7ca9f67bb49e54501e8e17769eed4f43bfdf0581b6d1e56cedbaf0064",
+        "size": 48864
+      },
+      "ledger/epoch_chain.jsonl": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "ba13bc744784c7fd3412fba2e52538a7cec961403818957f58315558c3e90dd9",
+        "size": 97338
+      },
+      "ledger/epoch_observations.jsonl": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "a93798b091e63bc504d1c4639b8c3f70d652deeb8fee5484b5858714b0756044",
+        "size": 85008
+      },
+      "ledger/evidence_distillation.jsonl": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "bbe2f79a32b8a61e21fcaa89fdeb566926003353f873bbd9c2a5391950f7a096",
+        "size": 32657
+      },
+      "ledger/nexus_cell/continuity.jsonl": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "d31b92dd7bbcc3dfd9c80f2caad74c6edcf5a9c908ee2c32a91d5168d3208a2a",
+        "size": 81736
+      },
+      "ledger/nexus_gate_ledger.v0.1.0.jsonl": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "72486546afe236af06eb394876cd16587604c056a9332541f370b2fd9a84161c",
+        "size": 30602
+      },
+      "nexus_gate/actions/cli.py": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "66961dcdf1174e88334db7f5e56dbc2bcd408688c4295b6593606679fb01a800",
+        "size": 39671
+      },
+      "nexus_gate/discoveries/cards.py": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "1cb0e156e9200ab3514ecb85bdb620843e1e1a3e5100491f08f3a97608df9e3c",
+        "size": 51764
+      },
+      "nexus_gate/outcomes/learn.py": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "092172cb8648687a22dd89973926536f19c704f132c21b9fe0a01070e19ce519",
+        "size": 11427
+      },
+      "reports/CHATGPT_HANDOFF_LATEST.md": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "a254984a0a71059aa4088459ae30999fe6b21c3753ea71932d969767550ca7ba",
+        "size": 2231
+      },
+      "reports/CODEX_HANDOFF_LATEST.md": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "d8956bcfa62acb7170b214d4b70c9617690dcc17cbae3204f5c553697f739360",
+        "size": 2229
+      },
+      "reports/nexus_adapter_compile_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "67acc5f0fdace8cd39f0de417419f446e4e914a5bf35dea7989f1802be3fefbe",
+        "size": 1513
+      },
+      "reports/nexus_bounded_runtime_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "50b4ac8d2315515f2e6bac78ac8b0365e65df270f7264fed77f5f9ec87a00a4f",
+        "size": 6295
+      },
+      "reports/nexus_bridge_compile_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "f4e968e2cf292825af1ac9d1b70c2a5120b9997a242cfb734e77c3ab6f3f5837",
+        "size": 6906
+      },
+      "reports/nexus_compile_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "1aecede7989e52395381d688132b161f228659f9ac81878b5f11d4b0c0aab7b1",
+        "size": 18076
+      },
+      "reports/nexus_domain_intelligence_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "4ddf16b664bac2d0d52cf66ce6f99fa5de87c98242a98ddddbe52a75e191e22c",
+        "size": 3633
+      },
+      "reports/nexus_electron_environment_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "024e3a891f3521cb3e161e30a9fce85a4da69f631d22ec23f9c5329933d7ccac",
+        "size": 1610
+      },
+      "reports/nexus_electron_preflight_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "440b2b2e061dc2cd9b7d319b41a8703d7244a3dc899797a733b4dcdc8bb7bd8d",
+        "size": 5540
+      },
+      "reports/nexus_epoch_integrity_seal_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "20316009b69417fc86c5b738b32c54609112edee335e8ab121bdce2e2b74255a",
+        "size": 38140
+      },
+      "reports/nexus_evidence_compaction_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "96dde066c2a30a12525cbd2a0ac3ea3d1033b9ca77d3c45ae674c72ac23581c8",
+        "size": 631
+      },
+      "reports/nexus_feedback_interface_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "3eb623eef33740f6016e2f6b529a838110250df490343a9a2fa9a8cadc27fe2b",
+        "size": 1479
+      },
+      "reports/nexus_feedback_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "77d7551c7a277f4dbc1916eaa1d155a89b543784a8d7b373f499b6aeeaf714bd",
+        "size": 21612
+      },
+      "reports/nexus_interconnect_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "68cb9bdef1ba3035ad63325eba5f0fc2dc36a76eab8c0260e782b0eda199ac42",
+        "size": 15674
+      },
+      "reports/nexus_loop_orchestration_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "697c18d89e53ac583cdecc313a8e7138507e9d37b7ab2740ff42b39c70ed722f",
+        "size": 8216
+      },
+      "reports/nexus_meta_orchestrator_gate.v1.1.3.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "93cb56468198a9287dad1dd151eef3acdecbc0968fc9f19091ecb588ba4c261c",
+        "size": 16667
+      },
+      "reports/nexus_meta_orchestrator_gate_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "93cb56468198a9287dad1dd151eef3acdecbc0968fc9f19091ecb588ba4c261c",
+        "size": 16667
+      },
+      "reports/nexus_nn_router_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "10bdc84af4b6a40fc4e7e510a6b435afbce78e2c39dc93b5c47e71e714203a06",
+        "size": 11359
+      },
+      "reports/nexus_receptor_compile_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "41dcfe916a06b7f266138a864aa38ad9a8fce468f410deae026d571dbe0bd1f3",
+        "size": 1772
+      },
+      "reports/nexus_reflective_loop_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "f0a4cc0a80481baee69b7cee9f70a61f7ffd821adcdc6cc2faf2b71a86f6fbed",
+        "size": 4057
+      },
+      "reports/nexus_runtime_compile_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "5879d7dd5ab6c7f6e55bda7fa9b4d257f2e70e936b8c3e5ccabe943a2f9c5e70",
+        "size": 1289
+      },
+      "reports/nexus_self_healing_report_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "63ea2765237748803d8ce1fd2a982a0dc66725ab47fd8682637a9fa80ed03b8a",
+        "size": 2731
+      },
+      "scripts/nexus.ps1": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "159edcc04b45cb7b212ca7589916bdfd9e9ac98d7de97baa6a79bdc169a13fbe",
+        "size": 25736
+      },
+      "scripts/nexus.sh": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "031de0136f998c418b709df582975f0e5e4bfb2de7fbc1560c0123419119f277",
+        "size": 14058
+      },
+      "scripts/nexus_human.ps1": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "bfbaa38cc639a85aa2ff146fef4b0a9004db0b8c88cea39ee2ef9d9351f355a4",
+        "size": 21318
+      },
+      "state/actions/2d20430d292e53065fcd5621516a0e1999065eabeb110e348f9ccc45552e74f9/lifecycle.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "099275d562a03278946cab5c6ae55ea63807d41deae5ed277242e9f6be911fc6",
+        "size": 750
+      },
+      "state/actions/2d20430d292e53065fcd5621516a0e1999065eabeb110e348f9ccc45552e74f9/recommendation.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "6e7c36d1d1ed77babe510c3984d1de7d98484cbdd973a42a274f7f37856b8d88",
+        "size": 39599
+      },
+      "state/ai_feedback_context_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "bf25c98a327773a8fbb8f29f9261d5511baab6f314875d27b7ce718fe6b9837c",
+        "size": 2433
+      },
+      "state/algorithms/nexus_algorithm_cards.v0.3.0.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "055d75d0256071bd5e841053f6dc704c3b7d36eebd77eae040b7a727677b1981",
+        "size": 100696
+      },
+      "state/algorithms/nexus_algorithm_cards_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "055d75d0256071bd5e841053f6dc704c3b7d36eebd77eae040b7a727677b1981",
+        "size": 100696
+      },
+      "state/coherence/arbiter_calibration_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "4db07a0761146c7581f9734a717183f8e37c8360d5bb34df4006dcfdfa6c668c",
+        "size": 485
+      },
+      "state/coherence/nexus_coherence_field_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "e382c370107d6d064e9bd3b7a267022ef038b9e6ffbc856246f5dc08aadf34a0",
+        "size": 10000
+      },
+      "state/coherence/pressure_memory_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "c60e898abe1455d49ef90c899927dac1da474031424e09b7779ac83b27893dfb",
+        "size": 403
+      },
+      "state/decision/nexus_decision_envelope_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "f3bb525cc8a94bc181b123803406b891737dab25a83a5fa048b94b8f9baa36fb",
+        "size": 24866
+      },
+      "state/discoveries/nexus_discovery_cards.v0.2.0.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "3dbd7b4016377f58f2ea846426aba37520c73d5f9714cde0aa618da1ae829a6c",
+        "size": 44722
+      },
+      "state/discoveries/nexus_discovery_cards_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "3dbd7b4016377f58f2ea846426aba37520c73d5f9714cde0aa618da1ae829a6c",
+        "size": 44722
+      },
+      "state/distillation/nexus_evidence_graph_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "95aeae18a0aa4fef420104b919bb274225f46df4a7bbedb0b785b88af9208504",
+        "size": 32221
+      },
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/compatibility_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "bea9d481700fa05ec928f89ff6faec761a441ad5669c8f3454cbda9b09038be9",
+        "size": 357
+      },
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/epoch_manifest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "a6937a4a86df5d129612f32ee5e56c1b2cac107b19ca9c7d3def06ebce509fdd",
+        "size": 37384
+      },
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/observations/93f779ec90a15fa43a0a1942a467899e08de8958790335cb5de084877b5e7540.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "a911d45b191513958f1b86aa389c17e4bef2d7cea570692c23e4bdc2ada9693e",
+        "size": 3412
+      },
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/observations/a9cd1daac3d9f2b2ecad0f2387b8a453815886477396e4b2ff38f7f70899b1ad.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "0a002b8e70c639270208ecf8e1b5842486d3dac0a0fdec5923550a0502f20f2f",
+        "size": 3412
+      },
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/origin_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "84003e046218fc68c4c791bdad1638b1b183d24457f2797587a6e92b90420173",
+        "size": 951
+      },
+      "state/epochs/097e42b3f629ef3db3d9ccbfc38393070502a49fdd1574cf991b410c80fc5d85/source_index.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "6217f8c2fe7a6a0723421404b46db0b64c1e5939a2e07e9ada50645e9ce2ce49",
+        "size": 233711
+      },
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/compatibility_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "9af807f5178bbe2a0e324359979555fb51cd7ba19cb9ad2df79335fd15d53107",
+        "size": 357
+      },
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/epoch_manifest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "dd745e2aeaa695556622e5cbcf581680d69e374c36d11e236d2666874264b308",
+        "size": 36593
+      },
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/observations/2bbd34bdca776aa80696a8a76818f8f549035c434451e8eced00ff369c974fd5.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "37fef9165077dc68efac60c8ba356157c62aef4899c008e3e219f8da397cc6aa",
+        "size": 3411
+      },
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/observations/38a265a66f8dd7b64dda39bd84d10fdb719cd3f89ec6e4b5a638b2ae68076d06.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "0cf46126fcc4cc7c3e322158e862e37f07a3664e4255e2070b91947535a32f13",
+        "size": 3411
+      },
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/observations/5b7d11b6881c2cf2de5a72fc7a61d09bc6de6e6f513d59ac3f02a7e11feb490f.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "0889aad7520c78854b4bae63fbedea7dec8e8f4728b1a858a3222e6b7d6a7624",
+        "size": 3411
+      },
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/origin_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "b8e6e7d3ddca2dc5940e75c9efc357e3dc3d5e4818039e85febfc7976b4c15d4",
+        "size": 951
+      },
+      "state/epochs/115e6bee6f6695f8d5dd883cd6ad11a7157b2467e4338079d7fdda4b93fa48c0/source_index.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "f11cb977d2a4162a44851946f6eb8fadc877ad7d83205c8715a7c06b9c48ea0e",
+        "size": 231504
+      },
+      "state/epochs/6bc38a595bc75fdeeba77ce91cd728fcc443a036a83119015f361980907c712b/compatibility_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "5eef777ddd5519b4f666cd45fa23c37a89f8510ed61fafdcb102f7e594f9016e",
+        "size": 357
+      },
+      "state/epochs/6bc38a595bc75fdeeba77ce91cd728fcc443a036a83119015f361980907c712b/epoch_manifest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "a237320246e00448e45f66b6e6d5314018c26ef45c90f3e19f91c5c2dc4db25c",
+        "size": 37384
+      },
+      "state/epochs/6bc38a595bc75fdeeba77ce91cd728fcc443a036a83119015f361980907c712b/observations/4b470d5ce8f9cfdebf504a64e5d4cb6e4eedb9a3259b55596f3e69f417f8de23.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "c51c735be022e5b3516da1d65f6d053de269132dcda5d64088d5acc11e62217e",
+        "size": 3412
+      },
+      "state/epochs/6bc38a595bc75fdeeba77ce91cd728fcc443a036a83119015f361980907c712b/origin_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "52c4dfd996cea9f1cd9c433c4ed624fa9a9982fa512329ed8dcc4ed3a733b817",
+        "size": 951
+      },
+      "state/epochs/6bc38a595bc75fdeeba77ce91cd728fcc443a036a83119015f361980907c712b/source_index.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "21b88a0049ebb9727b6cc04c20f289ed24436f14f6e653383818c0a8c9e64c79",
+        "size": 233711
+      },
+      "state/epochs/855e097ea198d289f1ed66c38e1c54ae64d7d2e3adc1ae46d8cd2c9ec3e96a6b/compatibility_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "1f79da5db4bb5920856a5d0564911a0d60ca2cb4642a3dae64abe456ee987cfe",
+        "size": 357
+      },
+      "state/epochs/855e097ea198d289f1ed66c38e1c54ae64d7d2e3adc1ae46d8cd2c9ec3e96a6b/epoch_manifest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "abe72bad2962c8320e3d4251eae7a408f7012caf55c9a423df9b7de63d097359",
+        "size": 37384
+      },
+      "state/epochs/855e097ea198d289f1ed66c38e1c54ae64d7d2e3adc1ae46d8cd2c9ec3e96a6b/observations/b6e60ac2215d40e302eaea389a6b4a978eb413bfc332e454da4e3c1ab699e085.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "1e987749622e63dfdeaed6cc8038a7aa4946e8285b73eae009ef77922b268b00",
+        "size": 3412
+      },
+      "state/epochs/855e097ea198d289f1ed66c38e1c54ae64d7d2e3adc1ae46d8cd2c9ec3e96a6b/origin_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "f827be5f2f32a26f4236168251484d77a73aea6447319c39c72e9aa9dec04848",
+        "size": 951
+      },
+      "state/epochs/855e097ea198d289f1ed66c38e1c54ae64d7d2e3adc1ae46d8cd2c9ec3e96a6b/source_index.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "0c26b787a1f6b6d92b71b5cf3f2867f951df26d37fd40eb236418b99a0ba86e1",
+        "size": 233711
+      },
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/compatibility_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "de1c580791cb37f14ec1f698bfa1739ab72aed80bad10377b2660242574f1d90",
+        "size": 357
+      },
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/epoch_manifest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "42be3e6063bac78fc09d17891d3fa7f8ac544811afe2e123d191a91a30ea7617",
+        "size": 37384
+      },
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/observations/3e51e0f0f3582e56cbd985a6f12b387fd0ef917e323d0bbdba566a2f2bb91ead.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "c762f83c160673570ff46930e61567e1e6ff5821948bb345736738c2f1e6a392",
+        "size": 3412
+      },
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/observations/6fac44d4cc4cdc9ef89409d792fee3647bd0256ff0d6d4d8f04bf5423ee8bd2f.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "6ae159b1daa47844a24a6f066e3bf86fea6099ec74f53b539c42e882234c9f36",
+        "size": 3412
+      },
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/origin_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "40516c7de46862c8de88186693d3fc7193c31e76ea951a6b5a5eea2b1090663b",
+        "size": 951
+      },
+      "state/epochs/a94dee99e2978530419eb752062bff9b4c0847daeec57c94abb7084cd3b48a05/source_index.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "67cb1e8ef4d3100018530758fa43c78c894d247f9850aa612795a7d5f044ecca",
+        "size": 233711
+      },
+      "state/epochs/abbb565706301a7c5ad001c55f414b687eccaf9ef56814893fcbbed3b2e90f14/compatibility_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "3a9b8b7b0c8f1f8b05ff980087dfe83fac12df0466cce27ffa3cfb3ee4453886",
+        "size": 357
+      },
+      "state/epochs/abbb565706301a7c5ad001c55f414b687eccaf9ef56814893fcbbed3b2e90f14/epoch_manifest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "7b8fff661b62a103767d7c5f66be3c42387dafad1a06890f2cb41b4673fc81c2",
+        "size": 37332
+      },
+      "state/epochs/abbb565706301a7c5ad001c55f414b687eccaf9ef56814893fcbbed3b2e90f14/observations/10ec82938e2e467a3fca18ed3e722a62406b7b8ad21b691187f7e88dd884ea88.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "3d4158c56db798c8bbce8646435c6b4d7e4eac3ecca57d7a737dbc57439a4fef",
+        "size": 3412
+      },
+      "state/epochs/abbb565706301a7c5ad001c55f414b687eccaf9ef56814893fcbbed3b2e90f14/origin_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "d1e03410f41a611a0ac2de93444cf9b5dbf1a9e6ec39df4afd0627fcb31232ee",
+        "size": 951
+      },
+      "state/epochs/abbb565706301a7c5ad001c55f414b687eccaf9ef56814893fcbbed3b2e90f14/source_index.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "096de348cafb7a1a9f5a39117775bfa8fd3e34447b81d7d2830ffb583fbb2119",
+        "size": 233710
+      },
+      "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/compatibility_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "5088841349808bf81e42ed9fc1c6e7d95360b4bc3660af01556b9c226ef28ab7",
+        "size": 357
+      },
+      "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/epoch_manifest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "53ff13eb62465bce86bf90ac74952b7c66edfba7c59f56b0f7de3601923d2d90",
+        "size": 37384
+      },
+      "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/observations/cf90c32c0f212dff34f209a5f95d82cc55707bababcad1ec5b26bcb86fb28b26.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "6010b26d42683f57c489d722142f6a0e842cd622572961a7b25443576669fc9f",
+        "size": 3412
+      },
+      "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/origin_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "58a4ef97e2b69309aba16bbe793e2100c491cb30071e13071833a945052c24a6",
+        "size": 951
+      },
+      "state/epochs/bfe3616ce1aadbf0153234735d2b2415203ef4f4f6a5bb6731f45501358802d6/source_index.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "70490bb64084f317648eaad56432c89a1dcb47b0f18c4312c40c551db3383d96",
+        "size": 233711
+      },
+      "state/epochs/cd3a99d6709ec947ccb7792f731feef8199cd81eaec6d01148dbc87c10c6b0a6/compatibility_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "aa03f5ce5ba0e67a4e1fdb0b33edb78b223b7e5d2966f76e4f24b1b909c50ded",
+        "size": 357
+      },
+      "state/epochs/cd3a99d6709ec947ccb7792f731feef8199cd81eaec6d01148dbc87c10c6b0a6/epoch_manifest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "14f606ace795a0142bd525334afa18ad9fce0f6d1853db3d61a225072813e336",
+        "size": 37384
+      },
+      "state/epochs/cd3a99d6709ec947ccb7792f731feef8199cd81eaec6d01148dbc87c10c6b0a6/observations/9a0fad0a9f979842d15033f3baf811604d707f344b912edefd36da3056319a0b.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "ee93b9da93085309e66718f48e05e2a500440171a03562301f7db9582a31e986",
+        "size": 3412
+      },
+      "state/epochs/cd3a99d6709ec947ccb7792f731feef8199cd81eaec6d01148dbc87c10c6b0a6/origin_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "bd58575c14905c66d39b974b5a4ef43f8eeff5d91ff4b24de3ea94e802c589c0",
+        "size": 951
+      },
+      "state/epochs/cd3a99d6709ec947ccb7792f731feef8199cd81eaec6d01148dbc87c10c6b0a6/source_index.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "f92aea53a67ae2cfb6deb4a9a92182c69f0c4e821eb10cf7cab6b6150dd70fc7",
+        "size": 233711
+      },
+      "state/epochs/de613cc4206215c20dd357450a5f980a6f5713f1f07996d4c2f0885a877a9106/compatibility_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "80ab51ad6ec2164e23115e05ccc4cb0243bc7a789fc3c0d5cd2be4b214472b27",
+        "size": 357
+      },
+      "state/epochs/de613cc4206215c20dd357450a5f980a6f5713f1f07996d4c2f0885a877a9106/epoch_manifest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "9684e6904954a9df4f4c2b4e0623f9639d25a95c69910736224856b4f802e302",
+        "size": 37384
+      },
+      "state/epochs/de613cc4206215c20dd357450a5f980a6f5713f1f07996d4c2f0885a877a9106/observations/c1354263a6c3836e14c1315c731d6956d84e09a7396665c460bfa37e4b323569.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "87f4fd6c2a3ce292a3685173f3bc1580c2dce9255692e1d69052fb33ac703aef",
+        "size": 3412
+      },
+      "state/epochs/de613cc4206215c20dd357450a5f980a6f5713f1f07996d4c2f0885a877a9106/origin_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "dd214ca7692e76eb84ed951c60ee902339dcb08ba2afab54ab131ae0d909991a",
+        "size": 951
+      },
+      "state/epochs/de613cc4206215c20dd357450a5f980a6f5713f1f07996d4c2f0885a877a9106/source_index.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "6858d772bea887dd9b03e211b7658fc04960902d2e85517a385c235d70056db2",
+        "size": 233711
+      },
+      "state/epochs/e50a7f787b4005a4a45ebeb647d9e926902abfbefa40773f8c0f73b3856c758f/compatibility_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "b21437cd6b3eb50eafa8200157add047978bd58f77ee5f222e28a4172a27dace",
+        "size": 357
+      },
+      "state/epochs/e50a7f787b4005a4a45ebeb647d9e926902abfbefa40773f8c0f73b3856c758f/epoch_manifest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "337a07446a565d53efc04f5be55eb1e27bbe70f5a859e4b9ecf464a2db5594c7",
+        "size": 37384
+      },
+      "state/epochs/e50a7f787b4005a4a45ebeb647d9e926902abfbefa40773f8c0f73b3856c758f/observations/d9518aac048fd14e2c0b4a1b5134040f9b57f214962a094b99f719b9dddd4692.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "511be83e4df78c6825bed1cf2c955b89807561fd87ac1bf8ac6a46b223a8c4d9",
+        "size": 3412
+      },
+      "state/epochs/e50a7f787b4005a4a45ebeb647d9e926902abfbefa40773f8c0f73b3856c758f/origin_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "4d0c4161fda49f21560171a3a17175b305ec2ba29db1e6e3efc4e20a8741d521",
+        "size": 951
+      },
+      "state/epochs/e50a7f787b4005a4a45ebeb647d9e926902abfbefa40773f8c0f73b3856c758f/source_index.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "654949fe2bab77be2c22c8e9502e0e24b3c69e18eb2aafe24fe1a629faa855bc",
+        "size": 233711
+      },
+      "state/epochs/e64cf8975ba73c847ecf4c5901dd6bfb1332431be11d7f82751c6c96c380db3f/compatibility_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "66cbc2e1472f669274ea6ec82c3e266d89097dce5763a57a9948475e271359a5",
+        "size": 357
+      },
+      "state/epochs/e64cf8975ba73c847ecf4c5901dd6bfb1332431be11d7f82751c6c96c380db3f/epoch_manifest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "3868e83d618be502d778e708208c7ac7500e6c5ff40213fbc16d1b3bd58db65b",
+        "size": 37384
+      },
+      "state/epochs/e64cf8975ba73c847ecf4c5901dd6bfb1332431be11d7f82751c6c96c380db3f/observations/f731a7f98a1fdfa7b5763b47cfc75165ffaac49e72f32164c59b6f579ffce586.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "78b862a8b7be8f0aa4725faaf6483825e0c30935c548afab942241b2245a33cf",
+        "size": 3412
+      },
+      "state/epochs/e64cf8975ba73c847ecf4c5901dd6bfb1332431be11d7f82751c6c96c380db3f/origin_packet.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "d7e8455e2de966dca928e9e3d95f2e3aedd2018fe9bcc0d0ca78897cc6fd5f87",
+        "size": 951
+      },
+      "state/epochs/e64cf8975ba73c847ecf4c5901dd6bfb1332431be11d7f82751c6c96c380db3f/source_index.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "deeb720706afab3c080feed1483522734cd0b67e76de6386577bbcfc7def5fec",
+        "size": 233711
+      },
+      "state/interconnect_graph.v0.2.2.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "68cb9bdef1ba3035ad63325eba5f0fc2dc36a76eab8c0260e782b0eda199ac42",
+        "size": 15674
+      },
+      "state/latest_action_pointer.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "64686b82357d6064d72c6df2df11a82386bde69c5ab8a6627c781c87476264a6",
+        "size": 313
+      },
+      "state/latest_epoch_pointer.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "2299e017958a93a5b038ee37ec76a3c334a1caf96d3877b21adc4342d176b9ab",
+        "size": 929
+      },
+      "state/latest_observation_pointer.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "c8f1044394ee3cc86e680505b6cd3ba1495e04a161a7ebd4bfa0a729088ddd6f",
+        "size": 484
+      },
+      "state/lattice/nexus_triadic_lattice_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "cc0406053161151909eb7d0fdd2a280edb25920445dff78f17c7cc8c85b0daf7",
+        "size": 4580
+      },
+      "state/loops/nexus_loop_orchestration_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "9795b963df5a8cd5a3afd15a2880ed487e23e66fa741ebfe09ec937ddc6bd90c",
+        "size": 940
+      },
+      "state/loops/nexus_meta_orchestrator_gate.v1.1.3.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "c51a52aedf879d33c2bac914f5f2d4ca4d026f23c34432eb59ca3ef1d67213ac",
+        "size": 884
+      },
+      "state/loops/nexus_toolbelt.v0.9.7.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "2fb4a2ad53dae41933c02aace8fdc105d4c9c492381f662feb731eb5bbd49785",
+        "size": 22102
+      },
+      "state/loops/nexus_toolbelt_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "2fb4a2ad53dae41933c02aace8fdc105d4c9c492381f662feb731eb5bbd49785",
+        "size": 22102
+      },
+      "state/nexus_nn_router_index.v0.6.4.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "3ae229e0a168d1772c956ac6dc5390105b83389d11007aca6c65ff5d9f03cf7f",
+        "size": 4355
+      },
+      "state/nexus_origin_manifest_latest.json": {
+        "classification": "generated",
+        "exists": true,
+        "hash": "1b4fe358b78d45a2511a3cd76662f78d241da80e8d5a5918467b0de3a6ee05d9",
+        "size": 10104
+      },
+      "tests/test_causal_action_receipts_v262.py": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "aea9c932f50c939c0566da370a724a46db751d0c688e11096ab9eaa52dc313bd",
+        "size": 1956
+      },
+      "tests/test_causal_integrity_hardening_v263.py": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "303338dfdf12c991a0e52f19e4b09cd8d8331f451133b1953fda344ce900e56a",
+        "size": 4144
+      },
+      "tests/test_outcome_aware_arbiter_v220.py": {
+        "classification": "canonical_source",
+        "exists": true,
+        "hash": "733e7c03cb59801fbe42f998ca25001850fa39828420586d6a480ea55a428d83",
+        "size": 2684
+      }
+    },
+    "working_tree_snapshot_hash": "60b2168c940822c44804b370f90434be3a3ba2c5ba3b2f0c7a92adcdd2eb2e80"
+  },
+  "predictions": {
+    "expected_duration_seconds": 300,
+    "expected_effects": [
+      "registered_lane_report_update"
+    ],
+    "expected_exit_class": "success",
+    "expected_gate_changes": [
+      "epoch_observed"
+    ],
+    "predicted_read_set": [
+      "Cortex/",
+      "state/cortex/",
+      "reports/"
+    ],
+    "predicted_write_set": [
+      "state/cortex/",
+      "reports/nexus_cortex_refresh_report_latest.json"
+    ]
+  },
+  "receipt_hash": "a7f7f4379e882f4c109ca3f1d1d15095762fe88587ccb755f1ef958665b54c4f",
+  "recommendation": {
+    "arguments_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "command_registry_entry_hash": "d445346b146b73ff798e96f6b5f5cbbd56903b7b5e2bfe98649868d6b838cfcb",
+    "command_registry_id": "nexus.cortex-refresh",
+    "confidence": 0.72,
+    "lane": "cortex-refresh",
+    "normalized_arguments": {},
+    "reason": "Cortex is bounded read-only but constrained; refresh its certificate, graph, telemetry, vectors, and NEXUS packet before memory-aware planning.",
+    "risk_estimate": 0.5,
+    "utility_estimate": 62.519
+  },
+  "recommendation_id": "e6d29088c99a70322482af88ff0d28cdb5b4156e25036a1e6714535791c9c5a7",
+  "schema": "NEXUS_ACTION_RECOMMENDATION_RECEIPT.v2.6.3"
+}

@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import Any
 
 
-VERSION = "2.2.0"
-SCHEMA = "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.2.0"
+VERSION = "2.6.3"
+SCHEMA = "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.6.3"
 REPORT_LATEST = Path("reports") / "nexus_recommendation_outcome_latest.json"
 CALIBRATION_LATEST = Path("state") / "coherence" / "arbiter_calibration_latest.json"
 PRESSURE_MEMORY_LATEST = Path("state") / "coherence" / "pressure_memory_latest.json"
@@ -172,6 +172,10 @@ def build_outcome_report(root: str | Path, intent: str = "", record: bool = True
         outcome = (learning_receipt.get("outcome") or {}).get("classification", "unknown")
         learning_status = "learnable"
         blocked_reason = ""
+    elif learning_receipt:
+        learning_status = "blocked"
+        blockers = learning_receipt.get("blocking_reasons") or []
+        blocked_reason = ", ".join(blockers) if blockers else "learning receipt is not learnable"
     event_basis = {
         "selected": selected,
         "human_surface": latest_gate.get("path"),
@@ -226,6 +230,7 @@ def build_outcome_report(root: str | Path, intent: str = "", record: bool = True
             "reports/nexus_decision_envelope_latest.json",
             "reports/nexus_coherence_field_latest.json",
             "reports/human_surface/*",
+            "state/actions/<action_id>/learning.json",
         ],
         "write_surfaces": [
             REPORT_LATEST.as_posix(),

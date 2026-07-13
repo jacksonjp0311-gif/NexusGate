@@ -866,6 +866,78 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.3: source-node to evidence-node compression map",
             ],
             "boundary": "Visualization state supports operator awareness. It is not source identity, memory proof, or authority.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "local-success-is-not-durable-learning",
+            "version": "0.1.0",
+            "title": "Local Success Is Not Durable Learning",
+            "status": "active",
+            "summary": "A command can execute successfully while still being non-learnable because effects are missing, final evolve did not pass, the epoch is working-tree-only, or confounders remain.",
+            "math": {
+                "causal_confidence": "K = E * A * R * X * W * V * F * D",
+                "durable_gate": "final_evolve_passed AND clean_epoch_admissible AND no high confounder pressure",
+                "hard_zero": "unknown evidence does not equal pass",
+            },
+            "code_references": [
+                "nexus_gate/actions/cli.py::finalize",
+                "reports/nexus_first_learning_readiness_latest.json",
+            ],
+            "algorithm_card_refs": [
+                "final-evolve-learning-proof-algorithm",
+                "receipt-dependency-enforcement-algorithm",
+                "replay-safe-calibration-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 first-learning-readiness",
+                "Run a receipt lifecycle only after explicit human authorization.",
+                "Inspect learning.json blocking_reasons before any calibration claim.",
+            ],
+            "evidence_surfaces": [
+                "state/actions/<action_id>/learning.json",
+                "reports/nexus_first_learning_readiness_latest.json",
+            ],
+            "next_versions": [
+                "v0.2: first clean epoch learning rehearsal",
+                "v0.3: calibration approval command",
+            ],
+            "boundary": "Durable learning is local calibration evidence only. It does not prove global correctness or grant authority.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "authorization-is-temporal-causal-evidence",
+            "version": "0.1.0",
+            "title": "Authorization Is Temporal Causal Evidence",
+            "status": "active",
+            "summary": "Authorization is valid only for one action, one command definition, one argument hash, one source epoch, and one expiry window.",
+            "math": {
+                "authorization_valid": "entry_hash_match AND args_hash_match AND epoch_match AND now <= expires_at",
+                "stale_rule": "registry change OR source change -> STALE",
+                "expiry_rule": "now > expires_at -> EXPIRED",
+            },
+            "code_references": [
+                "nexus_gate/actions/cli.py::_verify_authorization_for_execution",
+                "registry/nexus_command_registry.v2.6.2.json",
+            ],
+            "algorithm_card_refs": [
+                "authorization-expiry-algorithm",
+                "registry-definition-binding-algorithm",
+                "human-authorization-binding-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 action-recommend",
+                ".\\scripts\\nexus.ps1 action-authorize -ActionId \"<id>\"",
+                "Change source or registry and verify execution blocks as stale.",
+            ],
+            "evidence_surfaces": [
+                "state/actions/<action_id>/authorization.json",
+                "state/actions/<action_id>/lifecycle.json",
+            ],
+            "next_versions": [
+                "v0.2: UI expiry countdown",
+                "v0.3: explicit reauthorization packet",
+            ],
+            "boundary": "Authorization evidence binds a local action. It is not reusable, delegable, or identity proof.",
         }
     ]
     return {

@@ -24,11 +24,11 @@
   "claim_boundary": "The NEXUS Coherence Field is local development evidence only. It scores orientation, memory, evidence freshness, runtime pressure, wounds, policy, and continuity surfaces to recommend routing. It does not prove correctness, safety, security, production readiness, scientific truth, model understanding, or autonomous authority; coherence may not grant authority.",
   "coherence": {
     "decision_packet_fresh": false,
-    "dirty_count": 127,
+    "dirty_count": 92,
     "field_state": "coherent",
     "lineage_entropy": 8,
     "missing_surfaces": [],
-    "score": 88,
+    "score": 91,
     "state": "coherent",
     "threshold": 85
   },
@@ -80,11 +80,11 @@
       "status"
     ]
   },
-  "generated_at_utc": "2026-07-12T23:22:06.636972+00:00",
+  "generated_at_utc": "2026-07-13T02:27:16.764274+00:00",
   "intent": "Compile NEXUS coherence continuity field.",
   "mode": "outcome_aware_coherence_field",
   "origin": {
-    "origin_manifest_hash": "d5a724c5792ba333e84bd66bd947e2f0986216b928663c0cbe31b478b511fe75",
+    "origin_manifest_hash": "12b51783f7b449ed4705411921661394429915c9c0c56f86cad09af6ad6da26d",
     "product_phase": "Causal Action Receipt Loop",
     "product_version": "2.6.2",
     "status": "pass"
@@ -94,13 +94,13 @@
       "predictive-memory"
     ],
     "latest_outcome": {
-      "action_id": "32fdbddcb15ec47434d2622be81d3c78820dcbd19ad039f30db014f039d1acb8",
+      "action_id": "38a047f03a436374922c01f3179774c428f5aad1db0d6bb69f4b24350d010600",
       "arbiter_score": 62.519,
       "blocked_reason": "no validated causal action receipt",
-      "coherence_score": 88,
-      "event_id": "6f48b621840b85981f1339f9",
+      "coherence_score": 91,
+      "event_id": "e7d439b72e521afec75eb5dc",
       "followup_needed": true,
-      "human_surface_path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\human_surface\\20260712_191826",
+      "human_surface_path": "C:\\Users\\jacks\\OneDrive\\Desktop\\nexus-gate\\reports\\human_surface\\20260712_222059",
       "law": "No receipt, no learning.",
       "learning_receipt_hash": null,
       "learning_status": "blocked",
@@ -111,7 +111,7 @@
       "selected_action": "cortex-certificate-refresh",
       "selected_command": ".\\scripts\\nexus.ps1 cortex-refresh",
       "selected_source": "predictive-memory",
-      "timestamp": "2026-07-12T23:21:29.091696+00:00"
+      "timestamp": "2026-07-13T02:25:36.850798+00:00"
     },
     "pressure_trend": "stable",
     "route_fitness": 0.5,
@@ -148,34 +148,34 @@
   ],
   "repository_snapshot": {
     "branch": "main",
-    "epoch_id": "e1ea2bc8db1c21743e75ef19",
-    "generated_at_utc": "2026-07-12T23:22:06.559030+00:00",
-    "input_snapshot_hash": "1a8789b36758adcb88bd63fc5259da59f8f7108ea8c28e3af7d6c7032c1f1295",
+    "epoch_id": "9753650b16919dc2c6d3ac98",
+    "generated_at_utc": "2026-07-13T02:27:16.680241+00:00",
+    "input_snapshot_hash": "c248a4e399c0474f31f2f6e9188f0ea81ae40f21da307c520c05e6af12182363",
     "input_surfaces": [
       {
         "exists": true,
         "path": "reports/nexus_decision_envelope_latest.json",
-        "sha256": "94d2b39110226c92406cfe6cb60879a5636206dc7dda52ac1e139953f9c89e39"
+        "sha256": "0ca505f7ded6d7a65e9514cea6bd64c60553daba426e07600bcde046cf722584"
       },
       {
         "exists": true,
         "path": "reports/nexus_origin_seal_latest.json",
-        "sha256": "308a54f12b438bc77aaaa5e0033ba56270e8d58c6aa30a1ef2d98787e7be55f7"
+        "sha256": "64104e4dd3568d801caced6ffec4414016c2ec675f9f634a4ce10be4506eef3e"
       },
       {
         "exists": true,
         "path": "state/nexus_origin_manifest_latest.json",
-        "sha256": "308a54f12b438bc77aaaa5e0033ba56270e8d58c6aa30a1ef2d98787e7be55f7"
+        "sha256": "64104e4dd3568d801caced6ffec4414016c2ec675f9f634a4ce10be4506eef3e"
       },
       {
         "exists": true,
         "path": "state/algorithms/nexus_algorithm_cards_latest.json",
-        "sha256": "c1613377122df3ed1aea2d5cd254e77b5318e2576f35e56d89bc284ac930f0a8"
+        "sha256": "9f4c6cf37e738e48603adce66e160454e1c8a31fc43602baf7fbce6f2af27d20"
       },
       {
         "exists": true,
         "path": "state/discoveries/nexus_discovery_cards_latest.json",
-        "sha256": "dd86a73aeb9691f1e572013606a667515a20ee2fba3661346df295a0038c1b7e"
+        "sha256": "c673f3b4e97aef406f868b9223c87cf87d089f629c8155e4c0dad76206e6b2d1"
       },
       {
         "exists": true,
@@ -215,23 +215,23 @@
       {
         "exists": true,
         "path": "state/coherence/arbiter_calibration_latest.json",
-        "sha256": "76e08f0ca4ddd21fc17861005b3fbae016e7077a1bb14056beef66dc5744173e"
+        "sha256": "7b4b08f798490dc3da02c742236231a34b8d67163e2973c5ecb48ae260edb3d8"
       },
       {
         "exists": true,
         "path": "state/coherence/pressure_memory_latest.json",
-        "sha256": "88344b3c60049f6a84a0c006f5d51e3c752e3a657e8f1c6a7f8230dd683f0cf4"
+        "sha256": "98d929fbd976c31212b8721b6527acaa53963ab326e7afcd8f6b7985d8031f8b"
       },
       {
         "exists": true,
         "path": "reports/nexus_recommendation_outcome_latest.json",
-        "sha256": "06ad2bfef9486f933f881a8452a06f45e3396c11f31ac4aa261f45a45790217c"
+        "sha256": "7e527943ac85189af84acd6728e76c769d846b2c8651a74a92f7dfd1e2961c05"
       }
     ],
-    "repository_commit": "bf9b8d48da9250b38e6fb871ad2a554d63a8643a",
+    "repository_commit": "c64864f07a93671a4520c45da84ce95594e07174",
     "schema": "NEXUS_REPOSITORY_SNAPSHOT.v2.4.0",
-    "source_status_count": 47,
-    "source_status_hash": "1e2ed7f7d29d5a5b4607a2203269ff854b7e1a5db7626ae189182aa0d160f8d0"
+    "source_status_count": 25,
+    "source_status_hash": "bd5f198dda530879877c986d4439d0382117952b0748bf4478f83a425f45309f"
   },
   "runtime_pressure": {
     "level": "pass",

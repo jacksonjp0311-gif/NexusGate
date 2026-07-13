@@ -118,6 +118,7 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v2.6.1 | Epoch Integrity Seal | sealed | Adds source-root epoch identity, immutable epoch packets, latest pointer, append-only epoch chain, and distillation ledger append semantics. |
 | v2.6.1a | Epoch Integrity Hardening | current | Separates Source Epochs from Observation Events, includes relevant untracked source, verifies immutable epoch directories, and excludes neural runtime graph churn from source identity. |
 | v2.6.2 | Causal Action Receipt Loop | current | Adds registered-command action receipts, explicit human authorization binding, effect/validation/learning gates, and the law: no receipt, no learning. |
+| v2.6.3 | Causal Integrity Hardening | current | Enforces effect receipts before validation, registry-definition authorization binding, authorization expiry, snapshot-based effects, final evolve learning proof, clean-epoch calibration gates, and first-learning readiness. |
 ## v0.9.5 - AI Toolbelt Surface
 
 No version step without update chart entry. Adds operator-visible toolbelt index and README Toolbelt section.

@@ -15,7 +15,7 @@
     "external_api_writes",
     "secret_access"
   ],
-  "chain_event_hash": "e94d2ae876df78898a21100c02273ac65bb1710c64f1fe2721fb5d91e370f486",
+  "chain_event_hash": "be04e0797beed89b6a4c7c99357cebc83407750215b42777755dfd95a08844eb",
   "checks": {
     "commit_sha_not_primary_epoch": true,
     "human_authority_boundary_declared": true,
@@ -27,68 +27,48 @@
     "untracked_source_included": true
   },
   "claim_boundary": "Source Epoch and Observation packets provide local temporal identity evidence only. They separate content-addressed repository identity from repeatable observation runs. They do not prove correctness, safety, security, production readiness, model understanding, consciousness, or autonomous authority.",
-  "dirty_source_count": 44,
+  "dirty_source_count": 20,
   "dirty_source_entries_sample": [
-    " M AGENTS.md",
     " M README.md",
     " M docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
     " M docs/feedback/FEEDBACK_LOG.md",
     " M docs/updates/UPDATE_CHART.md",
     " M docs/versioning/NEXUS_CHANGELOG.md",
-    " M electron/main.js",
-    " M nexus_gate/decision/envelope.py",
+    " M nexus_gate/actions/cli.py",
     " M nexus_gate/discoveries/cards.py",
-    " M nexus_gate/epochs/seal.py",
-    " M nexus_gate/hygiene/runtime_churn.py",
-    " M nexus_gate/origin/seal.py",
     " M nexus_gate/outcomes/learn.py",
     " M scripts/nexus.ps1",
     " M scripts/nexus.sh",
     " M scripts/nexus_human.ps1",
-    " M tests/test_epoch_integrity_seal_v261.py",
-    " M tests/test_origin_seal_v122.py",
-    " M tests/test_runtime_churn_hygiene_v230.py",
-    "?? docs/design/CAUSAL_ACTION_RECEIPT_LOOP_v2.6.2.md",
-    "?? docs/design/EPOCH_INTEGRITY_HARDENING_v2.6.1a.md",
-    "?? docs/protocols/APPEND_ONLY_LEDGER_PROTOCOL.md",
-    "?? docs/protocols/CAUSAL_ACTION_RECEIPT_PROTOCOL.md",
-    "?? docs/protocols/ROUTE_CALIBRATION_PROTOCOL.md",
-    "?? docs/protocols/SOURCE_EPOCH_AND_OBSERVATION_PROTOCOL.md",
-    "?? nexus_gate/actions/__init__.py",
-    "?? nexus_gate/actions/cli.py",
-    "?? nexus_gate/ledger/__init__.py",
-    "?? nexus_gate/ledger/append_only.py",
-    "?? registry/nexus_command_registry.v2.6.2.json",
-    "?? schemas/nexus_action_authorization_receipt.v2.6.2.schema.json",
-    "?? schemas/nexus_action_effect_receipt.v2.6.2.schema.json",
-    "?? schemas/nexus_action_execution_receipt.v2.6.2.schema.json",
-    "?? schemas/nexus_action_learning_receipt.v2.6.2.schema.json",
-    "?? schemas/nexus_action_ledger_event.v2.6.2.schema.json",
-    "?? schemas/nexus_action_recommendation_receipt.v2.6.2.schema.json",
-    "?? schemas/nexus_action_validation_receipt.v2.6.2.schema.json",
-    "?? schemas/nexus_command_registry.v2.6.2.schema.json",
-    "?? schemas/nexus_epoch_observation.v2.6.2.schema.json",
-    "?? schemas/nexus_source_epoch.v2.6.2.schema.json"
+    " M tests/test_causal_action_receipts_v262.py",
+    " M tests/test_outcome_aware_arbiter_v220.py",
+    "?? docs/design/CAUSAL_INTEGRITY_HARDENING_v2.6.3.md",
+    "?? docs/protocols/AUTHORIZATION_INTEGRITY_PROTOCOL.md",
+    "?? docs/protocols/CALIBRATION_APPLICATION_PROTOCOL.md",
+    "?? docs/protocols/EFFECT_ATTRIBUTION_PROTOCOL.md",
+    "?? docs/protocols/FINAL_EVOLVE_LEARNING_GATE.md",
+    "?? docs/protocols/FIRST_DURABLE_LEARNING_EXPERIMENT.md",
+    "?? tests/test_causal_integrity_hardening_v263.py"
   ],
   "durable_admissibility": "working_tree_only",
   "eligible_as_learning_parent": false,
   "epoch_chain": {
-    "chain_length": 93,
+    "chain_length": 111,
     "chain_valid": true,
     "duplicate_event_ids": 0,
     "fork_detected": false,
     "hash_mismatches": 0,
     "malformed_rows": 0,
-    "tail_hash": "e94d2ae876df78898a21100c02273ac65bb1710c64f1fe2721fb5d91e370f486"
+    "tail_hash": "be04e0797beed89b6a4c7c99357cebc83407750215b42777755dfd95a08844eb"
   },
   "epoch_directory_integrity": {
     "compatibility_packet_hash_valid": true,
-    "directory_status": "verified_existing",
+    "directory_status": "created",
     "manifest_hash_valid": true,
     "origin_packet_hash_valid": true,
     "source_index_hash_valid": true
   },
-  "epoch_id": "2644f029a92dbfc68f7c49f6f66e098ad5bf01838777b5396868730fe35378a6",
+  "epoch_id": "9eb11e2cc2ee501e0ffff8d3b0c497cd5406e952a19fe3a05af6cb31fb89a1a8",
   "epoch_state": "sealed_working_tree",
   "epoch_subsystem_version": "2.6.1a",
   "gate_index": {
@@ -96,7 +76,7 @@
       "exists": true,
       "path": "reports/nexus_coherence_field_latest.json",
       "schema": "NEXUS_COHERENCE_CONTINUITY_FIELD.v2.4.0",
-      "sha256": "638207fdb00839314055415757d48cec64b7e500f9f66b8edf489b64637a6309",
+      "sha256": "bd7d9d74e983ab6e9c01e8112b7f1ef5a9fbdd747541d428a15fd84c580f6651",
       "status": "pass",
       "version": "2.4.0"
     },
@@ -104,7 +84,7 @@
       "exists": true,
       "path": "reports/nexus_compile_report_latest.json",
       "schema": null,
-      "sha256": "30df2409c30fd889bd037d546cec718c38be73283d2086e0c4a9f18fd9b46bd7",
+      "sha256": "429fa463f3c2189ec986f9d0c67470b91006f89f069a618eae2ccf7f9a97d8de",
       "status": "pass",
       "version": "0.9.5-personal-coding-paradise-compiler"
     },
@@ -112,7 +92,7 @@
       "exists": true,
       "path": "reports/nexus_decision_envelope_latest.json",
       "schema": "NEXUS_DECISION_ENVELOPE.v2.5.0",
-      "sha256": "6c8a4f9a285f2ae41ad1e84608c420f6a791c1bb7bc3c07457221eddbde32955",
+      "sha256": "03aa2098fa89b66346a600c84098fab36a9b9637ac6741f96041cdd31ca476f4",
       "status": "warn",
       "version": "2.5.0"
     },
@@ -120,7 +100,7 @@
       "exists": true,
       "path": "reports/nexus_evidence_distillation_report_latest.json",
       "schema": "NEXUS_EVIDENCE_DISTILLATION_GRAPH.v2.6.0",
-      "sha256": "f9ef1043a7b1e973b92f830ce7e1744a52772c73001c925d7d6017a291065287",
+      "sha256": "1eeb3817b84d363a80e412ad796bb3e22dd26842e0dc90306d89939dbdc30799",
       "status": "pass",
       "version": "2.6.0"
     },
@@ -128,23 +108,23 @@
       "exists": true,
       "path": "reports/nexus_origin_seal_latest.json",
       "schema": "NEXUS_ORIGIN_SEAL.v2.6.2",
-      "sha256": "308a54f12b438bc77aaaa5e0033ba56270e8d58c6aa30a1ef2d98787e7be55f7",
+      "sha256": "64104e4dd3568d801caced6ffec4414016c2ec675f9f634a4ce10be4506eef3e",
       "status": "pass",
       "version": "2.6.2"
     },
     "outcome-learn": {
       "exists": true,
       "path": "reports/nexus_recommendation_outcome_latest.json",
-      "schema": "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.2.0",
-      "sha256": "06ad2bfef9486f933f881a8452a06f45e3396c11f31ac4aa261f45a45790217c",
+      "schema": "NEXUS_RECOMMENDATION_OUTCOME_LEARNER.v2.6.3",
+      "sha256": "7e527943ac85189af84acd6728e76c769d846b2c8651a74a92f7dfd1e2961c05",
       "status": "warn",
-      "version": "2.2.0"
+      "version": "2.6.3"
     },
     "runtime-hygiene": {
       "exists": true,
       "path": "reports/nexus_runtime_hygiene_latest.json",
       "schema": "NEXUS_RUNTIME_CHURN_HYGIENE.v2.6.2",
-      "sha256": "3f2fec595ea56313bb9b1e36fb9fe0d8c43dfa9ea037cc606679ec15b23020c4",
+      "sha256": "4899392ae23d4fcfa22182d61610e7dd43a312d2e72bfcd22058b8cadb7fa665",
       "status": "warn",
       "version": "2.6.2"
     },
@@ -152,23 +132,23 @@
       "exists": true,
       "path": "reports/nexus_triadic_lattice_latest.json",
       "schema": "NEXUS_TRIADIC_GEOMETRIC_LATTICE.v2.5.0",
-      "sha256": "e3a50de150b9a0532c6392a7246849995ba532f54c78b79f032f78b7981cdd2f",
+      "sha256": "d6451c76278e143f2fa7217dd7ae6440c066a4685173385d14c20b6a73c0e7c0",
       "status": "pass",
       "version": "2.5.0"
     }
   },
-  "generated_at_utc": "2026-07-12T23:22:17.914332+00:00",
-  "manifest_hash": "d5c39fb7ffc753dab7971b52779b22dac3054016a4c49fb6168049005e8fdfb2",
+  "generated_at_utc": "2026-07-13T02:27:22.466158+00:00",
+  "manifest_hash": "c76cb4558f6023d8719fb71ffa15f23cdaabf380047dc606c1ee3505f70807a8",
   "observation_chain": {
-    "chain_length": 92,
+    "chain_length": 110,
     "chain_valid": true,
     "duplicate_event_ids": 0,
     "fork_detected": false,
     "hash_mismatches": 0,
     "malformed_rows": 0,
-    "tail_hash": "15ff76c13641966321d202504ec16860388b0467e4eac3b15808ab20790079d9"
+    "tail_hash": "0f9cf43678a0f2dc0f9ca3f6c66a6f913f4f361f0ab6fb723b8a92b1eff20ba1"
   },
-  "observation_event_hash": "15ff76c13641966321d202504ec16860388b0467e4eac3b15808ab20790079d9",
+  "observation_event_hash": "0f9cf43678a0f2dc0f9ca3f6c66a6f913f4f361f0ab6fb723b8a92b1eff20ba1",
   "primary_root_kind": "working_tree_source_root",
   "product_phase": "Causal Action Receipt Loop",
   "product_version": "2.6.2",
@@ -183,40 +163,40 @@
   ],
   "repository_attestation": {
     "branch": "main",
-    "commit_sha": "bf9b8d48da9250b38e6fb871ad2a554d63a8643a",
+    "commit_sha": "c64864f07a93671a4520c45da84ce95594e07174",
     "note": "Commit SHA is not the primary epoch identity because source epoch identity is available before commit.",
     "role": "advisory_post_source_identity_binding"
   },
   "required_surfaces": [
     {
-      "bytes": 20219,
+      "bytes": 20517,
       "exists": true,
       "path": "README.md",
-      "sha256": "ba40f3bad3e96a0673d6c3e0be9003dfb53b6ddaf23d1493bb624b5a7418323c"
+      "sha256": "ae322b108b044021fe7f7c0b19fb22d41711fa8aef7f88c5d0d451080b460a2b"
     },
     {
-      "bytes": 18789,
+      "bytes": 19076,
       "exists": true,
       "path": "AGENTS.md",
-      "sha256": "613a4d73e5cfec79a208fda74d0553c7207acf4e202d73dede7eeae9507405d7"
+      "sha256": "ee467213397d7e9f82afccebb43cce3a2f52f52bfd1af488a5a1f0cfb68cb338"
     },
     {
-      "bytes": 10457,
+      "bytes": 10732,
       "exists": true,
       "path": "docs/updates/UPDATE_CHART.md",
-      "sha256": "b48038e9af096558ba35ac977a3d5e5ea57db5130974d2dc48314503fc9fb844"
+      "sha256": "16b503b2b6fdc40101e849a45eaa6e3819648c183fad4c18a4873dca8e2c2502"
     },
     {
-      "bytes": 16469,
+      "bytes": 17106,
       "exists": true,
       "path": "docs/versioning/NEXUS_CHANGELOG.md",
-      "sha256": "e9c2cb8f8cdd725b5110813e33257aee5b370ea99637def1c7a22eea07f98a0f"
+      "sha256": "471187a849df97216bdf4b5cb8902e33619cadf1e21c1bb097a761347c987e72"
     },
     {
-      "bytes": 19376,
+      "bytes": 21279,
       "exists": true,
       "path": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
-      "sha256": "78df9e4be4c6539d98fbaa9794ec8a0e3bee7174fa6bac0b5c86ed656bd8560b"
+      "sha256": "f3acb7c65384878dd34281867e4d8d3cc3b75e6cd0310c07061f30c9ca5cce21"
     },
     {
       "bytes": 11158,
@@ -234,10 +214,10 @@
   "runtime_contract_version": "epoch-integrity-hardening.v2.6.1a",
   "schema": "NEXUS_SOURCE_EPOCH.v2.6.2",
   "schema_compatibility_hash": "source-epoch-observation-v1",
-  "source_epoch_id": "2644f029a92dbfc68f7c49f6f66e098ad5bf01838777b5396868730fe35378a6",
-  "source_root": "070af2099c94653456a7e2f7488873b7c22a3247ec3bc44a35c641a910465140",
-  "source_surface_count": 649,
-  "source_surface_index_hash": "1885923ea0a57bd038a5aebb75207c56eed9bbfc5c7ea490ceb9866bb0b9f495",
+  "source_epoch_id": "9eb11e2cc2ee501e0ffff8d3b0c497cd5406e952a19fe3a05af6cb31fb89a1a8",
+  "source_root": "16d6a5b2dc9128d2116f34ed5d022b5b8bc5c10e417a67983fafa283ce02fe18",
+  "source_surface_count": 656,
+  "source_surface_index_hash": "756ed059f4c131c86ae5df0550af34cdf7838c7804c2245083783d40c3165f7e",
   "source_surface_sample": [
     {
       "bytes": 756,
@@ -249,22 +229,22 @@
       "sha256": "60d8f0eef0e5df8d6f907bdafc1ae02bc59e3a209b0bcf9d0c9605245dc395ac"
     },
     {
-      "bytes": 18789,
+      "bytes": 19076,
       "exclusion_reason": null,
-      "git_state": "modified",
+      "git_state": "tracked",
       "included": true,
-      "leaf_hash": "5d49cee6452c15ce4857b541b1fc7c6d11cfd2199b46556dee12a058b07db328",
+      "leaf_hash": "bdabd2632a9b8936e3857869d71d2185f7ba4d885e22669c18c4e93a8914d80f",
       "path": "AGENTS.md",
-      "sha256": "613a4d73e5cfec79a208fda74d0553c7207acf4e202d73dede7eeae9507405d7"
+      "sha256": "ee467213397d7e9f82afccebb43cce3a2f52f52bfd1af488a5a1f0cfb68cb338"
     },
     {
-      "bytes": 20219,
+      "bytes": 20517,
       "exclusion_reason": null,
       "git_state": "modified",
       "included": true,
-      "leaf_hash": "031704a3ccdbb91d0722b41cb58c249424332d844c07a8b779b4d0f8c2ea64f8",
+      "leaf_hash": "567ebbfa3f089bb273540a94c00eee21d72a139250e5eb99cf36da95b77938f7",
       "path": "README.md",
-      "sha256": "ba40f3bad3e96a0673d6c3e0be9003dfb53b6ddaf23d1493bb624b5a7418323c"
+      "sha256": "ae322b108b044021fe7f7c0b19fb22d41711fa8aef7f88c5d0d451080b460a2b"
     },
     {
       "bytes": 9601,
@@ -330,13 +310,13 @@
       "sha256": "0f6e6f2d68604ce8128af8a1296a3bf2fbd15097b6739382fb345d1f16f02a38"
     },
     {
-      "bytes": 19376,
+      "bytes": 21279,
       "exclusion_reason": null,
       "git_state": "modified",
       "included": true,
-      "leaf_hash": "ec7572f7c261781fea521a32d8e2fd6d1f66cbc3e338378c53764972cdfbec1c",
+      "leaf_hash": "e40561ac835a109c1bc879b85e299ef6ff994ddfd15df6b9d0c71c4f7073abee",
       "path": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
-      "sha256": "78df9e4be4c6539d98fbaa9794ec8a0e3bee7174fa6bac0b5c86ed656bd8560b"
+      "sha256": "f3acb7c65384878dd34281867e4d8d3cc3b75e6cd0310c07061f30c9ca5cce21"
     },
     {
       "bytes": 1648,
@@ -530,7 +510,7 @@
     {
       "bytes": 1009,
       "exclusion_reason": null,
-      "git_state": "untracked",
+      "git_state": "tracked",
       "included": true,
       "leaf_hash": "26979f0370e5e58c2b804617936a7b0372b2793807f51b7915d5b4f0385339ce",
       "path": "docs/design/CAUSAL_ACTION_RECEIPT_LOOP_v2.6.2.md",
@@ -546,6 +526,15 @@
       "sha256": "53f30506b7c92e4e24869b9a0bf8c58cd2a52d70cbfa262473320bb1953962cb"
     },
     {
+      "bytes": 1361,
+      "exclusion_reason": null,
+      "git_state": "untracked",
+      "included": true,
+      "leaf_hash": "9038125bf3c895a5c5d6cae9f270036816f910a8fee5cea6c0a9dfdda5b8bf2e",
+      "path": "docs/design/CAUSAL_INTEGRITY_HARDENING_v2.6.3.md",
+      "sha256": "41d46ece87928805a2bba1c06db09d0e385fc8109fd01d223fea7f76bf1b286d"
+    },
+    {
       "bytes": 1076,
       "exclusion_reason": null,
       "git_state": "tracked",
@@ -557,7 +546,7 @@
     {
       "bytes": 878,
       "exclusion_reason": null,
-      "git_state": "untracked",
+      "git_state": "tracked",
       "included": true,
       "leaf_hash": "6e907f7428366f837495ef236e2e9f8f1c163bfd04c643d9b245d22fb9e40451",
       "path": "docs/design/EPOCH_INTEGRITY_HARDENING_v2.6.1a.md",
@@ -663,13 +652,13 @@
       "sha256": "8ce91330d2d01ee4cca2ed75ca53f72e7adc46383f33f64f6d33ade2404b360c"
     },
     {
-      "bytes": 119384,
+      "bytes": 129758,
       "exclusion_reason": null,
       "git_state": "modified",
       "included": true,
-      "leaf_hash": "f76edbe248b5a391f8ebd5a521a0cbaee4ac1ac856836337c2f5634572e937cf",
+      "leaf_hash": "c2b00fa5781c1b302006477715b80501861c5b07a2de7b0ddef9e5582c211610",
       "path": "docs/feedback/FEEDBACK_LOG.md",
-      "sha256": "47984441346dfbe60ca8b531fdd81dc42976a9e47b35bad9f7e92e17bc2e76da"
+      "sha256": "06b02b5b10f56efce58f04e27befbd3c630c48a3735dd4ead7f1f672050123aa"
     },
     {
       "bytes": 1802,
@@ -949,30 +938,21 @@
       "leaf_hash": "30a1011b9ae211f06273b8f314a160327edb660ae7f77ff2a74664fe04189677",
       "path": "docs/nexus_cell/NEXUS_CELL_FULL_CORE_RUNTIME.md",
       "sha256": "89bb73432d30b391f96818b267b20180d95d9b7de77807d3716ffdbf8e93a634"
-    },
-    {
-      "bytes": 982,
-      "exclusion_reason": null,
-      "git_state": "tracked",
-      "included": true,
-      "leaf_hash": "b4c088fa971ff7ce3fcd2528082c7ca7ab9d376c1dda5be4a5df77e20f3a3b61",
-      "path": "docs/nexus_cell/NEXUS_CELL_MATH_AND_ALGORITHMS.md",
-      "sha256": "1ecd690605b39e7b022cb8a7862bb34d727f9042a4e98b298876335c660885be"
     }
   ],
   "status": "pass",
   "system": "NEXUS GATE",
-  "tracked_source_root": "aff138ff461e59eb4e75b41e4df1537f4505880b9a00714971f5748b204ef77e",
-  "working_tree_source_root": "070af2099c94653456a7e2f7488873b7c22a3247ec3bc44a35c641a910465140",
+  "tracked_source_root": "82040b5d01bba2501ce30b2376f3fe7e0a3111f6cf941b8f51544d7da4d9b5f3",
+  "working_tree_source_root": "16d6a5b2dc9128d2116f34ed5d022b5b8bc5c10e417a67983fafa283ce02fe18",
   "write_surfaces": [
     "reports/nexus_epoch_integrity_seal_latest.json",
     "state/latest_epoch_pointer.json",
     "state/latest_observation_pointer.json",
-    "state/epochs/2644f029a92dbfc68f7c49f6f66e098ad5bf01838777b5396868730fe35378a6/epoch_manifest.json",
-    "state/epochs/2644f029a92dbfc68f7c49f6f66e098ad5bf01838777b5396868730fe35378a6/origin_packet.json",
-    "state/epochs/2644f029a92dbfc68f7c49f6f66e098ad5bf01838777b5396868730fe35378a6/source_index.json",
-    "state/epochs/2644f029a92dbfc68f7c49f6f66e098ad5bf01838777b5396868730fe35378a6/compatibility_packet.json",
-    "state/epochs/2644f029a92dbfc68f7c49f6f66e098ad5bf01838777b5396868730fe35378a6/observations/bd94b642786bf857b405030411334bf76a7ebd34d3556745f76bd38c4a9fb991.json",
+    "state/epochs/9eb11e2cc2ee501e0ffff8d3b0c497cd5406e952a19fe3a05af6cb31fb89a1a8/epoch_manifest.json",
+    "state/epochs/9eb11e2cc2ee501e0ffff8d3b0c497cd5406e952a19fe3a05af6cb31fb89a1a8/origin_packet.json",
+    "state/epochs/9eb11e2cc2ee501e0ffff8d3b0c497cd5406e952a19fe3a05af6cb31fb89a1a8/source_index.json",
+    "state/epochs/9eb11e2cc2ee501e0ffff8d3b0c497cd5406e952a19fe3a05af6cb31fb89a1a8/compatibility_packet.json",
+    "state/epochs/9eb11e2cc2ee501e0ffff8d3b0c497cd5406e952a19fe3a05af6cb31fb89a1a8/observations/54b8421da5dac84a8717820cb9f533ee6c8aea350e7a2d83207034edeaaa5d12.json",
     "ledger/epoch_chain.jsonl",
     "ledger/epoch_observations.jsonl"
   ]

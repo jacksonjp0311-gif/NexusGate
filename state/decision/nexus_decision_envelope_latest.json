@@ -9,7 +9,7 @@
     },
     "coherence_input": {
       "lineage_entropy": 8,
-      "score": 88,
+      "score": 91,
       "status": "pass"
     },
     "lattice_input": {
@@ -44,7 +44,7 @@
           "fresh": false,
           "rule": "repository_commit + source_status_hash + input_snapshot_hash"
         },
-        "source_packet_hash": "ee97e1d947fbc9c78b71dc3b5a440bb0d4e677b8c6f635de72ae300f6333be63",
+        "source_packet_hash": "5c12960b5243cc11cda58e9a82bd68158e988747489cd12b3aadda46e188b7e1",
         "triadic_lattice": {
           "action": "cortex-certificate-refresh",
           "alignment": 0.6344,
@@ -88,7 +88,7 @@
           "fresh": false,
           "rule": "repository_commit + source_status_hash + input_snapshot_hash"
         },
-        "source_packet_hash": "56d7ef8cdbfc3d9a821bb69fded1dde7c2c00808bb788ebb445cc344f4be15b9",
+        "source_packet_hash": "208d3235b9628c0df95f5680ca09b07c34ec1a984b288156188768dbbcc0929b",
         "triadic_lattice": {
           "action": "inspect_dirty_scope",
           "alignment": 0.6742,
@@ -132,7 +132,7 @@
           "fresh": false,
           "rule": "repository_commit + source_status_hash + input_snapshot_hash"
         },
-        "source_packet_hash": "0d180ae3af8fd99db55c828a0af92b6740d95a2e0f82eb52409d76c71965ad48",
+        "source_packet_hash": "08aae252f5fd2f91eee4c2999d8dc2bcc8c81626b3212b338213b2919c626bee",
         "triadic_lattice": {
           "action": "predictive-timing",
           "alignment": 0.6742,
@@ -221,7 +221,7 @@
         "fresh": false,
         "rule": "repository_commit + source_status_hash + input_snapshot_hash"
       },
-      "source_packet_hash": "ee97e1d947fbc9c78b71dc3b5a440bb0d4e677b8c6f635de72ae300f6333be63",
+      "source_packet_hash": "5c12960b5243cc11cda58e9a82bd68158e988747489cd12b3aadda46e188b7e1",
       "triadic_lattice": {
         "action": "cortex-certificate-refresh",
         "alignment": 0.6344,
@@ -267,7 +267,7 @@
   "coherence_input": {
     "field_state": "coherent",
     "lineage_entropy": 8,
-    "score": 88,
+    "score": 91,
     "state": "coherent",
     "status": "pass"
   },
@@ -345,10 +345,10 @@
       "surface": "git status --short"
     }
   ],
-  "generated_at_utc": "2026-07-12T23:22:08.542702+00:00",
+  "generated_at_utc": "2026-07-13T02:27:17.851955+00:00",
   "intent": "Self-bootstrap NEXUS decision envelope.",
   "memory": {
-    "algorithm_cards": 54,
+    "algorithm_cards": 60,
     "cortex_authority": {
       "cortex_may_mutate_repo": false,
       "external_api_writes": false,
@@ -358,7 +358,7 @@
       "secret_access": false
     },
     "cortex_refresh_status": "constrained",
-    "discovery_cards": 21,
+    "discovery_cards": 23,
     "predictive_memory_next_command": ".\\scripts\\nexus.ps1 cortex-refresh",
     "predictive_memory_next_loop": "cortex-certificate-refresh",
     "predictive_memory_status": "warn"
@@ -366,7 +366,7 @@
   "mode": "triadic_lattice_decision_envelope",
   "origin": {
     "commit": null,
-    "origin_manifest_hash": "d5a724c5792ba333e84bd66bd947e2f0986216b928663c0cbe31b478b511fe75",
+    "origin_manifest_hash": "12b51783f7b449ed4705411921661394429915c9c0c56f86cad09af6ad6da26d",
     "product_phase": "Causal Action Receipt Loop",
     "product_version": "2.6.2",
     "schema": "NEXUS_ORIGIN_SEAL.v2.6.2",
@@ -374,7 +374,7 @@
   },
   "outcome_awareness": {
     "calibration_schema": "NEXUS_ARBITER_CALIBRATION.v2.2.0",
-    "latest_coherence_score": 88.0,
+    "latest_coherence_score": 91.0,
     "pressure_memory_schema": "NEXUS_PRESSURE_MEMORY.v2.2.0",
     "pressure_trend": "stable"
   },
@@ -412,7 +412,7 @@
         "fresh": false,
         "rule": "repository_commit + source_status_hash + input_snapshot_hash"
       },
-      "source_packet_hash": "ee97e1d947fbc9c78b71dc3b5a440bb0d4e677b8c6f635de72ae300f6333be63",
+      "source_packet_hash": "5c12960b5243cc11cda58e9a82bd68158e988747489cd12b3aadda46e188b7e1",
       "triadic_lattice": {
         "action": "cortex-certificate-refresh",
         "alignment": 0.6344,
@@ -443,7 +443,7 @@
         "fresh": false,
         "rule": "repository_commit + source_status_hash + input_snapshot_hash"
       },
-      "source_packet_hash": "56d7ef8cdbfc3d9a821bb69fded1dde7c2c00808bb788ebb445cc344f4be15b9",
+      "source_packet_hash": "208d3235b9628c0df95f5680ca09b07c34ec1a984b288156188768dbbcc0929b",
       "triadic_lattice": {
         "action": "inspect_dirty_scope",
         "alignment": 0.6742,
@@ -474,7 +474,7 @@
         "fresh": false,
         "rule": "repository_commit + source_status_hash + input_snapshot_hash"
       },
-      "source_packet_hash": "0d180ae3af8fd99db55c828a0af92b6740d95a2e0f82eb52409d76c71965ad48",
+      "source_packet_hash": "08aae252f5fd2f91eee4c2999d8dc2bcc8c81626b3212b338213b2919c626bee",
       "triadic_lattice": {
         "action": "predictive-timing",
         "alignment": 0.6742,
@@ -527,19 +527,19 @@
   ],
   "repository_snapshot": {
     "branch": "main",
-    "epoch_id": "588100b9306e67f2de42e61a",
-    "generated_at_utc": "2026-07-12T23:22:08.447472+00:00",
-    "input_snapshot_hash": "7005e69a35bc9690747cbba9d0d59aee08ce79ae5e3e3c5fd19945786695f519",
+    "epoch_id": "816e8232060b75ca10667a11",
+    "generated_at_utc": "2026-07-13T02:27:17.688658+00:00",
+    "input_snapshot_hash": "8824a3142e4628d6c5bb5dcaa4be3940ea1c4d1cf68aaf6c40de30d4adf7e2b2",
     "input_surfaces": [
       {
         "exists": true,
         "path": "state/nexus_origin_manifest_latest.json",
-        "sha256": "308a54f12b438bc77aaaa5e0033ba56270e8d58c6aa30a1ef2d98787e7be55f7"
+        "sha256": "64104e4dd3568d801caced6ffec4414016c2ec675f9f634a4ce10be4506eef3e"
       },
       {
         "exists": true,
         "path": "reports/nexus_origin_seal_latest.json",
-        "sha256": "308a54f12b438bc77aaaa5e0033ba56270e8d58c6aa30a1ef2d98787e7be55f7"
+        "sha256": "64104e4dd3568d801caced6ffec4414016c2ec675f9f634a4ce10be4506eef3e"
       },
       {
         "exists": true,
@@ -554,22 +554,22 @@
       {
         "exists": true,
         "path": "reports/nexus_predictive_memory_orchestrator_latest.json",
-        "sha256": "b3785431748dc7d33b087558fdbbcad7ed66d7b40090bb1d2aae6f9d9aca5163"
+        "sha256": "6ef0a598695702e6f7ae0329df43c8f43fcc6b042ec1dd78f0371802427d6abd"
       },
       {
         "exists": true,
         "path": "reports/nexus_predictive_evolve_plan_latest.json",
-        "sha256": "1a5c7da866bfabfc1d662a74ecb97c614fbf1ebac3466c08f2a7354eb76b9cdd"
+        "sha256": "0d6ef650e59349da362e024f5c3c6b4c56b78cb11c75f1d5655bac8f8feafd9d"
       },
       {
         "exists": true,
         "path": "reports/nexus_predictive_gate_timing_latest.json",
-        "sha256": "9a0bfe76c3c3c8e8b098529c14b2a3347d280cd1d2fc36c36ff2da672da50627"
+        "sha256": "d6c3b05d666add036ac9b3f04f700e96b76d40448e6385c2b657e501b9fef038"
       },
       {
         "exists": true,
         "path": "reports/nexus_certificate_resume_report_latest.json",
-        "sha256": "4018c1f02758167a7edfc37eaf7bc42bb319bec54c09684f16549466d17dcbca"
+        "sha256": "2763b53a4f520b6c7a31adcef684741fa2eef8035afa0e477bb21dffe9f6cf39"
       },
       {
         "exists": true,
@@ -584,48 +584,48 @@
       {
         "exists": true,
         "path": "state/algorithms/nexus_algorithm_cards_latest.json",
-        "sha256": "c1613377122df3ed1aea2d5cd254e77b5318e2576f35e56d89bc284ac930f0a8"
+        "sha256": "9f4c6cf37e738e48603adce66e160454e1c8a31fc43602baf7fbce6f2af27d20"
       },
       {
         "exists": true,
         "path": "state/discoveries/nexus_discovery_cards_latest.json",
-        "sha256": "dd86a73aeb9691f1e572013606a667515a20ee2fba3661346df295a0038c1b7e"
+        "sha256": "c673f3b4e97aef406f868b9223c87cf87d089f629c8155e4c0dad76206e6b2d1"
       },
       {
         "exists": true,
         "path": "reports/nexus_coherence_field_latest.json",
-        "sha256": "638207fdb00839314055415757d48cec64b7e500f9f66b8edf489b64637a6309"
+        "sha256": "bd7d9d74e983ab6e9c01e8112b7f1ef5a9fbdd747541d428a15fd84c580f6651"
       },
       {
         "exists": true,
         "path": "state/coherence/arbiter_calibration_latest.json",
-        "sha256": "76e08f0ca4ddd21fc17861005b3fbae016e7077a1bb14056beef66dc5744173e"
+        "sha256": "7b4b08f798490dc3da02c742236231a34b8d67163e2973c5ecb48ae260edb3d8"
       },
       {
         "exists": true,
         "path": "state/coherence/pressure_memory_latest.json",
-        "sha256": "88344b3c60049f6a84a0c006f5d51e3c752e3a657e8f1c6a7f8230dd683f0cf4"
+        "sha256": "98d929fbd976c31212b8721b6527acaa53963ab326e7afcd8f6b7985d8031f8b"
       },
       {
         "exists": true,
         "path": "reports/nexus_triadic_lattice_latest.json",
-        "sha256": "e3a50de150b9a0532c6392a7246849995ba532f54c78b79f032f78b7981cdd2f"
+        "sha256": "d6451c76278e143f2fa7217dd7ae6440c066a4685173385d14c20b6a73c0e7c0"
       },
       {
         "exists": true,
         "path": "state/lattice/nexus_triadic_lattice_latest.json",
-        "sha256": "e3a50de150b9a0532c6392a7246849995ba532f54c78b79f032f78b7981cdd2f"
+        "sha256": "d6451c76278e143f2fa7217dd7ae6440c066a4685173385d14c20b6a73c0e7c0"
       }
     ],
-    "repository_commit": "bf9b8d48da9250b38e6fb871ad2a554d63a8643a",
+    "repository_commit": "c64864f07a93671a4520c45da84ce95594e07174",
     "schema": "NEXUS_REPOSITORY_SNAPSHOT.v2.4.0",
-    "source_status_count": 47,
-    "source_status_hash": "1e2ed7f7d29d5a5b4607a2203269ff854b7e1a5db7626ae189182aa0d160f8d0"
+    "source_status_count": 25,
+    "source_status_hash": "bd5f198dda530879877c986d4439d0382117952b0748bf4478f83a425f45309f"
   },
   "risk": {
     "active_wound_key": null,
     "certificate_resume_gate": null,
-    "dirty_count": 127,
+    "dirty_count": 92,
     "runtime_pressure": "pass",
     "slowest_gate": null
   },
@@ -649,7 +649,7 @@
   "system": "NEXUS GATE",
   "triadic_lattice": {
     "average_alignment": 0.6637,
-    "lattice_packet_hash": "08599b301d6a9a20044ccfaa3b4abd636d6a404c5e12821bf5d6643ba26dfdb7",
+    "lattice_packet_hash": "2c303fcd90b782db31560992b2a4d99c4a1c7bfee0b0ecf97253e2b94daff59b",
     "schema": "NEXUS_TRIADIC_GEOMETRIC_LATTICE.v2.5.0",
     "selected_hint": {
       "action": "inspect_dirty_scope",

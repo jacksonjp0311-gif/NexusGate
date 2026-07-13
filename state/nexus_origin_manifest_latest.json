@@ -31,11 +31,10 @@
     "required_origin_surfaces_present": true
   },
   "claim_boundary": "Origin Seal is local development evidence only. It binds current repository identity, key surface hashes, commit state, and subsystem version lineage. It does not prove correctness, safety, security, production readiness, model understanding, or autonomous authority.",
-  "commit": "bf9b8d48da9250b38e6fb871ad2a554d63a8643a",
-  "dirty_count": 127,
+  "commit": "c64864f07a93671a4520c45da84ce95594e07174",
+  "dirty_count": 93,
   "dirty_entries_sample": [
-    "M .gitignore",
-    " M AGENTS.md",
+    "M AGENTS.md",
     " M NexusCell/ledger/nexus_cell_continuity.jsonl",
     " M README.md",
     " M \"Tesseract Neural Network/memory/conversation_latest.json\"",
@@ -47,16 +46,15 @@
     " M docs/feedback/FEEDBACK_LOG.md",
     " M docs/updates/UPDATE_CHART.md",
     " M docs/versioning/NEXUS_CHANGELOG.md",
-    " M electron/main.js",
+    " M ledger/action_lifecycle.jsonl",
+    " M ledger/action_receipts.jsonl",
     " M ledger/epoch_chain.jsonl",
+    " M ledger/epoch_observations.jsonl",
     " M ledger/evidence_distillation.jsonl",
     " M ledger/nexus_cell/continuity.jsonl",
     " M ledger/nexus_gate_ledger.v0.1.0.jsonl",
-    " M nexus_gate/decision/envelope.py",
+    " M nexus_gate/actions/cli.py",
     " M nexus_gate/discoveries/cards.py",
-    " M nexus_gate/epochs/seal.py",
-    " M nexus_gate/hygiene/runtime_churn.py",
-    " M nexus_gate/origin/seal.py",
     " M nexus_gate/outcomes/learn.py",
     " M reports/CHATGPT_HANDOFF_LATEST.md",
     " M reports/CODEX_HANDOFF_LATEST.md",
@@ -73,23 +71,25 @@
     " M reports/nexus_feedback_report_latest.json",
     " M reports/nexus_interconnect_report_latest.json",
     " M reports/nexus_loop_orchestration_report_latest.json",
-    " M reports/nexus_meta_orchestrator_gate.v1.1.3.json"
+    " M reports/nexus_meta_orchestrator_gate.v1.1.3.json",
+    " M reports/nexus_meta_orchestrator_gate_latest.json",
+    " M reports/nexus_nn_router_report_latest.json"
   ],
   "epoch_integrity": {
     "durable_admissibility": "working_tree_only",
     "ledger_chain_valid": true,
     "manifest_hash_valid": true,
     "observation_valid": true,
-    "source_epoch_id": "2644f029a92dbfc68f7c49f6f66e098ad5bf01838777b5396868730fe35378a6",
+    "source_epoch_id": "9eb11e2cc2ee501e0ffff8d3b0c497cd5406e952a19fe3a05af6cb31fb89a1a8",
     "source_root_match": true,
     "valid": true,
     "visible": true
   },
-  "generated_utc": "2026-07-12T23:22:39.859248+00:00",
+  "generated_utc": "2026-07-13T02:27:37.621215+00:00",
   "legacy_version_lineage": {
     "cortex_refresh_version": "1.2.1",
     "epoch_integrity_version": "2.6.2",
-    "latest_epoch_id": "2644f029a92dbfc68f7c49f6f66e098ad5bf01838777b5396868730fe35378a6",
+    "latest_epoch_id": "9eb11e2cc2ee501e0ffff8d3b0c497cd5406e952a19fe3a05af6cb31fb89a1a8",
     "lineage_manifest_phase": "Domain Intelligence Orchestrator",
     "lineage_manifest_system_version": "0.4.0",
     "meta_orchestrator_version": "1.1.3",
@@ -100,19 +100,19 @@
     "python_package_api_version": "0.1.3"
   },
   "next_action": ".\\scripts\\nexus.ps1 predictive-memory; .\\scripts\\nexus.ps1 evolve",
-  "origin_manifest_hash": "6fa18fd405a7dbf56f15cfe0866c2920d86eef2a3d449115f732899b63b8f489",
+  "origin_manifest_hash": "ad8b68c9491db897fa0e8d04b6066555961ce4deb1eb5fc206e8f7afcbfe234e",
   "origin_surfaces": [
     {
-      "bytes": 20219,
+      "bytes": 20517,
       "exists": true,
       "path": "README.md",
-      "sha256": "ba40f3bad3e96a0673d6c3e0be9003dfb53b6ddaf23d1493bb624b5a7418323c"
+      "sha256": "ae322b108b044021fe7f7c0b19fb22d41711fa8aef7f88c5d0d451080b460a2b"
     },
     {
-      "bytes": 18789,
+      "bytes": 19076,
       "exists": true,
       "path": "AGENTS.md",
-      "sha256": "613a4d73e5cfec79a208fda74d0553c7207acf4e202d73dede7eeae9507405d7"
+      "sha256": "ee467213397d7e9f82afccebb43cce3a2f52f52bfd1af488a5a1f0cfb68cb338"
     },
     {
       "bytes": 361,
@@ -127,16 +127,16 @@
       "sha256": "96b3d426abc316b64feaa10a11646b78583461f747b1833b5f6bcee76ac60b87"
     },
     {
-      "bytes": 10457,
+      "bytes": 10732,
       "exists": true,
       "path": "docs/updates/UPDATE_CHART.md",
-      "sha256": "b48038e9af096558ba35ac977a3d5e5ea57db5130974d2dc48314503fc9fb844"
+      "sha256": "16b503b2b6fdc40101e849a45eaa6e3819648c183fad4c18a4873dca8e2c2502"
     },
     {
-      "bytes": 16469,
+      "bytes": 17106,
       "exists": true,
       "path": "docs/versioning/NEXUS_CHANGELOG.md",
-      "sha256": "e9c2cb8f8cdd725b5110813e33257aee5b370ea99637def1c7a22eea07f98a0f"
+      "sha256": "471187a849df97216bdf4b5cb8902e33619cadf1e21c1bb097a761347c987e72"
     },
     {
       "bytes": 1142,
@@ -151,34 +151,34 @@
       "sha256": "6edac68a0f96abc8221dc629bacad38cd4d8477a3f2016ac1802842706847460"
     },
     {
-      "bytes": 90939,
+      "bytes": 100696,
       "exists": true,
       "path": "state/algorithms/nexus_algorithm_cards_latest.json",
-      "sha256": "c1613377122df3ed1aea2d5cd254e77b5318e2576f35e56d89bc284ac930f0a8"
+      "sha256": "9f4c6cf37e738e48603adce66e160454e1c8a31fc43602baf7fbce6f2af27d20"
     },
     {
-      "bytes": 41377,
+      "bytes": 44722,
       "exists": true,
       "path": "state/discoveries/nexus_discovery_cards_latest.json",
-      "sha256": "7ff96d8084a565204301e245c9c213e9f3da61e190a395f1e716db6f0a2aced8"
+      "sha256": "36126c96d1a1229a7361727509b60edfeda4ee896d7a1d6cc68fb78c6afe4347"
     },
     {
       "bytes": 18076,
       "exists": true,
       "path": "reports/nexus_compile_report_latest.json",
-      "sha256": "30df2409c30fd889bd037d546cec718c38be73283d2086e0c4a9f18fd9b46bd7"
+      "sha256": "429fa463f3c2189ec986f9d0c67470b91006f89f069a618eae2ccf7f9a97d8de"
     },
     {
-      "bytes": 16618,
+      "bytes": 16667,
       "exists": true,
       "path": "reports/nexus_meta_orchestrator_gate_latest.json",
-      "sha256": "b33344714d102623b2e21bff35c5266e6db8dceda80ecbfbff18ed36a4a1373b"
+      "sha256": "93cb56468198a9287dad1dd151eef3acdecbc0968fc9f19091ecb588ba4c261c"
     },
     {
-      "bytes": 12726,
+      "bytes": 13203,
       "exists": true,
       "path": "reports/nexus_predictive_memory_orchestrator_latest.json",
-      "sha256": "b3785431748dc7d33b087558fdbbcad7ed66d7b40090bb1d2aae6f9d9aca5163"
+      "sha256": "6ef0a598695702e6f7ae0329df43c8f43fcc6b042ec1dd78f0371802427d6abd"
     },
     {
       "bytes": 39342,
@@ -187,28 +187,28 @@
       "sha256": "3d5240bfdf2db3a26ad40ae1dd48ed3c6d97b53c7a843ac23975394cc6ab0e28"
     },
     {
-      "bytes": 39183,
+      "bytes": 38130,
       "exists": true,
       "path": "reports/nexus_epoch_integrity_seal_latest.json",
-      "sha256": "24b1dd1e15f2767a7af3069304922ffa6e76c8c57ac7fb596db75eb36dcd46e9"
+      "sha256": "2d6a0bf92fbd8c18803827b4969c03495c52311db9ba9b79c98b1906f427d010"
     },
     {
       "bytes": 4580,
       "exists": true,
       "path": "reports/nexus_triadic_lattice_latest.json",
-      "sha256": "e3a50de150b9a0532c6392a7246849995ba532f54c78b79f032f78b7981cdd2f"
+      "sha256": "d6451c76278e143f2fa7217dd7ae6440c066a4685173385d14c20b6a73c0e7c0"
     },
     {
-      "bytes": 32191,
+      "bytes": 32241,
       "exists": true,
       "path": "reports/nexus_evidence_distillation_report_latest.json",
-      "sha256": "e48524915aed0a2dae40c582377ec946326ff202c01d022543ad33101828963c"
+      "sha256": "6ef00561f07acabdc604473cfdf3acd40206c5eee8e918f0a26bf6a48727c2a5"
     },
     {
       "bytes": 929,
       "exists": true,
       "path": "state/latest_epoch_pointer.json",
-      "sha256": "5f202801fcfda64ce05c121ee93a6e31082b16b7cb7704144c7d3c36b9da58a6"
+      "sha256": "dfd18bba06d81fdee5d31d51d74b22a3cfb580392d1e8ce701de8324117901de"
     }
   ],
   "product_phase": "Causal Action Receipt Loop",
@@ -233,10 +233,10 @@
     "reports/nexus_evidence_distillation_report_latest.json",
     "state/latest_epoch_pointer.json"
   ],
-  "readme_current_line": "v2.6.2 Causal Action Receipt Loop, including v2.6.1a Epoch Integrity Hardening, Repo Neural Graph Runtime Hygiene, v2.6.1 Epoch Integrity Seal, v2.6.0 Evidence Distillation Graph, Triadic Geometric Lattice, and Causal Coherence Routing. Product identity is bound by Source Epochs, Observation Events, immutable `state/epochs/<source_epoch_id>/` packets, epoch ledgers, Origin Seal, Decision Envelope, Coherence Field, Triadic Lattice evidence, distilled graph nodes, and registered command-route metadata. Older version strings are subsystem lineage until deliberate migration; authority remains human-bound.",
+  "readme_current_line": "v2.6.3 Causal Integrity Hardening, including v2.6.2 Causal Action Receipt Loop, v2.6.1a Epoch Integrity Hardening, Repo Neural Graph Runtime Hygiene, v2.6.1 Epoch Integrity Seal, v2.6.0 Evidence Distillation Graph, Triadic Geometric Lattice, and Causal Coherence Routing. Product identity is bound by Source Epochs, Observation Events, immutable `state/epochs/<source_epoch_id>/` packets, epoch ledgers, Origin Seal, Decision Envelope, Coherence Field, Triadic Lattice evidence, distilled graph nodes, and registered command-route metadata. Older version strings are subsystem lineage until deliberate migration; authority remains human-bound.",
   "schema": "NEXUS_ORIGIN_SEAL.v2.6.2",
   "status": "pass",
-  "surface_hash": "cc0888c8fec298b289fcde9a655f031971fb5b1ab72e319eabd7ab93b75bc6ed",
+  "surface_hash": "c5d4784d93e9c290b36f5ddb71341b6225066f653f16b6ce9c06783f51a3cfe8",
   "system": "NEXUS GATE",
   "write_surfaces": [
     "reports/nexus_origin_seal_latest.json",

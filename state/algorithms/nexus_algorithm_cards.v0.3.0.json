@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 54,
+  "card_count": 60,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -1867,15 +1867,221 @@
       "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
       "summary": "No receipt means no learning. Working-tree-only epochs, duplicate receipts, validation failures, and confounded effects do not update durable route fitness.",
       "title": "Receipt-Gated Calibration Algorithm"
+    },
+    {
+      "algorithm_id": "receipt-dependency-enforcement-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "requested stage -> required prior receipt set -> immutable receipt hash check -> lifecycle state check -> allow or block",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 55,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Receipt dependency enforcement prevents validation, finalization, or learning from skipping effect proof. It does not prove the evidence is globally complete.",
+      "title": "Receipt Dependency Enforcement Algorithm"
+    },
+    {
+      "algorithm_id": "authorization-expiry-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "authorization receipt -> expires_at_utc -> current time -> expired/still valid -> execute or block",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 56,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Authorization is single-window and non-reusable. Expired authorization becomes `EXPIRED`, not implied consent.",
+      "title": "Authorization Expiry Algorithm"
+    },
+    {
+      "algorithm_id": "registry-definition-binding-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "registry entry -> canonical hash -> recommendation binding -> authorization binding -> execution-time hash comparison",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 57,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Registry definition binding prevents authorization reuse after executor target, write set, timeout, risk class, postcondition, or learning eligibility changes.",
+      "title": "Registry Definition Binding Algorithm"
+    },
+    {
+      "algorithm_id": "action-window-effect-attribution-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "pre snapshot -> post snapshot -> added/deleted/modified/already-dirty delta -> classify canonical/generated writes -> confounder pressure",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 58,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "This is action-window-associated attribution. NEXUS does not claim process-level file-access causality without direct instrumentation.",
+      "title": "Action-Window Effect Attribution Algorithm"
+    },
+    {
+      "algorithm_id": "final-evolve-learning-proof-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "validation receipt -> final_evolve_required -> final_evolve_report_hash -> final_evolve_passed -> durable learning decision",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 59,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Targeted validation may pass while durable learning remains blocked. Final evolve is local gate evidence, not production proof.",
+      "title": "Final Evolve Learning Proof Algorithm"
+    },
+    {
+      "algorithm_id": "replay-safe-calibration-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "learning receipt -> receipt hash -> calibration ledger replay check -> capped update -> route model before/after hash",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 60,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "One receipt may inform, several independent receipts may influence, repeated validated evidence may promote. Calibration adjusts recommendation pressure only.",
+      "title": "Replay-Safe Calibration Algorithm"
     }
   ],
   "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
   "discovered_algorithms": [
+    "action-window-effect-attribution-algorithm",
     "adaptive-timeout-budgeting",
     "append-only-ledger-transaction-algorithm",
     "arbiter-calibration-algorithm",
     "authority-gate-algorithm",
     "authority-monotonicity-algorithm",
+    "authorization-expiry-algorithm",
     "causal-action-lifecycle-algorithm",
     "causal-coherence-routing-algorithm",
     "causal-confidence-algorithm",
@@ -1897,6 +2103,7 @@
     "evidence-distillation-algorithm",
     "evidence-freshness-algorithm",
     "failure-doctor-algorithm",
+    "final-evolve-learning-proof-algorithm",
     "gate-dependency-invalidation-algorithm",
     "gate-selection-policy",
     "geometric-memory-router-algorithm",
@@ -1913,9 +2120,12 @@
     "predictive-memory-orchestrator-algorithm",
     "pressure-memory-algorithm",
     "provenance-preserving-pruning-algorithm",
+    "receipt-dependency-enforcement-algorithm",
     "receipt-gated-calibration-algorithm",
     "reflective-repair-algorithm",
+    "registry-definition-binding-algorithm",
     "rehydration-algorithm",
+    "replay-safe-calibration-algorithm",
     "repo-native-memory-promotion-algorithm",
     "route-decision-algorithm",
     "runtime-churn-hygiene-algorithm",
@@ -1927,7 +2137,7 @@
     "versioned-vector-blob-storage-algorithm"
   ],
   "discovery_source": "derived_from_cards_algorithm_id",
-  "generated_at_utc": "2026-07-12T23:21:58.962686+00:00",
+  "generated_at_utc": "2026-07-13T02:27:03.699610+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",

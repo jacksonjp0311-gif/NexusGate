@@ -1,5 +1,15 @@
-## v2.6.2 - Causal Action Receipt Loop
+## v2.6.3 - Causal Integrity Hardening
 Status: current
+- Makes Effect Receipt mandatory before validation.
+- Binds authorization to command registry entry hash, arguments hash, pre-source epoch, and pre-source root.
+- Enforces authorization expiry and single-use execution.
+- Adds snapshot-based effect attribution for added, deleted, modified, already-dirty, generated, and canonical source writes.
+- Requires final evolve evidence and clean epoch admissibility before durable learning.
+- Adds first-learning-readiness report and command lane.
+- Keeps evolve recommendation-only: no autonomous authorization, execution, or calibration.
+
+## v2.6.2 - Causal Action Receipt Loop
+Status: sealed
 - Adds Source Epoch / Observation split for v2.6.1a Epoch Integrity Hardening.
 - Adds concurrency-aware append-only ledger helper.
 - Adds causal action recommendation, authorization, execution, effects, validation, and learning receipt surfaces.
