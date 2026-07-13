@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "action-recommend", "action-chain-verify", "causal-receipts", "first-learning-readiness", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "action-recommend", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-chain-verify", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [string]$ActionId = "",
     [switch]$NoGit
@@ -193,6 +193,11 @@ function Run-All {
     Run-Pack
     Invoke-Step "Runtime hygiene" "18_runtime_hygiene.json" { python -m nexus_gate.hygiene.runtime_churn --root . --json }
     Invoke-Step "First learning readiness" "18b_first_learning_readiness.json" { python -m nexus_gate.actions.cli first-learning-readiness --root . --json }
+    Invoke-Step "Action semantic verify" "18c_action_semantic_verify.json" { python -m nexus_gate.actions.cli semantic-verify --root . --json }
+    Invoke-Step "Experience chain verify" "18d_experience_chain_verify.json" { python -m nexus_gate.actions.cli experience-chain-verify --root . --json }
+    Invoke-Step "Calibration replay verify" "18e_calibration_replay_verify.json" { python -m nexus_gate.actions.cli calibration-replay-verify --root . --json }
+    Invoke-Step "Adaptive coherence" "18f_adaptive_coherence.json" { python -m nexus_gate.actions.cli adaptive-coherence --root . --json }
+    Invoke-Step "Emergence observation" "18g_emergence_observation.json" { python -m nexus_gate.actions.cli emergence-report --root . --json }
     Invoke-Step "Epoch chain verify" "19_epoch_chain_verify.json" { python -m nexus_gate.epochs.seal --root . --chain-verify --json }
     Say "Compiled report files written." "OK"
     Say "Human surface passed." "OK"
@@ -436,6 +441,45 @@ if ($Command -eq "action-recommend") {
 if ($Command -eq "action-chain-verify") {
     Invoke-Step "Causal action chain verify" "16i4_action_chain_verify.json" { python -m nexus_gate.actions.cli chain-verify --root . --json }
     Say "Causal action chain verified." "OK"
+    exit 0
+}
+
+if ($Command -eq "action-semantic-verify") {
+    Invoke-Step "Causal action semantic verify" "16i4b_action_semantic_verify.json" {
+        if ([string]::IsNullOrWhiteSpace($ActionId)) { python -m nexus_gate.actions.cli semantic-verify --root . --json }
+        else { python -m nexus_gate.actions.cli semantic-verify --root . --action-id $ActionId --json }
+    }
+    Say "Causal action semantics verified." "OK"
+    exit 0
+}
+
+if ($Command -eq "experience-readiness") {
+    Invoke-Step "Experience readiness" "16i6_experience_readiness.json" { python -m nexus_gate.actions.cli experience-readiness --root . --json }
+    Say "Experience readiness report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "experience-chain-verify") {
+    Invoke-Step "Experience chain verify" "16i7_experience_chain_verify.json" { python -m nexus_gate.actions.cli experience-chain-verify --root . --json }
+    Say "Experience chain verified." "OK"
+    exit 0
+}
+
+if ($Command -eq "calibration-replay-verify") {
+    Invoke-Step "Calibration replay verify" "16i8_calibration_replay_verify.json" { python -m nexus_gate.actions.cli calibration-replay-verify --root . --json }
+    Say "Calibration replay verified." "OK"
+    exit 0
+}
+
+if ($Command -eq "adaptive-coherence") {
+    Invoke-Step "Adaptive coherence" "16i9_adaptive_coherence.json" { python -m nexus_gate.actions.cli adaptive-coherence --root . --json }
+    Say "Adaptive coherence report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "emergence-report") {
+    Invoke-Step "Emergence observation" "16i10_emergence_observation.json" { python -m nexus_gate.actions.cli emergence-report --root . --json }
+    Say "Emergence observation report written." "OK"
     exit 0
 }
 

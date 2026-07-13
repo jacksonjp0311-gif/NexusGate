@@ -1,5 +1,15 @@
-## v2.6.3 - Causal Integrity Hardening
+## v2.7.0 - Governed Experience Engine
 Status: current
+- Adds semantic action-chain verification so receipt presence is not treated as receipt validity.
+- Adds action-bound final evolve receipts; general latest evolve summaries no longer satisfy specific action learning proof.
+- Adds verified Experience Seals under `state/experiences/<experience_id>/` and `ledger/experience_chain.jsonl`.
+- Separates source identity, runtime experience, and calibration/plasticity surfaces.
+- Adds explicit calibration status, authorization, application, and replay verification lanes.
+- Adds adaptive coherence and emergence observation reports with sample-sufficiency counter-signals.
+- Keeps evolve recommendation-only: no autonomous authorization, execution, source mutation, or route promotion.
+
+## v2.6.3 - Causal Integrity Hardening
+Status: sealed
 - Makes Effect Receipt mandatory before validation.
 - Binds authorization to command registry entry hash, arguments hash, pre-source epoch, and pre-source root.
 - Enforces authorization expiry and single-use execution.

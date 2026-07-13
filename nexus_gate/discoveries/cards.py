@@ -938,6 +938,106 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
                 "v0.3: explicit reauthorization packet",
             ],
             "boundary": "Authorization evidence binds a local action. It is not reusable, delegable, or identity proof.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "source-identity-is-not-runtime-activity",
+            "version": "0.1.0",
+            "title": "Source Identity Is Not Runtime Activity",
+            "status": "active",
+            "summary": "A successful governed action may intentionally write runtime receipts, reports, and observations without changing the Source Epoch that defines NEXUS identity.",
+            "math": {
+                "source_epoch": "hash(canonical_source + runtime_contract + schema_compatibility)",
+                "experience": "hash(source_epoch + action_id + execution_hash + effect_hash + validation_hash)",
+                "rule": "expected_runtime_mutation != source_drift",
+            },
+            "code_references": [
+                "nexus_gate/actions/cli.py::experience_seal",
+                "nexus_gate/actions/cli.py::action_final_evolve",
+                "nexus_gate/epochs/seal.py::build_epoch_integrity_seal",
+            ],
+            "algorithm_card_refs": [
+                "identity-plane-experience-plane-plasticity-plane-algorithm",
+                "verified-experience-seal-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 experience-readiness",
+                ".\\scripts\\nexus.ps1 experience-chain-verify",
+                "Confirm runtime receipts do not become autonomous source authority.",
+            ],
+            "evidence_surfaces": [
+                "state/experiences/<experience_id>/experience_manifest.json",
+                "ledger/experience_chain.jsonl",
+                "reports/nexus_experience_readiness_latest.json",
+            ],
+            "next_versions": ["v0.2: move local runtime memory outside canonical source identity"],
+            "boundary": "This discovery separates identity from experience. It does not permit untracked source mutation or automatic learning.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "receipt-presence-is-not-receipt-validity",
+            "version": "0.1.0",
+            "title": "Receipt Presence Is Not Receipt Validity",
+            "status": "active",
+            "summary": "A receipt file is only evidence after its hash, schema, action identity, ledger event, and lifecycle order are recomputed and verified.",
+            "math": {
+                "valid_receipt": "hash_match AND schema_valid AND action_match AND ledger_event_present",
+                "valid_sequence": "valid_receipts AND ordered_stages AND prerequisite_stages_present",
+                "rule": "present_file != admissible_evidence",
+            },
+            "code_references": [
+                "nexus_gate/actions/cli.py::_verify_receipt",
+                "nexus_gate/actions/cli.py::semantic_verify",
+            ],
+            "algorithm_card_refs": [
+                "semantic-action-chain-verification-algorithm",
+                "receipt-dependency-enforcement-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 action-semantic-verify -ActionId \"<id>\"",
+                "Tamper with a receipt in a fixture and confirm verification fails closed.",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_action_semantic_verify_latest.json",
+                "ledger/action_receipts.jsonl",
+            ],
+            "next_versions": ["v0.2: expose semantic failures in Electron action HUD"],
+            "boundary": "Semantic verification is local evidence only. It does not prove global correctness or security.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "verified-experience-before-plasticity",
+            "version": "0.1.0",
+            "title": "Verified Experience Before Plasticity",
+            "status": "active",
+            "summary": "NEXUS may organize memory from verified experiences, but route calibration remains explicit, bounded, replay-safe, and human authorized.",
+            "math": {
+                "plasticity_gate": "semantic_pass AND experience_sealed AND learning_eligible AND calibration_authorized",
+                "sample_rule": "one experience may inform; three independent experiences may influence",
+                "coherence": "geometric_mean(identity, causal, experience, calibration, sample_sufficiency)",
+            },
+            "code_references": [
+                "nexus_gate/actions/cli.py::calibration_status",
+                "nexus_gate/actions/cli.py::calibration_apply",
+                "nexus_gate/actions/cli.py::adaptive_coherence",
+            ],
+            "algorithm_card_refs": [
+                "adaptive-coherence-measurement-algorithm",
+                "emergence-observation-algorithm",
+                "replay-safe-calibration-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 adaptive-coherence",
+                ".\\scripts\\nexus.ps1 emergence-report",
+                ".\\scripts\\nexus.ps1 calibration-status -ActionId \"<experience-id>\"",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_adaptive_coherence_latest.json",
+                "reports/nexus_emergence_observation_latest.json",
+                "reports/nexus_calibration_status_latest.json",
+            ],
+            "next_versions": ["v0.2: benchmark route improvement over uncalibrated baseline"],
+            "boundary": "Plasticity changes recommendation pressure only after explicit authorization. It never creates autonomous authority.",
         }
     ]
     return {

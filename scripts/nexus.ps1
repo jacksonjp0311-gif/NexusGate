@@ -24,7 +24,7 @@
 # nexus_gate.epochs.seal
 # nexus_gate.actions.cli
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "predictive-memory", "certificate-resume", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "action-recommend", "action-status", "action-authorize", "action-deny", "action-execute", "action-effects", "action-validate", "action-finalize", "action-chain-verify", "causal-receipts", "first-learning-readiness", "install-hooks", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "cortex-refresh", "sync-cortex")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "predictive-memory", "certificate-resume", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "action-recommend", "action-status", "action-authorize", "action-deny", "action-execute", "action-effects", "action-final-evolve", "action-validate", "action-finalize", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-seal", "experience-chain-verify", "calibration-status", "calibration-authorize", "calibration-apply", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "install-hooks", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "cortex-refresh", "sync-cortex")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -489,9 +489,23 @@ switch ($Command) {
     "action-deny" { python -m nexus_gate.actions.cli deny --root . --action-id $ActionId --json }
     "action-execute" { python -m nexus_gate.actions.cli execute --root . --action-id $ActionId --json }
     "action-effects" { python -m nexus_gate.actions.cli effects --root . --action-id $ActionId --json }
+    "action-final-evolve" { python -m nexus_gate.actions.cli action-final-evolve --root . --action-id $ActionId --json }
     "action-validate" { python -m nexus_gate.actions.cli validate --root . --action-id $ActionId --json }
     "action-finalize" { python -m nexus_gate.actions.cli finalize --root . --action-id $ActionId --json }
     "action-chain-verify" { python -m nexus_gate.actions.cli chain-verify --root . --json }
+    "action-semantic-verify" {
+        if ([string]::IsNullOrWhiteSpace($ActionId)) { python -m nexus_gate.actions.cli semantic-verify --root . --json }
+        else { python -m nexus_gate.actions.cli semantic-verify --root . --action-id $ActionId --json }
+    }
+    "experience-readiness" { python -m nexus_gate.actions.cli experience-readiness --root . --json }
+    "experience-seal" { python -m nexus_gate.actions.cli experience-seal --root . --action-id $ActionId --json }
+    "experience-chain-verify" { python -m nexus_gate.actions.cli experience-chain-verify --root . --json }
+    "calibration-status" { python -m nexus_gate.actions.cli calibration-status --root . --experience-id $ActionId --json }
+    "calibration-authorize" { python -m nexus_gate.actions.cli calibration-authorize --root . --experience-id $ActionId --note $Tag --json }
+    "calibration-apply" { python -m nexus_gate.actions.cli calibration-apply --root . --experience-id $ActionId --json }
+    "calibration-replay-verify" { python -m nexus_gate.actions.cli calibration-replay-verify --root . --json }
+    "adaptive-coherence" { python -m nexus_gate.actions.cli adaptive-coherence --root . --json }
+    "emergence-report" { python -m nexus_gate.actions.cli emergence-report --root . --json }
     "causal-receipts" { python -m nexus_gate.actions.cli receipts --root . --json }
     "first-learning-readiness" { python -m nexus_gate.actions.cli first-learning-readiness --root . --json }
     "install-hooks" { & (Join-Path $PSScriptRoot "install_nexus_git_hooks.ps1") -Root $Root }

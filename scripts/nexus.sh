@@ -234,6 +234,10 @@ case "$COMMAND" in
     shift || true
     python -m nexus_gate.actions.cli effects --root . --action-id "${1:-}" --json
     ;;
+  action-final-evolve)
+    shift || true
+    python -m nexus_gate.actions.cli action-final-evolve --root . --action-id "${1:-}" --json
+    ;;
   action-validate)
     shift || true
     python -m nexus_gate.actions.cli validate --root . --action-id "${1:-}" --json
@@ -243,6 +247,33 @@ case "$COMMAND" in
     python -m nexus_gate.actions.cli finalize --root . --action-id "${1:-}" --json
     ;;
   action-chain-verify) python -m nexus_gate.actions.cli chain-verify --root . --json ;;
+  action-semantic-verify)
+    shift || true
+    python -m nexus_gate.actions.cli semantic-verify --root . --action-id "${1:-}" --json
+    ;;
+  experience-readiness) python -m nexus_gate.actions.cli experience-readiness --root . --json ;;
+  experience-chain-verify) python -m nexus_gate.actions.cli experience-chain-verify --root . --json ;;
+  calibration-replay-verify) python -m nexus_gate.actions.cli calibration-replay-verify --root . --json ;;
+  adaptive-coherence) python -m nexus_gate.actions.cli adaptive-coherence --root . --json ;;
+  emergence-report) python -m nexus_gate.actions.cli emergence-report --root . --json ;;
+  experience-seal)
+    shift || true
+    python -m nexus_gate.actions.cli experience-seal --root . --action-id "${1:-}" --json
+    ;;
+  calibration-status)
+    shift || true
+    python -m nexus_gate.actions.cli calibration-status --root . --experience-id "${1:-}" --json
+    ;;
+  calibration-authorize)
+    shift || true
+    EXP_ID="${1:-}"
+    shift || true
+    python -m nexus_gate.actions.cli calibration-authorize --root . --experience-id "$EXP_ID" --note "${*:-}" --json
+    ;;
+  calibration-apply)
+    shift || true
+    python -m nexus_gate.actions.cli calibration-apply --root . --experience-id "${1:-}" --json
+    ;;
   causal-receipts) python -m nexus_gate.actions.cli receipts --root . --json ;;
   first-learning-readiness) python -m nexus_gate.actions.cli first-learning-readiness --root . --json ;;
   install-hooks) ./scripts/install_nexus_git_hooks.sh ;;

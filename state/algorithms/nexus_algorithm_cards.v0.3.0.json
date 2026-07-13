@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 60,
+  "card_count": 66,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -2071,11 +2071,217 @@
       "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
       "summary": "One receipt may inform, several independent receipts may influence, repeated validated evidence may promote. Calibration adjusts recommendation pressure only.",
       "title": "Replay-Safe Calibration Algorithm"
+    },
+    {
+      "algorithm_id": "semantic-action-chain-verification-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "receipt files + receipt hashes + ledger events + lifecycle order -> semantic pass/fail",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 61,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "A valid hash chain can still contain an invalid causal sequence. Semantic verification checks stage order, immutable receipt validity, matching action IDs, matching recommendation IDs, and prerequisite receipt presence before later stages may consume earlier evidence.",
+      "title": "Semantic Action Chain Verification Algorithm"
+    },
+    {
+      "algorithm_id": "action-bound-final-evolve-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "effect receipt -> action-specific verifier -> epoch/action/experience checks -> final-evolve receipt",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 62,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "A general latest evolve pass is not proof for a specific action. Action-bound final evolve verifies after effect capture, records input receipt hashes, and separates verifier-generated report churn from the target action's own effects.",
+      "title": "Action-Bound Final Evolve Algorithm"
+    },
+    {
+      "algorithm_id": "verified-experience-seal-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "recommendation + authorization + execution + effects + final evolve + validation + learning -> semantic verify -> experience id",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 63,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Experience Seals bind a completed causal action into an auditable experience object. They preserve source epoch identity, receipt references, semantic verification evidence, and calibration status without granting future authority.",
+      "title": "Verified Experience Seal Algorithm"
+    },
+    {
+      "algorithm_id": "identity-plane-experience-plane-plasticity-plane-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "source identity -> runtime experience -> authorized calibration -> bounded future route pressure",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 64,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Source identity defines what governed system acted. Experience records what happened during an authorized action. Plasticity is the separately authorized ability for verified experience to adjust future routing pressure.",
+      "title": "Identity Plane / Experience Plane / Plasticity Plane Algorithm"
+    },
+    {
+      "algorithm_id": "adaptive-coherence-measurement-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "identity integrity + causal integrity + experience integrity + calibration integrity + sample sufficiency -> geometric mean",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 65,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Adaptive coherence is measured conservatively so one strong dimension cannot hide a weak causal dimension. Low sample sufficiency keeps emergence claims blocked even when structural readiness looks high.",
+      "title": "Adaptive Coherence Measurement Algorithm"
+    },
+    {
+      "algorithm_id": "emergence-observation-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "verified experiences + calibration events + coherence dimensions + counter-signals -> emergence observation report",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 66,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Emergence observation is an engineering measurement surface. It records self-organization signals and counter-signals, but it does not claim consciousness, AGI, autonomous authority, or production readiness.",
+      "title": "Emergence Observation Algorithm"
     }
   ],
   "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
   "discovered_algorithms": [
+    "action-bound-final-evolve-algorithm",
     "action-window-effect-attribution-algorithm",
+    "adaptive-coherence-measurement-algorithm",
     "adaptive-timeout-budgeting",
     "append-only-ledger-transaction-algorithm",
     "arbiter-calibration-algorithm",
@@ -2098,6 +2304,7 @@
     "decision-envelope-arbitration-algorithm",
     "effect-set-comparison-algorithm",
     "emergence-detection-algorithm",
+    "emergence-observation-algorithm",
     "epoch-integrity-seal-algorithm",
     "epoch-observation-algorithm",
     "evidence-distillation-algorithm",
@@ -2111,6 +2318,7 @@
     "geometric-runtime-packet-algorithm",
     "governed-agent-continuity-algorithm",
     "human-authorization-binding-algorithm",
+    "identity-plane-experience-plane-plasticity-plane-algorithm",
     "lineage-topology-algorithm",
     "meta-loop-registry-algorithm",
     "origin-seal-algorithm",
@@ -2131,13 +2339,15 @@
     "runtime-churn-hygiene-algorithm",
     "runtime-pressure-model",
     "self-bootstrap-decision-envelope-algorithm",
+    "semantic-action-chain-verification-algorithm",
     "source-epoch-identity-algorithm",
     "triadic-geometric-lattice-algorithm",
     "ui-surface-algorithm",
+    "verified-experience-seal-algorithm",
     "versioned-vector-blob-storage-algorithm"
   ],
   "discovery_source": "derived_from_cards_algorithm_id",
-  "generated_at_utc": "2026-07-13T02:27:03.699610+00:00",
+  "generated_at_utc": "2026-07-13T05:53:20.843171+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",

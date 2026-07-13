@@ -484,3 +484,51 @@ learning receipt -> receipt hash -> calibration ledger replay check -> capped up
 ```
 
 One receipt may inform, several independent receipts may influence, repeated validated evidence may promote. Calibration adjusts recommendation pressure only.
+
+## Semantic Action Chain Verification Algorithm
+
+```text
+receipt files + receipt hashes + ledger events + lifecycle order -> semantic pass/fail
+```
+
+A valid hash chain can still contain an invalid causal sequence. Semantic verification checks stage order, immutable receipt validity, matching action IDs, matching recommendation IDs, and prerequisite receipt presence before later stages may consume earlier evidence.
+
+## Action-Bound Final Evolve Algorithm
+
+```text
+effect receipt -> action-specific verifier -> epoch/action/experience checks -> final-evolve receipt
+```
+
+A general latest evolve pass is not proof for a specific action. Action-bound final evolve verifies after effect capture, records input receipt hashes, and separates verifier-generated report churn from the target action's own effects.
+
+## Verified Experience Seal Algorithm
+
+```text
+recommendation + authorization + execution + effects + final evolve + validation + learning -> semantic verify -> experience id
+```
+
+Experience Seals bind a completed causal action into an auditable experience object. They preserve source epoch identity, receipt references, semantic verification evidence, and calibration status without granting future authority.
+
+## Identity Plane / Experience Plane / Plasticity Plane Algorithm
+
+```text
+source identity -> runtime experience -> authorized calibration -> bounded future route pressure
+```
+
+Source identity defines what governed system acted. Experience records what happened during an authorized action. Plasticity is the separately authorized ability for verified experience to adjust future routing pressure.
+
+## Adaptive Coherence Measurement Algorithm
+
+```text
+identity integrity + causal integrity + experience integrity + calibration integrity + sample sufficiency -> geometric mean
+```
+
+Adaptive coherence is measured conservatively so one strong dimension cannot hide a weak causal dimension. Low sample sufficiency keeps emergence claims blocked even when structural readiness looks high.
+
+## Emergence Observation Algorithm
+
+```text
+verified experiences + calibration events + coherence dimensions + counter-signals -> emergence observation report
+```
+
+Emergence observation is an engineering measurement surface. It records self-organization signals and counter-signals, but it does not claim consciousness, AGI, autonomous authority, or production readiness.
