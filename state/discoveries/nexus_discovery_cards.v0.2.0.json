@@ -1,5 +1,5 @@
 {
-  "card_count": 27,
+  "card_count": 29,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -1052,10 +1052,74 @@
       "summary": "A small read-only pulse can compress freshness, runtime pressure, and Git scope into an inhale/hold/exhale phase for the next human or AI pass.",
       "title": "Breath As Vital-Sign Compression",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "geometric-conductance-field-algorithm"
+      ],
+      "boundary": "Conductance may alter route preference. It may not bypass authority, receipt validity, or final evolve.",
+      "code_references": [
+        "nexus_gate/field/laplacian.py::electrical_flow",
+        "nexus_gate/field/conductance.py::build_conductance_field"
+      ],
+      "discovery_id": "conductance-is-preference-not-authority",
+      "evidence_surfaces": [
+        "reports/nexus_conductance_field_latest.json"
+      ],
+      "math": {
+        "flow": "Q_e = D_e * (phi_u - phi_v)",
+        "laplacian": "L(D) = B diag(D) B^T",
+        "law": "conductance_adjusts_preference AND NOT authority"
+      },
+      "next_versions": [
+        "v0.2: add authorized conductance calibration events from repeated verified experiences"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 conductance-field"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Sparse edge conductance can guide paths of least resistance while preserving human authorization as a binary hard gate.",
+      "title": "Conductance Is Preference Not Authority",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "governed-telemetry-codec-algorithm"
+      ],
+      "boundary": "Telemetry can describe the world. It cannot task external systems, authorize action, or calibrate directly.",
+      "code_references": [
+        "nexus_gate/telemetry/policy.py::validate_url",
+        "nexus_gate/telemetry/normalize.py::observation",
+        "nexus_gate/telemetry/fusion.py::fuse_observations"
+      ],
+      "discovery_id": "telemetry-is-observation-not-instruction",
+      "evidence_surfaces": [
+        "reports/nexus_telemetry_health_latest.json",
+        "reports/nexus_telemetry_field_latest.json"
+      ],
+      "math": {
+        "freshness": "exp(-ln(2) * age_seconds / half_life_seconds)",
+        "law": "external_text = data, not instruction",
+        "trust": "source_prior * schema_validity * freshness * agreement * provenance_integrity"
+      },
+      "next_versions": [
+        "v0.2: add optional live adapter smoke tests behind NEXUS_TELEMETRY_LIVE=1"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 telemetry-health",
+        ".\\scripts\\nexus.ps1 telemetry-pull -Tag space-weather",
+        ".\\scripts\\nexus.ps1 telemetry-fuse"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "External weather, space, seismic, and orbital packets can contextualize NEXUS without becoming commands or authority.",
+      "title": "Telemetry Is Observation Not Instruction",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-13T09:07:58.456037+00:00",
+  "generated_at_utc": "2026-07-13T12:11:35.391977+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

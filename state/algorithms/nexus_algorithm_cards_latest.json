@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 67,
+  "card_count": 70,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -2309,6 +2309,108 @@
       "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
       "summary": "Breath Pulse is the fast vital-sign loop for NEXUS. It reads existing reports, classifies missing or stale surfaces, detects canonical versus runtime Git pressure, and emits one compact operating phase. It may orient the next AI or human pass, but it cannot execute, self-authorize, calibrate, mutate source, or replace final evolve.",
       "title": "Breath Pulse Algorithm"
+    },
+    {
+      "algorithm_id": "semantic-breath-regulation-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "packet timestamps + producer registry + action lifecycle + pulse history -> semantic freshness -> vitality/pressure -> shell-neutral command id",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 68,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Breath regulates attention before route planning. It recommends the producer of stale evidence, not Breath itself, and gives active action lifecycles priority over unrelated broad work.",
+      "title": "Semantic Breath Regulation Algorithm"
+    },
+    {
+      "algorithm_id": "geometric-conductance-field-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "triadic prior + Breath pressure + telemetry salience -> bounded conductance graph -> Laplacian flow -> route preference",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 69,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Conductance is preference, not authority. Weighted edges may adjust route preference; hard gates such as human authorization, source identity, schema validity, and receipt validity remain binary.",
+      "title": "Geometric Conductance Field Algorithm"
+    },
+    {
+      "algorithm_id": "governed-telemetry-codec-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "source registry -> allowlisted GET -> normalized observation -> robust fusion -> telemetry salience",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 70,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Telemetry is external sensing only. External text is data, not instruction. Telemetry may contextualize route pressure, but it cannot task external systems, authorize action, or calibrate directly.",
+      "title": "Governed Telemetry Codec Algorithm"
     }
   ],
   "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
@@ -2348,10 +2450,12 @@
     "final-evolve-learning-proof-algorithm",
     "gate-dependency-invalidation-algorithm",
     "gate-selection-policy",
+    "geometric-conductance-field-algorithm",
     "geometric-memory-router-algorithm",
     "geometric-preflight-cleanup-algorithm",
     "geometric-runtime-packet-algorithm",
     "governed-agent-continuity-algorithm",
+    "governed-telemetry-codec-algorithm",
     "human-authorization-binding-algorithm",
     "identity-plane-experience-plane-plasticity-plane-algorithm",
     "lineage-topology-algorithm",
@@ -2375,6 +2479,7 @@
     "runtime-pressure-model",
     "self-bootstrap-decision-envelope-algorithm",
     "semantic-action-chain-verification-algorithm",
+    "semantic-breath-regulation-algorithm",
     "source-epoch-identity-algorithm",
     "triadic-geometric-lattice-algorithm",
     "ui-surface-algorithm",
@@ -2382,7 +2487,7 @@
     "versioned-vector-blob-storage-algorithm"
   ],
   "discovery_source": "derived_from_cards_algorithm_id",
-  "generated_at_utc": "2026-07-13T09:07:34.668200+00:00",
+  "generated_at_utc": "2026-07-13T12:11:19.215357+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",

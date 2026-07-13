@@ -1,5 +1,13 @@
-## v2.7.1 - Breath Pulse
+## v2.8.0 - Cybernetic Field Engine
 Status: current
+- Upgrades Breath with semantic freshness, command IDs, lifecycle priority, pressure/vitality split, and pulse history.
+- Adds the Geometric Conductance Lattice: sparse pure-Python electrical-flow route preference with hard authority gates preserved.
+- Adds the Governed Telemetry Codec: offline-safe source registry, health, fixture pulls, normalization, fusion, and untrusted-text boundaries.
+- Integrates telemetry health/fusion, Breath, conductance field, and replay verification into evolve.
+- Boundary: pressure guides attention, conductance alters preference, telemetry describes context; none authorize action or durable plasticity.
+
+## v2.7.1 - Breath Pulse
+Status: sealed
 - Adds `.\scripts\nexus.ps1 breath` and Bash parity as a read-only vital-sign lane.
 - Writes `reports/nexus_breath_pulse_latest.json` and `state/breath/nexus_breath_pulse_latest.json`.
 - Summarizes freshness, runtime pressure, Git scope, and an inhale/hold/exhale next-command phase.

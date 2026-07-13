@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS Telemetry Observation v2.8.0",
+  "type": "object",
+  "required": ["schema", "observation_id", "source_id", "phenomenon", "measurement", "provenance", "quality", "authority_boundary"],
+  "properties": {
+    "schema": {"const": "NEXUS_TELEMETRY_OBSERVATION.v2.8.0"},
+    "observation_id": {"type": "string"},
+    "source_id": {"type": "string"},
+    "phenomenon": {"type": "string"},
+    "measurement": {"type": "object"},
+    "provenance": {"type": "object"},
+    "quality": {"type": "object"},
+    "authority_boundary": {"type": "object"}
+  }
+}

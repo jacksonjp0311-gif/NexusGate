@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS Conductance Field v2.8.0",
+  "type": "object",
+  "required": ["schema", "status", "nodes", "edges", "flow", "route_recommendation", "claim_boundary"],
+  "properties": {
+    "schema": {"const": "NEXUS_CONDUCTANCE_FIELD.v2.8.0"},
+    "status": {"enum": ["pass", "warn", "fail"]},
+    "nodes": {"type": "array"},
+    "edges": {"type": "array"},
+    "flow": {"type": "object"},
+    "route_recommendation": {"type": "object"},
+    "claim_boundary": {"type": "string"}
+  }
+}

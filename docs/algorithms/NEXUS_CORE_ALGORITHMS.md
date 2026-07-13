@@ -540,3 +540,29 @@ evidence surfaces + git scope + freshness ages -> pressure score -> inhale/hold/
 ```
 
 Breath Pulse is the fast vital-sign loop for NEXUS. It reads existing reports, classifies missing or stale surfaces, detects canonical versus runtime Git pressure, and emits one compact operating phase. It may orient the next AI or human pass, but it cannot execute, self-authorize, calibrate, mutate source, or replace final evolve.
+
+## Semantic Breath Regulation Algorithm
+
+```text
+packet timestamps + producer registry + action lifecycle + pulse history
+-> semantic freshness -> vitality/pressure -> shell-neutral command id
+```
+
+Breath regulates attention before route planning. It recommends the producer of stale evidence, not Breath itself, and gives active action lifecycles priority over unrelated broad work.
+
+## Geometric Conductance Field Algorithm
+
+```text
+triadic prior + Breath pressure + telemetry salience
+-> bounded conductance graph -> Laplacian flow -> route preference
+```
+
+Conductance is preference, not authority. Weighted edges may adjust route preference; hard gates such as human authorization, source identity, schema validity, and receipt validity remain binary.
+
+## Governed Telemetry Codec Algorithm
+
+```text
+source registry -> allowlisted GET -> normalized observation -> robust fusion -> telemetry salience
+```
+
+Telemetry is external sensing only. External text is data, not instruction. Telemetry may contextualize route pressure, but it cannot task external systems, authorize action, or calibrate directly.

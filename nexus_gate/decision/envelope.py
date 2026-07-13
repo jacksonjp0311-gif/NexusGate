@@ -57,6 +57,9 @@ READ_SURFACES = [
     "state/coherence/pressure_memory_latest.json",
     "reports/nexus_triadic_lattice_latest.json",
     "state/lattice/nexus_triadic_lattice_latest.json",
+    "reports/nexus_conductance_field_latest.json",
+    "reports/nexus_telemetry_field_latest.json",
+    "reports/nexus_breath_pulse_latest.json",
     "git status --short",
 ]
 
@@ -318,7 +321,29 @@ def _select_action(
     recommendations: list[dict[str, Any]],
     coherence: dict[str, Any],
     calibration: dict[str, Any],
+    conductance: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
+    conductance = conductance or {}
+    route = conductance.get("route_recommendation") or {}
+    dominant = route.get("dominant_route")
+    field_adjustment = 0.0
+    if dominant:
+        for item in recommendations:
+            command = str(item.get("command") or "")
+            if dominant.replace("nexus.", "") in command:
+                field_adjustment = max(-2.5, min(2.5, float(route.get("dominant_route_flow") or 0) * 2.5))
+                item["conductance_field"] = {
+                    "effective_resistance": route.get("effective_resistance"),
+                    "route_flow": route.get("dominant_route_flow"),
+                    "dominant_path": [dominant, "human-authorization-boundary"],
+                    "supporting_edges": [edge.get("edge_id") for edge in conductance.get("flow", {}).get("edge_flows", []) if edge.get("target") == dominant],
+                    "resisting_edges": [edge.get("edge_id") for edge in conductance.get("edges", []) if edge.get("hard_gate")],
+                    "temporary_context_modifier": (conductance.get("temporary_modifiers") or {}).get("telemetry_modifier"),
+                    "persistent_conductance": None,
+                    "sample_count": 0,
+                    "uncertainty": 1.0,
+                    "bounded_adjustment": field_adjustment,
+                }
     arbiter = arbitrate_recommendations(recommendations, coherence, calibration)
     selected = arbiter["selected"]
     command = selected["command"]
@@ -374,6 +399,7 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
     coherence = _read_json(root_path / "reports" / "nexus_coherence_field_latest.json", {})
     calibration = _read_json(root_path / "state" / "coherence" / "arbiter_calibration_latest.json", {})
     pressure_memory = _read_json(root_path / "state" / "coherence" / "pressure_memory_latest.json", {})
+    conductance = _read_json(root_path / "reports" / "nexus_conductance_field_latest.json", {})
     git_scope = _git_scope(root_path)
 
     recommendations = _build_recommendations(
@@ -403,7 +429,7 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
         ))
     triadic_lattice = build_triadic_lattice(root_path, recommendations, repository_snapshot)
     recommendations = apply_lattice_alignment(recommendations, triadic_lattice)
-    selected, arbiter = _select_action(recommendations, coherence, calibration)
+    selected, arbiter = _select_action(recommendations, coherence, calibration, conductance)
     missing = [
         rel for rel in READ_SURFACES
         if not rel.startswith("git ") and not (root_path / rel).exists()
@@ -462,6 +488,13 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
             "selected_hint": triadic_lattice.get("selected_hint"),
             "triad": triadic_lattice.get("triad"),
             "lattice_packet_hash": triadic_lattice.get("lattice_packet_hash"),
+        },
+        "conductance_field": {
+            "schema": conductance.get("schema"),
+            "status": conductance.get("status", "missing" if not conductance else "unknown"),
+            "route_recommendation": conductance.get("route_recommendation"),
+            "temporary_modifiers": conductance.get("temporary_modifiers"),
+            "claim_boundary": conductance.get("claim_boundary", "Conductance preference cannot bypass authority."),
         },
         "wounds": {
             "active_wound_key": wound.get("active_wound_key"),

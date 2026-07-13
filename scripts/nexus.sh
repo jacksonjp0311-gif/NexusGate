@@ -212,6 +212,16 @@ case "$COMMAND" in
   runtime-hygiene) python -m nexus_gate.hygiene.runtime_churn --root . --json ;;
   clean-runtime) python -m nexus_gate.hygiene.runtime_churn --root . --apply --json ;;
   breath) python -m nexus_gate.breath.pulse --root . --json ;;
+  telemetry-sources) python -m nexus_gate.telemetry.cli sources --root . --json ;;
+  telemetry-health) python -m nexus_gate.telemetry.cli health --root . --json ;;
+  telemetry-pull) python -m nexus_gate.telemetry.cli pull --root . --profile "${TAG:-space-weather}" --json ;;
+  telemetry-fuse) python -m nexus_gate.telemetry.cli fuse --root . --json ;;
+  telemetry-status) python -m nexus_gate.telemetry.cli status --root . --json ;;
+  conductance-field) python -m nexus_gate.field.cli field --root . --intent "${TAG:-Compile NEXUS conductance field.}" --json ;;
+  conductance-status) python -m nexus_gate.field.cli status --root . --intent "${TAG:-Inspect NEXUS conductance field.}" --json ;;
+  conductance-route) python -m nexus_gate.field.cli route --root . --intent "${TAG:-Route through NEXUS conductance field.}" --json ;;
+  conductance-replay-verify) python -m nexus_gate.field.cli replay-verify --root . --json ;;
+  conductance-calibration-proposal) python -m nexus_gate.field.cli calibration-proposal --root . --intent "$TAG" --json ;;
   action-recommend) python -m nexus_gate.actions.cli recommend --root . --json ;;
   action-status)
     shift || true
@@ -331,7 +341,11 @@ case "$COMMAND" in
     python -m nexus_gate.distillation.graph --root . --json
     python -m nexus_gate.build.packer --root . --out dist --json
     python -m nexus_gate.hygiene.runtime_churn --root . --json
+    python -m nexus_gate.telemetry.cli health --root . --json
+    python -m nexus_gate.telemetry.cli fuse --root . --json
     python -m nexus_gate.breath.pulse --root . --json
+    python -m nexus_gate.field.cli field --root . --json
+    python -m nexus_gate.field.cli replay-verify --root . --json
     ;;
   pack)
     python -m nexus_gate.build.packer --root . --out dist --json

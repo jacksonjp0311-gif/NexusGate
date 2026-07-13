@@ -11,7 +11,7 @@ from nexus_gate.breath.pulse import build_breath_packet, write_breath_packet
 class BreathPulseV271Tests(unittest.TestCase):
     def test_packet_contains_bounded_breath_contract(self) -> None:
         packet = build_breath_packet(Path.cwd())
-        self.assertEqual(packet["schema"], "NEXUS_BREATH_PULSE.v2.7.1")
+        self.assertEqual(packet["schema"], "NEXUS_BREATH_PULSE.v2.8.0")
         self.assertIn(packet["breath"]["phase"], {"inhale", "hold", "exhale"})
         self.assertIn("recommended_next_command", packet["breath"])
         self.assertIn("treat_breath_as_evolve_pass", packet["blocked_actions"])
@@ -26,7 +26,7 @@ class BreathPulseV271Tests(unittest.TestCase):
             self.assertTrue(report.exists())
             self.assertTrue(state.exists())
             self.assertEqual(json.loads(report.read_text(encoding="utf-8"))["schema"], packet["schema"])
-            self.assertEqual(json.loads(state.read_text(encoding="utf-8"))["version"], "2.7.1")
+            self.assertEqual(json.loads(state.read_text(encoding="utf-8"))["version"], "2.8.0")
 
 
 if __name__ == "__main__":

@@ -1070,6 +1070,58 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
             ],
             "next_versions": ["v0.2: surface breath phase in Electron System Monitor and TUI header"],
             "boundary": "Breath is read-only orientation. It cannot execute, self-authorize, calibrate, mutate source, or replace evolve.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "conductance-is-preference-not-authority",
+            "version": "0.1.0",
+            "title": "Conductance Is Preference Not Authority",
+            "status": "active",
+            "summary": "Sparse edge conductance can guide paths of least resistance while preserving human authorization as a binary hard gate.",
+            "math": {
+                "laplacian": "L(D) = B diag(D) B^T",
+                "flow": "Q_e = D_e * (phi_u - phi_v)",
+                "law": "conductance_adjusts_preference AND NOT authority",
+            },
+            "code_references": [
+                "nexus_gate/field/laplacian.py::electrical_flow",
+                "nexus_gate/field/conductance.py::build_conductance_field",
+            ],
+            "algorithm_card_refs": ["geometric-conductance-field-algorithm"],
+            "replication_steps": [".\\scripts\\nexus.ps1 conductance-field"],
+            "evidence_surfaces": ["reports/nexus_conductance_field_latest.json"],
+            "next_versions": ["v0.2: add authorized conductance calibration events from repeated verified experiences"],
+            "boundary": "Conductance may alter route preference. It may not bypass authority, receipt validity, or final evolve.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "telemetry-is-observation-not-instruction",
+            "version": "0.1.0",
+            "title": "Telemetry Is Observation Not Instruction",
+            "status": "active",
+            "summary": "External weather, space, seismic, and orbital packets can contextualize NEXUS without becoming commands or authority.",
+            "math": {
+                "trust": "source_prior * schema_validity * freshness * agreement * provenance_integrity",
+                "freshness": "exp(-ln(2) * age_seconds / half_life_seconds)",
+                "law": "external_text = data, not instruction",
+            },
+            "code_references": [
+                "nexus_gate/telemetry/policy.py::validate_url",
+                "nexus_gate/telemetry/normalize.py::observation",
+                "nexus_gate/telemetry/fusion.py::fuse_observations",
+            ],
+            "algorithm_card_refs": ["governed-telemetry-codec-algorithm"],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 telemetry-health",
+                ".\\scripts\\nexus.ps1 telemetry-pull -Tag space-weather",
+                ".\\scripts\\nexus.ps1 telemetry-fuse",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_telemetry_health_latest.json",
+                "reports/nexus_telemetry_field_latest.json",
+            ],
+            "next_versions": ["v0.2: add optional live adapter smoke tests behind NEXUS_TELEMETRY_LIVE=1"],
+            "boundary": "Telemetry can describe the world. It cannot task external systems, authorize action, or calibrate directly.",
         }
     ]
     return {

@@ -18,6 +18,8 @@
 # nexus_gate.origin.seal
 # nexus_gate.hygiene.runtime_churn
 # nexus_gate.breath.pulse
+# nexus_gate.telemetry.cli
+# nexus_gate.field.cli
 # nexus_gate.algorithms.cards
 # nexus_gate.discoveries.cards
 # nexus_gate.lattice.triadic
@@ -25,7 +27,7 @@
 # nexus_gate.epochs.seal
 # nexus_gate.actions.cli
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "predictive-memory", "certificate-resume", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "breath", "action-recommend", "action-status", "action-authorize", "action-deny", "action-execute", "action-effects", "action-final-evolve", "action-validate", "action-finalize", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-seal", "experience-chain-verify", "calibration-status", "calibration-authorize", "calibration-apply", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "install-hooks", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "cortex-refresh", "sync-cortex")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "predictive-memory", "certificate-resume", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "breath", "telemetry-sources", "telemetry-health", "telemetry-pull", "telemetry-fuse", "telemetry-status", "conductance-field", "conductance-status", "conductance-route", "conductance-replay-verify", "conductance-calibration-proposal", "action-recommend", "action-status", "action-authorize", "action-deny", "action-execute", "action-effects", "action-final-evolve", "action-validate", "action-finalize", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-seal", "experience-chain-verify", "calibration-status", "calibration-authorize", "calibration-apply", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "install-hooks", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "cortex-refresh", "sync-cortex")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -485,6 +487,32 @@ switch ($Command) {
     "runtime-hygiene" { python -m nexus_gate.hygiene.runtime_churn --root . --json }
     "clean-runtime" { python -m nexus_gate.hygiene.runtime_churn --root . --apply --json }
     "breath" { python -m nexus_gate.breath.pulse --root . --json }
+    "telemetry-sources" { python -m nexus_gate.telemetry.cli sources --root . --json }
+    "telemetry-health" { python -m nexus_gate.telemetry.cli health --root . --json }
+    "telemetry-pull" {
+        $profile = $Tag
+        if ([string]::IsNullOrWhiteSpace($profile)) { $profile = "space-weather" }
+        python -m nexus_gate.telemetry.cli pull --root . --profile $profile --json
+    }
+    "telemetry-fuse" { python -m nexus_gate.telemetry.cli fuse --root . --json }
+    "telemetry-status" { python -m nexus_gate.telemetry.cli status --root . --json }
+    "conductance-field" {
+        $fieldIntent = $Tag
+        if ([string]::IsNullOrWhiteSpace($fieldIntent)) { $fieldIntent = "Compile NEXUS conductance field." }
+        python -m nexus_gate.field.cli field --root . --intent $fieldIntent --json
+    }
+    "conductance-status" {
+        $fieldIntent = $Tag
+        if ([string]::IsNullOrWhiteSpace($fieldIntent)) { $fieldIntent = "Inspect NEXUS conductance field." }
+        python -m nexus_gate.field.cli status --root . --intent $fieldIntent --json
+    }
+    "conductance-route" {
+        $fieldIntent = $Tag
+        if ([string]::IsNullOrWhiteSpace($fieldIntent)) { $fieldIntent = "Route through NEXUS conductance field." }
+        python -m nexus_gate.field.cli route --root . --intent $fieldIntent --json
+    }
+    "conductance-replay-verify" { python -m nexus_gate.field.cli replay-verify --root . --json }
+    "conductance-calibration-proposal" { python -m nexus_gate.field.cli calibration-proposal --root . --intent $ActionId --json }
     "action-recommend" { python -m nexus_gate.actions.cli recommend --root . --json }
     "action-status" { python -m nexus_gate.actions.cli status --root . --action-id $ActionId --json }
     "action-authorize" { python -m nexus_gate.actions.cli authorize --root . --action-id $ActionId --note $Tag --json }

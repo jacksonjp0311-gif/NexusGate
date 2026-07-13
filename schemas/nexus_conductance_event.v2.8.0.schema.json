@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS Conductance Event v2.8.0",
+  "type": "object",
+  "required": ["weight_event_id", "edge_id", "conductance_before", "conductance_after", "calibration_authorization_hash"],
+  "properties": {
+    "weight_event_id": {"type": "string"},
+    "edge_id": {"type": "string"},
+    "conductance_before": {"type": "number"},
+    "conductance_after": {"type": "number"},
+    "calibration_authorization_hash": {"type": "string"}
+  }
+}
