@@ -1038,6 +1038,38 @@ def build_discovery_cards(root: str | Path) -> dict[str, Any]:
             ],
             "next_versions": ["v0.2: benchmark route improvement over uncalibrated baseline"],
             "boundary": "Plasticity changes recommendation pressure only after explicit authorization. It never creates autonomous authority.",
+        },
+        {
+            "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+            "discovery_id": "breath-as-vital-sign-compression",
+            "version": "0.1.0",
+            "title": "Breath As Vital-Sign Compression",
+            "status": "active",
+            "summary": "A small read-only pulse can compress freshness, runtime pressure, and Git scope into an inhale/hold/exhale phase for the next human or AI pass.",
+            "math": {
+                "pressure": "100 - fail_penalty - warn_penalty - stale_penalty - dirty_penalty",
+                "phase": "critical -> hold; canonical_change -> exhale; stale -> inhale; elevated_pressure -> hold; stable -> inhale",
+                "rule": "breath != authority AND breath != evolve_pass",
+            },
+            "code_references": [
+                "nexus_gate/breath/pulse.py::build_breath_packet",
+                "nexus_gate/breath/pulse.py::_rhythm",
+            ],
+            "algorithm_card_refs": [
+                "breath-pulse-algorithm",
+                "runtime-churn-hygiene-algorithm",
+                "adaptive-coherence-measurement-algorithm",
+            ],
+            "replication_steps": [
+                ".\\scripts\\nexus.ps1 breath",
+                "Inspect reports/nexus_breath_pulse_latest.json for phase, pressure, freshness, and next command.",
+            ],
+            "evidence_surfaces": [
+                "reports/nexus_breath_pulse_latest.json",
+                "state/breath/nexus_breath_pulse_latest.json",
+            ],
+            "next_versions": ["v0.2: surface breath phase in Electron System Monitor and TUI header"],
+            "boundary": "Breath is read-only orientation. It cannot execute, self-authorize, calibrate, mutate source, or replace evolve.",
         }
     ]
     return {

@@ -532,3 +532,11 @@ verified experiences + calibration events + coherence dimensions + counter-signa
 ```
 
 Emergence observation is an engineering measurement surface. It records self-organization signals and counter-signals, but it does not claim consciousness, AGI, autonomous authority, or production readiness.
+
+## Breath Pulse Algorithm
+
+```text
+evidence surfaces + git scope + freshness ages -> pressure score -> inhale/hold/exhale -> bounded next command
+```
+
+Breath Pulse is the fast vital-sign loop for NEXUS. It reads existing reports, classifies missing or stale surfaces, detects canonical versus runtime Git pressure, and emits one compact operating phase. It may orient the next AI or human pass, but it cannot execute, self-authorize, calibrate, mutate source, or replace final evolve.

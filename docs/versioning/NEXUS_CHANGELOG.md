@@ -1,5 +1,13 @@
-## v2.7.0 - Governed Experience Engine
+## v2.7.1 - Breath Pulse
 Status: current
+- Adds `.\scripts\nexus.ps1 breath` and Bash parity as a read-only vital-sign lane.
+- Writes `reports/nexus_breath_pulse_latest.json` and `state/breath/nexus_breath_pulse_latest.json`.
+- Summarizes freshness, runtime pressure, Git scope, and an inhale/hold/exhale next-command phase.
+- Adds Breath Pulse protocol, algorithm memory, and discovery card.
+- Preserves the boundary: Breath may orient attention, but cannot execute, self-authorize, calibrate, mutate source, or replace final evolve.
+
+## v2.7.0 - Governed Experience Engine
+Status: sealed
 - Adds semantic action-chain verification so receipt presence is not treated as receipt validity.
 - Adds action-bound final evolve receipts; general latest evolve summaries no longer satisfy specific action learning proof.
 - Adds verified Experience Seals under `state/experiences/<experience_id>/` and `ledger/experience_chain.jsonl`.

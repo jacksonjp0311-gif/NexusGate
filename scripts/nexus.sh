@@ -211,6 +211,7 @@ case "$COMMAND" in
   outcome-learn) python -m nexus_gate.outcomes.learn --root . --json ;;
   runtime-hygiene) python -m nexus_gate.hygiene.runtime_churn --root . --json ;;
   clean-runtime) python -m nexus_gate.hygiene.runtime_churn --root . --apply --json ;;
+  breath) python -m nexus_gate.breath.pulse --root . --json ;;
   action-recommend) python -m nexus_gate.actions.cli recommend --root . --json ;;
   action-status)
     shift || true
@@ -330,6 +331,7 @@ case "$COMMAND" in
     python -m nexus_gate.distillation.graph --root . --json
     python -m nexus_gate.build.packer --root . --out dist --json
     python -m nexus_gate.hygiene.runtime_churn --root . --json
+    python -m nexus_gate.breath.pulse --root . --json
     ;;
   pack)
     python -m nexus_gate.build.packer --root . --out dist --json

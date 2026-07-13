@@ -1,5 +1,5 @@
 {
-  "card_count": 26,
+  "card_count": 27,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -1018,10 +1018,44 @@
       "summary": "NEXUS may organize memory from verified experiences, but route calibration remains explicit, bounded, replay-safe, and human authorized.",
       "title": "Verified Experience Before Plasticity",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "breath-pulse-algorithm",
+        "runtime-churn-hygiene-algorithm",
+        "adaptive-coherence-measurement-algorithm"
+      ],
+      "boundary": "Breath is read-only orientation. It cannot execute, self-authorize, calibrate, mutate source, or replace evolve.",
+      "code_references": [
+        "nexus_gate/breath/pulse.py::build_breath_packet",
+        "nexus_gate/breath/pulse.py::_rhythm"
+      ],
+      "discovery_id": "breath-as-vital-sign-compression",
+      "evidence_surfaces": [
+        "reports/nexus_breath_pulse_latest.json",
+        "state/breath/nexus_breath_pulse_latest.json"
+      ],
+      "math": {
+        "phase": "critical -> hold; canonical_change -> exhale; stale -> inhale; elevated_pressure -> hold; stable -> inhale",
+        "pressure": "100 - fail_penalty - warn_penalty - stale_penalty - dirty_penalty",
+        "rule": "breath != authority AND breath != evolve_pass"
+      },
+      "next_versions": [
+        "v0.2: surface breath phase in Electron System Monitor and TUI header"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 breath",
+        "Inspect reports/nexus_breath_pulse_latest.json for phase, pressure, freshness, and next command."
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "A small read-only pulse can compress freshness, runtime pressure, and Git scope into an inhale/hold/exhale phase for the next human or AI pass.",
+      "title": "Breath As Vital-Sign Compression",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-13T05:53:32.956848+00:00",
+  "generated_at_utc": "2026-07-13T09:07:58.456037+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

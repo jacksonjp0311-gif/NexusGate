@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "action-recommend", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-chain-verify", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "breath", "action-recommend", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-chain-verify", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [string]$ActionId = "",
     [switch]$NoGit
@@ -198,6 +198,7 @@ function Run-All {
     Invoke-Step "Calibration replay verify" "18e_calibration_replay_verify.json" { python -m nexus_gate.actions.cli calibration-replay-verify --root . --json }
     Invoke-Step "Adaptive coherence" "18f_adaptive_coherence.json" { python -m nexus_gate.actions.cli adaptive-coherence --root . --json }
     Invoke-Step "Emergence observation" "18g_emergence_observation.json" { python -m nexus_gate.actions.cli emergence-report --root . --json }
+    Invoke-Step "Breath pulse" "18h_breath_pulse.json" { python -m nexus_gate.breath.pulse --root . --json }
     Invoke-Step "Epoch chain verify" "19_epoch_chain_verify.json" { python -m nexus_gate.epochs.seal --root . --chain-verify --json }
     Say "Compiled report files written." "OK"
     Say "Human surface passed." "OK"
@@ -429,6 +430,12 @@ if ($Command -eq "distill") {
 if ($Command -eq "runtime-hygiene") {
     Invoke-Step "Runtime hygiene" "16j_runtime_hygiene.json" { python -m nexus_gate.hygiene.runtime_churn --root . --json }
     Say "Runtime hygiene report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "breath") {
+    Invoke-Step "Breath pulse" "18h_breath_pulse.json" { python -m nexus_gate.breath.pulse --root . --json }
+    Say "Breath pulse report written." "OK"
     exit 0
 }
 

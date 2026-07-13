@@ -17,6 +17,7 @@
 # nexus_gate.loops.certificate_resume
 # nexus_gate.origin.seal
 # nexus_gate.hygiene.runtime_churn
+# nexus_gate.breath.pulse
 # nexus_gate.algorithms.cards
 # nexus_gate.discoveries.cards
 # nexus_gate.lattice.triadic
@@ -24,7 +25,7 @@
 # nexus_gate.epochs.seal
 # nexus_gate.actions.cli
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "predictive-memory", "certificate-resume", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "action-recommend", "action-status", "action-authorize", "action-deny", "action-execute", "action-effects", "action-final-evolve", "action-validate", "action-finalize", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-seal", "experience-chain-verify", "calibration-status", "calibration-authorize", "calibration-apply", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "install-hooks", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "cortex-refresh", "sync-cortex")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "predictive-memory", "certificate-resume", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "breath", "action-recommend", "action-status", "action-authorize", "action-deny", "action-execute", "action-effects", "action-final-evolve", "action-validate", "action-finalize", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-seal", "experience-chain-verify", "calibration-status", "calibration-authorize", "calibration-apply", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "install-hooks", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "cortex-refresh", "sync-cortex")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
@@ -483,6 +484,7 @@ switch ($Command) {
     }
     "runtime-hygiene" { python -m nexus_gate.hygiene.runtime_churn --root . --json }
     "clean-runtime" { python -m nexus_gate.hygiene.runtime_churn --root . --apply --json }
+    "breath" { python -m nexus_gate.breath.pulse --root . --json }
     "action-recommend" { python -m nexus_gate.actions.cli recommend --root . --json }
     "action-status" { python -m nexus_gate.actions.cli status --root . --action-id $ActionId --json }
     "action-authorize" { python -m nexus_gate.actions.cli authorize --root . --action-id $ActionId --note $Tag --json }

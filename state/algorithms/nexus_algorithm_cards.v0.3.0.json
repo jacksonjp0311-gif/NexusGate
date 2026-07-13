@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 66,
+  "card_count": 67,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -2275,6 +2275,40 @@
       "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
       "summary": "Emergence observation is an engineering measurement surface. It records self-organization signals and counter-signals, but it does not claim consciousness, AGI, autonomous authority, or production readiness.",
       "title": "Emergence Observation Algorithm"
+    },
+    {
+      "algorithm_id": "breath-pulse-algorithm",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "evidence surfaces + git scope + freshness ages -> pressure score -> inhale/hold/exhale -> bounded next command",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 67,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Breath Pulse is the fast vital-sign loop for NEXUS. It reads existing reports, classifies missing or stale surfaces, detects canonical versus runtime Git pressure, and emits one compact operating phase. It may orient the next AI or human pass, but it cannot execute, self-authorize, calibrate, mutate source, or replace final evolve.",
+      "title": "Breath Pulse Algorithm"
     }
   ],
   "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
@@ -2288,6 +2322,7 @@
     "authority-gate-algorithm",
     "authority-monotonicity-algorithm",
     "authorization-expiry-algorithm",
+    "breath-pulse-algorithm",
     "causal-action-lifecycle-algorithm",
     "causal-coherence-routing-algorithm",
     "causal-confidence-algorithm",
@@ -2347,7 +2382,7 @@
     "versioned-vector-blob-storage-algorithm"
   ],
   "discovery_source": "derived_from_cards_algorithm_id",
-  "generated_at_utc": "2026-07-13T05:53:20.843171+00:00",
+  "generated_at_utc": "2026-07-13T09:07:34.668200+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",
