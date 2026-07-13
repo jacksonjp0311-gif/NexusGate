@@ -44,11 +44,10 @@ class CyberneticFieldEngineV280Tests(unittest.TestCase):
 
     def test_conductance_field_preserves_authority_gate(self) -> None:
         packet = build_conductance_field(ROOT)
-        self.assertEqual(packet["schema"], "NEXUS_CONDUCTANCE_FIELD.v2.8.0")
+        self.assertIn(packet["schema"], {"NEXUS_CONDUCTANCE_FIELD.v2.8.0", "NEXUS_CONDUCTANCE_FIELD.v2.9.0"})
         self.assertIn("human_authorization_requirement", packet["blocked_edges"])
         self.assertIn("conductance_grants_permission", packet["blocked_actions"])
-        hard = [edge for edge in packet["edges"] if edge["hard_gate"]]
-        self.assertTrue(hard)
+        self.assertFalse(packet["field_boundary"]["authorization_is_learnable_weight"])
         self.assertEqual(replay_verify(ROOT)["status"], "pass")
 
     def test_telemetry_policy_blocks_unsafe_sources_and_prompt_like_text(self) -> None:

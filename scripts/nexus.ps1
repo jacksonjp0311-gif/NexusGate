@@ -20,6 +20,8 @@
 # nexus_gate.breath.pulse
 # nexus_gate.telemetry.cli
 # nexus_gate.field.cli
+# nexus_gate.intelligence.cli
+# nexus_gate.language.cli
 # nexus_gate.algorithms.cards
 # nexus_gate.discoveries.cards
 # nexus_gate.lattice.triadic
@@ -27,12 +29,17 @@
 # nexus_gate.epochs.seal
 # nexus_gate.actions.cli
 param(
-    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "predictive-memory", "certificate-resume", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "breath", "telemetry-sources", "telemetry-health", "telemetry-pull", "telemetry-fuse", "telemetry-status", "conductance-field", "conductance-status", "conductance-route", "conductance-replay-verify", "conductance-calibration-proposal", "action-recommend", "action-status", "action-authorize", "action-deny", "action-execute", "action-effects", "action-final-evolve", "action-validate", "action-finalize", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-seal", "experience-chain-verify", "calibration-status", "calibration-authorize", "calibration-apply", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "install-hooks", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "cortex-refresh", "sync-cortex")]
+    [ValidateSet("rehydrate", "compile", "strict", "pack", "adapters", "receptors", "bridge", "runtime", "human", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "tui", "ui", "evolve", "once", "loop", "watch", "status", "promote", "nn", "nn-health", "tnn","tnn-chat", "ask", "fast", "balanced", "deep", "align-score", "geo", "geo-clean", "cell-plan", "cell-context", "shell", "cell-bridge", "cell-run", "cell", "cell-doctor", "cell-ledger", "cell-policy","tnn-health","tnn-warm","tnn-deep","tnn-doctor", "meta-loop", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-evolve", "predictive-memory", "certificate-resume", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "breath", "telemetry-sources", "telemetry-health", "telemetry-pull", "telemetry-fuse", "telemetry-status", "conductance-field", "conductance-status", "conductance-route", "conductance-replay-verify", "conductance-calibration-proposal", "ai-touch-begin", "ai-touch-status", "ai-touch-end", "ai-touch-abort", "ai-touch-verify", "ai-touch-list", "ai-touch-replay-verify", "intelligence-extract", "intelligence-status", "intelligence-candidates", "intelligence-review", "intelligence-promote", "intelligence-reject", "intelligence-replay-verify", "language-corpus-build", "language-corpus-status", "language-corpus-verify", "language-query", "language-explain", "language-chat", "language-trace", "language-status", "self-model-build", "self-model-status", "self-model-verify", "language-benchmark", "language-benchmark-smoke", "language-benchmark-full", "language-benchmark-compare", "language-retention-test", "language-efficiency-report", "language-adversarial-test", "language-replay-verify", "motif-discover", "motif-status", "motif-verify", "motif-expand", "motif-replay-verify", "language-calibration-status", "language-calibration-propose", "language-calibration-authorize", "language-calibration-apply", "language-calibration-replay-verify", "action-recommend", "action-status", "action-authorize", "action-deny", "action-execute", "action-effects", "action-final-evolve", "action-validate", "action-finalize", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-seal", "experience-chain-verify", "calibration-status", "calibration-authorize", "calibration-apply", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "install-hooks", "algorithm-cards", "discovery-cards", "loops", "loop-registry", "phi-gate", "phi-gate-auto", "phi-gate-compile", "phi-loop", "phi-loop-auto", "phi-wound", "phi-wound-gpu", "toolbelt", "toolbelt-start", "toolbelt-dashboard", "toolbelt-next", "toolbelt-ship", "toolbelt-json", "wound-compress", "preflight", "preflight-json", "cortex", "cortex-refresh", "sync-cortex")]
     [string]$Command = "rehydrate",
     [int]$Cycles = 1,
     [int]$Interval = 5,
     [string]$Tag = "",
     [string]$ActionId = "",
+    [string]$Provider = "codex",
+    [string]$SessionId = "",
+    [string]$InteractionId = "",
+    [string]$CandidateId = "",
+    [string]$Disposition = "pending_review",
     [switch]$NoCommit,
     [switch]$CallModel,
     [string]$Loop = "rhp-core",
@@ -513,6 +520,85 @@ switch ($Command) {
     }
     "conductance-replay-verify" { python -m nexus_gate.field.cli replay-verify --root . --json }
     "conductance-calibration-proposal" { python -m nexus_gate.field.cli calibration-proposal --root . --intent $ActionId --json }
+    "ai-touch-begin" {
+        $sid = $SessionId
+        if ([string]::IsNullOrWhiteSpace($sid)) { $sid = "manual-" + [guid]::NewGuid().ToString("N") }
+        $intent = $Tag
+        if ([string]::IsNullOrWhiteSpace($intent)) { $intent = "Declared AI touch session." }
+        python -m nexus_gate.intelligence.cli touch-begin --root . --provider $Provider --session-id $sid --intent $intent --json
+    }
+    "ai-touch-status" {
+        if ([string]::IsNullOrWhiteSpace($InteractionId)) { python -m nexus_gate.intelligence.cli touch-status --root . --json }
+        else { python -m nexus_gate.intelligence.cli touch-status --root . --interaction-id $InteractionId --json }
+    }
+    "ai-touch-list" { python -m nexus_gate.intelligence.cli touch-list --root . --json }
+    "ai-touch-end" {
+        $iid = $InteractionId
+        if ([string]::IsNullOrWhiteSpace($iid)) { $iid = $ActionId }
+        python -m nexus_gate.intelligence.cli touch-end --root . --interaction-id $iid --disposition $Disposition --json
+    }
+    "ai-touch-abort" {
+        $iid = $InteractionId
+        if ([string]::IsNullOrWhiteSpace($iid)) { $iid = $ActionId }
+        python -m nexus_gate.intelligence.cli touch-abort --root . --interaction-id $iid --json
+    }
+    "ai-touch-verify" {
+        if ([string]::IsNullOrWhiteSpace($InteractionId)) { python -m nexus_gate.intelligence.cli touch-verify --root . --json }
+        else { python -m nexus_gate.intelligence.cli touch-verify --root . --interaction-id $InteractionId --json }
+    }
+    "ai-touch-replay-verify" { python -m nexus_gate.intelligence.cli touch-replay-verify --root . --json }
+    "intelligence-extract" {
+        $iid = $InteractionId
+        if ([string]::IsNullOrWhiteSpace($iid)) { $iid = $ActionId }
+        python -m nexus_gate.intelligence.cli extract --root . --interaction-id $iid --json
+    }
+    "intelligence-status" { python -m nexus_gate.intelligence.cli intelligence-status --root . --json }
+    "intelligence-candidates" { python -m nexus_gate.intelligence.cli intelligence-candidates --root . --json }
+    "intelligence-review" { python -m nexus_gate.intelligence.cli intelligence-candidates --root . --json }
+    "intelligence-promote" {
+        $cid = $CandidateId
+        if ([string]::IsNullOrWhiteSpace($cid)) { $cid = $ActionId }
+        python -m nexus_gate.intelligence.cli promote --root . --candidate-id $cid --json
+    }
+    "intelligence-reject" {
+        $cid = $CandidateId
+        if ([string]::IsNullOrWhiteSpace($cid)) { $cid = $ActionId }
+        python -m nexus_gate.intelligence.cli reject --root . --candidate-id $cid --json
+    }
+    "intelligence-replay-verify" { python -m nexus_gate.intelligence.cli intelligence-replay-verify --root . --json }
+    "language-corpus-build" { python -m nexus_gate.language.cli corpus-build --root . --json }
+    "language-corpus-status" { python -m nexus_gate.language.cli corpus-status --root . --json }
+    "language-corpus-verify" { python -m nexus_gate.language.cli corpus-verify --root . --json }
+    "language-query" {
+        $query = $Tag
+        if ([string]::IsNullOrWhiteSpace($query)) { $query = "What is NEXUS permitted to learn?" }
+        python -m nexus_gate.language.cli query --root . --tag $query --json
+    }
+    "language-explain" { python -m nexus_gate.language.cli explain --root . --tag $Tag --json }
+    "language-chat" { python -m nexus_gate.language.cli chat --root . --tag $Tag --json }
+    "language-trace" { python -m nexus_gate.language.cli trace --root . --tag $Tag --json }
+    "language-status" { python -m nexus_gate.language.cli status --root . --json }
+    "self-model-build" { python -m nexus_gate.language.cli self-model-build --root . --json }
+    "self-model-status" { python -m nexus_gate.language.cli self-model-status --root . --json }
+    "self-model-verify" { python -m nexus_gate.language.cli self-model-verify --root . --json }
+    "language-benchmark" { python -m nexus_gate.language.cli benchmark --root . --json }
+    "language-benchmark-smoke" { python -m nexus_gate.language.cli benchmark-smoke --root . --json }
+    "language-benchmark-full" { python -m nexus_gate.language.cli benchmark-full --root . --json }
+    "language-benchmark-compare" { python -m nexus_gate.language.cli benchmark-compare --root . --json }
+    "language-retention-test" { python -m nexus_gate.language.cli retention-test --root . --json }
+    "language-efficiency-report" { python -m nexus_gate.language.cli efficiency-report --root . --json }
+    "language-adversarial-test" { python -m nexus_gate.language.cli adversarial-test --root . --json }
+    "language-replay-verify" { python -m nexus_gate.language.cli replay-verify --root . --json }
+    "motif-discover" { python -m nexus_gate.language.cli motif-discover --root . --json }
+    "motif-status" { python -m nexus_gate.language.cli motif-status --root . --json }
+    "motif-verify" { python -m nexus_gate.language.cli motif-verify --root . --json }
+    "motif-expand" { python -m nexus_gate.language.cli motif-status --root . --json }
+    "motif-replay-verify" { python -m nexus_gate.language.cli motif-replay-verify --root . --json }
+    "language-calibration-status" { python -m nexus_gate.language.cli calibration-status --root . --json }
+    "language-calibration-propose" { python -m nexus_gate.language.cli calibration-propose --root . --json }
+    "language-calibration-authorize" { python -m nexus_gate.language.cli calibration-authorize --root . --json }
+    "language-calibration-apply" { python -m nexus_gate.language.cli calibration-apply --root . --json }
+    "language-calibration-replay-verify" { python -m nexus_gate.language.cli calibration-replay-verify --root . --json }
     "action-recommend" { python -m nexus_gate.actions.cli recommend --root . --json }
     "action-status" { python -m nexus_gate.actions.cli status --root . --action-id $ActionId --json }
     "action-authorize" { python -m nexus_gate.actions.cli authorize --root . --action-id $ActionId --note $Tag --json }

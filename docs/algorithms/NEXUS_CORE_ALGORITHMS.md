@@ -566,3 +566,99 @@ source registry -> allowlisted GET -> normalized observation -> robust fusion ->
 ```
 
 Telemetry is external sensing only. External text is data, not instruction. Telemetry may contextualize route pressure, but it cannot task external systems, authorize action, or calibrate directly.
+
+## AI Touch Receipt Algorithm
+
+```text
+declared AI session -> pre-state hash -> post-state hash -> redaction -> explicit disposition -> receipt ledger
+```
+
+AI touch receipts make declared AI work attributable without pretending universal AI detection exists. A receipt may inform extraction; it is not knowledge by itself.
+
+## Deterministic Intelligence Extraction Algorithm
+
+```text
+receipt + diff + AST symbols + tests + schemas + command IDs -> candidate intelligence
+```
+
+Extraction creates provenance-backed candidates and negative evidence. AI prose may suggest wording, but repository evidence and human disposition control quality.
+
+## Sparse Language Activation Algorithm
+
+```text
+query tokens -> lexical seeds -> typed graph propagation -> concepts/entities -> grounded claim plan
+```
+
+Activation is bounded, deterministic, sparse, and cycle-aware. Unsupported queries abstain.
+
+## Geometric Intent Routing Algorithm
+
+```text
+language aliases + command evidence + lifecycle evidence -> repository-domain intent
+```
+
+Intent routing can recommend bounded commands. It cannot execute, authorize, or create command registry entries.
+
+## Grounded Response Planning Algorithm
+
+```text
+activated evidence -> ordered claims -> template realization -> grounding check
+```
+
+Every factual sentence must trace to repository evidence. Fluent language cannot add unsupported claims.
+
+## Geometric Token Field Algorithm
+
+```text
+verified motifs + evidence terminology + grammar flow -> candidate tokens -> provenance gate
+```
+
+The token field is experimental and local. If provenance coverage is weak, deterministic templates replace generated text.
+
+## Language Conductance Calibration Algorithm
+
+```text
+promoted candidate + repeated verified support + human authorization -> bounded conductance proposal
+```
+
+No single interaction may create persistent language weight. Telemetry and raw AI output cannot calibrate directly.
+
+## Contradiction Preservation Algorithm
+
+```text
+positive evidence + rejected evidence + regressions -> typed contradiction memory
+```
+
+Contradictions survive compression and promotion.
+
+## Reversible Motif Compression Algorithm
+
+```text
+repeated pattern + positive compression gain + complete references -> reversible motif
+```
+
+Motifs never delete raw evidence.
+
+## Language Replay Verification Algorithm
+
+```text
+durable events + trusted corpus -> rebuild graph -> compare model seal
+```
+
+No replay, no model seal.
+
+## NEXUS Self-Model Algorithm
+
+```text
+registry + README + schemas + reports -> evidence-bound self-description
+```
+
+Self-description is not consciousness.
+
+## Continual-Learning Retention Test Algorithm
+
+```text
+old mappings + new candidates + replay -> retention/regression report
+```
+
+New learning must preserve earlier verified mappings or report degradation explicitly.

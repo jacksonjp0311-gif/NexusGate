@@ -39,6 +39,9 @@ state/neural_activity/repo_neural_graph_latest.json
 state/breath/
 state/field/
 state/telemetry/
+state/ai_interactions/
+state/intelligence/
+state/language/
 state/visual/
 state/wounds/
 state/nexus_cell/

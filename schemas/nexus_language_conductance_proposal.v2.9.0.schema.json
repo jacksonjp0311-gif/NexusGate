@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS Language Conductance Proposal v2.9.0",
+  "type": "object",
+  "required": ["schema", "status", "automatic_apply"],
+  "properties": {
+    "schema": {"const": "NEXUS_LANGUAGE_CONDUCTANCE_PROPOSAL.v2.9.0"},
+    "automatic_apply": {"const": false}
+  }
+}

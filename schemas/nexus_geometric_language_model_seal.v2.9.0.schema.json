@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS Geometric Language Model Seal v2.9.0",
+  "type": "object",
+  "required": ["schema", "model_id", "model_version", "corpus_manifest_id", "corpus_hash", "node_count", "edge_count", "runtime_graph_hash", "durable_event_root_hash", "tokenizer_config_hash", "activation_config_hash", "decoder_config_hash", "claim_boundary"],
+  "properties": {
+    "schema": {"const": "NEXUS_GEOMETRIC_LANGUAGE_MODEL_SEAL.v2.9.0"},
+    "model_id": {"type": "string"},
+    "model_version": {"const": "2.9.0"},
+    "node_count": {"type": "integer", "minimum": 0},
+    "edge_count": {"type": "integer", "minimum": 0}
+  }
+}

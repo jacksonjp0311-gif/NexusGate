@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS AI Touch Receipt v2.9.0",
+  "type": "object",
+  "required": ["schema", "interaction_id", "provider", "session_id_hash", "started_at_utc", "status", "human_intent", "pre_state", "human_disposition", "authority_boundary", "receipt_hash"],
+  "properties": {
+    "schema": {"const": "NEXUS_AI_TOUCH_RECEIPT.v2.9.0"},
+    "interaction_id": {"type": "string"},
+    "provider": {"type": "string"},
+    "model_identifier": {"type": ["string", "null"]},
+    "session_id_hash": {"type": "string"},
+    "started_at_utc": {"type": "string"},
+    "completed_at_utc": {"type": ["string", "null"]},
+    "status": {"enum": ["open", "closed"]},
+    "human_disposition": {"enum": ["pending_review", "accepted", "accepted_with_modification", "rejected", "abandoned", "reverted"]},
+    "receipt_hash": {"type": "string"}
+  }
+}

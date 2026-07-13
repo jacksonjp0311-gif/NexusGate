@@ -23,6 +23,22 @@ Do not claim production validation, safety proof, security proof, correctness pr
 python -m nexus_gate.compiler --root . --json
 ```
 
+## AI Touch Editing Protocol
+
+Before editing source, schemas, docs, tests, registry, or command surfaces, AI agents should declare the interaction:
+
+```powershell
+.\scripts\nexus.ps1 ai-touch-begin -Provider "codex" -SessionId "<session-id>" -Tag "<human intent>"
+```
+
+After bounded work and validation, close it with an explicit disposition:
+
+```powershell
+.\scripts\nexus.ps1 ai-touch-end -InteractionId "<interaction-id>" -Disposition "pending_review"
+```
+
+Valid dispositions are `pending_review`, `accepted`, `accepted_with_modification`, `rejected`, `abandoned`, and `reverted`. No interaction defaults to accepted. AI output is observation, not knowledge. Intelligence extraction and promotion require verified receipts, redaction completion, explicit disposition, and later governance gates. Ordinary human editing is not blocked, but unattributed changes cannot promote intelligence.
+
 ## Predictive Timing Preflight
 
 Before running full `evolve`, pack, broad test suites, Electron smoke, or any long-running validation lane, run:

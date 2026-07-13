@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "breath", "telemetry-sources", "telemetry-health", "telemetry-fuse", "conductance-field", "conductance-replay-verify", "action-recommend", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-chain-verify", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "breath", "telemetry-sources", "telemetry-health", "telemetry-fuse", "conductance-field", "conductance-replay-verify", "ai-touch-replay-verify", "intelligence-replay-verify", "language-corpus-verify", "language-replay-verify", "self-model-verify", "language-benchmark-smoke", "action-recommend", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-chain-verify", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [string]$ActionId = "",
     [switch]$NoGit
@@ -203,6 +203,12 @@ function Run-All {
     Invoke-Step "Breath pulse" "18j_breath_pulse.json" { python -m nexus_gate.breath.pulse --root . --json }
     Invoke-Step "Conductance field" "18k_conductance_field.json" { python -m nexus_gate.field.cli field --root . --json }
     Invoke-Step "Conductance replay verify" "18l_conductance_replay_verify.json" { python -m nexus_gate.field.cli replay-verify --root . --json }
+    Invoke-Step "AI touch replay verify" "18m_ai_touch_replay_verify.json" { python -m nexus_gate.intelligence.cli touch-replay-verify --root . --json }
+    Invoke-Step "Intelligence replay verify" "18n_intelligence_replay_verify.json" { python -m nexus_gate.intelligence.cli intelligence-replay-verify --root . --json }
+    Invoke-Step "Language corpus verify" "18o_language_corpus_verify.json" { python -m nexus_gate.language.cli corpus-verify --root . --json }
+    Invoke-Step "Language replay verify" "18p_language_replay_verify.json" { python -m nexus_gate.language.cli replay-verify --root . --json }
+    Invoke-Step "Self model verify" "18q_self_model_verify.json" { python -m nexus_gate.language.cli self-model-verify --root . --json }
+    Invoke-Step "Language benchmark smoke" "18r_language_benchmark_smoke.json" { python -m nexus_gate.language.cli benchmark-smoke --root . --json }
     Invoke-Step "Epoch chain verify" "19_epoch_chain_verify.json" { python -m nexus_gate.epochs.seal --root . --chain-verify --json }
     Say "Compiled report files written." "OK"
     Say "Human surface passed." "OK"

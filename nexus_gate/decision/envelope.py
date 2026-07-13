@@ -325,25 +325,45 @@ def _select_action(
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     conductance = conductance or {}
     route = conductance.get("route_recommendation") or {}
-    dominant = route.get("dominant_route")
-    field_adjustment = 0.0
-    if dominant:
+    route_scores = conductance.get("route_scores") or {}
+    field_valid = conductance.get("status") == "pass" and conductance.get("conductance_field_hash")
+    route_aliases = {
+        "nexus.runtime-hygiene": ("runtime-hygiene", "inspect_dirty_scope"),
+        "nexus.predictive-evolve": ("predictive-evolve", "predictive-timing"),
+        "nexus.experience-readiness": ("experience-readiness", "action-recommend"),
+        "nexus.conductance-field": ("conductance-field",),
+        "nexus.status": ("status", "origin-seal", "coherence-field", "preflight"),
+    }
+    if field_valid and route_scores:
+        flows = [float((score or {}).get("route_flow") or 0.0) for score in route_scores.values()]
+        mean_flow = sum(flows) / len(flows) if flows else 0.0
         for item in recommendations:
             command = str(item.get("command") or "")
-            if dominant.replace("nexus.", "") in command:
-                field_adjustment = max(-2.5, min(2.5, float(route.get("dominant_route_flow") or 0) * 2.5))
-                item["conductance_field"] = {
-                    "effective_resistance": route.get("effective_resistance"),
-                    "route_flow": route.get("dominant_route_flow"),
-                    "dominant_path": [dominant, "human-authorization-boundary"],
-                    "supporting_edges": [edge.get("edge_id") for edge in conductance.get("flow", {}).get("edge_flows", []) if edge.get("target") == dominant],
-                    "resisting_edges": [edge.get("edge_id") for edge in conductance.get("edges", []) if edge.get("hard_gate")],
-                    "temporary_context_modifier": (conductance.get("temporary_modifiers") or {}).get("telemetry_modifier"),
-                    "persistent_conductance": None,
-                    "sample_count": 0,
-                    "uncertainty": 1.0,
-                    "bounded_adjustment": field_adjustment,
-                }
+            action = str(item.get("action") or "")
+            source = str(item.get("source") or "")
+            matched_route = None
+            for route_id, aliases in route_aliases.items():
+                if any(alias in command or alias in action or alias == source for alias in aliases):
+                    matched_route = route_id
+                    break
+            if not matched_route:
+                continue
+            score = route_scores.get(matched_route) or {}
+            flow_value = float(score.get("route_flow") or 0.0)
+            field_adjustment = max(-6.25, min(6.25, (flow_value - mean_flow) * 25.0))
+            item["conductance_field"] = {
+                "effective_resistance": route.get("effective_resistance"),
+                "route_flow": round(flow_value, 6),
+                "dominant_path": [matched_route, "recommendation-sink"],
+                "supporting_edges": [edge.get("edge_id") for edge in conductance.get("flow", {}).get("edge_flows", []) if edge.get("target") == matched_route or edge.get("source") == matched_route],
+                "resisting_edges": [],
+                "temporary_context_modifier": (conductance.get("temporary_modifiers") or {}).get("telemetry_modifier"),
+                "persistent_conductance": None,
+                "sample_count": 0,
+                "uncertainty": 1.0,
+                "bounded_adjustment": round(field_adjustment, 3),
+                "authorization_gate_status": "outside_adaptive_field",
+            }
     arbiter = arbitrate_recommendations(recommendations, coherence, calibration)
     selected = arbiter["selected"]
     command = selected["command"]
@@ -493,6 +513,7 @@ def build_decision_envelope(root: str | Path, intent: str = "") -> dict[str, Any
             "schema": conductance.get("schema"),
             "status": conductance.get("status", "missing" if not conductance else "unknown"),
             "route_recommendation": conductance.get("route_recommendation"),
+            "route_scores": conductance.get("route_scores"),
             "temporary_modifiers": conductance.get("temporary_modifiers"),
             "claim_boundary": conductance.get("claim_boundary", "Conductance preference cannot bypass authority."),
         },

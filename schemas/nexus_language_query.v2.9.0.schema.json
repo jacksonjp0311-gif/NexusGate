@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS Language Query v2.9.0",
+  "type": "object",
+  "required": ["schema", "query_id", "intent", "answer", "grounding", "authority_boundary"],
+  "properties": {
+    "schema": {"const": "NEXUS_LANGUAGE_QUERY.v2.9.0"},
+    "answer": {"type": "string"}
+  }
+}

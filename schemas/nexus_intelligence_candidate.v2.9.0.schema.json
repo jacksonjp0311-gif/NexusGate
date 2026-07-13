@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NEXUS Intelligence Candidate v2.9.0",
+  "type": "object",
+  "required": ["schema", "candidate_id", "candidate_type", "normalized_label", "evidence_refs", "support", "quality", "status", "promotion_level", "authority_boundary", "candidate_hash"],
+  "properties": {
+    "schema": {"const": "NEXUS_INTELLIGENCE_CANDIDATE.v2.9.0"},
+    "candidate_type": {"enum": ["language_concept", "intent_alias", "repository_entity", "causal_repair_motif", "procedural_skill", "failure_pattern", "contradiction_pattern", "command_mapping", "test_expectation", "schema_rule", "architecture_rule", "capability_statement", "limitation_statement"]},
+    "status": {"enum": ["candidate", "negative_evidence", "promoted", "rejected"]},
+    "promotion_level": {"type": "integer", "minimum": 0, "maximum": 5}
+  }
+}

@@ -222,6 +222,78 @@ case "$COMMAND" in
   conductance-route) python -m nexus_gate.field.cli route --root . --intent "${TAG:-Route through NEXUS conductance field.}" --json ;;
   conductance-replay-verify) python -m nexus_gate.field.cli replay-verify --root . --json ;;
   conductance-calibration-proposal) python -m nexus_gate.field.cli calibration-proposal --root . --intent "$TAG" --json ;;
+  ai-touch-begin)
+    shift || true
+    python -m nexus_gate.intelligence.cli touch-begin --root . --provider "${PROVIDER:-codex}" --session-id "${SESSION_ID:-manual}" --intent "${*:-${TAG:-Declared AI touch session.}}" --json
+    ;;
+  ai-touch-status) python -m nexus_gate.intelligence.cli touch-status --root . --interaction-id "${INTERACTION_ID:-}" --json ;;
+  ai-touch-list) python -m nexus_gate.intelligence.cli touch-list --root . --json ;;
+  ai-touch-end)
+    shift || true
+    python -m nexus_gate.intelligence.cli touch-end --root . --interaction-id "${1:-${INTERACTION_ID:-}}" --disposition "${DISPOSITION:-pending_review}" --json
+    ;;
+  ai-touch-abort)
+    shift || true
+    python -m nexus_gate.intelligence.cli touch-abort --root . --interaction-id "${1:-${INTERACTION_ID:-}}" --json
+    ;;
+  ai-touch-verify) python -m nexus_gate.intelligence.cli touch-verify --root . --interaction-id "${INTERACTION_ID:-}" --json ;;
+  ai-touch-replay-verify) python -m nexus_gate.intelligence.cli touch-replay-verify --root . --json ;;
+  intelligence-extract)
+    shift || true
+    python -m nexus_gate.intelligence.cli extract --root . --interaction-id "${1:-${INTERACTION_ID:-}}" --json
+    ;;
+  intelligence-status) python -m nexus_gate.intelligence.cli intelligence-status --root . --json ;;
+  intelligence-candidates|intelligence-review) python -m nexus_gate.intelligence.cli intelligence-candidates --root . --json ;;
+  intelligence-promote)
+    shift || true
+    python -m nexus_gate.intelligence.cli promote --root . --candidate-id "${1:-${CANDIDATE_ID:-}}" --json
+    ;;
+  intelligence-reject)
+    shift || true
+    python -m nexus_gate.intelligence.cli reject --root . --candidate-id "${1:-${CANDIDATE_ID:-}}" --json
+    ;;
+  intelligence-replay-verify) python -m nexus_gate.intelligence.cli intelligence-replay-verify --root . --json ;;
+  language-corpus-build) python -m nexus_gate.language.cli corpus-build --root . --json ;;
+  language-corpus-status) python -m nexus_gate.language.cli corpus-status --root . --json ;;
+  language-corpus-verify) python -m nexus_gate.language.cli corpus-verify --root . --json ;;
+  language-query)
+    shift || true
+    python -m nexus_gate.language.cli query --root . --tag "${*:-${TAG:-What is NEXUS permitted to learn?}}" --json
+    ;;
+  language-explain)
+    shift || true
+    python -m nexus_gate.language.cli explain --root . --tag "${*:-${TAG:-Explain NEXUS.}}" --json
+    ;;
+  language-chat)
+    shift || true
+    python -m nexus_gate.language.cli chat --root . --tag "${*:-${TAG:-What is pending?}}" --json
+    ;;
+  language-trace)
+    shift || true
+    python -m nexus_gate.language.cli trace --root . --tag "${*:-${TAG:-Trace NEXUS language activation.}}" --json
+    ;;
+  language-status) python -m nexus_gate.language.cli status --root . --json ;;
+  self-model-build) python -m nexus_gate.language.cli self-model-build --root . --json ;;
+  self-model-status) python -m nexus_gate.language.cli self-model-status --root . --json ;;
+  self-model-verify) python -m nexus_gate.language.cli self-model-verify --root . --json ;;
+  language-benchmark) python -m nexus_gate.language.cli benchmark --root . --json ;;
+  language-benchmark-smoke) python -m nexus_gate.language.cli benchmark-smoke --root . --json ;;
+  language-benchmark-full) python -m nexus_gate.language.cli benchmark-full --root . --json ;;
+  language-benchmark-compare) python -m nexus_gate.language.cli benchmark-compare --root . --json ;;
+  language-retention-test) python -m nexus_gate.language.cli retention-test --root . --json ;;
+  language-efficiency-report) python -m nexus_gate.language.cli efficiency-report --root . --json ;;
+  language-adversarial-test) python -m nexus_gate.language.cli adversarial-test --root . --json ;;
+  language-replay-verify) python -m nexus_gate.language.cli replay-verify --root . --json ;;
+  motif-discover) python -m nexus_gate.language.cli motif-discover --root . --json ;;
+  motif-status) python -m nexus_gate.language.cli motif-status --root . --json ;;
+  motif-verify) python -m nexus_gate.language.cli motif-verify --root . --json ;;
+  motif-expand) python -m nexus_gate.language.cli motif-status --root . --json ;;
+  motif-replay-verify) python -m nexus_gate.language.cli motif-replay-verify --root . --json ;;
+  language-calibration-status) python -m nexus_gate.language.cli calibration-status --root . --json ;;
+  language-calibration-propose) python -m nexus_gate.language.cli calibration-propose --root . --json ;;
+  language-calibration-authorize) python -m nexus_gate.language.cli calibration-authorize --root . --json ;;
+  language-calibration-apply) python -m nexus_gate.language.cli calibration-apply --root . --json ;;
+  language-calibration-replay-verify) python -m nexus_gate.language.cli calibration-replay-verify --root . --json ;;
   action-recommend) python -m nexus_gate.actions.cli recommend --root . --json ;;
   action-status)
     shift || true

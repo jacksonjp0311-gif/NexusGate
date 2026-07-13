@@ -70,6 +70,17 @@ def _confidence(value: Any) -> float:
     return max(0.0, min(1.0, parsed))
 
 
+def _conductance_adjustment(recommendation: dict[str, Any]) -> float:
+    field = recommendation.get("conductance_field") or {}
+    if not field:
+        return 0.0
+    try:
+        adjustment = float(field.get("bounded_adjustment") or 0.0)
+    except (TypeError, ValueError):
+        adjustment = 0.0
+    return max(-6.25, min(6.25, adjustment))
+
+
 def score_recommendation(
     recommendation: dict[str, Any],
     coherence: dict[str, Any] | None = None,
@@ -95,7 +106,8 @@ def score_recommendation(
     calibration_boost = _calibration_adjustment(recommendation, calibration)
     lattice = recommendation.get("triadic_lattice") or {}
     lattice_adjustment = float(lattice.get("arbiter_adjustment") or 0.0)
-    total = round(severity + source + (confidence * 20) + _coherence_adjustment(recommendation, coherence) + calibration_boost + lattice_adjustment - cost - blockers - stale_penalty + final_guard, 3)
+    conductance_adjustment = _conductance_adjustment(recommendation)
+    total = round(severity + source + (confidence * 20) + _coherence_adjustment(recommendation, coherence) + calibration_boost + lattice_adjustment + conductance_adjustment - cost - blockers - stale_penalty + final_guard, 3)
     scored = dict(recommendation)
     scored["arbiter_score"] = total
     scored["arbiter_factors"] = {
@@ -108,6 +120,7 @@ def score_recommendation(
         "coherence_adjustment": _coherence_adjustment(recommendation, coherence),
         "calibration_adjustment": calibration_boost,
         "triadic_lattice_adjustment": lattice_adjustment,
+        "conductance_adjustment": conductance_adjustment,
         "final_guard": final_guard,
     }
     return scored

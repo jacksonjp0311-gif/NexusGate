@@ -121,7 +121,8 @@ Boundary: the update chart improves repository continuity. It does not prove cor
 | v2.6.3 | Causal Integrity Hardening | sealed | Enforces effect receipts before validation, registry-definition authorization binding, authorization expiry, snapshot-based effects, final evolve learning proof, clean-epoch calibration gates, and first-learning readiness. |
 | v2.7.0 | Governed Experience Engine | sealed | Adds semantic action-chain verification, action-bound final evolve receipts, verified Experience Seals, explicit calibration authorization surfaces, adaptive coherence, emergence observation, and separated identity/experience/plasticity planes. |
 | v2.7.1 | Breath Pulse | sealed | Adds read-only inhale/hold/exhale vital-sign packets for evidence freshness, runtime pressure, Git scope, and bounded next-command orientation. |
-| v2.8.0 | Cybernetic Field Engine | current | Adds semantic Breath regulation, sparse conductance routing, and governed telemetry codec context while preserving authority as a hard gate. |
+| v2.9.0 | Geometric Language Intelligence Engine | current | Adds AI Touch receipts, deterministic intelligence extraction, sparse NGLM activation, grounded query, reversible motifs, language replay, and benchmark smoke while preserving human authority. |
+| v2.8.0 | Cybernetic Field Engine | sealed | Adds semantic Breath regulation, sparse conductance routing, and governed telemetry codec context while preserving authority as a hard gate. |
 ## v0.9.5 - AI Toolbelt Surface
 
 No version step without update chart entry. Adds operator-visible toolbelt index and README Toolbelt section.

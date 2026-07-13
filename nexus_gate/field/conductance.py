@@ -10,7 +10,7 @@ from typing import Any
 from .laplacian import electrical_flow
 
 
-VERSION = "2.8.0"
+VERSION = "2.9.0"
 REPORT = Path("reports") / "nexus_conductance_field_latest.json"
 STATE = Path("state") / "field" / "nexus_conductance_field_latest.json"
 ROUTE_STATE = Path("state") / "field" / "nexus_route_conductance_latest.json"
@@ -74,6 +74,65 @@ def _telemetry_modifier(root: Path) -> float:
     return max(-0.1, min(0.1, confidence * 0.1))
 
 
+ROUTE_NODES = [
+    "nexus.status",
+    "nexus.runtime-hygiene",
+    "nexus.predictive-evolve",
+    "nexus.experience-readiness",
+    "nexus.conductance-field",
+]
+
+
+def _route_scores(flow: dict[str, Any]) -> dict[str, dict[str, float]]:
+    scores: dict[str, dict[str, float]] = {}
+    for route in ROUTE_NODES:
+        incoming = 0.0
+        outgoing = 0.0
+        for edge in flow.get("edge_flows", []):
+            if edge.get("target") == route:
+                incoming += abs(float(edge.get("flow") or 0.0))
+            if edge.get("source") == route:
+                outgoing += abs(float(edge.get("flow") or 0.0))
+        scores[route] = {
+            "net_incoming_flow": round(incoming, 6),
+            "net_outgoing_flow": round(outgoing, 6),
+            "route_flow": round((incoming + outgoing) / 2.0, 6),
+        }
+    return scores
+
+
+def _event_hash(event: dict[str, Any]) -> str:
+    body = {key: value for key, value in event.items() if key != "event_hash"}
+    return _hash(body)
+
+
+def _read_history(path: Path) -> tuple[list[dict[str, Any]], list[str]]:
+    events: list[dict[str, Any]] = []
+    errors: list[str] = []
+    if not path.exists():
+        return events, errors
+    previous = "genesis"
+    seen: set[str] = set()
+    for index, line in enumerate(path.read_text(encoding="utf-8-sig").splitlines(), start=1):
+        if not line.strip():
+            continue
+        try:
+            event = json.loads(line)
+        except Exception:
+            errors.append(f"malformed_row:{index}")
+            continue
+        if event.get("previous_event_hash") != previous:
+            errors.append(f"previous_hash_mismatch:{index}")
+        if event.get("event_id") in seen:
+            errors.append(f"duplicate_event_id:{index}")
+        seen.add(str(event.get("event_id")))
+        if event.get("event_hash") != _event_hash(event):
+            errors.append(f"event_hash_mismatch:{index}")
+        previous = str(event.get("event_hash") or previous)
+        events.append(event)
+    return events, errors
+
+
 def build_conductance_field(root: str | Path = ".", intent: str = "") -> dict[str, Any]:
     root_path = Path(root)
     base = _prior(root_path)
@@ -81,56 +140,67 @@ def build_conductance_field(root: str | Path = ".", intent: str = "") -> dict[st
     telemetry_mod = _telemetry_modifier(root_path)
     inspection = max(D_MIN, min(D_MAX, base + breath_mod))
     planning = max(D_MIN, min(D_MAX, base + telemetry_mod))
-    final = max(D_MIN, min(D_MAX, base - 0.25 if breath_mod < 0 else base))
+    readiness = max(D_MIN, min(D_MAX, base + max(0.0, -breath_mod) + 0.05))
+    field = max(D_MIN, min(D_MAX, base + 0.025))
+    status = max(D_MIN, min(D_MAX, base + (0.08 if breath_mod < 0 else 0.0)))
     nodes = [
         "identity",
         "evidence",
         "breath-pulse",
         "telemetry-context",
-        "conductance-field",
+        "recommendation-sink",
         "nexus.runtime-hygiene",
         "nexus.predictive-evolve",
-        "nexus.evolve",
-        "human-authorization-boundary",
+        "nexus.experience-readiness",
+        "nexus.conductance-field",
+        "nexus.status",
     ]
     edges = [
         _edge("identity->evidence", "identity", "evidence", "supports", base),
         _edge("evidence->breath", "evidence", "breath-pulse", "regulates", inspection),
+        _edge("evidence->status", "evidence", "nexus.status", "routes_to", status),
+        _edge("status->sink", "nexus.status", "recommendation-sink", "routes_to", status),
         _edge("breath->runtime", "breath-pulse", "nexus.runtime-hygiene", "routes_to", inspection),
+        _edge("runtime->sink", "nexus.runtime-hygiene", "recommendation-sink", "routes_to", inspection),
         _edge("telemetry->predictive", "telemetry-context", "nexus.predictive-evolve", "contextualizes", planning),
         _edge("evidence->predictive", "evidence", "nexus.predictive-evolve", "routes_to", planning),
-        _edge("predictive->field", "nexus.predictive-evolve", "conductance-field", "precedes", planning),
-        _edge("field->evolve", "conductance-field", "nexus.evolve", "routes_to", final),
-        _edge("evolve->human", "nexus.evolve", "human-authorization-boundary", "authorized_by", 0.75, hard_gate=True),
+        _edge("predictive->sink", "nexus.predictive-evolve", "recommendation-sink", "routes_to", planning),
+        _edge("evidence->readiness", "evidence", "nexus.experience-readiness", "routes_to", readiness),
+        _edge("readiness->sink", "nexus.experience-readiness", "recommendation-sink", "routes_to", readiness),
+        _edge("evidence->field", "evidence", "nexus.conductance-field", "routes_to", field),
+        _edge("field->sink", "nexus.conductance-field", "recommendation-sink", "routes_to", field),
     ]
     try:
-        flow = electrical_flow(nodes, edges, "identity", "human-authorization-boundary")
-        status = "pass"
+        flow = electrical_flow(nodes, edges, "identity", "recommendation-sink")
+        packet_status = "pass"
     except Exception as exc:
         flow = {"error": str(exc), "node_potentials": {}, "edge_flows": [], "effective_resistance": None}
-        status = "fail"
-    route_flows = {}
-    for edge in flow.get("edge_flows", []):
-        target = edge["target"]
-        if target.startswith("nexus."):
-            route_flows[target] = route_flows.get(target, 0.0) + abs(float(edge["flow"]))
-    dominant = max(route_flows.items(), key=lambda item: item[1], default=(None, 0.0))
+        packet_status = "fail"
+    route_scores = _route_scores(flow)
+    dominant = max(((route, score["route_flow"]) for route, score in route_scores.items()), key=lambda item: item[1], default=(None, 0.0))
     packet = {
-        "schema": "NEXUS_CONDUCTANCE_FIELD.v2.8.0",
+        "schema": "NEXUS_CONDUCTANCE_FIELD.v2.9.0",
         "system": "NEXUS GATE",
         "version": VERSION,
-        "status": status,
+        "status": packet_status,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "intent": intent,
         "mode": "sparse_geometric_conductance",
+        "field_boundary": {
+            "adaptive_recommendation_field": True,
+            "recommendation_result": "bounded_preference_only",
+            "non_adaptive_authorization_gate": "downstream_application_invariant",
+            "authorization_is_learnable_weight": False,
+        },
         "nodes": nodes,
         "edges": edges,
         "flow": flow,
+        "route_scores": route_scores,
         "route_recommendation": {
             "dominant_route": dominant[0],
             "dominant_route_flow": round(dominant[1], 6),
             "effective_resistance": flow.get("effective_resistance"),
-            "authority_gate_status": "hard_gate_preserved",
+            "authority_gate_status": "outside_adaptive_field",
             "execution_status": "not_executed",
         },
         "temporary_modifiers": {
@@ -138,7 +208,7 @@ def build_conductance_field(root: str | Path = ".", intent: str = "") -> dict[st
             "telemetry_modifier": telemetry_mod,
             "cap": 0.1,
         },
-        "blocked_edges": ["human_authorization_requirement", "receipt_validity", "source_identity", "claim_boundaries"],
+        "blocked_edges": ["human_authorization_requirement", "receipt_validity", "source_identity", "claim_boundaries", "telemetry_to_persistent_conductance"],
         "blocked_actions": ["execute_selected_route", "bypass_authority", "telemetry_direct_calibration", "conductance_grants_permission"],
         "claim_boundary": "Conductance alters recommendation preference only. It cannot bypass authority, schema validity, receipt validity, or final evolve.",
     }
@@ -151,21 +221,41 @@ def write_conductance_field(root: str | Path = ".", intent: str = "") -> dict[st
     packet = build_conductance_field(root_path, intent)
     _write(root_path / REPORT, packet)
     _write(root_path / STATE, packet)
-    _write(root_path / ROUTE_STATE, {"schema": "NEXUS_ROUTE_CONDUCTANCE.v2.8.0", "routes": packet["route_recommendation"], "field_hash": packet["conductance_field_hash"]})
+    _write(root_path / ROUTE_STATE, {"schema": "NEXUS_ROUTE_CONDUCTANCE.v2.9.0", "routes": packet["route_scores"], "field_hash": packet["conductance_field_hash"]})
     return packet
 
 
 def replay_verify(root: str | Path = ".") -> dict[str, Any]:
     root_path = Path(root)
-    chain = []
-    if (root_path / HISTORY).exists():
-        chain = [line for line in (root_path / HISTORY).read_text(encoding="utf-8").splitlines() if line.strip()]
+    events, errors = _read_history(root_path / HISTORY)
+    state: dict[str, float] = {}
+    for event in events:
+        if event.get("event_type") != "conductance_weight_update":
+            errors.append(f"unsupported_event_type:{event.get('event_type')}")
+            continue
+        if event.get("source") == "telemetry":
+            errors.append("telemetry_direct_persistent_update")
+        edge_id = str(event.get("edge_id") or "")
+        after = event.get("conductance_after")
+        try:
+            parsed = float(after)
+        except (TypeError, ValueError):
+            errors.append(f"invalid_conductance:{edge_id}")
+            continue
+        if not math.isfinite(parsed) or parsed < D_MIN or parsed > D_MAX:
+            errors.append(f"conductance_out_of_bounds:{edge_id}")
+            continue
+        state[edge_id] = round(parsed, 6)
+    state_hash = _hash({"events": len(events), "state": state})
     return {
-        "schema": "NEXUS_CONDUCTANCE_REPLAY.v2.8.0",
+        "schema": "NEXUS_CONDUCTANCE_REPLAY.v2.9.0",
         "version": VERSION,
-        "status": "pass",
-        "event_count": len(chain),
-        "replay_valid": True,
-        "mode": "no_persistent_events" if not chain else "history_replayed",
+        "status": "pass" if not errors else "fail",
+        "event_count": len(events),
+        "replay_valid": not errors,
+        "mode": "replayed_empty_history" if not events else "deterministic_event_replay",
+        "errors": errors,
+        "reconstructed_edge_count": len(state),
+        "final_state_hash": state_hash,
         "claim_boundary": "Replay verifies conductance history only; no calibration is applied here.",
     }

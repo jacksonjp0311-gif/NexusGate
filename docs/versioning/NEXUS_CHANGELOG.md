@@ -1,5 +1,13 @@
-## v2.8.0 - Cybernetic Field Engine
+## v2.9.0 - Geometric Language Intelligence Engine
 Status: current
+- Adds AI Touch Intelligence Receipts for declared Codex/AI sessions, redaction, verification, and replay.
+- Adds deterministic intelligence extraction, candidate promotion gates, negative evidence preservation, and no automatic conductance update.
+- Adds NGLM: local sparse tokenization, corpus graph, activation, grounded query, self-model, motif, replay, and benchmark surfaces.
+- Hardens conductance integration so the field becomes a capped arbiter input while authorization remains a non-adaptive gate.
+- Boundary: AI output is observation, not knowledge; no verified experience, no weight change; no benchmark, no intelligence claim.
+
+## v2.8.0 - Cybernetic Field Engine
+Status: sealed
 - Upgrades Breath with semantic freshness, command IDs, lifecycle priority, pressure/vitality split, and pulse history.
 - Adds the Geometric Conductance Lattice: sparse pure-Python electrical-flow route preference with hard authority gates preserved.
 - Adds the Governed Telemetry Codec: offline-safe source registry, health, fixture pulls, normalization, fusion, and untrusted-text boundaries.

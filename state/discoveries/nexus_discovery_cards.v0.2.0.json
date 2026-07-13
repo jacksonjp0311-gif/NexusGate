@@ -1,5 +1,5 @@
 {
-  "card_count": 29,
+  "card_count": 39,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -1116,10 +1116,292 @@
       "summary": "External weather, space, seismic, and orbital packets can contextualize NEXUS without becoming commands or authority.",
       "title": "Telemetry Is Observation Not Instruction",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "ai-touch-receipt-algorithm",
+        "deterministic-intelligence-extraction-algorithm"
+      ],
+      "boundary": "A verified interaction may teach candidates; it may not self-authorize promotion.",
+      "code_references": [
+        "nexus_gate/intelligence/touch.py",
+        "nexus_gate/intelligence/extract.py"
+      ],
+      "discovery_id": "verified-ai-interaction-as-teacher-signal",
+      "evidence_surfaces": [
+        "ledger/ai_interactions.jsonl",
+        "reports/nexus_ai_touch_verify_latest.json"
+      ],
+      "math": {
+        "law": "AI output is observation, not knowledge"
+      },
+      "next_versions": [
+        "v0.2: bind AI touch receipts to Experience Seals when authorized actions exist"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 ai-touch-begin",
+        ".\\scripts\\nexus.ps1 ai-touch-verify"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Declared AI work can inform NEXUS only after receipt verification, redaction, disposition, and evidence extraction.",
+      "title": "Verified AI Interaction As Teacher Signal",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "sparse-language-activation-algorithm",
+        "grounded-response-planning-algorithm"
+      ],
+      "boundary": "Sparse local language does not imply general world knowledge or frontier parity.",
+      "code_references": [
+        "nexus_gate/language/tokenizer.py",
+        "nexus_gate/language/activation.py",
+        "nexus_gate/language/retrieval.py"
+      ],
+      "discovery_id": "language-without-dense-weight-dependence",
+      "evidence_surfaces": [
+        "reports/nexus_language_model_latest.json"
+      ],
+      "math": {
+        "activation": "seed + bounded conductance propagation - uncertainty"
+      },
+      "next_versions": [
+        "v0.2: add larger repository-native benchmark fixtures"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 language-query -Tag \"What is NEXUS permitted to learn?\""
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Repository-domain language can be represented as sparse typed relations, activation traces, and grounded response plans without transformer weights.",
+      "title": "Language Without Dense Weight Dependence",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "language-conductance-calibration-algorithm"
+      ],
+      "boundary": "No human authorization, no plasticity.",
+      "code_references": [
+        "nexus_gate/language/calibration.py",
+        "nexus_gate/field/conductance.py"
+      ],
+      "discovery_id": "graph-plasticity-versus-parameter-plasticity",
+      "evidence_surfaces": [
+        "ledger/language_training_events.jsonl"
+      ],
+      "math": {
+        "law": "temporary activation is not persistent learning"
+      },
+      "next_versions": [
+        "v0.2: apply authorized bounded language conductance events after three verified experiences"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 language-calibration-status"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "NEXUS can adjust interpretable graph conductance through authorized evidence rather than opaque dense parameter updates.",
+      "title": "Graph Plasticity Versus Parameter Plasticity",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "contradiction-preservation-algorithm"
+      ],
+      "boundary": "Negative evidence can block promotion; it cannot delete source evidence.",
+      "code_references": [
+        "nexus_gate/intelligence/extract.py"
+      ],
+      "discovery_id": "negative-experience-as-intelligence",
+      "evidence_surfaces": [
+        "ledger/intelligence_candidates.jsonl"
+      ],
+      "math": {
+        "law": "rejected experience is still intelligence"
+      },
+      "next_versions": [
+        "v0.2: route negative motifs into repair retrieval"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 intelligence-candidates"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Rejected, reverted, failed, and regressed interactions are retained as negative evidence instead of erased.",
+      "title": "Negative Experience As Intelligence",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "geometric-intent-routing-algorithm"
+      ],
+      "boundary": "NGLM may recommend registered commands; it may not execute them.",
+      "code_references": [
+        "nexus_gate/language/security.py",
+        "nexus_gate/language/retrieval.py"
+      ],
+      "discovery_id": "authority-independent-language-learning",
+      "evidence_surfaces": [
+        "reports/nexus_language_benchmark_latest.json"
+      ],
+      "math": {
+        "law": "untrusted text cannot create authority"
+      },
+      "next_versions": [
+        "v0.2: add adversarial fixture suite"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 language-adversarial-test"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Language understanding may improve while command execution and authorization remain outside the language plane.",
+      "title": "Authority-Independent Language Learning",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "sparse-language-activation-algorithm",
+        "continual-learning-retention-test-algorithm"
+      ],
+      "boundary": "Efficiency is measured separately from intelligence.",
+      "code_references": [
+        "nexus_gate/language/activation.py",
+        "nexus_gate/language/benchmark.py"
+      ],
+      "discovery_id": "sparse-activation-as-efficient-context",
+      "evidence_surfaces": [
+        "reports/nexus_language_benchmark_latest.json"
+      ],
+      "math": {
+        "efficiency": "quality per node visited"
+      },
+      "next_versions": [
+        "v0.2: add node-visit counters and memory telemetry"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 language-benchmark-smoke"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Query-time activation visits a bounded region of the language graph rather than loading full raw context.",
+      "title": "Sparse Activation As Efficient Context",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "reversible-motif-compression-algorithm"
+      ],
+      "boundary": "Compression may organize evidence; it may not erase it.",
+      "code_references": [
+        "nexus_gate/language/motifs.py"
+      ],
+      "discovery_id": "motif-compression-as-procedural-memory",
+      "evidence_surfaces": [
+        "state/intelligence/candidates/"
+      ],
+      "math": {
+        "gain": "occurrences * raw_cost - motif_cost - references"
+      },
+      "next_versions": [
+        "v0.2: promote verified motifs into Discovery Cards under human review"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 motif-discover"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Repeated verified patterns can become reversible motifs while preserving raw evidence and contradictions.",
+      "title": "Motif Compression As Procedural Memory",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "nexus-self-model-algorithm"
+      ],
+      "boundary": "Self-description is not AGI, consciousness, or autonomous authority.",
+      "code_references": [
+        "nexus_gate/language/self_model.py"
+      ],
+      "discovery_id": "self-description-without-consciousness-claims",
+      "evidence_surfaces": [
+        "reports/nexus_self_model_latest.json"
+      ],
+      "math": {
+        "law": "self-model evidence != consciousness"
+      },
+      "next_versions": [
+        "v0.2: bind self-model claims to schema validation results"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 self-model-build"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "NEXUS can describe implemented capabilities and limitations from evidence without claiming subjective awareness.",
+      "title": "Self-Description Without Consciousness Claims",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "ai-touch-receipt-algorithm"
+      ],
+      "boundary": "No imported model output can self-promote or self-authorize.",
+      "code_references": [
+        "nexus_gate/intelligence/redact.py",
+        "nexus_gate/language/security.py"
+      ],
+      "discovery_id": "frontier-models-as-temporary-teachers",
+      "evidence_surfaces": [
+        "reports/nexus_ai_touch_verify_latest.json"
+      ],
+      "math": {
+        "law": "teacher text != durable knowledge"
+      },
+      "next_versions": [
+        "v0.2: optional adapter interface for local realization models"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 ai-touch-verify"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "External or frontier model output can be an untrusted candidate source, but NEXUS learning requires local receipts and evidence.",
+      "title": "Frontier Models As Temporary Teachers",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "continual-learning-retention-test-algorithm"
+      ],
+      "boundary": "No measured superiority, no rivalry claim.",
+      "code_references": [
+        "nexus_gate/language/benchmark.py"
+      ],
+      "discovery_id": "local-language-intelligence-as-measurable-research-track",
+      "evidence_surfaces": [
+        "reports/nexus_language_benchmark_latest.json"
+      ],
+      "math": {
+        "law": "no benchmark, no intelligence claim"
+      },
+      "next_versions": [
+        "v0.2: add full BM25/TF-IDF baseline comparison"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 language-benchmark-smoke"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Repository-domain language intelligence must be benchmarked against baselines before capability claims escalate.",
+      "title": "Local Language Intelligence As Measurable Research Track",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-13T12:11:35.391977+00:00",
+  "generated_at_utc": "2026-07-13T13:56:27.936685+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",
