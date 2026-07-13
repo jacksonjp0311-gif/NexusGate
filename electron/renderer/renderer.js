@@ -1040,10 +1040,8 @@ function bindMovableHud(panel, handle) {
   });
   const moveDrag = (event) => {
     if (!dragging) return;
-    const maxLeft = Math.max(8, window.innerWidth - Math.min(dragging.width, window.innerWidth - 16));
-    const maxTop = Math.max(8, window.innerHeight - Math.min(dragging.height, window.innerHeight - 16));
-    const nextLeft = Math.max(8, Math.min(maxLeft, event.clientX - dragging.x));
-    const nextTop = Math.max(8, Math.min(maxTop, event.clientY - dragging.y));
+    const nextLeft = event.clientX - dragging.x;
+    const nextTop = event.clientY - dragging.y;
     panel.style.left = `${nextLeft}px`;
     panel.style.top = `${nextTop}px`;
     panel.style.right = "auto";

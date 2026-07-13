@@ -2836,6 +2836,77 @@ body.system-error-active .chat-viewport {
   text-transform: uppercase;
 }
 
+/* NEXUS v2.7.1: card HUDs are movable windows with independent card scrolling. */
+.nexus-cards-hud {
+  display: grid !important;
+  grid-template-rows: auto auto minmax(0, 1fr) !important;
+  width: min(1040px, calc(100vw - 56px)) !important;
+  min-width: min(620px, calc(100vw - 40px)) !important;
+  min-height: min(520px, calc(100vh - 80px)) !important;
+  max-height: calc(100vh - 60px) !important;
+  overflow: hidden !important;
+  resize: both !important;
+  z-index: 100200 !important;
+}
+
+.nexus-cards-hud[hidden] {
+  display: none !important;
+}
+
+.nexus-cards-hud.is-expanded {
+  display: grid !important;
+}
+
+.nexus-cards-hud.is-dragging {
+  user-select: none !important;
+  cursor: grabbing !important;
+}
+
+.nexus-cards-hud .telemetry-hud-head {
+  cursor: grab !important;
+  flex: 0 0 auto !important;
+}
+
+.nexus-cards-hud.is-dragging .telemetry-hud-head {
+  cursor: grabbing !important;
+}
+
+.nexus-cards-summary {
+  min-height: 0 !important;
+  max-height: 92px !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(132, 204, 22, .70) rgba(2, 6, 23, .90) !important;
+}
+
+.nexus-cards-grid {
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain !important;
+  padding: 2px 4px 12px 2px !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(132, 204, 22, .70) rgba(2, 6, 23, .90) !important;
+}
+
+.nexus-card-hud-card {
+  min-height: 0 !important;
+  max-height: 430px !important;
+  display: grid !important;
+  grid-template-rows: auto auto minmax(0, 1fr) !important;
+  overflow: hidden !important;
+}
+
+.nexus-card-hud-card dl {
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  padding-right: 4px !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(34, 211, 238, .62) rgba(2, 6, 23, .90) !important;
+}
+
 .terminate-process-button:hover {
   border-color: rgba(254, 202, 202, .86);
   box-shadow: 0 0 18px rgba(248, 113, 113, .30);
