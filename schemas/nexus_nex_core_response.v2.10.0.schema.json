@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/nexus_nex_core_response.v2.10.0.schema.json",
+  "title": "NEX CORE Response v2.10.0",
+  "type": "object",
+  "required": ["schema", "cycle_id", "query_id", "status", "mode", "intent", "answer", "grounding", "inner_trace", "learning_state", "authority_boundary"],
+  "properties": {
+    "schema": {"const": "NEXUS_NEX_CORE_RESPONSE.v2.10.0"},
+    "cycle_id": {"type": "string"},
+    "query_id": {"type": "string"},
+    "status": {"enum": ["pass", "warn", "fail", "blocked"]},
+    "mode": {"const": "NEX_CORE"},
+    "intent": {"type": "object"},
+    "answer": {"type": "string"},
+    "grounding": {"type": "array", "items": {"type": "string"}},
+    "activated_concepts": {"type": "array"},
+    "activated_procedures": {"type": "array"},
+    "contradictions": {"type": "array"},
+    "uncertainty": {"type": "object"},
+    "inner_trace": {"type": "object", "required": ["message_count", "organs_consulted", "supporting_paths", "blocked_claims"]},
+    "learning_state": {"type": "object", "required": ["teaching_episode_created", "learning_proposal_created", "persistent_learning_applied"]},
+    "authority_boundary": {"type": "object", "required": ["recommendation_only", "may_execute", "may_authorize", "may_mutate_source"]}
+  }
+}

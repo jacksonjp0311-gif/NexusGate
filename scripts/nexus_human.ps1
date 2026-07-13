@@ -3,7 +3,7 @@
 # CRLF will be replaced by LF
 # LF will be replaced by CRLF
 param(
-    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "breath", "telemetry-sources", "telemetry-health", "telemetry-fuse", "conductance-field", "conductance-replay-verify", "ai-touch-replay-verify", "intelligence-replay-verify", "language-corpus-verify", "language-replay-verify", "self-model-verify", "language-benchmark-smoke", "action-recommend", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-chain-verify", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "evolve", "status", "gitfix")]
+    [ValidateSet("all", "compile", "runtime", "pack", "feedback", "interconnect", "compact", "heal", "interface", "electron-env", "electron-preflight", "reflect", "domain", "meta-orchestrator", "orchestrate", "predictive-timing", "predictive-memory", "epoch-seal", "epoch-verify", "epoch-chain-verify", "epoch-observe", "origin-seal", "triadic-lattice", "distill", "decision-envelope", "coherence-field", "outcome-learn", "runtime-hygiene", "clean-runtime", "breath", "telemetry-sources", "telemetry-health", "telemetry-fuse", "conductance-field", "conductance-replay-verify", "ai-touch-replay-verify", "intelligence-replay-verify", "language-corpus-verify", "language-replay-verify", "self-model-verify", "language-benchmark-smoke", "nex-teach-replay-verify", "nex-inner-status", "nex-learn-replay-verify", "nex-verify-authority", "nex-verify-replay", "nex-verify-all", "nex-chat", "action-recommend", "action-chain-verify", "action-semantic-verify", "experience-readiness", "experience-chain-verify", "calibration-replay-verify", "adaptive-coherence", "emergence-report", "causal-receipts", "first-learning-readiness", "evolve", "status", "gitfix")]
     [string]$Command = "all",
     [string]$ActionId = "",
     [switch]$NoGit
@@ -209,6 +209,12 @@ function Run-All {
     Invoke-Step "Language replay verify" "18p_language_replay_verify.json" { python -m nexus_gate.language.cli replay-verify --root . --json }
     Invoke-Step "Self model verify" "18q_self_model_verify.json" { python -m nexus_gate.language.cli self-model-verify --root . --json }
     Invoke-Step "Language benchmark smoke" "18r_language_benchmark_smoke.json" { python -m nexus_gate.language.cli benchmark-smoke --root . --json }
+    Invoke-Step "NEX teaching replay verify" "18s_nex_teaching_replay_verify.json" { python -m nexus_gate.nex_core.cli teach-replay-verify --root . --json }
+    Invoke-Step "NEX inner-message replay" "18t_nex_inner_message_replay.json" { python -m nexus_gate.nex_core.cli inner-status --root . --json }
+    Invoke-Step "NEX learning replay" "18u_nex_learning_replay_verify.json" { python -m nexus_gate.nex_core.cli learn-replay-verify --root . --json }
+    Invoke-Step "NEX authority invariant verify" "18v_nex_authority_verify.json" { python -m nexus_gate.nex_core.cli verify-authority --root . --json }
+    Invoke-Step "NEX CORE query smoke" "18w_nex_core_query_smoke.json" { python -m nexus_gate.nex_core.cli chat --root . --prompt "What has NEX verified about its own learning?" --json }
+    Invoke-Step "NEX benchmark smoke" "18x_nex_benchmark_smoke.json" { python -m nexus_gate.nex_core.cli verify-benchmark --root . --json }
     Invoke-Step "Epoch chain verify" "19_epoch_chain_verify.json" { python -m nexus_gate.epochs.seal --root . --chain-verify --json }
     Say "Compiled report files written." "OK"
     Say "Human surface passed." "OK"
@@ -534,6 +540,50 @@ if ($Command -eq "causal-receipts") {
 if ($Command -eq "first-learning-readiness") {
     Invoke-Step "First learning readiness" "16i6_first_learning_readiness.json" { python -m nexus_gate.actions.cli first-learning-readiness --root . --json }
     Say "First learning readiness report written." "OK"
+    exit 0
+}
+
+if ($Command -eq "nex-teach-replay-verify") {
+    Invoke-Step "NEX teaching replay verify" "16n1_nex_teaching_replay_verify.json" { python -m nexus_gate.nex_core.cli teach-replay-verify --root . --json }
+    Say "NEX teaching replay verified." "OK"
+    exit 0
+}
+
+if ($Command -eq "nex-inner-status") {
+    Invoke-Step "NEX inner-message status" "16n2_nex_inner_status.json" { python -m nexus_gate.nex_core.cli inner-status --root . --json }
+    Say "NEX inner-message status written." "OK"
+    exit 0
+}
+
+if ($Command -eq "nex-learn-replay-verify") {
+    Invoke-Step "NEX learning replay verify" "16n3_nex_learning_replay_verify.json" { python -m nexus_gate.nex_core.cli learn-replay-verify --root . --json }
+    Say "NEX learning replay verified." "OK"
+    exit 0
+}
+
+if ($Command -eq "nex-verify-authority") {
+    Invoke-Step "NEX authority invariant verify" "16n4_nex_authority_verify.json" { python -m nexus_gate.nex_core.cli verify-authority --root . --json }
+    Say "NEX authority invariants verified." "OK"
+    exit 0
+}
+
+if ($Command -eq "nex-verify-replay") {
+    Invoke-Step "NEX replay verify" "16n5_nex_replay_verify.json" { python -m nexus_gate.nex_core.cli verify-replay --root . --json }
+    Say "NEX replay verified." "OK"
+    exit 0
+}
+
+if ($Command -eq "nex-verify-all") {
+    Invoke-Step "NEX verify all" "16n6_nex_verify_all.json" { python -m nexus_gate.nex_core.cli verify-all --root . --json }
+    Say "NEX verification written." "OK"
+    exit 0
+}
+
+if ($Command -eq "nex-chat") {
+    $prompt = $Tag
+    if ([string]::IsNullOrWhiteSpace($prompt)) { $prompt = "What has NEX verified about its own learning?" }
+    Invoke-Step "NEX CORE chat" "16n7_nex_core_chat.json" { python -m nexus_gate.nex_core.cli chat --root . --prompt $prompt --json }
+    Say "NEX CORE chat packet written." "OK"
     exit 0
 }
 

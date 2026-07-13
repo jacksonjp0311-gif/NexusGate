@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/nexus_learning_authorization.v2.10.0.schema.json",
+  "title": "NEXUS Learning Authorization v2.10.0",
+  "type": "object",
+  "required": ["schema", "authorization_id", "proposal_id", "proposal_hash", "source_epoch_id", "learning_config_hash", "created_at_utc", "expires_minutes", "authority_boundary", "authorization_hash"],
+  "properties": {
+    "schema": {"const": "NEXUS_LEARNING_AUTHORIZATION.v2.10.0"},
+    "authorization_id": {"type": "string", "pattern": "^learn_auth_[0-9a-f]{24}$"},
+    "proposal_id": {"type": "string"},
+    "proposal_hash": {"type": "string", "minLength": 32},
+    "source_epoch_id": {"type": "string"},
+    "learning_config_hash": {"type": "string", "minLength": 32},
+    "created_at_utc": {"type": "string"},
+    "expires_minutes": {"type": "integer", "minimum": 1, "maximum": 1440},
+    "authority_boundary": {"type": "object", "required": ["single_proposal_only", "reusable", "may_create_authority"]},
+    "authorization_hash": {"type": "string", "minLength": 32}
+  }
+}

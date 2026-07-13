@@ -294,6 +294,52 @@ case "$COMMAND" in
   language-calibration-authorize) python -m nexus_gate.language.cli calibration-authorize --root . --json ;;
   language-calibration-apply) python -m nexus_gate.language.cli calibration-apply --root . --json ;;
   language-calibration-replay-verify) python -m nexus_gate.language.cli calibration-replay-verify --root . --json ;;
+  nex-teach-begin)
+    shift || true
+    python -m nexus_gate.nex_core.cli teach-begin --root . --tag "${*:-${TAG:-NEX teaching episode.}}" --json
+    ;;
+  nex-teach-status|nex-teach-list) python -m nexus_gate.nex_core.cli teach-status --root . --json ;;
+  nex-teach-bind-validation)
+    shift || true
+    TEACHING_ID="${1:-${ACTION_ID:-}}"
+    shift || true
+    python -m nexus_gate.nex_core.cli teach-bind-validation --root . --teaching-id "$TEACHING_ID" --tag "${*:-${TAG:-}}" --json
+    ;;
+  nex-teach-seal)
+    shift || true
+    python -m nexus_gate.nex_core.cli teach-seal --root . --teaching-id "${1:-${ACTION_ID:-}}" --disposition "${DISPOSITION:-pending_review}" --json
+    ;;
+  nex-teach-abort)
+    shift || true
+    python -m nexus_gate.nex_core.cli teach-abort --root . --teaching-id "${1:-${ACTION_ID:-}}" --json
+    ;;
+  nex-teach-verify)
+    shift || true
+    python -m nexus_gate.nex_core.cli teach-verify --root . --teaching-id "${1:-${ACTION_ID:-}}" --json
+    ;;
+  nex-teach-replay-verify) python -m nexus_gate.nex_core.cli teach-replay-verify --root . --json ;;
+  nex-chat|nex-query|nex-explain)
+    sub="${COMMAND#nex-}"
+    shift || true
+    python -m nexus_gate.nex_core.cli "$sub" --root . --prompt "${*:-${TAG:-What has NEX verified about its own learning?}}" --json
+    ;;
+  nex-inner-status) python -m nexus_gate.nex_core.cli inner-status --root . --json ;;
+  nex-inner-trace) python -m nexus_gate.nex_core.cli inner-trace --root . --json ;;
+  nex-cycle-status) python -m nexus_gate.nex_core.cli cycle-status --root . --json ;;
+  nex-mode-status) python -m nexus_gate.nex_core.cli mode-status --root . --json ;;
+  nex-learn-status) python -m nexus_gate.nex_core.cli learn-status --root . --json ;;
+  nex-learn-propose) python -m nexus_gate.nex_core.cli learn-propose --root . --json ;;
+  nex-learn-inspect|nex-learn-authorize|nex-learn-apply|nex-learn-reject|nex-learn-rollback-propose)
+    sub="${COMMAND#nex-}"
+    shift || true
+    python -m nexus_gate.nex_core.cli "$sub" --root . --proposal-id "${1:-${ACTION_ID:-}}" --json
+    ;;
+  nex-learn-replay-verify) python -m nexus_gate.nex_core.cli learn-replay-verify --root . --json ;;
+  nex-verify|nex-verify-cycle|nex-verify-learning|nex-verify-authority|nex-verify-retention|nex-verify-benchmark|nex-verify-adversarial|nex-verify-replay|nex-verify-all)
+    sub="${COMMAND#nex-}"
+    shift || true
+    python -m nexus_gate.nex_core.cli "$sub" --root . --proposal-id "${1:-${ACTION_ID:-}}" --json
+    ;;
   action-recommend) python -m nexus_gate.actions.cli recommend --root . --json ;;
   action-status)
     shift || true

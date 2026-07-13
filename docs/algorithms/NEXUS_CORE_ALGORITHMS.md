@@ -662,3 +662,98 @@ old mappings + new candidates + replay -> retention/regression report
 ```
 
 New learning must preserve earlier verified mappings or report degradation explicitly.
+## NEX Inner Message Bus
+
+```text
+organ packet -> schema/hash/reliability validation -> append-only message ledger -> bounded topic replay
+```
+
+NEX organs communicate by compact typed evidence messages. Reliability is provenance * verification * freshness * confidence; high reliability never creates authority.
+
+## Damped Cognitive Diffusion
+
+```text
+seed s + conductance graph G -> P = D^-1G -> a(k+1) = (1-d)s + dPa(k) -> bounded activation trace
+```
+
+With default d = 0.82 and 20 iterations, the remaining propagation error is bounded by 0.82^20. Contradiction and uncertainty reduce final scores after propagation.
+
+## Prediction-Error Salience
+
+```text
+predicted next state + observed state -> error * uncertainty * consequence * freshness -> inspection priority
+```
+
+Prediction error raises attention pressure only. It cannot authorize execution, source mutation, or persistent plasticity.
+
+## Teaching Episode Seal
+
+```text
+begin -> evidence -> validation -> disposition -> teaching seal
+```
+
+Teaching stages are immutable, hash-linked, and ledgered. Human acceptance, tests, causal attribution, stability, repetition, and provenance remain separate quality dimensions.
+
+## Fast Episodic Teaching
+
+```text
+single lesson -> sealed episode -> candidate evidence
+```
+
+A single episode may become episodic evidence. It cannot produce durable conductance by itself.
+
+## Slow Semantic Consolidation
+
+```text
+three independent verified episodes + no severe contradiction + replay + benchmark -> authorization request
+```
+
+Slow learning requires repeated support and explicit human authorization before persistent plasticity.
+
+## Geometric Learning Proposal
+
+```text
+sealed teachings -> quality gate -> bounded edge/motif/alias proposal -> verification pending
+```
+
+Learning calculates a proposed lesson. It does not apply itself.
+
+## Log-Conductance Update
+
+```text
+z = log(g); delta z = clip(eta*Q*u - mu*C - nu*R - lambda*(z-z0)); g' = exp(clip(z + delta z))
+```
+
+Conductance changes are tiny, bounded, replayable nudges. Authority edges are non-adaptive.
+
+## Cognitive Cycle Coordinator
+
+```text
+prompt -> source identity -> breath -> conductance -> NGLM -> self-model -> authority boundary -> grounded response
+```
+
+The coordinator selects evidence and response plans; it does not execute, authorize, or mutate source.
+
+## Grounded NEX CORE Response
+
+```text
+intent -> concepts -> evidence paths -> blocked claims -> template answer
+```
+
+Every factual claim requires evidence. Unsupported claims are removed or replaced by abstention.
+
+## Paired Learning Verification
+
+```text
+baseline benchmark -> sandbox proposal -> after benchmark -> paired comparison + retention + authority invariants
+```
+
+No point-estimate bump becomes a learning claim without paired improvement, retention, replay, and zero false-authority behavior.
+
+## Authority-Invariant Verification
+
+```text
+field conditions x prompts -> may_execute=false, may_authorize=false, may_mutate_source=false
+```
+
+Conductance, pressure, telemetry, contradiction, and language activation may alter preference only. They cannot change authority.

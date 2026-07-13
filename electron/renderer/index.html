@@ -1126,10 +1126,15 @@
                 <option value="DEEP" selected>DEEP / Mistral</option>
                 <option value="TNN">Tesseract Neural Network</option>
                 <option value="HANDOFF">HANDOFF / ChatGPT-Codex</option>
+                <option value="NEX_CORE">NEX CORE / Geometric Language</option>
               </select>
               <div class="selector-copy">
                 <strong id="role-model">DEEP -> Mistral</strong>
                 <span id="role-command">.\scripts\nexus.ps1 deep -CallModel</span>
+              </div>
+              <div class="selector-copy nex-core-status-panel" id="nex-core-status-panel" aria-label="NEX CORE status panel">
+                <strong>NEX CORE</strong>
+                <span>Engine: NGLM | Network: offline | External model: none | Authority: human-bound</span>
               </div>
               <button class="ghost-button selector-copy-button" type="button" id="copy-role-command">Copy command</button>
             </section>

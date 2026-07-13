@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/nexus_cognitive_cycle.v2.10.0.schema.json",
+  "title": "NEXUS Cognitive Cycle v2.10.0",
+  "type": "object",
+  "required": ["schema", "cycle_id", "stage", "teach", "build", "learn", "verify", "inner_communication", "authority_invariants", "measured_improvement", "status", "claim_boundary"],
+  "properties": {
+    "schema": {"const": "NEXUS_COGNITIVE_CYCLE.v2.10.0"},
+    "cycle_id": {"type": "string", "minLength": 1},
+    "stage": {"enum": ["teach", "build", "learn", "verify", "verified"]},
+    "teach": {"type": "object"},
+    "build": {"type": "object"},
+    "learn": {"type": "object"},
+    "verify": {"type": "object"},
+    "inner_communication": {"type": "object"},
+    "model_before": {"type": "object"},
+    "model_after": {"type": "object"},
+    "authority_invariants": {"type": "object"},
+    "measured_improvement": {"type": "object"},
+    "status": {"enum": ["open", "pass", "warn", "fail", "blocked"]},
+    "claim_boundary": {"type": "string", "minLength": 20}
+  }
+}

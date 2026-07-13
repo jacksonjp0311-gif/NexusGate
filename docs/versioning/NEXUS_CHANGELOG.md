@@ -1,5 +1,13 @@
-## v2.9.0 - Geometric Language Intelligence Engine
+## v2.10.0 - NEX Cognitive Cycle Engine
 Status: current
+- Adds NEX CORE, a direct local NGLM conversation path that bypasses `nn_router.compile`, Ollama, external model weights, and network access.
+- Adds typed inner evidence messages, bounded cognitive cycles, damped graph diffusion, and structured inner traces without hidden chain-of-thought storage.
+- Adds immutable teaching episodes with separate human acceptance, validation strength, causal attribution, stability, repetition, and provenance quality.
+- Adds bounded geometric learning proposals, log-conductance update math, replay verification, retention checks, and authority-invariant tests.
+- Boundary: teaching is not learning; acceptance is not validation; NEX may communicate internally but may not create authority or apply persistent plasticity.
+
+## v2.9.0 - Geometric Language Intelligence Engine
+Status: sealed
 - Adds AI Touch Intelligence Receipts for declared Codex/AI sessions, redaction, verification, and replay.
 - Adds deterministic intelligence extraction, candidate promotion gates, negative evidence preservation, and no automatic conductance update.
 - Adds NGLM: local sparse tokenization, corpus graph, activation, grounded query, self-model, motif, replay, and benchmark surfaces.

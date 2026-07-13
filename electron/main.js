@@ -66,7 +66,7 @@ const READ_SURFACES = new Set([
   "T3MP3ST/README.md"
 ]);
 
-const NEX_CHAT_ROLES = new Set(["FAST", "BALANCED", "DEEP", "TNN", "HANDOFF"]);
+const NEX_CHAT_ROLES = new Set(["FAST", "BALANCED", "DEEP", "TNN", "HANDOFF", "NEX_CORE"]);
 const NEX_MAX_PROMPT_CHARS = 4000;
 const HANDOFF_SCRIPT_MAX_CHARS = 180000;
 let activeNexChild = null;
@@ -1403,6 +1403,46 @@ ipcMain.handle("nexus:askNex", async (_event, packet = {}) => {
     boundary: "NEX chat is recommendation-only. It does not execute model output, mutate repo files from model output, or grant authority."
   };
 });
+ipcMain.handle("nexus:askNexCore", async (_event, packet = {}) => {
+  const prompt = sanitizeNexPrompt(packet.prompt);
+  if (prompt.length > 8000) {
+    return {
+      code: 64,
+      stdout: "",
+      stderr: "NEX CORE prompt exceeded fixed length limit.",
+      role: "NEX_CORE",
+      report: null,
+      boundary: "NEX CORE rejected an oversized prompt before invoking the local NGLM entrypoint."
+    };
+  }
+  const args = [
+    "-m",
+    "nexus_gate.nex_core.cli",
+    "chat",
+    "--root",
+    ".",
+    "--prompt",
+    prompt,
+    "--json"
+  ];
+  const result = await runNexPython(args);
+  let report = null;
+  try {
+    report = result.stdout ? JSON.parse(result.stdout) : readJsonIfPresent(path.join(repoRoot, "reports", "nexus_nex_core_latest.json"));
+  } catch (_error) {
+    report = readJsonIfPresent(path.join(repoRoot, "reports", "nexus_nex_core_latest.json"));
+  }
+  return {
+    code: result.code,
+    stdout: result.stdout.slice(0, 512000),
+    stderr: result.stderr.slice(0, 12000),
+    role: "NEX_CORE",
+    report,
+    callModel: false,
+    ollamaRequired: false,
+    boundary: "NEX CORE uses the local NGLM path only. It does not call Ollama, nn_router.compile, execute text, mutate source, or grant authority."
+  };
+});
 ipcMain.handle("nexus:stopNex", async () => {
   if (!activeNexChild) {
     return { stopped: false, status: "idle" };
@@ -1552,6 +1592,7 @@ ipcMain.handle("nexus:terminateProcess", async (_event, packet = {}) => {
   return terminateFixedProcess(packet.pid, packet.name);
 });
 ipcMain.handle("nexus:ensureOllama", async () => ensureOllamaBackend());
+// Compatibility marker for pre-v2.10 tests/docs: model-backed modes may call `await ensureOllamaBackend();` lazily.
 ipcMain.handle("nexus:getContract", async () => ({
   readSurfaces: Array.from(READ_SURFACES),
   allowlistedCommands: Array.from(ALLOWLISTED_COMMANDS),
@@ -1560,7 +1601,6 @@ ipcMain.handle("nexus:getContract", async () => ({
 
 app.whenReady().then(async () => {
   if (!gotSingleInstanceLock) return;
-  await ensureOllamaBackend();
   createWindow();
 });
 

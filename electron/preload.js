@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld("nexus", {
   runLane: (lane) => ipcRenderer.invoke("nexus:runLane", lane),
   runHandoffScript: (packet) => ipcRenderer.invoke("nexus:runHandoffScript", packet),
   askNex: (packet) => ipcRenderer.invoke("nexus:askNex", packet),
+  askNexCore: (packet) => ipcRenderer.invoke("nexus:askNexCore", packet),
   stopNex: () => ipcRenderer.invoke("nexus:stopNex"),
   getTelemetry: () => ipcRenderer.invoke("nexus:getTelemetry"),
   terminateProcess: (packet) => ipcRenderer.invoke("nexus:terminateProcess", packet),

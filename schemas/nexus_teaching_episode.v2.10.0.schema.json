@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/nexus_teaching_episode.v2.10.0.schema.json",
+  "title": "NEXUS Teaching Episode v2.10.0",
+  "type": "object",
+  "required": ["schema", "teaching_id", "status", "teacher_type", "intent", "evidence_refs", "source_epoch_id", "validation", "human_disposition", "quality", "authority_boundary", "teaching_seal_hash"],
+  "properties": {
+    "schema": {"const": "NEXUS_TEACHING_EPISODE.v2.10.0"},
+    "teaching_id": {"type": "string", "pattern": "^teach_[0-9a-f]{24}$"},
+    "status": {"enum": ["sealed"]},
+    "teacher_type": {"enum": ["human_instruction", "accepted_ai_interaction", "accepted_ai_interaction_with_modification", "verified_repository_change", "verified_failure", "verified_regression", "verified_contradiction", "verified_telemetry_observation", "verified_action_outcome", "verified_experience_seal"]},
+    "intent": {"type": "object", "required": ["summary", "intent_hash"]},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "ai_interaction_refs": {"type": "array", "items": {"type": "string"}},
+    "experience_refs": {"type": "array", "items": {"type": "string"}},
+    "source_epoch_id": {"type": "string", "minLength": 1},
+    "validation": {"type": "object", "required": ["tests_executed", "test_report_hashes"]},
+    "human_disposition": {"enum": ["pending_review", "accepted", "accepted_with_modification", "rejected", "abandoned", "reverted"]},
+    "quality": {"type": "object", "required": ["provenance_integrity", "validation_strength", "causal_attribution", "later_stability", "human_acceptance", "independent_repetition", "gate_quality", "ranking_quality"]},
+    "authority_boundary": {"type": "object", "required": ["may_create_candidates", "may_apply_learning", "may_execute", "may_authorize"]},
+    "teaching_seal_hash": {"type": "string", "minLength": 32}
+  }
+}

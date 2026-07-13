@@ -39,6 +39,28 @@ After bounded work and validation, close it with an explicit disposition:
 
 Valid dispositions are `pending_review`, `accepted`, `accepted_with_modification`, `rejected`, `abandoned`, and `reverted`. No interaction defaults to accepted. AI output is observation, not knowledge. Intelligence extraction and promotion require verified receipts, redaction completion, explicit disposition, and later governance gates. Ordinary human editing is not blocked, but unattributed changes cannot promote intelligence.
 
+## NEX Cognitive Cycle Protocol
+
+NEX CORE is the direct local NGLM conversation mode. Use it when the operator wants repository-grounded answers without Ollama, frontier models, external weights, or network access:
+
+```powershell
+.\scripts\nexus.ps1 nex-chat -Tag "What has NEX verified about its own learning?"
+.\scripts\nexus.ps1 nex-mode-status
+.\scripts\nexus.ps1 nex-verify-all
+```
+
+Teaching is explicit and separate from learning:
+
+```powershell
+.\scripts\nexus.ps1 nex-teach-begin -Tag "<lesson intent>"
+.\scripts\nexus.ps1 nex-teach-bind-validation -ActionId "<teaching-id>" -Tag "<validation bundle>"
+.\scripts\nexus.ps1 nex-teach-seal -ActionId "<teaching-id>" -Disposition "pending_review"
+.\scripts\nexus.ps1 nex-learn-propose
+.\scripts\nexus.ps1 nex-verify-learning -ActionId "<proposal-id>"
+```
+
+NEX may communicate internally through typed evidence messages. It may not store hidden chain-of-thought, create its own authority, execute generated text, self-authorize, mutate source, or apply persistent learning. A response cannot validate itself. Acceptance is not validation. No paired improvement and retention evidence, no learning claim.
+
 ## Predictive Timing Preflight
 
 Before running full `evolve`, pack, broad test suites, Electron smoke, or any long-running validation lane, run:

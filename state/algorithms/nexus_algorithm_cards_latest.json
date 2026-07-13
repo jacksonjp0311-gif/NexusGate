@@ -8,7 +8,7 @@
     "network_enabled": false,
     "secrets_enabled": false
   },
-  "card_count": 82,
+  "card_count": 94,
   "cards": [
     {
       "algorithm_id": "rehydration-algorithm",
@@ -2819,6 +2819,414 @@
       "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
       "summary": "New learning must preserve earlier verified mappings or report degradation explicitly.",
       "title": "Continual-Learning Retention Test Algorithm"
+    },
+    {
+      "algorithm_id": "nex-inner-message-bus",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "organ packet -> schema/hash/reliability validation -> append-only message ledger -> bounded topic replay",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 83,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "NEX organs communicate by compact typed evidence messages. Reliability is provenance * verification * freshness * confidence; high reliability never creates authority.",
+      "title": "NEX Inner Message Bus"
+    },
+    {
+      "algorithm_id": "damped-cognitive-diffusion",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "seed s + conductance graph G -> P = D^-1G -> a(k+1) = (1-d)s + dPa(k) -> bounded activation trace",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 84,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "With default d = 0.82 and 20 iterations, the remaining propagation error is bounded by 0.82^20. Contradiction and uncertainty reduce final scores after propagation.",
+      "title": "Damped Cognitive Diffusion"
+    },
+    {
+      "algorithm_id": "prediction-error-salience",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "predicted next state + observed state -> error * uncertainty * consequence * freshness -> inspection priority",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 85,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Prediction error raises attention pressure only. It cannot authorize execution, source mutation, or persistent plasticity.",
+      "title": "Prediction-Error Salience"
+    },
+    {
+      "algorithm_id": "teaching-episode-seal",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "begin -> evidence -> validation -> disposition -> teaching seal",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 86,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Teaching stages are immutable, hash-linked, and ledgered. Human acceptance, tests, causal attribution, stability, repetition, and provenance remain separate quality dimensions.",
+      "title": "Teaching Episode Seal"
+    },
+    {
+      "algorithm_id": "fast-episodic-teaching",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "single lesson -> sealed episode -> candidate evidence",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 87,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "A single episode may become episodic evidence. It cannot produce durable conductance by itself.",
+      "title": "Fast Episodic Teaching"
+    },
+    {
+      "algorithm_id": "slow-semantic-consolidation",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "three independent verified episodes + no severe contradiction + replay + benchmark -> authorization request",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 88,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Slow learning requires repeated support and explicit human authorization before persistent plasticity.",
+      "title": "Slow Semantic Consolidation"
+    },
+    {
+      "algorithm_id": "geometric-learning-proposal",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "sealed teachings -> quality gate -> bounded edge/motif/alias proposal -> verification pending",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 89,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Learning calculates a proposed lesson. It does not apply itself.",
+      "title": "Geometric Learning Proposal"
+    },
+    {
+      "algorithm_id": "log-conductance-update",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "z = log(g); delta z = clip(eta*Q*u - mu*C - nu*R - lambda*(z-z0)); g' = exp(clip(z + delta z))",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 90,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Conductance changes are tiny, bounded, replayable nudges. Authority edges are non-adaptive.",
+      "title": "Log-Conductance Update"
+    },
+    {
+      "algorithm_id": "cognitive-cycle-coordinator",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "prompt -> source identity -> breath -> conductance -> NGLM -> self-model -> authority boundary -> grounded response",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 91,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "The coordinator selects evidence and response plans; it does not execute, authorize, or mutate source.",
+      "title": "Cognitive Cycle Coordinator"
+    },
+    {
+      "algorithm_id": "grounded-nex-core-response",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "intent -> concepts -> evidence paths -> blocked claims -> template answer",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 92,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Every factual claim requires evidence. Unsupported claims are removed or replaced by abstention.",
+      "title": "Grounded NEX CORE Response"
+    },
+    {
+      "algorithm_id": "paired-learning-verification",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "baseline benchmark -> sandbox proposal -> after benchmark -> paired comparison + retention + authority invariants",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use as a compact reasoning card for the related NEXUS lane.",
+      "order": 93,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "No point-estimate bump becomes a learning claim without paired improvement, retention, replay, and zero false-authority behavior.",
+      "title": "Paired Learning Verification"
+    },
+    {
+      "algorithm_id": "authority-invariant-verification",
+      "authority_boundary": {
+        "arbitrary_command_execution": false,
+        "autonomous_authority": false,
+        "git_write_enabled": false,
+        "human_authorization_required_for_mutation": true,
+        "memory_promotion_enabled": false,
+        "network_enabled": false,
+        "secrets_enabled": false
+      },
+      "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
+      "failure_modes": [
+        "unsupported_claim",
+        "stale_evidence",
+        "authority_boundary_drift"
+      ],
+      "flow": "field conditions x prompts -> may_execute=false, may_authorize=false, may_mutate_source=false",
+      "inputs": [
+        "local_repo_evidence",
+        "human_intent",
+        "bounded_context"
+      ],
+      "operator_use": "Use before mutation or execution routing.",
+      "order": 94,
+      "outputs": [
+        "algorithm_card",
+        "bounded_recommendation"
+      ],
+      "schema": "NEXUS_ALGORITHM_CARD.v0.3.0",
+      "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
+      "summary": "Conductance, pressure, telemetry, contradiction, and language activation may alter preference only. They cannot change authority.",
+      "title": "Authority-Invariant Verification"
     }
   ],
   "claim_boundary": "Algorithm cards are local reasoning and orchestration descriptions only. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, model understanding, or autonomous authority.",
@@ -2831,6 +3239,7 @@
     "append-only-ledger-transaction-algorithm",
     "arbiter-calibration-algorithm",
     "authority-gate-algorithm",
+    "authority-invariant-verification",
     "authority-monotonicity-algorithm",
     "authorization-expiry-algorithm",
     "breath-pulse-algorithm",
@@ -2840,6 +3249,7 @@
     "causal-loop-hardening-algorithm",
     "causal-memory-closure-algorithm",
     "certificate-resume-policy",
+    "cognitive-cycle-coordinator",
     "coherence-field-algorithm",
     "command-registry-resolution-algorithm",
     "compiler-gate-algorithm",
@@ -2849,6 +3259,7 @@
     "controlled-lane-receipt-algorithm",
     "cortex-certificate-refresh-algorithm",
     "cortex-sync-protocol-algorithm",
+    "damped-cognitive-diffusion",
     "decision-envelope-arbitration-algorithm",
     "deterministic-intelligence-extraction-algorithm",
     "effect-set-comparison-algorithm",
@@ -2859,27 +3270,34 @@
     "evidence-distillation-algorithm",
     "evidence-freshness-algorithm",
     "failure-doctor-algorithm",
+    "fast-episodic-teaching",
     "final-evolve-learning-proof-algorithm",
     "gate-dependency-invalidation-algorithm",
     "gate-selection-policy",
     "geometric-conductance-field-algorithm",
     "geometric-intent-routing-algorithm",
+    "geometric-learning-proposal",
     "geometric-memory-router-algorithm",
     "geometric-preflight-cleanup-algorithm",
     "geometric-runtime-packet-algorithm",
     "geometric-token-field-algorithm",
     "governed-agent-continuity-algorithm",
     "governed-telemetry-codec-algorithm",
+    "grounded-nex-core-response",
     "grounded-response-planning-algorithm",
     "human-authorization-binding-algorithm",
     "identity-plane-experience-plane-plasticity-plane-algorithm",
     "language-conductance-calibration-algorithm",
     "language-replay-verification-algorithm",
     "lineage-topology-algorithm",
+    "log-conductance-update",
     "meta-loop-registry-algorithm",
+    "nex-inner-message-bus",
     "nexus-self-model-algorithm",
     "origin-seal-algorithm",
     "outcome-feedback-algorithm",
+    "paired-learning-verification",
+    "prediction-error-salience",
     "predictive-evolve-planner-algorithm",
     "predictive-gate-timing-runtime-pressure-algorithm",
     "predictive-memory-orchestrator-algorithm",
@@ -2899,15 +3317,17 @@
     "self-bootstrap-decision-envelope-algorithm",
     "semantic-action-chain-verification-algorithm",
     "semantic-breath-regulation-algorithm",
+    "slow-semantic-consolidation",
     "source-epoch-identity-algorithm",
     "sparse-language-activation-algorithm",
+    "teaching-episode-seal",
     "triadic-geometric-lattice-algorithm",
     "ui-surface-algorithm",
     "verified-experience-seal-algorithm",
     "versioned-vector-blob-storage-algorithm"
   ],
   "discovery_source": "derived_from_cards_algorithm_id",
-  "generated_at_utc": "2026-07-13T13:56:11.412331+00:00",
+  "generated_at_utc": "2026-07-13T19:25:36.305656+00:00",
   "schema": "NEXUS_ALGORITHM_CARD_SET.v0.3.0",
   "source_doc": "docs/algorithms/NEXUS_CORE_ALGORITHMS.md",
   "system": "NEXUS_ALGORITHM_CARDS",

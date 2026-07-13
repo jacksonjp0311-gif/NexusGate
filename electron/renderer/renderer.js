@@ -111,6 +111,11 @@ const roleSettings = {
     label: "HANDOFF -> ChatGPT/Codex",
     command: ".\\scripts\\nexus.ps1 nn-health",
     note: "HANDOFF selected. ChatGPT/Codex packet mode requires no local model authority."
+  },
+  NEX_CORE: {
+    label: "NEX CORE -> NGLM",
+    command: ".\\scripts\\nexus.ps1 nex-chat -Tag \"Ask through local NGLM.\"",
+    note: "Direct NEXUS cognitive substrate. No external model. Grounded and recommendation-only."
   }
 };
 
@@ -1465,6 +1470,7 @@ function naturalNexGreeting(prompt, role) {
     : role === "DEEP" ? "DEEP / Mistral"
     : role === "TNN" ? "Tesseract Neural Network"
     : role === "HANDOFF" ? "HANDOFF / ChatGPT-Codex"
+    : role === "NEX_CORE" ? "NEX CORE / NGLM"
     : role;
   const value = String(prompt || "").trim().toLowerCase();
   if (/^(you there|are you there|u there|ping|testing|test)\??!?$/.test(value)) {
@@ -1497,6 +1503,33 @@ async function sendNexMessage(prompt) {
       writeOutput(greeting, { preTranslated: true });
       statusEl.textContent = "stable";
       setBuffer(100, "complete");
+      return;
+    }
+    if (role === "NEX_CORE") {
+      if (!window.nexus.askNexCore) {
+        throw new Error("NEX CORE bridge is not exposed by preload.");
+      }
+      const result = await window.nexus.askNexCore({ prompt, role: "NEX_CORE" });
+      const report = result.report || {};
+      const uncertainty = report.uncertainty?.level || "unknown";
+      const groundingCount = Array.isArray(report.grounding) ? report.grounding.length : 0;
+      const trace = report.inner_trace || {};
+      const visible = [
+        report.answer || "NEX does not currently have verified evidence to answer that.",
+        "",
+        `Mode: NEX CORE`,
+        `Engine: ${report.engine || "NGLM"}`,
+        `External model: ${report.external_model || "none"}`,
+        `Grounding: ${groundingCount}`,
+        `Uncertainty: ${uncertainty}`,
+        `Cycle: ${report.cycle_id || "unknown"}`,
+        `Organs: ${(trace.organs_consulted || []).join(", ") || "none"}`,
+        `Authority: human-bound / recommendation-only`
+      ].join("\n");
+      appendChat("ai", visible, result.code === 0 ? "NEX CORE / NGLM / grounded" : "NEX CORE / system-error");
+      writeOutput([visible].join(""), { preTranslated: true });
+      statusEl.textContent = result.code === 0 ? "stable" : "blocked";
+      setBuffer(result.code === 0 ? 100 : 0, result.code === 0 ? "complete" : "error");
       return;
     }
     // Offline graceful degradation: if the local model endpoint is blocked, keep chat responsive
@@ -1623,7 +1656,6 @@ function buildFallbackState(context) {
 async function loadSurfaceState() {
   setClock();
   setInterval(setClock, 1000);
-  ensureLocalOllamaBackend();
   startTelemetryLoop();
   startPetriPreviewLoop();
   setBuffer(10, "hydrate");

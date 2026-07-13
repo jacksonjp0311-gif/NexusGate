@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/nexus_nex_core_model_seal.v2.10.0.schema.json",
+  "title": "NEX CORE Model Seal v2.10.0",
+  "type": "object",
+  "required": ["schema", "model_id", "source_epoch_id", "teaching_event_root_hash", "message_event_root_hash", "learning_event_root_hash", "runtime_graph_hash", "created_at_utc", "claim_boundary"],
+  "properties": {
+    "schema": {"const": "NEXUS_NEX_CORE_MODEL_SEAL.v2.10.0"},
+    "model_id": {"type": "string"},
+    "source_epoch_id": {"type": "string"},
+    "teaching_event_root_hash": {"type": "string"},
+    "message_event_root_hash": {"type": "string"},
+    "learning_event_root_hash": {"type": "string"},
+    "runtime_graph_hash": {"type": "string"},
+    "created_at_utc": {"type": "string"},
+    "claim_boundary": {"type": "string", "minLength": 20}
+  }
+}

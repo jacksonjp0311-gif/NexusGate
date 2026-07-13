@@ -1,5 +1,5 @@
 {
-  "card_count": 39,
+  "card_count": 49,
   "cards": [
     {
       "algorithm_card_refs": [
@@ -1398,10 +1398,294 @@
       "summary": "Repository-domain language intelligence must be benchmarked against baselines before capability claims escalate.",
       "title": "Local Language Intelligence As Measurable Research Track",
       "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "nex-inner-message-bus"
+      ],
+      "boundary": "Reliable inner messages do not create execution or authorization power.",
+      "code_references": [
+        "nexus_gate/nex_core/messages.py",
+        "nexus_gate/nex_core/bus.py"
+      ],
+      "discovery_id": "inner-communication-without-autonomous-authority",
+      "evidence_surfaces": [
+        "ledger/nex_inner_messages.jsonl"
+      ],
+      "math": {
+        "reliability": "provenance * verification * freshness * confidence"
+      },
+      "next_versions": [
+        "v0.2: add more organ-specific predictive messages"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 nex-inner-status"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "NEX organs may exchange typed evidence packets while authority remains outside message reliability.",
+      "title": "Inner Communication Without Autonomous Authority",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "teaching-episode-seal",
+        "geometric-learning-proposal"
+      ],
+      "boundary": "Teaching cannot apply persistent conductance.",
+      "code_references": [
+        "nexus_gate/nex_core/teach.py",
+        "nexus_gate/nex_core/learn.py"
+      ],
+      "discovery_id": "teaching-is-not-learning",
+      "evidence_surfaces": [
+        "ledger/nex_teaching_events.jsonl",
+        "ledger/nex_learning_events.jsonl"
+      ],
+      "math": {
+        "gate": "min(P,V,A,S,H,R)"
+      },
+      "next_versions": [
+        "v0.2: bind teaching episodes to verified Experience Seals"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 nex-teach-begin",
+        ".\\scripts\\nexus.ps1 nex-learn-propose"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "A teaching episode records evidence; learning remains a proposal until replay, measurement, retention, and human authorization pass.",
+      "title": "Teaching Is Not Learning",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "teaching-episode-seal"
+      ],
+      "boundary": "Friendly disposition cannot masquerade as evidence of correctness.",
+      "code_references": [
+        "nexus_gate/nex_core/teach.py"
+      ],
+      "discovery_id": "acceptance-is-not-validation",
+      "evidence_surfaces": [
+        "state/nex_core/teaching/"
+      ],
+      "math": {
+        "quality": "accepted without tests => V=0"
+      },
+      "next_versions": [
+        "v0.2: add validation bundle signatures"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 nex-teach-seal -Disposition accepted"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Human acceptance, test validation, and causal attribution are independent quality dimensions.",
+      "title": "Acceptance Is Not Validation",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "prediction-error-salience"
+      ],
+      "boundary": "Attention is not authority.",
+      "code_references": [
+        "nexus_gate/nex_core/build.py"
+      ],
+      "discovery_id": "prediction-error-as-attention-pressure",
+      "evidence_surfaces": [
+        "reports/nexus_cognitive_cycle_latest.json"
+      ],
+      "math": {
+        "priority": "|error| * uncertainty * consequence * freshness"
+      },
+      "next_versions": [
+        "v0.2: feed measured prediction error into Breath pressure"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 nex-verify-all"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Prediction error can prioritize inspection without authorizing action.",
+      "title": "Prediction Error As Attention Pressure",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "fast-episodic-teaching",
+        "slow-semantic-consolidation"
+      ],
+      "boundary": "A single episode may inform but cannot persistently influence conductance.",
+      "code_references": [
+        "nexus_gate/nex_core/teach.py",
+        "nexus_gate/nex_core/learn.py"
+      ],
+      "discovery_id": "fast-experience-and-slow-knowledge",
+      "evidence_surfaces": [
+        "state/nex_core/teaching/",
+        "state/nex_core/learning/"
+      ],
+      "math": {
+        "repetition": "R = min(1, independent_verified / 3)"
+      },
+      "next_versions": [
+        "v0.2: add consolidation windows"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 nex-learn-status"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "NEX separates one-event episodic teaching from slow semantic consolidation that requires repeated verified support.",
+      "title": "Fast Experience And Slow Knowledge",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "damped-cognitive-diffusion"
+      ],
+      "boundary": "Convergence does not imply consciousness.",
+      "code_references": [
+        "nexus_gate/nex_core/build.py"
+      ],
+      "discovery_id": "convergent-graph-activation",
+      "evidence_surfaces": [
+        "reports/nexus_nex_core_latest.json"
+      ],
+      "math": {
+        "update": "a(k+1)=(1-d)s+dPa(k), d=0.82"
+      },
+      "next_versions": [
+        "v0.2: add larger cognitive subgraphs"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 nex-chat -Tag \"What is pending?\""
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Damped internal activation uses a contraction so bounded cycles do not self-amplify indefinitely.",
+      "title": "Convergent Graph Activation",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "log-conductance-update"
+      ],
+      "boundary": "A weight cannot authorize itself.",
+      "code_references": [
+        "nexus_gate/nex_core/learn.py"
+      ],
+      "discovery_id": "small-local-weight-changes-preserve-stability",
+      "evidence_surfaces": [
+        "ledger/nex_learning_events.jsonl"
+      ],
+      "math": {
+        "delta": "clip(eta*Q*u - penalties, +/-0.05)"
+      },
+      "next_versions": [
+        "v0.2: add authorized application after repeated verified teachings"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 nex-learn-propose"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Log-conductance proposals cap single updates so lessons nudge routing rather than violently rewiring it.",
+      "title": "Small Local Weight Changes Preserve Stability",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "grounded-nex-core-response"
+      ],
+      "boundary": "Auditable evidence trace is allowed; hidden chain-of-thought storage is not required.",
+      "code_references": [
+        "nexus_gate/nex_core/chat.py",
+        "electron/renderer/renderer.js"
+      ],
+      "discovery_id": "structured-rationale-without-chain-of-thought-storage",
+      "evidence_surfaces": [
+        "reports/nexus_nex_core_latest.json"
+      ],
+      "math": {
+        "trace": "evidence paths + blocked claims"
+      },
+      "next_versions": [
+        "v0.2: add collapsible UI trace filters"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 nex-chat -Tag \"Explain your boundary\""
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "NEX CORE exposes selected intent, evidence paths, contradictions, uncertainty, and blocked claims without storing hidden free-form reasoning.",
+      "title": "Structured Rationale Without Chain-Of-Thought Storage",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "cognitive-cycle-coordinator"
+      ],
+      "boundary": "No frontier parity, AGI, consciousness, or autonomous authority claim follows from local conversation.",
+      "code_references": [
+        "electron/main.js",
+        "electron/preload.js",
+        "electron/renderer/renderer.js",
+        "nexus_gate/nex_core/chat.py"
+      ],
+      "discovery_id": "direct-nglm-conversation-without-frontier-model",
+      "evidence_surfaces": [
+        "reports/nexus_nex_core_latest.json"
+      ],
+      "math": {
+        "route": "NEX_CORE -> nexus:askNexCore -> nexus_gate.nex_core.cli chat"
+      },
+      "next_versions": [
+        "v0.2: add richer UI trace panels"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 nex-mode-status",
+        ".\\scripts\\nexus.ps1 nex-chat -Tag \"What can you claim?\""
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "NEX CORE routes chat directly to local NGLM and verified evidence, bypassing Ollama and neural-model bridge paths.",
+      "title": "Direct NGLM Conversation Without A Frontier Model",
+      "version": "0.1.0"
+    },
+    {
+      "algorithm_card_refs": [
+        "paired-learning-verification",
+        "authority-invariant-verification"
+      ],
+      "boundary": "Verification can request authorization; it cannot grant it.",
+      "code_references": [
+        "nexus_gate/nex_core/verify.py"
+      ],
+      "discovery_id": "verification-as-the-gate-to-plasticity",
+      "evidence_surfaces": [
+        "reports/nexus_cognitive_cycle_latest.json"
+      ],
+      "math": {
+        "law": "no paired improvement, no learning claim"
+      },
+      "next_versions": [
+        "v0.2: add full held-out benchmark packs"
+      ],
+      "replication_steps": [
+        ".\\scripts\\nexus.ps1 nex-verify-all"
+      ],
+      "schema": "NEXUS_DISCOVERY_CARD.v0.2.0",
+      "status": "active",
+      "summary": "Replay, paired benchmark comparison, retention, and authority invariants must pass before a learning proposal can request human authorization.",
+      "title": "Verification As The Gate To Plasticity",
+      "version": "0.1.0"
     }
   ],
   "claim_boundary": "Discovery cards preserve local engineering discoveries as reproducible cards. They do not prove correctness, safety, security, production readiness, scientific truth, mathematical proof, or autonomous authority.",
-  "generated_at_utc": "2026-07-13T13:56:27.936685+00:00",
+  "generated_at_utc": "2026-07-13T19:25:48.816043+00:00",
   "portal_entry": "[18] Discoveries",
   "schema": "NEXUS_DISCOVERY_CARD_SET.v0.2.0",
   "system": "NEXUS_DISCOVERY_CARDS",

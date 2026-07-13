@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/nexus_geometric_learning_proposal.v2.10.0.schema.json",
+  "title": "NEXUS Geometric Learning Proposal v2.10.0",
+  "type": "object",
+  "required": ["schema", "proposal_id", "teaching_ids", "edge_updates", "quality", "learning_config_hash", "status", "automatic_apply", "authority_boundary", "proposal_hash"],
+  "properties": {
+    "schema": {"const": "NEXUS_GEOMETRIC_LEARNING_PROPOSAL.v2.10.0"},
+    "proposal_id": {"type": "string", "pattern": "^learn_[0-9a-f]{24}$"},
+    "teaching_ids": {"type": "array", "items": {"type": "string"}},
+    "experience_ids": {"type": "array", "items": {"type": "string"}},
+    "candidate_ids": {"type": "array", "items": {"type": "string"}},
+    "edge_updates": {"type": "array", "items": {"type": "object", "required": ["edge_id", "eligible", "math"]}},
+    "motif_updates": {"type": "array"},
+    "alias_updates": {"type": "array"},
+    "procedure_updates": {"type": "array"},
+    "negative_evidence_updates": {"type": "array"},
+    "quality": {"type": "object", "required": ["provenance_integrity", "validation_strength", "causal_attribution", "later_stability", "human_acceptance", "independent_repetition", "gate_quality", "ranking_quality"]},
+    "predicted_effect": {"type": "object"},
+    "verification_requirements": {"type": "array", "items": {"type": "string"}},
+    "status": {"type": "string"},
+    "automatic_apply": {"const": false},
+    "authority_boundary": {"type": "object", "required": ["human_authorization_required", "may_apply_itself"]},
+    "proposal_hash": {"type": "string", "minLength": 32}
+  }
+}

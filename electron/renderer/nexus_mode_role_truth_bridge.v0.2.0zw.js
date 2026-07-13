@@ -46,6 +46,14 @@
       available: true,
       command: "/handoff run",
       message: "HANDOFF selected. ChatGPT-Codex relay is active for compressed handoff."
+    },
+    NEX_CORE: {
+      label: "NEX CORE / Geometric Language",
+      backend: "local NGLM",
+      brain: "NEX CORE/NGLM",
+      available: true,
+      command: ".\\scripts\\nexus.ps1 nex-chat -Tag \"<ask>\"",
+      message: "NEX CORE selected. Direct NGLM cognitive substrate is active without Ollama or external model authority."
     }
   };
 

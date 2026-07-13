@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/nexus_inner_message.v2.10.0.schema.json",
+  "title": "NEXUS Inner Message v2.10.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "message_id", "cycle_id", "topic", "message_type", "source_organ", "target_organs", "created_at_utc", "source_epoch_id", "payload", "payload_hash", "quality", "authority_class", "hop_count", "hop_limit", "previous_message_hash", "message_hash"],
+  "properties": {
+    "schema": {"const": "NEXUS_INNER_MESSAGE.v2.10.0"},
+    "message_id": {"type": "string", "pattern": "^msg_[0-9a-f]{24}$"},
+    "cycle_id": {"type": "string", "minLength": 1},
+    "topic": {"type": "string", "minLength": 3},
+    "message_type": {"type": "string", "minLength": 1},
+    "source_organ": {"type": "string", "minLength": 1},
+    "target_organs": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "created_at_utc": {"type": "string"},
+    "source_epoch_id": {"type": "string", "minLength": 1},
+    "payload": {"type": "object"},
+    "payload_hash": {"type": "string", "minLength": 32},
+    "quality": {
+      "type": "object",
+      "required": ["provenance", "verification", "freshness", "confidence", "combined_reliability"],
+      "properties": {
+        "provenance": {"type": "number", "minimum": 0, "maximum": 1},
+        "verification": {"type": "number", "minimum": 0, "maximum": 1},
+        "freshness": {"type": "number", "minimum": 0, "maximum": 1},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "combined_reliability": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "causal_refs": {"type": "array", "items": {"type": "string"}},
+    "authority_class": {"enum": ["evidence_only", "recommendation_only", "authority_required", "blocked"]},
+    "hop_count": {"type": "integer", "minimum": 0},
+    "hop_limit": {"type": "integer", "minimum": 1, "maximum": 32},
+    "previous_message_hash": {"type": "string", "minLength": 7},
+    "message_hash": {"type": "string", "minLength": 32}
+  }
+}

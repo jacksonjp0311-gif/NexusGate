@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/nexus_learning_event.v2.10.0.schema.json",
+  "title": "NEXUS Learning Event v2.10.0",
+  "type": "object",
+  "required": ["schema", "event_type", "proposal_id"],
+  "properties": {
+    "schema": {"const": "NEXUS_LEARNING_EVENT.v2.10.0"},
+    "event_type": {"enum": ["proposal_created", "proposal_authorized", "proposal_applied", "proposal_rejected", "rollback_proposed"]},
+    "proposal_id": {"type": "string"},
+    "proposal_hash": {"type": "string"},
+    "authorization_hash": {"type": "string"},
+    "learning_event_hash": {"type": "string"}
+  }
+}

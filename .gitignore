@@ -9,6 +9,8 @@ Thumbs.db
 logs/*.log
 ledger/runtime_gate_timings.jsonl
 ledger/cortex_benchmark_trends.jsonl
+ledger/nex_*.jsonl
+ledger/nex_*.jsonl.lock
 reports/tmp/
 reports/compact_compile_logs/
 reports/script_runs/
@@ -36,6 +38,8 @@ state/loops/nexus_*_state.json
 state/loops/nexus_toolbelt.v*.json
 state/nexus_geometric_memory_runtime_latest.json
 state/neural_activity/repo_neural_graph_latest.json
+state/neural_activity/repo_neural_graph_manifest_latest.json
+state/nex_core/
 state/breath/
 state/field/
 state/telemetry/
